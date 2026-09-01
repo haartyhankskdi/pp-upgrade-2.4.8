@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_PromoBanner
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="mppromobanner" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Promo Banner</label>
+            <tab>mageplaza</tab>
+            <resource>Mageplaza_PromoBanner::configuration</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Select Yes to enable this module</comment>
+                </field>
+                <field id="promo_category" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Promotion Category</label>
+                    <frontend_model>Mageplaza\PromoBanner\Block\Adminhtml\Config\Field\Category</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+                <field id="show_close_btn" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Allow Customer to Close Promo Banner</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Select Yes to display Close button</comment>
+                </field>
+                <field id="auto_close_time" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Auto Close Promo Banner After</label>
+                    <source_model>Mageplaza\PromoBanner\Model\Config\Source\AutoClose</source_model>
+                    <comment>Set the time to auto close promo banners after showing.</comment>
+                </field>
+                <field id="auto_reopen_time" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Auto-reopen schedule</label>
+                    <comment>Set the time to reopen promo banners after being closed (when customers click on the close button).</comment>
+                    <source_model>Mageplaza\PromoBanner\Model\Config\Source\Frequency</source_model>
+                </field>
+            </group>
+            <group id="slider_setting" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Slider Banner Settings</label>
+                <field id="show_buttons" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Show Next/Prev Buttons</label>
+                    <comment>If Yes, the Next/ Pre buttons will be shown. Customers can click on to forward or backward banners</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="change_time" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Switching Time</label>
+                    <validate>validate-digits validate-zero-or-greater</validate>
+                    <comment>The time in milliseconds (ms) to switch among banners. Default: 5000</comment>
+                </field>
+            </group>
+            <group id="popup_setting" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Popup Banner Settings</label>
+                <field id="popup_responsive" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Popup Responsive</label>
+                    <source_model>Mageplaza\PromoBanner\Model\Config\Source\PopupResponsive</source_model>
+                </field>
+                <field id="popup_width" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Popup Width</label>
+                    <validate>validate-digits validate-zero-or-greater</validate>
+                    <comment>Unit: pixels. Default: 800px</comment>
+                    <depends>
+                        <field id="popup_responsive">center</field>
+                    </depends>
+                </field>
+                <field id="popup_height" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Popup Height</label>
+                    <validate>validate-digits validate-zero-or-greater</validate>
+                    <comment>Unit: pixels. Default: 320px</comment>
+                    <depends>
+                        <field id="popup_responsive">center</field>
+                    </depends>
+                </field>
+                <field id="show_popup_checkbox" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Rejection Checkbox</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Show checkbox asking customers whether they want to reject the popup banners next visits. If they tick, the next time they visit, the popup banners will not be displayed.</comment>
+                </field>
+                <field id="checkbox_label" translate="label" type="text" sortOrder="50" showInDefault="1" showInStore="1" showInWebsite="1" canRestore="1">
+                    <label>Checkbox Label</label>
+                    <validate>validate-no-html-tags</validate>
+                    <depends>
+                        <field id="show_popup_checkbox">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="floating_setting" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Floating Banner Settings</label>
+                <field id="float_width" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Floating Block Width</label>
+                    <validate>validate-digits validate-zero-or-greater</validate>
+                    <comment>Unit: pixels. Default: 300px</comment>
+                </field>
+                <field id="float_height" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Floating Block Height</label>
+                    <validate>validate-digits validate-zero-or-greater</validate>
+                    <comment>Unit: pixels. Default: 280px</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

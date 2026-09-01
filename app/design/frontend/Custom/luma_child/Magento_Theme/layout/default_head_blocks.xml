@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../vendor/magento/framework/Module/etc/module.xsd">
+  <head>
+    <css src="css/local-l.css" />
+    <meta name="theme-color" content="#3da9d2"/>
+    <!-- <font src="fonts/ubuntu-v14-latin-300.woff2"/>
+    <font src="fonts/ubuntu-v14-latin-300italic.woff2"/>
+    <font src="fonts/ubuntu-v14-latin-500.woff2"/>
+    <font src="fonts/ubuntu-v14-latin-500italic.woff2"/>
+    <font src="fonts/ubuntu-v14-latin-700.woff2"/>
+    <font src="fonts/ubuntu-v14-latin-700italic.woff2"/>
+    <font src="fonts/ubuntu-v14-latin-italic.woff2"/>
+    <font src="fonts/ubuntu-v14-latin-regular.woff2"/> -->
+
+    <!-- remove font not needed -->
+    <remove src="fonts/opensans/light/opensans-300.woff2"/>
+    <remove src="fonts/opensans/regular/opensans-400.woff2"/>
+    <remove src="fonts/opensans/semibold/opensans-600.woff2"/>
+    <remove src="fonts/opensans/bold/opensans-700.woff2"/>
+    <remove src="fonts/Luma-Icons.woff2"/>
+  </head>
+</page>

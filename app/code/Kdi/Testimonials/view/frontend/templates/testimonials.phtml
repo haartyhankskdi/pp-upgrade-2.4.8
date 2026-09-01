@@ -1,0 +1,403 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    body {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      background: #fff;
+      margin: 0;
+      padding: 40px 0;
+      color: #222;
+    }
+
+    .experience-story h2.section-title {
+      text-align: center;
+      font-weight: 300;
+      font-size: 42px;
+      margin-bottom: 40px;
+    }
+
+    .experience-story .slick-slider {
+      max-width: 100%; 
+    }
+
+    /*.card {
+      background: #fff;
+      border-radius: 0px;
+      overflow: hidden;
+      box-shadow: none;
+      margin: 0 10px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }*/
+
+    .experience-story .image-pair {
+      display: flex;
+      height: 215px;
+      overflow: hidden;
+    }
+
+    .experience-story .image-left,
+    .experience-story .image-right {
+      width: 50%;
+      overflow: hidden;
+      border-radius: 10px;
+      margin: 0 1px;
+    }
+
+    .experience-story .image-pair img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .experience-story .quote {
+      padding: 25px 0px 0 !important;
+      display: flex;
+      gap: 12px;
+    }
+
+    .experience-story .quote-icon {
+      font-size: 64px;
+      line-height: 1;
+      color: #f44336;
+      font-weight: bold;
+    }
+
+    .experience-story .quote-text {
+      font-size: 13px;
+      color: #000;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .experience-story .author {
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .experience-story .read-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 40px;
+      background: #3ecff0;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.08);
+      transition: all 0.2s ease;
+    }
+
+    .experience-story .read-btn:hover {
+      background: #2ab7d6;
+      transform: translateY(-2px);
+    }
+
+    /* Slick arrows and dots */
+    .experience-story .slick-prev:before,
+    .experience-story .slick-next:before {
+      color: #3ecff0;
+      font-size: 30px;
+    }
+
+    .experience-story .slick-dots li button:before {
+      font-size: 12px;
+      color: #3ecff0;
+    }
+
+    .experience-story .slick-dots li.slick-active button:before {
+      color: #2ab7d6;
+    }
+
+    @media (max-width: 768px) {
+      .experience-story .image-pair { height: 220px; }
+      .experience-story h2.section-title { font-size: 28px; }
+    }
+
+.experience-story{
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+.experience-story h2{
+  font-family: 'Roboto', sans-serif;
+    font-size: 38px;
+    color: #2C596D !important;
+    line-height: 48px;
+    font-weight: 300 !important;
+    padding: 0;
+    margin: 0px 0 25px 0 !important;
+}
+.experience-story .quote-icon{
+  background: url(../pub/media/quote-icon.png) left 0 no-repeat;
+  width: 51px;
+  height: 40px;
+  display: inline-block;
+  position: absolute;
+  top: -25px;
+  left: 0;
+}
+
+.experience-story .quote{
+  position: relative;
+}
+
+.experience-story .quote-text{
+  font-size: 13px;
+  font-weight: 400;
+  color: #000;
+  line-height: 22px;
+}
+
+.experience-story .card{
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 0px !important;
+}
+.experience-story .author{
+  margin: 20px 0!important;
+}
+
+.quote .read-btn{
+  font-weight: 400 !important;
+  box-shadow: none !important;
+  color: #fff !important;
+}
+
+@media (max-width: 767px) {
+  .experience-story .slick-dots li button{
+    background: #ddd !important;
+  }
+  .experience-story .slick-dots li.slick-active button{
+    background: #2ab7d6 !important;
+  }
+  .experience-story h2.section-title{
+    font-size: 30px !important;
+    line-height: 40px !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .experience-story .slick-arrow{
+    display: none !important;
+  }
+  .experience-story .slick-slide{
+    margin: 0 12px !important;
+  }
+}
+
+
+.experience-story h2.section-title{
+  font-size: 38px;
+    font-weight: 300 !important; 
+    line-height: 46px;
+    font-family: 'Lato', sans-serif;
+    padding: 0;
+    margin: 0 0 30px 0 !important;
+    color: #000 !important;
+}
+.experience-story .quote-text h4{
+  font-size: 21px;
+    font-weight: 700; 
+    line-height: 25px;
+    font-family: 'Lato', sans-serif;
+    padding: 0;
+    margin: 0 0 15px 0;
+    color: #000;
+}
+.experience-story .quote-text p{
+  font-size: 15px;
+    font-weight: 400; 
+    line-height: 22px;
+    font-family: 'Lato', sans-serif;
+    padding: 0;
+    margin: 0 0 10px 0;
+    color: #000;
+}
+
+.view-all-story-btn{
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.view-all-story-btn a{
+  background-size: 100% 200% !important;
+    background-image: linear-gradient(to bottom, #ED3237 50%, #ED3237 50%) !important;
+    -webkit-transition: background-position 0.7s;
+    -moz-transition: background-position 0.7s;
+    transition: background-position 0.7s !important;
+    text-decoration: none !important;
+    background: #ED3237;
+    opacity: 1;
+    border: 0;
+    text-decoration: none;
+    width: 247px;
+    display: inline-block;
+    text-align: center;
+    font-size: 13px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 52px;
+    padding: 0 0px;
+    font-weight: 400;
+    border-radius: 30px;
+    letter-spacing: 0.26px;
+    height: auto;
+    text-transform: uppercase;
+}
+
+.view-all-story-btn a:hover{
+  background-size: 100% 200% !important;
+    background-image: linear-gradient(to bottom, #ED3237 50%, #53CAF5 50%) !important;
+    background-position: 0 -100% !important;
+    text-decoration: none !important;
+    background-color: #53CAF5 !important;
+}
+
+  </style>
+
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Kdi\Testimonials\ViewModel\View $viewModel (assumed) */
+
+$vm = $block->getViewModel();
+
+// echo "count of items" . count($vm->getAllTestimonials());
+
+
+?>
+<?php if ($vm->isCurrentProductInList()) : ?>
+  
+<div class="experience-story"> 
+<h2 class="section-title">Real Patient, <strong>Real Results</strong></h2>
+<?php if(count($vm->getAllTestimonials())) : ?>
+  <div class="slick-slider">
+    
+      <?php foreach ($vm->getAllTestimonials() as $testimonial): 
+        $before = $testimonial->getData('image1');
+        $after = $testimonial->getData('image2');
+        $title = $testimonial->getData('title');
+        $writer = $testimonial->getData('review_writer');
+        $review = html_entity_decode($testimonial->getData('review'), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $id = $testimonial->getId();
+        $url =  $testimonial->getData('meta_url');
+        $review_listing = $testimonial->getData('review_listing');
+      ?>
+      <div class="item">
+        <article class="card">
+        <a href="<?= $block->escapeUrl($block->getUrl('successstory/post/' . $url)) ?>">
+          <div class="image-pair">
+            <?php if ($before): ?>
+              <div class="image-left">
+                <img src="<?= 'https://www.pharmacyplanet.com/media/'.$block->escapeUrl($before); ?>" alt="<?= $block->escapeHtmlAttr($writer ? $writer . ' before' : 'before image'); ?>">
+              </div>
+            <?php endif; ?>
+            <?php if ($after): ?>
+              <div class="image-right">
+                <img src="<?= 'https://www.pharmacyplanet.com/media/'.$block->escapeUrl($after); ?>" alt="<?= $block->escapeHtmlAttr($writer ? $writer . ' after' : 'after image'); ?>">
+              </div>
+            <?php endif; ?>
+          </div>
+            </a>
+          <div class="quote">
+           
+            <div>
+              <div class="quote-text">
+              <a href="<?= $block->escapeUrl($block->getUrl('successstory/post/' . $url)) ?>"><h4 class="title"><?= $title ?></h4></a>
+                <p class="review"><?= $review_listing ?></p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+      <?php endforeach; ?>
+
+      
+      
+  </div>
+<div class="view-all-story-btn">
+<a href="/successstory">View All Success Stories</a></div>
+        <?php endif; ?>
+</div>
+ 
+
+
+
+        
+        <style type="text/css">
+          .row {
+            display: flex;
+          }
+        
+          .column {
+            padding: 0px 30px;
+          }
+        </style>
+        
+        
+        <script type="text/javascript">
+                require(['jquery', 'jquery/ui', 'slick'], function($){
+            $(document).ready(function() {
+                $('.slick-slider').slick({
+                    dots: true,
+                    infinite: false,
+                    autoplay: false,
+                    responsive: [
+                      {
+                            breakpoint: 3000,
+                            settings: {
+                                slidesToShow: 4,
+                                slidesToScroll: 3,
+                                infinite: false,
+                                dots: false
+                            }
+                        },
+                      {
+                            breakpoint: 1440,
+                            settings: {
+                                slidesToShow: 4,
+                                slidesToScroll: 3,
+                                infinite: false,
+                                dots: false
+                            }
+                        },
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 3,
+                                infinite: false,
+                                dots: true
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                infinite: false,
+                                dots: true
+                            }
+                        }
+                    ]
+                });
+            });
+        });
+            </script>
+        
+            <style>
+                .category-slider {
+                    
+                }
+                
+                .item img {
+                    height: 300px;
+                    width: 300px;
+                }
+            </style>
+
+
+<?php endif; ?>

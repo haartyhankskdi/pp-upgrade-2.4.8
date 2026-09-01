@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">My Account</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Home</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Home</item>
+                    <item name="label" xsi:type="string">Home</item>
+                    <item name="link" xsi:type="string">/</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Dashboard</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Dashboard</item>
+                    <item name="label" xsi:type="string">Dashboard</item>
+                </argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="customer_account_dashboard_info" remove="true"/>
+        <referenceBlock name="customer_account_dashboard_address" remove="true"/>
+        <referenceBlock name="customer_account_dashboard_top" remove="true"/>
+        <referenceBlock name="sidebar.main.account_nav" remove="true"/>
+        <referenceBlock name="customer-account-navigation-downloadable-products-link" remove="true"/>
+        <referenceBlock name="customer-account-navigation-wish-list-link" remove="true"/>
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+        <referenceBlock name="wishlist_sidebar" remove="true" />
+        <referenceBlock name="sale.reorder.sidebar" remove="true"/>
+        <referenceContainer name="content">
+            <block class="Magento\Customer\Block\Account\Dashboard\Info" name="custom-dashboard" template="Magento_Customer::account/dashboard/new.phtml" cacheable="false"/>
+            <!-- <block class="Magento\Framework\View\Element\Template" name="gdpr_customer_delete_info" after="-" template="Mageplaza_Gdpr::account/edit/delete.phtml" ifconfig="gdpr/general/enabled"/> -->
+        </referenceContainer>
+    </body>
+</page>

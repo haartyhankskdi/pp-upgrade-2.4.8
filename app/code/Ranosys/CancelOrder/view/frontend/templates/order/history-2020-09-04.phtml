@@ -1,0 +1,167 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate
+
+/** @var \Magento\Sales\Block\Order\History $block */
+
+$is_enable = $block->getenable();
+$notice = $block->getnotice();
+$label = $block->getlabel();
+if (!$label) {
+    $label = "Cancel Order";
+}
+
+if ($notice) {
+    $notice = "Notice: " . $notice;
+}
+?>
+<?php $_orders = $block->getOrders(); ?>
+<?= $block->getChildHtml('info') ?>
+<?php if ($_orders && count($_orders)) : ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-orders-table">
+            <caption class="table-caption"><?= $block->escapeHtml(__('Orders')) ?></caption>
+            <thead>
+                <tr>                   
+                    <th scope="col" class="col date"><?= $block->escapeHtml(__('Date')) ?></th>
+                    <?= $block->getChildHtml('extra.column.header') ?>
+                    <th scope="col" class="col detail"><?= $block->escapeHtmlAttr(__('Order details')) ?></th>
+                    <th scope="col" class="col status"><?= $block->escapeHtml(__('Status')) ?></th>
+                    <th scope="col" class="col actions"></th>
+                </tr>
+            </thead>
+            <tbody>
+                    <?php foreach ($_orders as $_order) : ?>
+                    <?php 
+                    $productname = $block->getProductName($_order->getRealOrderId());
+                    $productName = implode(', ', $productname); ?>
+                    <tr>
+                        
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Date')) ?>" class="col date"><?= /* @noEscape */ date("j M Y",strtotime($_order->getCreatedAt())); ?></td>
+
+                        <td data-th="<?php echo $block->escapeHtml(__('Order #')) ?>" class="col id">
+                            <div class="pro-name"><?php /* @escapeNotVerified */  print_r($productName); ?></div></td>
+
+                        <?php $extra = $block->getChildBlock('extra.container'); ?>
+                        <?php if ($extra) : ?>
+                            <?php $extra->setOrder($_order); ?>
+                            <?= $extra->getChildHtml() ?>
+                        <?php endif; ?>
+                        
+                        
+                        <?php
+                                $status = $_order->getStatusLabel();
+
+                                switch ($status) {
+                                  case "Processing":
+                                    echo "<td data-th='Status' class='col status processing'>Processing</td>";
+                                    break;
+                                  case "Complete":
+                                    echo "<td data-th='Status' class='col status complete'>Complete</td>";
+                                    break;
+                                  case "Cancelled":
+                                    echo "<td data-th='Status' class='col status cancelled'>Cancelled</td>";
+                                    break;
+                                  default:
+                                    echo "<td data-th='Status' class='col status pending'>Pending</td>";
+                                }
+                        ?>
+                    
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Actions')) ?>" class="col actions">
+                            <a href="<?= $block->escapeUrl($block->getViewUrl($_order)) ?>" class="action view">
+                                <span><?= $block->escapeHtml(__('View')) ?></span>
+                            </a>
+
+                            <?php if ($this->helper(\Magento\Sales\Helper\Reorder::class)->canReorder($_order->getEntityId())) : ?>
+                                <a href="#" data-post='<?= /* @noEscape */
+                                $this->helper(\Magento\Framework\Data\Helper\PostHelper::class)
+                                    ->getPostData($block->getReorderUrl($_order))
+                                ?>' class="action order reorder">
+                                    <span><?= $block->escapeHtml(__('Reorder')) ?></span>
+                                </a>
+                            <?php endif ?>
+
+                            <?php if ($_order->getStatusLabel() == 'Complete' || $_order->getStatusLabel() == 'Cancelled') { ?>
+                                <a href="javascript:void(0);" class="action disable-cancelled">
+                                    <span>X</span>
+                                </a>
+                            <?php } ?>
+                            <?php if ($is_enable == 1 && $_order->getStatusLabel() != 'Complete' && $_order->getStatusLabel() != 'Cancelled') : ?>
+                                <a href="javascript:void(0);" class="action cancelled cancel-<?php echo $_order->getRealOrderId() ?>">
+                                    <span>X</span>
+                                </a>
+                                <div class="popup-form-<?php echo $_order->getRealOrderId() ?>" style="display: none;">
+                                    <form class="form cancel-order-<?php echo $_order->getRealOrderId() ?>"
+                                          action="<?php /* @escapeNotVerified */ echo $block->getFormAction($_order); ?>"
+                                          id="cancellation-form"
+                                          method="post">
+                                        <fieldset class="fieldset">
+                                            <div class="field note no-label order-q"><?php /* @escapeNotVerified */ echo __('Are you sure to cancel selected order?') ?><br>
+                                                <span class="order-id"><?php /* @escapeNotVerified */ echo __('Order #:') ?><?php /* @escapeNotVerified */ echo $_order->getRealOrderId() ?></span></div>
+                                            <div class="field comment col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                <label class="label" for="comment"><span><?php /* @escapeNotVerified */ echo __('Any cancellation reason ?') ?></span></label>
+                                                <div class="control">
+                                                    <textarea name="comment" id="comment" title="<?php /* @escapeNotVerified */ echo __('Any cancellation reason ?') ?>" placeholder="<?php /* @escapeNotVerified */ echo __('Why do you want to cancel this order?') ?>" class="input-text" cols="5" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                            <span class="order-notice"><?php /* @escapeNotVerified */ echo __($notice) ?></span>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                                <script type = 'text/javascript'>
+                                    require(
+                                            [
+                                                'jquery',
+                                                'Magento_Ui/js/modal/modal'
+                                            ],
+                                            function (
+                                                    $,
+                                                    modal
+                                                    ) {
+                                                var options = {
+                                                    type: 'popup',
+                                                    buttons: [{
+                                                            text: $.mage.__('Yes'),
+                                                            class: 'btn-yes',
+                                                            click: function () {
+                                                                $('.cancel-order-<?php echo $_order->getRealOrderId() ?>').submit();
+                                                            }
+                                                        }, {
+                                                            text: $.mage.__('No'),
+                                                            class: 'btn-no',
+                                                            click: function () {
+                                                                this.closeModal();
+                                                            }
+                                                        }]
+                                                };
+
+                                                var popup = modal(options, $('.popup-form-<?php echo $_order->getRealOrderId() ?>'));
+                                                $(".cancel-<?php echo $_order->getRealOrderId() ?>").on('click', function () {
+                                                    $(".popup-form-<?php echo $_order->getRealOrderId() ?>").modal("openModal");
+                                                });
+
+                                            }
+                                    );
+                                </script>
+                            <?php endif ?>
+
+
+                            
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="back-dasboard" style="display: none;"><a href="/customer/account">Back to dashboard</a></div>
+    <?php if ($block->getPagerHtml()) : ?>
+        <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml() ?></div>
+    <?php endif ?>
+<?php else : ?>
+    <div class="message info empty"><span><?= $block->escapeHtml(__('You have placed no orders.')) ?></span></div>
+<?php endif ?>

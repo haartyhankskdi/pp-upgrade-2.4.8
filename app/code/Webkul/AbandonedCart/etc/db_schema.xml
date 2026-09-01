@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AbandonedCart
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+        <table name="wk_abandoned_cart_mails" resource="default" engine="innodb" comment="Abandoned Cart Mails Table">
+              <column xsi:type="int" name="entity_id" padding="11" unsigned="true" nullable="false" identity="true"
+                      comment="Entity ID"/>
+              <column xsi:type="int" name="quote_id" padding="11" unsigned="false" nullable="false" identity="false"
+                      comment="Quote ID"/>
+              <column xsi:type="int" name="mail_sent" padding="11" unsigned="false" nullable="true" identity="false"
+                      comment="Number Of Mails Sent"/>
+              <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" comment="First Mail Sent On"/>
+              <column xsi:type="timestamp" name="sent_on" on_update="false" nullable="true"
+                      comment="Mail Sent On"/>
+              <constraint xsi:type="primary" referenceId="PRIMARY">
+                  <column name="entity_id"/>
+              </constraint>
+        </table>
+        <table name="wk_abandoned_cart_mail_logs" resource="default" engine="innodb" comment="Abandoned Cart Mail Logs Table">
+              <column xsi:type="int" name="entity_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+              <column xsi:type="int" name="quote_id" padding="11" unsigned="false" nullable="false" identity="false"
+                      comment="Quote ID"/>
+              <column xsi:type="timestamp" name="sent_on" on_update="false" nullable="true" comment="Mail Sent On"/>
+              <column xsi:type="text" name="mail_content" nullable="true" comment="Mail Content"/>
+              <column xsi:type="text" name="sent_by" nullable="true" comment="Sent by"/>
+              <column xsi:type="int" name="mode" padding="11" unsigned="false" nullable="true" comment="Mode"/>
+              <constraint xsi:type="primary" referenceId="PRIMARY">
+                  <column name="entity_id"/>
+              </constraint>
+        </table>
+</schema>

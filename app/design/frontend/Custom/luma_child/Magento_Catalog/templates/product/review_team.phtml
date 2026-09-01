@@ -1,0 +1,146 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');
+
+$product_updated_at = $product ? $product->getData('updated_at') : null;
+
+// echo 'product update at'. $product_updated_at;
+
+    if ($product_updated_at) {
+    $product_updated_at_date = date('Y-m-d', strtotime($product_updated_at));
+    // Convert date from 'Y-m-d' to 'F j Y' (e.g., March 26 2026)
+    $product_updated_at_date = date('F j Y', strtotime($product_updated_at));
+}
+
+
+
+?>
+<div class="blog-bottom-review-sec">
+    <div class="container-2">
+        
+<div class="blog-bottom-review-team">
+    
+    <div class="reviewved-by sep-l">
+      <?php
+
+
+
+$product_review_by = $objectManager->get('Haartyhanks\AuthReview\Model\EntityFactory')->create()->load($product->getData('product_review_by'));
+$product_authored_by = $objectManager->get('Haartyhanks\AuthReview\Model\EntityFactory')->create()->load($product->getData('product_authored_by'));
+
+$review_at_raw = $product->getData('last_review_on');
+$updated_at_raw = $product->getData('last_update_on');
+$updated_at = $updated_at_raw ? date('F j Y', strtotime($updated_at_raw)) : 'Mar 13 2026';
+$review_at = $review_at_raw ? date('F j Y', strtotime($review_at_raw)) : 'Mar 23 2026';
+
+
+
+if ($product):
+    $productId = $product->getId();
+
+    // Author profiles
+    $authors = [
+        [
+            'name' => "HARMINDER ‘HARMY’ KAUR",
+            'degree' => "BSc(hons) Pharmacy",
+            'gphc' => "2061107",
+            'img_jpg' => "https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/HARMY-PROFILE-PIC.jpg",
+        ],
+        [
+            'name' => "Hardeep Sehmi",
+            'degree' => "BSc(hons) Pharmacy",
+            'gphc' => "2060875",
+            
+            'img_jpg' => "https://magento-1195784-4216081.cloudwaysapps.com/media/weltpixel/owlcarouselslider/images/t/a/tam-profile-pic_1.jpg",
+        ],
+        [
+            'name' => "Ayesha Patel",
+            'degree' => "MPharm (Hons), IPresc",
+            'gphc' => "2079407",
+            
+            'img_jpg' => "https://phpstack-732705-2678695.cloudwaysapps.com/pub/media/wysiwyg/ayesha.png",
+        ],
+    ];
+    $index = ($productId - 1) % count($authors);
+    $author = $authors[$index];
+?>
+<?php if(isset($product_authored_by) && $product_authored_by !== null): ?>
+
+
+  
+<div class="review-right-img">
+   <img src="<?= isset($product_authored_by['photo']) && $product_authored_by['photo'] ? $product_authored_by['photo'] : 'https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/HARMY-PROFILE-PIC.jpg'; ?>" width="800" height="400" alt="Pharmacist Image">
+    
+    
+</div>
+
+<div class="review-title-box">
+    <p class="review-text"> Review By</p>
+    
+    <p class="pharmacist-title name"><?= isset($product_authored_by['name']) ? $product_authored_by['name'] : 'HARMINDER ‘HARMY’ KAUR' ?></p>
+    <p class="review-text"> <?= ' Last Updated On : '. $updated_at ?></p>
+    <p class="review-text"><?= isset($product_authored_by['specialist']) ? $product_authored_by['specialist'] : 'BSc(hons) Pharmacy' ?></p>
+    <p class="gphc-no">GPhC Number: <?= isset($product_authored_by['registration_number']) ? $product_authored_by['registration_number'] : '2061107' ?></p>
+</div>
+<?php else: ?>
+    <div class="review-right-img">
+   <img src="<?= $author['img_jpg']; ?>" width="800" height="400" alt="Pharmacist Image">
+    
+    
+</div>
+
+<div class="review-title-box">
+    
+    <p class="review-text">Authored By</p>
+    <p class="pharmacist-title name"><?= $author['name']; ?></p>
+    <p class="review-text"><?= $author['degree']; ?></p>
+    <p class="gphc-no">GPhC Number: <?= $author['gphc']; ?></p>
+</div>
+
+<?php endif; ?>
+</div>
+<?php endif; ?>
+
+<?php if(isset($product_review_by) && $product_authored_by !== null): ?>
+
+
+    <div class="reviewved-by">
+    <div class="review-right-img">
+        <img src="<?= $product_review_by['photo'] ? $product_review_by['photo'] : 'https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/gurdev-sehmi-img.jpg' ?>" width="800" height="400" alt="Pharmacist Image">
+    </div>
+        <div class="review-title-box">
+        <p class="review-text">Authored By</p>
+    
+    <p class="pharmacist-title name"><?= !empty($product_review_by['name']) ? $product_review_by['name'] : 'GURDEV SEHMI'; ?></p>
+    <?php if($product_updated_at) : ?>
+        <p class="review-text"> <?= 'Last Reviewed On : '. $review_at ?></p>
+    <?php endif; ?>
+    <p class="review-text"><?= !empty($product_review_by['specialist']) ? $product_review_by['specialist'] : 'BSc Pharm, MRPharmS, Independent Prescriber, Superintendent Pharmacist, Clinical Lead'; ?></p>
+    <p class="gphc-no"> GPhC Number: <?= !empty($product_review_by['registration_number']) ? $product_review_by['registration_number'] : '2050925'; ?></p>
+
+</div>
+    </div>
+
+    <?php else : ?>
+
+    <div class="reviewved-by">
+        <div class="review-right-img">
+            <picture>
+              <source srcset="https://magento-1195784-4216081.cloudwaysapps.com/pub/media/gurdev-sehmi-img.webp" type="image/webp">
+              <img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/gurdev-sehmi-img.jpg" alt="Pharmacist Image" />
+            </picture>
+        </div>
+        <div class="review-title-box">
+            <p class="review-title"><?php //$_post->getPublishDate(); ?></p>
+            <p class="review-text">Reviewed By</p>    
+            <p class="pharmacist-title name">GURDEV SEHMI</p>
+            <p class="review-text">BSc Pharm, MRPharmS, Independent Prescriber, Superintendent Pharmacist, Clinical Lead</p>
+            <p class="gphc-no">GPhC Number: 2050925</p>
+        </div>
+    </div>
+
+<?php endif; ?>
+
+</div>
+</div>
+</div>

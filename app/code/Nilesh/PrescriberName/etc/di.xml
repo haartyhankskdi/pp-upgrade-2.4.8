@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Nilesh\PrescriberName\Api\PrescriberNameRepositoryInterface" type="Nilesh\PrescriberName\Model\PrescriberNameRepository"/>
+	<preference for="Nilesh\PrescriberName\Api\Data\PrescriberNameInterface" type="Nilesh\PrescriberName\Model\Data\PrescriberName"/>
+	<preference for="Nilesh\PrescriberName\Api\Data\PrescriberNameSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Nilesh\PrescriberName\Model\ResourceModel\PrescriberName\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">nilesh_prescribername_prescribername</argument>
+			<argument name="resourceModel" xsi:type="string">Nilesh\PrescriberName\Model\ResourceModel\PrescriberName\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="nilesh_prescribername_prescribername_listing_data_source" xsi:type="string">Nilesh\PrescriberName\Model\ResourceModel\PrescriberName\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="sales_order_grid_data_source" xsi:type="string">Nilesh\PrescriberName\Model\Order\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Nilesh\PrescriberName\Model\Order\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_grid</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Sales\Model\ResourceModel\Order</argument>
+        </arguments>
+    </type>
+</config>

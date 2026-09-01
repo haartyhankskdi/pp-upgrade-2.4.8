@@ -1,0 +1,111 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AbandonedCart
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<?php
+    $dataset = $block->getDatasets();
+    $labels = $block->getLabels();
+    $fromDate = $block->getRequest()->getParam('fromDate');
+    $toDate = $block->getRequest()->getParam('toDate');
+?>
+<div style ="float:left; display:none !important">
+    <form method="post" action ="">
+        <?= /* @noEscape */ $block->getBlockHtml('formkey')?>
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span>From Date</span>
+            </label>
+            <div class="admin__field-control">
+                <input type="text" 
+                        class="admin__control-text has-datepicker" 
+                        id="calendar_inputField" 
+                        name="fromDate"
+                        value = "<?= /* @noEscape */ $fromDate; ?>"
+                        aria-required="true" />
+            </div>
+        </div>
+        <div class="admin__field">
+            <label class="admin__field-label">
+                <span>To Date</span>
+            </label>
+
+            <div class="admin__field-control">
+                <input type="text" 
+                        class="admin__control-text has-datepicker" 
+                        id="calendar_inputField2" 
+                        name="toDate"
+                        value = "<?= /* @noEscape */ $toDate; ?>"
+                        aria-required="true" />
+            </div>
+        </div>
+        <div class="admin__field">
+            <button type="submit" class="action-default scalable primary">
+                Filter Results
+            </button>
+        </div>
+    </form>
+</div>
+<div id="container" style="width: 100%; float:right">
+    <canvas id="canvas"></canvas>
+</div>
+
+<script>
+    require([
+        "jquery",
+        'Webkul_AbandonedCart/js/Chart.bundle',
+        'Webkul_AbandonedCart/js/utils'
+    ], function ($) {
+        var MONTHS = [];
+        var color = Chart.helpers.color;
+        var barChartData = {
+            labels: <?= /* @noEscape */ $labels; ?>,
+            datasets: <?= /* @noEscape */ $dataset; ?>
+
+        };
+        $(document).ready(function() {
+            var ctx = document.getElementById('canvas').getContext('2d');
+            window.myBar = new Chart(ctx, {
+                type: 'bar',
+                data: barChartData,
+                options: {
+                    responsive: true,
+                }
+            });
+
+        });
+    })
+</script>
+<script>
+    require([
+        "jquery",
+        "mage/calendar"
+    ], function ($) {
+        $("#calendar_inputField").calendar({
+            changeYear: true,
+            changeMonth: true,
+            dateFormat :'yyyy/mm/dd',
+            yearRange: "1970:2050",
+            buttonText: "Select Date",
+        });
+        $("#calendar_inputField2").calendar({
+            changeYear: true,
+            changeMonth: true,
+            dateFormat :'yyyy/mm/dd',
+            yearRange: "1970:2050",
+            buttonText: "Select Date",
+        });
+    });
+</script>
+<style>
+    .abandoned-cart-button-admin{
+        color:#fff !important;
+        background-color: #eb5202 !important;
+    }
+</style>

@@ -1,0 +1,168 @@
+<?php
+namespace Haartyhanks\RemoveObjectManager\Block;
+
+use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
+use Magento\Catalog\Model\ProductRepository;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\CatalogInventory\Api\StockRegistryInterface;
+use Magento\Checkout\Model\Cart;
+use Magento\Framework\UrlInterface;
+use Magento\Framework\Session\SessionManagerInterface;
+use Magento\Catalog\Helper\Image;
+use Magento\Customer\Model\Session;
+use Magento\Catalog\Block\Product\ListProduct;
+use Magento\Framework\Registry;
+
+class RemoveObj extends \Magento\Framework\View\Element\Template
+{
+    /**
+     * @var CollectionFactory
+    */
+    protected $productCollectionFactory;
+    /**
+     * @var ProductRepository
+    */
+    protected $productRepository;
+    /**
+     * @var StoreManagerInterface
+    */
+    protected $storeManager;
+    /**
+     * @var StockRegistryInterface
+    */
+    protected $stockRegistry;
+    /**
+     * @var Cart
+    */
+    protected $cart;
+    /**
+     * @var UrlInterface
+     */
+    protected $urlInterface;
+
+    /**
+     * @var SessionManagerInterface
+     */
+    protected $session;
+
+    /**
+     * @var Image
+     */
+    protected $imageHelper;
+
+    /**
+     * @var Session
+     */
+    protected $customerSession;
+
+    /**
+     * @var ListProduct
+     */
+    protected $listProduct;
+
+    /**
+     * @var Registry
+     */
+    protected $registry;
+
+    public function __construct(
+        \Magento\Framework\View\Element\Template\Context $context,
+        CollectionFactory $productCollectionFactory,
+        ProductRepository $productRepository,
+        StoreManagerInterface $storeManager,
+        StockRegistryInterface $stockRegistry,
+        UrlInterface $urlInterface,
+        Cart $cart,
+        SessionManagerInterface $session,
+        Image $imageHelper,
+        Session $customerSession,
+        ListProduct $listProduct,
+        Registry $registry,
+        array $data = []
+    ) {
+        parent::__construct($context, $data);
+        $this->productCollectionFactory         = $productCollectionFactory;
+        $this->productRepository                = $productRepository;
+        $this->storeManager                     = $storeManager;
+        $this->stockRegistry                    = $stockRegistry;
+        $this->urlInterface                     = $urlInterface;
+        $this->cart                             = $cart;
+        $this->session                          = $session;
+        $this->imageHelper                      = $imageHelper;
+        $this->customerSession                  = $customerSession;
+        $this->listProduct                      = $listProduct;
+        $this->registry                         = $registry;
+    }
+
+    public function getProductCollection()
+    {
+        // die('custom block file');
+        $collection = $this->productCollectionFactory;
+        return $collection;
+    }
+
+    public function getCurrentProduct()
+    {
+        $currentProductId = $this->productRepository;
+        return $currentProductId;
+    }
+
+    public function getProductRepository()
+    {
+        return $this->productRepository;
+    }
+
+    public function getStoreUrl()
+    {
+        return $this->storeManager->getStore()->getBaseUrl();
+    }
+
+    public function getMediaUrl()
+    {
+        return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    }
+
+    public function getStockRegistry()
+    {
+        return $this->stockRegistry;
+    }
+
+    public function getCart()
+    {
+        return $this->cart;
+    }
+    public function getCurrentPageUrl()
+    {
+        return $this->urlInterface->getCurrentUrl();
+    }
+
+    public function getSession()
+    {
+        return $this->session;
+    }
+
+    public function getImageHelper()
+    {
+        return $this->imageHelper;
+    }
+
+    public function getCustomerData()
+    {
+        return $this->customerSession;
+    }
+
+    public function getListProduct()
+    {
+        return $this->listProduct;
+    }
+
+    public function getCurrentProductId()
+    {
+        return $this->registry->registry('current_product');
+    }
+
+    public function getCurrentCategory()
+    {
+        return $this->registry->registry('current_category');
+    }
+}

@@ -1,0 +1,30 @@
+<!--
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+-->
+<div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="payment-method-content">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+
+        <!-- ko template: 'Magenest_SagePay/payment/cc-sage-form' --><!-- /ko -->
+
+        <div class="actions-toolbar" style="display: none">
+            <div class="primary">
+                <button class="action primary checkout"
+                        type="submit"
+                        data-bind="
+                        click: placeOrder,
+                        attr: {title: $t('Place Order')},
+                        css: {disabled: !isPlaceOrderActionAllowed()},
+                        enable: (getCode() == isChecked())
+                        "
+                        disabled>
+                    <span data-bind="text: $t('Place Order')"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

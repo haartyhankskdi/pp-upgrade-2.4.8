@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amasty_customform>
+            <general>
+                <enabled>0</enabled>
+            </general>
+            <email>
+                <sender_email_identity>general</sender_email_identity>
+                <template>amasty_customform_email_template</template>
+            </email>
+            <response>
+                <sender>general</sender>
+                <template>amasty_customform_response_template</template>
+            </response>
+            <autoresponder>
+                <sender>general</sender>
+                <template>amasty_customform_autoresponder_template</template>
+            </autoresponder>
+            <gdpr>
+                <enabled>0</enabled>
+                <text><![CDATA[I have read & accept the <a target="_blank" href="/privacy-policy">Privacy Policy</a>]]></text>
+            </gdpr>
+            <advanced>
+                <date_format>mm/dd/yy</date_format>
+                <is_render_google_map_in_pdf>0</is_render_google_map_in_pdf>
+                <file_link_lifetime>1</file_link_lifetime>
+            </advanced>
+            <customer_account>
+                <show_answers>0</show_answers>
+                <disable_for_customer_groups/>
+                <allow_edit_answers>0</allow_edit_answers>
+                <notify_when_customer_edits_answer>0</notify_when_customer_edits_answer>
+                <after_edit_email_template>amasty_customform_customer_change_answer</after_edit_email_template>
+                <allow_customer_remove_data>0</allow_customer_remove_data>
+                <notify_when_customer_removes_answer>0</notify_when_customer_removes_answer>
+                <after_remove_email_template>amasty_customform_customer_remove_answer</after_remove_email_template>
+            </customer_account>
+            <mailchimp>
+                <enabled>0</enabled>
+            </mailchimp>
+        </amasty_customform>
+    </default>
+</config>

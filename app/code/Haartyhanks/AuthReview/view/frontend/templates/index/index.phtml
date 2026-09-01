@@ -1,0 +1,123 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+/** @var \Haartyhanks\AuthReview\Model\EntityFactory $entityFactory */
+$entityFactory = $objectManager->get(\Haartyhanks\AuthReview\Model\EntityFactory::class);
+
+/** @var \Haartyhanks\AuthReview\Model\ResourceModel\Entity\Collection $collection */
+$collection = $entityFactory->create()->getCollection();
+
+// optional filters
+// $collection->addFieldToFilter('status', 1);
+
+// load and loop
+$data =  $collection->load();
+
+?>
+
+
+
+
+<section class="team-section">
+  <h2>Meet our team</h2>
+
+  <div class="team-grid">
+    <!-- for loop -->
+    <?php if(count($data->getData())) : ?>
+    <?php foreach ($data->getData() as $data) : ?>
+    <article class="team-card">
+      <div class="team-image">
+        <img src="<?=$data['photo']  ?>" alt="<?=$data['name']  ?>">
+      </div>
+      <div class="team-content">
+        <h3 class="team-name"><?=$data['name']  ?></h3>
+        <p class="team-subtitle"><?=$data['registration_number']  ?></p>
+        
+      </div>
+    </article>
+    <?php endforeach ; ?>
+    <?php endif ; ?>
+  </div>
+</section>
+
+
+
+<style>
+    .team-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.team-section h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #123c5d;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.team-card {
+  background: #f5fafc;
+  border-radius: 4px;
+  padding: 30px 25px 25px;
+  box-shadow: 0 0 0 1px #e4eef4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.team-image {
+  width: 100%;
+  padding-top: 110%; /*  aspect ratio  */
+  background: #bde5ff;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.team-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-image.no-image {
+  background: #f4f9fc;
+}
+
+.team-name {
+  font-size: 22px;
+  margin: 0 0 6px;
+  color: #003b64;
+}
+
+.team-subtitle {
+  margin: 0 0 18px;
+  color: #6c7a89;
+  font-size: 14px;
+}
+
+.team-link {
+  margin-top: auto;
+  color: #e3362b;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.team-link:hover {
+  text-decoration: underline;
+}
+
+
+</style>

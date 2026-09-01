@@ -1,0 +1,16 @@
+<?php /** @var $block \Magento\Framework\View\Element\Template */ ?>
+<?php
+$nexUrl = $block->getUrl('sagepay/server/failure');
+?>
+
+<script>
+    require([
+        'jquery'
+    ], function($) {
+        $(document).ready(function() {
+            $('body > div.loading-mask', window.parent.document).css("display", "block");
+            window.parent.location = '<?= /* @noEscape */ $nexUrl?>';
+            $('iframe#server-low-profile', window.parent.document).remove();
+        });
+    });
+</script>

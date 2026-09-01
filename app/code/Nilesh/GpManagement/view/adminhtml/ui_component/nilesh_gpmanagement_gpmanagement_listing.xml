@@ -1,0 +1,208 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">nilesh_gpmanagement_gpmanagement_listing.nilesh_gpmanagement_gpmanagement_listing_data_source</item>
+		</item>
+	</argument>
+	<settings>
+		<spinner>nilesh_gpmanagement_gpmanagement_columns</spinner>
+		<deps>
+			<dep>nilesh_gpmanagement_gpmanagement_listing.nilesh_gpmanagement_gpmanagement_listing_data_source</dep>
+		</deps>
+		<buttons>
+			<button name="add">
+				<url path="*/*/new"/>
+				<class>primary</class>
+				<label translate="true">Add new GpManagement</label>
+			</button>
+		</buttons>
+	</settings>
+	<dataSource component="Magento_Ui/js/grid/provider" name="nilesh_gpmanagement_gpmanagement_listing_data_source">
+		<settings>
+			<updateUrl path="mui/index/render"/>
+		</settings>
+		<aclResource>Nilesh_GpManagement::GpManagement</aclResource>
+		<dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="nilesh_gpmanagement_gpmanagement_listing_data_source">
+			<settings>
+				<requestFieldName>id</requestFieldName>
+				<primaryFieldName>gpmanagement_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<listingToolbar name="listing_top">
+		<settings>
+			<sticky>true</sticky>
+		</settings>
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls"/>
+		<filters name="listing_filters"/>
+		<paging name="listing_paging"/>
+	</listingToolbar>
+	<columns name="nilesh_gpmanagement_gpmanagement_columns">
+		<settings>
+			<editorConfig>
+				<param name="selectProvider" xsi:type="string">nilesh_gpmanagement_gpmanagement_listing.nilesh_gpmanagement_gpmanagement_listing.nilesh_gpmanagement_gpmanagement_columns.ids</param>
+				<param name="enabled" xsi:type="boolean">true</param>
+				<param name="indexField" xsi:type="string">gpmanagement_id</param>
+				<param name="clientConfig" xsi:type="array">
+					<item name="saveUrl" path="nilesh_gpmanagement/GpManagement/inlineEdit" xsi:type="url"/>
+					<item name="validateBeforeSave" xsi:type="boolean">false</item>
+				</param>
+			</editorConfig>
+			<childDefaults>
+				<param name="fieldAction" xsi:type="array">
+					<item name="provider" xsi:type="string">nilesh_gpmanagement_gpmanagement_listing.nilesh_gpmanagement_gpmanagement_listing.nilesh_gpmanagement_gpmanagement_columns_editor</item>
+					<item name="target" xsi:type="string">startEdit</item>
+					<item name="params" xsi:type="array">
+						<item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+						<item name="1" xsi:type="boolean">true</item>
+					</item>
+				</param>
+			</childDefaults>
+		</settings>
+		<selectionsColumn name="ids">
+			<settings>
+				<indexField>gpmanagement_id</indexField>
+			</settings>
+		</selectionsColumn>
+		<column name="gpmanagement_id">
+			<settings>
+				<filter>text</filter>
+				<sorting>asc</sorting>
+				<label translate="true">ID</label>
+			</settings>
+		</column>
+		<column name="practice_code">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">practice_code</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<actionsColumn class="Nilesh\GpManagement\Ui\Component\Listing\Column\GpManagementActions" name="actions">
+			<settings>
+				<indexField>gpmanagement_id</indexField>
+				<resizeEnabled>false</resizeEnabled>
+				<resizeDefaultWidth>107</resizeDefaultWidth>
+			</settings>
+		</actionsColumn>
+		<column name="name_of_practice">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">name_of_practice</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="email">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">email</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="telephone">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">telephone</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="address_line_one">
+			<settings>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="city">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">city</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="county">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">county</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="postcode">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">postcode</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="additional_info">
+			<settings>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="created_date">
+			<settings>
+				<editor>
+					<editorType>date</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="modify_date">
+			<settings>
+				<editor>
+					<editorType>date</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+	</columns>
+</listing>

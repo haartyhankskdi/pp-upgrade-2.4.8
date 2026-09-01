@@ -1,0 +1,42 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Widget\Gender $block */
+
+// for="$block->escapeHtmlAttr($block->getFieldId('gender'))"
+?>
+<div class="field gender<?= $block->isRequired() ? ' required' : ''?>">
+    <label class="label"><span><?= $block->escapeHtml($block->getStoreLabel('gender')) ?></span></label>
+    <div class="control">
+            <?php $options = $block->getGenderOptions(); ?>
+            <?php $value = $block->getGender(); ?>
+
+            <div class="field">
+            <input type="radio" <?= /* @noEscape */ ("1" == $value) ? ' checked="checked"' : '' ?> name="<?= $block->escapeHtmlAttr($block->getFieldName('gender')) ?>" value="1" id="gender_male" class="<?php if ($block->isRequired()) : ?>required-entry validate-one-required-by-name <?php endif; ?>">
+            <label class="gender gender_male" for="gender_male"><span><?= $block->escapeHtml(__("Male")) ?></span></label>
+        </div>
+
+        <div class="field">
+            <input type="radio" <?= /* @noEscape */ ("2" == $value) ? ' checked="checked"' : '' ?> name="<?= $block->escapeHtmlAttr($block->getFieldName('gender')) ?>" value="2" id="gender_female" class="<?php if ($block->isRequired()) : ?> required-entry validate-one-required-by-name <?php endif; ?>">
+            <label class="gender gender_female" for="gender_female"><span><?= $block->escapeHtml(__("Female")) ?></span></label>
+        </div>
+            <div for="gender" generated="true" class="mage-error" style="display:none" id="gender-error">This is a required field.</div>
+    </div>
+</div>
+
+<script>
+    require(['jquery'], function($){
+        $('.gender').click(function () { 
+            if ($("#gender_male").is(":checked")) {
+                $(".gender_male").addClass('active');
+                $(".gender_female").removeClass('active');
+            }else{
+                $(".gender_male").removeClass('active');
+                $(".gender_female").addClass('active');
+            }
+        });
+    });
+</script>

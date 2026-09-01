@@ -1,0 +1,85 @@
+<?php 
+   $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+   $category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+?>
+
+<?php if ($category->getId() == 84) :?>
+
+<div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="<?php echo $this->getBaseUrl();?>media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+
+    <div class="work-c">
+      <div class="h-title-2">
+        Complete our online<br>
+        clinical consultation
+      </div>
+      <p>Answer a few questions on your health and your fitness goals.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="<?php echo $this->getBaseUrl();?>media/wysiwyg/WLImage/work-img-2.webp" alt="Setup Coaching">
+    <div class="work-c">
+      <div class="h-title-2">
+        Clinical<br>
+        assessment
+      </div>
+      <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="<?php echo $this->getBaseUrl();?>media/wysiwyg/WLImage/work-img-3.webp" alt="Ongoing Support">
+    <div class="work-c">
+      <div class="h-title-2">
+        Welcome<br>
+        aboard!
+      </div>
+      <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div>
+
+<?php else : ?>
+
+
+<div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="<?php echo $this->getBaseUrl();?>media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+
+    <div class="work-c">
+      <div class="h-title-2">
+        Complete our online<br>
+        clinical consultation
+      </div>
+      <p>Answer a few questions on your health and your fitness goals.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="<?php echo $this->getBaseUrl();?>media/wysiwyg/WLImage/work-img-2.webp" alt="Setup Coaching">
+    <div class="work-c">
+      <div class="h-title-2">
+        Clinical<br>
+        assessment
+      </div>
+      <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="<?php echo $this->getBaseUrl();?>media/wysiwyg/WLImage/work-img-3.webp" alt="Ongoing Support">
+    <div class="work-c">
+      <div class="h-title-2">
+        Welcome<br>
+        aboard!
+      </div>
+      <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical journey.</p>
+    </div>
+  </div>
+</div>
+<?php endif; ?>
+

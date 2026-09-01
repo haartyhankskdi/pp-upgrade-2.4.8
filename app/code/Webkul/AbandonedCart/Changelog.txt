@@ -1,0 +1,21 @@
+Legend
+
++ Features
+
+-------------------------------- Version 3.0.0 --------------------------------------
+    +   Version updated for Magento 2.3.x
+
+-------------------------------- Version 2.1.0 --------------------------------------
+    + Compatible with magento 2.3
+
+-------------------------------- Version 2.0.1 --------------------------------------
+    - issues fixed
+
+-------------------------------- Version 2.0.0 --------------------------------------
+    + Admin Can get the list of abandoned cart within a range of particular days
+    + Automatic mails can be sent to the customer
+    + Admin can send manual mails to any customer
+    + Admin can view the complete log of the mails sent
+    + Admin can see the reports of Abandoned Cart, Mails Sent and Carts Converted in graphical form
+    + Mail Templates for each followup mail can be set from the admin configuration
+

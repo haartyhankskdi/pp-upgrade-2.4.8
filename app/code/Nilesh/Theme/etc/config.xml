@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<homepage>
+            <!-- Section One Start -->
+			<section_one>
+
+				<enable>1</enable>
+				<container>two</container>
+				
+                <banner_one_image/>
+				<banner_one_title>Title</banner_one_title>
+				<banner_one_template>Desc</banner_one_template>
+				<banner_one_link>#</banner_one_link>
+				<banner_one_button_name>Button Name</banner_one_button_name>
+
+                <!-- <banner_two_image /> -->
+                <!-- <banner_two_title>Title</banner_two_title> -->
+                <banner_two_template>Desc</banner_two_template>
+                <!-- <banner_two_link>#</banner_two_link> -->
+                <!-- <banner_two_button_name>Button Name</banner_two_button_name> -->
+
+                <!-- <banner_three_image />
+                <banner_three_title>Title</banner_three_title>
+                <banner_three_template>Desc</banner_three_template>
+                <banner_three_link>#</banner_three_link>
+                <banner_three_button_name>Button Name</banner_three_button_name> -->
+
+			</section_one>
+
+            
+
+		</homepage>
+	</default>
+</config>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AbandonedCart
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    
+     <template id="webkul_abandoned_cart_abandoned_cart_mail_configuration_abandoned_cart_first_mail_template" 
+              label="First Abandoned Cart Mail" 
+              file="first_mail.html" 
+              type="html" 
+              module="Webkul_AbandonedCart" 
+              area="frontend"
+    />
+    <template id="webkul_abandoned_cart_abandoned_cart_mail_configuration_abandoned_cart_second_mail_template" 
+              label="Second Abandoned Cart Mail" 
+              file="second_mail.html" 
+              type="html" 
+              module="Webkul_AbandonedCart" 
+              area="frontend"
+    />
+    <template id="webkul_abandoned_cart_abandoned_cart_mail_configuration_abandoned_cart_third_mail_template" 
+              label="Third Abandoned Cart Mail" 
+              file="third_mail.html" 
+              type="html" 
+              module="Webkul_AbandonedCart" 
+              area="frontend"
+    /> 
+     <template id="abandoned_cart_custom_email" 
+            label="Abandoned Cart Custom Email"
+            file="abandoned_cart_custom_email.html"
+            type="html"
+            module="Webkul_AbandonedCart"
+            area="frontend"/> 
+</config>

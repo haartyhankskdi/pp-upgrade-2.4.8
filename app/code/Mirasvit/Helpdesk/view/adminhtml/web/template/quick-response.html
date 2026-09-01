@@ -1,0 +1,29 @@
+
+<div class="admin__action-dropdown-wrap hdmx-quick-response__dropdown"
+     data-bind="css: {_active: opened, _disabled: !collapsible}, outerClick: close.bind($data)">
+    <button
+            class="admin__action-dropdown"
+            type="button"
+            data-bind="click: toggleOpened"
+            data-toggle="dropdown"
+            aria-haspopup="true">
+        <!-- ko if: current() -->
+        <span class="admin__action-dropdown-text" data-bind="text: current().name"></span>
+        <!-- /ko -->
+    </button>
+
+    <ul class="admin__action-dropdown-menu">
+        <!-- ko foreach: { data: templates, as: 'template' } -->
+        <!-- ko ifnot: $parent.current() == template -->
+        <li>
+            <a data-bind="
+                text: template.name,
+                click: $parent.onChangeTemplate,
+                attr: {'data-template': template.body},
+                event: {mouseover: $parent.showPreview, mouseout: $parent.hidePreview}"
+            ></a>
+        </li>
+        <!-- /ko -->
+        <!-- /ko -->
+    </ul>
+</div>

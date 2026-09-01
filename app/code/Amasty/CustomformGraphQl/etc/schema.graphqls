@@ -1,0 +1,46 @@
+type Query {
+    customform (
+        formId: Int @doc(description: "Custom Form ID")
+    ): Form
+    @resolver(class: "Amasty\\CustomformGraphQl\\Model\\Resolver\\Query\\Form")
+}
+
+type Mutation {
+    amCustomFormSubmit (input: AmFormSubmitInput): AmFormSubmitOutput
+    @resolver(class: "\\Amasty\\CustomformGraphQl\\Model\\Resolver\\Mutation\\Submit") @doc(description:"Submit form")
+}
+
+input AmFormSubmitInput {
+    form_data: String
+}
+
+type AmFormSubmitOutput {
+    status: Int @doc(description: "Result status")
+}
+
+type Form {
+    form_id: Int @doc(description: "The ID number assigned to the custom form"),
+    title: String @doc(description: "The title of the custom form"),
+    code: String @doc(description: "The code of the custom form"),
+    success_url: String @doc(description: "Redirect url after submit"),
+    status: Boolean @doc(description: "Status"),
+    created_at: String @doc(description: "Date when custom form created"),
+    customer_group: String @doc(description: "Customer groups form displayed"),
+    store_id: String @doc(description: "Stores where form displayed"),
+    send_notification: Boolean @doc(description: "If notifications need"),
+    send_to: String @doc(description: "Send notifications to"),
+    submit_button: String @doc(description: "Text of submit button"),
+    success_message: String @doc(description: "Message displayed after submit form"),
+    form_json: String @doc(description: "Json contains all form fields"),
+    email_field: String @doc(description: "Get email address of customer from selected field"),
+    email_field_hide: Boolean @doc(description: "Hide Email field for logged in customer"),
+    popup_show: Boolean @doc(description: "Show custom form in popup"),
+    popup_button: String @doc(description: "Text of button which trigger popup showing"),
+    form_title: String @doc(description: "Json with titles of pages"),
+    gdpr_enabled: Boolean @doc(description: "Is GDPR consent enabled"),
+    gdpr_text: String @doc(description: "GDPR text"),
+    advanced_google_key: String @doc(description: "Google Api Key used for Google Map Field"),
+    advanced_date_format: String @doc(description: "Date Format"),
+    is_form_available: Boolean @doc(description: "Survey is disabled or survey is enabled and form available"),
+    isSurvey: Boolean @doc(description: "Is survey mode enabled")
+}

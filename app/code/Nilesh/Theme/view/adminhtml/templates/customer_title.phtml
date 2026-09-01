@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var $block \Magento\Theme\Block\Html\Title
+ */
+$titleIdHtml = ($block->getTitleId()) ? ' id="' . $block->escapeHtmlAttr($block->getTitleId()) . '"' : '';
+$titleClass = ($block->getTitleClass()) ? ' ' . $block->getTitleClass() : '';
+$title = $block->getPageTitle();
+?>
+
+<div class="page-title-wrapper<?= $block->escapeHtmlAttr($titleClass) ?>">
+    <h1 class="page-title" <?= /* @noEscape */ $titleIdHtml ?>><?= $block->escapeHtml($title) ?></h1>
+    <?= $block->getChildHtml() ?>
+</div>
+<?php
+$controllerName = $this->getRequest()->getControllerName();
+$actionName = $this->getRequest()->getActionName();
+$moduleName = $this->getRequest()->getModuleName();
+$urlAction = $moduleName . '_' . $controllerName . '_' . $actionName;
+if ($urlAction == 'customer_index_edit') {
+    $custFlag = 0;
+    $helper = $this->helper('Sachin\OrderFlag\Helper\OrderFlag');
+    $customerId = $this->getRequest()->getParam('id');
+    $custFlag = $helper->getCustomerFlagForCustomerEdit($customerId);
+    if ($custFlag == 1) { ?>
+        <div class="notsupply">Do Not Supply</div>
+<?php }
+} ?>
+
+<style type="text/css">
+    .page-header-hgroup .page-title-wrapper {
+        width: auto;
+        float: left;
+    }
+
+    .page-header-hgroup .notsupply {
+        width: auto;
+        display: inline-block;
+        margin-top: 8px;
+        margin-left: 15px;
+        color: #fff;
+        text-transform: uppercase;
+        background: #ff0000;
+        padding: 15px 20px;
+        font-weight: 600;
+
+    }
+
+    .page-header-hgroup .repeat-order {
+        width: auto;
+        display: inline-block;
+        margin-top: 8px;
+        margin-left: 15px;
+        color: #fff;
+        text-transform: uppercase;
+        background: #ffc000;
+        padding: 15px 20px;
+        font-weight: 600;
+
+    }
+
+    .data-grid-cell-content .notsupply {
+        width: auto;
+        display: inline-block;
+        margin-top: 8px;
+        margin-left: 0;
+        color: #fff;
+        text-transform: uppercase;
+        background: #ff0000;
+        padding: 10px 10px;
+        font-weight: 600;
+        text-align: center;
+    }
+</style>

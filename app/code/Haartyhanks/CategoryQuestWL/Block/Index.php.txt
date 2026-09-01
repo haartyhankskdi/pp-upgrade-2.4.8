@@ -1,0 +1,198 @@
+<?php
+
+namespace Haartyhanks\CategoryQuest\Block;
+
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Framework\Url\EncoderInterface;
+use Magento\Framework\Json\EncoderInterface as JsonEncoderInterface;
+use Magento\Framework\Stdlib\StringUtils;
+use Magento\Catalog\Helper\Product;
+use Magento\Catalog\Model\ProductTypes\ConfigInterface;
+use Magento\Framework\Pricing\PriceCurrencyInterface;
+use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
+use Magento\Catalog\Block\Product\Context;
+use Magento\Framework\Session\SessionManagerInterface;
+use Magento\Catalog\Model\CategoryFactory;
+use Magento\Catalog\Model\ProductRepository;
+use Magento\Framework\Locale\FormatInterface;
+use Magento\Customer\Model\Session;
+
+class Index extends \Magento\Catalog\Block\Product\View
+{
+    /**
+     * Magento string lib
+     *
+     * @var \Magento\Framework\Stdlib\StringUtils
+     */
+    protected $string;
+
+    /**
+     * @var \Magento\Framework\Json\EncoderInterface
+     */
+    protected $_jsonEncoder;
+
+    /**
+     * @var \Magento\Framework\Pricing\PriceCurrencyInterface
+     * @deprecated 102.0.0
+     */
+    protected $priceCurrency;
+
+    /**
+     * @var \Magento\Framework\Url\EncoderInterface
+     */
+    protected $urlEncoder;
+
+    /**
+     * @var \Magento\Catalog\Helper\Product
+     */
+    protected $_productHelper;
+
+    /**
+     * @var \Magento\Catalog\Model\ProductTypes\ConfigInterface
+     */
+    protected $productTypeConfig;
+
+    /**
+     * @var \Magento\Framework\Locale\FormatInterface
+     */
+    protected $_localeFormat;
+
+    /**
+     * @var \Magento\Customer\Model\Session
+     */
+    protected $customerSession;
+
+    /**
+     * @var ProductRepositoryInterface
+     */
+    protected $productRepositoryInterface;
+
+    /**
+     * @var SessionManagerInterface
+     */
+    protected $_coreSession;
+
+    /**
+     * @var CollectionFactory
+     */
+    protected $_productCollectionFactory;
+
+    /**
+     * @var CategoryFactory
+     */
+    protected $_categoryFactory;
+
+    /**
+     * @var ProductRepository
+     */
+    protected $_productRepository;
+
+    /**
+     * @param EncoderInterface $urlEncoder
+     * @param JsonEncoderInterface $jsonEncoder
+     * @param StringUtils $string
+     * @param Product $productHelper
+     * @param ConfigInterface $productTypeConfig
+     * @param FormatInterface $localeFormat
+     * @param Session $customerSession
+     * @param ProductRepositoryInterface $productRepositoryInterface
+     * @param PriceCurrencyInterface $priceCurrency
+     * @param SessionManagerInterface $coreSession
+     * @param CollectionFactory $productCollectionFactory
+     * @param CategoryFactory $categoryFactory
+     * @param ModelCategoryFactory $modelCategoryFactory
+     * @param ProductRepository $productRepository
+     * @param Context $context
+     * @param array $data
+     */
+    public function __construct(
+        EncoderInterface $urlEncoder,
+        JsonEncoderInterface $jsonEncoder,
+        StringUtils $string,
+        Product $productHelper,
+        ConfigInterface $productTypeConfig,
+        FormatInterface $localeFormat,
+        Session $customerSession,
+        ProductRepositoryInterface $productRepositoryInterface,
+        PriceCurrencyInterface $priceCurrency,
+        SessionManagerInterface $coreSession,
+        CollectionFactory $productCollectionFactory,
+        CategoryFactory $categoryFactory,
+        ProductRepository $productRepository,
+        Context $context,
+        array $data = []
+    ) {
+        $this->_productHelper = $productHelper;
+        $this->urlEncoder = $urlEncoder;
+        $this->_jsonEncoder = $jsonEncoder;
+        $this->productTypeConfig = $productTypeConfig;
+        $this->string = $string;
+        $this->_localeFormat = $localeFormat;
+        $this->customerSession = $customerSession;
+        $this->productRepositoryInterface = $productRepositoryInterface;
+        $this->priceCurrency = $priceCurrency;
+        $this->_coreSession = $coreSession;
+        $this->_categoryFactory = $categoryFactory;
+        $this->_productCollectionFactory = $productCollectionFactory;
+        $this->_productRepository = $productRepository;
+        // parent::__construct(
+        //     $urlEncoder, 
+        //     $jsonEncoder, 
+        //     $productTypeConfig, 
+        //     $string,
+        //     $localeFormat, 
+        //     $customerSession,
+        //     $productRepositoryInterface,
+        //     $priceCurrency,
+        //     $context, 
+        //     $data
+        // );
+    }
+
+    public function getCatValueSession()
+    {
+        $this->_coreSession->start();
+        return $this->_coreSession->getCatValue();
+    }
+
+    public function getProdValueSession()
+    {
+        $this->_coreSession->start();
+        return $this->_coreSession->getProdValue();
+    }
+
+    // public function unSetCatValue()
+    // {
+    //     $this->_coreSession->start();
+    //     $this->_coreSession->unsCatValue();
+    // }
+    // public function unSetProdValue()
+    // {
+    //     $this->_coreSession->start();
+    //     $this->_coreSession->unsProdValue();
+    // }
+    
+    
+    public function getProductCollection($categoryId)
+    {
+        // $categoryId = 'yourcategoryid';
+        $category = $this->_categoryFactory->create()->load($categoryId);
+        $collection = $this->_productCollectionFactory->create();
+        $collection->addAttributeToSelect('*');
+        $collection->addCategoryFilter($category);
+        $collection->addAttributeToFilter('visibility', \Magento\Catalog\Model\Product\Visibility::VISIBILITY_BOTH);
+        $collection->addAttributeToFilter('status',\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED);
+        return $collection;
+    }
+
+    public function getCategoryProduct($categoryId)
+    {
+        $category = $this->_modelCategoryFactory->create()->load($categoryId)->getProductCollection()->addAttributeToSelect('*');
+        return $category;
+    }
+
+    public function getProductById($id)
+	{
+		return $this->_productRepository->getById($id);
+	}
+}

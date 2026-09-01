@@ -1,0 +1,9 @@
+<?php
+
+namespace Haartyhanks\CategoryQuest\Block;
+
+
+class Product extends \Magento\Catalog\Block\Product\View
+{
+    
+}

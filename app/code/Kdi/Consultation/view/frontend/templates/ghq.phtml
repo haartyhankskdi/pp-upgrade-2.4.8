@@ -1,0 +1,64 @@
+
+
+<h2>BMI Calculator</h2>
+
+<form id="bmiForm">
+  <label for="height">Height:</label>
+  <input type="number" id="height" placeholder="Enter height" required>
+  <select id="heightUnit">
+    <option value="cm">cm</option>
+    <option value="inch">inch</option>
+    <option value="ft">feet</option>
+  </select>
+
+  <label for="weight">Weight:</label>
+  <input type="number" id="weight" placeholder="Enter weight" required>
+  <select id="weightUnit">
+    <option value="kg">kg</option>
+    <option value="lb">pounds (lb)</option>
+    <option value="st">stone</option>
+  </select>
+
+  <button type="submit">Calculate BMI</button>
+</form>
+
+<div class="result" id="result"></div>
+
+<script>
+document.getElementById("bmiForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let height = parseFloat(document.getElementById("height").value);
+  let weight = parseFloat(document.getElementById("weight").value);
+  let heightUnit = document.getElementById("heightUnit").value;
+  let weightUnit = document.getElementById("weightUnit").value;
+
+  // Convert height to meters
+  if (heightUnit === "cm") {
+    height = height / 100;
+  } else if (heightUnit === "inch") {
+    height = height * 0.0254;
+  } else if (heightUnit === "ft") {
+    height = height * 0.3048;
+  }
+
+  // Convert weight to kg
+  if (weightUnit === "lb") {
+    weight = weight * 0.453592;
+  } else if (weightUnit === "st") {
+    weight = weight * 6.35029;
+  }
+
+  const bmi = weight / (height * height);
+  let category = "";
+
+  if (bmi < 18.5) category = "Underweight";
+  else if (bmi < 24.9) category = "Normal weight";
+  else if (bmi < 29.9) category = "Overweight";
+  else category = "Obese";
+
+  document.getElementById("result").innerHTML = 
+    `Your BMI is <strong>${bmi.toFixed(2)}</strong> (${category})`;
+});
+</script>
+

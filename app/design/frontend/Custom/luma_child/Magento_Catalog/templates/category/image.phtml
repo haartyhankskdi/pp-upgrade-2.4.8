@@ -1,0 +1,28 @@
+<?php
+/**
+  * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+<?php
+    $_helper    = $this->helper('Magento\Catalog\Helper\Output');
+    $_category  = $block->getCurrentCategory();
+    $_imgHtml   = '';
+    if ($_imgUrl = $_category->getImageUrl()) {
+        if($_category->getMagetimCategoryImageAlt()) {
+            $img_alt = $_category->getMagetimCategoryImageAlt();
+        } else {
+            $img_alt = $_category->getName();
+        }
+        
+        $_imgHtmlImag = '<img src="/' . ltrim(ltrim($_imgUrl, "/pub"), "/") . '" 
+                            alt="' . $block->escapeHtml($img_alt) . '" 
+                            title="' . $block->escapeHtml($_category->getName()) . '" 
+                            class="image" 
+                            loading="lazy" />';
+
+        $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtmlImag, 'image');
+        echo '<div class="category-image hello">';
+        /* @escapeNotVerified */ echo $_imgHtml;
+        echo '</div>';
+    }
+?>

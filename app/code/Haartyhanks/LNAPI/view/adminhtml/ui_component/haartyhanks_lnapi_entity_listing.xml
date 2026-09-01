@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">haartyhanks_lnapi_entity_listing.haartyhanks_lnapi_entity_listing_data_source</item>
+		</item>
+	</argument>
+	<settings>
+		<spinner>haartyhanks_lnapi_entity_columns</spinner>
+		<deps>
+			<dep>haartyhanks_lnapi_entity_listing.haartyhanks_lnapi_entity_listing_data_source</dep>
+		</deps>
+	</settings>
+	<dataSource name="haartyhanks_lnapi_entity_listing_data_source" component="Magento_Ui/js/grid/provider">
+		<settings>
+			<storageConfig>
+				<param name="indexField" xsi:type="string">entity_id</param>
+			</storageConfig>
+			<updateUrl path="mui/index/render"/>
+		</settings>
+		<aclResource>Haartyhanks_LNAPI::Entity</aclResource>
+		<dataProvider name="haartyhanks_lnapi_entity_listing_data_source" class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+			<settings>
+				<requestFieldName>id</requestFieldName>
+				<primaryFieldName>entity_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<listingToolbar name="listing_top">
+		<settings>
+			<sticky>true</sticky>
+		</settings>
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls"/>
+		<filters name="listing_filters"/>
+		<paging name="listing_paging"/>
+	</listingToolbar>
+	<columns name="haartyhanks_lnapi_entity_columns">
+		<selectionsColumn name="ids">
+			<settings>
+				<indexField>entity_id</indexField>
+			</settings>
+		</selectionsColumn>
+		<column name="entity_id">
+			<settings>
+				<filter>text</filter>
+				<sorting>asc</sorting>
+				<label translate="true">ID</label>
+			</settings>
+		</column>
+		<column name="Customer_Id">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Customer_Id</label>
+			</settings>
+		</column>
+		<column name="verification_link">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">verification_link</label>
+			</settings>
+		</column>
+		<column name="status">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">status</label>
+			</settings>
+		</column>
+		<column name="is_verified">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">is_verified</label>
+			</settings>
+		</column>
+	</columns>
+</listing>

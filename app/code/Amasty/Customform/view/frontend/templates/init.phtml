@@ -1,0 +1,377 @@
+<?php
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
+?>
+<?php
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Amasty\Customform\Block\Init $block
+ * @var \Amasty\Customform\ViewModel\Form\FormInitInterface $viewModel
+ */
+
+use Amasty\Customform\Model\Config\GdprCustomform;
+
+$viewModel = $block->getViewModel();
+$formId = $viewModel->getFormId();
+$isSurvey = $viewModel->isSurvey();
+$usePopup = $viewModel->isPopupUsed();
+?>
+
+<?php if ($usePopup) : ?>
+    <div class="amform-parent">
+        <div class="amcform-popup-block" data-form-id=<?= (int)$formId ?>>
+            <div class="amcform-popup">
+                <button class="amcform-button -clear -with-icon -close-popup" data-amcform-js="close">
+                    <i class="amcform-icon -cross"></i>
+                </button>
+            <?php endif; ?>
+
+            <form class="rendered-form amform-form <?= /* @noEscape */ ($usePopup) ? 'amform-content' : '' ?> <?= $escaper->escapeHtml($block->getAdditionalClasses()) ?>" id="amform-form-<?= (int) $formId ?>" data-amform-id="<?= (int) $formId ?>" action="<?= $escaper->escapeUrl($viewModel->getFormAction()) ?>" data-mage-init='{"validation": {"ignore" : ".amcform-hidden-field, .amcform-hidden-page, :hidden:not(.amform-rating)"}}' enctype="multipart/form-data" method="post">
+
+
+            <?php 
+                    echo $this->getLayout()
+                    ->createBlock("Magento\Framework\View\Element\Template")
+                    ->setTemplate("Kdi_GHQ::gp_search.phtml")
+                    ->toHtml(); 
+
+                    // echo $this->getLayout()
+                    // ->createBlock("Magento\Framework\View\Element\Template")
+                    // ->setTemplate("Kdi_GHQ::bmi.phtml")
+                    // ->toHtml(); 
+                ?>
+
+                <input name="form_key" type="hidden" value="<?= $escaper->escapeHtml($viewModel->getFormKey()) ?>" />
+                <input name="form_id" type="hidden" value="<?= (int)$formId ?>" />
+                <input name="is_survey" type="hidden" value="<?= (int)$isSurvey ?>" />
+                <div class="amform-form-fieldset fieldset">
+                    <div class="insert-container fields"></div>
+                    <?php if ($viewModel->isGDPREnabled()) : ?>
+                        <div class="field required amform-hide-formload control amcform-gdpr" data-amcform-js="gdpr" style="display: none">
+                            <label class="label">
+                                <input class="amform-checkbox" type="checkbox" name="gdpr" data-id="amcustom-form-gdpr-<?= (int) $formId ?>" id="amcustom-form-gdpr-<?= (int) $formId ?>" title="<?= $escaper->escapeHtml(__('GDPR')); ?>" data-validate="{required:true}" value="1" disabled>
+                                <?= /* @noEscape */ $viewModel->getGDPRText(); ?>
+                            </label>
+                        </div>
+                    <?php endif; ?>
+                    <?php $gdprCheckboxesHtml = $viewModel->getGdprCheckboxHtml($formId . GdprCustomform::CUSTOM_FORM); ?>
+                    <?php if (!empty($gdprCheckboxesHtml)) : ?>
+                        <?=
+                        /** @noEscape */
+                        $gdprCheckboxesHtml ?>
+                    <?php endif; ?>
+                </div>
+
+            </form>
+            <div class="product-question-right">
+                <div class="info-1">
+                    <div class="info-img"><img class="" src="/static/frontend/Custom/luma_child/en_GB/images/manesha-img.jpg" alt="Manesha"></div>
+                    <div class="info_details_1 question-text">
+                        <div class="info-right-t">You’re almost there!</div>
+                        <p>It is the prescribers duty to ensure that the medicine is being used safely and appropriately. please answer a few questions about yourself to help us process your request.</p>
+                    </div>
+                    <div class="info-n">- Manesha</div>
+                    <p>Customer Service Team</p>
+                </div>
+                <div class="info-1 info_list">
+                    <h2 class="info_title_1">Confidentiality &amp; Authenticity Assured</h2>
+                    <ul>
+                        <li>Fully Regulated UK Pharmacy</li>
+                        <li>Authentic UK sourced medicines only.</li>
+                        <li>Trading for more than 10 years.</li>
+                        <li>Information Governance lead ensures all data is confidential</li>
+                    </ul>
+                </div>
+                <div class="info-1 info_list info_2">
+                    <h2 class="info_title_2">Need Help With Your Questionnaire?</h2>
+                    <p>Our customer service team is on hand Monday-Friday to help you with your queries.</p>
+                    <p>Please call us on <strong><a class="tel-link" href="tel:08009788956">08009788956</a></strong> or<br>email us at: <a href="mailto:headoffice@pharmacyplanet.com"><strong>headoffice@pharmacyplanet.com</strong></a></p>
+                </div>
+            </div>
+
+            <?php if ($usePopup) : ?>
+            </div>
+        </div>
+        <div class="start-const-btn">
+            <button data-amform-show="<?= (int)$formId ?>" class="amform-show-popup amcform-button -default">
+                <?= $escaper->escapeHtml($viewModel->getPopupButtonTitle()) ?>
+            </button>
+            
+        </div>
+
+    </div>
+
+<?php endif; ?>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'Amasty_Customform/js/google-map-loader',
+        'Amasty_Customform/js/form-render',
+        '<?= $escaper->escapeHtml($viewModel->getFormFillerComponent()) ?>',
+        'Amasty_Customform/js/am-google-map',
+        'Amasty_Customform/js/form-init'
+    ], function($, googleMapLoader) {
+        function renderForm() {
+            var renderedFormContainer = $('#amform-form-<?= (int)$formId ?> .insert-container'),
+                renderedForm;
+
+            $('body').addClass('amform-body');
+            $(".amform-show-popup").click(function(){
+                $("body").addClass("amform-poup-opened");
+            });
+            $(".-cross").click(function(){
+                $("body").removeClass("amform-poup-opened");
+            });
+
+            renderedFormContainer.formRender(
+                <?= (int)$formId ?>,
+                <?= /* @noEscape */ $block->getFormDataJson() ?>,
+                <?= (int)$isSurvey ?>,
+                function() {
+                    renderedForm = $('[data-amcform-js="multi-page"]');
+
+                    if (renderedForm.length) {
+                        renderedForm.amFormInit();
+                        renderedForm.amFormFill({
+                            'formParams': <?=
+                                            /** @noEscape */
+                                            $viewModel->getFormParamsJson() ?>
+                        });
+                        renderedForm.trigger('contentUpdated');
+                    }
+
+                    $(document).on('amcform-init-multipage', function(e, form) {
+                        var $form = form.find('[data-amcform-js="multi-page"]');
+
+                        if ($form.length) {
+                            $form.amFormFill({
+                                'formParams': <?=
+                                                /** @noEscape */
+                                                $viewModel->getFormParamsJson() ?>
+                            });
+                        }
+                    });
+                }
+            );
+        }
+
+        <?php if ($viewModel->isUseGoogleMap()) : ?>
+            var deferredObject = googleMapLoader('<?= $escaper->escapeHtml($viewModel->getGoogleKey()) ?>');
+
+            deferredObject.always(renderForm);
+        <?php else : ?>
+            renderForm();
+        <?php endif; ?>
+
+
+
+         // custom js for disabled button and error message
+        jQuery(document).ready(function($){
+            var submitBtn = $('.amcform-submit.action.submit.primary');
+            $('input.policy').on('change', function() {
+                console.log('aaaaaaaa');
+            var val = $(this).val();    
+            if(val === 'no' || val === 'option-2'){
+                submitBtn.prop('disabled', true).css({'opacity':'0.5', 'pointer-events':'none'});
+            } else {
+                submitBtn.prop('disabled', false).css({'opacity':'1', 'pointer-events':'auto'});
+            }
+        });
+        });
+    });
+
+   
+</script>
+
+<style type="text/css">
+    
+    .page-layout-1column.amform-body .product-question-right{
+      width: 282px;
+      float: left;
+      background: #fff;
+      padding: 25px 20px 21px 20px;
+      box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.15);
+    }
+    .page-layout-1column.amform-body .info-1 h2 {
+        width: 100%;
+        float: left;
+        padding: 0;
+        margin: 0 0 15px 0;
+        font-size: 16px;
+        color: #2C5975;
+        font-family: 'Ubuntu', sans-serif;
+        line-height: 20px;
+        font-weight: 500;
+    }
+
+    /* custom css for disabled button and error message */
+    .amform-form .action.primary:disabled, 
+    .amform-parent .action.primary:disabled{
+        background:#ED3237 !important;
+    }
+    .amform-text.error-msg{
+        background-color: #ED3237;
+        padding: 1px 20px;
+        color: #fff;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    /* custom css for disabled button and error message */
+
+
+    @media screen and (min-width: 768px) {
+
+        .page-layout-1column.amform-body .product-question-right { 
+            margin-top: 270px;
+            float: right;
+        }
+            .page-layout-1column.amform-body .product-question-right {
+            display: block !important; 
+        }
+         
+
+    }
+
+    @media screen and (max-width: 767px) {
+
+        .page-layout-1column.amform-body .amcform-popup-block{
+            z-index: 99999999;
+        }
+
+    }
+</style>
+
+<script type="text/javascript">
+    require([
+        'jquery'
+    ], function($) {
+        $(document).ready(function() {
+            $(".amcform-icon.-cross").click(function(){
+                location.reload();
+            });
+
+
+            
+            // // Check on page load and on radio change whether all .amform-radiotwo.policy radios are set to "yes"
+            // function toggleSubmitButtonBasedOnPolicyRadios() {
+            //     var $radios = $('input.amform-radiotwo.policy[type="radio"]');
+            //     var disable = false;
+
+            //     // Group the radios by name and check the checked value for each group
+            //     var radioNames = [];
+            //     $radios.each(function(){
+            //         var name = $(this).attr('name');
+            //         if ($.inArray(name, radioNames) === -1) {
+            //             radioNames.push(name);
+            //         }
+            //     });
+
+            //     // If any group has checked radio != "yes" or nothing checked, disable the button
+            //     radioNames.forEach(function(name){
+            //         var $checked = $('input.amform-radiotwo.policy[type="radio"][name="' + name + '"]:checked');
+            //         if ($checked.length === 0 || $checked.val() !== 'yes') {
+            //             disable = true;
+            //         }
+            //     });
+
+            //     var $button = $('.amcform-submit.action.submit.primary');
+            //     $button.prop('disabled', disable);
+            // }
+
+            // // Run on page load in case some radios are prefilled
+            // $(toggleSubmitButtonBasedOnPolicyRadios);
+
+            // // Re-check whenever any policy radio changes
+            // $(document).on('change', 'input.amform-radiotwo.policy[type="radio"]', function() {
+            //     toggleSubmitButtonBasedOnPolicyRadios();
+            // });
+
+
+            
+
+
+
+
+
+        function insertGpSearchFormAfterLastBefore() {
+            console.log('-----------------------------------------------------');
+
+            var $blocks = $('.amcform-page-wrap .amform-layout-one');
+
+            // get the block that contains gp_search_before
+            var $targetBlock = $('.gp_search_before').closest('.amform-layout-one');
+
+            // get its index
+            var index = $blocks.index($targetBlock);
+
+            console.log("Index:", index);
+
+            // add class to that block
+            $blocks.eq(index).addClass('DDDDDDDDDD');
+
+            // create new layout
+            var $newLayout = $('<div class="amform-layout-one amform-layout-one--gp-search"></div>');
+            var $newGroup  = $('<div class="amform-groupv2 gp-search-group"></div>');
+            var $gpForm = $('#gp_search_form');
+                        if ($gpForm.length) {
+                            $newGroup.append($gpForm);
+                            $gpForm.show();
+                        } else {
+                            console.warn('#gp_search_form not found.');
+                        }
+
+
+            $newLayout.append($newGroup);
+
+            // insert after found index
+            $blocks.eq(index).before($newLayout);
+
+
+
+            console.log("New layout inserted after index:", index);
+
+
+            console.log('-----------------------------------------------------');
+
+        }
+
+
+        function fixDatePickerInputs() {
+            const inputs = document.querySelectorAll('input.amform-date._has-datepicker');
+            document.querySelectorAll('button.ui-datepicker-trigger').forEach(btn => {
+                btn.style.display = 'none';
+            });
+            inputs.forEach(input => {
+                input.removeAttribute('readonly');
+                input.setAttribute('type', 'date');
+            });
+            
+            return inputs.length; // returns count of modified inputs
+        }
+            fixDatePickerInputs();
+            
+        // run after 5 seconds
+        setTimeout(insertGpSearchFormAfterLastBefore, 5000);
+        setTimeout(fixDatePickerInputs, 5000);
+
+
+       
+
+
+
+
+
+
+
+
+
+        });
+    });
+</script>
+

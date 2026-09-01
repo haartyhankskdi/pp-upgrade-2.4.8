@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_PopupBuilder
+ * @copyright Copyright (C) 2020 Magezon (https://www.magezon.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magezon_PopupBuilder::popupbuilder" title="Magezon Popup Builder" translate="title" module="Magezon_PopupBuilder" sortOrder="10" parent="Magento_Backend::content" resource="Magezon_PopupBuilder::popupbuilder"/>
+        <add id="Magezon_PopupBuilder::popup" title="Popups" translate="title" module="Magezon_PopupBuilder" sortOrder="10" parent="Magezon_PopupBuilder::popupbuilder" action="popupbuilder/popup" resource="Magezon_PopupBuilder::popup"/>
+        <add id="Magezon_PopupBuilder::reports" title="Reports" translate="title" module="Magezon_PopupBuilder" sortOrder="30" parent="Magezon_PopupBuilder::popupbuilder" action="popupbuilder/reports" resource="Magezon_PopupBuilder::report"/>
+    </menu>
+</config>

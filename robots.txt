@@ -1,0 +1,229 @@
+# ============================================================
+# robots.txt for https://www.pharmacyplanet.com
+# Updated: June 2026
+# GPhC Registered Online Pharmacy | UK Weight Loss & Treatments
+# ============================================================
+# Policy: Open to all legitimate search engines and AI crawlers.
+# All product pages, blog content, and treatment pages are
+# fully accessible for indexing and AI citation.
+#
+# AI Policy:  https://www.pharmacyplanet.com/ai-policy
+# LLMs file:  https://www.pharmacyplanet.com/llms.txt
+# ============================================================
+
+
+# ── ALL BOTS (Default: Allow Everything) ──────────────────────
+User-agent: *
+Allow: /
+
+# Block Magento admin and backend only
+Disallow: /admin/
+Disallow: /adminhtml/
+Disallow: /index.php/admin/
+Disallow: /var/
+Disallow: /downloader/
+Disallow: /errors/
+
+# Block internal customer account / checkout system pages
+Disallow: /customer/account/login/
+Disallow: /customer/account/logout/
+Disallow: /customer/account/create/
+Disallow: /customer/account/forgotpassword/
+Disallow: /customer/account/edit/
+Disallow: /checkout/
+Disallow: /checkout/cart/
+Disallow: /checkout/onepage/
+Disallow: /multishipping/
+
+# Block search results pages (duplicate/thin content)
+Disallow: /catalogsearch/
+Disallow: /search/
+
+# Block internal Magento system paths
+Disallow: /cgi-bin/
+Disallow: /soap/
+Disallow: /api/
+Disallow: /rest/
+Disallow: /graphql/
+Disallow: /pub/static/
+Disallow: /pub/media/catalog/product/cache/
+
+# Block URL parameters that create duplicate pages
+Disallow: /*?SID=
+Disallow: /*?from=
+Disallow: /*?dir=
+Disallow: /*?limit=
+Disallow: /*?mode=
+Disallow: /*?price=
+Disallow: /*?cat=
+
+
+# ── GOOGLE ────────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+
+# ── BING / MICROSOFT ──────────────────────────────────────────
+User-agent: Bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+User-agent: msnbot-media
+Allow: /
+
+User-agent: adidxbot
+Allow: /
+
+
+# ── APPLE ─────────────────────────────────────────────────────
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+
+# ── OPENAI / CHATGPT ──────────────────────────────────────────
+# AI Policy: https://www.pharmacyplanet.com/ai-policy
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+
+# ── ANTHROPIC / CLAUDE ────────────────────────────────────────
+# AI Policy: https://www.pharmacyplanet.com/ai-policy
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+
+# ── GOOGLE AI (GEMINI / VERTEX) ───────────────────────────────
+# AI Policy: https://www.pharmacyplanet.com/ai-policy
+User-agent: Google-Extended
+Allow: /
+
+
+# ── META AI ───────────────────────────────────────────────────
+# AI Policy: https://www.pharmacyplanet.com/ai-policy
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+
+# ── PERPLEXITY AI ─────────────────────────────────────────────
+# AI Policy: https://www.pharmacyplanet.com/ai-policy
+User-agent: PerplexityBot
+Allow: /
+
+
+# ── YOU.COM ───────────────────────────────────────────────────
+User-agent: YouBot
+Allow: /
+
+
+# ── COHERE ────────────────────────────────────────────────────
+User-agent: cohere-ai
+Allow: /
+
+
+# ── AMAZON / ALEXA ────────────────────────────────────────────
+User-agent: Amazonbot
+Allow: /
+
+
+# ── BYTEDANCE / TIKTOK ────────────────────────────────────────
+User-agent: Bytespider
+Allow: /
+
+
+# ── SEMRUSH ───────────────────────────────────────────────────
+User-agent: SemrushBot
+Allow: /
+
+User-agent: SemrushBot-SA
+Allow: /
+
+
+# ── AHREFS ────────────────────────────────────────────────────
+User-agent: AhrefsBot
+Allow: /
+
+
+# ── MOZ ───────────────────────────────────────────────────────
+User-agent: Moz
+Allow: /
+
+User-agent: DotBot
+Allow: /
+
+
+# ── MAJESTIC ──────────────────────────────────────────────────
+User-agent: MJ12bot
+Allow: /
+
+
+# ── TWITTER / X ───────────────────────────────────────────────
+User-agent: Twitterbot
+Allow: /
+
+
+# ── LINKEDIN ──────────────────────────────────────────────────
+User-agent: LinkedInBot
+Allow: /
+
+
+# ── DUCKDUCKGO ────────────────────────────────────────────────
+User-agent: DuckDuckBot
+Allow: /
+
+
+# ── YANDEX ────────────────────────────────────────────────────
+User-agent: Yandex
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+
+# ── BAIDU ─────────────────────────────────────────────────────
+User-agent: Baiduspider
+Allow: /
+
+
+# ── ARCHIVE.ORG ───────────────────────────────────────────────
+User-agent: ia_archiver
+Allow: /
+
+
+# ── SITEMAPS ──────────────────────────────────────────────────
+Sitemap: https://www.pharmacyplanet.com/sitemap.xml
+
+# ── AI POLICY & LLM ACCESS ────────────────────────────────────
+# Full AI policy: https://www.pharmacyplanet.com/ai-policy
+# LLMs access file: https://www.pharmacyplanet.com/llms.txt

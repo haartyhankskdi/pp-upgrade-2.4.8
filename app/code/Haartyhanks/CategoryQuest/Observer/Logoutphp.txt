@@ -1,0 +1,26 @@
+<?php
+
+namespace Haartyhanks\CategoryQuest\Observer;
+
+use Magento\Framework\Event\ObserverInterface;
+use Magento\Checkout\Model\Cart;
+
+class Logout implements ObserverInterface
+{
+  protected  $cart;
+
+  public function __construct(Cart $modelCart) {
+      $this->cart = $modelCart;
+  }
+
+  public function execute(\Magento\Framework\Event\Observer $observer)
+  {
+      foreach($this->cart->getItems() as $item)
+      {
+          $this->cart->removeItem($item->getId());
+      }
+      $this->cart->save();
+      $this->cart->saveQuote();  // I added both 'save' lines to make sure everything is persisted
+      return $this;
+  }
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Magenest_SagePay::sagepay" title="Opayo"
+             module="Magenest_SagePay" sortOrder="50"
+             dependsOnModule="Magenest_SagePay" resource="Magenest_SagePay::sagepay"/>
+        <add id="Magenest_SagePay::transaction" title="Transactions"
+             module="Magenest_SagePay" sortOrder="10" parent="Magenest_SagePay::sagepay"
+             action="sagepay/transaction/index" resource="Magenest_SagePay::transaction"/>
+        <add id="Magenest_SagePay::profile" title="Subscription Profiles"
+             module="Magenest_SagePay" sortOrder="20" parent="Magenest_SagePay::sagepay"
+             action="sagepay/profile/index" resource="Magenest_SagePay::profile"/>
+        <add id="Magenest_SagePay::settings" title="Settings"
+            module="Magenest_SagePay" sortOrder="50" parent="Magenest_SagePay::sagepay"
+            action="adminhtml/system_config/edit/section/payment/magenest_sagepay"
+            resource="Magenest_SagePay::settings"/>
+    </menu>
+</config>

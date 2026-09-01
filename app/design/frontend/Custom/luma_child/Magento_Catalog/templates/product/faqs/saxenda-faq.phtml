@@ -1,0 +1,84 @@
+<div class="product-faq-section">
+   <div class="container reveal1">
+      <div class="h-title">Frequently asked questions</div>
+      <div class="faq-list">
+         <input type="checkbox" id="title1" />
+         <label for="title1">What is Saxenda?</label>
+         <div class="panel-p">
+            <p>Saxenda is a daily injection indicated as an adjunct to a reduced-calorie diet, and increased physical activity, for weight management in adult patients</p>
+         </div>
+      </div>
+      <div class="faq-list">
+         <input type="checkbox" id="title2" />
+         <label for="title2">How does it work?</label>
+         <div class="panel-p">
+            <p>Saxenda contains the drug Liraglutide which is a medicine that falls into the Glucagon-like peptide 1 (GLP-1) agonist class of drugs.</p>
+            <p>GLP-1 is a naturally occurring hormone in the body that is released in response to food intake and acts as a physiological regulator of appetite. Saxenda is 97% similar to naturally occurring GLP-1.</p>
+            <p>Saxenda works in the hypothalamus, where it interacts with specific neurons involved in the regulation of appetite and food intake. Liraglutide sits on this receptor and causes changes to very important hormones involved in regulating body weight: insulin, leptin, and glucagon.</p>
+            <p>The effect of this medicine is thought to affect weight loss by the following mechanisms:</p>
+            <ul>
+               <li>Reduces Leptin Resistance</li>
+               <li>Improves Insulin Sensitivity</li>
+               <li>Acts as a Glucagon Suppressant</li>
+               <li>Reduces Appetite</li>
+               <li>Increases Metabolism</li>
+            </ul>
+            <p>Saxenda increases feelings of satiety feeling full) and decreases hunger. As a result of its mechanism of action, patients taking Saxenda feel satisfied and eat less food, leading to weight loss.</p>
+         </div>
+      </div>
+      <div class="faq-list">
+         <input type="checkbox" id="title3" />
+         <label for="title3">What are the benefits of taking it?</label>
+         <div class="panel-p">
+            <p>Liraglutide was originally developed to treat type II diabetes because it can help reduce insulin resistance but was soon found to have a dramatic effect on weight.</p>
+            <p>Many studies have shown that patients using Saxenda lose significant amounts of weight over several weeks (usually around 10% body fat).</p>
+            <p>In a clinical study of people taking Saxenda for 3 years:</p>
+            <ul>
+               <li>56% achieved significant weight loss at year 1, and</li>
+               <li>Approximately half of these patients maintained weight loss at 3 years when taking Saxenda added to a reduced-calorie meal plan and increased physical activity, compared with people not on the drug.</li>
+            </ul>
+            <p>Reducing your waistline isn’t the only impact of weight loss. Taking off weight and keeping it off may help improve conditions such as high blood pressure and high cholesterol levels.</p>
+         </div>
+      </div>
+      <div class="faq-list">
+         <input type="checkbox" id="title4" />
+         <label for="title4">How do I use it and its dosage?</label>
+         <div class="panel-p">
+            <p><strong>Always use this medicine exactly as your prescriber has told you. Check with your doctor, pharmacist, or nurse if you are not sure.</strong></p>
+            <p>Before beginning your treatment with Saxenda</p>
+         </div>
+      </div>
+      <div class="faq-list">
+         <input type="checkbox" id="title5" />
+         <label for="title5">Side effects & precautions</label>
+         <div class="panel-p">
+            <p><strong>Like all medicines, this Saxenda (Liraglutide) can cause side effects, although not everybody gets them.</strong></p>
+            <p><strong>Serious side effects</strong></p>
+            <ul>
+               <li>Some severe allergic reactions (anaphylaxis) have been reported rarely in patients using Saxenda. You should see your doctor straight away if you get symptoms such as breathing problems, swelling of face and throat and a fast heartbeat.</li>
+               <li>Cases of inflammation of the pancreas (pancreatitis) have been reported uncommonly in patients using Saxenda. Pancreatitis is a serious</li>
+            </ul>
+         </div>
+      </div>
+      <div class="faq-list">
+         <input type="checkbox" id="title5" />
+         <label for="title5">Buying Saxenda online</label>
+         <div class="panel-p">
+            <p>You can buy Saxenda (Liraglutide) Injections online through one of the UK’s leading online pharmacies, Pharmacy Planet. It's easy and convenient. You will need to fill out a short assessment and the item will be delivered directly to your door. If you want to buy Saxenda Injections online, use Pharmacy Planet, a UK pharmacy you can trust.</p>
+         </div>
+      </div>
+   </div>
+</div>
+<script>
+   document.querySelectorAll('.product-faq-section .faq-list input[type="checkbox"]').forEach(checkbox => {
+       checkbox.addEventListener('change', function () {
+           if (this.checked) {
+               document.querySelectorAll('.product-faq-section .faq-list input[type="checkbox"]').forEach(otherCheckbox => {
+                   if (otherCheckbox !== this) {
+                       otherCheckbox.checked = false;
+                   }
+               });
+           }
+       });
+   });
+</script>

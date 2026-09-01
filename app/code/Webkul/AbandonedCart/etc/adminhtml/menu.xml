@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Webkul Software.
+*
+* @category  Webkul
+* @package   Webkul_AbandonedCart
+* @author    Webkul
+* @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+* @license   https://store.webkul.com/license.html
+*/
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Webkul_AbandonedCart::abandonedcart"
+            title="Webkul Abandoned Cart"
+            translate="title"
+            module="Webkul_AbandonedCart"
+            sortOrder="10"
+            dependsOnConfig="webkul_abandoned_cart/abandoned_cart_settings/enable_disable_abandoned_cart"
+            resource="Webkul_AbandonedCart::abandonedcart"/>
+
+        <add id="Webkul_AbandonedCart::customerlist"
+            title="Abandoned Cart Customer List"
+            translate="title"
+            module="Webkul_AbandonedCart" sortOrder="10"
+            action="abandonedcart/customer/customerlist"
+            parent="Webkul_AbandonedCart::abandonedcart"
+            resource="Webkul_AbandonedCart::customerlist"/>
+
+        <add id="Webkul_AbandonedCart::mailslist"
+            title="Abandoned Cart Sent Mails"
+            translate="title"
+            module="Webkul_AbandonedCart" sortOrder="10"
+            action="abandonedcart/customer/mailssent"
+            parent="Webkul_AbandonedCart::abandonedcart"
+            resource="Webkul_AbandonedCart::mailslist"/>
+
+        <add id="Webkul_AbandonedCart::reports"
+            title="Abandoned Cart Reports"
+            translate="title"
+            module="Webkul_AbandonedCart" sortOrder="10"
+            action="abandonedcart/customer/reports"
+            parent="Webkul_AbandonedCart::abandonedcart"
+            resource="Webkul_AbandonedCart::reports"/>
+    </menu>
+</config>

@@ -1,0 +1,6 @@
+<?php
+namespace Haartyhanks\CategoryQuest\Block;
+class CategoryForm extends \Magento\Framework\View\Element\Template
+{
+
+}

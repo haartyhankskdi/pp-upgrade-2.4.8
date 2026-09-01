@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+            <magenest_sagepay>
+                <active>1</active>
+                <active_moto>0</active_moto>
+                <title>Opayo PI Integration</title>
+                <model>Magenest\SagePay\Model\SagePay</model>
+                <payment_action>authorize_capture</payment_action>
+                <challenge_window_size>FullScreen</challenge_window_size>
+                <trans_type>GoodsAndServicePurchase</trans_type>
+                <can_save_card>0</can_save_card>
+                <use_dropin>0</use_dropin>
+                <dropin_mode>modal</dropin_mode>
+                <order_status>processing</order_status>
+                <test>0</test>
+                <ignore_address_check>1</ignore_address_check>
+                <gift_aid>0</gift_aid>
+                <vendor_code>mg2</vendor_code>
+                <cctypes>AE,VI,MC,DI,JCB</cctypes>
+                <useccv>1</useccv>
+                <allowspecific>0</allowspecific>
+                <apply_3d_secure>UseMSPSetting</apply_3d_secure>
+                <apply_cvc_check>UseMSPSetting</apply_cvc_check>
+                <debug>1</debug>
+                <enable_logging>1</enable_logging>
+                <collect_recipient>0</collect_recipient>
+                <send_email>0</send_email>
+                <browser_javascript_enabled>1</browser_javascript_enabled>
+            </magenest_sagepay>
+            <magenest_sagepay_form>
+                <active>1</active>
+                <title>Opayo Form</title>
+                <payment_action>authorize_capture</payment_action>
+                <order_status>processing</order_status>
+                <allowspecific>0</allowspecific>
+                <model>Magenest\SagePay\Model\SagePayForm</model>
+                <debug>1</debug>
+            </magenest_sagepay_form>
+            <magenest_sagepay_direct>
+                <active>1</active>
+                <title>Opayo Direct</title>
+                <payment_action>authorize_capture</payment_action>
+                <order_status>processing</order_status>
+                <allowspecific>0</allowspecific>
+                <cctypes>AE,VI,MC,DI,JCB</cctypes>
+                <model>Magenest\SagePay\Model\SagePayDirect</model>
+            </magenest_sagepay_direct>
+            <magenest_sagepay_server>
+                <active>1</active>
+                <title>Opayo Server</title>
+                <payment_profile>NORMAL</payment_profile>
+                <payment_action>authorize_capture</payment_action>
+                <order_status>processing</order_status>
+                <allowspecific>0</allowspecific>
+                <model>Magenest\SagePay\Model\SagePayServer</model>
+                <debug>1</debug>
+            </magenest_sagepay_server>
+            <magenest_sagepay_paypal>
+                <active>1</active>
+                <title>Opayo Paypal</title>
+                <billing_agreement>0</billing_agreement>
+                <payment_action>authorize_capture</payment_action>
+                <order_status>processing</order_status>
+                <allowspecific>0</allowspecific>
+                <model>Magenest\SagePay\Model\SagePayPaypal</model>
+            </magenest_sagepay_paypal>
+        </payment>
+    </default>
+</config>

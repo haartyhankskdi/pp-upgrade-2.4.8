@@ -1,0 +1,46 @@
+ .data-grid-cell-content .gridnotsupply{
+    width: 125px;
+    display: inline-block;
+    margin-top: 8px;
+    margin-left: 0;
+    color: #fff;
+    text-transform: uppercase;
+    background: #ff0000;
+    padding: 10px 10px;
+    font-weight: 600;
+    text-align: center;
+}
+
+ .data-grid-cell-content .gridrepeatorder{
+   width: 125px;
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 0;
+    color: #fff;
+    text-transform: uppercase;
+    background: #ffc000;
+    padding: 10px 10px;
+    font-weight: 600;
+    text-align: center;
+}
+
+
+.page-header-hgroup.sticky-cloned{
+   display: none;
+}
+
+.page-main-actions .page-actions._fixed .page-header-hgroup.sticky-cloned{
+    display: block !important;
+    width: 100% !important;
+    float: left;
+    position: absolute;
+    top: 5px;
+    left: 30px;
+}
+.page-main-actions .page-actions._fixed .page-actions-inner:before{
+   display: none;
+}
+
+.page-main-actions .page-actions._fixed{
+   padding-top: 70px;
+}

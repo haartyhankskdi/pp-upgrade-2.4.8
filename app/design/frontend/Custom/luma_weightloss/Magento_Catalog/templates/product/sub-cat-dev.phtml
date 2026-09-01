@@ -1,0 +1,70 @@
+<?php
+$helperCatProduct = $this->helper(\Nilesh\Theme\Helper\CatProduct::class);
+// $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+// $category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+// $subcats = $category->getChildrenCategories(); 
+$subcats = $helperCatProduct->getChildrenCategories(); 
+
+?>
+<div class="product details product-item-details sub-category-details custom-row-category">
+    
+    <?php
+    foreach ($subcats as $subcat) {
+        if ($subcat->getIsActive()) {
+                $sub_category = $helperCatProduct->getSubCategory($subcat->getId());
+                                    // $sub_category = $objectManager->create('Magento\Catalog\Model\Category')->load($subcat->getId());
+                                    $subcat_url = $subcat->getUrl();
+                                    //echo "<pre>";print_r($sub_category->getData());exit();
+                                     ?>
+            
+            <div class="sub-cat-wrapper custom-col-category">
+                <div class="sub-cat-info custom-col-wrapper-category">
+                    <span class="product-image">
+                        <a href="<?php echo $subcat_url; ?>">
+                                    <img src="<?php echo $sub_category->getImageUrl() ?>" alt="<?php echo $subcat->getName(); ?>">
+                        </a>                
+                    </span>
+                    <span class="product-item-name">
+                        <a class="sub-cat-url" data-href="<?php echo $subcat_url; ?>" href="<?php echo $subcat_url?>" class="product-item-link"><?php echo $subcat->getName(); ?></a>
+                    </span>
+                    <div class="product-item-details sub-cat-desc">
+                        <?php echo $sub_category->getDescription(); ?> 
+                    </div>
+                    
+                    <div class="two-cat-product">
+                        <?php 
+                            $_prod = $helperCatProduct->getProductCollectionByCategories($subcat->getId());
+                            if(is_array($_prod)){
+                                foreach ($_prod as $prod) {
+                                    ?>
+                                        <a href="<?php echo $prod['url']; ?>"><?php echo $prod['name']; ?></a>
+                                    <?php
+                                }
+                            }
+                        ?>
+                    </div>
+
+                    <div class="view-product">
+                        <a href="<?php echo $subcat_url; ?>" class="view-prducts-a">View Products</a>
+                    </div>
+                </div>
+            </div>
+            
+         
+            <?php                           
+        }
+    } ?>
+
+</div>
+
+<script>
+    require(['jquery'], function($){
+        $(".sub-cat-desc").each(function () {
+            var text = jQuery(this).text();
+            var href = $(this).parent().find(".sub-cat-url").data("href");
+            if (text.length > 100) {
+                $(this).text(text.substr(0, text.lastIndexOf(' ', 97)) + ' ..').append(` <a href='${href}' title="read more">READ MORE</a>`);
+            }
+        });
+    });
+</script>

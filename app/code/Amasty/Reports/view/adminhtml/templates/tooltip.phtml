@@ -1,0 +1,26 @@
+<?php
+/** @var \Amasty\Reports\Block\Adminhtml\Tooltip $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$element = $block->getConfig();
+?>
+
+<div class="amreports-tooltip-block">
+    <div class="amreports-inner">
+        <div class="amreports-title">
+            <?= $escaper->escapeHtml($element['title']) ?>
+        </div>
+        <div class="amreports-description">
+            <?= $escaper->escapeHtml($element['tooltip_description']) ?>
+        </div>
+        <img src="<?= $escaper->escapeUrl($element['img'] ?? '') ?>"
+             class="amreports-image"
+             alt="<?= $escaper->escapeHtmlAttr(__('Analytic Graph')) ?>"
+        />
+        <div class="amreports-toolbar">
+            <a href="<?= $escaper->escapeUrl($block->getLinkUrl($element)) ?>" class="amreports-button">
+                <?= $escaper->escapeHtml(__('Get')) ?>
+            </a>
+        </div>
+    </div>
+</div>

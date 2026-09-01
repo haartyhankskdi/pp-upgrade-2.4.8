@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<form
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="faq" sortOrder="90">
+        <settings>
+            <label translate="true">FAQ</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+        </settings>
+        <!-- FAQ Fields -->
+        <!-- FAQ 1 -->
+        <field name="faq_question_1">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string">FAQ Question 1</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </field>
+        <field name="faq_answer_1">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="label" xsi:type="string">FAQ Answer 1</item>
+                    <item name="sortOrder" xsi:type="number">11</item>
+                </item>
+            </argument>
+        </field>
+        <!-- FAQ 2 -->
+        <field name="faq_question_2">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string">FAQ Question 2</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </field>
+        <field name="faq_answer_2">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="label" xsi:type="string">FAQ Answer 2</item>
+                    <item name="sortOrder" xsi:type="number">21</item>
+                </item>
+            </argument>
+        </field>
+        <!-- FAQ 3 -->
+        <field name="faq_question_3">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string">FAQ Question 3</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+        </field>
+        <field name="faq_answer_3">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="label" xsi:type="string">FAQ Answer 3</item>
+                    <item name="sortOrder" xsi:type="number">31</item>
+                </item>
+            </argument>
+        </field>
+        <!-- FAQ 4 -->
+        <field name="faq_question_4">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string">FAQ Question 4</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+        </field>
+        <field name="faq_answer_4">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="label" xsi:type="string">FAQ Answer 4</item>
+                    <item name="sortOrder" xsi:type="number">41</item>
+                </item>
+            </argument>
+        </field>
+        <!-- FAQ 5 -->
+        <field name="faq_question_5">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string">FAQ Question 5</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+            </argument>
+        </field>
+        <field name="faq_answer_5">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="label" xsi:type="string">FAQ Answer 5</item>
+                    <item name="sortOrder" xsi:type="number">51</item>
+                </item>
+            </argument>
+        </field>
+        <!-- FAQ 6 -->
+        <field name="faq_question_6">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string">FAQ Question 6</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                </item>
+            </argument>
+        </field>
+        <field name="faq_answer_6">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="label" xsi:type="string">FAQ Answer 6</item>
+                    <item name="sortOrder" xsi:type="number">61</item>
+                </item>
+            </argument>
+        </field>
+        <!-- FAQ 7 -->
+        <field name="faq_question_7">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string">FAQ Question 7</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                </item>
+            </argument>
+        </field>
+        <field name="faq_answer_7">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="label" xsi:type="string">FAQ Answer 7</item>
+                    <item name="sortOrder" xsi:type="number">71</item>
+                </item>
+            </argument>
+        </field>
+        <!-- FAQ 8 -->
+        <field name="faq_question_8">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string">FAQ Question 8</item>
+                    <item name="sortOrder" xsi:type="number">80</item>
+                </item>
+            </argument>
+        </field>
+        <field name="faq_answer_8">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="label" xsi:type="string">FAQ Answer 8</item>
+                    <item name="sortOrder" xsi:type="number">81</item>
+                </item>
+            </argument>
+        </field>
+        <!-- FAQ 9 -->
+        <field name="faq_question_9">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string">FAQ Question 9</item>
+                    <item name="sortOrder" xsi:type="number">90</item>
+                </item>
+            </argument>
+        </field>
+        <field name="faq_answer_9">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="label" xsi:type="string">FAQ Answer 9</item>
+                    <item name="sortOrder" xsi:type="number">91</item>
+                </item>
+            </argument>
+        </field>
+        <!-- FAQ 10 -->
+        <field name="faq_question_10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string">FAQ Question 10</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                </item>
+            </argument>
+        </field>
+        <field name="faq_answer_10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="label" xsi:type="string">FAQ Answer 10</item>
+                    <item name="sortOrder" xsi:type="number">101</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

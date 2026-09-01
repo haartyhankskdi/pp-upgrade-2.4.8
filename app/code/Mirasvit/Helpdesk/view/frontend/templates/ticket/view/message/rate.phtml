@@ -1,0 +1,40 @@
+<?php
+/** @var \Mirasvit\Helpdesk\Block\Ticket\View\Message\Rate $block */
+?>
+<?php
+$message = $block->getMessage();
+
+if ($message->getTriggeredBy() != \Mirasvit\Helpdesk\Model\Config::USER) {
+    return;
+}
+$rateUrl = $block->getRateImageUrl();
+?>
+
+<?php if ($rateUrl): ?>
+    <div class="hdmx__ticket-message-rate-satisfaction">
+        <div class="comment">
+            <?= $block->escapeHtml($block->getSatisfactionComment(), $message->getAllowedTags()); ?>
+        </div>
+
+        <div class="rate">
+            <img src="<?= $rateUrl; ?>" alt="<?= __('Rate') ?>"/>
+        </div>
+    </div>
+<?php else: ?>
+    <div class="hdmx__ticket-message-rate">
+        <a href="<?= $block->getSatisfactionUrl(1); ?>" target="_blank">
+            <img src="<?= $block->getRateImages()[1] ?>" alt="Bad">
+            <span><?= __('Bad') ?></span>
+        </a>
+
+        <a href="<?= $block->getSatisfactionUrl(2); ?>" target="_blank">
+            <img src="<?= $block->getRateImages()[2] ?>" alt="Ok">
+            <span><?= __('Ok') ?></span>
+        </a>
+
+        <a href="<?= $block->getSatisfactionUrl(3); ?>" target="_blank">
+            <img src="<?= $block->getRateImages()[3] ?>" alt="Great">
+            <span><?= __('Great') ?></span>
+        </a>
+    </div>
+<?php endif ?>

@@ -1,0 +1,4 @@
+/* Hide the Developer section in Stores > Configuration */
+.section-config-title[translate*="Developer"] {
+    display: none !important;
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Nilesh_GeneralQuestions::GeneralQuestions" sortOrder="10" title="GeneralQuestions">
+					<resource id="Nilesh_GeneralQuestions::GeneralQuestions_save" sortOrder="10" title="Save GeneralQuestions"/>
+					<resource id="Nilesh_GeneralQuestions::GeneralQuestions_delete" sortOrder="20" title="Delete GeneralQuestions"/>
+					<resource id="Nilesh_GeneralQuestions::GeneralQuestions_update" sortOrder="30" title="Update GeneralQuestions"/>
+					<resource id="Nilesh_GeneralQuestions::GeneralQuestions_view" sortOrder="40" title="View GeneralQuestions"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

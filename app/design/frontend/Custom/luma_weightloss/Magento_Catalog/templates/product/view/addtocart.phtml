@@ -1,0 +1,110 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+
+<?php $_product = $block->getProduct(); ?>
+<?php
+/*
+*  this for adding product is adding
+*/
+$backLinkCart = $this->helper(\Nilesh\Theme\Helper\BackLinkCart::class);
+$customCookie = $this->helper(\Haartyhanks\CategoryQuestWL\Helper\CustomCookie::class);
+$backLinkCart->setBackProductId($_product->getId());
+$_amastyCustomFormHelper = $this->helper(Amasty\Customform\Helper\Data::class);
+$_helperCatalog = $this->helper(Haartyhanks\CategoryQuestWL\Helper\Data::class);
+$baseUrl  = $_helperCatalog->getCurrentStoreBaseUrl();
+$formValue = $_amastyCustomFormHelper->getFormValue();
+// echo $formValue;
+?>
+
+<?php
+$actionName = $this->getRequest()->getFullActionName();
+if ($actionName == 'checkout_cart_configure') {
+    $buttonTitle = __('Update Cart');
+} else {
+    $buttonTitle = __('ORDER ITEM');
+}
+?>
+<?php if ($_product->isSaleable()) : ?>
+    <div class="box-tocart">
+        <div class="fieldset">
+            <?php if ($block->shouldRenderQuantity()) : ?>
+                <div class="field qty">
+                    <label class="label" for="qty"><span><?= $block->escapeHtml(__('Quantity')) ?></span></label>
+                    <?php if ($actionName == "catalog_product_view") { ?>
+                        <div class="control">
+                            <input type="number" name="qty" id="qty" value="<?= /* @escapeNotVerified */ $block->getProductDefaultQty() * 1 ?>" title="<?= /* @escapeNotVerified */ __('Qty') ?>" class="input-text qty" data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>" />
+                        </div>
+                    <?php } else { ?>
+                        <div class="control" data-bind="scope: 'qty_change'">
+
+                            <button data-bind="click: decreaseQty" class="ajax-cart-qty-minus"> </button>
+
+                            <input data-bind="value: qty()" type="number" name="qty" id="qty" min="0" value="<?= $block->getProductDefaultQty() * 1 ?>" title="<?= $block->escapeHtmlAttr(__('Quantity')) ?>" class="input-text qty" data-validate="<?= $block->escapeHtmlAttr(json_encode($block->getQuantityValidators())) ?>" />
+                            <input type="hidden" name="questionnaire_unique_id" id="questionnaire_unique_id" maxlength="255" value="<?= $customCookie->get(); ?>" />
+                            <button data-bind="click: increaseQty" class="ajax-cart-qty-plus"> </button>
+
+                        </div>
+                    <?php } ?>
+                </div>
+
+                <script type="text/x-magento-init">
+                    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "qty_change": {
+                        "component": "Magento_Catalog/js/qty_change",
+                        "defaultQty": <?php echo $block->getProductDefaultQty() * 1 ?>
+                    }
+                 }
+            }
+        }
+    }
+</script>
+
+            <?php endif; ?>
+            <?php /*
+         echo $this->getLayout()
+          ->createBlock('Magento\Catalog\Pricing\Render',
+                  "product.price.finals",
+                    [
+                        'data' => [
+                            'price_render' => 'product.price.render.default',
+                            'price_type_code' => 'final_price',
+                            'zone' => 'item_view'
+                        ]
+                   ]
+                  )
+          ->toHtml();
+      */
+            ?>
+
+            <?php if ($formValue==1) { ?>
+                <div class="actions">
+                    <button type="submit" title="<?= $block->escapeHtmlAttr($buttonTitle) ?>" class="action primary tocart" id="product-addtocart-button" disabled>
+                        <span><?= $block->escapeHtml($buttonTitle) ?></span>
+                    </button>
+                    <?= $block->getChildHtml('', true) ?>
+                </div>
+            <?php
+            } else { ?>
+                <div class="fill-wlcat-question"><p>It looks like you missed filling in questions from the last consultation. Please <a href="<?php echo $baseUrl; ?>">Click Here</a> to submit your response.</p></div>
+            <?php
+            } ?>
+        </div>
+    </div>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+</script>

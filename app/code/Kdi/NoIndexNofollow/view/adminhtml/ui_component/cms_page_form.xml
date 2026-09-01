@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="design">
+        <field name="default_robots">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Default Robots</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">default_robots</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="options" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="label" xsi:type="string" translate="true">INDEX, FOLLOW</item>
+                            <item name="value" xsi:type="string">INDEX, FOLLOW</item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="label" xsi:type="string" translate="true">NOINDEX, FOLLOW</item>
+                            <item name="value" xsi:type="string">NOINDEX, FOLLOW</item>
+                        </item>
+                        <item name="2" xsi:type="array">
+                            <item name="label" xsi:type="string" translate="true">INDEX, NOFOLLOW</item>
+                            <item name="value" xsi:type="string">INDEX, NOFOLLOW</item>
+                        </item>
+                        <item name="3" xsi:type="array">
+                            <item name="label" xsi:type="string" translate="true">NOINDEX, NOFOLLOW</item>
+                            <item name="value" xsi:type="string">NOINDEX, NOFOLLOW</item>
+                        </item>
+                    </item>
+                    <item name="sortOrder" xsi:type="number">90</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="notice" xsi:type="string" translate="true">This will be included before head closing tag in page HTML.</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

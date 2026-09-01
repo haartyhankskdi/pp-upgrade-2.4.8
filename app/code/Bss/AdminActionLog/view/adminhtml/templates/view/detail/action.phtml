@@ -1,0 +1,173 @@
+<?php
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_AdminActionLog
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2017-2018 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+
+?>
+<?php
+$log = $block->getLog();
+$customer = $block->getUser($log->getUserId());
+$log_details = $block->getDetails();
+$number = count($log_details);
+
+?>
+<?php if ($log): ?>
+    <div class="log-gid">
+        <p class="row">
+            <span class="label"><?php echo $block->escapeHtml(__('Date:'))?></span>
+            <span class="value"><?php echo $block->escapeHtml($block->getCreatedAt()) ?></span>
+        </p>
+        <p class="row">
+            <span class="label"><?php echo $block->escapeHtml(__('Username:'))?></span>
+            <span class="value"><?php echo $block->escapeHtml($log->getUserName()) ?></span>
+        </p>
+        <p class="row">
+            <span class="label"><?php echo $block->escapeHtml(__('Full name:'))?></span>
+            <span class="value"><?php echo $block->escapeHtml($customer->getFirstname()) . ' ' . $customer->getLastname() ?></span>
+        </p>
+        <p class="row">
+            <span class="label"><?php echo $block->escapeHtml(__('Email:'))?></span>
+            <span class="value"><?php echo $block->escapeHtml($customer->getEmail()) ?></span>
+        </p>
+        <p class="row">
+            <span class="label"><?php echo $block->escapeHtml(__('Action Type:'))?></span>
+            <span class="value"><?php echo $block->escapeHtml(ucfirst($log->getActionType())) ?></span>
+        </p>
+        <p class="row">
+            <span class="label"><?php echo $block->escapeHtml(__('Object:'))?></span>
+            <span class="value"><?php echo $block->escapeHtml($log->getGroupAction()) ?></span>
+        </p>
+        <p class="row">
+            <span class="label"><?php echo $block->escapeHtml(__('Item:'))?></span>
+            <span class="value"><?php echo $block->escapeHtml($log->getInfo()) ?></span>
+        </p>
+    </div>
+    <?php if ($log->getActionType()  != 'view' && $number): ?>
+        <div class="log-details">
+            <?php if ($log->getGroupAction() == 'System Configuration' && !$log->getRevert()): ?>
+                <a href="<?php echo $block->escapeUrl($block->getUrlRevert()) ?>" title="<?php echo $block->escapeHtml(__('Revert')) ?>" id="revert" class ="button-revert action-primary">
+                    <span>
+                        <?php echo $block->escapeHtml(__('Revert')) ?>
+                    </span>
+                </a>
+            <?php endif ?>
+            <table class="view_details">
+                <thead>
+                <tr>
+                    <th><?php echo $block->escapeHtml(__('Name'))?></th>
+                    <th><?php echo $block->escapeHtml(__('Old Value'))?></th>
+                    <th><?php echo $block->escapeHtml(__('New Value'))?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php $source_data = true;?>
+                <?php $mess_diff = true;?>
+                <?php foreach ($log_details as $log_detail): ?>
+                    <?php if ($log_detail->getSourceData() && $source_data): ?>
+                        <tr><td  class="sourcedata" colspan="3"><?php echo $block->escapeHtml($log_detail->getSourceData()) ?></td></tr>
+                        <?php $source_data = false; ?>
+                    <?php endif ?>
+
+                    <?php $new_value = json_decode($log_detail->getNewValue(), true); ?>
+                    <?php $old_value = json_decode($log_detail->getOldValue(), true); ?>
+                    <?php if (isset($new_value['_create']) && $mess_diff): ?>
+                        <tr>
+                            <td class="mess-diff" colspan="3">
+                                <?php echo $block->escapeHtml(__('N/A')); ?>
+                            </td>
+                        </tr>
+                    <?php endif ?>
+                    <?php if (isset($new_value['_delete']) && $mess_diff): ?>
+                        <tr>
+                            <td class="mess-diff" colspan="3">
+                                <?php echo $block->escapeHtml(__('The item was deleted')); ?>
+                            </td>
+                        </tr>
+                    <?php endif ?>
+                    <?php if (isset($new_value['_no_change']) && $mess_diff): ?>
+                        <tr>
+                            <td class="mess-diff" colspan="3">
+                                <?php echo $block->escapeHtml(__('No changes')); ?>
+                            </td>
+                        </tr>
+                    <?php endif ?>
+                    <?php
+                    if (isset($new_value['_create'])
+                        || isset($new_value['_delete'])
+                        || isset($new_value['_no_change'])
+                    ) {
+                        $new_value = [];
+                        $mess_diff = false;
+                    }
+                    ?>
+                    <?php if ($new_value && is_array($new_value)) : ?>
+                        <?php foreach ($new_value as $k => $value): ?>
+                            <?php
+                            $source = $k;
+                            if (strpos($source, '_scope_') !== false) {
+                                $source = substr_replace($source, '', strpos($source, '_scope_'), strlen($source));
+                            }
+                            ?>
+                            <?php if (isset($old_value[$k]) && $old_value[$k] !=''): ?>
+                                <?php
+                                $result = $block->getDecoratedDiff($old_value[$k], $value);
+                                ?>
+                                <tr>
+                                    <td class="path"><p><?php echo $block->escapeHtml($source) ?></p></td>
+                                    <td class="oldvalue"><p><?php echo /* @noEscape */ $result['old'] ?></p></td>
+                                    <td class="newvalue"><p><?php echo /* @noEscape */ $result['new'] ?></p></td>
+                                </tr>
+                            <?php else: ?>
+                                <tr>
+                                    <td class="path"><p><?php echo $block->escapeHtml($source) ?></p></td>
+                                    <td class="oldvalue"><p><?php echo isset($old_value[$k]) ? $block->escapeHtml($old_value[$k]) : $block->escapeHtml('') ?></p></td>
+                                    <td class="newvalue"><p><?php echo $block->escapeHtml($value) ?></p></td>
+                                </tr>
+                            <?php endif; ?>
+                        <?php endforeach ?>
+                    <?php endif; ?>
+                    <?php if ($old_value && !$new_value && is_array($old_value)) : ?>
+                        <?php foreach ($old_value as $k => $value): ?>
+                            <?php
+                            $source = $k;
+                            if (strpos($source, '_scope_') !== false) {
+                                $source = substr_replace($source, '', strpos($source, '_scope_'), strlen($source));
+                            }
+                            ?>
+                            <?php if (isset($new_value[$k]) && $new_value[$k] !=''): ?>
+                                <?php
+                                $result = $block->getDecoratedDiff($new_value[$k], $value);
+                                ?>
+                                <tr>
+                                    <td class="path"><p><?php echo $block->escapeHtml($source) ?></p></td>
+                                    <td class="oldvalue"><p><?php echo /* @noEscape */ $result['old'] ?></p></td>
+                                    <td class="newvalue"><p><?php echo /* @noEscape */ $result['new'] ?></p></td>
+                                </tr>
+                            <?php else: ?>
+                                <tr>
+                                    <td class="path"><p><?php echo $block->escapeHtml($source) ?></p></td>
+                                    <td class="oldvalue"><p><?php echo $block->escapeHtml($value) ?></p></td>
+                                    <td class="newvalue"><p><?php echo isset($new_value[$k]) ? $block->escapeHtml($new_value[$k]) : $block->escapeHtml('') ?></p></td>
+                                </tr>
+                            <?php endif; ?>
+                        <?php endforeach ?>
+                    <?php endif; ?>
+                <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif ?>
+<?php endif ?>

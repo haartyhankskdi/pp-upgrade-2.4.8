@@ -1,0 +1,226 @@
+<?php 
+    $_product = $block->getProduct();
+     $proCustopt = $_product->getOptions();
+    $productDesc = $_product->getData('short_description');
+    $prodPrice = $_product->getPriceInfo()->getPrice('final_price')->getValue();
+    $prodStock = $_product->isSaleable();
+    $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
+                    ->init($_product, 'product_base_image')
+                    ->constrainOnly(true)
+                    ->keepAspectRatio(true)
+                    ->keepTransparency(true)
+                    ->keepFrame(false)
+                    ->resize(150, 150)->getUrl();
+    $prodName = $_product->getName();
+    $prodDesc = $_product->getDescription();
+    $prodUrl = $_product->getProductUrl();    
+    $prodSku = $_product->getSku();                
+?>
+
+<div class="prod-desprection">
+    <?php if($productDesc != ""){ ?>
+    <div id="short-desc">
+        <!--SHORT DESCRIPTIONS -->
+        
+        <?php echo implode(' ', array_slice(explode(' ', $productDesc), 0, 20))."\n"; ?>
+        
+        <span id="product-view-dots">...</span>
+    </div>
+
+    <!--FULL DESCRIPTIONS -->
+    <span id="product-view-full-desc" style="display: none;">
+        <?php /* @escapeNotVerified */ echo $productDesc; ?>
+    </span>
+
+    <!--READ MORE FUNCTION -->
+    <a onclick="readLessReadMore()" id="product-view-desc-hh">Read more</a>
+
+    <?php }if($prodStock && $_product->getTypeId() == "configurable"){ ?>
+    <span class="select-custoption">Please make a selection</span>
+    <?php } ?>
+</div>
+
+<?php
+if(!($_product->isSaleable()) && $_product->getTypeId() == "configurable"){
+?>
+<div class="config-price">
+<span class="price-label">Starts at</span>
+<span class="price"><?php echo "£".$prodPrice; ?></span>
+</div>
+<?php } ?>
+<script>
+    function readLessReadMore() {
+        var dots = document.getElementById("product-view-dots");
+        var moreText = document.getElementById("product-view-full-desc");
+        var btnText = document.getElementById("product-view-desc-hh");      
+
+        if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more"; 
+            moreText.style.display = "none";
+            document.getElementById("short-desc").style.display = "block";
+            
+        } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Read less"; 
+            moreText.style.display = "inline";
+            document.getElementById("short-desc").style.display = "none";
+        }
+    }
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Pharmacy",
+  "image": "<?php echo $imageUrl; ?>",
+  "name": "<?php echo $prodName; ?>",
+  "description": "<?php echo htmlspecialchars($prodDesc); ?>",
+  "openingHours": "Mo-Fr 08:00-17:30",
+  "PriceRange" : "<?php echo $prodPrice; ?>",
+  "telephone": "+44 (0)800 978 8956",
+  "address":
+  {
+  "@type": "PostalAddress",
+  "streetAddress": "4 Progress Business Centre, Whittle Parkway",
+  "addressLocality": "Slough ",
+  "addressRegion": "LN",
+  "addressCountry": "GBP"
+  }
+}
+</script>
+
+<script type="application/ld+json"> 
+{
+"@context": "http://schema.org/",
+"@type": "Product",
+"name": "<?php echo $prodName; ?>",
+"brand": { 
+"@type": "Organization",
+"legalName":"Pharmacy Planet"
+},
+
+"description": "<?php echo htmlspecialchars($prodDesc); ?>",
+"sku": "<?php echo $prodSku; ?>",
+"mpn": "*******",
+"image": [
+{
+"@type": "ImageObject",
+"url": "<?php echo $imageUrl; ?>",
+"caption": "<?php echo $prodName; ?>"
+}
+],
+
+"offers": {
+"@type": "Offer",
+"availability": "http://schema.org/InStock", 
+"itemCondition": "https://schema.org/NewCondition",
+"url": "<?php echo $prodUrl; ?>",
+"price": "<?php echo $prodPrice; ?>",
+"priceCurrency": "GBP",
+"PriceValidUntil": "2050-12-31 14:44:20",
+"seller": {
+"@type": "WebSite",
+"name": "https://www.pharmacyplanet.com"
+}
+},
+"aggregateRating": {
+"@type": "AggregateRating",
+"ratingValue": "5",
+"bestRating": "5",
+"worstRating": "1",
+"reviewCount": "6",
+"url": "<?php echo $prodUrl; ?>"
+}   ,"review":[ 
+
+{
+"@type": "Review",
+"author": {
+"@type": "Person",
+"name": "Linda Olbison"
+},
+"datePublished": "2020-03-02 10:09:21",
+"reviewBody": "1st class. Very happy with professional service",
+"url": "",
+"reviewRating": {
+"@type": "Rating",
+"bestRating": 5,
+"ratingValue": 5,
+"worstRating": 1
+},
+"publisher": {
+"@type": "Organization",
+"name": "Trustpilot",
+"sameAs": "https://uk.trustpilot.com/review/pharmacyplanet.co.uk"
+}
+}, 
+
+{
+"@type": "Review",
+"author": {
+"@type": "Person",
+"name": "Claire Cameron"
+},
+"datePublished": "2020-02-24 11:55:03",
+"reviewBody": "Great service and quick delivery, would recommend.",
+"url": "",
+"reviewRating": {
+"@type": "Rating",
+"bestRating": 5,
+"ratingValue": 5,
+"worstRating": 1
+},
+"publisher": {
+"@type": "Organization",
+"name": "Trustpilot",
+"sameAs": "https://uk.trustpilot.com/review/pharmacyplanet.co.uk"
+}
+}, 
+
+{
+"@type": "Review",
+"author": {
+"@type": "Person",
+"name": "Mrs julia gallacher"
+},
+"datePublished": "2020-02-23 16:25:40",
+"reviewBody": "had what i needed-excellent service",
+"url": "",
+"reviewRating": {
+"@type": "Rating",
+"bestRating": 5,
+"ratingValue": 5,
+"worstRating": 1
+},
+"publisher": {
+"@type": "Organization",
+"name": "Trustpilot",
+"sameAs": "https://uk.trustpilot.com/review/pharmacyplanet.co.uk"
+}
+}, 
+
+{
+"@type": "Review",
+"author": {
+"@type": "Person",
+"name": "Lisa Robinson"
+},
+"datePublished": "2020-02-21 10:55:36",
+"reviewBody": "Excellent service, very helpful and efficient.",
+"url": "",
+"reviewRating": {
+"@type": "Rating",
+"bestRating": 5,
+"ratingValue": 5,
+"worstRating": 1
+},
+"publisher": {
+"@type": "Organization",
+"name": "Trustpilot",
+"sameAs": "https://uk.trustpilot.com/review/pharmacyplanet.co.uk"
+}
+} 
+
+]
+}
+</script>

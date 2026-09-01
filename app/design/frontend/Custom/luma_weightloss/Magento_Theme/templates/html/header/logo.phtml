@@ -1,0 +1,70 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+
+<?php
+
+$helperCust = $this->helper(\Nilesh\Theme\Helper\Customer::Class);
+
+/**
+ * @var \Magento\Theme\Block\Html\Header\Logo $block
+ */
+$storeName = $block->getThemeName() ? $block->getThemeName() : $block->getLogoAlt();
+/**
+ * @var \Magento\Theme\ViewModel\Block\Html\Header\LogoSizeResolverInterface|null $logoSizeResolver
+ */
+$logoSizeResolver = $block->getLogoSizeResolver();
+$logoWidth = $logoSizeResolver !== null && $logoSizeResolver->getWidth()
+    ? $logoSizeResolver->getWidth()
+    : $block->getLogoWidth();
+$logoHeight = $logoSizeResolver !== null && $logoSizeResolver->getHeight()
+    ? $logoSizeResolver->getHeight()
+    : $block->getLogoHeight();
+?>
+
+<div class="rating-header">
+<!-- TrustBox widget - Micro Combo -->
+            <div class="trustpilot-widget" data-locale="en-GB" data-template-id="5419b6ffb0d04a076446a9af" data-businessunit-id="62de404543cebd829464951e" data-style-height="50px" data-style-width="100%">
+                <a href="https://uk.trustpilot.com/review/magento-1584919-6629151.cloudwaysapps.com" target="_blank" rel="noopener">Trustpilot</a>
+            </div>
+        </li>
+        <!-- End TrustBox widget -->
+</div>
+<span data-action="toggle-nav" class="action nav-toggle"><span><?= $block->escapeHtml(__('Toggle Nav')) ?></span></span>
+
+<!-- 
+<div class="logo-login-signup-mobile mf-initial" data-was-processed="true">
+                    <a href="https://phpstack-732705-2678695.cloudwaysapps.com/phpwl/customer/account/" class="btn-link btn btn-custom btn-login-myaccount">
+                <span style="display:none">My Account</span>
+            </a>
+</div> -->
+<div class="logo-login-signup-mobile">
+        <?php if($helperCust->isLogIn()): ?>
+        <!-- <a href="<?php //echo $block->getBaseUrl(); ?>customer/account/logout/" class="btn-link btn btn-custom btn-logout-myaccount"></a> -->
+            <a href="<?php echo $block->getBaseUrl(); ?>customer/account/" class="btn-link btn btn-custom btn-logout-myaccount">
+                <span style="display:none">My Account</span>
+            </a>
+        <?php else: ?>
+            <a href="<?php echo $block->getBaseUrl(); ?>customer/account/" class="btn-link btn btn-custom btn-login-myaccount">
+                <span style="display:none">My Account</span>
+            </a>
+        <?php endif; ?>
+    </div>
+
+
+<a
+    class="logo"
+    href="https://www.pharmacyplanet.com/general-health/weight-loss.html"
+    title="<?= $block->escapeHtmlAttr($storeName) ?>"
+    aria-label="store logo">
+    <img src="<?= $block->escapeUrl($block->getLogoSrc()) ?>"
+         title="<?= $block->escapeHtmlAttr($block->getLogoAlt()) ?>"
+         alt="<?= $block->escapeHtmlAttr($block->getLogoAlt()) ?>"
+            <?= $logoWidth ? 'width="' . $block->escapeHtmlAttr($logoWidth) . '"' : '' ?>
+            <?= $logoHeight ? 'height="' . $block->escapeHtmlAttr($logoHeight) . '"' : '' ?>
+    />
+</a>
+

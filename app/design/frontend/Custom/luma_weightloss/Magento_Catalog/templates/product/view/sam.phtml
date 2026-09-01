@@ -1,0 +1,6 @@
+<div class="out-of-stock-new">
+<?php
+    echo $this->getLayout()->createBlock("Webkul\OutOfStockNotification\Block\OutOfStockProduct")->setIfconfig("notificationsettings/enable/oosn")->setTemplate("Webkul_OutOfStockNotification::outofstockproduct.phtml")->toHtml();
+    echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setIfconfig("notificationsettings/enable/oosn")->setTemplate("Webkul_OutOfStockNotification::emailid.phtml")->toHtml();
+?>
+</div>

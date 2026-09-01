@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="amasty_customform_form" resource="default" engine="innodb" comment="amasty_customform_form">
+        <column xsi:type="int" name="form_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="text" name="title" nullable="false" comment="Form Title"/>
+        <column xsi:type="varchar" name="code" nullable="false" length="255" comment="Form Code"/>
+        <column xsi:type="text" name="success_url" nullable="false" comment="Success Url"/>
+        <column xsi:type="smallint" name="status" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Form Status"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Form Creation Time"/>
+        <column xsi:type="text" name="customer_group" nullable="false" comment="Customer Group"/>
+        <column xsi:type="text" name="store_id" nullable="false" comment="Stores"/>
+        <column xsi:type="smallint" name="send_notification" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Send Notification"/>
+        <column xsi:type="text" name="send_to" nullable="false" comment="Send Notification To"/>
+        <column xsi:type="text" name="email_template" nullable="false" comment="Email Template"/>
+        <column xsi:type="text" name="submit_button" nullable="false" comment="Submit Button Text"/>
+        <column xsi:type="text" name="success_message" nullable="false" comment="Success Message"/>
+        <column xsi:type="text" name="form_json" nullable="false" comment="Form json"/>
+        <column xsi:type="text" name="email_field" nullable="false" comment="Email Field Code"/>
+        <column xsi:type="smallint" name="email_field_hide" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Hide Email Field for Registered Customers"/>
+        <column xsi:type="smallint" name="popup_show" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Use popup for form"/>
+        <column xsi:type="text" name="popup_button" nullable="false" comment="Button for trigger form"/>
+        <column xsi:type="text" name="form_title" nullable="false" comment="Field for page titles"/>
+        <column xsi:type="smallint" name="save_referer_url" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Save referrer url"/>
+        <column xsi:type="text" name="auto_reply_template" nullable="true" comment="Auto Reply Email Template"/>
+        <column xsi:type="tinyint" name="form_contains_sensitive_data" padding="2" nullable="false" default="0" comment="Form Contains Sensitive Data"/>
+        <column xsi:type="smallint" name="auto_reply_enable" padding="6" unsigned="false" nullable="false" identity="false" default="2" comment="Is Auto Responder Enabled"/>
+        <column xsi:type="smallint" name="survey_mode_enable" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Survey mode enable"/>
+        <column xsi:type="smallint" name="design" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Form Design"/>
+        <column xsi:type="tinyint" name="is_visible" nullable="false" default="1" identity="false" comment="Scheduled To"/>
+        <column xsi:type="datetime" name="scheduled_from" nullable="true" comment="Scheduled From"/>
+        <column xsi:type="datetime" name="scheduled_to" nullable="true" comment="Scheduled To"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="form_id"/>
+        </constraint>
+
+        <constraint xsi:type="unique" referenceId="AMASTY_CUSTOMFORM_FORM_CODE">
+            <column name="code"/>
+        </constraint>
+    </table>
+
+    <table name="amasty_customform_answer" resource="default" engine="innodb" comment="amasty_customform_answer">
+        <column xsi:type="tinyint" name="status" padding="3" unsigned="true" nullable="false" default="0" comment="Status"/>
+        <column xsi:type="int" name="answer_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="int" name="form_id" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Form Id"/>
+        <column xsi:type="text" name="store_id" nullable="false" comment="Store"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Form Creation Time"/>
+        <column xsi:type="datetime" name="updated_at" nullable="true" comment="Date of last answer edit"/>
+        <column xsi:type="varchar" name="ip" nullable="false" length="255" default="" comment="IP"/>
+        <column xsi:type="int" name="customer_id" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Customer Id"/>
+        <column xsi:type="text" name="response_json" nullable="false" comment="Response json"/>
+        <column xsi:type="text" name="admin_response_email" nullable="false" comment="Response Email"/>
+        <column xsi:type="text" name="admin_response_message" nullable="false" comment="Response Message"/>
+        <column xsi:type="int" name="admin_response_status" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Response Status"/>
+        <column xsi:type="text" name="referer_url" nullable="false" comment="Referrer url of response"/>
+        <column xsi:type="text" name="form_name" nullable="true" comment="Name of the form at the time of submitting the form"/>
+        <column xsi:type="text" name="form_code" nullable="true" comment="Code of the form at the time of submitting the form"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="answer_id"/>
+        </constraint>
+
+        <index referenceId="AMASTY_CUSTOMFORM_ANSWER_ANSWER_ID" indexType="btree">
+            <column name="form_id"/>
+        </index>
+
+        <index referenceId="AMASTY_CUSTOMFORM_CUSTOMER_ID" indexType="btree">
+            <column name="customer_id"/>
+        </index>
+    </table>
+</schema>

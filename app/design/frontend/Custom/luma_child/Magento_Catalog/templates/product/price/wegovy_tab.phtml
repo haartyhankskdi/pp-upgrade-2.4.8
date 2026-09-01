@@ -1,0 +1,355 @@
+<?php
+
+/** 
+ * Get product price by SKU using Magento's ProductRepositoryInterface (factory class)
+ * Usage: $price = getProductPriceBySku('WL-WEG-0.25-1');
+ */
+function getProductPriceBySku($sku)
+{
+    try {
+        // $objectManager is available globally in .phtml files
+        $productRepository = \Magento\Framework\App\ObjectManager::getInstance()->get('\Magento\Catalog\Api\ProductRepositoryInterface');
+        $product = $productRepository->get($sku);
+        return $product->getFinalPrice();
+    } catch (\Exception $e) {
+        // Log the error if needed
+        return null;
+    }
+}
+
+
+// wegovy.php
+
+// ------- DATA (edit prices/options here) -------
+$catalog = [
+    '1.5mg' => [
+        ['label' => 'Starting Dose - (1.5mg x 30 tablets)',                         'note' => '1.5mg',                  'price' => 95.00, 'sku' =>  getProductPriceBySku('Weg-Tab-1.5mg-1'),  'per_pen' => 95.00],
+
+        ['label' => '2 Month Starter Pack (1.5mg x 30 tablets & 4mg x 30 tablets)', 'note' => '1.5mg',                  'price' => 190.00, 'sku' => getProductPriceBySku('Weg-Tab-2MSP-1'), 'per_pen' => 157.00],
+
+        ['label' => '2 Month Continuation Pack (1.5mg x 60 tablets)', 'note' => '1.5mg',                  'price' => 198.00, 'sku' => getProductPriceBySku('Weg-Tab-1.5mg-2'), 'per_pen' => 198.00],
+
+        ['label' => '3 Month Continuation Pack (1.5mg x 90 tablets)', 'note' => '1.5mg',                  'price' => 236.00, 'sku' => getProductPriceBySku('Weg-Tab-1.5mg-3'), 'per_pen' => 236.00],
+
+        [
+            'label' => 'BEST VALUE- 3 Month Starter Pack (1.5mg x 30 tablets, 4mg x 30 tablets &amp; 9mg x 30 tablets)',
+            'note' => '1.5mg + 4mg + 1.0mg',
+            'price' => 285.00,
+            'sku' => getProductPriceBySku('Weg-Tab-3MSP-1'),
+            'per_pen' => 285.00
+        ],
+    ],
+    '4mg' => [
+        ['label' => '1 Month Pack - (4mg x 30 tablets)',                          'note' => '4mg',                   'price' => 98.00, 'sku' => getProductPriceBySku('Weg-Tab-4mg-1'), 'per_pen' => 98.00],
+        ['label' => '2 Month Starter Pack (1.5mg x 30 tablets & 4mg x 30 tablets)',            'note' => '4mg',                   'price' => 195.00, 'sku' => getProductPriceBySku('Weg-Tab-2MSP-1'), 'per_pen' => 195.50],
+        ['label' => '2 Month Continuation Pack (4mg x 60 tablets)',            'note' => '4mg',                   'price' => 293.00, 'sku' => getProductPriceBySku('Weg-Tab-4mg-2'), 'per_pen' => 293.00],
+        ['label' => '3 Month Continuation Pack (4mg x 90 tablets)',            'note' => '4mg',                   'price' => 293.00, 'sku' => getProductPriceBySku('Weg-Tab-4mg-3'), 'per_pen' => 293.00],
+        ['label' => '2 Month Titration Pack (4mg x 30 tablets &amp; 9mg x 30 tablets)',            'note' => '4mg',                   'price' => 293.00, 'sku' => getProductPriceBySku('Weg-Tab-TP-49mg'), 'per_pen' => 293.00],
+        ['label' => 'BEST VALUE- 3 Month Starter Pack (1.5mg x 30 tablets, 4mg x 30 tablets &amp; 9mg x 30 tablets)',            'note' => '4mg',                   'price' => 293.00, 'sku' => getProductPriceBySku('Weg-Tab-3MSP-1'), 'per_pen' => 293.00],
+    ],
+
+    '9mg' => [
+        ['label' => '1 Month Pack - (9mg x 30 tablets)', 'note' => '1mg', 'price' => 108.00, 'sku' => getProductPriceBySku('Weg-Tab-9mg-1'), 'per_pen' => 108.00],
+        ['label' => '2 Month Continuation Pack (9mg x 60 tablets)', 'note' => '1mg', 'price' => 215.00, 'sku' => getProductPriceBySku('Weg-Tab-9mg-2'), 'per_pen' => 215.00],
+        ['label' => '2 Month Titration Pack (9mg x 30 tablets &amp; 25mg x 30 tablets)', 'note' => '1mg + 1.7mg', 'price' => 269.00, 'sku' => getProductPriceBySku('Weg-Tab-TP-925mg'), 'per_pen' => 269.00],
+        ['label' => '3 Month Continuation Pack (9mg x 90 tablets)', 'note' => '1mg', 'price' => 322.00, 'sku' => getProductPriceBySku('Weg-Tab-9mg-3'), 'per_pen' => 322.00],
+        ['label' => 'BEST VALUE- 3 Month Starter Pack (1.5mg x 30 tablets, 4mg x 30 tablets &amp; 9mg x 30 tablets)',            'note' => '4mg',                   'price' => 293.00, 'sku' => getProductPriceBySku('Weg-Tab-3MSP-1'), 'per_pen' => 293.00],
+
+    ],
+
+
+    '25mg' => [
+        ['label' => '1 Month Pack - (25mg x 30 tablets)',                         'note' => '1.7mg',                   'price' => 149.00, 'sku' => getProductPriceBySku('Weg-Tab-25mg-1'), 'per_pen' => 149.00],
+        ['label' => '2 Month Titration Pack (9mg x 30 tablets &amp; 25mg x 30 tablets)',                         'note' => '1.7mg',                   'price' => 297.00, 'sku' => getProductPriceBySku('Weg-Tab-TP-925mg'), 'per_pen' => 297.00],
+
+        ['label' => '2 Month Continuation Pack (25mg x 60 tablets)',   'note' => '1.7mg + 2.4mg',           'price' => 344.00, 'sku' => getProductPriceBySku('Weg-Tab-25mg-2'), 'per_pen' => 344.00],
+        ['label' => '3 Month Continuation Pack (25mg x 90 tablets)',                         'note' => '1.7mg',                   'price' => 446.00, 'sku' => getProductPriceBySku('Weg-Tab-25mg-3'), 'per_pen' => 446.00],
+        ['label' => 'BEST VALUE- 3 Month Starter Pack (1.5mg x 30 tablets, 4mg x 30 tablets &amp; 9mg x 30 tablets)',            'note' => '4mg',                   'price' => 293.00, 'sku' => getProductPriceBySku('Weg-Tab-3MSP-1'), 'per_pen' => 293.00],
+
+    ],
+];
+
+
+$writer = new \Zend_Log_Writer_Stream(BP . '/var/log/custom.log');
+$zendLogger = new \Zend_Log();
+$zendLogger->addWriter($writer);
+$zendLogger->info(" ======================");
+
+$zendLogger->info(" Message Log " . print_r($catalog, true));
+
+
+$zendLogger->info(" ======================");
+
+
+// Selected strength (server-side fallback)
+$default = '1.5mg';
+$strength = isset($_GET['strength'], $catalog[$_GET['strength']]) ? $_GET['strength'] : $default;
+
+// Helper
+$money = fn($n) => '£' . number_format($n, 2);
+?>
+
+<style>
+    :root {
+        --bg1: #e9f1ff;
+        --bg2: #e9e6f8;
+        --card: #fff;
+        --muted: #65748b;
+        --ok: #10b981;
+        --ring: #e6e8ef;
+        --ink: #0f172a;
+    }
+
+    * {
+        box-sizing: border-box
+    }
+
+    body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+        background: #f6f7fb;
+        color: var(--ink)
+    }
+
+
+    .price-comparison-sec {
+        background: transparent linear-gradient(129deg, #D4F2FC 0%, #C2DDFB 100%) 0% 0% no-repeat !important;
+        padding: 40px;
+    }
+
+    .comparison-title {
+        font-size: 35px;
+        color: #000;
+        font-family: 'Roboto', sans-serif;
+        line-height: 45px;
+        padding: 0 0px;
+        font-weight: 400;
+        margin-top: 0 !important;
+        margin-bottom: 10px;
+    }
+
+    .price-comparison-sec p {
+        font-size: 14px;
+        color: #000;
+        font-family: 'Roboto', sans-serif;
+        line-height: 22px;
+        padding: 0 0px;
+        font-weight: 400;
+        margin-top: 0 !important;
+    }
+
+    .select-option-sec {
+        background-color: #fff;
+        display: inline-block;
+        padding: 25px;
+        border-radius: 12px;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .select-shell label {
+        font-size: 14px;
+        color: #000;
+        font-family: 'Roboto', sans-serif;
+        line-height: 22px;
+        padding: 0 0 10px 0;
+        font-weight: 400;
+    }
+
+    .select-shell select {
+        width: 100% !important;
+        border: 0;
+        background: url(https://www.pharmacyplanet.com/static/frontend/Custom/luma_child/en_GB/images/select-dropdown-arrow.png) no-repeat right 15px center #F1F7F9 !important;
+        border-radius: 50px;
+        height: 55px;
+        padding: 0 35px 0 20px;
+        font-size: 14px;
+        color: #000;
+        font-family: 'Roboto', sans-serif;
+        line-height: 22px;
+    }
+
+    .select-option-sec .card-price-table {
+        width: 100% !important;
+        background-color: #F1F7F9;
+        border: 0;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .select-option-sec .cards .card {
+        width: 100%;
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        color: #111;
+        font-size: 13px;
+        font-family: 'Ubuntu', sans-serif;
+        line-height: 22px;
+        font-weight: 400;
+        padding: 5px 0px;
+        background: transparent !important;
+    }
+
+    .select-option-sec .cards .card .card-title .title,
+    .select-option-sec .card-price-table .card-h {
+        width: 80%;
+        float: left;
+    }
+
+    .select-option-sec .cards .card .card-title .price,
+    .select-option-sec .card-price-table .card-p {
+        width: 20%;
+        float: left;
+        text-align: right;
+        padding-right: 15px;
+    }
+
+    .select-option-sec .card-price-table .card-table {
+        width: 100%;
+        display: inline-block;
+    }
+
+    .select-option-sec .cards {
+        height: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: 180px;
+
+    }
+
+    .select-option-sec .cards::-webkit-scrollbar {
+        width: 7px;
+        background-color: rgba(166, 211, 230, 1);
+    }
+
+    .select-option-sec .cards::-webkit-scrollbar-thumb {
+        border-radius: 0px;
+        border: 0px solid white;
+        background-color: rgba(88, 127, 143, 1);
+    }
+
+
+    @media only screen and (max-width: 767px) {
+
+        .price-comparison-sec {
+            padding: 30px 20px !important;
+        }
+
+        .select-option-sec .cards .card .card-title .title,
+        .select-option-sec .card-price-table .card-h {
+            width: 60% !important;
+        }
+
+        .select-option-sec .cards .card .card-title .price,
+        .select-option-sec .card-price-table .card-p {
+            width: 35% !important;
+        }
+
+    }
+</style>
+<div class="wrap">
+    <div class="panel price-comparison-sec">
+        <div class="comparison-title">Price Comparison</div>
+        <p>Select your preferred options and see the best price</p>
+        <!-- Dropdown -->
+        <div class="select-option-sec">
+            <form method="get" class="select-shell" id="strengthForm">
+                <label for="brand">Strength</label>
+                <select name="strength" id="strengthSelect" aria-label="Select strength">
+                    <?php foreach (array_keys($catalog) as $s): ?>
+                        <option value="<?= htmlspecialchars($s) ?>" <?= $s === $strength ? 'selected' : '' ?>><?= htmlspecialchars($s) ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <!-- <svg class="caret" width="18" height="18" viewBox="0 0 20 20" fill="none">
+          <path d="M5 7l5 6 5-6" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg> -->
+                <noscript><button type="submit" style="margin-top:10px">Update</button></noscript>
+            </form>
+
+            <!-- <p class="hint">Prices include next-day delivery and prescription</p> -->
+
+            <!-- Cards: server-side initial render -->
+            <div class="card-price-table">
+                <div class="card-table">
+                    <div class="card-h"><strong>Pack</strong></div>
+                    <div class="card-p"><strong>Price (£)</strong></div>
+                </div>
+                <div id="cards" class="cards">
+
+                    <?php foreach ($catalog[$strength] as $o): ?>
+                        <div class="card">
+                            <div class="card-title">
+                                <div class="title"><?= htmlspecialchars($o['label']) ?></div>
+                                <div class="price <?= $o['sku'] ?>" data-sku=""><?= $money($o['sku']) ?></div>
+                            </div>
+                            <!-- <div class="sub">= htmlspecialchars($o['note']) ?></div>  -->
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <!-- <p class="hint">Select your treatment after the consultation:</p> -->
+        </div>
+    </div>
+</div>
+
+<!-- Safe JSON payload for JS -->
+<script id="optionsData" type="application/json">
+    <?= json_encode($catalog, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . "\n" ?>
+</script>
+
+<script>
+    (function() {
+        function ready(fn) {
+            document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn)
+        }
+        ready(function() {
+            var select = document.getElementById('strengthSelect');
+            var cards = document.getElementById('cards');
+            var dataEl = document.getElementById('optionsData');
+
+            var OPTIONS = {};
+            try {
+                OPTIONS = JSON.parse((dataEl.textContent || '{}').trim());
+            } catch (e) {
+                console.error(e);
+            }
+
+            function money(n) {
+                return '£' + Number(n).toFixed(2);
+            }
+
+            function render(strength) {
+                var items = OPTIONS[strength] || [];
+                cards.innerHTML = items.map(function(o) {
+                    return '<div class="card"> <div class="card-title">' +
+                        '<div class="title">' + o.label + '</div>'
+
+                        +
+                        '<div class="price">' + money(o.sku) + '</div>'
+
+
+
+                        +
+                        '</div> </div>';
+                }).join('');
+
+                // keep URL in sync (no reload)
+                /**
+                try{
+                  var url=new URL(location.href);
+                  url.searchParams.set('strength', strength);
+                  history.replaceState({},'',url);
+                }catch(_){}
+                */
+            }
+
+            // Initial sync and on-change behavior
+            render(select.value);
+            select.addEventListener('change', function(e) {
+                render(e.target.value);
+            });
+        });
+    })();
+</script>

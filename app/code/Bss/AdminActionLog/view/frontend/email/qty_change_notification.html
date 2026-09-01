@@ -1,0 +1,79 @@
+<!--
+/**
+ * BSS Commerce Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://bsscommerce.com/Bss-Commerce-License.txt
+ *
+ * @category   BSS
+ * @package    Bss_RewardPoint
+ * @author     Extension Team
+ * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @license    http://bsscommerce.com/Bss-Commerce-License.txt
+ */
+-->
+<!--@subject {{trans "Qty Change Notification"}} @-->
+<style type="text/css">
+    {{css file="Bss_AdminActionLog::css/qty_change_email.css"}}
+</style>
+{{template config_path="design/email/header_template"}}
+<h2 class="title">{{trans "Action log Details"}}</h2>
+<div class="log-gid">
+    <p class="row">
+        <span class="label">{{trans "Date: "}}</span>
+        <span class="value">{{var date}}</span>
+    </p>
+    <p class="row">
+        <span class="label">{{trans "Username: "}}</span>
+        <span class="value">{{var userName}}</span>
+    </p>
+    <p class="row">
+        <span class="label">{{trans "Full name: "}}</span>
+        <span class="value">{{var fullName}}</span>
+    </p>
+    <p class="row">
+        <span class="label">{{trans "Email: "}}</span>
+        <span class="value">{{var email}}</span>
+    </p>
+    <p class="row">
+        <span class="label">{{trans "Action Type: "}}</span>
+        <span class="value">{{var action}}</span>
+    </p>
+    <p class="row">
+        <span class="label">{{trans "Object: "}}</span>
+        <span class="value">{{var className}}</span>
+    </p>
+    <p class="row">
+        <span class="label">{{trans "Item: "}}</span>
+        <span class="value">{{var productName}}</span>
+    </p>
+</div>
+<div class="log-details">
+    <table class="view_details" style="width: 100%">
+        <thead >
+        <tr style="text-align: center">
+            <th>{{trans "Name"}}</th>
+            <th>{{trans "Old Value"}}</th>
+            <th>{{trans "New Value"}}</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="path">
+                    <p>{{trans "Qty"}}</p>
+                </td>
+                <td class="oldvalue">
+                    <p>{{var oldValue}}</p>
+                </td>
+                <td class="newvalue">
+                    <p>{{var newValue}}</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{{template config_path="design/email/footer_template"}}

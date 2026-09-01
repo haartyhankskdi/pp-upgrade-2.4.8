@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Kdi\AdvisePost\Api\AdvicePostRepositoryInterface" type="Kdi\AdvisePost\Model\AdvicePostRepository"/>
+	<preference for="Kdi\AdvisePost\Api\Data\AdvicePostInterface" type="Kdi\AdvisePost\Model\AdvicePost"/>
+	<preference for="Kdi\AdvisePost\Api\Data\AdvicePostSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Kdi\AdvisePost\Model\ResourceModel\AdvicePost\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">kdi_advice_post</argument>
+			<argument name="resourceModel" xsi:type="string">Kdi\AdvisePost\Model\ResourceModel\AdvicePost\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="kdi_advisepost_advicepost_listing_data_source" xsi:type="string">Kdi\AdvisePost\Model\ResourceModel\AdvicePost\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

@@ -1,0 +1,4850 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+
+<?php
+/** @var \Magento\Catalog\Model\Product $currentProduct */
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+/** @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory */
+$productCollectionFactory = $objectManager->get('Magento\Catalog\Model\ResourceModel\Product\CollectionFactory');
+
+/** @var \Magento\Catalog\Model\Product $currentProduct */
+$currentProduct = $objectManager->get('Magento\Catalog\Model\ProductRepository')->getById($block->getProduct()->getId());
+$productId = $currentProduct->getId();
+// $currentProduct = ;
+
+
+$categoryId = 84; // Your specific category ID
+
+// Get the category IDs associated with the current product
+$productCategoryIds = $currentProduct->getCategoryIds();
+// print_r($productCategoryIds);
+
+
+// Check if the product is in category 84
+// if (in_array($categoryId, $productCategoryIds)) {
+if ($productId == 9305){ ?>
+<div class="product-details-sec-new desktop-cont-tab">
+  <div class="container">
+    <div class="product-details">
+      <nav class="section-nav">
+        <p class="links-sec">LINKS</p>
+        <ul>
+          <li>
+            <a href="#buy-mounjaro-injections">Buy Mounjaro Injections Online UK</a>
+          </li>
+          <li>
+            <a href="#what-is-mounjaro">What is Mounjaro?</a>
+          </li>
+          <li>
+            <a href="#how-much-mounjaro-injections-cost">How much does the Mounjaro injections cost in UK?</a>
+          </li>
+          <li>
+            <a href="#how-does-mounjaro-work">How does Mounjaro work in the body?</a>
+          </li>
+          <li>
+            <a href="#mounjaro-dosage-guide">Mounjaro dosage guide for weight loss</a>
+          </li>
+          <li>
+            <a href="#buying-mounjaro-injection">Buying Mounjaro injection for first time</a>
+          </li>
+          <li>
+            <a href="#how-to-use-mounjaro=pen">How to use Mounjaro Pen : A Step by Step Guide</a>
+          </li>
+          <li>
+            <a href="#where-to-inject-mounjaro">Where to inject Mounjaro for weight loss?</a>
+          </li>
+          <li>
+            <a href="#mounjaro-side-effects">Mounjaro Side Effects</a>
+          </li>
+          <li>
+            <a href="#what-are-some-alternative">What are some alternative weight loss treatments?</a>
+          </li>
+          <li>
+            <a href="#who-is-eligible">Who is eligible for Mounjaro?</a>
+          </li>
+          <li>
+            <a href="#reference-websites">Reference websites</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="tab-content-right-sec">
+        <section id="buy-mounjaro-injections">
+          <h2>Buy Mounjaro Injections Online UK</h2>
+          <div class="tab-content-sec">
+            <p>You can buy Mounjaro, the latest GLP-1 weekly weight loss injections from Pharmacy Planet, a registered online pharmacy based in the UK. It is approved for weight loss treatment in the UK and prescribed for adults with obesity (BMI of 30+) and for those with a BMI of 27 or above with health conditions such as high blood pressure, high cholesterol and type 2 diabetes.</p>
+            <p>Complete the simple online consultation and start your weight loss journey with Pharmacy Planet.</p>
+          </div>
+        </section>
+        <section id="what-is-mounjaro">
+          <h2>What is Mounjaro?</h2>
+          <div class="tab-content-sec">
+            <p>Mounjaro is the brand name for the drug tirzepatide, an approved for weight loss drug in the UK. The prescription only medicine helps control appetite and reduce cravings, making you feel fuller for longer. As a result of reduced calorie intake and increased physical activity, effective weight loss can be achieved in patients.</p>
+            <p><strong>Mounjaro Overview</strong></p>
+            <p><img src="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Strengths_1.png" data-original="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Strengths_1.png" id="JXHNOL5" alt="Mounjaro Starting Dose" width="698" height="349" class="mf-loaded" data-was-processed="true"></p>
+          </div>
+        </section>
+        <section id="how-much-mounjaro-injections-cost">
+          <h2>How much does the Mounjaro injections cost in UK?</h2>
+          <div class="tab-content-sec">
+            <p>The price of Mounjaro starts from £149 per month at Pharmacy Planet in the UK. It is available in six different strengths. You can check out the complete list of Mounjaro prices below</p>
+            <p><strong>Current In stock Mounjaro Pen Dosages and their Prices:</strong></p>
+            <p><strong>Starting Dosage:</strong></p>
+            <p>Weeks 1 – 4: 2.5 mg (4 doses) Starter Pack at £149</p>
+            <p><strong>Intermediate Dosage:</strong></p>
+            <p>Weeks 5 – 8: 5 mg (4 doses) at £149</p>
+            <p>Weeks 9-12: 7.5 mg (4 doses) at £175</p>
+            <p>Weeks 13-16: 10 mg (4 doses) at £175</p>
+            <p>Weeks 17- 20: 12.5 mg (4 doses) at £209</p>
+            <p><strong>Highest Dosage:</strong></p>
+            <p>After 21 weeks: 15 mg (4 doses) at £209</p>
+          </div>
+        </section>
+        <section id="how-does-mounjaro-work">
+          <h2>How does Mounjaro work in the body?</h2>
+          <div class="tab-content-sec">
+            <p>Tirzepatide, the active ingredient in Mounjaro, belongs to a class of drugs called GLP-1 and GIP receptor agonists. These drugs mimic the naturally occurring hormone GLP-1 which is released in the gut after a meal to suppress hunger. It also slows down gastric emptying to make you feel fuller for longer. This results in reduced intake of food which can lead to weight loss.</p>
+            <p>Mounjaro prevents the conversion of excess sugar into fat by regulating blood sugar levels in our body. It is usually prescribed when lifestyle modifications have not been effective in weight loss.</p>
+          </div>
+        </section>
+        <section id="mounjaro-dosage-guide">
+          <h2>Mounjaro dosage guide for weight loss</h2>
+          <div class="tab-content-sec">
+            <p>It is important to follow a Mounjaro dosage plan to make sure that the medication is taken regularly to achieve the maximum weight loss and lessen the chances of side effects</p>
+            <p><strong>Mounjaro dosing schedule</strong></p>
+            <p><strong><img src="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Dosage_Schedule.png" data-original="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Dosage_Schedule.png" style="display: block; margin-left: auto; margin-right: auto; width: 814px; height: 682px;" alt="Mounjaro_Dosage_Schedule" width="814" height="682" class="mf-loaded" data-was-processed="true"></strong></p>
+            <p>If you are a first-time user, start at the lowest dose of 2.5mg per week for 4 weeks. As long as you are tolerating the medicine, your dose will increase to 5mg per week for the next 4 weeks and then to 7.5mg per week for 4 weeks. The dose can increase again to 10mg per week for 4 weeks, then 12.5mg for 4 weeks, and finally to 15mg per week. You can remain on this dose until your target weight is reached. This is known as the maintenance dose.</p>
+            <p>Sticking to the dosing regimen of once weekly until reaching your goal weight is imperative.</p>
+            <p>The potential for serious side effects is heightened when Mounjaro is misused. It is important to consult your healthcare provider before adjusting your dosage outside the established dosing schedule and to discuss side effects that might be affecting you.</p>
+          </div>
+        </section>
+        <section id="buying-mounjaro-injection">
+          <h2>Buying Mounjaro injection for first time</h2>
+          <div class="tab-content-sec">
+            <p>If you are ordering Mounjaro for first time, each pen will have 4 weekly doses (one dose per week) lasting for 28 days. It is important to keep it refrigerated at 2-8C between uses, however, if kept outside of refrigerate conditions, the pen will be stable for at least 4 weeks before its effectiveness begins to be affected.</p>
+            <p>Each pack of Mounjaro consist of:</p>
+            <p>· Four needles</p>
+            <p>· One Mounjaro Pen (4 doses)</p>
+            <p>· Patient information leaflet and Instruction leaflet</p>
+          </div>
+        </section>
+        <section id="how-to-use-mounjaro=pen">
+          <h2>How to use Mounjaro Pen : A Step by Step Guide</h2>
+          <div class="tab-content-sec">
+            <p>Mounjaro must be injected under the skin (Subcutaneously) in your stomach (abdomen), thigh or upper arm part of your body. Make sure the selected injection site area is clean before inserting the needle.</p>
+            <p>· Remove the pen cap and clean the end (where needle will be inserted) with a swab.</p>
+            <p>· Take one needle from the pack, peel off the paper cover, and firmly push and twist the needle cap until it is securely attached to the Mounjaro Pen. Now remove the plastic cap.</p>
+            <p>· Twist the pen until the first line appears in the Window. Hold the pen upside down and twist until a small liquid drop appears at the tip of the needle.</p>
+            <p>· Twist the plunger until the number one appears in the treatment window.</p>
+            <p>· Once the injection site is chosen, insert the pen at a 90-degree angle and push down the plunger gently until the zero appears again in the treatment window. Hold the needle in place for 10 seconds to make sure the full dose is administered.</p>
+            <p>· Remove the needle and close the Mounjaro pen with plastic cap. Safely dispose of the needle.</p>
+            <p>· Keep the pen stored safely for your next dose.</p>
+            <p>Important Instructions:</p>
+            <p>· Always check the expiration date and ensure it is not frozen or damaged before opening the pen.</p>
+            <p>· A new needle needs to be inserted each time.</p>
+          </div>
+        </section>
+        <section id="where-to-inject-mounjaro">
+          <h2>Where to inject Mounjaro for weight loss?</h2>
+          <div class="tab-content-sec">
+            <p>The best place to inject Mounjaro are the fleshier areas of your body. This includes your stomach (at least 5 cm away from belly button), thigh or upper arm area. It is important to rotate the injection site as inserting the needle in same place every time can cause irritation.</p>
+          </div>
+        </section>
+        <section id="mounjaro-side-effects">
+          <h2>Mounjaro Side Effects</h2>
+          <div class="tab-content-sec">
+            <p>Like any other medications, Mounjaro also can cause side effects.</p>
+            <p>The most common side effects of Mounjaro include:</p>
+            <p>· Diarrhoea</p>
+            <p>· Feeling sickness or fatigue</p>
+            <p>· Nausea and Vomiting</p>
+            <p>· Constipation</p>
+            <p>· Rashes or Pain in injected body areas</p>
+            <p>These symptoms are more likely to disappear over the time since your body slowly gets adjusted to the medication.</p>
+            <p>If the symptoms remain same or becomes severe, please consult your clinician or local healthcare provider immediately.</p>
+          </div>
+        </section>
+        <section id="what-are-some-alternative">
+          <h2>What are some alternative weight loss treatments?</h2>
+          <div class="tab-content-sec">
+            <p>Like Mounjaro , there are other GLP- 1 medicines available for weight loss treatment in the UK. See the list of options below:</p>
+            <p>Injectable Medications:</p>
+            <p>Wegovy is considered as one of the best alternatives for Mounjaro. Wegovy contains active ingredient semaglutide which belong to the same category of GLP-1 receptor agonist. Wegovy does have a more well-known counterpart, known as Ozempic. However, Ozempic is only licensed for use for patients with Type 2 Diabetes.</p>
+            <p>You can compare <a tabindex="0" href="https://www.pharmacyplanet.com/blog/post/wegovy-vs-mounjaro-choosing-weight-loss-methods" target="_blank" rel="noopener">Mounjaro vs Wegovy</a> and <a tabindex="0" href="https://www.pharmacyplanet.com/blog/post/is-mounjaro-superior-to-ozempic-for-weight-loss-treatment" target="_blank" rel="noopener">Ozempic Vs Mounjaro</a> to understand their mechanisms, dosages and effects to help choose the right medication for you.</p>
+          </div>
+        </section>
+        <section id="who-is-eligible">
+          <h2>Who is eligible for Mounjaro?</h2>
+          <div class="tab-content-sec">
+            <p>Mounjaro (weekly injectable pen), is usually prescribed for patients who fit the following criteria:</p>
+            <p>· Has to be aged 18-75 years old.</p>
+            <p>· Is diagnosed with obesity or has a BMI that is 30 or above.</p>
+            <p>· BMI of 27 – 30 with at least one weight related condition like prediabetes, hypertension, high cholesterol or heart problems</p>
+            <p>Mounjaro is not recommended or prescribed if you are:</p>
+            <p>· Below 18 years.</p>
+            <p>· Pregnant or breastfeeding.</p>
+            <p>· Having any kidney or liver related conditions</p>
+            <p>· Suffering from Inflammation of the pancreas (Pancreatitis), diabetic retinopathy, macular oedema, or other eye problems.</p>
+            <p>· History of thyroid issues or medullary thyroid carcinoma (MTC), or if there is a family history of MTC.</p>
+            <p>· Diagnosed with Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).</p>
+            <p>· Allergic to any of the ingredients used in Mounjaro.</p>
+          </div>
+        </section>
+        <section id="reference-websites">
+          <h2>Reference websites</h2>
+          <div class="tab-content-sec">
+            <p><a href="https://www.uchealth.org/today/what-is-mounjaro-and-how-does-it-work-for-weight-loss/" target="_blank">https://www.uchealth.org/today/what-is-mounjaro-and-how-does-it-work-for-weight-loss/</a></p>
+            <p><a href="https://www.gov.uk/government/news/mhra-authorises-diabetes-drug-mounjaro-tirzepatide-for-weight-management-and-weight-loss" target="_blank">https://www.gov.uk/government/news/mhra-authorises-diabetes-drug-mounjaro-tirzepatide-for-weight-management-and-weight-loss</a></p>
+            <p><a href="https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/treating-your-diabetes/tablets-and-medication/glp-1/mounjaro" target="_blank">https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/treating-your-diabetes/tablets-and-medication/glp-1/mounjaro</a></p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mobile-cont-tab">
+  <div class="faq-section-new">
+    <div class="container reveal1">
+      <div class="h-title">
+        LINKS
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">Buy Mounjaro Injections Online UK</button>
+        <div class="panel-p">
+          <p>You can buy Mounjaro, the latest GLP-1 weekly weight loss injections from Pharmacy Planet, a registered online pharmacy based in the UK. It is approved for weight loss treatment in the UK and prescribed for adults with obesity (BMI of 30+) and for those with a BMI of 27 or above with health conditions such as high blood pressure, high cholesterol and type 2 diabetes.</p>
+          <p>Complete the simple online consultation and start your weight loss journey with Pharmacy Planet.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">What is Mounjaro?</button>
+        <div class="panel-p">
+          <p>Mounjaro is the brand name for the drug tirzepatide, an approved for weight loss drug in the UK. The prescription only medicine helps control appetite and reduce cravings, making you feel fuller for longer. As a result of reduced calorie intake and increased physical activity, effective weight loss can be achieved in patients.</p>
+          <p><strong>Mounjaro Overview</strong></p>
+          <p><img src="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Strengths_1.png" data-original="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Strengths_1.png" id="JXHNOL5" alt="Mounjaro Starting Dose" width="698" height="349" class="mf-loaded" data-was-processed="true"></p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">How much does the Mounjaro injections cost in UK?</button>
+        <div class="panel-p">
+          <p>The price of Mounjaro starts from £149 per month at Pharmacy Planet in the UK. It is available in six different strengths. You can check out the complete list of Mounjaro prices below</p>
+          <p><strong>Current In stock Mounjaro Pen Dosages and their Prices:</strong></p>
+          <p><strong>Starting Dosage:</strong></p>
+          <p>Weeks 1 – 4: 2.5 mg (4 doses) Starter Pack at £149</p>
+          <p><strong>Intermediate Dosage:</strong></p>
+          <p>Weeks 5 – 8: 5 mg (4 doses) at £149</p>
+          <p>Weeks 9-12: 7.5 mg (4 doses) at £175</p>
+          <p>Weeks 13-16: 10 mg (4 doses) at £175</p>
+          <p>Weeks 17- 20: 12.5 mg (4 doses) at £209</p>
+          <p><strong>Highest Dosage:</strong></p>
+          <p>After 21 weeks: 15 mg (4 doses) at £209</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">How does Mounjaro work in the body?</button>
+        <div class="panel-p">
+          <p>Tirzepatide, the active ingredient in Mounjaro, belongs to a class of drugs called GLP-1 and GIP receptor agonists. These drugs mimic the naturally occurring hormone GLP-1 which is released in the gut after a meal to suppress hunger. It also slows down gastric emptying to make you feel fuller for longer. This results in reduced intake of food which can lead to weight loss.</p>
+          <p>Mounjaro prevents the conversion of excess sugar into fat by regulating blood sugar levels in our body. It is usually prescribed when lifestyle modifications have not been effective in weight loss.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">Mounjaro dosage guide for weight loss</button>
+        <div class="panel-p">
+          <p>It is important to follow a Mounjaro dosage plan to make sure that the medication is taken regularly to achieve the maximum weight loss and lessen the chances of side effects</p>
+          <p><strong>Mounjaro dosing schedule</strong></p>
+          <p><strong><img src="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Dosage_Schedule.png" data-original="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Dosage_Schedule.png" style="display: block; margin-left: auto; margin-right: auto; width: 814px; height: 682px;" alt="Mounjaro_Dosage_Schedule" width="814" height="682" class="mf-loaded" data-was-processed="true"></strong></p>
+          <p>If you are a first-time user, start at the lowest dose of 2.5mg per week for 4 weeks. As long as you are tolerating the medicine, your dose will increase to 5mg per week for the next 4 weeks and then to 7.5mg per week for 4 weeks. The dose can increase again to 10mg per week for 4 weeks, then 12.5mg for 4 weeks, and finally to 15mg per week. You can remain on this dose until your target weight is reached. This is known as the maintenance dose.</p>
+          <p>Sticking to the dosing regimen of once weekly until reaching your goal weight is imperative.</p>
+          <p>The potential for serious side effects is heightened when Mounjaro is misused. It is important to consult your healthcare provider before adjusting your dosage outside the established dosing schedule and to discuss side effects that might be affecting you.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">Buying Mounjaro injection for first time</button>
+        <div class="panel-p">
+          <p>If you are ordering Mounjaro for first time, each pen will have 4 weekly doses (one dose per week) lasting for 28 days. It is important to keep it refrigerated at 2-8C between uses, however, if kept outside of refrigerate conditions, the pen will be stable for at least 4 weeks before its effectiveness begins to be affected.</p>
+          <p>Each pack of Mounjaro consist of:</p>
+          <p>· Four needles</p>
+          <p>· One Mounjaro Pen (4 doses)</p>
+          <p>· Patient information leaflet and Instruction leaflet</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">How to use Mounjaro Pen : A Step by Step Guide</button>
+        <div class="panel-p">
+          <p>Mounjaro must be injected under the skin (Subcutaneously) in your stomach (abdomen), thigh or upper arm part of your body. Make sure the selected injection site area is clean before inserting the needle.</p>
+          <p>· Remove the pen cap and clean the end (where needle will be inserted) with a swab.</p>
+          <p>· Take one needle from the pack, peel off the paper cover, and firmly push and twist the needle cap until it is securely attached to the Mounjaro Pen. Now remove the plastic cap.</p>
+          <p>· Twist the pen until the first line appears in the Window. Hold the pen upside down and twist until a small liquid drop appears at the tip of the needle.</p>
+          <p>· Twist the plunger until the number one appears in the treatment window.</p>
+          <p>· Once the injection site is chosen, insert the pen at a 90-degree angle and push down the plunger gently until the zero appears again in the treatment window. Hold the needle in place for 10 seconds to make sure the full dose is administered.</p>
+          <p>· Remove the needle and close the Mounjaro pen with plastic cap. Safely dispose of the needle.</p>
+          <p>· Keep the pen stored safely for your next dose.</p>
+          <p>Important Instructions:</p>
+          <p>· Always check the expiration date and ensure it is not frozen or damaged before opening the pen.</p>
+          <p>· A new needle needs to be inserted each time.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">Where to inject Mounjaro for weight loss?</button>
+        <div class="panel-p">
+          <p>The best place to inject Mounjaro are the fleshier areas of your body. This includes your stomach (at least 5 cm away from belly button), thigh or upper arm area. It is important to rotate the injection site as inserting the needle in same place every time can cause irritation.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">Mounjaro Side Effects</button>
+        <div class="panel-p">
+          <p>Like any other medications, Mounjaro also can cause side effects.</p>
+          <p>The most common side effects of Mounjaro include:</p>
+          <p>· Diarrhoea</p>
+          <p>· Feeling sickness or fatigue</p>
+          <p>· Nausea and Vomiting</p>
+          <p>· Constipation</p>
+          <p>· Rashes or Pain in injected body areas</p>
+          <p>These symptoms are more likely to disappear over the time since your body slowly gets adjusted to the medication.</p>
+          <p>If the symptoms remain same or becomes severe, please consult your clinician or local healthcare provider immediately.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">What are some alternative weight loss treatments?</button>
+        <div class="panel-p">
+          <p>Like Mounjaro , there are other GLP- 1 medicines available for weight loss treatment in the UK. See the list of options below:</p>
+          <p>Injectable Medications:</p>
+          <p>Wegovy is considered as one of the best alternatives for Mounjaro. Wegovy contains active ingredient semaglutide which belong to the same category of GLP-1 receptor agonist. Wegovy does have a more well-known counterpart, known as Ozempic. However, Ozempic is only licensed for use for patients with Type 2 Diabetes.</p>
+          <p>You can compare <a tabindex="0" href="https://www.pharmacyplanet.com/blog/post/wegovy-vs-mounjaro-choosing-weight-loss-methods" target="_blank" rel="noopener">Mounjaro vs Wegovy</a> and <a tabindex="0" href="https://www.pharmacyplanet.com/blog/post/is-mounjaro-superior-to-ozempic-for-weight-loss-treatment" target="_blank" rel="noopener">Ozempic Vs Mounjaro</a> to understand their mechanisms, dosages and effects to help choose the right medication for you.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">Who is eligible for Mounjaro?</button>
+        <div class="panel-p">
+          <p>Mounjaro (weekly injectable pen), is usually prescribed for patients who fit the following criteria:</p>
+          <p>· Has to be aged 18-75 years old.</p>
+          <p>· Is diagnosed with obesity or has a BMI that is 30 or above.</p>
+          <p>· BMI of 27 – 30 with at least one weight related condition like prediabetes, hypertension, high cholesterol or heart problems</p>
+          <p>Mounjaro is not recommended or prescribed if you are:</p>
+          <p>· Below 18 years.</p>
+          <p>· Pregnant or breastfeeding.</p>
+          <p>· Having any kidney or liver related conditions</p>
+          <p>· Suffering from Inflammation of the pancreas (Pancreatitis), diabetic retinopathy, macular oedema, or other eye problems.</p>
+          <p>· History of thyroid issues or medullary thyroid carcinoma (MTC), or if there is a family history of MTC.</p>
+          <p>· Diagnosed with Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).</p>
+          <p>· Allergic to any of the ingredients used in Mounjaro.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">Reference websites</button>
+        <div class="panel-p">
+          <p><a href="https://www.uchealth.org/today/what-is-mounjaro-and-how-does-it-work-for-weight-loss/" target="_blank">https://www.uchealth.org/today/what-is-mounjaro-and-how-does-it-work-for-weight-loss/</a></p>
+          <p><a href="https://www.gov.uk/government/news/mhra-authorises-diabetes-drug-mounjaro-tirzepatide-for-weight-management-and-weight-loss" target="_blank">https://www.gov.uk/government/news/mhra-authorises-diabetes-drug-mounjaro-tirzepatide-for-weight-management-and-weight-loss</a></p>
+          <p><a href="https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/treating-your-diabetes/tablets-and-medication/glp-1/mounjaro" target="_blank">https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/treating-your-diabetes/tablets-and-medication/glp-1/mounjaro</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+    <div class="work-c">
+      <div class="h-title-2">
+        Complete our online<br>
+        clinical consultation
+      </div>
+      <p>Answer a few questions on your health and your fitness goals.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-2.webp" alt="Setup Coaching">
+    <div class="work-c">
+      <div class="h-title-2">
+        Clinical<br>
+        assessment
+      </div>
+      <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-3.webp" alt="Ongoing Support">
+    <div class="work-c">
+      <div class="h-title-2">
+        Welcome<br>
+        aboard!
+      </div>
+      <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div>
+<?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faq-mounjaro.phtml")->toHtml(); ?>
+<?php } 
+
+elseif ($productId == 9221) { 
+  echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/tabs/wegovy.phtml")->toHtml(); ?>
+<div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+    <div class="work-c">
+      <div class="h-title-2">
+        Complete our online<br>
+        clinical consultation
+      </div>
+      <p>Answer a few questions on your health and your fitness goals.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-2.webp" alt="Setup Coaching">
+    <div class="work-c">
+      <div class="h-title-2">
+        Clinical<br>
+        assessment
+      </div>
+      <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-3.webp" alt="Ongoing Support">
+    <div class="work-c">
+      <div class="h-title-2">
+        Welcome<br>
+        aboard!
+      </div>
+      <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div>
+
+ <?php  echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/wegovy-faq.phtml")->toHtml();  
+} ?>
+
+
+
+<style type="text/css">
+  .catalog-product-view.product-mounjaro .weightloss-treatment-comparison,
+  .catalog-product-view.product-mounjaro .how-it-works-section,
+  .catalog-product-view.product-mounjaro .treatment-options,
+  .catalog-product-view.product-mounjaro .weightloss-journey,
+  .catalog-product-view.product-mounjaro .widget.block.block-static-block,
+  .catalog-product-view.product-mounjaro .need-help-section,
+  .catalog-product-view.product-mounjaro .footer-blog,
+  .catalog-product-view.product-mounjaro .hm-meet-team{
+    width: 100%;
+    float: left;
+    position: relative;
+  }
+
+  .catalog-product-view.product-mounjaro .weightloss-treatment-comparison{
+    width: 100%;
+    float: left;
+    padding: 80px 0;
+    margin: 0;
+  }
+.catalog-product-view.product-mounjaro .weightloss-treatment-comparison h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 40px 0;
+  font-size: 38px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.product-mounjaro .weight-loss-com table td{
+  padding: 0;
+}
+
+.catalog-product-view.product-mounjaro .weight-loss-com table td.weight-d-2,
+.catalog-product-view.product-mounjaro .weight-loss-com table td.weight-d-3{ 
+    border-radius: 8px;
+    padding: 5px !important;
+    border: 5px solid #fff;
+}
+
+.catalog-product-view.product-mounjaro .weight-loss-com table td.weight-d-2{
+  background: #FEECEC; 
+}
+.catalog-product-view.product-mounjaro .weight-loss-com table td.weight-d-3{
+  background: #E7F2F4; 
+}
+
+.catalog-product-view.product-mounjaro .weight-cont{
+  background: #fff;
+    border-radius: 8px;
+    padding:25px 10px 20px 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.catalog-product-view.product-mounjaro .weight-cont h3{
+  font-size: 20px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px; 
+    font-weight: 700; 
+    text-align: left;
+    padding: 0 0px;
+}
+
+.catalog-product-view.product-mounjaro .weight-d-1{
+  height: 268px;
+  width: 215px;
+}
+
+.catalog-product-view.product-mounjaro .weight-d-1 table td{
+  font-size: 16px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 22px; 
+    font-weight: 700; 
+    text-align: left;
+    padding: 22px 10px;
+}
+
+.catalog-product-view.product-mounjaro .weight-loss-com table td.l-space{
+  font-size: 16px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px; 
+    font-weight: 400; 
+    text-align: left;
+    padding: 22px 5px;
+    height: 40px;
+}
+
+.catalog-product-view.product-mounjaro .weight-loss-com table td.weight-d-3 td.l-space{
+  border-bottom: 1px solid #dde8ea;
+}
+.catalog-product-view.product-mounjaro .weight-loss-com table td.weight-d-2 td.l-space{
+  border-bottom: 1px solid #fff;
+}
+
+.catalog-product-view.product-mounjaro .weight-cont .weight-i {height: 123px;}
+.catalog-product-view.product-mounjaro .weight-cont h3 {font-size: 15px;}
+.catalog-product-view.product-mounjaro .weight-loss-com table td {width: 140px; height: 40px;}
+.catalog-product-view.product-mounjaro .weight-loss-com table .weight-d-1 table tr {border-bottom: 1px solid #F3F1ED;}
+.catalog-product-view.product-mounjaro .weight-loss-com table .weight-d-1 table tr:nth-child(1) {height: 255px; display: inline-block; border-bottom: 0px solid #F3F1ED;}
+.catalog-product-view.product-mounjaro .weight-loss-com table .weight-d-1 table tr:nth-child(4) td {padding: 22px 10px 25px 10px;}
+
+.catalog-product-view.product-mounjaro .l-space.last{
+  border-bottom: 0 !important;
+}
+
+.catalog-product-view.product-mounjaro .weightloss-treatment-comparison p{
+  font-size: 16px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 22px; 
+    font-weight: 400; 
+    text-align: left;
+    width: 100%;
+    display: inline-block;
+}
+
+.catalog-product-view.product-mounjaro .weight-loss-com{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin-bottom: 20px;
+}
+.catalog-product-view.product-mounjaro .weight-cont .weight-i img{
+  height: 100%;
+}
+
+ 
+.catalog-product-view.product-mounjaro .how-it-works-section h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 40px 0;
+  font-size: 38px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.product-mounjaro .Works-1{
+  width: 314px;
+  float: none;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  margin: 0 20px;
+  margin-bottom: 34px;
+}
+
+.catalog-product-view.product-mounjaro .work-c{
+  position: absolute;
+  top: 32px;
+  left: 129px;
+}
+.catalog-product-view.product-mounjaro .work-c h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 25px; 
+    font-weight: 700; 
+    text-align: left;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+ 
+.catalog-product-view.product-mounjaro .work-c p{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: 13px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 18px; 
+    font-weight: 400; 
+    text-align: left; 
+}
+
+
+.catalog-product-view.product-mounjaro .treatment-options{
+  width: 100%;
+  float: left;
+  padding:65px 0 87px 0;
+  margin: 0;
+  background: #96D8F0;
+}
+.catalog-product-view.product-mounjaro .treatment-options h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 35px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.product-mounjaro .home-treatment-block{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+.catalog-product-view.product-mounjaro .home_block_1{
+  width: 298px;
+  float: none;
+  display: inline-block;
+  margin: 0 0px;
+  border-radius: 8px;
+  vertical-align: top;
+  background: #fff;
+  padding: 40px 25px 0px 25px;
+}
+.catalog-product-view.product-mounjaro .home_block_img{
+  height: 260px;
+  overflow-y: hidden;
+  margin-bottom: 30px;
+}
+
+.catalog-product-view.product-mounjaro .home_block_1 h3{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px; 
+    font-weight: 900; 
+    text-align: left;
+}
+.catalog-product-view.product-mounjaro .home_block_1 h3 a{
+  color: #000;
+}
+
+.catalog-product-view.product-mounjaro .home_block_1 p{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 22px 0;
+  font-size: 14px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px; 
+    font-weight: 400; 
+    text-align: left;
+}
+
+
+.catalog-product-view.product-mounjaro .home_block_1 .h-banner-btn a,
+.catalog-product-view.product-mounjaro .home_block_1 .h-banner-btn button{
+  width: 145px;
+  text-transform: uppercase;
+  float: left;
+}
+.catalog-product-view.product-mounjaro .home_block_1 .h-banner-btn a,
+.catalog-product-view.product-mounjaro .home_block_1 .h-banner-btn button{
+    width: 145px;
+    display: inline-block;
+    text-align: center;
+    background: #EC3237;
+    font-size: 13px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 55px;
+    padding: 0 0px;
+    font-weight: 400;
+    border-radius: 30px;
+    letter-spacing: 0.26px;
+    border: 0;
+    transition: all .35s;
+}
+.catalog-product-view.product-mounjaro .home_block_1 .h-banner-btn a:hover,
+.catalog-product-view.product-mounjaro .home_block_1 .h-banner-btn button:hover{
+    background: #53CAF5 !important;
+}
+
+.catalog-product-view.product-mounjaro .included-section{
+  width: 100%;
+  float: left;
+  padding:75px 0 45px 0;
+  margin: 0;
+}
+
+.catalog-product-view.product-mounjaro .included-section h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 35px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.product-mounjaro .subsection{
+  width: 50%;
+  float: left;
+}
+
+.catalog-product-view.product-mounjaro .subsection h3{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 15px 0;
+  font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px; 
+    font-weight: 900; 
+    text-align: left;
+}
+
+.catalog-product-view.product-mounjaro .subsection p{
+  width: 80%;
+  float: left;
+  padding: 0;
+  margin: 0 0 0px 15px;
+  font-size: 15px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 22px; 
+    font-weight: 400; 
+    text-align: left;
+}
+
+.catalog-product-view.product-mounjaro .subsection-content{
+  width: auto;
+  float: left;
+  margin-right: 30px;
+  padding: 0 0 11px 0;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #D3DEE1;
+  min-height: 101px;
+}
+
+.catalog-product-view.product-mounjaro .subsection-content.last{
+  border-bottom: 0 !important;
+}
+.catalog-product-view.product-mounjaro .subsection-content img{
+  float: left;
+}
+ 
+
+.catalog-product-view.product-mounjaro .video-section{
+  width: 100%;
+  float: left;
+  padding: 76px 0 46px 0;
+  background: #E7F2F4;
+  text-align: center;
+}
+
+.catalog-product-view.product-mounjaro .video-section h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 50px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.product-mounjaro .video-section .subsection{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.catalog-product-view.product-mounjaro .subsection-2{
+  width: 1028px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 65px;
+  display: inline-block;
+}
+.catalog-product-view.product-mounjaro .subsection-2 h3{
+  width: auto;
+  float: left;
+  padding: 0;
+  margin: 0;
+  font-size: 42px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 55px; 
+    font-weight: 300; 
+    text-align: left;
+}
+
+.catalog-product-view.product-mounjaro .subsection-2 h3 strong{
+  font-weight: 700;
+}
+
+.catalog-product-view.product-mounjaro .subsection-2 .h-banner-btn{
+  width: auto;
+  float: right;
+}
+.catalog-product-view.product-mounjaro .subsection-2 .h-banner-btn a{
+  width: 220px !important;
+}
+
+.catalog-product-view.product-mounjaro .meet-team-section{
+  width: 100%;
+  float: left;
+  padding:80px 0;
+  margin: 0;
+  text-align: center;
+}
+.catalog-product-view.product-mounjaro .meet-team-section h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 30px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.product-mounjaro .meet-team-section h3{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 5px 0;
+  font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px; 
+    font-weight: 900; 
+    text-align: left;
+}
+
+.catalog-product-view.product-mounjaro .meet-team-section p{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 0px 0px;
+  font-size: 14px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px; 
+    font-weight: 400; 
+    text-align: left;
+}
+
+.catalog-product-view.product-mounjaro .meet-team-section .team-1{
+  width: 332px;
+  float: none;
+  margin: 0 5px;
+  display: inline-block;
+}
+
+.catalog-product-view.product-mounjaro .meet-team-section .subsection-content2{
+  margin-top: 175px;
+  padding-left : 10px;
+  padding-right : 10px;
+}
+ 
+.catalog-product-view.product-mounjaro button.plus-button {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  display: inline-block;
+  float : right;
+  margin-top : -28px;
+  margin-right:-34px;
+  padding: 7px 12px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%; /* Ensures the button is circular */
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.catalog-product-view.product-mounjaro .meet-team-section2{
+  width: 100%;
+  float: left;
+  padding:65px 0;
+  margin: 66px 0px 0px 0px;
+  background: #E7F2F4;
+  text-align: center;
+}
+.catalog-product-view.product-mounjaro .team-2{
+  width: 321px;
+  float: none;
+  display: inline-block;
+  background: #fff;
+  margin: 0 12px;
+  border-radius: 8px;
+  padding: 44px 34px;
+}
+.catalog-product-view.product-mounjaro .team-2 img{
+  float: left;
+}
+
+.catalog-product-view.product-mounjaro .team-2 h3{
+  padding: 0;
+  margin:0 0 0 20px;
+  font-size: 18px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 22px; 
+    font-weight: 700; 
+    text-align: left;
+    float: left;
+    width: 175px;
+}
+
+.catalog-product-view.product-mounjaro .stories-section{
+  width: 100%;
+  float: left;
+  padding: 65px 0;
+  margin: 0;
+  text-align: center;
+}
+.catalog-product-view.product-mounjaro .stories-section h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 30px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.product-mounjaro .story-1{
+  width: 332px;
+  float: none;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 5px;
+}
+
+
+.catalog-product-view.product-mounjaro .story-1 .subsection-content{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin:45px 0 0 0;
+  border-bottom: 0 !important;
+}
+.catalog-product-view.product-mounjaro .story-1 img{
+  border-radius: 8px;
+}
+.catalog-product-view.product-mounjaro .story-1 .subsection-content{
+  position: relative;
+}
+.catalog-product-view.product-mounjaro .story-1 .subsection-content:before{
+  width: 48px;
+  height: 40px;
+  display: inline-block;
+  content: " " !important;
+  background: url(/pub/media/wysiwyg/WLImage/quote-icon.png) 0 0 no-repeat; 
+  position: absolute;
+  top: -70px;
+  left: 0;
+}
+.catalog-product-view.product-mounjaro .story-1 .subsection-content p{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: 13px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px; 
+    font-weight: 400; 
+    text-align: left;
+}
+
+.catalog-product-view.product-mounjaro .story-1 .subsection-content p strong{
+  font-weight: 700;
+}
+
+
+
+.catalog-product-view.product-mounjaro .story-1 .subsection-content img{
+  float: left;
+  margin-bottom: 10px;
+  border-radius: 0;
+}
+
+.catalog-product-view.product-mounjaro .faq-section{
+  width: 100%;
+  float: left;
+  padding:84px 0 104px 0;
+  margin: 0;
+  background: #E7F2F4;
+}
+
+.catalog-product-view.product-mounjaro .faq-section h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 40px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.product-mounjaro .faq-content{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+.catalog-product-view.product-mounjaro .faq-list p.question{
+  font-size: 16px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px; 
+    font-weight: 400; 
+    text-align: left;
+    padding: 20px 0;
+}
+
+.catalog-product-view.product-mounjaro .blogs-section{
+  width: 100%;
+  float: left;
+  padding:65px 0;
+  margin: 0;
+  text-align: center;
+}
+
+.catalog-product-view.product-mounjaro .blogs-section h2,
+.catalog-product-view.product-mounjaro .blogs-section h3{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 40px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.product-mounjaro .blog-c,
+.catalog-product-view.product-mounjaro .blogs-section .post-holder{
+  width: 332px;
+  float: none;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 5px;
+}
+
+.catalog-product-view.product-mounjaro .blogs-section .post-title-holder{
+  height: 67px;
+    width: 100%;
+    overflow-y: hidden;
+    padding-bottom: 0;
+    float: left;
+    margin-bottom: 5px;
+}
+
+.catalog-product-view.product-mounjaro .blog-img,
+.catalog-product-view.product-mounjaro .blogs-section .post-holder .post-ftimg-hld{
+  margin-bottom: 20px;
+}
+.catalog-product-view.product-mounjaro .blog-img img,
+.catalog-product-view.product-mounjaro .blogs-section .post-holder .post-ftimg-hld img{
+  border-radius: 8px;
+}
+
+.catalog-product-view.product-mounjaro .blog-c h4,
+.catalog-product-view.product-mounjaro .blogs-section .post-holder .post-title a{
+  width: 100%;
+  float: left;
+  font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 26px; 
+    font-weight: 900; 
+    text-align: left;
+    padding: 0px 0 10px 0;
+    margin: 0;
+}
+
+.catalog-product-view.product-mounjaro .blogs-section .post-holder .post-text-hld{
+  min-height: auto !important;
+  width: 100%;
+  float: left;
+}
+.catalog-product-view.product-mounjaro .blog-c p,
+.catalog-product-view.product-mounjaro .blogs-section .post-holder .post-text-hld p{
+  width: 100%;
+  float: left;
+  font-size: 13px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px; 
+    font-weight: 400; 
+    text-align: left;
+    padding: 0px 0 5px 0;
+    margin: 0;
+}
+
+.catalog-product-view.product-mounjaro .blogs-section .post-holder .post-posed-date{
+  float: left;
+}
+.catalog-product-view.product-mounjaro .blog-c p span,
+.catalog-product-view.product-mounjaro .blogs-section .post-holder .post-posed-date span{
+  font-size: 11px !important; 
+    color: #6B6B6B !important;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px; 
+    font-weight: 400 !important; 
+    text-align: left;
+    padding: 0px 0 0px 0;
+    margin: 0;
+    font-style: normal !important;
+}
+
+
+.catalog-product-view.product-mounjaro .faq-section .accordion {
+      font: var(--unnamed-font-style-normal) normal normal 18px/21px Roboto;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-000000);
+    text-align: left;
+    font: normal normal normal 18px/21px Roboto;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    padding: 15px;
+    width: 100%;
+    }
+
+ .catalog-product-view.product-mounjaro .faq-section .accordion:after {
+      content: '\002B'; / Unicode character for plus sign /
+       padding-left: 80px 
+      float: right;
+    }
+
+    /* .faq-section .active:after {
+      content: "\2212"; / Unicode character for minus sign /
+    } */
+
+.catalog-product-view.product-mounjaro .faq-section .panel {
+    padding: 10px 0;
+    display: none;
+    overflow: hidden;
+    font: var(--unnamed-font-style-normal) normal normal 18px/21px Roboto;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-000000);
+    text-align: left;
+    font: normal normal normal 18px/21px Roboto;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+  }
+
+
+.catalog-product-view.product-mounjaro .h-title-2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: 14px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 18px; 
+    font-weight: 700; 
+    text-align: left;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.catalog-product-view.product-mounjaro .h-title-3{
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0 0 7px 0;
+    font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 40px;
+    font-weight: 700;
+    text-align: left;
+}
+.catalog-product-view.product-mounjaro .subsection .h-title-4{
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0 0 15px 0;
+    font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px;
+    font-weight: 900;
+    text-align: left;
+}
+.catalog-product-view.product-mounjaro .subsection-2 .h-title-5{
+    width: auto;
+    float: left;
+    padding: 0;
+    margin: 0;
+    font-size: 42px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 55px;
+    font-weight: 300;
+    text-align: left;
+}
+.catalog-product-view.product-mounjaro .subsection-2 .h-title-5 strong {
+    font-weight: 700;
+}
+
+.catalog-product-view.product-mounjaro .meet-team-section .h-title-6{
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0 0 5px 0;
+    font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px;
+    font-weight: 900;
+    text-align: left;
+}
+
+.catalog-product-view.product-mounjaro .team-2 .h-title-7{
+    padding: 0;
+    margin: 0 0 0 20px;
+    font-size: 18px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 22px;
+    font-weight: 700;
+    text-align: left;
+    float: left;
+    width: 175px;
+}
+
+.catalog-product-view.product-mounjaro .home_block_1 .h-product-title{
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px;
+    font-weight: 900;
+    text-align: left;
+}
+
+.catalog-product-view.product-mounjaro .footer-consultation .container .footer-title{
+    width: auto;
+    float: left;
+    padding: 0;
+    margin: 0;
+    font-size: 42px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 55px;
+    font-weight: 300;
+    text-align: left;
+    background: none !important;
+}
+
+.catalog-product-view.product-mounjaro .footer-consultation .container .footer-title span{
+  font-size: 15px;
+  line-height: 22px !important;
+  width: 100%;
+  float: left;
+}
+
+@media screen and (min-width: 768px) {
+  .catalog-product-view.product-mounjaro .h-title{
+      width: 100%;
+      float: left;
+      padding: 0;
+      margin: 0 0 22px 0;
+      font-size: 38px;
+      color: #101010;
+      font-family: 'Lato', sans-serif;
+      line-height: 48px;
+      font-weight: 300;
+      text-align: center;
+  }
+  .catalog-product-view.product-mounjaro .blogs-section .h-title{
+    margin-bottom: 40px !important;
+  }
+  .catalog-product-view.product-mounjaro .right-column h3, 
+  .catalog-product-view.product-mounjaro .need-help-section .right-column .content-title {
+        margin-top: 0;
+        font: normal normal bold 30px / 40px Lato;
+        letter-spacing: 0px;
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (min-width:768px) and (max-width:991px){
+  .catalog-product-view.product-mounjaro .video-section .subsection-2 .h-title-5,
+  .catalog-product-view.product-mounjaro .footer-consultation .container .footer-title{
+      font-size: 32px !important;
+      line-height: 44px !important;
+  }
+  .catalog-product-view.product-mounjaro .team-2 .h-title-7{
+    font-size: 15px !important;
+    width: 122px !important;
+  }
+  .catalog-product-view.product-mounjaro .offer.mf-initial {
+    width: auto;
+    height: 42px;
+
+}
+}
+
+@media only screen and (min-width:992px) and (max-width:1024px){
+
+  .catalog-product-view.product-mounjaro .team-2{
+    width: 310px !important;
+  }
+  .catalog-product-view.product-mounjaro .offer.mf-initial {
+      width: auto;
+      height: 42px;
+
+  }
+  .catalog-product-view.product-mounjaro .how-it-works-section .Works-1{
+    width: 300px !important;
+    margin: 0 15PX !important;
+  }
+  .catalog-product-view.product-mounjaro .how-it-works-section .Works-1 .work-c{
+    left: 110px !important;
+  }
+
+}
+
+
+@media screen and (max-width: 767px) {
+  .catalog-product-view.product-mounjaro .weight-loss-journey .h-title,
+  .catalog-product-view.product-mounjaro .home-testimonilas .h-title,
+  .catalog-product-view.product-mounjaro .google-review-section .h-title,
+  .catalog-product-view.product-mounjaro .blogs-section .h-title,
+  .catalog-product-view.product-mounjaro .faq-section .h-title,
+  .catalog-product-view.product-mounjaro .stories-section .h-title,
+  .catalog-product-view.product-mounjaro .meet-team-section .h-title,
+  .catalog-product-view.product-mounjaro .video-section .h-title,
+  .catalog-product-view.product-mounjaro .included-section .h-title,
+  .catalog-product-view.product-mounjaro .treatment-options .h-title,
+  .catalog-product-view.product-mounjaro .how-it-works-section .h-title{
+    font-size: 32px !important;
+    line-height: 40px !important;
+    text-align: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: auto !important;
+    font-weight: 300; 
+      margin: 0 0 45px 0;
+  }
+  .catalog-product-view.product-mounjaro .column.main {
+        padding: 0 10px !important;
+    }
+  .catalog-product-view.product-mounjaro .patient-info-leaflet-sec {
+      width: 94% !important;
+      float: none !important;
+      padding: 0;
+      margin: 0 auto !important;
+  }
+  .catalog-product-view.product-mounjaro .how-it-works-section .h-title{ 
+      margin-bottom: 19px !important;
+  }
+  .catalog-product-view.product-mounjaro .faq-section .h-title{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: 25px !important;
+  }
+  .catalog-product-view.product-mounjaro .how-it-works-section .work-c .h-title-2{
+      width: 100% !important;
+      padding: 0 !important;
+      font-size: 15px !important;
+      font-family: 'Lato', sans-serif;
+      line-height: 20px !important;
+      margin-bottom: 10px !important; 
+  }
+  .catalog-product-view.product-mounjaro .how-it-works-section .work-c .h-title-2 br{
+    display: none;
+  }
+   
+  .catalog-product-view.product-mounjaro .video-section .subsection-2 .h-title-5,
+  .catalog-product-view.product-mounjaro .footer-consultation .container .footer-title{
+      width: 100% !important;
+      text-align: center !important;
+      font-size: 25px !important;
+  }
+  .catalog-product-view.product-mounjaro .slider-wrapper.review-slider .demo-content {
+      width: 100% !important;
+      float: left; 
+      margin: 0 0px; 
+  }
+
+  .catalog-product-view.product-mounjaro .desk-review-slider{
+    display: none;
+  }
+  .catalog-product-view.product-mounjaro .product-details-sec-new .product-details{
+    grid-template-columns: 1fr 15em !important;
+    padding: 0 10px !important;
+  }
+  .catalog-product-view.product-mounjaro .tab-content-right-sec p{
+    word-break: break-all;
+  }
+  .catalog-product-view.product-mounjaro .patient-info-leaflet{
+    width: auto !important;
+  }
+  .catalog-product-view.product-mounjaro .product-details-sec-new .product-details > nav{
+    padding-right: 15px !important;
+    margin-right: 15px !important;
+  }
+  .catalog-product-view.product-mounjaro .tab-content-right-sec h2{
+    font-size: 18px !important;
+    line-height: 26px !important;
+  }
+  .catalog-product-view.product-mounjaro .product-details-sec-new .section-nav ul li{
+    border-bottom: 1px solid #46c0ec;
+    padding-bottom: 20px;
+  }
+  .catalog-product-view.product-mounjaro .Works-1{
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0;
+  }
+
+  .catalog-product-view.product-mounjaro .home_block_1 .h-product-title{
+    text-align: center;
+  }
+  .catalog-product-view.product-mounjaro .product-faq-section .container,
+  .catalog-product-view.product-mounjaro .need-help-section .container{
+        width: 100%;
+    }
+  .catalog-product-view.product-mounjaro .product-faq-section .faq-list label{
+      padding-right: 5% !important;
+      font-size: 17px !important;
+      line-height: 22px !important;
+      width: 95%;
+    }
+
+    .catalog-product-view.product-mounjaro .home_block_1{
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    .catalog-product-view.product-mounjaro .carousel-item{
+      width: 100% !important;
+    }
+    .catalog-product-view.product-mounjaro .weightloss-journey .container h3{
+      width: 100% !important;
+      text-align: center !important;
+      font-size: 25px !important;
+      line-height: 35px !important;
+    }
+    .catalog-product-view.product-mounjaro .weightloss-journey .h-banner-btn {
+      width: 100% !important;
+      float: left !important;
+      margin-top: 20px;
+      text-align: center;
+  }
+  .catalog-product-view.product-mounjaro .weightloss-journey{
+    margin-bottom: 10px !important;
+  }
+  .catalog-product-view.product-mounjaro .need-help-section h2{
+    padding-top: 30px !important;
+    text-align: left !important;
+    font-size: 32px !important;
+  }
+   .catalog-product-view.product-mounjaro .need-help-section .left-column {
+      width: 100% !important;
+      margin-right: 0 !important;
+  }
+  .catalog-product-view.product-mounjaro .need-help-section .right-column .content-title{
+    margin: 15px 0 10px 0;
+  }
+  .catalog-product-view.product-mounjaro .need-help-section{
+    height: auto !important;
+    padding-bottom: 30px;
+  }
+  .catalog-product-view.product-mounjaro .footer-blog{
+    width: 94% !important;
+    margin: 0 auto;
+    float: none;
+  }
+  .catalog-product-view.product-mounjaro .footer-blog .h-title{
+    font-size: 32px !important;
+  }
+  .h-banner-btn{
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+  }
+  .catalog-product-view.product-mounjaro .home_block_1 .h-banner-btn a, 
+  .catalog-product-view.product-mounjaro .home_block_1 .h-banner-btn button{
+    float: none;
+    margin: 0 auto;
+  }
+  .catalog-product-view.product-mounjaro .how-it-works-section{
+    width: auto !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+
+ 
+ 
+.catalog-product-view.product-mounjaro .review-header{
+  width: 100%;
+  float: left;
+  padding: 0; 
+  margin: 0 0 50px 0;
+  text-align: center;
+}
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider{
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .slides-container { 
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .slide-arrow {
+  position: absolute;
+  display: flex;
+  top: 35%;
+  bottom: 0;
+  margin: auto;
+  height: 15px;
+  background-color: transparent;
+  border: none;
+  width: 46px;
+  font-size: 3rem;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 100ms;
+}
+
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .slide-arrow:hover,
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .slide-arrow:focus {
+  opacity: 1;
+}
+
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider #slide-arrow-prev {
+  left: -60px; 
+  border-radius: 0 2rem 2rem 0;
+}
+
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider #slide-arrow-next {
+  right: -40px; 
+  border-radius: 2rem 0 0 2rem;
+}
+
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .slide {
+  width: 100%;
+  height: 100%;
+  flex: 1 0 100%;
+}
+
+.catalog-product-view.product-mounjaro .review-list { 
+    float: none;
+    display: inline-block;
+    background: #fff;
+    margin: 0 8px;
+    padding: 40px 27px;
+    border-radius: 8px;
+    text-align: left;
+}
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .demo-content .read-more-btn,
+.catalog-product-view.product-mounjaro .review-slide .content .read-more-btn{
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+    color: #000 !important;
+    text-align: left;
+    font-weight: 400;
+    font-size: 13px;
+    box-shadow: none !important;
+
+}
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .demo-content .read-more-btn:hover,
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .demo-content .read-more-btn:focus,
+.catalog-product-view.product-mounjaro .review-slide .content .read-more-btn:hover{
+    color:#EC3237 !important;
+    text-decoration: underline;
+    background: transparent;
+    border: 0;
+    box-shadow:none !important;
+}
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .demo-content .review-list p,
+.catalog-product-view.product-mounjaro .review-slide .content .review-list p{
+    margin-bottom: 10px !important;
+}
+.catalog-product-view.product-mounjaro .review-list .review-img {
+    margin-bottom: 10px;
+}
+.catalog-product-view.product-mounjaro .author-c p {
+    width: auto;
+    float: left;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 50px;
+    font-weight: 700;
+    letter-spacing: 0.31px;
+}
+.catalog-product-view.product-mounjaro .author-c img {
+    float: left;
+    border-radius: 50px;
+}
+
+
+
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .demo-content {
+  font-size: 12px;
+    color: #515151;
+    font-family: 'Lato', sans-serif;
+}
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .review-image{
+    
+    width: 100%;
+    float: left;   
+  }
+
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .review-image p,
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .review-image p span{
+  width: auto;
+  float: right;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+    color: #515151;
+    font-family: 'Lato', sans-serif;
+}
+ 
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .review-name{
+  width: auto;
+    float: left;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    color: #000 !important;
+    line-height: 22px;
+    font-weight: 700 !important;
+    text-align: left;
+}
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .review-description{
+ width: 100%;
+    float: left;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0px;
+    text-align: left;
+    margin: 0;
+}
+ 
+ 
+@media screen and (min-width: 768px) { 
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .demo-content {
+  width: 31%;
+    float: left; 
+    margin: 0 10px; 
+}
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .container{
+  width: 1180px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/*.catalog-product-view.product-mounjaro .page-main{
+  max-width: 100% !important;
+}*/
+
+
+.catalog-product-view.product-mounjaro .product-info-main{
+  margin-bottom: 50px;
+}
+.catalog-product-view.product-mounjaro .product-details-sec-new .container,
+.catalog-product-view.product-mounjaro .custom-product-info{
+  max-width: 1090px;
+  margin: 0 auto;
+}
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider #slide-arrow-prev, .slider-wrapper.desk-review-slider #slide-arrow-next {
+        height: 50px;
+        width: 50px;
+        border-radius: 50px;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+    }
+
+}
+
+@media only screen and (min-width:768px) and (max-width:1024px){
+
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .container{
+  width: 100% !important;
+}
+
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider #slide-arrow-prev{
+  left: 0 !important;
+}
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider #slide-arrow-next{
+  right: 0 !important;
+}
+
+.catalog-product-view.product-mounjaro .Works-1 .h-title-2 br{
+  display: none;
+}
+
+
+}
+
+
+
+@media only screen and (min-width:768px) and (max-width:991px){
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .demo-content{
+    width: 30% !important;
+  }
+  .catalog-product-view.product-mounjaro .Works-1{
+  width: 335px !important;
+  margin: 0 15px !important;
+}
+   
+}
+
+.catalog-product-view.product-mounjaro .rating-img{
+  width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0 0 40px 0;
+    text-align: center;
+    display: inline-block;
+}
+.catalog-product-view.product-mounjaro .rating-img img{
+  float: none;
+    display: inline-block;
+}
+.catalog-product-view.product-mounjaro .rating-img p{
+  width: auto;
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 4px !important;
+    margin-left: 10px !important;
+}
+
+ 
+@media only screen and (min-width:768px) and (max-width:1024px){
+
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .container{
+  width: 100% !important;
+}
+
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider #slide-arrow-prev{
+  left: 0 !important;
+}
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider #slide-arrow-next{
+  right: 0 !important;
+}
+
+}
+
+
+
+@media only screen and (min-width:768px) and (max-width:991px){
+.catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .demo-content{
+    width: 30% !important;
+  }
+   
+}
+
+.catalog-product-view.product-mounjaro .google-review-section{
+  width: 100%;
+  float: left;
+  padding:65px 0 74px 0;
+  margin: 0;
+  background: #E6F0F3;
+  text-align: center;
+}
+.catalog-product-view.product-mounjaro .google-review-section h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 30px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.product-mounjaro .need-help-section h2,
+.catalog-product-view.product-mounjaro .need-help-section h3{
+    text-align: center;
+    font: normal normal 300 38px/46px Lato;
+    letter-spacing: 0px;
+    padding-top: 60px;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.catalog-product-view.product-mounjaro .need-help-section{
+    background: #E7F2F4;
+    height: 571px;
+}
+.catalog-product-view.product-mounjaro .need-help-section .right-column, 
+.catalog-product-view.product-mounjaro .need-help-section .left-column {display: inline-block;} 
+.catalog-product-view.product-mounjaro .need-help-section .right-column a {color: #ed3237;}
+
+.catalog-product-view.product-mounjaro .need-help-section .right-column, 
+.catalog-product-view.product-mounjaro .need-help-section .left-column{
+    vertical-align: top;
+}
+.catalog-product-view.product-mounjaro .need-help-section .left-column{
+    width: 47%;
+    margin-right: 2%;
+}
+.catalog-product-view.product-mounjaro .need-help-section .right-column{
+    text-align: left !important;
+}
+.catalog-product-view.product-mounjaro .need-help-section .right-column h3,
+.catalog-product-view.product-mounjaro .need-help-section .right-column .content-title{
+    font-size: 25px !important;
+    line-height: 35px !important;
+}
+
+@media screen and (min-width: 768px) {
+    .catalog-product-view.product-mounjaro .category-section-2 .subsection-b {
+        width: auto;
+    }
+
+
+  .catalog-product-view.product-mounjaro .slider-wrapper {
+    flex-direction: column; 
+    align-items: center;
+  }
+
+   .catalog-product-view.product-mounjaro .slider-wrapper.desk-review-slider .slide-arrow {
+        top: 30% !important;
+    }
+ 
+    .catalog-product-view.product-mounjaro .need-help-section h2,
+    .catalog-product-view.product-mounjaro .need-help-section h3{
+        text-align: center;
+        font: normal normal 300 38px/46px Lato;
+        letter-spacing: 0px;
+        padding-top: 60px;
+    }
+
+    .catalog-product-view.product-mounjaro .need-help-section{
+        background: #E7F2F4;
+        height: 571px;
+    }
+    
+
+    .catalog-product-view.product-mounjaro .left-column img{
+        width: 515px;
+        height: auto;
+    }
+
+    .catalog-product-view.product-mounjaro .left-column {
+        width: 50%;
+        text-align: left;  
+        margin-bottom: 0;  
+    }
+
+    .catalog-product-view.product-mounjaro .right-column {
+        width: 50%;
+        text-align: justify;  
+    }
+
+    .catalog-product-view.product-mounjaro .right-column h3,
+    .catalog-product-view.product-mounjaro .need-help-section .right-column .content-title{
+        margin-top: 0;  
+        font: normal normal bold 30px/40px Lato;
+        letter-spacing: 0px;
+        margin-bottom: 10px;
+    }
+     .catalog-product-view.product-mounjaro .weightloss-journey{
+        margin-top: 80px;
+        margin-bottom: 80px;
+    
+
+    }
+
+   .catalog-product-view.product-mounjaro .need-help-section .right-column{
+        margin-top: 15px;
+        float: right;
+    }
+
+    .catalog-product-view.product-mounjaro .footer-blog .post-list-wrapper.blog-widget-recent{
+      margin: 0 auto;
+    }
+    .catalog-product-view.product-mounjaro .weightloss-journey .container {
+        max-width: 1030px !important;
+        display: block !important;
+    }
+
+}
+ 
+
+@media only screen and (min-width: 768px) and (max-width: 977px) {
+
+.catalog-product-view.product-mounjaro .product-details-sec-new .product-details{
+  grid-template-columns: 1fr 30em !important;
+}
+.catalog-product-view.product-mounjaro .product-details-sec-new .product-details {
+    padding: 0 20px;
+}
+.catalog-product-view.product-mounjaro .tab-content-right-sec h2{
+  line-height: 35px !important;
+}
+.catalog-product-view.product-mounjaro .weightloss-journey .container h3{
+      width: 100% !important;
+      text-align: center !important;
+      font-size: 35px !important;
+      line-height: 45px !important;
+    }
+    .catalog-product-view.product-mounjaro .weightloss-journey .h-banner-btn {
+      width: 100% !important;
+      float: left !important;
+      margin-top: 20px;
+      text-align: center;
+  }
+  .catalog-product-view.product-mounjaro .need-help-section .container{
+    width: 95%;
+  }
+  .catalog-product-view.product-mounjaro .need-help-section .right-column{
+    margin-top: 0 !important;
+  }
+
+}
+
+
+
+@media only screen and (min-width: 978px) and (max-width: 1024px) {
+
+.catalog-product-view.product-mounjaro .product-details-sec-new .product-details{
+  grid-template-columns: 1fr 45em !important;
+}
+.catalog-product-view.product-mounjaro .product-details-sec-new .product-details {
+    padding: 0 20px;
+}
+.catalog-product-view.product-mounjaro .tab-content-right-sec h2{
+  line-height: 35px !important;
+}
+.catalog-product-view.product-mounjaro .weightloss-journey .container h3{
+      width: 100% !important;
+      text-align: center !important;
+      font-size: 45px !important;
+      line-height: 55px !important;
+    }
+    .catalog-product-view.product-mounjaro .weightloss-journey .h-banner-btn {
+      width: 100% !important;
+      float: left !important;
+      margin-top: 20px;
+      text-align: center;
+  }
+  .catalog-product-view.product-mounjaro .need-help-section .container{
+    width: 95%;
+  }
+  .catalog-product-view.product-mounjaro .need-help-section .right-column{
+    margin-top: 0 !important;
+  }
+
+}
+
+
+.catalog-product-view.product-mounjaro .hm-meet-team{
+  width: 100%;
+  float: left;
+  padding: 40px 0;
+  background-color:#E7F2F4 ;
+}
+.catalog-product-view.product-mounjaro .hm-meet-team .owl-carousel .banner-item .content_slider{
+  position: relative;
+  top: 10px;
+  left: 0;
+  width: 100%;
+}
+.catalog-product-view.product-mounjaro .hm-meet-team .owl-carousel .banner-item .content_slider button.plus-button{
+  display: none;
+}
+
+.catalog-product-view.product-mounjaro .hm-meet-team .owl-carousel .banner-item .content_slider .h-title-6{
+  color: #000; 
+    font-family: 'Lato', sans-serif !important;
+    line-height: 22px; 
+    font-weight: 500;
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+}
+
+.catalog-product-view.product-mounjaro .hm-meet-team .owl-theme .owl-dots{
+  bottom: -70px;
+}
+
+.catalog-product-view.product-mounjaro .weightloss-journey {
+    background: #000000;
+    width: 100%;
+    float: left;
+    padding: 45px 0;
+    margin: 50px 0;
+}
+.catalog-product-view.product-mounjaro .weightloss-journey .h-banner-btn a {
+    width: 220px;
+    display: inline-block;
+    text-align: center;
+    background: #EC3237;
+    font-size: 13px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 52px;
+    padding: 0 0px;
+    font-weight: 400;
+    border-radius: 28px;
+    letter-spacing: 0.26px;
+}
+.catalog-product-view.product-mounjaro .weightloss-journey .h-banner-btn a:hover {
+    background: #53CAF5 !important;
+}
+.catalog-product-view.product-mounjaro .weightloss-journey .container h3 {
+    width: auto;
+    float: left;
+    padding: 0;
+    margin: 0;
+    font-size: 42px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 55px;
+    font-weight: 300;
+    text-align: left;
+    background: none !important;
+}
+.catalog-product-view.product-mounjaro .weightloss-journey .h-banner-btn {
+    width: auto;
+    float: right;
+}
+.catalog-product-view.product-mounjaro .treatment-options .carousel-prev, 
+.catalog-product-view.product-mounjaro .treatment-options .carousel-next {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    background-color: #fff;
+}
+
+.catalog-product-view.product-mounjaro .how-it-works-section {
+    width: 100%;
+    display: inline-block;
+    padding: 20px 0 20px 0;
+    text-align: center;
+}
+.catalog-product-view.product-mounjaro .product-faq-section{
+  background-color: #fff;
+  padding: 30px 0 !important;
+  margin-bottom: 50px;
+}
+
+.catalog-product-view.product-mounjaro .product-faq-section .faq-list label{
+  font-size: 22px;
+  color: #2C596D;
+  font-family: "Ubuntu", sans-serif;
+  line-height: 34px;
+  font-weight: 400;
+}
+.catalog-product-view.product-mounjaro .product-faq-section .faq-list {
+    border-bottom: 1px solid #2C596D;
+    padding-bottom: 12px;
+    width: 100%;
+    display: inline-block;
+}
+.catalog-product-view.product-mounjaro .home_block_1 .info,
+.catalog-product-view.product-mounjaro .home_block_1 .product-price{
+    display: none;
+}
+.catalog-product-view.product-mounjaro .home_block_1 ul{
+  padding: 0;
+  margin: 0 0 15px 0;
+  display: inline-block;
+  float: left;
+}
+.catalog-product-view.product-mounjaro .home_block_1 ul li{
+  list-style-type: none;
+  text-align: left;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+.catalog-product-view.product-mounjaro .home_block_1 ul li img{
+  margin-right: 10px;
+}
+
+.catalog-product-view.product-mounjaro .home_block_1 {
+    width: 298px;
+    float: none;
+    display: inline-block;
+    margin: 0 0px;
+    border-radius: 8px;
+    vertical-align: top;
+    background: #fff;
+    padding: 40px 25px 30px 25px;
+}
+
+.catalog-product-view.product-mounjaro .treatment-options .carousel-prev, 
+.catalog-product-view.product-mounjaro .treatment-options .carousel-next{
+  display: none;
+}
+@media screen and (min-width: 768px) {
+ .catalog-product-view.product-mounjaro .need-help-section {
+        background: #E7F2F4;
+        height: auto;
+        padding: 0 0 80px 0;
+    }
+    .catalog-product-view.product-mounjaro .mobile-cont-tab{
+      display: none;
+    }
+}
+
+
+.catalog-product-view.product-mounjaro .page-bottom{
+  display: none;
+}
+
+
+
+
+
+
+
+
+.catalog-product-view.product-mounjaro .faq-section-new .faq-list .accordion-p {
+  text-align: left; 
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    padding:20px 0 8px 0;
+    width: 100%;
+    cursor: pointer;  
+  border: none; 
+  outline: none;
+  transition: 0.4s;
+  box-shadow: none !important; 
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.catalog-product-view.product-mounjaro .faq-section-new .faq-list .active, 
+.catalog-product-view.product-mounjaro .faq-section-new .faq-list .accordion-p:hover {
+  background-color: transparent !important;
+}
+
+.catalog-product-view.product-mounjaro .faq-section-new .faq-list .panel-p {
+  text-align: left;
+     
+    letter-spacing: 0px;
+    font-size: 16px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    text-align: left;
+    padding: 0px 0;
+  padding: 0 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background: transparent;
+  
+}
+
+.catalog-product-view.product-mounjaro .faq-section-new{
+  width: 100%;
+  float: left;
+  padding:84px 0 104px 0;
+  margin: 0;
+  background: #E7F2F4;
+}
+
+.catalog-product-view.product-mounjaro .faq-section-new h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 40px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.product-mounjaro .faq-section-new .faq-list {
+    border-bottom: 1px solid #96D8F0;
+    padding-bottom: 12px;
+}
+.catalog-product-view.product-mounjaro .faq-section-new button.accordion-p{
+  border: 0;
+  border-bottom: 0px solid #96D8F0;
+  box-shadow:none !important;
+  background: transparent;
+  font-size: 18px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px;
+    font-weight: 700;
+    text-align: left;
+    padding: 20px 0 8px 0;
+}
+
+.catalog-product-view.product-mounjaro .faq-section-new .panel-p,
+.catalog-product-view.product-mounjaro .faq-section-new .panel-p p{
+  font-size: 16px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    text-align: left;
+    padding: 0px 0;
+}
+
+.catalog-product-view.product-mounjaro .faq-section-new button.accordion-p:after{
+  float: right; 
+  display: none;
+}
+.catalog-product-view.product-mounjaro .faq-section-new button.accordion-p{ 
+  background: url(/pub/media/wysiwyg/WLImage/Poly.png) right 32px no-repeat; 
+}
+.catalog-product-view.product-mounjaro .cms-index-index .faq-section-new{
+    margin-top: 50px;
+}
+
+.catalog-product-view.product-mounjaro .categoryquestwl-index-index .faq-section-new{
+  margin-bottom: 70px;
+}
+
+@media screen and (min-width: 768px) {
+    .catalog-product-view.product-mounjaro .faq-section-new .container {
+        max-width: 670px !important;
+    }
+    .catalog-product-view.product-mounjaro .faq-section-new .faq-list .accordion-p{
+      background-color: transparent !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .catalog-product-view.product-mounjaro .faq-section-new .container {
+        width: 94%;
+    }
+    .catalog-product-view.product-mounjaro .faq-section-new .faq-list .accordion-p{
+        font-size: 15px !important;
+        padding-left: 0 !important;
+        padding-right: 20px !important;
+        line-height: 22px;
+    }
+    .catalog-product-view.product-mounjaro .faq-section-new .h-title{
+      text-align: left;
+      padding-left: 15px;
+      padding-right: 15px;
+      width: auto !important;
+      font-weight: 300;
+      margin: 0 0 15px 0;
+      font-size: 25px;
+      color: #000;
+      font-family: 'Lato', sans-serif;
+      line-height: 32px;
+      font-weight: 400;
+      text-align: left;
+      padding: 0px 0;
+      letter-spacing: 0px; 
+    }
+    .catalog-product-view.product-mounjaro .product-faq-section .h-title{
+      margin: 0 0 15px 0;
+      font-size: 25px; 
+      line-height: 32px;
+    }
+    .catalog-product-view.product-mounjaro .faq-section-new{
+      margin-bottom: 30px;
+    }
+    .catalog-product-view.product-mounjaro .how-it-works-section .h-title{
+      padding: 0;
+    }
+    .catalog-product-view.product-mounjaro .faq-section-new .panel-p p{
+      font-size: 14px !important;
+      line-height: 22px !important;
+    }
+    .catalog-product-view.product-mounjaro .cms-index-index .faq-section-new{
+      padding: 55px 0 75px 0 !important;
+    }
+    .catalog-product-view.product-mounjaro .faq-section-new {
+        padding: 40px 0 40px 0 !important;
+    }
+    .catalog-product-view.product-mounjaro .product-details-sec-new.desktop-cont-tab{
+      display: none;
+    }
+
+}
+
+
+</style>
+
+<style type="text/css"> 
+html {
+  scroll-behavior: smooth;
+}
+
+
+.catalog-product-view.product-mounjaro .product-details-sec-new{
+  width: 100%;
+    float: left;
+    background-color: #F1F7F9;
+    padding:45px 0;
+    margin:0 0 50px 0;
+} 
+.catalog-product-view.product-mounjaro .product-details-sec-new .product-details > nav {
+  position: sticky;
+  top: 2rem;
+  align-self: start;
+  margin-right: 45px;
+}
+
+
+
+.catalog-product-view.product-mounjaro .product-details-sec-new .section-nav ul{
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}
+.catalog-product-view.product-mounjaro .product-details-sec-new .section-nav ul li{
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+} 
+.catalog-product-view.product-mounjaro .product-details-sec-new .section-nav li.active > a {
+  color: #000;
+  font-weight: 400;
+}
+
+/* Sidebar Navigation */
+.catalog-product-view.product-mounjaro .product-details-sec-new .section-nav {
+  padding-right: 45px;
+  border-right: 1px solid #4ea8ed;
+}
+
+.catalog-product-view.product-mounjaro .product-details-sec-new .section-nav a {
+  text-decoration: none;
+  display: block;
+  padding:0; 
+  transition: all 50ms ease-in-out; 
+  font-size: 13px;
+  color: #000;
+  font-family: "Ubuntu", sans-serif;
+  line-height: 20px;
+  text-decoration: underline;
+}
+
+.catalog-product-view.product-mounjaro .product-details-sec-new .section-nav a:hover,
+.catalog-product-view.product-mounjaro .product-details-sec-new .section-nav a:focus {
+  color: #53CAF5;
+}
+
+
+.catalog-product-view.product-mounjaro .product-details-sec-new .product-details-sec-new{
+  width: 100%;
+  float: left;
+  background-color: #F1F7F9;
+  padding: 40px 0;
+} 
+ 
+/** page layout **/
+.catalog-product-view.product-mounjaro .product-details-sec-new .product-details{
+  display: grid;
+  grid-template-columns: 1fr 46em;  
+  margin: 0 auto;
+  padding: 0 25px;
+}
+
+/*.product-details-sec-new section{
+  margin-bottom: 15%;
+}*/
+
+.catalog-product-view.product-mounjaro .product-details-sec-new .links-sec{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 20px 0;
+  font-size: 16px;
+  color: #2C596D;
+  font-family: "Ubuntu", sans-serif;
+  line-height: 46px;
+  font-weight: 500;
+  border-bottom: 1px solid #46c0ec;
+}
+
+
+.catalog-product-view.product-mounjaro .tab-content-sec{
+  display: inline-block;
+  /*height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 570px;*/
+}
+.catalog-product-view.product-mounjaro .tab-content-right-sec p {
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0 0 20px 0;
+    font-family: 'Ubuntu', sans-serif;
+    color: #101010;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+}
+.catalog-product-view.product-mounjaro .tab-content-right-sec h2 {
+    width: 100%;
+    float: left;
+    padding: 0 0 20px 0;
+    margin: 0;
+    font-family: 'Ubuntu', sans-serif;
+    color: #2C596D;
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 46px;
+    position: relative;
+  }
+
+.catalog-product-view.product-mounjaro .tab-content-right-sec h2:after {
+    content: ' ';
+    width: 15%;
+    float: left;
+    border-top: 2px solid #8EA8B3;
+    margin-top: 10px;
+    margin-bottom: 22px;
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+  }
+
+ .catalog-product-view.product-mounjaro .product-details-sec-new .product-details{
+    padding: 0 25px;
+  }
+
+  .catalog-product-view.product-mounjaro .product.attribute.description{
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    
+
+    .catalog-product-view.product-mounjaro .product-faq-section .faq-list .panel-p{
+      font-size: 13px !important;
+      line-height: 21px !important;
+      padding-top: 12px;
+    }
+    .catalog-product-view.product-mounjaro.product.media{
+      width: 94%;
+      margin: 0 auto;
+    }
+    .catalog-product-view.product-mounjaro .info-how-itwork .header-search-panel {
+      margin-top: 20px;
+    }
+
+    .catalog-product-view.product-mounjaro .product-info-cont-1.product-mhra-section { 
+          width: 94%;
+          margin: 30px auto 0 auto;
+      }
+
+      .catalog-product-view.product-mounjaro .product-faq-section .faq-list{
+        padding-bottom: 0 !important;
+      }
+
+      .catalog-product-view.product-mounjaro .product-faq-section{
+        margin-bottom: 0;
+      }
+      .catalog-product-view.page-layout-1column .product-info-main .select-option .brand-label{
+        margin-bottom: 15px;
+      }
+
+}
+
+ 
+@media screen and (min-width: 1025px) { 
+  .catalog-product-view.product-mounjaro .product-info-cont-1.product-mhra-section{
+    width: 1090px;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    float: none;
+  }
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .catalog-product-view.page-layout-1column .product-info-cont-1.product-mhra-section .info-mhra-logo-sec {
+        width: 470px !important;
+        margin: 0 auto !important;
+        float: none !important;
+        border: 0 !important;
+        border-bottom: 1px solid #ddd !important;
+        padding-bottom: 28px;
+        padding-right: 0 !important;
+    }
+    .catalog-product-view.page-layout-1column .product-info-cont-1.product-mhra-section .info-mhra-logo-sec .img-1-n {
+        width: 100px !important;
+        float: left !important;
+        margin-right: 15px !important;
+        margin-left: 15px;
+    }
+    .catalog-product-view.page-layout-1column .product-info-cont-1.product-mhra-section .product-cont-right { 
+        width: 460px;
+        margin: 20px auto !important;
+        float: none !important;
+    }
+    .catalog-product-view.page-layout-1column .product-info-cont-1.product-mhra-section{
+      margin-top: 0 !important;
+    }
+}
+
+
+.catalog-product-view.product-mounjaro .product-faq-section .faq-list .panel-p{
+  font-family: 'Ubuntu', sans-serif;
+    color: #101010;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.catalog-product-view.product-mounjaro .product-faq-section .faq-list .panel-p ul li{
+  font-family: 'Ubuntu', sans-serif;
+    color: #101010;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+
+
+.catalog-product-view.category-weight-loss .tab-content-right-sec p img{
+  width: 100% !important;
+  height: auto !important;
+}
+
+@media screen and (max-width: 767px) {
+  .catalog-product-view.category-weight-loss .faq-section-new .panel-p p img{
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+ 
+ 
+
+ 
+</style>
+
+
+<style type="text/css">
+  .catalog-product-view.weightloss-product .weightloss-treatment-comparison,
+  .catalog-product-view.weightloss-product .how-it-works-section,
+  .catalog-product-view.weightloss-product .treatment-options,
+  .catalog-product-view.weightloss-product .weightloss-journey,
+  .catalog-product-view.weightloss-product .widget.block.block-static-block,
+  .catalog-product-view.weightloss-product .need-help-section,
+  .catalog-product-view.weightloss-product .footer-blog,
+  .catalog-product-view.weightloss-product .hm-meet-team{
+    width: 100%;
+    float: left;
+    position: relative;
+  }
+
+  .catalog-product-view.weightloss-product .weightloss-treatment-comparison{
+    width: 100%;
+    float: left;
+    padding: 80px 0;
+    margin: 0;
+  }
+.catalog-product-view.weightloss-product .weightloss-treatment-comparison h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 40px 0;
+  font-size: 38px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.weightloss-product .weight-loss-com table td{
+  padding: 0;
+}
+
+.catalog-product-view.weightloss-product .weight-loss-com table td.weight-d-2,
+.catalog-product-view.weightloss-product .weight-loss-com table td.weight-d-3{ 
+    border-radius: 8px;
+    padding: 5px !important;
+    border: 5px solid #fff;
+}
+
+.catalog-product-view.weightloss-product .weight-loss-com table td.weight-d-2{
+  background: #FEECEC; 
+}
+.catalog-product-view.weightloss-product .weight-loss-com table td.weight-d-3{
+  background: #E7F2F4; 
+}
+
+.catalog-product-view.weightloss-product .weight-cont{
+  background: #fff;
+    border-radius: 8px;
+    padding:25px 10px 20px 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.catalog-product-view.weightloss-product .weight-cont h3{
+  font-size: 20px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px; 
+    font-weight: 700; 
+    text-align: left;
+    padding: 0 0px;
+}
+
+.catalog-product-view.weightloss-product .weight-d-1{
+  height: 268px;
+  width: 215px;
+}
+
+.catalog-product-view.weightloss-product .weight-d-1 table td{
+  font-size: 16px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 22px; 
+    font-weight: 700; 
+    text-align: left;
+    padding: 22px 10px;
+}
+
+.catalog-product-view.weightloss-product .weight-loss-com table td.l-space{
+  font-size: 16px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px; 
+    font-weight: 400; 
+    text-align: left;
+    padding: 22px 5px;
+    height: 40px;
+}
+
+.catalog-product-view.weightloss-product .weight-loss-com table td.weight-d-3 td.l-space{
+  border-bottom: 1px solid #dde8ea;
+}
+.catalog-product-view.weightloss-product .weight-loss-com table td.weight-d-2 td.l-space{
+  border-bottom: 1px solid #fff;
+}
+
+.catalog-product-view.weightloss-product .weight-cont .weight-i {height: 123px;}
+.catalog-product-view.weightloss-product .weight-cont h3 {font-size: 15px;}
+.catalog-product-view.weightloss-product .weight-loss-com table td {width: 140px; height: 40px;}
+.catalog-product-view.weightloss-product .weight-loss-com table .weight-d-1 table tr {border-bottom: 1px solid #F3F1ED;}
+.catalog-product-view.weightloss-product .weight-loss-com table .weight-d-1 table tr:nth-child(1) {height: 255px; display: inline-block; border-bottom: 0px solid #F3F1ED;}
+.catalog-product-view.weightloss-product .weight-loss-com table .weight-d-1 table tr:nth-child(4) td {padding: 22px 10px 25px 10px;}
+
+.catalog-product-view.weightloss-product .l-space.last{
+  border-bottom: 0 !important;
+}
+
+.catalog-product-view.weightloss-product .weightloss-treatment-comparison p{
+  font-size: 16px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 22px; 
+    font-weight: 400; 
+    text-align: left;
+    width: 100%;
+    display: inline-block;
+}
+
+.catalog-product-view.weightloss-product .weight-loss-com{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin-bottom: 20px;
+}
+.catalog-product-view.weightloss-product .weight-cont .weight-i img{
+  height: 100%;
+}
+
+ 
+.catalog-product-view.weightloss-product .how-it-works-section h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 40px 0;
+  font-size: 38px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.weightloss-product .Works-1{
+  width: 314px;
+  float: none;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  margin: 0 20px;
+  margin-bottom: 34px;
+}
+
+.catalog-product-view.weightloss-product .work-c{
+  position: absolute;
+  top: 32px;
+  left: 129px;
+}
+.catalog-product-view.weightloss-product .work-c h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 25px; 
+    font-weight: 700; 
+    text-align: left;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+ 
+.catalog-product-view.weightloss-product .work-c p{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: 13px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 18px; 
+    font-weight: 400; 
+    text-align: left; 
+}
+
+
+.catalog-product-view.weightloss-product .treatment-options{
+  width: 100%;
+  float: left;
+  padding:65px 0 87px 0;
+  margin: 0;
+  background: #96D8F0;
+}
+.catalog-product-view.weightloss-product .treatment-options h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 35px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.weightloss-product .home-treatment-block{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+.catalog-product-view.weightloss-product .home_block_1{
+  width: 298px;
+  float: none;
+  display: inline-block;
+  margin: 0 0px;
+  border-radius: 8px;
+  vertical-align: top;
+  background: #fff;
+  padding: 40px 25px 0px 25px;
+}
+.catalog-product-view.weightloss-product .home_block_img{
+  height: 260px;
+  overflow-y: hidden;
+  margin-bottom: 30px;
+}
+
+.catalog-product-view.weightloss-product .home_block_1 h3{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px; 
+    font-weight: 900; 
+    text-align: left;
+}
+.catalog-product-view.weightloss-product .home_block_1 h3 a{
+  color: #000;
+}
+
+.catalog-product-view.weightloss-product .home_block_1 p{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 22px 0;
+  font-size: 14px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px; 
+    font-weight: 400; 
+    text-align: left;
+}
+
+
+.catalog-product-view.weightloss-product .home_block_1 .h-banner-btn a,
+.catalog-product-view.weightloss-product .home_block_1 .h-banner-btn button{
+  width: 145px;
+  text-transform: uppercase;
+  float: left;
+}
+.catalog-product-view.weightloss-product .home_block_1 .h-banner-btn a,
+.catalog-product-view.weightloss-product .home_block_1 .h-banner-btn button{
+    width: 145px;
+    display: inline-block;
+    text-align: center;
+    background: #EC3237;
+    font-size: 13px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 55px;
+    padding: 0 0px;
+    font-weight: 400;
+    border-radius: 30px;
+    letter-spacing: 0.26px;
+    border: 0;
+    transition: all .35s;
+}
+.catalog-product-view.weightloss-product .home_block_1 .h-banner-btn a:hover,
+.catalog-product-view.weightloss-product .home_block_1 .h-banner-btn button:hover{
+    background: #53CAF5 !important;
+}
+
+.catalog-product-view.weightloss-product .included-section{
+  width: 100%;
+  float: left;
+  padding:75px 0 45px 0;
+  margin: 0;
+}
+
+.catalog-product-view.weightloss-product .included-section h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 35px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.weightloss-product .subsection{
+  width: 50%;
+  float: left;
+}
+
+.catalog-product-view.weightloss-product .subsection h3{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 15px 0;
+  font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px; 
+    font-weight: 900; 
+    text-align: left;
+}
+
+.catalog-product-view.weightloss-product .subsection p{
+  width: 80%;
+  float: left;
+  padding: 0;
+  margin: 0 0 0px 15px;
+  font-size: 15px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 22px; 
+    font-weight: 400; 
+    text-align: left;
+}
+
+.catalog-product-view.weightloss-product .subsection-content{
+  width: auto;
+  float: left;
+  margin-right: 30px;
+  padding: 0 0 11px 0;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #D3DEE1;
+  min-height: 101px;
+}
+
+.catalog-product-view.weightloss-product .subsection-content.last{
+  border-bottom: 0 !important;
+}
+.catalog-product-view.weightloss-product .subsection-content img{
+  float: left;
+}
+ 
+
+.catalog-product-view.weightloss-product .video-section{
+  width: 100%;
+  float: left;
+  padding: 76px 0 46px 0;
+  background: #E7F2F4;
+  text-align: center;
+}
+
+.catalog-product-view.weightloss-product .video-section h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 50px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.weightloss-product .video-section .subsection{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.catalog-product-view.weightloss-product .subsection-2{
+  width: 1028px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 65px;
+  display: inline-block;
+}
+.catalog-product-view.weightloss-product .subsection-2 h3{
+  width: auto;
+  float: left;
+  padding: 0;
+  margin: 0;
+  font-size: 42px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 55px; 
+    font-weight: 300; 
+    text-align: left;
+}
+
+.catalog-product-view.weightloss-product .subsection-2 h3 strong{
+  font-weight: 700;
+}
+
+.catalog-product-view.weightloss-product .subsection-2 .h-banner-btn{
+  width: auto;
+  float: right;
+}
+.catalog-product-view.weightloss-product .subsection-2 .h-banner-btn a{
+  width: 220px !important;
+}
+
+.catalog-product-view.weightloss-product .meet-team-section{
+  width: 100%;
+  float: left;
+  padding:80px 0;
+  margin: 0;
+  text-align: center;
+}
+.catalog-product-view.weightloss-product .meet-team-section h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 30px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.weightloss-product .meet-team-section h3{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 5px 0;
+  font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px; 
+    font-weight: 900; 
+    text-align: left;
+}
+
+.catalog-product-view.weightloss-product .meet-team-section p{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 0px 0px;
+  font-size: 14px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px; 
+    font-weight: 400; 
+    text-align: left;
+}
+
+.catalog-product-view.weightloss-product .meet-team-section .team-1{
+  width: 332px;
+  float: none;
+  margin: 0 5px;
+  display: inline-block;
+}
+
+.catalog-product-view.weightloss-product .meet-team-section .subsection-content2{
+  margin-top: 175px;
+  padding-left : 10px;
+  padding-right : 10px;
+}
+ 
+.catalog-product-view.weightloss-product button.plus-button {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  display: inline-block;
+  float : right;
+  margin-top : -28px;
+  margin-right:-34px;
+  padding: 7px 12px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%; /* Ensures the button is circular */
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.catalog-product-view.weightloss-product .meet-team-section2{
+  width: 100%;
+  float: left;
+  padding:65px 0;
+  margin: 66px 0px 0px 0px;
+  background: #E7F2F4;
+  text-align: center;
+}
+.catalog-product-view.weightloss-product .team-2{
+  width: 321px;
+  float: none;
+  display: inline-block;
+  background: #fff;
+  margin: 0 12px;
+  border-radius: 8px;
+  padding: 44px 34px;
+}
+.catalog-product-view.weightloss-product .team-2 img{
+  float: left;
+}
+
+.catalog-product-view.weightloss-product .team-2 h3{
+  padding: 0;
+  margin:0 0 0 20px;
+  font-size: 18px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 22px; 
+    font-weight: 700; 
+    text-align: left;
+    float: left;
+    width: 175px;
+}
+
+.catalog-product-view.weightloss-product .stories-section{
+  width: 100%;
+  float: left;
+  padding: 65px 0;
+  margin: 0;
+  text-align: center;
+}
+.catalog-product-view.weightloss-product .stories-section h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 30px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.weightloss-product .story-1{
+  width: 332px;
+  float: none;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 5px;
+}
+
+
+.catalog-product-view.weightloss-product .story-1 .subsection-content{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin:45px 0 0 0;
+  border-bottom: 0 !important;
+}
+.catalog-product-view.weightloss-product .story-1 img{
+  border-radius: 8px;
+}
+.catalog-product-view.weightloss-product .story-1 .subsection-content{
+  position: relative;
+}
+.catalog-product-view.weightloss-product .story-1 .subsection-content:before{
+  width: 48px;
+  height: 40px;
+  display: inline-block;
+  content: " " !important;
+  background: url(/pub/media/wysiwyg/WLImage/quote-icon.png) 0 0 no-repeat; 
+  position: absolute;
+  top: -70px;
+  left: 0;
+}
+.catalog-product-view.weightloss-product .story-1 .subsection-content p{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: 13px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px; 
+    font-weight: 400; 
+    text-align: left;
+}
+
+.catalog-product-view.weightloss-product .story-1 .subsection-content p strong{
+  font-weight: 700;
+}
+
+
+
+.catalog-product-view.weightloss-product .story-1 .subsection-content img{
+  float: left;
+  margin-bottom: 10px;
+  border-radius: 0;
+}
+
+.catalog-product-view.weightloss-product .faq-section{
+  width: 100%;
+  float: left;
+  padding:84px 0 104px 0;
+  margin: 0;
+  background: #E7F2F4;
+}
+
+.catalog-product-view.weightloss-product .faq-section h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 40px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.weightloss-product .faq-content{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+.catalog-product-view.weightloss-product .faq-list p.question{
+  font-size: 16px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px; 
+    font-weight: 400; 
+    text-align: left;
+    padding: 20px 0;
+}
+
+.catalog-product-view.weightloss-product .blogs-section{
+  width: 100%;
+  float: left;
+  padding:65px 0;
+  margin: 0;
+  text-align: center;
+}
+
+.catalog-product-view.weightloss-product .blogs-section h2,
+.catalog-product-view.weightloss-product .blogs-section h3{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 40px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.weightloss-product .blog-c,
+.catalog-product-view.weightloss-product .blogs-section .post-holder{
+  width: 332px;
+  float: none;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 5px;
+}
+
+.catalog-product-view.weightloss-product .blogs-section .post-title-holder{
+  height: 67px;
+    width: 100%;
+    overflow-y: hidden;
+    padding-bottom: 0;
+    float: left;
+    margin-bottom: 5px;
+}
+
+.catalog-product-view.weightloss-product .blog-img,
+.catalog-product-view.weightloss-product .blogs-section .post-holder .post-ftimg-hld{
+  margin-bottom: 20px;
+}
+.catalog-product-view.weightloss-product .blog-img img,
+.catalog-product-view.weightloss-product .blogs-section .post-holder .post-ftimg-hld img{
+  border-radius: 8px;
+}
+
+.catalog-product-view.weightloss-product .blog-c h4,
+.catalog-product-view.weightloss-product .blogs-section .post-holder .post-title a{
+  width: 100%;
+  float: left;
+  font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 26px; 
+    font-weight: 900; 
+    text-align: left;
+    padding: 0px 0 10px 0;
+    margin: 0;
+}
+
+.catalog-product-view.weightloss-product .blogs-section .post-holder .post-text-hld{
+  min-height: auto !important;
+  width: 100%;
+  float: left;
+}
+.catalog-product-view.weightloss-product .blog-c p,
+.catalog-product-view.weightloss-product .blogs-section .post-holder .post-text-hld p{
+  width: 100%;
+  float: left;
+  font-size: 13px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px; 
+    font-weight: 400; 
+    text-align: left;
+    padding: 0px 0 5px 0;
+    margin: 0;
+}
+
+.catalog-product-view.weightloss-product .blogs-section .post-holder .post-posed-date{
+  float: left;
+}
+.catalog-product-view.weightloss-product .blog-c p span,
+.catalog-product-view.weightloss-product .blogs-section .post-holder .post-posed-date span{
+  font-size: 11px !important; 
+    color: #6B6B6B !important;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px; 
+    font-weight: 400 !important; 
+    text-align: left;
+    padding: 0px 0 0px 0;
+    margin: 0;
+    font-style: normal !important;
+}
+
+
+.catalog-product-view.weightloss-product .faq-section .accordion {
+      font: var(--unnamed-font-style-normal) normal normal 18px/21px Roboto;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-000000);
+    text-align: left;
+    font: normal normal normal 18px/21px Roboto;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    padding: 15px;
+    width: 100%;
+    }
+
+ .catalog-product-view.weightloss-product .faq-section .accordion:after {
+      content: '\002B'; / Unicode character for plus sign /
+       padding-left: 80px 
+      float: right;
+    }
+
+    /* .faq-section .active:after {
+      content: "\2212"; / Unicode character for minus sign /
+    } */
+
+.catalog-product-view.weightloss-product .faq-section .panel {
+    padding: 10px 0;
+    display: none;
+    overflow: hidden;
+    font: var(--unnamed-font-style-normal) normal normal 18px/21px Roboto;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-000000);
+    text-align: left;
+    font: normal normal normal 18px/21px Roboto;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+  }
+
+
+.catalog-product-view.weightloss-product .h-title-2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: 14px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 18px; 
+    font-weight: 700; 
+    text-align: left;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.catalog-product-view.weightloss-product .h-title-3{
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0 0 7px 0;
+    font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 40px;
+    font-weight: 700;
+    text-align: left;
+}
+.catalog-product-view.weightloss-product .subsection .h-title-4{
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0 0 15px 0;
+    font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px;
+    font-weight: 900;
+    text-align: left;
+}
+.catalog-product-view.weightloss-product .subsection-2 .h-title-5{
+    width: auto;
+    float: left;
+    padding: 0;
+    margin: 0;
+    font-size: 42px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 55px;
+    font-weight: 300;
+    text-align: left;
+}
+.catalog-product-view.weightloss-product .subsection-2 .h-title-5 strong {
+    font-weight: 700;
+}
+
+.catalog-product-view.weightloss-product .meet-team-section .h-title-6{
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0 0 5px 0;
+    font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px;
+    font-weight: 900;
+    text-align: left;
+}
+
+.catalog-product-view.weightloss-product .team-2 .h-title-7{
+    padding: 0;
+    margin: 0 0 0 20px;
+    font-size: 18px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 22px;
+    font-weight: 700;
+    text-align: left;
+    float: left;
+    width: 175px;
+}
+
+.catalog-product-view.weightloss-product .home_block_1 .h-product-title{
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px;
+    font-weight: 900;
+    text-align: left;
+}
+
+.catalog-product-view.weightloss-product .footer-consultation .container .footer-title{
+    width: auto;
+    float: left;
+    padding: 0;
+    margin: 0;
+    font-size: 42px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 55px;
+    font-weight: 300;
+    text-align: left;
+    background: none !important;
+}
+
+.catalog-product-view.weightloss-product .footer-consultation .container .footer-title span{
+  font-size: 15px;
+  line-height: 22px !important;
+  width: 100%;
+  float: left;
+}
+
+@media screen and (min-width: 768px) {
+  .catalog-product-view.weightloss-product .h-title{
+      width: 100%;
+      float: left;
+      padding: 0;
+      margin: 0 0 22px 0;
+      font-size: 38px;
+      color: #101010;
+      font-family: 'Lato', sans-serif;
+      line-height: 48px;
+      font-weight: 300;
+      text-align: center;
+  }
+  .catalog-product-view.weightloss-product .blogs-section .h-title{
+    margin-bottom: 40px !important;
+  }
+  .catalog-product-view.weightloss-product .right-column h3, 
+  .catalog-product-view.weightloss-product .need-help-section .right-column .content-title {
+        margin-top: 0;
+        font: normal normal bold 30px / 40px Lato;
+        letter-spacing: 0px;
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (min-width:768px) and (max-width:991px){
+  .catalog-product-view.weightloss-product .video-section .subsection-2 .h-title-5,
+  .catalog-product-view.weightloss-product .footer-consultation .container .footer-title{
+      font-size: 32px !important;
+      line-height: 44px !important;
+  }
+  .catalog-product-view.weightloss-product .team-2 .h-title-7{
+    font-size: 15px !important;
+    width: 122px !important;
+  }
+  .catalog-product-view.weightloss-product .offer.mf-initial {
+    width: auto;
+    height: 42px;
+
+}
+}
+
+@media only screen and (min-width:992px) and (max-width:1024px){
+
+  .catalog-product-view.weightloss-product .team-2{
+    width: 310px !important;
+  }
+  .catalog-product-view.weightloss-product .offer.mf-initial {
+      width: auto;
+      height: 42px;
+
+  }
+  .catalog-product-view.weightloss-product .how-it-works-section .Works-1{
+    width: 300px !important;
+    margin: 0 15PX !important;
+  }
+  .catalog-product-view.weightloss-product .how-it-works-section .Works-1 .work-c{
+    left: 110px !important;
+  }
+
+}
+
+
+@media screen and (max-width: 767px) {
+  .catalog-product-view.weightloss-product .weight-loss-journey .h-title,
+  .catalog-product-view.weightloss-product .home-testimonilas .h-title,
+  .catalog-product-view.weightloss-product .google-review-section .h-title,
+  .catalog-product-view.weightloss-product .blogs-section .h-title,
+  .catalog-product-view.weightloss-product .faq-section .h-title,
+  .catalog-product-view.weightloss-product .stories-section .h-title,
+  .catalog-product-view.weightloss-product .meet-team-section .h-title,
+  .catalog-product-view.weightloss-product .video-section .h-title,
+  .catalog-product-view.weightloss-product .included-section .h-title,
+  .catalog-product-view.weightloss-product .treatment-options .h-title,
+  .catalog-product-view.weightloss-product .how-it-works-section .h-title{
+    font-size: 32px !important;
+    line-height: 40px !important;
+    text-align: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: auto !important;
+    font-weight: 300; 
+      margin: 0 0 45px 0;
+  }
+  .catalog-product-view.weightloss-product .column.main {
+        padding: 0 10px !important;
+    }
+  .catalog-product-view.weightloss-product .patient-info-leaflet-sec {
+      width: 94% !important;
+      float: none !important;
+      padding: 0;
+      margin: 0 auto !important;
+  }
+  .catalog-product-view.weightloss-product .how-it-works-section .h-title{ 
+      margin-bottom: 19px !important;
+  }
+  .catalog-product-view.weightloss-product .faq-section .h-title{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: 25px !important;
+  }
+  .catalog-product-view.weightloss-product .how-it-works-section .work-c .h-title-2{
+      width: 100% !important;
+      padding: 0 !important;
+      font-size: 15px !important;
+      font-family: 'Lato', sans-serif;
+      line-height: 20px !important;
+      margin-bottom: 10px !important; 
+  }
+  .catalog-product-view.weightloss-product .how-it-works-section .work-c .h-title-2 br{
+    display: none;
+  }
+   
+  .catalog-product-view.weightloss-product .video-section .subsection-2 .h-title-5,
+  .catalog-product-view.weightloss-product .footer-consultation .container .footer-title{
+      width: 100% !important;
+      text-align: center !important;
+      font-size: 25px !important;
+  }
+  .catalog-product-view.weightloss-product .slider-wrapper.review-slider .demo-content {
+      width: 100% !important;
+      float: left; 
+      margin: 0 0px; 
+  }
+
+  .catalog-product-view.weightloss-product .desk-review-slider{
+    display: none;
+  }
+  .catalog-product-view.weightloss-product .product-details-sec-new .product-details{
+    grid-template-columns: 1fr 15em !important;
+    padding: 0 10px !important;
+  }
+  .catalog-product-view.weightloss-product .tab-content-right-sec p{
+    word-break: break-all;
+  }
+  .catalog-product-view.weightloss-product .patient-info-leaflet{
+    width: auto !important;
+  }
+  .catalog-product-view.weightloss-product .product-details-sec-new .product-details > nav{
+    padding-right: 15px !important;
+    margin-right: 15px !important;
+  }
+  .catalog-product-view.weightloss-product .tab-content-right-sec h2{
+    font-size: 18px !important;
+    line-height: 26px !important;
+  }
+  .catalog-product-view.weightloss-product .product-details-sec-new .section-nav ul li{
+    border-bottom: 1px solid #46c0ec;
+    padding-bottom: 20px;
+  }
+  .catalog-product-view.weightloss-product .Works-1{
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0;
+  }
+
+  .catalog-product-view.weightloss-product .home_block_1 .h-product-title{
+    text-align: center;
+  }
+  .catalog-product-view.weightloss-product .product-faq-section .container,
+  .catalog-product-view.weightloss-product .need-help-section .container{
+        width: 100%;
+    }
+  .catalog-product-view.weightloss-product .product-faq-section .faq-list label{
+      padding-right: 5% !important;
+      font-size: 17px !important;
+      line-height: 22px !important;
+      width: 95%;
+    }
+
+    .catalog-product-view.weightloss-product .home_block_1{
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    .catalog-product-view.weightloss-product .carousel-item{
+      width: 100% !important;
+    }
+    .catalog-product-view.weightloss-product .weightloss-journey .container h3{
+      width: 100% !important;
+      text-align: center !important;
+      font-size: 25px !important;
+      line-height: 35px !important;
+    }
+    .catalog-product-view.weightloss-product .weightloss-journey .h-banner-btn {
+      width: 100% !important;
+      float: left !important;
+      margin-top: 20px;
+      text-align: center;
+  }
+  .catalog-product-view.weightloss-product .weightloss-journey{
+    margin-bottom: 10px !important;
+  }
+  .catalog-product-view.weightloss-product .need-help-section h2{
+    padding-top: 30px !important;
+    text-align: left !important;
+    font-size: 32px !important;
+  }
+   .catalog-product-view.weightloss-product .need-help-section .left-column {
+      width: 100% !important;
+      margin-right: 0 !important;
+  }
+  .catalog-product-view.weightloss-product .need-help-section .right-column .content-title{
+    margin: 15px 0 10px 0;
+  }
+  .catalog-product-view.weightloss-product .need-help-section{
+    height: auto !important;
+    padding-bottom: 30px;
+  }
+  .catalog-product-view.weightloss-product .footer-blog{
+    width: 94% !important;
+    margin: 0 auto;
+    float: none;
+  }
+  .catalog-product-view.weightloss-product .footer-blog .h-title{
+    font-size: 32px !important;
+  }
+  .h-banner-btn{
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+  }
+  .catalog-product-view.weightloss-product .home_block_1 .h-banner-btn a, 
+  .catalog-product-view.weightloss-product .home_block_1 .h-banner-btn button{
+    float: none;
+    margin: 0 auto;
+  }
+  .catalog-product-view.weightloss-product .how-it-works-section{
+    width: auto !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+
+ 
+ 
+.catalog-product-view.weightloss-product .review-header{
+  width: 100%;
+  float: left;
+  padding: 0; 
+  margin: 0 0 50px 0;
+  text-align: center;
+}
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider{
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .slides-container { 
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .slide-arrow {
+  position: absolute;
+  display: flex;
+  top: 35%;
+  bottom: 0;
+  margin: auto;
+  height: 15px;
+  background-color: transparent;
+  border: none;
+  width: 46px;
+  font-size: 3rem;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 100ms;
+}
+
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .slide-arrow:hover,
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .slide-arrow:focus {
+  opacity: 1;
+}
+
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider #slide-arrow-prev {
+  left: -60px; 
+  border-radius: 0 2rem 2rem 0;
+}
+
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider #slide-arrow-next {
+  right: -40px; 
+  border-radius: 2rem 0 0 2rem;
+}
+
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .slide {
+  width: 100%;
+  height: 100%;
+  flex: 1 0 100%;
+}
+
+.catalog-product-view.weightloss-product .review-list { 
+    float: none;
+    display: inline-block;
+    background: #fff;
+    margin: 0 8px;
+    padding: 40px 27px;
+    border-radius: 8px;
+    text-align: left;
+}
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .demo-content .read-more-btn,
+.catalog-product-view.weightloss-product .review-slide .content .read-more-btn{
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+    color: #000 !important;
+    text-align: left;
+    font-weight: 400;
+    font-size: 13px;
+    box-shadow: none !important;
+
+}
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .demo-content .read-more-btn:hover,
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .demo-content .read-more-btn:focus,
+.catalog-product-view.weightloss-product .review-slide .content .read-more-btn:hover{
+    color:#EC3237 !important;
+    text-decoration: underline;
+    background: transparent;
+    border: 0;
+    box-shadow:none !important;
+}
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .demo-content .review-list p,
+.catalog-product-view.weightloss-product .review-slide .content .review-list p{
+    margin-bottom: 10px !important;
+}
+.catalog-product-view.weightloss-product .review-list .review-img {
+    margin-bottom: 10px;
+}
+.catalog-product-view.weightloss-product .author-c p {
+    width: auto;
+    float: left;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 50px;
+    font-weight: 700;
+    letter-spacing: 0.31px;
+}
+.catalog-product-view.weightloss-product .author-c img {
+    float: left;
+    border-radius: 50px;
+}
+
+
+
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .demo-content {
+  font-size: 12px;
+    color: #515151;
+    font-family: 'Lato', sans-serif;
+}
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .review-image{
+    
+    width: 100%;
+    float: left;   
+  }
+
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .review-image p,
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .review-image p span{
+  width: auto;
+  float: right;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+    color: #515151;
+    font-family: 'Lato', sans-serif;
+}
+ 
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .review-name{
+  width: auto;
+    float: left;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    color: #000 !important;
+    line-height: 22px;
+    font-weight: 700 !important;
+    text-align: left;
+}
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .review-description{
+ width: 100%;
+    float: left;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0px;
+    text-align: left;
+    margin: 0;
+}
+ 
+ 
+@media screen and (min-width: 768px) { 
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .demo-content {
+  width: 31%;
+    float: left; 
+    margin: 0 10px; 
+}
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .container{
+  width: 1180px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/*.catalog-product-view.weightloss-product .page-main{
+  max-width: 100% !important;
+}*/
+
+
+.catalog-product-view.weightloss-product .product-info-main{
+  margin-bottom: 50px;
+}
+.catalog-product-view.weightloss-product .product-details-sec-new .container,
+.catalog-product-view.weightloss-product .custom-product-info{
+  max-width: 1090px;
+  margin: 0 auto;
+}
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider #slide-arrow-prev, .slider-wrapper.desk-review-slider #slide-arrow-next {
+        height: 50px;
+        width: 50px;
+        border-radius: 50px;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+    }
+
+}
+
+@media only screen and (min-width:768px) and (max-width:1024px){
+
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .container{
+  width: 100% !important;
+}
+
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider #slide-arrow-prev{
+  left: 0 !important;
+}
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider #slide-arrow-next{
+  right: 0 !important;
+}
+
+.catalog-product-view.weightloss-product .Works-1 .h-title-2 br{
+  display: none;
+}
+
+
+}
+
+
+
+@media only screen and (min-width:768px) and (max-width:991px){
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .demo-content{
+    width: 30% !important;
+  }
+  .catalog-product-view.weightloss-product .Works-1{
+  width: 335px !important;
+  margin: 0 15px !important;
+}
+   
+}
+
+.catalog-product-view.weightloss-product .rating-img{
+  width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0 0 40px 0;
+    text-align: center;
+    display: inline-block;
+}
+.catalog-product-view.weightloss-product .rating-img img{
+  float: none;
+    display: inline-block;
+}
+.catalog-product-view.weightloss-product .rating-img p{
+  width: auto;
+    float: none;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 4px !important;
+    margin-left: 10px !important;
+}
+
+ 
+@media only screen and (min-width:768px) and (max-width:1024px){
+
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .container{
+  width: 100% !important;
+}
+
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider #slide-arrow-prev{
+  left: 0 !important;
+}
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider #slide-arrow-next{
+  right: 0 !important;
+}
+
+}
+
+
+
+@media only screen and (min-width:768px) and (max-width:991px){
+.catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .demo-content{
+    width: 30% !important;
+  }
+   
+}
+
+.catalog-product-view.weightloss-product .google-review-section{
+  width: 100%;
+  float: left;
+  padding:65px 0 74px 0;
+  margin: 0;
+  background: #E6F0F3;
+  text-align: center;
+}
+.catalog-product-view.weightloss-product .google-review-section h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 30px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.weightloss-product .need-help-section h2,
+.catalog-product-view.weightloss-product .need-help-section h3{
+    text-align: center;
+    font: normal normal 300 38px/46px Lato;
+    letter-spacing: 0px;
+    padding-top: 60px;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.catalog-product-view.weightloss-product .need-help-section{
+    background: #E7F2F4;
+    height: 571px;
+}
+.catalog-product-view.weightloss-product .need-help-section .right-column, 
+.catalog-product-view.weightloss-product .need-help-section .left-column {display: inline-block;} 
+.catalog-product-view.weightloss-product .need-help-section .right-column a {color: #ed3237;}
+
+.catalog-product-view.weightloss-product .need-help-section .right-column, 
+.catalog-product-view.weightloss-product .need-help-section .left-column{
+    vertical-align: top;
+}
+.catalog-product-view.weightloss-product .need-help-section .left-column{
+    width: 47%;
+    margin-right: 2%;
+}
+.catalog-product-view.weightloss-product .need-help-section .right-column{
+    text-align: left !important;
+}
+.catalog-product-view.weightloss-product .need-help-section .right-column h3,
+.catalog-product-view.weightloss-product .need-help-section .right-column .content-title{
+    font-size: 25px !important;
+    line-height: 35px !important;
+}
+
+@media screen and (min-width: 768px) {
+    .catalog-product-view.weightloss-product .category-section-2 .subsection-b {
+        width: auto;
+    }
+
+
+  .catalog-product-view.weightloss-product .slider-wrapper {
+    flex-direction: column; 
+    align-items: center;
+  }
+
+   .catalog-product-view.weightloss-product .slider-wrapper.desk-review-slider .slide-arrow {
+        top: 30% !important;
+    }
+ 
+    .catalog-product-view.weightloss-product .need-help-section h2,
+    .catalog-product-view.weightloss-product .need-help-section h3{
+        text-align: center;
+        font: normal normal 300 38px/46px Lato;
+        letter-spacing: 0px;
+        padding-top: 60px;
+    }
+
+    .catalog-product-view.weightloss-product .need-help-section{
+        background: #E7F2F4;
+        height: 571px;
+    }
+    
+
+    .catalog-product-view.weightloss-product .left-column img{
+        width: 515px;
+        height: auto;
+    }
+
+    .catalog-product-view.weightloss-product .left-column {
+        width: 50%;
+        text-align: left;  
+        margin-bottom: 0;  
+    }
+
+    .catalog-product-view.weightloss-product .right-column {
+        width: 50%;
+        text-align: justify;  
+    }
+
+    .catalog-product-view.weightloss-product .right-column h3,
+    .catalog-product-view.weightloss-product .need-help-section .right-column .content-title{
+        margin-top: 0;  
+        font: normal normal bold 30px/40px Lato;
+        letter-spacing: 0px;
+        margin-bottom: 10px;
+    }
+     .catalog-product-view.weightloss-product .weightloss-journey{
+        margin-top: 80px;
+        margin-bottom: 80px;
+    
+
+    }
+
+   .catalog-product-view.weightloss-product .need-help-section .right-column{
+        margin-top: 15px;
+        float: right;
+    }
+
+    .catalog-product-view.weightloss-product .footer-blog .post-list-wrapper.blog-widget-recent{
+      margin: 0 auto;
+    }
+    .catalog-product-view.weightloss-product .weightloss-journey .container {
+        max-width: 1030px !important;
+        display: block !important;
+    }
+
+}
+ 
+
+@media only screen and (min-width: 768px) and (max-width: 977px) {
+
+.catalog-product-view.weightloss-product .product-details-sec-new .product-details{
+  grid-template-columns: 1fr 30em !important;
+}
+.catalog-product-view.weightloss-product .product-details-sec-new .product-details {
+    padding: 0 20px;
+}
+.catalog-product-view.weightloss-product .tab-content-right-sec h2{
+  line-height: 35px !important;
+}
+.catalog-product-view.weightloss-product .weightloss-journey .container h3{
+      width: 100% !important;
+      text-align: center !important;
+      font-size: 35px !important;
+      line-height: 45px !important;
+    }
+    .catalog-product-view.weightloss-product .weightloss-journey .h-banner-btn {
+      width: 100% !important;
+      float: left !important;
+      margin-top: 20px;
+      text-align: center;
+  }
+  .catalog-product-view.weightloss-product .need-help-section .container{
+    width: 95%;
+  }
+  .catalog-product-view.weightloss-product .need-help-section .right-column{
+    margin-top: 0 !important;
+  }
+
+}
+
+
+
+@media only screen and (min-width: 978px) and (max-width: 1024px) {
+
+.catalog-product-view.weightloss-product .product-details-sec-new .product-details{
+  grid-template-columns: 1fr 45em !important;
+}
+.catalog-product-view.weightloss-product .product-details-sec-new .product-details {
+    padding: 0 20px;
+}
+.catalog-product-view.weightloss-product .tab-content-right-sec h2{
+  line-height: 35px !important;
+}
+.catalog-product-view.weightloss-product .weightloss-journey .container h3{
+      width: 100% !important;
+      text-align: center !important;
+      font-size: 45px !important;
+      line-height: 55px !important;
+    }
+    .catalog-product-view.weightloss-product .weightloss-journey .h-banner-btn {
+      width: 100% !important;
+      float: left !important;
+      margin-top: 20px;
+      text-align: center;
+  }
+  .catalog-product-view.weightloss-product .need-help-section .container{
+    width: 95%;
+  }
+  .catalog-product-view.weightloss-product .need-help-section .right-column{
+    margin-top: 0 !important;
+  }
+
+}
+
+
+.catalog-product-view.weightloss-product .hm-meet-team{
+  width: 100%;
+  float: left;
+  padding: 40px 0;
+  background-color:#E7F2F4 ;
+}
+.catalog-product-view.weightloss-product .hm-meet-team .owl-carousel .banner-item .content_slider{
+  position: relative;
+  top: 10px;
+  left: 0;
+  width: 100%;
+}
+.catalog-product-view.weightloss-product .hm-meet-team .owl-carousel .banner-item .content_slider button.plus-button{
+  display: none;
+}
+
+.catalog-product-view.weightloss-product .hm-meet-team .owl-carousel .banner-item .content_slider .h-title-6{
+  color: #000; 
+    font-family: 'Lato', sans-serif !important;
+    line-height: 22px; 
+    font-weight: 500;
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+}
+
+.catalog-product-view.weightloss-product .hm-meet-team .owl-theme .owl-dots{
+  bottom: -70px;
+}
+
+.catalog-product-view.weightloss-product .weightloss-journey {
+    background: #000000;
+    width: 100%;
+    float: left;
+    padding: 45px 0;
+    margin: 50px 0;
+}
+.catalog-product-view.weightloss-product .weightloss-journey .h-banner-btn a {
+    width: 220px;
+    display: inline-block;
+    text-align: center;
+    background: #EC3237;
+    font-size: 13px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 52px;
+    padding: 0 0px;
+    font-weight: 400;
+    border-radius: 28px;
+    letter-spacing: 0.26px;
+}
+.catalog-product-view.weightloss-product .weightloss-journey .h-banner-btn a:hover {
+    background: #53CAF5 !important;
+}
+.catalog-product-view.weightloss-product .weightloss-journey .container h3 {
+    width: auto;
+    float: left;
+    padding: 0;
+    margin: 0;
+    font-size: 42px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 55px;
+    font-weight: 300;
+    text-align: left;
+    background: none !important;
+}
+.catalog-product-view.weightloss-product .weightloss-journey .h-banner-btn {
+    width: auto;
+    float: right;
+}
+.catalog-product-view.weightloss-product .treatment-options .carousel-prev, 
+.catalog-product-view.weightloss-product .treatment-options .carousel-next {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    background-color: #fff;
+}
+
+.catalog-product-view.weightloss-product .how-it-works-section {
+    width: 100%;
+    display: inline-block;
+    padding: 20px 0 20px 0;
+    text-align: center;
+}
+.catalog-product-view.weightloss-product .product-faq-section{
+  background-color: #fff;
+  padding: 30px 0 !important;
+  margin-bottom: 50px;
+}
+
+.catalog-product-view.weightloss-product .product-faq-section .faq-list label{
+  font-size: 22px;
+  color: #2C596D;
+  font-family: "Ubuntu", sans-serif;
+  line-height: 34px;
+  font-weight: 400;
+}
+.catalog-product-view.weightloss-product .product-faq-section .faq-list {
+    border-bottom: 1px solid #2C596D;
+    padding-bottom: 12px;
+    width: 100%;
+    display: inline-block;
+}
+.catalog-product-view.weightloss-product .home_block_1 .info,
+.catalog-product-view.weightloss-product .home_block_1 .product-price{
+    display: none;
+}
+.catalog-product-view.weightloss-product .home_block_1 ul{
+  padding: 0;
+  margin: 0 0 15px 0;
+  display: inline-block;
+  float: left;
+}
+.catalog-product-view.weightloss-product .home_block_1 ul li{
+  list-style-type: none;
+  text-align: left;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+.catalog-product-view.weightloss-product .home_block_1 ul li img{
+  margin-right: 10px;
+}
+
+.catalog-product-view.weightloss-product .home_block_1 {
+    width: 298px;
+    float: none;
+    display: inline-block;
+    margin: 0 0px;
+    border-radius: 8px;
+    vertical-align: top;
+    background: #fff;
+    padding: 40px 25px 30px 25px;
+}
+
+.catalog-product-view.weightloss-product .treatment-options .carousel-prev, 
+.catalog-product-view.weightloss-product .treatment-options .carousel-next{
+  display: none;
+}
+@media screen and (min-width: 768px) {
+ .catalog-product-view.weightloss-product .need-help-section {
+        background: #E7F2F4;
+        height: auto;
+        padding: 0 0 80px 0;
+    }
+    .catalog-product-view.weightloss-product .mobile-cont-tab{
+      display: none;
+    }
+}
+
+
+.catalog-product-view.weightloss-product .page-bottom{
+  display: none;
+}
+
+
+
+
+
+
+
+
+.catalog-product-view.weightloss-product .faq-section-new .faq-list .accordion-p {
+  text-align: left; 
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    padding:20px 0 8px 0;
+    width: 100%;
+    cursor: pointer;  
+  border: none; 
+  outline: none;
+  transition: 0.4s;
+  box-shadow: none !important; 
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.catalog-product-view.weightloss-product .faq-section-new .faq-list .active, 
+.catalog-product-view.weightloss-product .faq-section-new .faq-list .accordion-p:hover {
+  background-color: transparent !important;
+}
+
+.catalog-product-view.weightloss-product .faq-section-new .faq-list .panel-p {
+  text-align: left;
+     
+    letter-spacing: 0px;
+    font-size: 16px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    text-align: left;
+    padding: 0px 0;
+  padding: 0 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background: transparent;
+  
+}
+
+.catalog-product-view.weightloss-product .faq-section-new{
+  width: 100%;
+  float: left;
+  padding:84px 0 104px 0;
+  margin: 0;
+  background: #E7F2F4;
+}
+
+.catalog-product-view.weightloss-product .faq-section-new h2{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 40px 0;
+  font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px; 
+    font-weight: 300; 
+    text-align: center;
+}
+
+.catalog-product-view.weightloss-product .faq-section-new .faq-list {
+    border-bottom: 1px solid #96D8F0;
+    padding-bottom: 12px;
+}
+.catalog-product-view.weightloss-product .faq-section-new button.accordion-p{
+  border: 0;
+  border-bottom: 0px solid #96D8F0;
+  box-shadow:none !important;
+  background: transparent;
+  font-size: 18px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px;
+    font-weight: 700;
+    text-align: left;
+    padding: 20px 0 8px 0;
+}
+
+.catalog-product-view.weightloss-product .faq-section-new .panel-p,
+.catalog-product-view.weightloss-product .faq-section-new .panel-p p{
+  font-size: 16px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    text-align: left;
+    padding: 0px 0;
+}
+
+.catalog-product-view.weightloss-product .faq-section-new button.accordion-p:after{
+  float: right; 
+  display: none;
+}
+.catalog-product-view.weightloss-product .faq-section-new button.accordion-p{ 
+  background: url(/pub/media/wysiwyg/WLImage/Poly.png) right 32px no-repeat; 
+}
+.catalog-product-view.weightloss-product .cms-index-index .faq-section-new{
+    margin-top: 50px;
+}
+
+.catalog-product-view.weightloss-product .categoryquestwl-index-index .faq-section-new{
+  margin-bottom: 70px;
+}
+
+@media screen and (min-width: 768px) {
+    .catalog-product-view.weightloss-product .faq-section-new .container {
+        max-width: 670px !important;
+    }
+    .catalog-product-view.weightloss-product .faq-section-new .faq-list .accordion-p{
+      background-color: transparent !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .catalog-product-view.weightloss-product .faq-section-new .container {
+        width: 94%;
+    }
+    .catalog-product-view.weightloss-product .faq-section-new .faq-list .accordion-p{
+        font-size: 15px !important;
+        padding-left: 0 !important;
+        padding-right: 20px !important;
+        line-height: 22px;
+    }
+    .catalog-product-view.weightloss-product .faq-section-new .h-title{
+      text-align: left;
+      padding-left: 15px;
+      padding-right: 15px;
+      width: auto !important;
+      font-weight: 300;
+      margin: 0 0 15px 0;
+      font-size: 25px;
+      color: #000;
+      font-family: 'Lato', sans-serif;
+      line-height: 32px;
+      font-weight: 400;
+      text-align: left;
+      padding: 0px 0;
+      letter-spacing: 0px; 
+    }
+    .catalog-product-view.weightloss-product .product-faq-section .h-title{
+      margin: 0 0 15px 0;
+      font-size: 25px; 
+      line-height: 32px;
+    }
+    .catalog-product-view.weightloss-product .faq-section-new{
+      margin-bottom: 30px;
+    }
+    .catalog-product-view.weightloss-product .how-it-works-section .h-title{
+      padding: 0;
+    }
+    .catalog-product-view.weightloss-product .faq-section-new .panel-p p{
+      font-size: 14px !important;
+      line-height: 22px !important;
+    }
+    .catalog-product-view.weightloss-product .cms-index-index .faq-section-new{
+      padding: 55px 0 75px 0 !important;
+    }
+    .catalog-product-view.weightloss-product .faq-section-new {
+        padding: 40px 0 40px 0 !important;
+    }
+    .catalog-product-view.weightloss-product .product-details-sec-new.desktop-cont-tab{
+      display: none;
+    }
+
+}
+
+
+</style>
+
+<style type="text/css"> 
+html {
+  scroll-behavior: smooth;
+}
+
+
+.catalog-product-view.weightloss-product .product-details-sec-new{
+  width: 100%;
+    float: left;
+    background-color: #F1F7F9;
+    padding:45px 0;
+    margin:0 0 50px 0;
+} 
+.catalog-product-view.weightloss-product .product-details-sec-new .product-details > nav {
+  position: sticky;
+  top: 2rem;
+  align-self: start;
+  margin-right: 45px;
+}
+
+
+
+.catalog-product-view.weightloss-product .product-details-sec-new .section-nav ul{
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}
+.catalog-product-view.weightloss-product .product-details-sec-new .section-nav ul li{
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+} 
+.catalog-product-view.weightloss-product .product-details-sec-new .section-nav li.active > a {
+  color: #000;
+  font-weight: 400;
+}
+
+/* Sidebar Navigation */
+.catalog-product-view.weightloss-product .product-details-sec-new .section-nav {
+  padding-right: 45px;
+  border-right: 1px solid #4ea8ed;
+}
+
+.catalog-product-view.weightloss-product .product-details-sec-new .section-nav a {
+  text-decoration: none;
+  display: block;
+  padding:0; 
+  transition: all 50ms ease-in-out; 
+  font-size: 13px;
+  color: #000;
+  font-family: "Ubuntu", sans-serif;
+  line-height: 20px;
+  text-decoration: underline;
+}
+
+.catalog-product-view.weightloss-product .product-details-sec-new .section-nav a:hover,
+.catalog-product-view.weightloss-product .product-details-sec-new .section-nav a:focus {
+  color: #53CAF5;
+}
+
+
+.catalog-product-view.weightloss-product .product-details-sec-new .product-details-sec-new{
+  width: 100%;
+  float: left;
+  background-color: #F1F7F9;
+  padding: 40px 0;
+} 
+ 
+/** page layout **/
+.catalog-product-view.weightloss-product .product-details-sec-new .product-details{
+  display: grid;
+  grid-template-columns: 1fr 46em;  
+  margin: 0 auto;
+  padding: 0 25px;
+}
+ 
+.catalog-product-view.weightloss-product .product-details-sec-new .links-sec{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 20px 0;
+  font-size: 16px;
+  color: #2C596D;
+  font-family: "Ubuntu", sans-serif;
+  line-height: 46px;
+  font-weight: 500;
+  border-bottom: 1px solid #46c0ec;
+}
+
+
+.catalog-product-view.weightloss-product .tab-content-sec{
+  display: inline-block; 
+}
+.catalog-product-view.weightloss-product .tab-content-right-sec p {
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0 0 20px 0;
+    font-family: 'Ubuntu', sans-serif;
+    color: #101010;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+}
+.catalog-product-view.weightloss-product .tab-content-right-sec h2 {
+    width: 100%;
+    float: left;
+    padding: 0 0 20px 0;
+    margin: 0;
+    font-family: 'Ubuntu', sans-serif;
+    color: #2C596D;
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 46px;
+    position: relative;
+  }
+
+.catalog-product-view.weightloss-product .tab-content-right-sec h2:after {
+    content: ' ';
+    width: 15%;
+    float: left;
+    border-top: 2px solid #8EA8B3;
+    margin-top: 10px;
+    margin-bottom: 22px;
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+  }
+
+ .catalog-product-view.weightloss-product .product-details-sec-new .product-details{
+    padding: 0 25px;
+  }
+
+  .catalog-product-view.weightloss-product .product.attribute.description{
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    
+
+    .catalog-product-view.weightloss-product .product-faq-section .faq-list .panel-p{
+      font-size: 13px !important;
+      line-height: 21px !important;
+      padding-top: 12px;
+    }
+    .catalog-product-view.weightloss-product.product.media{
+      width: 94%;
+      margin: 0 auto;
+    }
+    .catalog-product-view.weightloss-product .info-how-itwork .header-search-panel {
+      margin-top: 20px;
+    }
+
+    .catalog-product-view.weightloss-product .product-info-cont-1.product-mhra-section { 
+          width: 94%;
+          margin: 30px auto 0 auto;
+      }
+
+      .catalog-product-view.weightloss-product .product-faq-section .faq-list{
+        padding-bottom: 0 !important;
+      }
+
+      .catalog-product-view.weightloss-product .product-faq-section{
+        margin-bottom: 0;
+      }
+      .catalog-product-view.page-layout-1column .product-info-main .select-option .brand-label{
+        margin-bottom: 15px;
+      }
+
+}
+
+ 
+@media screen and (min-width: 1025px) { 
+  .catalog-product-view.weightloss-product .product-info-cont-1.product-mhra-section{
+    width: 1090px;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    float: none;
+  }
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .catalog-product-view.page-layout-1column .product-info-cont-1.product-mhra-section .info-mhra-logo-sec {
+        width: 470px !important;
+        margin: 0 auto !important;
+        float: none !important;
+        border: 0 !important;
+        border-bottom: 1px solid #ddd !important;
+        padding-bottom: 28px;
+        padding-right: 0 !important;
+    }
+    .catalog-product-view.page-layout-1column .product-info-cont-1.product-mhra-section .info-mhra-logo-sec .img-1-n {
+        width: 100px !important;
+        float: left !important;
+        margin-right: 15px !important;
+        margin-left: 15px;
+    }
+    .catalog-product-view.page-layout-1column .product-info-cont-1.product-mhra-section .product-cont-right { 
+        width: 460px;
+        margin: 20px auto !important;
+        float: none !important;
+    }
+    .catalog-product-view.page-layout-1column .product-info-cont-1.product-mhra-section{
+      margin-top: 0 !important;
+    }
+}
+
+
+.catalog-product-view.weightloss-product .product-faq-section .faq-list .panel-p{
+  font-family: 'Ubuntu', sans-serif;
+    color: #101010;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.catalog-product-view.weightloss-product .product-faq-section .faq-list .panel-p ul li{
+  font-family: 'Ubuntu', sans-serif;
+    color: #101010;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+
+ 
+ 
+</style>
+
+
+
+
+<script>
+var acc = document.getElementsByClassName("accordion-p");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+   
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      if (entry.intersectionRatio > 0) {
+        document.querySelector(`nav li a[href="#${id}"]`).parentElement.classList.add('active');
+      } else {
+        document.querySelector(`nav li a[href="#${id}"]`).parentElement.classList.remove('active');
+      }
+    });
+  });
+
+  // Track all sections that have an `id` applied
+  document.querySelectorAll('section[id]').forEach((section) => {
+    observer.observe(section);
+  });
+  
+});
+</script>
+
+</html> 

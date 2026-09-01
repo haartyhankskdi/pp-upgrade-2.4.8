@@ -1,0 +1,34 @@
+<?php
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Google Invisible reCaptcha for Magento 2
+*/
+?>
+<?php
+/**
+ * @var $block Magento\Framework\View\Element\Template
+ * @var $viewModel Amasty\InvisibleCaptcha\ViewModel\Captcha
+ * @var $escaper Magento\Framework\Escaper
+ */
+
+$viewModel = $block->getViewModel();
+?>
+
+<?php if ($viewModel->isNeedToShowCaptcha()): ?>
+    <div id="am-recaptcha-container" data-bind="scope:'amRecaptcha'"></div>
+
+    <script type="text/x-magento-init">
+        {
+            "#am-recaptcha-container": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "amRecaptcha": {
+                            "component": "Amasty_InvisibleCaptcha/js/view/am-recaptcha"
+                        }
+                    }
+                }
+            }
+        }
+</script>
+<?php endif; ?>

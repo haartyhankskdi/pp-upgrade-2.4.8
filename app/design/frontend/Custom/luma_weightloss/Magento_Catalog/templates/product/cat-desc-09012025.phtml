@@ -1,0 +1,333 @@
+<?php
+
+$_helperCatalog = $this->helper(Haartyhanks\CategoryQuestWL\Helper\Data::class);
+$baseUrl  = $_helperCatalog->getCurrentStoreBaseUrl();
+$productId = $_helperCatalog->getCurrentProductId();
+$product = $_helperCatalog->getCurrentWLProduct();
+
+/** @var \Magento\Framework\ObjectManagerInterface $objectManager */
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$stockRegistry = $objectManager->get('Magento\CatalogInventory\Api\StockRegistryInterface');
+$session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
+
+
+/** @var \Magento\Store\Model\StoreManagerInterface $storeManager */
+$storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+$currentStore = $storeManager->getStore();
+$baseUrl = $currentStore->getBaseUrl();
+
+// To Open Product Page retieve productID open 
+
+// Get URL Interface
+$urlInterface = $objectManager->get('Magento\Framework\UrlInterface');
+
+// Get the current URL
+$currentUrl = $urlInterface->getCurrentUrl();
+
+// Remove the base URL from the current URL
+$relativeUrl = str_replace($baseUrl, '', $currentUrl);
+
+// Step 1: Create an associative array with URL paths as keys and product IDs as values
+$productUrls = [
+    'buy-wegovy' => 9411,
+    'buy-mounjaro' => 9424,
+    'buy-orlistat-xenical-capsules' => 9426,
+    'buy-mysimba' => 9429,
+    'buy-saxenda' => 9434,
+    'buy-zepbound' => 9436
+];
+
+// Step 2: Check if $relativeUrl exists in the array and get the corresponding product ID
+$productId = isset($productUrls[$relativeUrl]) ? $productUrls[$relativeUrl] : null;
+
+// To Open Product Page retieve productID close code
+
+// Check if a valid product ID is provided
+if ($productId) {
+    // Load the product details based on the product ID
+    /** @var \Magento\Catalog\Model\ProductRepository $productRepository */
+    $productRepository = $objectManager->get(\Magento\Catalog\Model\ProductRepository::class);
+    $imageHelper = $objectManager->get(Magento\Catalog\Helper\Image::class);
+
+
+    try {
+        $product = $productRepository->getById($productId);
+        
+        // Prepare the product details array
+        $productDetails = [
+            'image' => $imageHelper->init($product, 'product_page_image_small')->resize(500)->getUrl(),
+            'images' => $product->getMediaGalleryImages(),
+            'title' => $product->getName(),
+            'description' => $product->getShortDescription(),
+            'features' => explode("\n", $product->getData('features')), // Assuming 'features' is a multi-line attribute
+            'price' => $product->getFinalPrice(),
+            'is_salable' => $product->getIsSalable(),
+            'stockItem' => $stockRegistry->getStockItem($product->getId()),
+        ];
+        $images = $productDetails['images'];
+
+        // custom alt tag
+        $altText = $productDetails['title'];
+        $Zepbound = "Injection Effective for Weight Loss";
+        $Mounjaro = "weight loss medications";
+        $orlistat = "Buy Orlistat/ Xenical Capsules Online";
+        $Mysimba =  "Weight Loss Tablets";
+        $Saxenda = "Weight-Loss Pen";
+        $wegovy = "Wegovy Weight Loss Treatment";
+
+        // Check if "Zepboud" is in the alt text, and replace it if true
+        if ($productId == 9436) {
+            $altText = $Zepbound;
+        } elseif ($productId == 9424) {
+            $altText = $Mounjaro;
+        } elseif ($productId == 9426) {
+            $altText = $orlistat;
+        } elseif ($productId == 9429) {
+            $altText = $Mysimba;
+        } elseif ($productId == 9434) {
+            $altText = $Saxenda;
+        } elseif ($productId == 9411) {
+            $altText = $wegovy;
+        }
+
+        ?>
+    
+        <div class="category-description main-cat-desc">
+            <div class="container">
+                <div class="category-image-right">
+                <div class="category-image">
+                    <div class="slideshow-container">
+                        <?php 
+                        foreach($images as $child){ ?>
+                            <div class="mySlides fade">
+                                <img id="main-image" src="<?php echo $child->getUrl(); ?>" alt="<?php echo $altText; ?>" />
+                            </div>
+                        <?php } ?>
+                    </div>
+
+                </div><br>
+                <div class="dots-sec" style="text-align:center">
+                    <?php for($i = 0; $i < count($images); $i++) { ?>
+                        <span class="dot" onclick="currentSlide(<?php echo $i + 1; ?>)"></span> 
+                    <?php } ?>
+                </div>
+
+                <!-- <div class="thumbnails">
+                    <?php
+                    $thumbnailCount = 0;
+                    foreach($images as $image) {
+                        if ($thumbnailCount >= 4) {
+                            break; // Display only 4 thumbnails
+                        }
+                        echo '<img src="' . $image->getUrl() . '" class="thumbnail" onclick="updateMainImage(this)">';
+                        $thumbnailCount++;
+                    }
+                    ?>
+                </div> -->
+            </div>
+                <div class="category-details">
+                    <div class="category-c">
+                        <h1 class='wl-product-name'><?php echo $productDetails['title']; ?></h1>
+                        <p><?php //echo $productDetails['description']; ?></p>
+
+                    </div>
+                    <div class="price-s">PRICE<span>Starting from &nbsp; <b>£<?php echo $productDetails['price']; ?></b></span></div><br>
+                    <p>A medicated weight loss plan proven to help you lose weight</p>
+                    <li><img src="/media/wysiwyg//WLImage/tick.svg" alt="tick">Science-backed approach</li>
+                    <li><img src="/media/wysiwyg//WLImage/tick.svg" alt="tick"> Lose up to 15% of body weight</li>
+                    <li><img src="/media/wysiwyg//WLImage/tick.svg" alt="tick">Hassle-free online consultation</li>
+                    
+                    <?php
+                        $stockItem = $productDetails['stockItem'];
+                        $inStock = $stockItem->getIsInStock();
+                        if (!$inStock) { ?>
+                             <div class="start-const-btn">
+                                <a href="#" id="notifyBtn">Notify me once available</a>
+                            </div>
+                            <div class="email-input-box" id="emailInputBox" style="display: none;">
+                                <input type="email" id="emailInput" name="email" placeholder="Enter your email" required>
+                                <button id="submitBtn">Submit</button>
+                            </div>
+                            <div class="success-message" id="successMessage" style="display: none;">
+                                Thank you! You will be notified once the product available.
+                            </div>
+                        <?php
+                        } else { ?>
+                            <div class="start-const-btn"><a href="<?php echo $baseUrl . 'wl-login'; ?>">START MY CONSULTATION</a></div>
+                            <?php $session->setData('product_id' , $productId); ?>
+                        <?php
+                        }
+                    ?>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+<?php
+
+    } 
+    catch (\Exception $e) {
+        echo "An error occurred: " . $e->getMessage();
+    }
+} else {
+
+     header("Location: " . $baseUrl);
+     exit;
+}
+?>
+
+<style>
+/* Add CSS to style the thumbnails */
+.thumbnails .thumbnail {
+    width: 100px; /* Set the desired width for thumbnails */
+    height: auto; /* Maintain aspect ratio */
+    margin: 5px; /* Add some margin between thumbnails */
+}
+
+/* slideshow */
+
+.mySlides {display: none;}
+img {vertical-align: middle;}
+
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+
+
+/* End slideshow */
+
+/* Email box  */
+.email-input-box {
+    margin-top: 20px;
+}
+
+.email-input-box input {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.email-input-box button {
+    padding: 10px 20px;
+    background-color: #28A745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.success-message {
+    margin-top: 20px;
+    color: #28A745;
+    font-weight: bold;
+}
+</style>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var pageHeaders = document.querySelectorAll('.page-header');
+
+    pageHeaders.forEach(function(header) {
+        var offerDiv = document.createElement('div');
+        offerDiv.classList.add('offer1', 'mf-initial');
+        offerDiv.setAttribute('data-was-processed', 'true');
+
+        var offerSpan = document.createElement('span');
+        offerSpan.classList.add('wl-offer');
+        offerSpan.textContent = 'NEW CUSTOMER: SAVE 10% OFF YOUR FIRST ORDER WITH CODE: NEW10';
+
+        offerDiv.appendChild(offerSpan);
+
+        header.insertBefore(offerDiv, header.firstChild);
+    });
+});
+</script>
+
+<script>
+function updateMainImage(thumbnail) {
+    var mainImage = document.getElementById('main-image');
+    mainImage.src = thumbnail.src;
+}
+
+document.getElementById('notifyBtn').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('emailInputBox').style.display = 'block';
+});
+
+document.getElementById('submitBtn').addEventListener('click', function() {
+    var email = document.getElementById('emailInput').value;
+    if (validateEmail(email)) {
+        document.getElementById('emailInputBox').style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+    } else {
+        alert('Please enter a valid email address.');
+    }
+});
+
+function validateEmail(email) {
+    var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return re.test(String(email).toLowerCase());
+}
+
+</script>
+
+
+
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) { slideIndex = 1 } 
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+}
+
+function currentSlide(n) {
+    slideIndex = n;
+    showSlides(slideIndex);
+}
+
+setInterval(function() {
+    slideIndex++;
+    showSlides(slideIndex);
+}, 5000); // Change image every 5 seconds
+</script>

@@ -1,0 +1,14 @@
+<!-- Meet the team -->
+<div class="meet-the-team-section">
+ <div class="container">
+<div class="hm-meet-team reveal1">
+  <div class="meet-team-title">Meet the <span>team</span></div>
+<?php
+  echo $this->getLayout()->createBlock('WeltPixel\OwlCarouselSlider\Block\Slider\Custom')
+    ->setData(['slider_id' => 1]) // Set slider_id to 1
+    ->toHtml();
+?>
+<div class="h-banner-btn"><a href="<?php echo $this->getBaseUrl();?>meet-our-team">LEARN ABOUT OUR TEAM</a></div>
+</div>
+</div>
+</div>

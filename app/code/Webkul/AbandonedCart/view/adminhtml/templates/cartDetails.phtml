@@ -1,0 +1,35 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AbandonedCart
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php
+$data = $block->getQuoteData();?>
+<table class="wk-abandonedcart-admin-table">
+<?php foreach ($data as $index => $value): ?>
+    <tr>
+        <td style="text-align:right; font-weight:700; padding-right:20px">
+            <?= /* @noEscape */ __($index); ?>
+        </td>
+        <td>
+            <?php if ($value !="") { /* @noEscape */echo $value;
+            } else { /* @noEscape */ echo "-";} ?>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>
+<style>
+    .wk-abandonedcart-admin-table{
+        width: 100%;
+        margin-top:20px;
+    }
+    .wk-abandonedcart-admin-table tr {
+        line-height: 2;
+    }
+</style>

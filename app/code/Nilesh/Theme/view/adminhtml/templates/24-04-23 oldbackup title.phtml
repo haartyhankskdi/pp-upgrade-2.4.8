@@ -1,0 +1,96 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var $block \Magento\Theme\Block\Html\Title
+ */
+$titleIdHtml = ($block->getTitleId()) ? ' id="' . $block->escapeHtmlAttr($block->getTitleId()) . '"' : '';
+$titleClass = ($block->getTitleClass()) ? ' ' . $block->getTitleClass() : '';
+$title = $block->getPageTitle();
+?>
+
+<div class="page-title-wrapper<?= $block->escapeHtmlAttr($titleClass) ?>">
+    <h1 class="page-title"<?= /* @noEscape */ $titleIdHtml ?>><?= $block->escapeHtml($title) ?></h1>
+    <?= $block->getChildHtml() ?>
+</div>
+<?php
+$orderId = $this->getRequest()->getParam('order_id');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$order = $objectManager->create('Magento\Sales\Model\Order')->load($orderId);
+$orderItems = $order->getAllVisibleItems();
+$controllerName = $this->getRequest()->getControllerName();
+$actionName = $this->getRequest()->getActionName();
+$moduleName = $this->getRequest()->getModuleName();  
+$urlAction = $moduleName.'_'.$controllerName.'_'.$actionName;
+if($urlAction == 'sales_order_view'){
+$custFlag = 0;
+$helper = $this->helper('Sachin\OrderFlag\Helper\OrderFlag');
+$custFlag = $helper->getCustomerFlag();
+if($custFlag == 1){?>
+<div class="notsupply">Do Not Supply</div>
+<script>
+require(['jquery','domReady!'], function($) {    
+    $( window ).on("load", function() {
+    setTimeout(function () {
+       $(".page-title-wrapper").parent().clone().addClass('sticky-cloned').prependTo("div.page-actions[data-ui-id='page-actions-toolbar-content-header']");       
+    }, 500);
+    //console.log('MKY');
+    });    
+});
+</script>
+<?php } foreach ($orderItems as $order) {
+        if ($helper->getProductHistory($order->getProductId(), $order->getCreatedAt())){ ?>
+            <div class="repeat-order">Repeat Order</div>
+   <?php }    
+    }
+}
+?>
+
+<style type="text/css">
+
+    .page-header-hgroup .page-title-wrapper{
+        width: auto;
+        float: left;
+    }
+    .page-header-hgroup .notsupply{
+        width: auto;
+        display: inline-block;
+        margin-top: 8px;
+    margin-left: 15px;
+    color: #fff;
+    text-transform: uppercase;
+    background: #ff0000;
+    padding: 15px 20px;
+    font-weight:600;
+
+    }
+
+    .page-header-hgroup .repeat-order{
+        width: auto;
+        display: inline-block;
+        margin-top: 8px;
+    margin-left: 15px;
+    color: #fff;
+    text-transform: uppercase;
+    background: #ffc000;
+    padding: 15px 20px;
+    font-weight:600;
+
+    }
+ .data-grid-cell-content .notsupply{
+    width: auto;
+    display: inline-block;
+    margin-top: 8px;
+    margin-left: 0;
+    color: #fff;
+    text-transform: uppercase;
+    background: #ff0000;
+    padding: 10px 10px;
+    font-weight: 600;
+    text-align: center;
+}
+
+</style>

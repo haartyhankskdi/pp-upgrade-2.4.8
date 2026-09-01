@@ -1,0 +1,20 @@
+<?php 
+/* Conditional blocks */
+// For product view page
+if($this->getRequest()->getFullActionName() == 'catalog_category_view' || $this->getRequest()->getFullActionName() == 'catalog_product_view' || $this->getRequest()->getFullActionName() == 'checkout_cart_index' || $this->getRequest()->getFullActionName() == 'cms_index_index'){
+    // if($this->getRequest()->getFullActionName() != 'cms_index_index'){
+    //     echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('discretion-confidentiality')->toHtml();
+    // }
+    echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('trust_pilot')->toHtml();
+}elseif ($this->getRequest()->getFullActionName() == 'checkout_index_index' || $this->getRequest()->getFullActionName() == "onestepcheckout_index_index") {
+    // This is for checkout
+    echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('checkout_block')->toHtml();
+}else{
+    // This is common for all page
+    echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('icon_theme_footer')->toHtml();
+}
+
+// TEMP POPUP
+if($this->getRequest()->getFullActionName() == 'cms_index_index'){
+    echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('temp-popup')->toHtml();
+}

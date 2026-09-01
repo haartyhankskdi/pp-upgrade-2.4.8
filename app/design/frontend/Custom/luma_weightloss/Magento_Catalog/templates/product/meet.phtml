@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Carousel</title>
+<style>
+/* Style for the carousel container */
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Style for the carousel slide */
+.carousel-slide {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+/* Style for each individual slide */
+.slide-row {
+  flex: 0 0 calc(100% / 4);
+  max-width: calc(100% / 4); /* Adjusted width for each slide */
+  height: 230px;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* Responsive adjustments for slides */
+@media only screen and (max-width: 768px) {
+  .slide-row {
+    flex: 0 0 calc(100% / 3);
+    max-width: calc(100% / 3); /* Adjusted width for tablets */
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .slide-row {
+    flex: 0 0 100%;
+    max-width: 100%; /* Adjusted width for smartphones */
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .carousel-slide {
+    flex-wrap: nowrap; /* Ensure only one slide is shown per view */
+  }
+}
+
+/* Style for the navigation buttons */
+.carousel-nav {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.nav-btn {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 10px;
+  border: none;
+  outline: none;
+  margin: 0 5px;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: #96d9f1;
+}
+
+</style>
+</head>
+<body>
+
+<div class="meet-team-section">
+<div class="container">
+<div class="h-title">Meet the team</div>
+    <div class="carousel-container">
+    <div class="carousel-slide">
+    <div class="slide-row slide1" style="background-image: url('/media/wysiwyg/WLImage/sehmi.webp');">
+        <div class="subsection-content2">
+            <div class="h-title-6">Gurdev Sehmi</div>
+            <p>Superintendent Pharmacist.</p>
+            <button class="plus-button">+</button>
+        </div>
+    </div>
+    <div class="slide-row slide2" style="background-image: url('/media/wysiwyg/WLImage/Manesha.webp');">
+        <div class="subsection-content2">
+            <div class="h-title-6">Gurdev Sehmi</div>
+            <p>Superintendent Pharmacist.</p>
+            <button class="plus-button">+</button>
+        </div>
+    </div>
+    <div class="slide-row slide3" style="background-image: url('/media/wysiwyg/WLImage/boo.webp');">
+        <div class="subsection-content2">
+            <div class="h-title-6">Gurdev Sehmi</div>
+            <p>Superintendent Pharmacist.</p>
+            <button class="plus-button">+</button>
+        </div>
+    </div>
+    <div class="slide-row slide4" style="background-image: url('/media/wysiwyg/WLImage/Manesha.webp');">
+        <div class="subsection-content2">
+            <div class="h-title-6">Gurdev Sehmi</div>
+            <p>Superintendent Pharmacist.</p>
+            <button class="plus-button">+</button>
+        </div>
+    </div>
+    <div class="slide-row slide5" style="background-image: url('/media/wysiwyg/WLImage/boo.webp');">
+        <div class="subsection-content2">
+            <div class="h-title-6">Gurdev Sehmi</div>
+            <p>Superintendent Pharmacist.</p>
+            <button class="plus-button">+</button>
+        </div>
+    </div>
+    <div class="slide-row slide6" style="background-image: url('/media/wysiwyg/WLImage/sehmi.webp');">
+        <div class="subsection-content2">
+            <div class="h-title-6">Gurdev Sehmi</div>
+            <p>Superintendent Pharmacist.</p>
+            <button class="plus-button">+</button>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="carousel-nav">
+    <button class="nav-btn" onclick="prevSlide()">Prev</button>
+    <button class="nav-btn" onclick="nextSlide()">Next</button>
+</div>
+<div style="text-align: center;">
+    <span class="dot" onclick="currentSlide(1)"></span> 
+    <span class="dot" onclick="currentSlide(2)"></span> 
+    <span class="dot" onclick="currentSlide(3)"></span> 
+    <span class="dot" onclick="currentSlide(4)"></span> 
+    <span class="dot" onclick="currentSlide(5)"></span> 
+    <span class="dot" onclick="currentSlide(6)"></span> 
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let slideIndex = 0;
+    let autoSlideInterval;
+
+    function showSlides() {
+        const slidesContainer = document.querySelector('.carousel-slide');
+        const slides = document.querySelectorAll('.slide-row');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+
+        // Hide all slides and deactivate all dots
+        slides.forEach(slide => {
+            slide.style.opacity = 0; // Hide slides
+        });
+        dots.forEach(dot => {
+            dot.classList.remove('active');
+        });
+
+        // Calculate the index of the first slide to be displayed
+        let startIndex = slideIndex % totalSlides;
+
+        // Ensure startIndex is positive
+        if (startIndex < 0) {
+            startIndex = totalSlides + startIndex;
+        }
+
+        // Show all slides and activate corresponding dots
+        slidesContainer.style.transition = 'transform 0.5s ease'; // Apply transition to container
+        slidesContainer.style.transform = `translateX(-${startIndex * (100 / totalSlides)}%)`; // Move container to show desired slides
+
+        slides.forEach((slide, index) => {
+            slide.style.opacity = 1; // Show slide
+            dots[index].classList.add('active');
+        });
+    }
+
+    function prevSlide() {
+        slideIndex--;
+        showSlides();
+    }
+
+    function nextSlide() {
+        slideIndex++;
+        showSlides();
+    }
+
+    // Auto slide
+    autoSlideInterval = setInterval(() => {
+        slideIndex++;
+        showSlides();
+    }, 3000);
+
+    // Stop auto slide when user interacts with carousel
+    function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+    }
+
+    // Manual slide
+    function currentSlide(n) {
+        slideIndex = n - 1;
+        showSlides();
+    }
+
+    // Show all slides initially
+    showSlides();
+});
+</script>
+
+</body>
+</html>

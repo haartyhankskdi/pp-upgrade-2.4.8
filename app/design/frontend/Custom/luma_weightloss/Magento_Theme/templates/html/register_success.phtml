@@ -1,0 +1,105 @@
+<?php
+
+$cartThemeHelper = $this->helper(\Nilesh\Theme\Helper\CartButton::class);
+$registerSuccessHelper = $this->helper(\Nilesh\Theme\Helper\RegisterSuccess::class);
+
+$needtoShow = $cartThemeHelper->getCartNeedGeneralQuestion();
+
+?>
+
+<div class="thank-you-wrapper">
+    <img class="thank-you-icon" src="<?php echo $this->getViewFileUrl('images/thank-you-icon.png'); ?>" />
+    <h3 class="thank-you-title">Thank You</h3>
+    <p class="sub-title">for registering with Pharmacy Planet</p>
+
+<?php
+$getNeedOfGQ = $cartThemeHelper->getNeedOfGQ();
+
+// if((empty($getNeedOfGQ) || ($getNeedOfGQ == 0)) && $cartThemeHelper->isLogin()){
+if($needtoShow && ($cartThemeHelper->getNeedOfGQ() == 0) && $cartThemeHelper->isLogin()){
+    // $registerSuccessHelper->setCartRedirect();
+    $redirect =  $this->getUrl('customer/general/question', array('referer'=>base64_encode($block->getBaseUrl().'onestepcheckout')));
+    ?>
+        <p class="text">You will be redirected to the General Questions page in <span id="counter">5</span> seconds.</p>
+        <script>
+            require(['jquery'], function(){
+                // setTimeout(() => {
+                //     window.location.href = "<?php //echo $redirect ?>";
+                // }, 5000);
+
+                // 5 seconds
+                var counter = 5;
+                setInterval(function() {
+                    counter--;
+                    if (counter >= 0) {
+                        span = document.getElementById("counter");
+                        span.innerHTML = counter;
+                    }
+                    // Display 'counter'.
+                    if (counter === 0) {
+                        // redirect
+                        window.location.href = "<?php echo $redirect ?>";
+                        clearInterval(counter);
+                    }
+                }, 1000);
+            });
+        </script>
+    <?php
+}elseif ($registerSuccessHelper->cartIsNotEmpty()) {
+    $redirect =  $this->getUrl('onestepcheckout');
+    ?>
+        <p class="text">You will be redirected to the Checkout page in <span id="counter">5</span> seconds.</p>
+        <script>
+            require(['jquery'], function(){
+                // setTimeout(() => {
+                //     window.location.href = "<?php echo $redirect ?>";
+                // }, 5000);
+
+                // 5 seconds
+                var counter = 5;
+                setInterval(function() {
+                    counter--;
+                    if (counter >= 0) {
+                        span = document.getElementById("counter");
+                        span.innerHTML = counter;
+                    }
+                    // Display 'counter'.
+                    if (counter === 0) {
+                        // redirect
+                        window.location.href = "<?php echo $redirect ?>";
+                        clearInterval(counter);
+                    }
+                }, 1000);
+            });
+        </script>
+    <?php
+}else{
+    $redirect =  $this->getUrl('customer/account');
+    ?>
+        <p class="text">You will be redirected to our Home page in <span id="counter">5</span> seconds.</p>
+        <script>
+            require(['jquery'], function(){
+                // setTimeout(() => {
+                //     window.location.href = "<?php echo $redirect ?>";
+                // }, 5000);
+                var counter = 5;
+
+                setInterval(function() {
+                    counter--;
+                    if (counter >= 0) {
+                        span = document.getElementById("counter");
+                        span.innerHTML = counter;
+                    }
+                    // Display 'counter'.
+                    if (counter === 0) {
+                        // redirect
+                        window.location.href = "<?php echo $redirect.'?register'; ?>";
+                        clearInterval(counter);
+                    }
+                }, 1000);
+            });
+        </script>
+<?php
+}
+?>
+</div>

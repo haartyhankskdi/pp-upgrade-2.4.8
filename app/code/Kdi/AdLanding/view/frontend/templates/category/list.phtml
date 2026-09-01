@@ -1,0 +1,291 @@
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+/** @var \Magento\Catalog\Api\ProductRepositoryInterface $productRepository */
+$productRepository = $objectManager->get(
+    \Magento\Catalog\Api\ProductRepositoryInterface::class
+);
+
+$imageHelper = $objectManager->get('Magento\Catalog\Helper\Image');
+$products[] = $productRepository->getById(9424);
+$products[] = $productRepository->getById(9411);
+
+?>
+
+
+
+<style>
+    .wl-select-product-section .section-title {
+        color: #101010;
+        text-align: center;
+        font-family: Lato;
+        font-size: 38px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 40px; 
+    }
+
+    .wl-select-product-section .product-grid {
+        display: flex;
+        gap: 35px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 90px 0;
+    }
+
+    .wl-select-product-section .product-card {
+        position: relative;
+        width: 500px;
+        border: 1px solid #B3D2DD;
+        background: #FFF;
+        padding: 24px;
+    }
+
+    .wl-select-product-section .price-badge {
+        position: absolute;
+        right: -15px;
+        top: -35px;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: #8ccce3;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #000;
+        font-family: Lato;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 32px; 
+    }
+
+    .wl-select-product-section .price-badge span {
+        color: #000;
+        font-family: Lato;
+        font-size: 25px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 32px; /* 91.429% */
+    }
+
+    .wl-select-product-section .price-badge strong {
+        font-size: 72px;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    .wl-select-product-section .card-content {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 35px;
+    }
+
+    .wl-select-product-section .product-image {
+        width: 180px;
+        flex-shrink: 0;
+    }
+
+    .wl-select-product-section .product-image img {
+        width: 100%;
+        display: block;
+    }
+
+    .wl-select-product-section .product-details {
+        flex: 1;
+        padding-top: 20px;
+    }
+
+    .wl-select-product-section .product-title {
+        color: #000;
+        font-family: Lato;
+        font-size: 26px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 33px; 
+        margin-bottom: 15px;
+        margin-top: 0;
+    }
+
+    .wl-select-product-section .product-item.custom-col-category.product-9436,
+    .wl-select-product-section .product-item.custom-col-category.product-9434,
+    .wl-select-product-section .product-item.custom-col-category.product-9426,
+    .wl-select-product-section .product-item.custom-col-category.product-9429 {
+        display: none !important;
+    }
+
+    .wl-select-product-section .features {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .wl-select-product-section .features li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #000;
+        font-family: Lato;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px; 
+        margin-bottom: 0;
+    }
+
+    .wl-select-product-section .features li::before {
+        content: "✓";
+        color: #ef343a;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    .wl-select-product-section .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height:62px;
+        border-radius: 60px;
+        background: #f52f38;
+        color: #FFF;
+        font-family: Lato;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 32px; 
+        text-decoration: none;
+    }
+
+    .wl-select-product-section .btn:hover {
+        background-color: #53CAF5;
+    }
+
+    @media(max-width:1200px) {
+
+        .wl-select-product-section .product-card {
+            width: 100%;
+        }
+
+        .wl-select-product-section .price-badge { 
+            margin: 0 auto 30px;
+        }
+
+        .wl-select-product-section .card-content {
+            flex-direction: column;
+        }
+
+        .wl-select-product-section .product-image {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .wl-select-product-section .product-title {
+            font-size: 42px;
+        }
+
+        .wl-select-product-section .section-title {
+            font-size: 48px;
+        }
+    }
+
+    @media(max-width:767px) {
+
+        .wl-select-product-section .section-title {
+            font-size: 32px;
+        }
+
+        .wl-select-product-section .price-badge {
+            width: 100px;
+            height: 100px;
+            top: -70px;
+            right: 0 !important;
+        }
+
+        .wl-select-product-section .price-badge strong {
+            font-size: 52px;
+        }
+
+        .wl-select-product-section .btn {
+            height: 60px;
+            font-size: 14px;
+        }
+        .wl-select-product-section{
+            padding: 0 15px;
+        }
+        .wl-select-product-section .price-badge span{
+            font-size: 18px !important;
+            line-height: 24px !important;
+        }
+        .wl-select-product-section .price-badge{
+            font-size: 12px !important;
+            line-height: 20px !important;
+        }
+        .wl-select-product-section .product-card{
+            margin-bottom: 70px;
+        }
+    }
+</style>
+
+<div class="wl-select-product-section">
+<div class="container">
+
+    <h1 class="section-title">Select your product</h1>
+
+    <div class="product-grid">
+
+
+
+        <?php foreach ($block->getProducts() as $product): ?>
+            <div class="product-card">
+
+                <div class="price-badge">
+                    Starting From <span><?= $block->formatPrice($product->getFinalPrice()) ?></span>
+                   
+                </div>
+
+                <div class="card-content">
+
+                    <div class="product-image">
+                        <img
+                            src="<?= $block->escapeUrl($block->getProductImageUrl($product)) ?>"
+                            alt="<?= $block->escapeHtmlAttr($product->getName()) ?>" />
+                    </div>
+                    <div class="product-details">
+                        <h2 class="product-title"><?= $product->getName() ?></h2>
+                        <ul class="features">
+                            <?php
+                            $bulletPoints = $product->getPrBulletPoints();
+                            // Fetch the bullet points attribute value
+                            $bulletPointsArray = explode("\n", $bulletPoints);
+                            // Split the attribute value by new lines into an array
+                            foreach ($bulletPointsArray as $bulletPoint): ?>
+                                <li><?= $block->escapeHtml($bulletPoint); ?></li>
+                            <?php
+                            endforeach; ?>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <span><a href="<?= $product->getProductUrl() . '?true'; ?>" class="btn">
+                        <?= __("SELECT & CONTINUE") ?>
+                    </a>
+                </span>
+            </div>
+        <?php endforeach; ?>
+
+        <!-- Product 1 -->
+
+
+
+
+    </div>
+
+</div>
+</div>

@@ -1,0 +1,14 @@
+<?php
+/** @var \Magento\Backend\Block\Template $block */
+
+// phpcs:disable Generic.Files.LineLength
+?>
+<div class="amreport-additional-info">
+<?= $block->escapeHtml(
+    __(
+        'To get more relevant and accurate results please refresh Amasty Customers Report statistics <a href="%1" target="_blank">here</a>.',
+        $block->getUrl('reports/report_statistics/index')
+    ),
+    ['a']
+) ?>
+</div>

@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="ageverification" sortOrder="999" translate="label">
+			<label>Age Verification</label>
+		</tab>
+		<section id="ageverification" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Age Verification</label>
+			<tab>ageverification</tab>
+			<resource>Sachin_Customer::config_sachin_customer</resource>
+			<group id="credential" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Credential</label>
+				<field id="soapurl" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Soap Url</label>
+					<comment/>
+				</field>
+				<field id="username" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Username</label>
+					<comment/>
+				</field>
+				<field id="password" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Password</label>
+					<comment/>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

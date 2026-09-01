@@ -1,0 +1,48 @@
+<?php
+/* @var Escaper $escaper */
+/* @var Chart $block */
+
+use Amasty\Reports\Block\Adminhtml\Report\Chart;
+use Magento\Framework\Escaper;
+
+$collection = $block->getCollection();
+?>
+
+<div class="amreports-amchart-wrapper" data-role="amreports-content">
+
+    <?php if ($collection->getSize()): ?>
+
+        <?php foreach ($collection as $item) {
+            $chartData[] = [
+                "date" => $escaper->escapeHtml($item->getPeriod()),
+                "value" => $escaper->escapeHtml($item->getTotal())
+            ];
+        } ?>
+
+        <div id="chart-overview"
+             class="amreports-amchart-container amreports-sales-overview"
+             data-chart-identifier="value"></div>
+
+        <script>
+            require([
+                "Amasty_Reports/vendor/amcharts4/core.min"
+            ], function () {
+                require([
+                    "jquery",
+                    "<?= /* @noEscape */ $block->getWidgetName('amreports_linear_charts') ?>"
+                ], function ($, widget) {
+                    widget({
+                        "data" : <?= /* @noEscape */ json_encode($chartData) ?>,
+                        "interval" : "<?= /* @noEscape */ $block->getInterval(); ?>",
+                        "currency" : "<?= /* @noEscape */ $block->getCurrencySymbol('total') ?>",
+                        "selectorInit" : "chart-overview"
+                    }, $('#chart-overview'));
+                });
+            });
+        </script>
+
+        <div class="listing">
+            <?= $block->getChildHtml() ?>
+        </div>
+    <?php endif; ?>
+</div>

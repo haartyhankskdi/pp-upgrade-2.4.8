@@ -1,0 +1,109 @@
+<?php
+
+/** @var \Kdi\AdLanding\Block\Index\Index $block */
+
+$questionnaireId = $block->getRepeatCustomerQuestionnaire();
+?>
+
+<?= $this->helper("Amasty\Customform\Helper\Data")->renderForm($questionnaireId) ?>
+
+<script>
+    window.addEventListener('load', function() {
+        var btn = document.querySelector('.amform-show-popup.amcform-button');
+        if (btn) {
+            btn.click();
+        }
+    });
+</script>
+
+<style>
+    @media (max-width: 767px) {
+
+        .adlanding-product-questionnaire .wl-question-sec h2 {
+            font-size: 27px !important;
+            width: 70%;
+            line-height: 33px !important;
+            text-align: left !important;
+        }
+
+        .adlanding-product-questionnaire .amcform-popup-block .amform-form {
+            margin-top: -10px;
+        }
+
+        .adlanding-product-questionnaire .rendered-form .wl-question-sec .fieldset .fields .field.form-group.am-customform-depend .amform-text.error-msg {
+            margin-right: 10px;
+        }
+
+    }
+
+    @media screen and (min-width: 768px) {
+
+        .adlanding-product-questionnaire.amform-poup-opened .amcform-popup-block .amform-form {
+            max-width: 600px !important;
+        }
+
+        .adlanding-product-questionnaire.amform-poup-opened .amcform-popup-block .amcform-button.-close-popup {
+            right: 18%;
+        }
+    }
+
+
+    .adlanding-product-questionnaire .wl-question-sec {
+        box-shadow: none !important;
+    }
+
+    .adlanding-product-questionnaire .wl-question-sec h2 {
+        color: #101010;
+        text-align: center;
+        font-family: Lato;
+        font-size: 38px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 40px;
+        margin-bottom: 25px !important;
+    }
+
+    .adlanding-product-questionnaire .rendered-form .fieldset .fields .field.form-group .checkbox-group .amform-groupv2 {
+        margin-right: 5px !important;
+    }
+
+    .adlanding-product-questionnaire .wl-question-sec .field.required.control.amcform-gdpr {
+        background-color: #fff;
+        margin: -10px 0 0 0;
+        padding: 0 30px;
+    }
+
+    .adlanding-product-questionnaire .default.amform-form .fields .amform-layout-one {
+        margin-right: 0 !important;
+    }
+
+    .adlanding-product-questionnaire .amform-parent .amcform-popup .rendered-form .fieldset .fields .field.fb-checkbox.form-group label.amform-versiontwo-label {
+        padding-left: 15px !important;
+        max-width: 440px !important;
+    }
+
+    .adlanding-product-questionnaire .rendered-form .fieldset .fields .field.fb-radio.form-group.registered_gp_fieldset {
+        padding-bottom: 20px;
+    }
+
+    .adlanding-product-questionnaire .amform-parent .amcform-popup .rendered-form .fieldset .fields .field.form-group label.amform-versiontwo-label {
+        max-width: 330px !important;
+    }
+
+    .adlanding-product-questionnaire .rendered-form .wl-question-sec .fieldset .fields .field.form-group.am-customform-depend {
+        background-color: #fff;
+    }
+
+    .adlanding-product-questionnaire .rendered-form .wl-question-sec .fieldset .fields .field.form-group.am-customform-depend .amform-text.error-msg {
+        margin-left: 15px;
+    }
+
+    .adlanding-product-questionnaire .rendered-form .wl-question-sec .fieldset .fields .field.fb-radio.form-group.registered_gp_surgery_fieldset {
+        padding: 0;
+    }
+
+    .adlanding-product-questionnaire .rendered-form .wl-question-sec .fieldset .fields .field.fb-radio.form-group.registered_gp_surgery_fieldset {
+        .adlanding-product-questionnaire .rendered-form .wl-question-sec .fieldset .fields .field.fb-radio.form-group.registered_gp_surgery_fieldset #clear_gp_search {
+            right: -10px;
+        }
+</style>

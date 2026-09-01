@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="amasty_custom_form" class="Amasty\Customform\Block\Init" is_email_compatible="true"
+            placeholder_image="Magento_Cms::images/widget_block.png">
+        <label translate="true">Amasty Custom Form</label>
+        <description translate="true">Custom Form</description>
+        <parameters>
+            <parameter name="form_id" xsi:type="text" visible="true">
+                <label translate="true">Form ID</label>
+            </parameter>
+            <parameter name="popup" xsi:type="select" required="false" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Show on Button Click</label>
+                <description translate="true">Custom Form popup will be displayed after the button is clicked. This setting has priority over the form value.</description>
+            </parameter>
+            <parameter name="button_text" xsi:type="text" visible="true">
+                <label translate="true">Button Text</label>
+                <depends>
+                    <parameter name="popup" value="1" />
+                </depends>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="Amasty_Customform::init.phtml" selected="true">
+                        <label translate="true">Default</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

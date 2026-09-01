@@ -1,0 +1,107 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ * Worked By Nilesh Dubey
+ */
+?>
+
+<?php
+/** @var $block \Magento\ConfigurableProduct\Block\Product\View\Type\Configurable*/
+$_product    = $block->getProduct();
+$_productId = $_product->getID();
+$_attributes = $block->decorateArray($block->getAllowAttributes());
+$helper = $this->helper('Nilesh\Theme\Helper\ConfigurableProduct');
+$childProducts = $helper->getChildProducts($_productId);
+?>
+<!-- Geathering All Asssign Product Attribute code -->
+<?php if ($_product->isSaleable() && count($_attributes)){
+  $attrCode = array();
+
+  // Now getting Child produt by checking child producr is not empty
+  if ( !empty($childProducts) ){
+    // Getting Simple Product
+    foreach ($childProducts as $childproduct){
+      // Getting All Asign attr by product
+      $ii = 1;
+      $holdFirstAttr;
+      $holdFirstAttrId;
+      foreach ($_attributes as $_attribute) {
+        $attributeCode = $_attribute->getProductAttribute()->getAttributeCode();
+        if($ii == 1){
+          $holdFirstAttrId = $_attribute->getAttributeId();
+          $holdFirstAttr = $childproduct->getCustomAttribute($attributeCode)->getValue();
+          $ii++;
+          continue;
+        }else{
+          $attrCode[] = array("reactOn" => $holdFirstAttr, "attrId" => $_attribute->getAttributeId(), "txt" => $childproduct->getAttributeText($attributeCode), "val" => $childproduct->getCustomAttribute($attributeCode)->getValue());
+        }
+      }
+    }
+
+  $jsVar = json_encode($attrCode);
+  // echo $jsVar; exit();
+?>
+
+    <script>
+      require(['jquery'],function($){
+          $(document).ready(function () {
+            var jsonAttr = <?php echo $jsVar; ?>;
+            var holdid = "#attribute<?php echo $holdFirstAttrId; ?>";
+            
+            $(holdid).change(function (e) { 
+              e.preventDefault();
+              var selfVal = $(this).val();
+              // alert(selfVal);
+              setTimeout(() => {
+                $.map(jsonAttr, function (element, index) {
+                var getthis = "#attribute"+element.attrId;
+                if((getthis+" option[value='"+element.val+"']").length > 0){
+                  if(selfVal == element.reactOn){
+                  // alert(($("#attribute"+element.attrId+" option[value='"+element.val+"']").length == 0) + " - " +(element.reactOn == selfVal) +" - "+element.val);
+                  $(getthis).append(`
+                    <option disabled value="${element.val}">${element.txt}</option>
+                  `);
+                  }
+                }
+              });
+              }, 500);
+            });
+            
+            setTimeout(() => { 
+              var selfVal = $(holdid).val();
+              $.map(jsonAttr, function (element, index) {
+                var getthis = "#attribute"+element.attrId;
+                if((getthis+" option[value='"+element.val+"']").length > 0){
+                  if(selfVal == element.reactOn){
+                  // alert(($("#attribute"+element.attrId+" option[value='"+element.val+"']").length == 0) + " - " +(element.reactOn == selfVal) +" - "+element.val);
+                  $(getthis).append(`
+                    <option disabled value="${element.val}">${element.txt}</option>
+                  `);
+                  }
+                }
+              });
+            }, 10000);
+            
+            /* setTimeout(() => { runLoopAttr(jsonAttr); }, 2000);
+            setTimeout(() => { runLoopAttr(jsonAttr); }, 5000);
+            setTimeout(() => { runLoopAttr(jsonAttr); }, 15000); */
+          
+          });
+
+          /* function runLoopAttr(jsonAttr) {
+            $.map(jsonAttr, function (element, index) {
+                var attrId = element.attrId;
+                alert($("#attribute"+attrId+" option[value='"+element.val+"']").length);
+                if($("#attribute"+attrId+" option[value='"+element.val+"']").length > 0){
+                  $("#attribute"+attrId).append(`
+                    <option disabled value="${element.val}">${element.txt}</option>
+                  `);
+                }
+              });
+          } */
+      });
+    </script>
+  <?php 
+  }
+} ?>

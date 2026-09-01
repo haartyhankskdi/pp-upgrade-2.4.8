@@ -1,0 +1,26 @@
+{
+    "name": "amasty/module-custom-forms-lite-subscription-package",
+    "description": "Custom Forms Lite Subscription Package by Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty/base": ">=1.13.6",
+        "amasty/module-magento-custom-form": "*"
+    },
+    "suggest": {
+        "amasty/module-custom-form-hyva": "Install CustomFormHyva module to activate the integration with Hyva Theme."
+    },
+    "homepage": "https://amasty.com/",
+    "type": "magento2-module",
+    "version": "1.18.2",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\CustomFormsLiteSubscriptionPackage\\": ""
+        }
+    }
+}

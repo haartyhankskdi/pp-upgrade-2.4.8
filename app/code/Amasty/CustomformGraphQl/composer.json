@@ -1,0 +1,22 @@
+{
+    "name": "amasty/module-magento-custom-form-graphql",
+    "description": "Custom Form Graphql by Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty/base": ">=1.13.2",
+        "amasty/module-magento-custom-form": ">=1.15.1"
+    },
+    "type": "magento2-module",
+    "version": "1.0.4",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\CustomformGraphQl\\": ""
+        }
+    }
+}

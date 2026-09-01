@@ -1,0 +1,84 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_GoogleTagManager
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+use Mageplaza\GoogleTagManager\Block\Tag\AnalyticsTag;
+
+/** @var AnalyticsTag $block */
+$data = $block->getAnalyticsData();
+?>
+<!--Analytics Added by Mageplaza GTM -->
+<?php if ($block->canShowAnalytics()) : ?>
+    <?php if ($block->isMultiShipping()) : ?>
+        <?php if (!empty($data)) : ?>
+            <?php foreach ($data as $dt) : ?>
+                <?php if (isset($dt) && !empty($dt['event_name'])) : ?>
+                    <?php foreach ($dt['event_name'] as $event) : ?>
+                        <script>
+                            gtag(
+                                'event',
+                                '<?= /** @noEscape */ $event ?>',
+                                <?= /** @noEscape */ $block->encodeJs($dt['data']) ?>
+                            );
+                        </script>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    <?php else : ?>
+        <?php if (isset($data) && !empty($data['event_name'])) : ?>
+            <?php foreach ($data['event_name'] as $event) : ?>
+                <script>
+                    gtag(
+                        'event',
+                        '<?= /** @noEscape */ $event ?>',
+                        <?= /** @noEscape */ $block->encodeJs($data['data']) ?>
+                    );
+                </script>
+                <?php if (isset($data['related'])) : ?>
+                    <script>
+                        gtag(
+                            <?= /** @noEscape */ $block->encodeJs($data['related']) ?>
+                        );
+                    </script>
+                <?php endif; ?>
+                <?php if (isset($data['up_sell'])) : ?>
+                    <script>
+                        gtag(
+                            <?= /** @noEscape */ $block->encodeJs($data['up_sell']) ?>
+                        );
+                    </script>
+                <?php endif; ?>
+
+                <?php if (!empty($data['step'])) : ?>
+                    <script>
+                        gtag(
+                            'event',
+                            '<?= /** @noEscape */ $data['step']['event'] ?>', {
+                                "checkout_step": <?= /** @noEscape */ $data['step']['checkout_step'] ?>,
+                                "checkout_option": "<?= /** @noEscape */ $data['step']['checkout_option'] ?>"
+                            }
+                        );
+                    </script>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>

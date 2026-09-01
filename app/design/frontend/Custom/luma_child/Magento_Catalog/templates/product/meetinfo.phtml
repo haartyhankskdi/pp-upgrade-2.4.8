@@ -1,0 +1,184 @@
+
+    <style>
+        /* Basic styles for the modal */
+        .meet-the-team-popup .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65); 
+            padding:35px 0;
+            
+            
+        }
+
+        .meet-the-team-popup .model-content-sec{
+            position: relative;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #999;
+            border: 1px solid rgba(0, 0, 0, .2);
+            border-radius: 6px;
+            -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+            box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+            outline: 0;
+            padding: 25px; 
+            z-index: 1000;
+            width: 400px;
+            margin: 0 auto;
+             
+            
+        }
+
+        .meet-the-team-popup .modal-header {
+            font-weight: 400;
+            margin-bottom: 15px;
+            font-family: 'Lato', sans-serif !important;
+            font-size: 22px;
+        }
+        .meet-the-team-popup .modal-content p{
+            font-weight: 400;
+            margin-bottom: 10px;
+            font-family: 'Lato', sans-serif !important;
+            font-size: 14px;
+            display: inline-block;
+        }
+        .meet-the-team-popup .modal-content span{
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-family: 'Lato', sans-serif !important;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .meet-the-team-popup .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            background-color: #000;
+            color: #fff;
+            border-radius: 50px;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 27px;
+            font-size: 24px;
+        }
+
+        .meet-the-team-popup .modal-content {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .meet-the-team-popup .model-content-sec{
+            position:relative;
+            animation:animatebottom 0.4s
+            }
+
+            @keyframes animatebottom{
+                from{
+                        bottom:-300px;
+                        opacity:0
+                    } 
+                to{
+                    bottom:0;
+                    opacity:1
+                    }
+                }
+
+
+    </style>
+
+
+    <!-- Modal element -->
+    <div class="meet-the-team-popup">
+    <div id="modal" class="modal">
+        <div class="model-content-sec">
+        <span id="modal-close" class="modal-close">&times;</span>
+        <div id="modal-header" class="modal-header"></div>
+        <div id="modal-content" class="modal-content"></div>
+    </div>
+    </div>
+</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const plusButtons = document.querySelectorAll('.plus-button');
+            const modal = document.getElementById('modal');
+            const modalClose = document.getElementById('modal-close');
+            const modalHeader = document.getElementById('modal-header');
+            const modalContent = document.getElementById('modal-content');
+
+            plusButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const section = this.getAttribute('data-section');
+
+                    // Simulated data retrieval based on section
+                    let sectionData;
+                    switch (section) {
+                        case 'bhupinder-dhaliwal':
+                            sectionData = {
+                                title: 'BHUPINDER (BOO) DHALIWAL',
+                                content: '<span>GPhC 2050963</span><p>Boo graduated from university with a degree in Pharmacy. After achieving registration as a pharmacist, he went on to purchase a community pharmacy and began a lifelong journey of delivering pharmaceutical care to communities across England. Today, Boo is an integral member of the Pharmacy Planet team. In between rounds of golf and a commitment to NHS pharmacy services, Boo enjoys seeing a new generation of pharmacy emerging in a digital era.</p>'
+                            };
+                            break;
+                        case 'james-batson':
+                            sectionData = {
+                                title: 'JAMES BATSON',
+                                content: '<p>James began his career in pharmacy as a teenager working in a small pharmacy in regional Australia. Since then, he has accrued decades of experience working in retail, hospital, and community pharmacy settings. Today, he oversees Pharmacy Planet’s extensive operations and coordinates all aspects of Pharmacy Planet.</p>'
+                            };
+                            break;
+                        case 'jenomi-thuduwage':
+                            sectionData = {
+                                title: 'JENOMI THUDUWAGE',
+                                content: '<p>Jenomi has been with Pharmacy Planet since its very earliest days. Starting as one of our first operational assistants, Jenomi began by preparing medicines to be shipped to patients and packaging their orders for dispatch. Since then, she has risen through the ranks to lead our customer service team and play a crucial role in the operations of our weight loss clinic.</p>'
+                            };
+                            break;
+                        case 'harminder-kaur':
+                            sectionData = {
+                                title: 'HARMINDER HARMY KAUR',
+                                content: '<span>GPhC 2061107</span><p>Harmy is an experienced community pharmacist and clinical services pharmacist. Her particular interest in weight loss medicine has seen her career spent working with patients across a wide array of healthcare settings. This has equipped her as an expert in developing and implementing innovative new clinical and patient care services. She brings these skills to Pharmacy Planet’s weight loss clinic where she provides her clinical services and advice.</p>'
+                            };
+                            break;
+                        case 'saranya-vijayakumar':
+                            sectionData = {
+                                title: 'SARANYA VIJAYAKUMAR',
+                                content: '<p>JSaranya is the most recent addition to the Pharmacy Planet team and has come on board with the experience she has gained in the food safety, nutrition, and marketing fields. Her valuable insight is already proving to be an asset for our weight loss clinic and the wider pharmacy.</p>'
+                            };
+                            break;
+                        case 'tamana-panesar':
+                            sectionData = {
+                                title: 'TAMANA PANESAR',
+                                content: '<p>Tamana joined the Pharmacy Planet customer service team in 2023 and has gone on to develop strong relationships with our patients and facilitate healthcare solutions for thousands of patients. Her cheery disposition and willingness to go above and beyond have made her a highly valued member of the Pharmacy Planet team.</p>'
+                            };
+                            break;
+                        default:
+                            sectionData = {
+                                title: 'Unknown',
+                                content: '<p>No details available.</p>'
+                            };
+                            break;
+                    }
+
+                    modalHeader.innerText = sectionData.title;
+                    modalContent.innerHTML = sectionData.content;
+                    modal.style.display = 'block';
+                });
+            });
+
+            modalClose.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            // Close the modal if user clicks outside of it
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+

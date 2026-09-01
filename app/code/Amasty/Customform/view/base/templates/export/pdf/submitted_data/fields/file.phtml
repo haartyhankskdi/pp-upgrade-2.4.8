@@ -1,0 +1,24 @@
+<?php
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/
+?>
+<?php
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Amasty\Customform\ViewModel\Export\Pdf\SubmittedData\Fields\File $viewModel
+ */
+
+$viewModel = $block->getViewModel();
+?>
+
+<?php foreach ($viewModel->getFieldValue() as $fileName => $fileUrl): ?>
+    <a class="amform-link"
+       href="<?= $escaper->escapeUrl($fileUrl)?>"
+       title="<?= $escaper->escapeHtmlAttr(__('Download')) ?>">
+        <?= $escaper->escapeHtml(__('Download:')) ?> <?= $escaper->escapeHtml($fileName) ?>
+    </a>
+<?php endforeach;?>

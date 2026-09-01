@@ -1,0 +1,22 @@
+<?php
+    /**
+     * @var Nilesh\PrescriberNotes\Block\Adminhtml\PrescriberNotes\RemoteNotes $block
+     * */
+?>
+<style>
+    #add_new_custom_button {
+        font-size: 1.6rem;
+        letter-spacing: .025em;
+        background-color: #eb5202;
+        border-color: #eb5202;
+        color: #ffffff;
+        text-shadow: 1px 1px 0 rgb(0 0 0 / 25%);
+        font-weight: bold;
+        padding: 0.6875em 20px;
+        position: relative;
+        top: 26px;
+        z-index: 20;
+        text-decoration: none;
+    }
+</style>
+<a id="add_new_custom_button" target="blank" href="<?php echo $this->getUrl("nilesh_prescribernotes/prescribernotes/new") . "?connect_id=" . $block->getCustomerId(); ?>" title="Add New Note">Add New Note</a>

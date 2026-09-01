@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="kdi_advice_post" resource="default" engine="innodb" comment="Kdi Adcice Post Table">
+		<column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="entity_id"/>
+		</constraint>
+		<column name="name" nullable="true" xsi:type="text" comment="Advice Post Name"/>
+		<column name="description" nullable="true" xsi:type="text" comment="Advice Post Name"/>
+		<column name="review_by" nullable="true" xsi:type="text" comment="Post Review By" />
+		<column name="author_by" nullable="true" xsi:type="text" comment="Post Author" />
+		<column name="consultation_url" nullable="true" xsi:type="varchar" comment="Book My Consultation URL" length="255"/>
+		<column name="blog_category_id" nullable="true" xsi:type="int" comment="Blog Category Id for Advice Post" identity="false"/>
+		<column name="category_id" nullable="true" xsi:type="int" comment="Advice Post Category Id" identity="false"/>
+		<column name="title" nullable="true" xsi:type="varchar" comment="Meta Title For Advice Post" length="255"/>
+		<column name="meta_description" nullable="true" xsi:type="varchar" comment="Meta Description For Advice Post" length="255"/>
+		<column name="meta_keyword" nullable="true" xsi:type="varchar" comment="Meta Keyword Advice Post" length="255"/>
+		<column name="robots" nullable="true" xsi:type="varchar" comment="Robots" length="255"/>
+	</table>
+</schema>

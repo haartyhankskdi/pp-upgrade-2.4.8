@@ -1,0 +1,14 @@
+<?php
+$coreHelper = $this->helper(\Magezon\Core\Helper\Data::class);
+$popup      = $this->getPopup();
+$settings   = $coreHelper->serialize($this->getJsSettings());
+$html       = $this->getProfileHtml();
+?>
+<?php if ($html) { ?>
+<div id="popupbuilder-popup-<?= $popup->getId() ?>" class="popupbuilder-popup" data-mage-init='{"Magezon_PopupBuilder/js/popup":<?= $settings ?>}'>
+	<div class="popupbuilder-poup-content-inner"><?= $html ?></div>
+</div>
+<?php if ($styleHtml = $this->getStyleHtml()) { ?>
+<style class="mgz-style"><?= $styleHtml ?></style>
+<?php } ?>
+<?php } ?>

@@ -1,0 +1,844 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/-->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">
+                amasty_customform_forms_edit.amasty_customform_forms_edit_data_source
+            </item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Form Configuration</item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+        <!--item name="template" xsi:type="string">templates/form/collapsible</item-->
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="export_form_data_to_csv" class="Amasty\Customform\Ui\Component\Form\Buttons\ExportFormDataToCsv"/>
+            <button name="export_form_data_to_pdf" class="Amasty\Customform\Ui\Component\Form\Buttons\ExportFormDataToPdf"/>
+            <button name="save">
+                <label translate="true">Save</label>
+                <class>save primary</class>
+            </button>
+            <button name="save_and_continue" class="Amasty\Customform\Ui\Component\Form\Buttons\SaveAndContinue"/>
+            <button name="duplicate" class="Amasty\Customform\Ui\Component\Form\Buttons\Duplicate"/>
+            <button name="delete" class="Amasty\Customform\Ui\Component\Form\Buttons\Delete"/>
+            <button name="back">
+                <url path="*/*/"/>
+                <label translate="true">Back</label>
+                <class>back</class>
+            </button>
+        </buttons>
+        <layout>
+            <navContainerName>left</navContainerName>
+            <type>tabs</type>
+        </layout>
+        <namespace>amasty_customform_forms_edit</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>amasty_customform_forms_edit.amasty_customform_forms_edit_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="amasty_customform_forms_edit_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Amasty_Customform/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="amasty_customform/forms/save"/>
+        </settings>
+        <dataProvider class="Amasty\Customform\Ui\DataProvider\Form" name="amasty_customform_forms_edit_data_source">
+            <settings>
+                <requestFieldName>form_id</requestFieldName>
+                <primaryFieldName>form_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="general" sortOrder="10">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataScope" xsi:type="string">data</item>
+            </item>
+        </argument>
+        <settings>
+            <label translate="true">General</label>
+        </settings>
+
+        <field name="form_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">form</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+            </settings>
+        </field>
+
+        <field name="status" sortOrder="10" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">1</item>
+                    <item name="source" xsi:type="string">form</item>
+                    <item name="switcherConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">true</item>
+                        <item name="rules" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="value" xsi:type="number">0</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_customform_forms_edit.areas.general.general.activate_ranges</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">false</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="number">1</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_customform_forms_edit.areas.general.general.activate_ranges</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Form</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <container name="activate_ranges" component="Magento_Ui/js/form/components/group" sortOrder="15">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">admin__control-grouped-date -amcform-from-to-ranges</item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <field name="scheduled_from" sortOrder="90" formElement="date">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="options" xsi:type="array">
+                            <item name="showsTime" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-date">true</class>
+                    </additionalClasses>
+                    <dataType>string</dataType>
+                    <label translate="true">Scheduled From</label>
+                </settings>
+            </field>
+            <field name="scheduled_to" sortOrder="100" formElement="date">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="options" xsi:type="array">
+                            <item name="showsTime" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <scopeLabel/>
+                    <additionalClasses>
+                        <class name="admin__field-date">true</class>
+                    </additionalClasses>
+                    <dataType>string</dataType>
+                    <label translate="true">Scheduled To</label>
+                </settings>
+            </field>
+        </container>
+
+        <field name="title" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">form</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Title</label>
+                <dataType>text</dataType>
+                <visible>true</visible>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="code" sortOrder="40" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">form</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Code</label>
+                <dataType>text</dataType>
+                <visible>true</visible>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="success_url" sortOrder="50" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">form</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Success Url</label>
+                <notice translate="true">Leave empty for redirect to homepage. Set '/' to use AJAX without page reload. Form with file upload requires page reload anyway.</notice>
+                <dataType>text</dataType>
+                <visible>true</visible>
+            </settings>
+        </field>
+
+        <field name="store_id" sortOrder="60" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Store View</label>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="Amasty\Customform\Model\Source\Stores"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+
+        <field name="customer_group" sortOrder="70" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="default" xsi:type="number">32000</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Customer Group</label>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="Magento\Customer\Model\Customer\Source\GroupSourceInterface"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+
+        <field name="success_url" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">form</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Success Url</label>
+                <notice translate="true">Leave empty for redirect to homepage. Set '/' to use AJAX without page reload.
+                    Form with file upload requires page reload anyway.
+                </notice>
+                <dataType>text</dataType>
+                <visible>true</visible>
+            </settings>
+        </field>
+
+        <field name="survey_mode_enable" sortOrder="80" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">form</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <notice translate="true">When enabled, customer will be able to submit the form only once.</notice>
+                <label translate="true">Use as Survey</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="save_referer_url" sortOrder="80" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">form</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Save Referrer Url</label>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+    </fieldset>
+
+    <fieldset name="notification" sortOrder="15">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataScope" xsi:type="string">data</item>
+            </item>
+        </argument>
+        <settings>
+            <label translate="true">Notifications</label>
+        </settings>
+
+        <fieldset name="email_notification">
+            <settings>
+                <label translate="true">Email Notifications</label>
+                <dataScope/>
+            </settings>
+
+            <field name="send_notification" sortOrder="10" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">2</item>
+                        <item name="switcherConfig" xsi:type="array">
+                            <item name="enabled" xsi:type="boolean">true</item>
+                            <item name="rules" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="value" xsi:type="number">0</item>
+                                    <item name="actions" xsi:type="array">
+                                        <item name="0" xsi:type="array">
+                                            <item name="target" xsi:type="string">
+                                                amasty_customform_forms_edit.areas.notification.notification.email_notification.send_to
+                                            </item>
+                                            <item name="callback" xsi:type="string">visible</item>
+                                            <item name="params" xsi:type="array">
+                                                <item name="0" xsi:type="boolean">false</item>
+                                            </item>
+                                        </item>
+                                        <item name="1" xsi:type="array">
+                                            <item name="target" xsi:type="string">
+                                                amasty_customform_forms_edit.areas.notification.notification.email_notification.email_template
+                                            </item>
+                                            <item name="callback" xsi:type="string">visible</item>
+                                            <item name="params" xsi:type="array">
+                                                <item name="0" xsi:type="boolean">false</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                                <item name="1" xsi:type="array">
+                                    <item name="value" xsi:type="number">1</item>
+                                    <item name="actions" xsi:type="array">
+                                        <item name="0" xsi:type="array">
+                                            <item name="target" xsi:type="string">
+                                                amasty_customform_forms_edit.areas.notification.notification.email_notification.send_to
+                                            </item>
+                                            <item name="callback" xsi:type="string">visible</item>
+                                            <item name="params" xsi:type="array">
+                                                <item name="0" xsi:type="boolean">true</item>
+                                            </item>
+                                        </item>
+                                        <item name="1" xsi:type="array">
+                                            <item name="target" xsi:type="string">
+                                                amasty_customform_forms_edit.areas.notification.notification.email_notification.email_template
+                                            </item>
+                                            <item name="callback" xsi:type="string">visible</item>
+                                            <item name="params" xsi:type="array">
+                                                <item name="0" xsi:type="boolean">true</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                                <item name="2" xsi:type="array">
+                                    <item name="value" xsi:type="number">2</item>
+                                    <item name="actions" xsi:type="array">
+                                        <item name="0" xsi:type="array">
+                                            <item name="target" xsi:type="string">
+                                                amasty_customform_forms_edit.areas.notification.notification.email_notification.send_to
+                                            </item>
+                                            <item name="callback" xsi:type="string">visible</item>
+                                            <item name="params" xsi:type="array">
+                                                <item name="0" xsi:type="boolean">true</item>
+                                            </item>
+                                        </item>
+                                        <item name="1" xsi:type="array">
+                                            <item name="target" xsi:type="string">
+                                                amasty_customform_forms_edit.areas.notification.notification.email_notification.email_template
+                                            </item>
+                                            <item name="callback" xsi:type="string">visible</item>
+                                            <item name="params" xsi:type="array">
+                                                <item name="0" xsi:type="boolean">true</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Send Notification to Email</label>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="Amasty\Customform\Model\Source\YesNoSystemConfig"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+
+            <field name="send_to" formElement="input" sortOrder="20">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">form</item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Recipients Email</label>
+                    <notice translate="true">Comma separated Emails, no spaces.</notice>
+                    <dataType>text</dataType>
+                    <visible>true</visible>
+                </settings>
+            </field>
+
+            <field name="email_template" sortOrder="30" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">2</item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Email Template</label>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="Amasty\Customform\Model\Source\FormNotificationEmailTemplate"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+        </fieldset>
+
+        <fieldset name="answer_notification">
+            <settings>
+                <label translate="true">Answer the Submitted Form</label>
+                <dataScope/>
+            </settings>
+
+            <field name="email_field" sortOrder="10" formElement="select">
+                <settings>
+                    <label translate="true">Email Address Field</label>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="Amasty\Customform\Model\Source\FormEmailField"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+
+            <field name="email_field_hide" sortOrder="80" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">form</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <notice translate="true">Set 'Yes' to automatically hide Email Address Field in the form for logged
+                        in customer
+                        and use email address specified in the customer account.
+                    </notice>
+                    <label translate="true">Hide Email Address Field</label>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+
+
+        </fieldset>
+
+        <fieldset name="autoresponder">
+            <settings>
+                <label translate="true">Autoresponder</label>
+                <dataScope/>
+            </settings>
+
+            <field name="auto_reply_enable" sortOrder="10" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">2</item>
+                    </item>
+                    <item name="switcherConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">true</item>
+                        <item name="rules" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="value" xsi:type="number">0</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">
+                                            amasty_customform_forms_edit.notification.autoresponder.auto_reply_template
+                                        </item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">false</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="number">1</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">
+                                            amasty_customform_forms_edit.notification.autoresponder.auto_reply_template
+                                        </item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="2" xsi:type="array">
+                                <item name="value" xsi:type="number">2</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">
+                                            amasty_customform_forms_edit.notification.autoresponder.auto_reply_template
+                                        </item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Enable Auto Response</label>
+                    <notice translate="true">Please note. "Email Address Field" should be selected for detecting
+                        recipient email.
+                    </notice>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="Amasty\Customform\Model\Source\YesNoSystemConfig"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+
+            <field name="auto_reply_template" sortOrder="20" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">2</item>
+                    </item>
+                </argument>
+                <settings>
+                    <label translate="true">Email Template</label>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options class="Amasty\Customform\Model\Source\AutoReplySystemConfig"/>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+        </fieldset>
+    </fieldset>
+
+    <fieldset name="content" sortOrder="30">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataScope" xsi:type="string">data</item>
+            </item>
+        </argument>
+        <settings>
+            <label translate="true">Content</label>
+        </settings>
+
+        <field name="design" sortOrder="5" formElement="select">
+            <settings>
+                <label translate="true">Form Design</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Amasty\Customform\Model\Config\Source\Design"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="submit_button" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">form</item>
+                    <item name="default" xsi:type="string" translate="true">Submit</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Submit Button</label>
+                <dataType>text</dataType>
+                <visible>true</visible>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate-no-html-tags" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="success_message" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">form</item>
+                    <item name="default" xsi:type="string">Thanks for contacting us. Your request was saved
+                        successfully.
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Success Message</label>
+                <dataType>text</dataType>
+                <visible>true</visible>
+                <validation>
+                    <rule name="validate-no-html-tags" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="popup_show" sortOrder="80" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">form</item>
+                    <item name="switcherConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">true</item>
+                        <item name="rules" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="value" xsi:type="number">0</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">
+                                            amasty_customform_forms_edit.areas.content.content.popup_button
+                                        </item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">false</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="number">1</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">
+                                            amasty_customform_forms_edit.areas.content.content.popup_button
+                                        </item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Show on Button Click</label>
+                <notice translate="true">Custom Form popup will be displayed after the button is clicked.</notice>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="popup_button" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">form</item>
+                    <item name="default" xsi:type="string">Show Form</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Button Text</label>
+                <dataType>text</dataType>
+                <visible>true</visible>
+                <validation>
+                    <rule name="validate-no-html-tags" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+    </fieldset>
+
+    <fieldset name="creator" sortOrder="40">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataScope" xsi:type="string">data</item>
+            </item>
+        </argument>
+        <settings>
+            <label translate="true">Creator</label>
+        </settings>
+
+        <field name="form_json" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <label translate="true">Form Json</label>
+            </settings>
+        </field>
+
+        <field name="form_title" formElement="input">
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <label translate="true">Form Title</label>
+                <dataScope>form_title</dataScope>
+            </settings>
+        </field>
+
+        <htmlContent name="amasty_customform_creator">
+            <argument name="block" xsi:type="object">Amasty\Customform\Block\Adminhtml\Form\Creator\Wrapper</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Amasty_Customform/js/form/elements/form_builder</item>
+                </item>
+            </argument>
+        </htmlContent>
+    </fieldset>
+
+    <fieldset name="embedding" sortOrder="50">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataScope" xsi:type="string">data</item>
+            </item>
+        </argument>
+        <settings>
+            <label translate="true">Embedding</label>
+        </settings>
+
+        <field name="cms" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">form</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cms Embedding Code</label>
+                <notice translate="true">Copy this code into CMS Page Editor to insert form into any CMS page.</notice>
+                <dataType>text</dataType>
+                <visible>true</visible>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+
+        <field name="template" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">form</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Template Embedding Code</label>
+                <notice translate="true">Insert this code into *.phtml template directly to display form in any block.
+                </notice>
+                <dataType>text</dataType>
+                <visible>true</visible>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+
+        <field name="layout" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">form</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Layout Embedding Code</label>
+                <notice translate="true">Insert this code into layout to display the form.</notice>
+                <dataType>text</dataType>
+                <visible>true</visible>
+                <disabled>true</disabled>
+            </settings>
+        </field>
+    </fieldset>
+</form>

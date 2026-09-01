@@ -1,0 +1,329 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post view template
+ *
+ * @var $block \Magefan\Blog\Block\Post\View
+ */
+?>
+<?php
+    $_post = $block->getPost();
+    $_postUrl = $_post->getPostUrl();
+    $_postName = $block->escapeHtml($_post->getTitle(), null);
+
+    // Custom blog product related slider
+    $finalCatIds = [];
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    /** @var \Magento\Catalog\Model\ResourceModel\Product\Collection $productCollection */
+    $productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
+    $categoryCollection = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory');
+    $categories = $categoryCollection->create();
+    $categories->addAttributeToSelect('*');
+    $categories->addAttributeToFilter('level', array('eq' => 2));
+
+    foreach ($categories as $category) {
+
+        if ($category->getIsActive()) {            
+            $catArr[$category->getName()] = $category->getId();
+            $categoryFactory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory');
+            $categorya = $categoryFactory->create()->load($category->getId());
+            $childrenCategories = $categorya->getChildrenCategories();
+        }
+
+        foreach ($childrenCategories as $fas){
+
+            if ($fas->getIsActive()) {              
+                $catArr[$fas->getName()] = $fas->getId();
+            }
+        }
+    }    
+
+    $categoryCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Category\Collection');
+    foreach ($_post->getParentCategories() as $ct) {         
+        if(array_key_exists($ct->getTitle(), $catArr)){            
+            $finalCatIds[] = $catArr[$ct->getTitle()];
+        }
+    }     
+    
+    /** Apply filters here */
+    $collection = $productCollection->addAttributeToSelect('*')->addCategoriesFilter(['in' => $finalCatIds])->addAttributeToFilter('type_id', 'configurable')->load();
+    $mediaUrl = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    $currencysymbol = $objectManager->get('Magento\Directory\Model\Currency');
+?>
+
+<?php
+// $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+// $pageTitle = $objectManager->get(\Magento\Framework\View\Page\Title::class)->get();
+// echo $pageTitle;
+?>
+
+<div class="post-view">
+    <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
+        <!-- 
+        <div class="post-header clearfix">
+            <?php /* ?>
+            <div class="addthis_toolbox addthis_default_style" addthis:url="<?= $block->escapeUrl($_postUrl) ?>">
+                <a class="addthis_button_facebook"></a>
+                <a class="addthis_button_twitter"></a>
+                <a class="addthis_button_email"></a>
+                <a class="addthis_button_compact"></a>
+            </div>
+            <?= $block->getInfoHtml() ?>
+            <?php */ ?>
+        </div>
+        -->
+
+        <div class="post-content">
+            <div class="post-description clearfix">
+                <?php /*
+                <?php if ($featuredImage = $_post->getFeaturedImage()) { ?>
+                    <?php
+                        $featuredImgAlt = $_post->getData('featured_img_alt');
+                        if (!$featuredImgAlt) {
+                            $featuredImgAlt = $_postName;
+                        }
+                    ?>
+                    <div class="post-ftimg-hld">
+                        <img src="<?= $block->escapeUrl($featuredImage) ?>"
+                             alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                    </div>
+                <?php }  */ ?>
+                 <?php
+// Get post content
+$content = $block->getContent();
+
+// Find all H2 and H3 headings
+preg_match_all('/<h2[^>]*>(.*?)<\/h2>|<h3[^>]*>(.*?)<\/h3>/', $content, $matches, PREG_SET_ORDER);
+
+$toc = '';
+$sectionCount = 0;
+$subSectionCount = 0;
+
+if (!empty($matches)) {
+    $toc .= '<div class="blog-toc">';
+    $toc .= '<h2>Table of Contents</h2>';
+
+    foreach ($matches as $match) {
+        if (!empty($match[1])) { // H2 Found
+            $sectionCount++;
+            $subSectionCount = 0;
+            $heading = trim($match[1]);
+            $id = 'section-' . $sectionCount;
+            $toc .= '<p>' . $sectionCount . '. <a href="#' . $id . '">' . $heading . '</a></p>';
+
+            // Replace original H2 with H2 having an ID
+            $content = str_replace('<h2>' . $heading . '</h2>', '<h2 id="' . $id . '">' . $heading . '</h2>', $content);
+        } elseif (!empty($match[2])) { // H3 Found
+            $subSectionCount++;
+            $heading = trim($match[2]);
+            $id = 'section-' . $sectionCount . '-' . $subSectionCount;
+
+            $toc .= '<p style="margin-left: 20px;">' . $sectionCount . '.' . $subSectionCount . '. <a href="#' . $id . '">' . $heading . '</a></p>';
+
+            $content = str_replace('<h3>' . $heading . '</h3>', '<h3 id="' . $id . '">' . $heading . '</h3>', $content);
+        }
+    }
+
+    $toc .= '</div>';
+}
+
+// Insert TOC just before the first <h2> or <h3>
+$splitContent = preg_split('/(<h[23][^>]*>)/i', $content, 2, PREG_SPLIT_DELIM_CAPTURE);
+if (count($splitContent) === 3) {
+    $content = $splitContent[0] . $toc . $splitContent[1] . $splitContent[2];
+}
+?>
+
+<div class="post-text-hld">
+    <?= /*@noEscape*/ $content ?>
+    <div class="clear clearfix"></div>
+</div>
+
+            
+                <div class="post-header clearfix">
+            <div class="addthis_toolbox addthis_default_style" addthis:url="<?= $block->escapeUrl($_postUrl) ?>">
+                <a class="addthis_button_facebook"></a>
+                <a class="addthis_button_twitter"></a>
+                <a class="addthis_button_email"></a>
+                <a class="addthis_button_compact"></a>
+            </div>
+            <?= $block->getInfoHtml() ?>
+        </div>
+            </div>
+        </div>
+
+        <div class="post-bottom">
+            <?= $block->getChildHtml('blog.post.bottom') ?>
+        </div>
+
+        <!-- Custom Blog Related Product Slider -->
+        <div class="col-md-12 blog-product-slider-wrapper">
+            <h3>Explore Related Products</h3>
+            <div class="slider-prev"><img src="<?= $mediaUrl.'wysiwyg/left-arrow.png'?>" alt="Left Arrow" class="prev-arrow slick-prev slick-arrow" /></div>
+            <div class="blog-products">
+                <?php
+                    foreach ($collection as $product){ ?>
+                        <div class="blog-products-list">
+                        <div class="product-photo"><img src="<?= $this->helper('Magento\Catalog\Helper\Image')->init($product, 'product_small_image')->resize(250,250)->getUrl(); ?>" alt="<?= $product->getName() ?>"></div>
+                        <div class="product-name"><?= $product->getName() ?></div>
+                        <div class="product-price-sec"><div class="price"><span>From</span><?= $currencysymbol->getCurrencySymbol().number_format($product->getPrice(),2) ?></div> 
+                        <div class="product-btn"><a href="<?= $product->getProductUrl() ?>">View Product</a></div>
+                        </div>
+                    </div>
+                <?php
+                    }  
+                ?>
+            </div>
+            <div class="slider-next"><img src="<?= $mediaUrl.'wysiwyg/right-arrow.png'?>" alt="Left Arrow" class="next-arrow slick-next slick-arrow" /></div>
+        </div>
+        <!-- Custom Blog Related Product Slider -->
+
+    </div>
+</div>
+
+
+<script>
+    require(["jquery", "slick_slider"], function (s) {
+        s(".blog-products").slick({
+            prevArrow: s(".prev-arrow"),
+            nextArrow: s(".next-arrow"),
+            infinite: !0,
+            speed: 300,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: !0,
+            autoplaySpeed: 3e3,
+            swipeToSlide: true,
+            responsive: [
+                { breakpoint: 1024, settings: { slidesToShow: 4, slidesToScroll: 1, infinite: !0, dots: !0 } },
+                { breakpoint: 600, settings: { slidesToShow: 2, slidesToScroll: 1 } },
+                { breakpoint: 480, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+            ],
+        });
+    });
+</script>
+
+
+<style type="text/css">
+
+    .blog-toc {
+    background: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.blog-toc h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.blog-toc p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+.blog-toc a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+    
+    .blog-products-list{
+        width: 100%;
+        float: left;
+        text-align: center;
+        border: 1px solid #ddd;
+        padding: 15px 12px;
+        margin: 0 5px;
+    }
+    .product-price-sec{
+        width: 100%;
+        float: left;
+    }
+
+    .product-price-sec .price{
+        float: left;
+        font-size: 16px !important;
+        color: #000;
+        font-family: 'Ubuntu', sans-serif !important;
+        line-height: 24px;
+        font-weight: 500;
+        text-align: left;
+    }
+    .product-price-sec .price span{
+        width: 100%;
+        float: left;
+        padding-bottom: 0px;
+        font-size: 13px !important;
+        line-height: 18px;
+    }
+    .product-price-sec .product-btn{
+        float: right;
+        margin-top: 12px;
+    }
+    .product-price-sec .product-btn a,
+    .product-price-sec .product-btn button{
+        background-color: #ED3237;
+        border-radius: 50px;
+        color: #fff;
+        padding: 10px 15px;
+    }
+
+    .blog-products-list .product-name{
+        font-size: 17px !important;
+        color: #000;
+        font-family: 'Ubuntu', sans-serif !important;
+        line-height: 23px;
+        font-weight: 400;
+        height: 80px;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        text-align: left;
+    }
+   
+    .slider-prev img,
+    .slider-next img{
+        width: 37px;
+        height: 65px;
+        top: 58%;
+    }
+    .blog-product-slider-wrapper{
+        position: relative;
+    }
+     
+   @media (max-width: 767px) {
+    .blog-product-slider-wrapper .slick-next{
+        right: 0;
+    }
+    .blog-product-slider-wrapper .slick-prev{
+        left: 0;
+    }
+    .blog-products-list .product-name{
+        height: auto !important;
+    }
+    .blog-product-slider-wrapper{
+        margin-top: 50px;
+    }
+    .blog-product-slider-wrapper h3{
+        font-size: 26px !important;
+        line-height: 34px !important;
+        font-weight: 300;
+        margin-bottom: 30px !important;
+    }
+
+   }
+
+   .blog-product-slider-wrapper h3{
+    font-size: 40px;
+    line-height: 44px;
+    font-weight: 300;
+    margin-bottom: 40px;
+}
+
+</style>

@@ -1,0 +1,16 @@
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        $("#add").hide();
+        $("#add_new_custom_button").hide();
+        $('.admin__data-grid-outer-wrap[data-bind="scope: \'nilesh_prescribernotes_prescribernotes_listing.nilesh_prescribernotes_prescribernotes_listing\'"]').hide();
+        $('body').on('focusin', '.admin__page-nav-link', function() {
+            if ($(this).attr('id') === 'tab_block_customer_prescriber_notes_tab') {
+                $("#add_new_custom_button").show();
+                $('.admin__data-grid-outer-wrap[data-bind="scope: \'nilesh_prescribernotes_prescribernotes_listing.nilesh_prescribernotes_prescribernotes_listing\'"]').show();
+            } else {
+                $("#add_new_custom_button").hide();
+                $('.admin__data-grid-outer-wrap[data-bind="scope: \'nilesh_prescribernotes_prescribernotes_listing.nilesh_prescribernotes_prescribernotes_listing\'"]').hide();
+            }
+        });
+    });
+</script>

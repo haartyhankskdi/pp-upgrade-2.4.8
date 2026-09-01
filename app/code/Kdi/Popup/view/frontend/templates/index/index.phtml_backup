@@ -1,0 +1,1067 @@
+<?php
+
+/** @var \Kdi\Popup\Block\Index\Index $block */
+if (!$block->isEnabled()):
+    return '';
+endif;
+?>
+
+<!-- <link rel="stylesheet" href="<?= $block->escapeUrl($block->getViewFileUrl('Kdi_ProductPopup::css/popup.css')) ?>"> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"> -->
+
+<div id="kdi-product-popup" class="kdi-popup-overlay" style="display: none;">
+    <div class="wegovy-popup" role="dialog" aria-modal="true" aria-labelledby="kdi-popup-title">
+        <button type="button" class="kdi-popup-close" aria-label="<?= $block->escapeHtmlAttr(__('Close')) ?>">&times;</button>
+
+        <div class="popup-content">
+
+            <section class="promo">
+                <div class="promo-grid">
+                    <!-- Left: copy + form -->
+                    <div class="promo-content">
+                        <div class="eyebrow">NOW available</div>
+                        <div class="headline">Wegovy</div>
+                        <div class="headline2">Weight Loss Pill</div>
+                        <!-- <div class="rule"></div> -->
+                        <p>The Wegovy weight loss pill is now available. </br>
+                            Click below to place your online.</p>
+
+                        <div class="feature-list">
+                            <div class="feature-list">
+
+                                <div class="feature-item">
+                                    <span class="feature-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#5B4FE9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="9" cy="20" r="1"></circle>
+                                            <circle cx="18" cy="20" r="1"></circle>
+                                            <path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.8h8.6a2 2 0 0 0 2-1.6L21 8H6"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="feature-text">
+                                        <span>Order Online</span><br>Quick and simple checkout
+                                    </span>
+                                </div>
+
+                                <div class="feature-item">
+                                    <span class="feature-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#5B4FE9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="5" y="4" width="14" height="17" rx="2"></rect>
+                                            <path d="M9 4h6a1 1 0 0 1 1 1v1H8V5a1 1 0 0 1 1-1z"></path>
+                                            <path d="M8 11h8M8 14h8M8 17h5"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="feature-text">
+                                        <span>Clinical review</span><br>UK prescriber assessment required
+                                    </span>
+                                </div>
+
+                                <div class="feature-item">
+                                    <span class="feature-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#5B4FE9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3z"></path>
+                                            <path d="M9 12l2 2 4-4"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="feature-text">
+                                        <span>Trusted pharmacy</span><br>UK registered pharmacy
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div class="order-section">
+
+                                <a href="https://www.pharmacyplanet.com/weightloss/wl-login" class="order-btn">
+                                    <span>PLACE YOUR ORDER</span>
+
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M13 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+
+                                <p class="treatment-link"><a href="https://www.pharmacyplanet.com/wegovy-tablets-semaglutide-weight-loss-pills-1.html" class="">
+                                    View treatment details 
+                                    <!-- <svg viewBox="0 0 24 24">
+                                    <path d="M9 5l7 7-7 7"></path>
+                                </svg> -->
+                                </a>
+
+                            </div>
+
+
+                            <!-- Waitlist form: email input added above the CTA button -->
+                            <!-- <form id="kdi-popup-form" class="kdi-popup-form waitlist-form">
+                            <label class="kdi-popup-field-label" for="kdi-popup-email">
+                                Email address
+                            </label>
+                            <input type="email" name="email" id="kdi-popup-email" placeholder="Enter your email & join the list" required class="waitlist-input" /> -->
+                            <!-- <button type="submit" class="kdi-popup-submit cta-button">
+                            <span class="e-text">Join the list</span>
+                            <span class="kdi-popup-arrow-badge">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M5 12h14M13 6l6 6-6 6" />
+                                </svg>
+                            </span>
+                        </button> -->
+                            <!-- </form> -->
+                            <!-- <div class="kdi-popup-message" id="kdi-popup-response"></div> -->
+                        </div>
+
+                        <!-- Right: illustration -->
+                        <!--  <div class="visual">
+                        <div class="visual-stage">
+                            <div class="arch"></div>
+                            <div class="pedestal"></div>
+                            <div class="pill-shadow"></div>
+                            <div class="pill"><span>novo</span></div>
+                        </div>
+                    </div> -->
+
+                    </div>
+
+                    <!-- Trust bar -->
+
+            </section>
+
+        </div>
+
+        <div class="trust-bar">
+            <div class="trust-item first">
+                <img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/gphc-icon-n.svg" width="35" height="35" alt=" ">
+                GPhC <br>Registered <br>Pharmacy
+            </div>
+            <div class="trust-item">
+                <img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/uk-team-icon-n.svg" width="30" height="30" alt=" ">
+                UK Clinical <br>Team
+            </div>
+            <div class="trust-item">
+                <img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/secure-icon-n.svg" width="40" height="40" alt=" ">
+                Secure &<br>Confidential
+            </div>
+            <div class="trust-item">
+                <img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/user-ivon-n.svg" width="40" height="40" alt=" ">
+                Thousands of<br>Happy Customers
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+    "#kdi-product-popup": {
+        "Kdi_ProductPopup/js/popup": {
+            "cookieName": "kdi_product_popup_closed",
+            "cookieLifetime": <?= (int)$block->getCookieLifetime() ?>,
+            "subscribeUrl": "<?= $block->escapeUrl($block->getSubscribeUrl()) ?>",
+            "productId": <?= (int)$block->getProductId() ?>
+        }
+    }
+}
+</script>
+
+
+
+<style>
+    /* Kdi_ProductPopup — popup styling for the two-column Wegovy layout */
+
+    .kdi-popup-overlay {
+        --navy-900: #060F33;
+        --navy-deep: #002a8f;
+        --navy-700: #142B6E;
+        --navy-600: #1C3A8C;
+        --orange-300: #FFAA66;
+        --orange-500: #FF7A29;
+        --orange-600: #FF5A0E;
+        --ink: #0A1640;
+        --muted: #C7CEEA;
+        --ivory: #F4F6FB;
+
+        position: fixed;
+        inset: 0;
+        background: rgba(6, 15, 51, 0.72);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        padding: 20px;
+    }
+
+    .wegovy-popup {
+        position: relative;
+        width: 100%;
+        max-width: 790px;
+        max-height: 92vh;
+        overflow-y: auto;
+        background: #fff;
+        border-radius: 0px;
+        color: #fff;
+        font-family: 'Lato', sans-serif;
+        box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.6);
+    }
+
+    .kdi-popup-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(255, 255, 255, 0.12);
+        color: #000;
+        font-size: 35px;
+        line-height: 1;
+        cursor: pointer;
+        z-index: 99999;
+        border: 1px solid #BFBFBF;
+        padding: 0;
+    }
+
+    .kdi-popup-close:hover {
+        background: #fff;
+    }
+
+    .popup-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        padding: 0px;
+        background: url(https://www.pharmacyplanet.com/pub/media/wysiwyg/wegovy-popup-bg.jpg) no-repeat right top !important;
+        background-size: 71% !important;
+    }
+
+    .popup-left {
+        width: 52%;
+    }
+
+    .preorder {
+        font-family: 'Anton', Impact, sans-serif;
+        text-transform: uppercase;
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    .popup-left h2 {
+        font-family: 'Anton', Impact, sans-serif;
+        text-transform: uppercase;
+        font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+        line-height: 1.02;
+        margin: 0 0 16px;
+        color: var(--orange-500);
+        font-weight: 400;
+    }
+
+    .popup-message-text {
+        font-size: 0.95rem;
+        color: var(--muted);
+        line-height: 1.5;
+        margin: 0 0 22px;
+    }
+
+    .benefits {
+        margin-bottom: 26px;
+    }
+
+    .benefit-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 14px;
+        font-size: 0.96rem;
+        font-weight: 500;
+        border-bottom: 1px solid rgba(255, 255, 255, .12);
+        padding-bottom: 14px;
+    }
+
+    .benefit-item:last-child {
+        border-bottom: none;
+    }
+
+    .icon {
+        flex: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--navy-700);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon svg {
+        width: 17px;
+        height: 17px;
+        stroke: var(--orange-500);
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    /* ---------- Form ---------- */
+
+    .kdi-popup-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 420px;
+    }
+
+    .kdi-popup-field-label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+    }
+
+    /*.kdi-popup-form input[type="email"] {
+        width: 100%;
+        padding: 15px 20px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.96);
+        color: var(--ink);
+        font-size: 0.95rem;
+        outline: none;
+        box-sizing: border-box;
+    }*/
+
+    .kdi-popup-form input[type="email"]:focus-visible {
+        border-color: #E6EFFC;
+        box-shadow: 0 0 0 4px #E6EFFC;
+    }
+
+    .order-section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        margin-top: 4px;
+    }
+
+    .order-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        width: 100%;
+        max-width: 420px;
+        background: #C2410C;
+        color: #fff !important;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 17px;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        padding: 16px 22px;
+        border-radius: 6px;
+        box-sizing: border-box;
+        transition: background 0.15s ease;
+    }
+
+    .order-btn:hover {
+        background: #005FFB;
+    }
+
+    .order-btn svg {
+        width: 20px;
+        height: 20px;
+        stroke: #fff;
+        fill: none;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex-shrink: 0;
+    }
+
+
+
+    .kdi-popup-arrow-badge {
+        flex: none;
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        background: #ED3237;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .kdi-popup-arrow-badge svg {
+        width: 30px;
+        height: 30px;
+        stroke: #fff;
+        fill: none;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .kdi-popup-message {
+        margin-top: 14px;
+        font-size: 0.88rem;
+        color: var(--muted);
+        min-height: 1.2em;
+    }
+
+    /* ---------- Visual ---------- */
+
+    .popup-right {
+        width: 42%;
+        position: relative;
+    }
+
+    .pill-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    .arch-bg {
+        width: 240px;
+        height: 380px;
+        background: linear-gradient(180deg, var(--orange-300), var(--orange-600) 75%);
+        border-radius: 130px 130px 0 0;
+        box-shadow: 0 0 0 12px var(--navy-700);
+        margin: auto;
+    }
+
+    .pedestal {
+        position: absolute;
+        left: 50%;
+        bottom: -16px;
+        transform: translateX(-50%);
+        width: 190px;
+        height: 46px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, var(--navy-600), var(--navy-900));
+        z-index: 0;
+    }
+
+    .pill {
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, #fff 0%, #E4E7EF 55%, #C9CDD9 100%);
+        color: #B8BDC9;
+        font-family: 'Lato', sans-serif;
+        font-style: italic;
+        font-size: 1.9rem;
+        font-weight: 700;
+        text-shadow: -1px -1px 0 rgba(255, 255, 255, 0.7), 2px 3px 4px rgba(0, 0, 0, 0.3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 80px;
+        transform: rotate(-9deg);
+        box-shadow:
+            inset 0 -8px 18px rgba(0, 0, 0, 0.18),
+            inset 0 8px 14px rgba(255, 255, 255, 0.6),
+            0 20px 35px -12px rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+
+    /* ---------- Trust bar ---------- */
+
+    .trust-section {
+        background: var(--ivory);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+        padding: 26px 30px;
+        color: var(--navy-900);
+    }
+
+    .trust-item {
+        width: 23%;
+        text-align: center;
+        font-weight: 700;
+        font-size: 0.82rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .trust-icon svg {
+        width: 26px;
+        height: 26px;
+        stroke: var(--navy-700);
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .trust-icon svg.fill-icon {
+        fill: var(--navy-700);
+        stroke: none;
+    }
+
+    /* ---------- Responsive ---------- */
+
+    @media (max-width: 768px) {
+        .popup-content {
+            flex-direction: column;
+            padding: 0px 0px;
+        }
+
+        .popup-left,
+        .popup-right {
+            width: 100%;
+        }
+
+        .popup-right {
+            order: -1;
+            margin-bottom: 20px;
+        }
+
+        .popup-left h2 {
+            font-size: clamp(1.8rem, 8vw, 2.4rem);
+        }
+
+        .trust-section {
+            flex-wrap: wrap;
+            padding: 22px 18px;
+        }
+
+        .trust-item {
+            width: 45%;
+        }
+    }
+</style>
+
+<style>
+    :root {
+        --navy-deep: #050b3a;
+        --navy: #0a1668;
+        --navy-light: #142a9c;
+        --orange: #ff6a00;
+        --orange-light: #ff9248;
+        --white: #ffffff;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* body {
+        margin: 0;
+        font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+        background: #eef0f6;
+        padding: 24px;
+    }*/
+
+    .promo {
+        position: relative;
+        max-width: 740px;
+        margin: 0 auto;
+        /* background: url(https://www.pharmacyplanet.com/pub/media/wysiwyg/popup-bg-img.jpg) no-repeat !important;
+        background: radial-gradient(circle at 78% 28%, var(--navy-light) 0%, var(--navy) 38%, var(--navy-deep) 78%);*/
+        border-radius: 0px;
+        overflow: hidden;
+        padding: 15px 0px 10px;
+        color: var(--white);
+    }
+
+    .promo-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 10px;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* ---------- Left column ---------- */
+    .eyebrow {
+        font-size: clamp(42px, 3.0vw, 50px);
+        font-weight: 800;
+        letter-spacing: 0;
+        color: #005FFB;
+        text-transform: uppercase;
+        line-height: 1.1;
+    }
+
+    .headline {
+        font-size: clamp(42px, 5.4vw, 50px);
+        font-weight: 700;
+        color: #000;
+        line-height: 1.02;
+        margin-top: 0px;
+    }
+
+    .headline2 {
+        font-size: clamp(34px, 3.4vw, 40px);
+        font-weight: 700;
+        color: #000;
+        line-height: 1.02;
+        margin-top: 4px;
+        margin-bottom: 15px;
+    }
+
+    .rule {
+        width: 64px;
+        height: 4px;
+        background: var(--orange);
+        border-radius: 2px;
+        margin: 5px 0 5px;
+    }
+
+    .feature-list {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 7px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .feature-item:last-child {
+        border-bottom: none;
+    }
+
+    .feature-icon {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 11px;
+        background: #ECF2FD;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .feature-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .feature-text {
+        font-size: 14px;
+        line-height: 1.25;
+        color: #000;
+    }
+
+    .feature-text span {
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    /* ---------- Waitlist form (input added above the button) ---------- */
+    .waitlist-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 420px;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .waitlist-input {
+        width: 100% !important;
+        padding: 15px 22px 15px 22px !important;
+        border-radius: 11px !important;
+        border: 1px solid #A7B3C9 !important;
+        background: #E6EFFC !important;
+        color: #000;
+        font-size: 15px;
+        outline: none;
+        height: auto !important;
+        transition: box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .waitlist-input::placeholder {
+        color: #6B6B6B !important;
+    }
+
+    .waitlist-input:focus {
+        border-color: #E6EFFC;
+        background: #E6EFFC;
+        box-shadow: 0 0 0 1px #E6EFFC;
+    }
+
+    #kdi-popup-form {
+        position: relative;
+    }
+
+    .cta-button {
+
+        font-weight: 800;
+        font-size: 15px;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        border: none !important;
+        border-radius: 32px;
+        padding: 0;
+        box-shadow: none !important;
+        cursor: pointer;
+        transition: background 0.15s ease, transform 0.1s ease;
+        width: 48px;
+        position: absolute;
+        right: 2px;
+        top: 2px;
+    }
+
+    .cta-button:hover {
+        background: var(--orange-light);
+    }
+
+    .cta-button:active {
+        transform: scale(0.98);
+    }
+
+    .cta-arrow {
+        flex-shrink: 0;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #0a0a2e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cta-arrow svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* ---------- Right column visual ---------- */
+    .visual {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 460px;
+    }
+
+    .visual-stage {
+        position: relative;
+        width: 78%;
+        max-width: 360px;
+        aspect-ratio: 0.73 / 1;
+    }
+
+    .arch {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: 52%;
+        height: 87%;
+        transform: translateX(-50%);
+        border-radius: 50% 50% 0 0 / 28% 28% 0 0;
+        background: linear-gradient(180deg, var(--navy-light) 0%, var(--navy) 60%, var(--navy-deep) 100%);
+        box-shadow: 0 35px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .arch::before {
+        content: "";
+        position: absolute;
+        inset: 4% 8% 0 7%;
+        border-radius: 50% 50% 0 0 / 32% 32% 0 0;
+        background: radial-gradient(circle at 50% 8%, #ffc488 0%, var(--orange) 50%, #b94400 100%);
+    }
+
+    .pedestal {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 95%;
+        height: 15%;
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+
+    .pedestal::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: linear-gradient(180deg, var(--navy-light), var(--navy));
+    }
+
+    .pedestal::after {
+        content: "";
+        position: absolute;
+        left: 4%;
+        right: 4%;
+        top: 38%;
+        bottom: -90%;
+        border-radius: 0 0 50% 50% / 0 0 65% 65%;
+        background: var(--navy-deep);
+        box-shadow: 0 18px 26px rgba(0, 0, 0, 0.45);
+    }
+
+    .pill-shadow {
+        position: absolute;
+        left: 50%;
+        bottom: 6%;
+        width: 64%;
+        height: 6%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.45);
+        border-radius: 50%;
+        filter: blur(6px);
+        z-index: 1;
+    }
+
+    .pill {
+        position: absolute;
+        left: 50%;
+        top: 68.5%;
+        z-index: 2;
+        width: 84%;
+        aspect-ratio: 1 / 1;
+        transform: translate(-50%, -50%) rotate(-9deg);
+        border-radius: 50%;
+        background: radial-gradient(circle at 32% 28%, #ffffff 0%, #e5e8ef 55%, #c7ccd8 100%);
+        box-shadow: 0 22px 40px rgba(0, 0, 0, 0.5), inset 0 -12px 20px rgba(0, 0, 0, 0.07), inset 0 10px 14px rgba(255, 255, 255, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pill span {
+        font-size: clamp(26px, 6vw, 36px);
+        font-weight: 800;
+        color: #a9aebb;
+        letter-spacing: 0.5px;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8), 0 -1px 1px rgba(0, 0, 0, 0.12);
+    }
+
+    /* ---------- Trust bar ---------- */
+    .trust-bar {
+        position: relative;
+        z-index: 2;
+        margin-top: 10px;
+        background: #F2F8FD;
+        border-radius: 0;
+        padding: 10px 30px;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin: 0 0px;
+        margin-bottom: 0px;
+    }
+
+    .trust-item {
+        flex: 1 1 100px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+        text-align: left;
+        color: #000;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 1.3;
+        padding: 0 0px;
+        position: relative;
+    }
+
+    /* .trust-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: -9px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 70%;
+        background: #dfe2ec;
+    }*/
+
+    .trust-item svg {
+        width: 42px;
+        height: 42px;
+    }
+
+    @media screen and (min-width:768px) {
+
+        .cta-button span.e-text {
+            display: none;
+        }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 880px) {
+        .promo {
+            padding: 40px 24px 28px;
+            /*background: url(https://www.pharmacyplanet.com/pub/media/wysiwyg/popup-bg-mobile.jpg) no-repeat !important;
+            background: radial-gradient(circle at 78% 28%, var(--navy-light) 0%, var(--navy) 38%, var(--navy-deep) 78%);
+            background-size: 100% !important;*/
+
+        }
+
+        .promo-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .visual {
+            order: -1;
+            min-height: 300px;
+            margin-bottom: 8px;
+        }
+
+        .visual-stage {
+            max-width: 260px;
+        }
+
+        .waitlist-form {
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 520px) {
+        .trust-item:not(:last-child)::after {
+            display: none;
+        }
+
+        .trust-bar {
+            gap: 24px;
+            background: transparent !important;
+            padding-bottom: 35px;
+        }
+
+        .promo .promo-content {
+            width: 100% !important;
+        }
+
+        .feature-item {
+            padding: 7px 0 !important;
+        }
+
+        .feature-list {
+            margin-top: 15px;
+        }
+
+        .feature-text {
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        .feature-text br {
+            display: none;
+        }
+
+        .cta-button {
+            width: 165px !important;
+            position: relative !important;
+            display: flex;
+            align-items: center;
+            background-color: #ED3237;
+            justify-content: center;
+            color: #fff;
+            border-radius: 5px !important;
+        }
+
+        .cta-button span {
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .kdi-popup-arrow-badge {
+            background: transparent !important;
+            width: auto !important;
+        }
+
+        .waitlist-form {
+            align-items: center;
+        }
+
+        .feature-text span {
+            width: 100%;
+            display: inline-block;
+        }
+
+        .popup-content {
+            padding-bottom: 80%;
+            background-position: center bottom !important;
+            background-size: 100% !important;
+            background: url(https://www.pharmacyplanet.com/pub/media/wysiwyg/wegovy-popup-mobile-bg.jpg) no-repeat center bottom !important;
+        }
+
+        .trust-item {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+        }
+
+        .trust-item.first br {
+            display: none;
+        }
+
+        .trust-item img {
+            width: 42px;
+            height: 42px;
+        }
+    }
+
+    #kdi-product-popup {
+        z-index: 9999999;
+        background: rgba(0, 0, 0, 0.8) !important;
+    }
+
+    body.cms-index-index #popupbuilder-popup1.popupbuilder-popup-modal .popupbuilder-widget-content,
+    body.cms-index-index #popupbuilder-popup1.popupbuilder-popup-modal {
+        display: none !important;
+    }
+
+    .promo-content p {
+        color: #000;
+    }
+
+    .promo-content {
+        width: 370px;
+    }
+
+    .treatment-link{
+        width: 100%;
+        text-align: center;
+    }
+    .treatment-link a{
+        font-size: 14px;
+        font-weight: 700;
+        color: #005FFB;
+    }
+    .treatment-link a:hover{
+        text-decoration: underline;
+    }
+    .treatment-link a:after{
+        content: " " !important;
+        width: 8px;
+        height: 12px;
+        display: inline-block;
+        margin-left: 5px;
+        margin-top: 5px;
+    position: absolute;
+        background: url(https://magento-1584919-6629151.cloudwaysapps.com/media/wysiwyg/view-arrow.png) no-repeat left center;
+    }
+
+</style>
+
+<script type="text/x-magento-init">
+    {
+    "#kdi-product-popup": {
+        "Kdi_Popup/js/popup": {
+            "cookieName": "kdi_product_popup_closed",
+            "cookieLifetime": <?= (int)$block->getCookieLifetime() ?>,
+            "subscribeUrl": "<?= $block->escapeUrl($block->getSubscribeUrl()) ?>",
+            "productId": <?= (int)$block->getProductId() ?>
+        }
+    }
+}
+</script>

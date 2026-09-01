@@ -1,0 +1,23 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$currentUrl = $objectManager->get(\Magento\Framework\UrlInterface::class)->getCurrentUrl();
+
+
+$urls = [
+   
+    'https://www.pharmacyplanet.com/meet-our-team',
+    'https://www.pharmacyplanet.com/blog',
+    'https://www.pharmacyplanet.com/view-all-treatments',
+    'https://www.pharmacyplanet.com/contact',
+    'https://www.pharmacyplanet.com/sitemap',
+    'https://www.pharmacyplanet.com/today-s-responsible-pharmacist'
+
+];
+
+
+// Check if the current URL exists in the array
+if (in_array($currentUrl, $urls)) {
+
+    echo '<link rel="canonical" href="' . $currentUrl . '" />' . PHP_EOL;
+}  
+?>

@@ -1,0 +1,269 @@
+<style>
+   
+    .create-ticket-page {
+        background: #fff;  
+        padding: 0;
+    }
+
+    .create-ticket-page .hero {
+        background: #53CAF5;
+        padding: 3rem 2rem 2.5rem;
+        text-align: center;
+    }
+
+    .create-ticket-page .hero-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 1.5rem;
+    }
+
+    .create-ticket-page .logo-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .create-ticket-page .hero h1 {
+        color: #fff;
+        font-size: 28px;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    .create-ticket-page .hero p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 15px;
+    }
+
+    .create-ticket-page .content {
+        padding: 2.5rem 1.5rem;
+        
+    }
+
+    .create-ticket-page .section-label {
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0;
+        text-transform: capitalize; 
+        margin-bottom: 1rem;
+    }
+
+    .create-ticket-page .contact-card { 
+        overflow: hidden; 
+    }
+
+    .create-ticket-page .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 1.1rem 1.25rem;
+        text-decoration: none;
+        transition: background 0.15s; 
+    }
+
+    .create-ticket-page .contact-item:last-child {
+        border-bottom: none;
+    }
+
+    .create-ticket-page .contact-item .item-value:hover { 
+        color: #53CAF5;
+    }
+
+    .create-ticket-page .icon-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .create-ticket-page .icon-green {
+        background: #e6f4ee;
+    }
+
+    .create-ticket-page .icon-blue {
+        background: #e6f0fb;
+    }
+
+    .create-ticket-page .item-text {
+        flex: 1;
+    }
+
+    /*.create-ticket-page .item-label {
+        font-size: 12px; 
+        margin-bottom: 2px;
+    }*/
+
+    .create-ticket-page .item-value {
+        font-size: 15px;
+        font-weight: 500; 
+        color: #222;
+    }
+
+    .create-ticket-page .item-sub {
+        font-size: 12px; 
+        margin-top: 1px;
+        color: #222;
+    }
+
+    .create-ticket-page .arrow { 
+        font-size: 14px;
+    }
+
+    .create-ticket-page .address-card { 
+        padding: 1.1rem 1.25rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+    }
+
+    .create-ticket-page .address-text {
+        font-size: 15px; 
+        line-height: 1.6;
+        font-weight: 500;
+    }
+    .create-ticket-page .address-text:before{
+        display: none;
+    }
+
+    .create-ticket-page .address-title {
+        font-size: 15px;
+        font-weight: 600; 
+        margin-bottom: 4px;
+    }
+
+    .create-ticket-page .hours-note {
+        font-size: 13px; 
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+
+    .create-ticket-page .website-btn {
+        background-size: 100% 200% !important;
+        background-image: linear-gradient(to bottom, #53CAF5 50%, #53CAF5 50%) !important;
+        -webkit-transition: background-position 0.7s;
+        -moz-transition: background-position 0.7s;
+        transition: background-position 0.7s !important;
+        text-decoration: none !important;
+        background: #53CAF5;
+        opacity: 1;
+        text-decoration: none;
+        font-size: 14px;
+        color: #fff;
+        font-family: 'Ubuntu', sans-serif;
+        line-height: 48px;
+        border: 0;
+        padding: 0 28px;
+        font-weight: 400;
+        display: inline-block;
+        border-radius: 50px;
+    }
+
+    .create-ticket-page .website-btn:hover {
+       background-size: 100% 200% !important;
+        background-image: linear-gradient(to bottom, #53CAF5 50%, #ED3237 50%) !important;
+        background-position: 0 -100% !important;
+        text-decoration: none !important;
+        background-color: #ED3237 !important;
+    }
+
+    .create-ticket-page .website-btn svg {
+        flex-shrink: 0;
+    }
+
+    .helpdesk-ticket-create .page.messages{
+        min-height: auto !important;
+    }
+    .footer-hero-sec{
+        padding-bottom: 25px;
+        border-top: 1px solid #96D9F1;
+         padding-top: 30px;
+    }
+    .helpdesk-ticket-create .column.main .page-title-wrapper .page-title{
+        display: none;
+    }
+    @media screen and (min-width: 768px) {
+        .create-ticket-page .hero p{
+            padding: 0 5%;
+        }
+        .create-ticket-page .contact-card{
+            display: flex;
+            gap: 30px;
+        }
+        .create-ticket-page .content { 
+            max-width: 670px;
+            margin: 0 auto;
+        }
+        
+        .create-ticket-page .contact-card{
+            margin-bottom: 0;
+        }
+        .create-ticket-page .section-label{
+            padding-left: 1.25rem;
+        }
+    }
+    @media screen and (max-width: 767px) {
+        .create-ticket-page .contact-item,
+        .create-ticket-page .address-card{
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+    }
+
+</style>
+
+<div class="create-ticket-page">
+    <div class="hero">
+        
+        <h1>Need Help? Raise a Support Ticket</h1>
+        <p>To raise a support request, please get in touch with us directly using any of the options below our team will be happy to assist you.</p>
+    </div>
+
+    <div class="content">
+        <p class="section-label">Contact Us</p>
+        <div class="contact-card">
+            <a class="contact-item" href="mailto:headoffice@pharmacyplanet.com">
+                <div class="icon-circle icon-blue">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#53CAF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                    </svg>
+                </div>
+                <div class="item-text">
+                    <!-- <div class="item-label">Email us</div> -->
+                    <div class="item-value">headoffice@pharmacyplanet.com</div> 
+                </div> 
+            </a>
+            <a class="contact-item" href="tel:08009788956">
+                <div class="icon-circle icon-blue">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#53CAF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                </div>
+                <div class="item-text">
+                    <!-- <div class="item-label">Call us</div> -->
+                    <div class="item-value">0800 978 8956</div> 
+                </div> 
+            </a>
+        </div>
+
+        <!-- <p class="section-label">Our location</p> -->
+        <div class="address-card">
+            <div class="icon-circle icon-blue">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#53CAF5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:2px;flex-shrink:0;">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+        </div>
+            <div>
+                <!-- <div class="address-title">Head Office</div> -->
+                <div class="address-text">4 Progress Business Centre <br>Whittle Parkway Slough <br>SL1 6DQ</div>
+            </div>
+        </div>
+       
+    </div> 
+</div>

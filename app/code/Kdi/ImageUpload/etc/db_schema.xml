@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="kdi_imageupload_entity" resource="default" engine="innodb" comment="kdi_imageupload_entity Table">
+		<column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="entity_id"/>
+		</constraint>
+		<column name="full_image" nullable="true" xsi:type="varchar" comment="Full Body Front" length="255"/>
+		<column name="full_image2" nullable="true" xsi:type="varchar" comment="Full Body Side" length="255"/>
+		<column name="identity_image" nullable="true" xsi:type="varchar" comment="Identity Card Image" length="255"/>
+		<column name="customer_id" nullable="true" xsi:type="int" comment="Customer Id" identity="false"/>
+		<column name="order_id" nullable="true" xsi:type="int" comment="Order Id" identity="false"/>
+		<column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+    	<column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+	</table>
+</schema>

@@ -1,0 +1,28 @@
+<?php
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+// @codingStandardsIgnoreFile
+?>
+<div style="display: none;" id="modal-transaction"></div>
+<script>
+    require([
+        'Magento_Ui/js/modal/modal',
+        'jquery'
+    ], function (modal, $) {
+        var options = {
+            type: 'popup',
+            responsive: true,
+            innerScroll: true,
+            title: $.mage.__("Transaction info"),
+            buttons: [{
+                text: $.mage.__('Close'),
+                class: '',
+                click: function () {
+                    this.closeModal();
+                }
+            }]
+        };
+        var popup = modal(options, $('#modal-transaction'));
+    })
+</script>

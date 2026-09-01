@@ -1,0 +1,39 @@
+<div class="blog-bottom-review-sec">
+    <div class="container-2">
+<div class="blog-bottom-review-team">
+    <div class="reviewved-by sep-l">
+        <div class="review-right-img">
+<picture>
+    <source srcset="https://magento-1195784-4216081.cloudwaysapps.com/pub/media/HARMY-PROFILE-PIC.webp" type="image/webp">
+    <img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/HARMY-PROFILE-PIC.jpg" width="800" height="400" alt="Pharmacist Image">
+</picture>
+
+      
+        </div>
+        <div class="review-title-box">
+        <p class="review-title"><?php //$_post->getPublishDate(); ?></p>
+            <p class="review-text">Authored By</p>
+            <p class="pharmacist-title name">HARMINDER ‘HARMY’ KAUR</p>
+            <p class="review-text">BSc(hons) Pharmacy</p>
+            <p class="gphc-no">GPhC Number: 2061107</p>
+        </div>
+    </div>
+
+    <div class="reviewved-by">
+        <div class="review-right-img">
+            <picture>
+              <source srcset="https://magento-1195784-4216081.cloudwaysapps.com/pub/media/gurdev-sehmi-img.webp" type="image/webp">
+              <img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/gurdev-sehmi-img.jpg" alt="Pharmacist Image" />
+            </picture>
+        </div>
+        <div class="review-title-box">
+            <p class="review-title"><?php //$_post->getPublishDate(); ?></p>
+            <p class="review-text">Reviewed By</p>    
+            <p class="pharmacist-title name">GURDEV SEHMI</p>
+            <p class="review-text">BSc Pharm, MRPharmS, Independent Prescriber, Superintendent Pharmacist, Clinical Lead</p>
+            <p class="gphc-no">GPhC Number: 2050925</p>
+        </div>
+    </div>
+</div>
+</div>
+</div>

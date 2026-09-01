@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\Customform\Api\Data\AnswerInterface" type="Amasty\Customform\Model\Answer"/>
+    <preference for="Amasty\Customform\Api\AnswerRepositoryInterface" type="Amasty\Customform\Model\AnswerRepository"/>
+    <preference for="Amasty\Customform\Api\Data\FormInterface" type="Amasty\Customform\Model\Form"/>
+    <preference for="Amasty\Customform\Api\FormRepositoryInterface" type="Amasty\Customform\Model\FormRepository"/>
+    <preference for="Amasty\Customform\Api\Answer\GetAttachedFileUrlInterface" type="Amasty\Customform\Model\Answer\GetSecuredFileUrl"/>
+    <preference for="Amasty\Customform\Model\Answer\FinderInterface" type="Amasty\Customform\Model\Answer\Finder"/>
+    <preference for="Amasty\Customform\Api\Answer\GetGridDataInterface" type="Amasty\Customform\Model\Answer\CustomerAccount\Api\GetGridItems"/>
+    <preference for="Amasty\Customform\ViewModel\Customer\CustomerInfoProviderInterface" type="Amasty\Customform\ViewModel\Customer\CustomerInfoFromCustomerSession"/>
+    <preference for="Amasty\Customform\Api\Answer\RemoveAnswerFromGridInterface" type="Amasty\Customform\Model\Answer\CustomerAccount\Api\RemoveAnswerFromGrid"/>
+    <preference for="Amasty\Customform\Api\Answer\AttachedFileDataProviderInterface" type="Amasty\Customform\Model\Answer\AttachedFileDataProvider"/>
+    <preference for="Amasty\Customform\Model\Form\Rendering\Autocomplete\ProcessorInterface" type="Amasty\Customform\Model\Form\Rendering\Autocomplete\Processor"/>
+    <preference for="Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesProcessorInterface" type="Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesProcessor"/>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="amasty_customform_forms_listing_data_source"
+                      xsi:type="string">Amasty\Customform\Model\ResourceModel\Form\Grid\Collection</item>
+                <item name="amasty_customform_answer_listing_data_source"
+                      xsi:type="string">Amasty\Customform\Model\ResourceModel\Answer\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\Export\MetadataProvider">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="serializer" xsi:type="object">Amasty\Base\Model\Serializer</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\Answer">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="customer_repository" xsi:type="object">Magento\Customer\Api\CustomerRepositoryInterface</item>
+                <item name="helper" xsi:type="object">Amasty\Customform\Helper\Data</item>
+                <item name="form_repository" xsi:type="object">Amasty\Customform\Api\FormRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\ResourceModel\Form\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="const">Amasty\Customform\Model\ResourceModel\Form::TABLE</argument>
+            <argument name="eventPrefix" xsi:type="string">amasty_customform_form_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">form_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Customform\Model\ResourceModel\Form</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\ResourceModel\Answer\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="const">Amasty\Customform\Model\ResourceModel\Answer::TABLE_NAME</argument>
+            <argument name="eventPrefix" xsi:type="string">amasty_customform_answer_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">answer_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Amasty\Customform\Model\ResourceModel\Answer</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Gdpr\Model\Source\CheckboxLocationCombine">
+        <arguments>
+            <argument name="optionGroups" xsi:type="array">
+                <item name="amasty" xsi:type="array">
+                    <item name="optionSources" xsi:type="array">
+                        <item name="amasty_customform" xsi:type="object">Amasty\Customform\Model\Config\GdprCustomform</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Gdpr\ViewModel\Adminhtml\System\Config\GdprCommentViewModel">
+        <arguments>
+            <argument name="sectionComments" xsi:type="array">
+                <item name="amasty_customform" xsi:type="array">
+                    <item name="selector" xsi:type="string">#row_amasty_customform_gdpr_enabled</item>
+                    <item name="comment" xsi:type="string" translate="true"><![CDATA[Please disable the setting if you use consent checkboxes configured for Custom Forms via <a href='%1'>GDPR Consent Checkboxes.</a>]]></item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\Export\SubmitedData\AnswerExporterFactory">
+        <arguments>
+            <argument name="resultRenderersMap" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="result_name_generator" xsi:type="string">Amasty\Customform\Model\Export\SubmitedData\Pdf\PdfResultNameGenerator</item>
+                    <item name="result_type" xsi:type="const">Amasty\Customform\Model\Export\SubmitedData\AnswerExporterFactory::TYPE_PDF</item>
+                    <item name="renderer_type" xsi:type="string">Amasty\Customform\Model\Export\SubmitedData\Pdf\PdfResultRenderer</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\ViewModel\Export\Pdf\SubmittedData\Document\IsCanRenderFieldComposite">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="0" xsi:type="object">Amasty\Customform\ViewModel\Export\Pdf\SubmittedData\Document\IsCanRenderGoogleMapField</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\ViewModel\Export\Pdf\SubmittedData\Document">
+        <arguments>
+            <argument name="isCanRenderFieldChecker" xsi:type="object">Amasty\Customform\ViewModel\Export\Pdf\SubmittedData\Document\IsCanRenderFieldComposite</argument>
+        </arguments>
+    </type>
+
+    <!--Add possibility for apply patches before DS start-->
+    <virtualType name="Magento\Framework\Setup\Patch\DeclarativeSchemaApplyBeforeReader" type="Magento\Framework\Setup\Patch\PatchReader">
+        <arguments>
+            <argument name="type" xsi:type="string">declarativeSchemaApplyBefore</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Amasty\Customform\Setup\Patch\PatchApplier" type="Magento\Framework\Setup\Patch\PatchApplier">
+        <arguments>
+            <argument name="dataPatchReader" xsi:type="object">Magento\Framework\Setup\Patch\DeclarativeSchemaApplyBeforeReader</argument>
+            <argument name="schemaPatchReader" xsi:type="object">Magento\Framework\Setup\Patch\DeclarativeSchemaApplyBeforeReader</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\Customform\Plugin\Setup\Model\DeclarationInstaller\ApplyPatchesBeforeDeclarativeSchema">
+        <arguments>
+            <argument name="patchApplier" xsi:type="object">Amasty\Customform\Setup\Patch\PatchApplier</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Setup\Model\DeclarationInstaller">
+        <plugin name="Amasty_Customform::execute-patches-before-schema-apply"
+                type="Amasty\Customform\Plugin\Setup\Model\DeclarationInstaller\ApplyPatchesBeforeDeclarativeSchema"
+        />
+    </type>
+    <!--Add possibility for apply patches before DS end-->
+
+    <type name="Amasty\Customform\Cron\ProcessFormScheduling">
+        <arguments>
+            <argument name="formRepository" xsi:type="object">Amasty\Customform\Api\FormRepositoryInterface\Proxy</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Amasty\Customform\Model\ResourceModel\Answer\CRUDCallbacks\BeforeSaveCallbacksPool"
+                 type="Amasty\Customform\Model\ResourceModel\Answer\CRUDCallbacks\CallbackPool">
+        <arguments>
+            <argument name="callbacks" xsi:type="array">
+                <item name="add_form_data" xsi:type="object">
+                    Amasty\Customform\Model\ResourceModel\Answer\CRUDCallbacks\BeforeSave\AddFormData
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\Customform\Model\ResourceModel\Answer">
+        <arguments>
+            <argument name="beforeSaveCallbacks" xsi:type="object">Amasty\Customform\Model\ResourceModel\Answer\CRUDCallbacks\BeforeSaveCallbacksPool</argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+   <!--  <update handle="blog_default"/>
+    <update handle="blog_post_list"/> -->
+    <head>
+        <title>Health &amp; Pharmacy Blog | Tips, Guides &amp; Advice | Pharmacy Planet</title>
+        
+        <meta name="description" content="Explore expert health tips, pharmacy guides, and skincare advice on the Pharmacy Planet blog. Stay informed and shop trusted healthcare products online." />
+        <meta name="og:image" content="https://magento-1584919-6629151.cloudwaysapps.com/media/phase_2/pharmacy-planet-blogs.jpg" />
+    
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <!-- <block class="Magefan\Blog\Block\Index" name="blog.posts.list" template="post/list.phtml" /> -->
+            <block name="category.list" class="Kdi\AdvisePost\Block\Category\Index" template="Kdi_AdvisePost::category/list.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="page.main.title" remove="true" />
+    </body>
+</page>

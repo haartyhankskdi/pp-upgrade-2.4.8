@@ -1,0 +1,277 @@
+<?php
+
+/**
+ * @var \Nilesh\MirasvitHelpdeskCustomerImage\Block\Adminhtml\HelpdeskImageTab $block
+ * */
+// $_messages = $block->getAllHelpdeskImagesByCustomerId();
+// $noAttachment = 0;
+?>
+
+<div>
+    <h2 class="questionnaire-uploads-section">Ticket Uploads</h2>
+    <?php
+    $tickets = $block->getTicketByCustomerId();
+    if($tickets){
+        foreach ($tickets as $ticket) {
+            // print_r($ticket);
+            $ticket_id = $ticket['ticket_id'];
+            $messages = $block->getMsgIdByTicketId($ticket_id);
+            foreach ($messages as $message) {
+                $messageId = $message['message_id'];
+                $attachments = $block->getAttachmentByMessageId($messageId);
+                foreach ($attachments as $attachment) { ?>
+                    <a class="space-1" href="<?= $attachment->getBackendUrl() ?>"><?= $attachment->getName() ?></a><br> <?php
+                }
+            }
+        }
+    }
+
+    ?>
+</div>
+<div>
+    <!-- <h2 class="questionnaire-uploads-section">Ticket Uploads</h2> -->
+    <!-- <?php //foreach ($_messages as $message) :
+            //$_attachments = $block->getAttachmentByMessageId($message->getId());
+            //if (count($_attachments)) : $noAttachment++; 
+            ?>
+        <div class="hdmx-message__attachments">
+            <?php //foreach ($_attachments as $_attachment) : 
+            ?>
+                <?php //if ($_attachment->getIsAllowed()) : 
+                ?>
+                    <a class="space-1" href="<?php // $_attachment->getBackendUrl() 
+                                                ?>"><?php // $_attachment->getName() 
+                                                    ?></a>
+                <?php //else : 
+                ?>
+                    <span class="space-1"><?php // $_attachment->getName() 
+                                            ?></span>
+                <?php //endif; 
+                ?>
+            <?php //endforeach 
+            ?>
+        </div>
+    <?php //endif; 
+    ?>
+<?php //endforeach; 
+?> -->
+
+    <?php //if ($noAttachment==0) : 
+    //echo $noAttachment;
+    ?>
+    <!-- <div class="hdmx-message__attachments no__result">
+        <p>No attachment found</p>
+    </div> -->
+    <?php //endif; 
+    ?>
+</div>
+
+
+<!-- <div class="prescriber-table">
+<div class="prescriber-heading">
+         <div class="prescriber-title">Prescriber Images</div>
+    <div class="prescriber-value">  -->
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$mediaDir = $objectManager->get('Magento\Framework\App\Filesystem\DirectoryList')->getPath('media');
+$mediaUrl = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'nilesh_prescribernotes/';
+$resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+$connection = $resource->getConnection();
+$sql = 'select * from nilesh_prescribernotes_prescribernotes where connect_id =' . $block->getCustomerId();
+$data = $connection->fetchAll($sql);
+//echo "<pre>";print_r($data);exit();
+?>
+<table class="prescriber-table">
+    <?php //foreach ($data as $value) { 
+    ?>
+    <?php //if(!empty($value['prescribernotes_upload']) || !empty($value['prescribernotes_upload2']) || !empty($value['prescribernotes_upload3']) || !empty($value['prescribernotes_upload4']) || !empty($value['prescribernotes_upload5'])){ 
+    ?>
+    <thead>
+        <tr>
+            <th>Prescriber Images</th>
+            <th>Subject</th>
+            <th>Uploader Name</th>
+            <th class="last">Created Date</th>
+        </tr>
+    </thead>
+    <?php //} } 
+    ?>
+    <tbody>
+        <?php foreach ($data as $value) { ?>
+            <?php if (!empty($value['prescribernotes_upload']) || !empty($value['prescribernotes_upload2']) || !empty($value['prescribernotes_upload3']) || !empty($value['prescribernotes_upload4']) || !empty($value['prescribernotes_upload5'])) { ?>
+                <tr>
+                    <td>
+                        <?php if (!empty($value['prescribernotes_upload'])) { ?>
+                            <a href="<?= $mediaUrl . $value['prescribernotes_upload'] ?>" download><?= $value['prescribernotes_upload'] ?></a>
+                        <?php }
+                        if (!empty($value['prescribernotes_upload2'])) { ?>
+                            <a href="<?= $mediaUrl . $value['prescribernotes_upload2'] ?>" download><?= $value['prescribernotes_upload2'] ?></a>
+                        <?php }
+                        if (!empty($value['prescribernotes_upload3'])) { ?>
+                            <a href="<?= $mediaUrl . $value['prescribernotes_upload3'] ?>" download><?= $value['prescribernotes_upload3'] ?></a>
+                        <?php }
+                        if (!empty($value['prescribernotes_upload4'])) { ?>
+                            <a href="<?= $mediaUrl . $value['prescribernotes_upload4'] ?>" download><?= $value['prescribernotes_upload4'] ?></a>
+                        <?php }
+                        if (!empty($value['prescribernotes_upload5'])) { ?>
+                            <a href="<?= $mediaUrl . $value['prescribernotes_upload5'] ?>" download><?= $value['prescribernotes_upload5'] ?></a>
+                        <?php } ?>
+                    </td>
+                    <td>
+                        <?php if (!empty($value['subject'])) { ?>
+                            <div class="prescriber-value"><?= $value['subject'] ?></div>
+                        <?php } ?>
+                    </td>
+                    <td>
+                        <?php if (!empty($value['created_by'])) { ?>
+                            <div class="prescriber-value"><?= $value['created_by'] ?></div>
+                        <?php } ?>
+                    </td>
+                    <td class="last">
+                        <?php if (!empty($value['created_at'])) { ?>
+                            <div class="prescriber-value"><?= $value['created_at'] ?></div>
+                        <?php } ?>
+                    </td>
+                </tr>
+            <?php } else {
+            } ?>
+        <?php } ?>
+    </tbody>
+</table>
+
+<?php
+$GQBlock = $block->getLayout()->createBlock('Nilesh\GeneralQuestions\Block\Adminhtml\CustomerEdit\Tab\View');
+$gq = $GQBlock->getCustomerData();
+$gq = isset($gq[0]) ? $gq[0] : array();
+if (isset($gq['upload_documents_prescriber']) && $gq['upload_documents_prescriber'] == '1' && isset($gq['upload_documents_prescriber_yes'])) { ?>
+    <div>
+        <h2 class="questionnaire-uploads-section">General Health Uploaded File</h2>
+        <span><?php /* @escapeNotVerified */ //echo __('Uploaded File'); 
+                ?></span>
+        <?php
+        $filesUploaded = isset($gq['upload_documents_prescriber_yes']) ? $gq['upload_documents_prescriber_yes'] : '';
+        $filesUploadedArray = explode(",", $filesUploaded);
+        ?>
+        <div class="filelink">
+            <?php
+            for ($iC = 0; $iC < count($filesUploadedArray); $iC++) {
+            ?>
+                <a href="<?php echo $GQBlock->getMediaGPUrl() . 'gq_uploads/' . $filesUploadedArray[$iC] ?>" download title="<?php echo @$filesUploadedArray[$iC] ?>">Doc <?= ($iC + 1) ?></a>
+            <?php
+            }
+            ?>
+        </div>
+    </div>
+    
+    
+<?php } ?>
+
+<style type="text/css">
+    .hdmx-message__attachments {
+        display: flow-root;
+        /*justify-content: space-between;*/
+        padding: 10px;
+        border: 1px solid #ddd;
+        margin-bottom: 0px;
+        color: #303030;
+    }
+
+    .hdmx-message__attachments a {
+        padding: 0 10px 10px 10px;
+        color: #303030;
+
+    }
+
+    .hdmx-message__attachments:nth-child(odd) {
+        background-color: #f1f1f1;
+    }
+
+    .hdmx-message__attachments .space-1 {
+        width: 50%;
+        float: left;
+        padding: 0;
+    }
+
+    .prescriber-table {
+        border-bottom: 0 !important;
+    }
+
+    .prescriber-table thead {
+        width: 100%;
+        display: inline-block;
+        background: #efae8c;
+    }
+
+    .prescriber-table tbody {
+        width: 100%;
+        display: inline-block;
+    }
+
+    .prescriber-table tr {
+        width: 100%;
+        display: inline-block;
+        border-bottom: 1px solid #333;
+    }
+
+    .prescriber-table th {
+        font-size: 17px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-top: 10px;
+        background: #eee;
+        background: #efae8c;
+        padding: 15px 10px;
+        margin-top: 0px;
+        color: #000;
+        color: #000;
+        width: 22.3%;
+        display: inline-block;
+        border-right: 1px solid #333;
+        text-align: center;
+    }
+
+    .prescriber-table th.last,
+    .prescriber-table td.last {
+        border-right: 0 !important;
+    }
+
+    .prescriber-table td {
+        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        padding: 15px 10px;
+        width: 22.3%;
+        display: inline-block;
+        border-right: 1px solid #333;
+        text-align: center;
+    }
+
+    .prescriber-table th:nth-child(1),
+    .prescriber-table td:nth-child(1) {
+        width: 26%;
+    }
+
+    .prescriber-table th:nth-child(3),
+    .prescriber-table td:nth-child(3) {
+        width: 20%;
+    }
+
+    .questionnaire-uploads-section {
+        width: 100%;
+        text-transform: uppercase;
+        background: #efae8c;
+        padding: 15px 10px;
+        margin-top: 100px;
+        font-weight: 600 !important;
+        display: inline-block;
+        border: 1px solid #333;
+        color: #000 !important;
+
+    }
+
+    /* .questionnaire-uploads-section h2{
+        color: #000 !important;
+    } */
+</style>

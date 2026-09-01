@@ -1,0 +1,68 @@
+<?php 
+    /**
+     * ! IMP - this .phtml file require Nilesh\Theme\Block\Homepage.php Block to work
+     */
+$mediaUrl = $block->getMediaUrl();
+$getImagePath = $block->getSectionImagePath();
+$isRow = @($block->getConfigDataSectionOne("container") == "three")?"col-lg-4 col-md-4 col-sm-12":"col-lg-6 col-md-6 col-sm-12";
+$isRowThree = @($block->getConfigDataSectionOne("container") == "three")?"yes":"";
+/* Section One */
+$sectionOneBanner = $mediaUrl.$getImagePath.$block->getConfigDataSectionOne("banner_one_image");
+$sectionOneTitle = $block->getConfigDataSectionOne("banner_one_title");
+$sectionOneDesc = $block->getConfigDataSectionOne("banner_one_template");
+// echo "sasasa".$sectionOneDesc;exit();
+$sectionOneLink = $block->getConfigDataSectionOne("banner_one_link");
+$sectionOneButtonName = $block->getConfigDataSectionOne("banner_one_button_name");
+
+/* Section One */
+$sectionTwoBanner = $mediaUrl.$getImagePath.$block->getConfigDataSectionOne("banner_two_image");
+$sectionTwoTitle = $block->getConfigDataSectionOne("banner_two_title");
+$sectionTwoDesc = $block->getConfigDataSectionOne("banner_two_template");
+$sectionTwoLink = $block->getConfigDataSectionOne("banner_two_link");
+$sectionTwoButtonName = $block->getConfigDataSectionOne("banner_two_button_name");
+
+/* Section One */
+$sectionThreeBanner = $mediaUrl.$getImagePath.$block->getConfigDataSectionOne("banner_three_image");
+$sectionThreeTitle = $block->getConfigDataSectionOne("banner_three_title");
+$sectionThreeDesc = $block->getConfigDataSectionOne("banner_three_template");
+$sectionThreeLink = $block->getConfigDataSectionOne("banner_three_link");
+$sectionThreeButtonName = $block->getConfigDataSectionOne("banner_three_button_name");
+
+if($block->getConfigDataSectionOne("enable") == "1"): ?>
+<section id="section__one" class="container_fluid">
+    <div class="section__one_row row">
+        <div class="block-wrapper block_1 <?= $isRow ?>">
+            <div class="for__images image-responsive" style="<?= !empty($sectionOneBanner)?"background:url('$sectionOneBanner')":""; ?>"></div>
+            <div class="for__title">
+                <p class="section__one__title"><?php echo $sectionOneTitle; ?></p>
+                <p class="section__one__desc"><?php echo $sectionOneDesc; ?></p>
+                <?php if(!empty($sectionOneLink)): ?>
+                    <a href="<?php echo $sectionOneLink; ?>" class="btn btn-primary btn-theme section__one__button" ><?php echo !empty($sectionOneButtonName)?$sectionOneButtonName:"Shop Now"; ?></a>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div class="block-wrapper block_2 <?= $isRow ?>">
+            <div class="for__images image-responsive" style="<?= !empty($sectionTwoBanner)?"background:url('$sectionTwoBanner')":""; ?>"></div>
+            <div class="for__title">
+                <p class="section__two__title"><?php echo $sectionTwoTitle; ?></p>
+                <p class="section__two__desc"><?php echo $sectionTwoDesc; ?></p>
+                <?php if(!empty($sectionTwoLink)): ?>
+                    <a href="<?php echo $sectionOneLink; ?>" class="btn btn-primary btn-theme section__two__button" ><?php echo !empty($sectionTwoButtonName)?$sectionTwoButtonName:"Shop Now"; ?></a>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div class="block-wrapper <?= $isRow ?>" style="<?php echo empty($isRowThree)?"display:none":"" ?>">
+            <div class="for__images image-responsive" style="<?= !empty($sectionThreeBanner)?"background:url('$sectionThreeBanner')":""; ?>"></div>
+            <div class="for__title">
+                <p class="section__three__title"><?php echo $sectionThreeTitle; ?></p>
+                <p class="section__three__desc"><?php echo $sectionThreeDesc; ?></p>
+                <?php if(!empty($sectionThreeLink)): ?>
+                    <a href="<?php echo $sectionThreeLink; ?>" class="btn btn-primary btn-theme section__three__button" ><?php echo !empty($sectionThreeButtonName)?$sectionThreeButtonName:"Shop Now"; ?></a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</section>
+<?php endif; ?>

@@ -1,0 +1,147 @@
+<?php
+$handles = $this->getLayout()->getUpdate()->getHandles();
+?>
+<script>window.popupbuilder = {};</script>
+<script>require(['jquery', 'underscore'], function($, _) {
+	var ids = [];
+    $('*[class*="pb-popup-"]').each(function(index, el) {
+        var classes = $(this).attr('class');
+        classes = classes.split(' ');
+        for (var i = 0; i < classes.length; i++) {
+            var popupClass = classes[i];
+            if (popupClass.indexOf('pb-popup-') !== -1) {
+                var id = parseInt(popupClass.replace('pb-popup-', ''));
+                $(this).addClass('pb-popup' + id);
+                ids.push(id);
+            }
+        }
+    });
+	$.ajax({
+        url: '<?= $this->getUrl('popupbuilder/ajax/load') ?>',
+        data: {
+        	ids: ids,
+        	handles: <?= json_encode($handles) ?>
+        },
+        type: 'post',
+        dataType: 'json',
+        success: function(res) {
+        	if (res.status) {
+        		var valid = false;
+	        	_.each(res.list, function(item, id) {
+    				$('body').append(item);
+    				valid = true;
+    				$('.pb-popup' + id).click(function(e) {
+    					e.preventDefault();
+    					$('#popupbuilder-popup-' + id).trigger('showPopup');
+    				});
+	    		});
+	    		if (valid) $('body').trigger('contentUpdated');
+	    	}
+        }
+    });
+})</script>
+
+<style>
+.popupbuilder-popup-modal {
+    display: none;  
+    position: fixed; 
+    top: 90%;      
+    left: 50%;  
+    transform: translate(-50%, -50%); 
+    width: 80%;     
+    max-width: 500px;
+   padding: 20px;  
+    z-index: 9999; 
+    background-color: transparent !important; 
+}
+
+/* Content inside the popup */
+.popupbuilder-popup-modal .popup-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+   color: #333;
+}
+
+/* Close button */
+.popupbuilder-close-button {
+    position: absolute;
+    top:-15px !important;
+    right: -30px !important;
+    font-size: 24px !important;
+    color: black !important;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+
+
+</style>
+
+
+<script>
+require(['jquery'], function($) {
+    $(document).ready(function() {
+
+        // --- Set cookie ---
+        function setCookie(name, value, days) {
+            var d = new Date();
+            d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
+            }
+            return null;
+        }
+
+        function shouldShowPopup() {
+            var cookie = getCookie('popupClosed');
+            if (cookie) {
+                var closedTime = parseInt(cookie);
+                var now = new Date().getTime();
+                return (now - closedTime) >= 86400000 ? true : false;
+            }
+            return true;
+        }
+
+        // --- Observe DOM changes for Magezon popup injection ---
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                $(mutation.addedNodes).each(function() {
+                    if ($(this).hasClass('popupbuilder-popup-modal')) {
+                        const $popup = $(this);
+
+                        if (shouldShowPopup()) {
+                            $popup.show();
+                            console.log("Popup shown (MutationObserver)");
+                        } else {
+                            $popup.remove();
+                            console.log("Popup removed (due to cookie)");
+                        }
+
+                        $(document).on('click', '.popupbuilder-close-button, .popup-thanku', function() {
+                            $popup.remove();
+                            setCookie('popupClosed', new Date().getTime(), 1);
+                            console.log("Popup closed, cookie set.");
+                        });
+                    }
+                });
+            });
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+
+    });
+});
+</script>
+
+
+

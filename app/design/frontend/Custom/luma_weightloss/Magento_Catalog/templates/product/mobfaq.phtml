@@ -1,0 +1,130 @@
+<div class="faq-section">
+  <div class="container">
+<div class="h-title">Product Info</div>
+
+<div class="faq-list">
+<button class="accordion">WHAT IS WEGOVY</button>
+<div class="panel">
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nisi dolor, facilisis a tincidunt quis, lacinia at mauris. 
+        Donec diam elit, finibus ut posuere ut, faucibus vitae ipsum. Nunc tellus quam, dapibus ut nisl id, semper laoreet odio. 
+        Nunc nec ipsum vitae dui finibus dignissim ut eu urna. Praesent quam nibh, placerat nec tortor non, pharetra rutrum enim. 
+        Proin blandit enim nec metus maximus, sit amet vulputate magna ullamcorper. Pellentesque posuere a lorem non consectetur.</p>
+</div>
+</div>
+
+<div class="faq-list">
+<button class="accordion">DOSAGE</button>
+<div class="panel">
+  <p>Donec diam elit, finibus ut posuere ut, faucibus vitae ipsum. Nunc tellus quam, dapibus ut nisl id, semper laoreet odio.</p><br>
+  <p>You will find regular support from both our clinicians and the customer service team for any questions, concerns or queries that you may have at any point while achieving your clinically supported weight loss programme. We are here to help you succeed!</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<button class="accordion">HOW TO TAKE IT</button>
+<div class="panel">
+  <p>Donec diam elit, finibus ut posuere ut, faucibus vitae ipsum. Nunc tellus quam, dapibus ut nisl id, semper laoreet odio.</p>
+</div>
+</div>
+
+<!-- <div class="faq-list">
+<button class="accordion">Am I eligible for the weight loss programme?</button>
+<div class="panel">
+  <p>To be eligible for our weight loss programme, you will need to have a BMI of over 30 or higher, or alternatively of 27 or higher if you have weight-related health issues. </p><br>
+  <p>Certain medical conditions will mean that our weight loss programme is not suitable. These include having pancreatic issues or certain thyroid problems. You will also be unable to join the programme if you are currently pregnant, have a history of eating disorders or some mental health conditions. </p>
+</div>
+</div>
+
+<div class="faq-list">
+  <button class="accordion">How can I fit exercise and diet into the programme? </button>
+  <div class="panel">
+    <p>Our programme is not just dependent on our clinically proven weight loss with medicines. We focus on both physical and mental wellness, and nutrition. Not only do we give you access to poignant resources, guides, and articles, we provide constant clinical advice and coaching to help you overcome those negative behaviours and attitudes that have held you back in the past. Our detailed strategies incorporate nutrition, exercise and clinically proven medicines that will allow you to gradually and effectively incorporate healthy habits into your lifestyle that result in an entirely new approach to health and wellbeing. </p>
+  </div>
+</div>
+
+
+<div class="faq-list">
+  <button class="accordion">Why should I choose Pharmacy Planet over traditional weight loss methods?</button>
+  <div class="panel">
+    <p>Listen. Weight loss is not easy. We’ve all been told how much we should eat. How much we should exercise. We are told over and over again about the things we all should be doing. But, weight loss is not about the shoulds. Should is not a helpful word. As soon as it is uttered there is an implication that we have failed and that we should’ve known better. Real weight loss happens when we turn the word should into the word want.</p><br>
+    <p>If we can change our mindset to believe that we want to lose weight, then we instantly begin to forgive our unhelpful attitudes and begin to forge a path that lets us explore new methods and accept new advice.</p><br>
+    <p>Weight loss medicines are not a solution in themselves, but they are an important tool that can help you to navigate a journey towards a healthier and happier you. A you that wants to be happier and healthier. And a you that wants to discover what life can really be like. </p>
+  </div>
+</div>
+
+
+<div class="faq-list">
+  <button class="accordion">Is Pharmacy Planet’s weight loss programme beneficial to my long-term health?</button>
+  <div class="panel">
+    <p>Absolutely. Not only because of the immediate effects of weight loss, but because of the healthy habits and lifestyle changes that you have embraced on the way to the person you have always wanted to be. Discover a new mindset that has not only seen the results of weight loss assisted by medicine but with the new habits you’ve come to love and appreciate on the journey towards the person you’ve always known you could be. </p>
+  </div>
+</div> -->
+
+</div>
+</div>
+
+<script>
+var accordions = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < accordions.length; i++) {
+  accordions[i].addEventListener("click", function() {
+    // Close all accordions
+    for (var j = 0; j < accordions.length; j++) {
+      if (accordions[j] !== this) {
+        accordions[j].classList.remove("active");
+        accordions[j].nextElementSibling.style.display = "none";
+      }
+    }
+
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+</script>
+
+
+<style>
+.accordion {
+      font: var(--unnamed-font-style-normal) normal normal 18px/21px Roboto;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-000000);
+    text-align: left;
+    font: normal normal normal 18px/21px Roboto;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    padding: 15px;
+    width: 100%;
+    }
+
+    .accordion:after {
+      content: '\002B'; /* Unicode character for plus sign */
+       padding-left: 80px 
+      float: right;
+    }
+
+    .active:after {
+      content: "\2212"; /* Unicode character for minus sign */
+    }
+
+  .panel {
+    padding: 10px;
+    display: none;
+    overflow: hidden;
+    font: var(--unnamed-font-style-normal) normal normal 18px/21px Roboto;
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-000000);
+    text-align: left;
+    font: normal normal normal 18px/21px Roboto;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+  }
+</style>

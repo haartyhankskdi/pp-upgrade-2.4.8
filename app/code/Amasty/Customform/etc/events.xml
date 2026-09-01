@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="amasty_custom_form_submitted">
+        <observer name="amasty_custom_form_submitted_send_notification" instance="Amasty\Customform\Observer\Form\Submit" />
+        <observer name="amasty_custom_form_submitted_get_confirmation" instance="Amasty\Customform\Observer\Form\GetStepConfirm" />
+        <!-- <observer name="save_category_questionnaire_unique_id_in_form" instance="Amasty\Customform\Observer\Form\SaveUniqueHashToForm"/> -->
+    </event>
+    <event name="amcustomform_answer_delete_after">
+        <observer name="amasty_custom_form_answer_remove_files" instance="Amasty\Customform\Observer\Answer\DeleteAfter" />
+    </event>
+    <event name="checkout_onepage_controller_success_action">
+        <observer name="save_category_questionnaire_unique_id" instance="Amasty\Customform\Observer\Form\SaveUniqueHashToOrder"/>
+    </event>
+</config>

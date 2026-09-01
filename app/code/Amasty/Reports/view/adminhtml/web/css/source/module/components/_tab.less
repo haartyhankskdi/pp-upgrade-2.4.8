@@ -1,0 +1,55 @@
+//
+//  Tab Styles
+//  ______________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amreports-tabs-wrapper {
+        & {
+            .am-flex(center, center);
+
+            border-bottom: 1px solid @amrep-input-border__color;
+            flex-basis: 100%;
+            margin: 0;
+            width: 100%;
+        }
+
+        .amreports-tab {
+            & {
+                background: #fff;
+                border: none;
+                color: @amrep__secondary__font-color;
+                cursor: pointer;
+                display: inline-block;
+                font-weight: 600;
+                padding: @amrep__indent 8px;
+                text-align: center;
+                transition: .2s background ease-in-out;
+                width: 50%;
+            }
+
+            &:not(:last-child) {
+                border-right: 1px solid @amrep-input-border__color;
+            }
+
+            &.-current,
+            &.active {
+                background: @amrep__tab-color__active;
+                color: #fff;
+            }
+        }
+    }
+
+    .amreports-tab-content {
+        & {
+            display: none;
+        }
+
+        &.-current {
+            display: block;
+        }
+    }
+}

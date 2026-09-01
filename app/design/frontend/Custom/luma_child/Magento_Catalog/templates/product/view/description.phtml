@@ -1,0 +1,35 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+/**
+ * Product description template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Description
+ */
+?>
+
+<div class="product-info-cont-1">
+    <div class="info-cont-1">
+        <p>UK licenced medication</p>     
+    </div>
+    <div class="info-cont-2">
+        <p>Cancel any time</p>     
+    </div>
+    <div class="info-cont-3">
+        <p>100% Discretion & Confidentiality</p>     
+    </div>
+    <div class="info-cont-4">
+        <p>TrustScore 4.8</p>     
+    </div>
+</div>
+
+<?= /* @noEscape */ $this->helper(Magento\Catalog\Helper\Output::class)->productAttribute(
+    $block->getProduct(),
+    $block->getProduct()->getDescription(),
+    'description'
+) ?>

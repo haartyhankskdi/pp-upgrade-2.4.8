@@ -1,0 +1,104 @@
+<!-- Ethnicity Selection -->
+<fieldset class="small-header">
+    <legend class="legend"><?= $block->escapeHtml(__('Ethnicity Information')) ?></legend>
+</fieldset>
+
+<div class="reg-form-grouped ethncity_optn">
+    <div class="field Ethnicity-field">
+        <label for="ethnicity" class="ethnicitycust-label label"><span>What is your ethnic group?</span></label>
+        <div class="control">
+            <select id="ethnicity" name="ethnicitycust">
+                <option value="">Please Select</option>
+                <option value="White">White</option>
+                <option value="Mixed / Multiple Ethnic Groups">Mixed / Multiple Ethnic Groups</option>
+                <option value="Asian / Asian British">Asian / Asian British</option>
+                <option value="Black / African / Caribbean / Black British">Black / African / Caribbean / Black British</option>
+                <option value="Other Ethnic Groups">Other Ethnic Groups</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="field sub_ethnicity" style="display: none;">
+        <label class="sub_ethnicity_lbl" for="sub_ethnicity">Sub Ethnicity</label>
+        <div class="control">
+            <select id="sub_ethnicity" name="sub_ethnicitycust">
+                <option value="">Please Select</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Input field for 'Other' selection -->
+    <div class="field other_ethnicity_field" style="display: none;">
+        <label for="other_ethnicity">Please enter below.</label>
+        <div class="control">
+            <input type="text" id="other_ethnicity" class="input-text" name="sub_ethnicitycust_other">
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+require(['jquery'], function($) {
+    $(document).ready(function() {
+        var subEthnicityOptions = {
+            "White": ["White - British", "White - Irish", "White - Gypsy or Irish Traveller", "White - Other"],
+            "Mixed / Multiple Ethnic Groups": ["Mixed - White and Black Caribbean", "Mixed - White and Black African", "Mixed - White and Asian", "Mixed - Other"],
+            "Asian / Asian British": ["Asian - Indian", "Asian - Pakistani", "Asian - Bangladeshi", "Asian - Chinese", "Asian - Other"],
+            "Black / African / Caribbean / Black British": ["Black - African", "Black - Caribbean", "Black - Other"],
+            "Other Ethnic Groups": ["Arab", "Other"],
+            "Prefer not to say": ["Not Applicable"]
+        };
+
+        var subEthnicityField = $(".field.sub_ethnicity");
+        var subEthnicity = $("#sub_ethnicity");
+        var otherEthnicityField = $(".field.other_ethnicity_field");
+        var otherEthnicityInput = $("#other_ethnicity");
+
+        // Initially hide fields
+        subEthnicityField.hide();
+        otherEthnicityField.hide();
+        otherEthnicityInput.prop("disabled", true);
+
+        $("#ethnicity").change(function() {
+            var selected = $(this).val();
+            subEthnicity.empty().append('<option value="">Select Sub Ethnicity</option>');
+            otherEthnicityField.hide();
+            otherEthnicityInput.val("").prop("disabled", true);
+            subEthnicity.prop("disabled", true);
+
+            if (subEthnicityOptions[selected]) {
+                $.each(subEthnicityOptions[selected], function(index, value) {
+                    subEthnicity.append('<option value="' + value + '">' + value + '</option>');
+                });
+                subEthnicity.prop("disabled", false);
+                subEthnicityField.show();
+            } else {
+                subEthnicityField.hide();
+            }
+        });
+
+        $("#sub_ethnicity").change(function() {
+            var selectedSub = $(this).val();
+            if (selectedSub === "Other") {
+                otherEthnicityField.show();
+                otherEthnicityInput.prop("disabled", false).attr("name", "sub_ethnicitycust");
+                subEthnicity.attr("name", "sub_ethnicitycust_hidden"); // Hide dropdown field name
+            } else {
+                otherEthnicityField.hide();
+                otherEthnicityInput.val("").prop("disabled", true).attr("name", "sub_ethnicitycust_hidden");
+                subEthnicity.attr("name", "sub_ethnicitycust"); // Restore dropdown field name
+            }
+        });
+
+        // Ensure correct value is submitted
+        $("form").submit(function() {
+            if ($("#sub_ethnicity").val() === "Other") {
+                $("#sub_ethnicity").prop("disabled", true);
+                $("#other_ethnicity").prop("disabled", false);
+            } else {
+                $("#other_ethnicity").prop("disabled", true);
+            }
+        });
+    });
+});
+</script>

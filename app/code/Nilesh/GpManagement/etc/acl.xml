@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Nilesh_GpManagement::GpManagement" sortOrder="10" title="GpManagement">
+					<resource id="Nilesh_GpManagement::GpManagement_save" sortOrder="10" title="Save GpManagement"/>
+					<resource id="Nilesh_GpManagement::GpManagement_delete" sortOrder="20" title="Delete GpManagement"/>
+					<resource id="Nilesh_GpManagement::GpManagement_update" sortOrder="30" title="Update GpManagement"/>
+					<resource id="Nilesh_GpManagement::GpManagement_view" sortOrder="40" title="View GpManagement"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

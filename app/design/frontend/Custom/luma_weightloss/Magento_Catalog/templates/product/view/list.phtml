@@ -1,0 +1,288 @@
+<?php
+/**
+ * Product view template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View
+ */
+$product = $block->getProduct();
+if ($product !== null) {
+    // Get product description
+    $productDescription = $product->getDescription();
+
+    // Get product price
+    $productPrice = $product->getPriceInfo()->getPrice('final_price')->getAmount()->getValue();
+
+    // Format the price
+    $productPriceFormatted = $block->getProductPriceHtml($product);
+
+    // Output product description and price
+    ?>
+    <div class="product-description">
+        <?php echo $productDescription; ?>
+    </div>
+
+    <div class="product-price">
+        <?php echo $productPriceFormatted; ?>
+    </div>
+
+    <!-- Add to Cart button -->
+    <div class="add-to-cart">
+        <?php echo $block->getChildHtml('product.info.addtocart'); ?>
+    </div>
+    <?php
+}
+?>
+
+
+<!-- Whats Included -->
+<!-- <div class="category-section-2">
+<div class="container">
+    <div class="subsection-b reveal1">
+           <h3>Free Online<br> Consultation</h3>
+        <div class="category-s-i">
+         <img src="/media/wysiwyg/WLImage/audience-svgrepo-com-red.png" alt="Free Online Consultation">
+        </div>
+    </div>
+
+    <div class="subsection-b reveal1">
+        <h3>Continuous<br> Care</h3>
+        <div class="category-s-i">
+            <img src="/media/wysiwyg/WLImage/Group-2658red.png" alt="Continuous Care">
+        </div>
+    </div>
+
+    <div class="subsection-b reveal1">
+        <h3>Discreet &<br> Speedy Delivery</h3>
+        <div class="category-s-i">
+            <img src="/media/wysiwyg/WLImage/deliveryred-truck.png" alt="Discreet & Speedy Delivery">
+        </div>
+    </div>
+
+    <div class="subsection-b last reveal1">
+         <h3>Cancel<br> anytime</h3>
+        <div class="category-s-i">
+            <img src="/media/wysiwyg/WLImage/Groupred2659.png" alt="Cancel anytime">
+        </div>
+    </div>
+</div>
+</div> -->
+
+<!-- How Does GLP1 work -->
+
+<!-- <div class="included-section glp-work">
+<div class="container">
+    <h2>How does GLP1 work</h2>
+    <div class="subsection reveal1">
+           <h3>Triggering insulin release from your pancreas</h3>
+        <div class="subsection-content">
+         <img src="/media/wysiwyg/WLImage/syringe-svgrepo-com.png" alt="syringe">
+            <p>Insulin is an essential hormone that allows your body to use the food you eat for energy. It lowers the amount of glucose (sugar) in your blood. If you don’t have enough insulin, your blood sugar increases, leading to diabetes.</p>
+        </div>
+    </div>
+
+    <div class="subsection reveal1">
+        <h3>Blocking glucagon secretion</h3>
+        <div class="subsection-content">
+            <img src="/media/wysiwyg/WLImage/blood-drop-svgrepo-com.png" alt="blood-drop-svgrepo-com">
+            <p>Glucagon is a hormone your body uses to raise your blood sugar levels when necessary. So, GLP-1 prevents more glucose from going into your bloodstream.</p>
+        </div>
+    </div>
+
+    <div class="subsection reveal1">
+        <h3>Slowing stomach emptying</h3>
+        <div class="subsection-content last">
+            <img src="/media/wysiwyg/WLImage/Groupst-2739.png" alt="Stomach">
+            <p>Slower digestion means that your body releases less glucose (sugar) from the food you eat into your bloodstream.</p>
+        </div>
+    </div>
+
+    <div class="subsection reveal1">
+         <h3>Increasing how full you feel after eating (satiety)</h3>
+        <div class="subsection-content last">
+            <img src="/media/wysiwyg/WLImage/brain-svgrepo-com.png" alt="Cancel anytime">
+            <p>GLP-1 affects areas of your brain that processes hunger and satiety.</p>
+        </div>
+    </div>
+</div>
+</div> -->
+
+<!-- How It Works -->
+
+<!-- <div class="how-it-works-section inner">
+<h2>How It Works</h2>
+    <div class="Works-1 reveal1">
+        <img src="/media/wysiwyg/WLImage/work-img-1-1.png" alt="Start Consultation" />
+        <div class="work-c">
+            <h2>Start<br> Consultation</h2>
+            <p>Answer a few questions to help us understand your symptoms.</p>
+        </div>
+    </div>
+   <div class="Works-1 reveal1">
+    <img src="/media/wysiwyg/WLImage/work-img-2-1.png" alt="Setup Coaching" />
+     <div class="work-c">
+        <h2>Setup<br> Coaching</h2>
+        <p>Setup a call with expert and receive a medication.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+      <img src="/media/wysiwyg/WLImage/work-img-3-1.png" alt="Ongoing Support" />
+       <div class="work-c">
+        <h2>Get Ongoing<br> Support</h2>
+        <p>Speak to your clinician at any point.</p>
+    </div>
+  </div>
+</div> -->
+
+<!-- Our results speak for themselves -->
+
+<!-- <div class="our-results our-results-2">
+<div class="container">
+    <h2>Our results speak for themselves</h2>
+
+    <div class="result-list reveal1">
+        <h3>97%</h3>
+        
+            <p><span>Improved confidence</span></p>
+            <p>97% of patients felt more<br> confident after program</p>
+        
+    </div>
+    
+    <div class="result-list result-2 reveal1">
+           <h3>10-15%</h3>
+         
+            <p><span>Body Weight Loss</span></p>
+            <p>Average body weight loss when<br> using GLP1 medication</p>
+       
+    </div>
+
+    
+
+    <div class="result-list last reveal1">
+        <h3>97%</h3>
+         
+            <p><span>Improved overall health</span></p>
+            <p>97% of patients felt the their overall health<br> had improved after the program</p>
+        
+    </div>
+</div>
+</div> -->
+
+<!-- product info -->
+
+<!-- <div class="product-info-tab">
+    <h2>Product Info</h2>
+
+    <div class="tab-container">
+        <div class="tab-cont">
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">WHAT IS WEGOVY</button> <span></span>
+        <button class="tablinks" onclick="openCity(event, 'Paris')">DOSAGE</button><span></span>
+        <button class="tablinks" onclick="openCity(event, 'Tokyo')">HOW TO TAKE IT</button><span></span>
+        <button class="tablinks" onclick="openCity(event, 'Tokyo')">SIDEEFFECTS</button><span></span>
+        <button class="tablinks" onclick="openCity(event, 'Tokyo')">EXPECTED WEIGHT LOSS</button>
+    </div>
+
+    <div id="London" class="tabcontent">
+    <h3>WHAT IS WEGOVY</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nisi dolor, facilisis a tincidunt quis, lacinia at mauris. 
+        Donec diam elit, finibus ut posuere ut, faucibus vitae ipsum. Nunc tellus quam, dapibus ut nisl id, semper laoreet odio. 
+        Nunc nec ipsum vitae dui finibus dignissim ut eu urna. Praesent quam nibh, placerat nec tortor non, pharetra rutrum enim. 
+        Proin blandit enim nec metus maximus, sit amet vulputate magna ullamcorper. Pellentesque posuere a lorem non consectetur. <br>
+        Nunc ut pharetra nibh. Morbi eu porttitor velit. Fusce pellentesque dolor pellentesque tortor pellentesque dapibus. Donec eu euismod ante. 
+        Aliquam fringilla mattis leo, ac mollis elit. Etiam condimentum commodo libero ut blandit. Donec hendrerit efficitur eros id condimentum. 
+        Fusce commodo arcu ut orci suscipit, egestas congue risus dapibus. Maecenas dictum, libero eu fermentum imperdiet, mauris diam aliquet sem, sed cursus dui enim a erat. 
+        Sed elementum ut erat varius feugiat. Maecenas dictum a dolor malesuada tincidunt. Curabitur bibendum, arcu in eleifend vestibulum..</p>
+    </div>
+
+    <div id="Paris" class="tabcontent">
+    <h3>DOSAGE</h3>
+    <p>Donec diam elit, finibus ut posuere ut, faucibus vitae ipsum. Nunc tellus quam, dapibus ut nisl id, semper laoreet odio.</p> 
+    </div>
+
+    <div id="Tokyo" class="tabcontent">
+    <h3>HOW TO TAKE IT</h3>
+    <p>Donec diam elit, finibus ut posuere ut, faucibus vitae ipsum. Nunc tellus quam, dapibus ut nisl id, semper laoreet odio. </p>
+    </div>
+
+</div>
+</div>
+</div> -->
+
+
+<!-- weightloss journey -->
+<!-- <div class="weightloss-journey"> 
+<div class="container">   
+        <h3>Start your <strong>weight loss journey</strong></h3>
+        <div class="h-banner-btn"><a href="#">START MY CONSULTATION</a></div>
+    </div>
+</div> -->
+
+<!-- WLVideo -->
+<!-- <div class="video-section inner">
+<div class="container">
+    <h2>How to take the product</h2>
+    <div class="subsection reveal1">
+          <video width="1020" height="590" controls>
+             <source src="/media/wysiwyg/WLImage/video-s.mp4" type="video/mp4">
+          </video>
+    </div>
+</div>
+</div> -->
+
+<!-- meet team section2 -->
+
+<!-- <div class="meet-team-section2 inner">
+<div class="container">
+    <div class="team-2 reveal1">
+        <img src="/media/wysiwyg/WLImage/uk.png" alt="UK Registered pharmacy">
+        <h3>UK Registered pharmacy</h3>
+    </div>
+
+    <div class="team-2 reveal1">
+        <img src="/media/wysiwyg/WLImage/Mhra.png" alt="MHRA authorised">
+        <h3>MHRA authorised medications</h3>
+    </div>
+
+    <div class="team-2 reveal1">
+        <img src="/media/wysiwyg/WLImage/myfitnesspal-svgrepo-com.png" alt="Over 10 years experience">
+        <h3>Over 10 years experience</h3>
+    </div>
+</div>
+</div> -->
+
+
+<?php
+
+// Treatment Options 
+$treatoption = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/treatment-option.phtml")->toHtml();
+//echo $treatoption;
+
+// Experience stories
+$storiesContent = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/stories.phtml")->toHtml();
+//echo $storiesContent;
+
+// Testimonial
+$testimonial = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/testimonial.phtml")->toHtml();
+//echo $testimonial;
+?>
+
+
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>

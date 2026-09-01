@@ -1,0 +1,132 @@
+<div class="container">
+
+	<!--<?php
+
+		//echo $block->getName();
+
+		?>
+		<a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/account/logout')) ?>">Log out</a>
+		<a class="action edit" href="">Start Consultation</a>
+		<a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/account/edit')) ?>">Account Information</a>
+		<a class="action edit" href="<?= $block->escapeUrl($block->getUrl('sales/order/history')) ?>">My Order</a>
+		<a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/general/question')) ?>">General Health Questions</a>
+		<a class="action edit" href="<?= $block->escapeUrl($block->getUrl('customer/address')) ?>">Address</a>
+		<a class="action edit" href="<?= $block->escapeUrl($block->getUrl('newsletter/manage')) ?>">News Letter</a> -->
+	<?php
+	//echo "<pre>";print_r($block->getCustomer()->);
+	$customer = $block->getCustomer();
+	// $customerId = $customer->getId();
+	//         $countryName = $this->getGender($customerId);
+	//         echo "test".$countryName;
+
+	$customerId = $customer->getId();
+	$gender = $customer->getGender();
+	if ($gender == 1) {
+		$image = $block->getUrl('media') . 'male.svg';
+	} else {
+		$image = $block->getUrl('media') . 'male-female.svg';
+	}
+	//echo $abcd;
+	// $genderText = $customer->getSource()->getOptionText($customer->getData('gender'));
+	// $genderValue = $customer->getCustomAttributeText('gender')->getValue();
+	// echo $genderValue;
+	?>
+
+	<div class="my-account-page">
+
+		<div class="my-account-top">
+			<!-- <div class="title-bg"><img src="<?php //echo $image; ?>" alt="Male/Female" /></div> -->
+
+			<div class="title-bg"><img src="/media/wysiwyg/WLImage/male.svg" alt="Male/Female" /></div>
+
+			<div class="title-left">
+				<h2>
+					<?php
+
+					echo $block->getName();
+
+					?>
+				</h2>
+
+				<p><a class="logout" href="<?= $block->escapeUrl($block->getUrl('customer/account/logout')) ?>">Log out</a> <span><!-- |</span>
+			 	<a class="" href="<?= $block->escapeUrl($block->getUrl('needhelp')) ?>">Need Help?</a> --></p>
+
+			</div>
+			<div class="Start-consultion-bg"><img src="/media/wysiwyg/WLImage/Start-consultion-bg.svg" alt="Start-consultion-bg" title="Start-consultion-bg" /></div>
+			<div class="Start-consultion-btn"><a href="/weightloss/wl-login">Start My Consultation</a></div>
+		</div>
+
+		<div class="myaccount-dashbord">
+
+			<div class="myaccount-dashbord-1">
+				<a href="<?= $block->escapeUrl($block->getUrl('customer/account/edit')) ?>">
+					<div class="my-account-1">
+						<div class="img"><img src="/media/wysiwyg/WLImage/manage-account-details-icon.svg" alt="Manage Account Details" title="Manage Account Details" /></div>
+						<h3>Manage Account Details</h3>
+					</div>
+				</a>
+			</div>
+
+			<div class="myaccount-dashbord-1">
+				<a href="<?= $block->escapeUrl($block->getUrl('customer/address')) ?>">
+					<div class="my-account-1">
+						<div class="img"><img src="/media/wysiwyg/WLImage/manage-addres-details-icon.svg" alt="Manage Addres Details" title="Manage Addres Details" /></div>
+						<h3>Manage Address Details</h3>
+					</div>
+				</a>
+			</div>
+
+			<!-- <div class="myaccount-dashbord-1">
+				<a href="<?= $block->escapeUrl($block->getUrl('customer/general/question')) ?>">
+					<div class="my-account-1 last">
+						<div class="img"><img src="/media/wysiwyg/WLImage/account-general-health-question.svg" alt="General Health Question" title="General Health Question" /></div>
+						<h3>General Health Questions</h3>
+					</div>
+				</a>
+			</div> -->
+
+			<div class="myaccount-dashbord-1">
+				<a href="<?= $block->escapeUrl($block->getUrl('sales/order/history')) ?>">
+					<div class="my-account-1">
+						<div class="img"><img src="/media/wysiwyg/WLImage/account-myorder.svg" alt="my Order" title="my Order" /></div>
+						<h3>My Orders</h3>
+					</div>
+				</a>
+			</div>
+
+			<div class="myaccount-dashbord-1">
+				<a href="<?= $block->escapeUrl($block->getUrl('newsletter/manage')) ?>">
+					<div class="my-account-1 ">
+						<div class="img"><img src="/media/wysiwyg/WLImage/newsletter.svg" alt="Newsletter" title="Newsletter" /></div>
+						<h3>Newsletter Subscriptions</h3>
+					</div>
+				</a>
+			</div>
+
+			<div class="myaccount-dashbord-1">
+				<a href="<?= $block->escapeUrl($block->getUrl('helpdesk')) ?>">
+					<div class="my-account-1 last">
+						<div class="img"><img src="/media/wysiwyg/WLImage/customer-support-icon.svg" alt="My Support Tickets" title="Order Query" /></div>
+						<h3>Order Query</h3>
+					</div>
+				</a>
+			</div>
+
+			<div class="myaccount-dashbord-1">
+				<a href="<?= $block->escapeUrl($block->getUrl('customer/delete')) ?>">
+					<div class="my-account-1 account-delete last">
+						<div class="img"><img src="/media/wysiwyg/WLImage/delete-account.svg" alt="Delete Account" title="Newsletter" /></div>
+						<h3>Delete Account</h3>
+					</div>
+				</a>
+			</div>
+
+		</div>
+
+		<!-- <a href="<?php // $block->escapeUrl($block->getUrl('customer/delete')) ?>"><div class="account-delete">
+			<h3>Delete Account</h3>	
+		</div></a> -->
+
+	</div>
+
+</div>

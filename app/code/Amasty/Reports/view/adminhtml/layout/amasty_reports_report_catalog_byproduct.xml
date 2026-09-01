@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="amasty_reports_general_layout"/>
+    <body>
+        <attribute name="class" value="amreports-other-pages"/>
+        <attribute name="class" value="amreports-byproduct-container"/>
+        <referenceContainer name="amreports.container">
+            <block class="Amasty\Reports\Block\Adminhtml\Report\Sales\OrderItems\Toolbar"
+                   template="Amasty_Reports::report/header.phtml"
+                   name="amreports.report.header"
+            />
+            <container name="amreports.container.content" htmlTag="div" htmlClass="amreports-container-content">
+                <block class="Amasty\Reports\Block\Adminhtml\Report\Catalog\ByProduct\Toolbar"
+                       template="Amasty_Reports::report/toolbar.phtml"
+                       name="amreports.report.toolbar"
+                />
+                <block class="Magento\Backend\Block\Template" name="amreports.report.content" />
+                <uiComponent name="amasty_report_catalog_by_product_listing" />
+            </container>
+        </referenceContainer>
+    </body>
+</page>

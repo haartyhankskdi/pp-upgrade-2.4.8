@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mflazyzoad>
+            <general>
+                <lazy_blocks>footer
+category.products.list
+search_result_list
+catalog.product.related
+product.info.upsell
+product.info.details
+checkout.cart.crosssell
+blog.post
+blog.posts.list
+blog.sidebar
+blog.post.relatedproducts
+product.info.description</lazy_blocks>
+                <mfmodule>LazyLoad</mfmodule>
+                <mftype>1</mftype>
+            </general>
+        </mflazyzoad>
+    </default>
+</config>

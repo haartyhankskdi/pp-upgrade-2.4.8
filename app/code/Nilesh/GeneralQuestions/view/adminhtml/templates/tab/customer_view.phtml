@@ -1,0 +1,152 @@
+<?php
+/**
+ * @var $block \Rbj\CustomerTab\Block\Adminhtml\CustomerEdit\Tab\View
+ */
+?>
+
+<?php $gq = $block->getCustomerData(); ?>
+
+<?php $gq = isset($gq[0])?$gq[0]:array(); ?>
+
+<div class="fieldset-wrapper customer-information">
+    <div class="fieldset-wrapper-title">
+        <span class="title"><?php /* @escapeNotVerified */
+            echo __('General Question') ?></span>
+    </div>
+    <table class="admin__table-wrapper admin__table-primary">
+        <thead>
+            <th>Question</th>
+            <th>Answer</th>
+        </thead>
+        <tbody>
+        <?php echo $block->getChildHtml(); ?>
+        <?php if(isset($gq['gender'])){ ?>
+                <tr>
+                    <td><?php /* @escapeNotVerified */
+                        echo __('Gender') ?></td>
+                    <td><?php echo ($gq['gender'] == "1")?"Male":"Female"; ?></td>
+                </tr>
+        <?php } ?>
+
+        <?php if(isset($gq['suffer_diagnosed'])){ ?>
+                <tr>
+                    <td><?php /* @escapeNotVerified */
+                        echo __('Do you suffer from or have you been diagnosed with any other medical condition(s)?') ?></td>
+                    <td><?php echo ($gq['suffer_diagnosed'] == "1")?"Yes":"No"; ?></td>
+                </tr>
+        <?php } ?>
+
+        <?php if(isset($gq['suffer_diagnosed']) && $gq['suffer_diagnosed'] == '1' && isset($gq['suffer_diagnosed_yes'])){ ?>
+                <tr>
+                    <td><?php /* @escapeNotVerified */ echo __('If Yes'); ?></td>
+                    <td><?php echo $gq['suffer_diagnosed_yes']; ?></td>
+                </tr>
+        <?php } ?>
+
+        <?php if(isset($gq['other_medication'])){ ?>
+                <tr>
+                    <td><?php /* @escapeNotVerified */
+                        echo __('Are you on any other medication (including prescription medicine, over the counter medicines, vitamins or supplements)?') ?></td>
+                    <td><?php echo ($gq['other_medication'] == "1")?"Yes":"No"; ?></td>
+                </tr>
+        <?php } ?>
+
+        <?php if(isset($gq['other_medication']) && $gq['other_medication'] == '1' && isset($gq['other_medication_yes'])){ ?>
+                <tr>
+                    <td><?php /* @escapeNotVerified */ echo __('If Yes'); ?></td>
+                    <td><?php echo $gq['other_medication_yes']; ?></td>
+                </tr>
+        <?php } ?>
+
+        <?php if(isset($gq['have_allergies'])){ ?>
+                <tr>
+                    <td><?php /* @escapeNotVerified */
+                        echo __('Do you have any allergies?') ?></td>
+                    <td><?php echo ($gq['have_allergies'] == "1")?"Yes":"No"; ?></td>
+                </tr>
+        <?php } ?>
+
+        <?php if(isset($gq['have_allergies']) && $gq['have_allergies'] == '1' && isset($gq['have_allergies_yes'])){ ?>
+                <tr>
+                    <td><?php /* @escapeNotVerified */ echo __('If Yes'); ?></td>
+                    <td><?php echo $gq['have_allergies_yes']; ?></td>
+                </tr>
+        <?php } ?>
+
+        <?php if(isset($gq['registered_gp'])){ ?>
+                <tr>
+                    <td><?php /* @escapeNotVerified */
+                        echo __('Are you registered with a GP in the UK?') ?></td>
+                    <td><?php echo ($gq['registered_gp'] == "1")?"Yes":"No"; ?></td>
+                </tr>
+        <?php } ?>
+        
+        <?php if(isset($gq['registered_gp_permission'])){ ?>
+                <tr>
+                    <td><?php /* @escapeNotVerified */
+                        echo __('If yes,  Do you give permission for Pharmacy Planet to inform your GP of this supply?') ?></td>
+                    <td><?php echo ($gq['registered_gp_permission'] == "1")?"Yes":"No"; ?></td>
+                </tr>
+        <?php } ?>
+
+        <?php if(isset($gq['registered_gp']) && $gq['registered_gp'] == "1" && isset($gq['registered_gp_permission']) && $gq['registered_gp_permission'] == '1' && isset($gq['registered_gp_surgery'])){ ?>
+                <tr>
+                    <td><?php /* @escapeNotVerified */ echo __('If Yes for permission'); ?></td>
+                    <td>
+                    <?php $gpSurg =  json_decode($gq['registered_gp_surgery']); if(is_object($gpSurg) && !empty($gpSurg) && $gpSurg != ''){ ?>
+                    <span class="name_of_practice"><span class="highlight">Practice Name: </span><?php echo $gpSurg->name_of_practice; ?></span> <br>
+                    <span class="name_of_practice"><span class="highlight">Address: </span>
+                        <?php echo "$gpSurg->address_line_one, $gpSurg->address_line_two, $gpSurg->city, $gpSurg->county, $gpSurg->postcode"; ?>
+                    </span>
+                    <?php } ?>
+                    </td>
+                </tr>
+        <?php } ?>
+
+        <?php if(isset($gq['upload_documents_prescriber'])){ ?>
+                <tr>
+                    <td><?php /* @escapeNotVerified */
+                        echo __('Would you like to upload any documents for the prescriber to see (for example, prescription, doctors letter or blood tests)?') ?></td>
+                    <td><?php echo ($gq['upload_documents_prescriber'] == "1")?"Yes":"No"; ?></td>
+                </tr>
+        <?php } ?>
+
+        <?php if(isset($gq['upload_documents_prescriber']) && $gq['upload_documents_prescriber'] == '1' && isset($gq['upload_documents_prescriber_yes'])){ ?>
+                <tr>
+                    <td><?php /* @escapeNotVerified */ echo __('Uploaded File'); ?></td>
+                    <td>
+                        <?php 
+                        $filesUploaded = isset($gq['upload_documents_prescriber_yes'])?$gq['upload_documents_prescriber_yes']:'';
+                        $filesUploadedArray = explode(",",$filesUploaded); 
+                        ?>
+                        <div class="filelink">
+                            <?php
+                            for ($iC = 0; $iC < count($filesUploadedArray); $iC++) { 
+                                ?>
+                                    <a href="<?php echo $block->getMediaGPUrl().'gq_uploads/'.$filesUploadedArray[$iC] ?>" download title="<?php echo @$filesUploadedArray[$iC] ?>">Doc <?= ($iC+1) ?></a>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </td>
+                </tr>
+        <?php } ?>
+
+        <?php if(isset($gq['prescriber_to_know'])){ ?>
+                <tr>
+                    <td><?php /* @escapeNotVerified */
+                        echo __('Do you suffer from or have you been diagnosed with any other medical condition(s)?') ?></td>
+                    <td><?php echo ($gq['prescriber_to_know'] == "1")?"Yes":"No"; ?></td>
+                </tr>
+        <?php } ?>
+
+        <?php if(isset($gq['prescriber_to_know']) && $gq['prescriber_to_know'] == '1' && isset($gq['prescriber_to_know_yes'])){ ?>
+                <tr>
+                    <td><?php /* @escapeNotVerified */ echo __('Listed Note'); ?></td>
+                    <td><?php echo $gq['prescriber_to_know_yes']; ?></td>
+                </tr>
+        <?php } ?>
+        
+        </tbody>
+    </table>
+</div>

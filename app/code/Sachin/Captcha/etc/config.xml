@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <captcha translate="label">
+            <fonts>
+                <arial>
+                    <label>Arial</label>
+                    <path>Arial/ARIALBD.TTF</path>
+                </arial>
+            </fonts>
+        </captcha>
+    </default>
+</config>

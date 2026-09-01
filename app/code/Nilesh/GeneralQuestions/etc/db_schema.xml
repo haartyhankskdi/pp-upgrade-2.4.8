@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table comment="nilesh_generalquestions_generalquestions Table" engine="innodb" name="nilesh_generalquestions_generalquestions" resource="default">
+		<column comment="Entity Id" identity="true" name="generalquestions_id" nullable="false" padding="6" unsigned="true" xsi:type="bigint"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="generalquestions_id"/>
+		</constraint>
+		<column length="255" name="customer_id" nullable="true" xsi:type="varchar"/>
+		<column length="255" name="suffer_diagnosed" nullable="true" xsi:type="varchar"/>
+		<column name="suffer_diagnosed_yes" nullable="true" xsi:type="text"/>
+		<column length="255" name="other_medication" nullable="true" xsi:type="varchar"/>
+		<column name="other_medication_yes" nullable="true" xsi:type="text"/>
+		<column length="255" name="have_allergies" nullable="true" xsi:type="varchar"/>
+		<column name="have_allergies_yes" nullable="true" xsi:type="text"/>
+		<column length="255" name="registered_gp" nullable="true" xsi:type="varchar"/>
+		<column length="255" name="registered_gp_permission" nullable="true" xsi:type="varchar"/>
+		<column name="registered_gp_surgery" nullable="true" xsi:type="text"/>
+		<column length="255" name="upload_documents_prescriber" nullable="true" xsi:type="varchar"/>
+		<column name="upload_documents_prescriber_yes" nullable="true" xsi:type="text"/>
+		<column length="255" name="prescriber_to_know" nullable="true" xsi:type="varchar"/>
+		<column name="prescriber_to_know_yes" nullable="true" xsi:type="text"/>
+		<column length="2" name="gender" nullable="true" xsi:type="varchar"/>
+
+		<column xsi:type="varchar" name="question_one" nullable="true" length="255" comment="Email" disabled="true"/>
+	</table>
+</schema>

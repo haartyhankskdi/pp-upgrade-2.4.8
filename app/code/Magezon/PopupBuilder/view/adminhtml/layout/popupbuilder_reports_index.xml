@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_PopupBuilder
+ * @copyright Copyright (C) 2020 Magezon (https://www.magezon.com)
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<css src="Magezon_Core::css/daterangepicker.css"/>
+	</head>
+	<body>
+		<referenceContainer name="main.top">
+			<block class="Magezon\PopupBuilder\Block\Adminhtml\TopMenu" name="page.title" template="Magezon_Core::menu.phtml"/>
+		</referenceContainer>
+		<referenceContainer name="content">
+			<block class="Magezon\PopupBuilder\Block\Adminhtml\Dashboard\Report" name="rentals.reports.dashboard.report" template="Magezon_Core::report.phtml">
+				<arguments>
+					<argument name="additional_classes" xsi:type="string">mgzreport-dashboard</argument>
+					<argument name="jsLayout" xsi:type="array">
+						<item name="types" xsi:type="array">
+							<item name="form.input" xsi:type="array">
+								<item name="component" xsi:type="string">Magento_Ui/js/form/element/abstract</item>
+								<item name="config" xsi:type="array">
+									<item name="provider" xsi:type="string">mgzReportProvider</item>
+									<item name="deps" xsi:type="array">
+										<item name="0" xsi:type="string">mgzReportProvider</item>
+									</item>
+									<item name="template" xsi:type="string">ui/form/field</item>
+									<item name="elementTmpl" xsi:type="string">ui/form/element/input</item>
+								</item>
+							</item>
+						</item>
+						<item name="components" xsi:type="array">
+							<item name="mgzreport" xsi:type="array">
+								<item name="component" xsi:type="string">uiComponent</item>
+								<item name="config" xsi:type="array">
+									<item name="component" xsi:type="string">Magezon_Core/js/report</item>
+									<item name="template" xsi:type="string">Magezon_Core/report</item>
+								</item>
+								<item name="children" xsi:type="array">
+									<item name="storeswitcher" xsi:type="array">
+										<item name="sortOrder" xsi:type="string">10</item>
+										<item name="component" xsi:type="string">Magezon_Core/js/store-switcher</item>
+										<item name="displayArea" xsi:type="string">header</item>
+										<item name="provider" xsi:type="string">mgzReportProvider</item>
+									</item>
+									<item name="daterangepicker" xsi:type="array">
+										<item name="sortOrder" xsi:type="string">20</item>
+										<item name="component" xsi:type="string">Magezon_Core/js/daterangepicker</item>
+										<item name="displayArea" xsi:type="string">header</item>
+										<item name="provider" xsi:type="string">mgzReportProvider</item>
+									</item>
+									<item name="items" xsi:type="array">
+										<item name="sortOrder" xsi:type="string">30</item>
+										<item name="component" xsi:type="string">Magezon_Core/js/items</item>
+										<item name="displayArea" xsi:type="string">header</item>
+										<item name="provider" xsi:type="string">mgzReportProvider</item>
+									</item>
+									<item name="chart" xsi:type="array">
+										<item name="sortOrder" xsi:type="string">40</item>
+										<item name="component" xsi:type="string">Magezon_PopupBuilder/js/chart</item>
+										<item name="displayArea" xsi:type="string">content</item>
+										<item name="provider" xsi:type="string">mgzReportProvider</item>
+									</item>
+								</item>
+							</item>
+							<item name="mgzReportProvider" xsi:type="array">
+								<item name="component" xsi:type="string">Magezon_Core/js/provider</item>
+								<item name="name" xsi:type="string">mgzReportProvider</item>
+								<item name="update_url" xsi:type="string">popupbuilder/reports/loadReports</item>
+							</item>
+						</item>
+					</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+	</body>
+</page>

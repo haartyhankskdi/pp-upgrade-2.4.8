@@ -1,0 +1,29 @@
+{
+    "name": "amasty/module-magento-custom-form",
+    "description": "Custom Form by Amasty",
+    "require": {
+        "php": ">=7.3.0",
+        "amasty/base": ">=1.13.6",
+        "amasty/aminvisiblecaptcha": ">=2.4.0"
+    },
+    "suggest": {
+        "dompdf/dompdf": "To use PDF functionality, please install the library dompdf/dompdf.",
+        "amasty/module-magento-custom-form-graphql": "Install amasty/module-magento-custom-form-graphql module to activate Graphql and Custom Forms integration.",
+        "amasty/module-magento-custom-form-mftf-2": "Install magento-custom-form-mftf-2 module to be able to run Custom Form MFTF tests for Magento 2.3.5+ version",
+        "amasty/module-magento-custom-form-mftf-3": "Install magento-custom-form-mftf-3 module to be able to run Custom Form MFTF tests for Magento 2.4.0+ version",
+        "amasty/module-custom-form-to-builder": "Install Amasty_CustomFormToBuilder module to activate the integration with Custom Reports Builder extension and create valuable reports about your Custom Forms."
+    },
+    "type": "magento2-module",
+    "version": "1.18.2",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\Customform\\": ""
+        }
+    }
+}

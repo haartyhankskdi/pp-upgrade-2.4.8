@@ -1,0 +1,137 @@
+<?php 
+$_product = $block->getProduct();
+?>
+
+ 
+<div class="product-info-rating">
+  <div class="product-info-rating-left">
+    <h4>Product ratings</h4>
+    <div class="product-rating-img">
+      <img src="<?php echo $this->getViewFileUrl('images/rating-img.jpg'); ?>" alt="Ratings" />
+    </div>
+  
+
+    <!-- Quick Link -->
+  <?php 
+    $helperProductPage = $this->helper(\Nilesh\Theme\Helper\ProductViewPage::class);
+
+    $getQuickLink = $helperProductPage->getCatLink();
+    if(is_array($getQuickLink) && count($getQuickLink) > 0){
+    ?>
+  <div class="quick-link product-quicklink">
+        <h4>Quick links</h4>
+            <ul>
+      
+                  <?php
+                      foreach ($getQuickLink as $ql) {
+                          ?>
+                              <li><a href="<?php echo $ql['url']; ?>"> View all <?php echo $ql['name']; ?></a></li>
+                          
+                          <?php
+                      }
+                  
+              ?>
+          </ul>
+  </div>
+<?php } ?>
+<!-- Quick Link -->
+
+</div>
+
+  <div class="product-info-rating-right">
+    
+    <div class="new-additional-info test-test">
+    <?php
+   // if(!empty($_product->getData('people_also_ask'))){
+    	if(!empty($_product->getData('faq_ques1'))){
+      ?>
+        <h4>People also ask</h4>
+
+        <?php 
+    		}
+        ?>
+        
+      <?php
+      echo (empty($_product->getData('faq_ques1'))) ? "" : "<h2 onclick='show_para(this)'>".$_product->getData('faq_ques1')."</h2>"."\n";
+      echo (empty($_product->getData('faq_ans1'))) ? "" : "<div class='accordian-product'>".$_product->getData('faq_ans1')."</div>";   
+      echo (empty($_product->getData('faq_ques2'))) ? "" : "<h2 onclick='show_para(this)'>".$_product->getData('faq_ques2')."</h2>"."\n";
+      echo (empty($_product->getData('faq_ans2'))) ? "" : "<div class='accordian-product'>".$_product->getData('faq_ans2')."</div>";
+      echo (empty($_product->getData('faq_ques3'))) ? "" : "<h2 onclick='show_para(this)'>".$_product->getData('faq_ques3')."</h2>"."\n";
+      echo (empty($_product->getData('faq_ans3'))) ? "" : "<div class='accordian-product'>".$_product->getData('faq_ans3')."</div>";
+      echo (empty($_product->getData('faq_ques4'))) ? "" : "<h2 onclick='show_para(this)'>".$_product->getData('faq_ques4')."</h2>"."\n";
+      echo (empty($_product->getData('faq_ans4'))) ? "" : "<div class='accordian-product'>".$_product->getData('faq_ans4')."</div>";
+      echo (empty($_product->getData('faq_ques5'))) ? "" : "<h2 onclick='show_para(this)'>".$_product->getData('faq_ques5')."</h2>"."\n";
+      echo (empty($_product->getData('faq_ans5'))) ? "" : "<div class='accordian-product'>".$_product->getData('faq_ans5')."</div>";
+      echo (empty($_product->getData('faq_ques6'))) ? "" : "<h2 onclick='show_para(this)'>".$_product->getData('faq_ques6')."</h2>"."\n";
+      echo (empty($_product->getData('faq_ans6'))) ? "" : "<div class='accordian-product'>".$_product->getData('faq_ans6')."</div>";
+      echo (empty($_product->getData('faq_ques7'))) ? "" : "<h2 onclick='show_para(this)'>".$_product->getData('faq_ques7')."</h2>"."\n";
+      echo (empty($_product->getData('faq_ans7'))) ? "" : "<div class='accordian-product'>".$_product->getData('faq_ans7')."</div>";
+      echo (empty($_product->getData('faq_ques8'))) ? "" : "<h2 onclick='show_para(this)'>".$_product->getData('faq_ques8')."</h2>"."\n";
+      echo (empty($_product->getData('faq_ans8'))) ? "" : "<div class='accordian-product'>".$_product->getData('faq_ans8')."</div>";
+      echo (empty($_product->getData('faq_ques9'))) ? "" : "<h2 onclick='show_para(this)'>".$_product->getData('faq_ques9')."</h2>"."\n";
+      echo (empty($_product->getData('faq_ans9'))) ? "" : "<div class='accordian-product'>".$_product->getData('faq_ans9')."</div>";
+      echo (empty($_product->getData('faq_ques10'))) ? "" : "<h2 onclick='show_para(this)'>".$_product->getData('faq_ques10')."</h2>"."\n";
+      echo (empty($_product->getData('faq_ans10'))) ? "" : "<div class='accordian-product'>".$_product->getData('faq_ans10')."</div>";
+    //}
+    ?>
+
+    <script>
+
+    function hide_para(){
+      var h2 = document.querySelectorAll(".accordian-product");
+      for (var i = 0; i < h2.length; i++) {
+        h2[i].style.display = 'none';
+      }
+    }
+
+    hide_para();
+
+    function show_para(currElement){
+      //hide_para();
+    //console.log(currElement.nextElementSibling);
+     // currElement.nextElementSibling.style.display = "block";
+      if(currElement.nextElementSibling.style.display == "none"){
+        currElement.nextElementSibling.style.display = "block";
+      }else{
+        currElement.nextElementSibling.style.display = "none";
+      }
+    }
+
+    </script>
+   
+    </div>
+
+<?php /*
+    <div class="product-info-price-table"> 
+      <h3>More about <?php echo $_product->getName(); ?></h3>
+      <table>
+        <tr>
+          <td><strong>Generic</strong></td>
+          <td><?php echo ($_product->getData('genericproduct') == 0)?"No":"Yes"; ?></td>
+        </tr>
+        <tr>
+          <td><strong>Ingredients</strong></td>
+          <td><?php echo  $_product->getData('ingredients'); ?></td>
+        </tr>
+        <tr>
+          <td><strong>Directions</strong></td>
+          <td><?php echo  $_product->getData('directions'); ?></td>
+        </tr>
+        <tr>
+          <td><strong>Side Effects</strong></td>
+          <td><?php echo  $_product->getData('sideeffects'); ?></td>
+        </tr>
+      </table>
+    </div>
+    */ ?>
+  </div>
+
+</div>
+<div class="product-logo-slider">
+<?php
+  /* 
+  * Static block - company-logo-slider
+  */
+  echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('company-logo-slider')->toHtml();
+?>
+</div>

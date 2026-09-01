@@ -1,0 +1,79 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$pharmacistCollection = $objectManager->create('Kdi\Pharmacist\Model\ResourceModel\Pharmacist\Collection');
+$storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+$mediaBaseUrl = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+// Fetch the enabled pharmacist (is_enabled = 1) and get the most recent one
+$pharmacist = $pharmacistCollection
+    ->addFieldToFilter('is_enabled', 1)
+    ->setOrder('entity_id', 'DESC')
+    ->getFirstItem();
+
+if ($pharmacist->getId()) {
+    $name = $pharmacist->getName();
+    $gphcNumber = $pharmacist->getGphcNo();
+    $pharmacistType = $pharmacist->getPharmacistType();
+    $description = $pharmacist->getDescription();
+    
+    // Assuming the date field is called 'date' or 'created_at'
+    $date = $pharmacist->getDate(); // Use whichever field holds the date
+    $formattedDate = date('d/m/Y'); // Format the date to d/m/Y
+
+    // Get the image URL from the pharmacist model
+    $imageFileName = $pharmacist->getImage(); // Assuming the image attribute is 'image'
+    $imageUrl = $mediaBaseUrl . '' . $imageFileName;
+?>
+
+<div class="pharmacist-left-content">
+    <p class="pharmacist-title">Today's responsible pharmacist</p>
+    <p class="pharmacist-text"><?= $formattedDate; ?></p>
+    <!-- <p class="pharmacist-title name"><?= $name; ?></p> -->
+    <p class="pharmacist-title name">HARMINDER ‘HARMY’ KAUR</p>
+    <p class="pharmacist-text">GPhC registration: <?= '2061107' ?></p>
+    <p class="pharmacist-title" style="display: none;">Pharmacist: <?= $pharmacistType; ?></p>
+    <!-- <p class="pharmacist-text"><?= $description; ?></p> -->
+
+    <div class="pharmacist-cont"><?= $description; ?></div>
+</div>
+<div class="pharmacist-right-img">
+    <!-- <img src="<?= $imageUrl; ?>" alt="Pharmacist Image" /> -->
+    <img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/harminder-kaur-img.jpg" alt="Harminder Kaur" />
+    <!-- <img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/gurdev_sehmi_responsible_pharmacist.jpg" alt="Gurdev Sehmi" /> -->
+</div>
+
+<?php
+} else {
+    // Show this if no enabled pharmacist is found
+    echo '<p>No responsible pharmacist data available.</p>';
+}
+?>
+
+
+
+
+
+
+<style type="text/css">
+    .cms-today-s-responsible-pharmacist .page-title-wrapper .page-title{
+        display: none;
+    }
+    .cms-today-s-responsible-pharmacist .pharmacist-sec{
+        margin-top: 40px;
+    }
+    .pharmacist-left-content .pharmacist-title{
+        text-transform: capitalize;
+    }
+
+
+    @media only screen and (max-width: 767px) {
+        .cms-today-s-responsible-pharmacist .breadcrumbs{
+            display: block !important;
+            margin-top: 15px !important;
+        }
+        .cms-today-s-responsible-pharmacist .pharmacist-sec {
+            margin-top: 0px !important;
+        }
+    }
+</style>

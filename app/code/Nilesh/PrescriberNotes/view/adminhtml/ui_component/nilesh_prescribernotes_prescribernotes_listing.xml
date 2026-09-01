@@ -1,0 +1,166 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">nilesh_prescribernotes_prescribernotes_listing.nilesh_prescribernotes_prescribernotes_listing_data_source</item>
+		</item>
+	</argument>
+	<settings>
+		<spinner>nilesh_prescribernotes_prescribernotes_columns</spinner>
+		<deps>
+			<dep>nilesh_prescribernotes_prescribernotes_listing.nilesh_prescribernotes_prescribernotes_listing_data_source</dep>
+		</deps>
+		<buttons>
+			<button name="add">
+<!--				<url path="nilesh_prescribernotes/prescribernotes/new"/>-->
+				<url path="*/*/new"/>
+				<class>primary</class>
+				<label translate="true">Add new PrescriberNotes</label>
+			</button>
+		</buttons>
+	</settings>
+	<dataSource name="nilesh_prescribernotes_prescribernotes_listing_data_source" component="Magento_Ui/js/grid/provider">
+		<settings>
+			<storageConfig>
+				<param name="indexField" xsi:type="string">prescribernotes_id</param>
+			</storageConfig>
+			<updateUrl path="mui/index/render"/>
+            <!--<filterUrlParams>
+                <param name="connect_id">*</param>
+            </filterUrlParams>-->
+		</settings>
+		<aclResource>Nilesh_PrescriberNotes::view</aclResource>
+		<dataProvider name="nilesh_prescribernotes_prescribernotes_listing_data_source" class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+			<settings>
+				<requestFieldName>id</requestFieldName>
+				<primaryFieldName>prescribernotes_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<listingToolbar name="listing_top">
+		<settings>
+			<sticky>false</sticky>
+		</settings>
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls"/>
+		<filters name="listing_filters"/>
+		<paging name="listing_paging"/>
+        <exportButton name="export_button"/>
+	</listingToolbar>
+	<columns name="nilesh_prescribernotes_prescribernotes_columns">
+		<settings>
+			<editorConfig>
+				<param name="selectProvider" xsi:type="string">nilesh_prescribernotes_prescribernotes_listing.nilesh_prescribernotes_prescribernotes_listing.nilesh_prescribernotes_prescribernotes_columns.ids</param>
+				<param name="enabled" xsi:type="boolean">true</param>
+				<param name="indexField" xsi:type="string">prescribernotes_id</param>
+				<param name="clientConfig" xsi:type="array">
+					<item name="saveUrl" xsi:type="url" path="nilesh_prescribernotes/PrescriberNotes/inlineEdit"/>
+					<item name="validateBeforeSave" xsi:type="boolean">false</item>
+				</param>
+			</editorConfig>
+			<childDefaults>
+				<param name="fieldAction" xsi:type="array">
+					<item name="provider" xsi:type="string">nilesh_prescribernotes_prescribernotes_listing.nilesh_prescribernotes_prescribernotes_listing.nilesh_prescribernotes_prescribernotes_columns_editor</item>
+					<item name="target" xsi:type="string">startEdit</item>
+					<item name="params" xsi:type="array">
+						<item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+						<item name="1" xsi:type="boolean">true</item>
+					</item>
+				</param>
+			</childDefaults>
+		</settings>
+		<selectionsColumn name="ids">
+			<settings>
+				<indexField>prescribernotes_id</indexField>
+			</settings>
+		</selectionsColumn>
+		<column name="prescribernotes_id" sortOrder="10">
+			<settings>
+				<filter>text</filter>
+				<sorting>asc</sorting>
+				<label translate="true">ID</label>
+			</settings>
+		</column>
+<!--		<column name="id">-->
+<!--			<settings>-->
+<!--				<filter>text</filter>-->
+<!--				<label translate="true">id</label>-->
+<!--				<editor>-->
+<!--					<editorType>text</editorType>-->
+<!--					<validation>-->
+<!--						<rule name="required-entry" xsi:type="boolean">false</rule>-->
+<!--					</validation>-->
+<!--				</editor>-->
+<!--			</settings>-->
+<!--		</column>-->		
+
+		<column name="subject">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Subject</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>				
+			</settings>
+		</column>
+
+		<column name="set_priority" class="Nilesh\PrescriberNotes\Ui\Component\Listing\Column\SetPriority">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Set Priority</label>
+				<bodyTmpl>ui/grid/cells/html</bodyTmpl>
+				<fieldClass>
+		            <class name="set_priority">true</class>
+		        </fieldClass>		        
+			</settings>
+		</column>				        	
+
+		<column name="created_at">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Created At</label>				
+			</settings>
+		</column>
+
+		<column name="created_by">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Created By</label>				
+			</settings>
+		</column>
+
+		<actionsColumn name="connect_id" class="Nilesh\PrescriberNotes\Ui\Component\Listing\Column\PrescriberNotesIdLink">
+			<settings>
+				<label translate="true">View</label>
+				<indexField>prescribernotes_id</indexField>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+			</settings>
+		</actionsColumn>
+
+		<column name="note" class="Nilesh\PrescriberNotes\Ui\Component\Listing\Column\PrescriberNotes">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Quick View</label>
+			</settings>
+		</column>
+
+		 <actionsColumn name="attachment" class="Nilesh\PrescriberNotes\Ui\Component\Listing\Column\Attachment">
+			<settings>
+				<label translate="true">Attachment</label>
+				<indexField>prescribernotes_id</indexField>
+				<bodyTmpl>ui/grid/cells/html</bodyTmpl>
+			</settings>
+		</actionsColumn>        		
+
+        <actionsColumn name="actions" class="Nilesh\PrescriberNotes\Ui\Component\Listing\Column\PrescriberNotesActions">
+			<settings>
+				<indexField>prescribernotes_id</indexField>
+				<resizeEnabled>false</resizeEnabled>
+				<resizeDefaultWidth>107</resizeDefaultWidth>
+			</settings>
+		</actionsColumn>
+	</columns> 
+</listing>

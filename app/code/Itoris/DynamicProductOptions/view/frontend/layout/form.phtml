@@ -1,0 +1,224 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+/**
+ * Product view template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View
+ */
+?>
+<?php
+    $_product = $block->getProduct();
+?>
+<?php $_helper = $this->helper(Magento\Catalog\Helper\Output::class); ?>
+<?php
+      $proCustopt = $_product->getOptions();
+
+      $moduleName = $this->getRequest()->getModuleName();
+
+       if($moduleName == "checkout"){
+            $button = "Edit Consultation";
+       }else{
+           $button = "Start Consultation";
+       }
+ ?>
+
+<div class="product-add-form">
+    <form data-product-sku="<?= $block->escapeHtmlAttr($_product->getSku()) ?>"
+          action="<?= $block->escapeUrl($block->getSubmitUrl($_product)) ?>" method="post"
+          id="product_addtocart_form"<?php if ($_product->getOptions()) :?> enctype="multipart/form-data"<?php endif; ?>>
+ 
+        <input type="hidden" name="product" value="<?= (int)$_product->getId() ?>" />
+        <input type="hidden" name="selected_configurable_option" value="" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+        <input type="hidden" name="item"  value="<?= (int)$block->getRequest()->getParam('id') ?>" />
+        <?= $block->getBlockHtml('formkey') ?>
+        <?= $block->getChildHtml('form_top') ?>
+
+        <?php if (!$block->hasOptions()) :?>
+            <?= $block->getChildHtml('product_info_form_content') ?>
+        <?php else :?>
+
+            <?php if ($_product->isSaleable() && $block->getOptionsContainer() == 'container1') :?>
+                <?= $block->getChildChildHtml('options_container') ?>
+            <?php endif;?>
+        <?php endif; ?>
+
+        <?php if ($_product->isSaleable() && $block->hasOptions() && $block->getOptionsContainer() == 'container2') :?>
+            <?= $block->getChildChildHtml('options_container') ?>
+        <?php endif;?>
+        <?= $block->getChildHtml('form_bottom') ?>
+
+        <div class="info-btn">
+        <?php if(!empty($proCustopt) && $_product->isSaleable()){  ?>
+          <!-- For Config product with custom option/Questionaire -->
+        <button type="button" class="start-consultation"><?php echo $button; ?></button>
+      <?php }
+    	$buttonTitle = __('Add to Cart');
+      if(empty($proCustopt) && $_product->isSaleable()){  ?>
+        <!-- For Config product without custom option/Questionaire -->
+        <button type="submit" class=""><?= $block->escapeHtml($buttonTitle) ?></button>
+      <?php }
+
+      ?>
+
+      </div>
+    </form>
+</div>
+ 
+<script type="text/x-magento-init">
+    {
+        "[data-role=priceBox][data-price-box=product-id-<?= $block->escapeHtml($_product->getId()) ?>]": {
+            "priceBox": {
+                "priceConfig":  <?= /* @noEscape */ $block->getJsonConfig() ?>
+            }
+        }
+    }
+</script>
+
+<script>
+
+    var stopTrigger = 0;
+
+   require(['jquery','jquery/ui', "mage/mage"], function($){
+
+    var dataForm = $('#product_addtocart_form');
+        dataForm.mage('validation', {ignore: ':hidden'});
+        $(document).ready(function () {
+            $("body").attr( "onhashchange", "myHashChange()");
+        });
+
+   	    $('.datetime-picker').datepicker( "option", "maxDate", "+0d" );
+        $("#itoris_dynamicproductoptions").show();
+        $(".swatch-opt").hide();
+           // $('.admin__field-option:contains("None")').addClass("sasa");
+            //$(".sasa").remove();
+      $("#product-addtocart-button").hide();
+      $("#product-updatecart-button").hide();
+
+        $(document).on('click','body .action.primary.continue', function(){
+            if($('._required._error:visible:first').offset() !== undefined) {
+                $('html, body').animate({
+                    scrollTop: $('._required._error:visible:first').offset().top
+                }, 500);
+            }
+        });
+
+         $(".start-consultation").click(function(event){
+            if(dataForm.validation('isValid')){
+                location.hash = "consultation";
+                stopTrigger = 1;
+                $("body").addClass('start_consultation');
+                event.preventDefault();
+                window.scrollTo(0, 0);
+                //$('.admin__field-option:contains("None")').addClass("sasa");
+                $(".admin__field-option").filter(function() {//To remove none radio button
+				    return $(this).text().trim() === "None";
+				}).addClass("sasa");
+                $(".sasa").remove();//To remove none radio button
+                $(".start-consultation").hide();
+                $(".attribute.overview").hide();
+                $(".head-info").show();
+                $(".pharmacyvideo").hide();
+                $(".prod-desprection").hide();
+                $("#itoris_dynamicproductoptions").hide(); //sachin
+                $(".swatch-opt").show(); //sachin
+                $(".question-text").show();
+                $("#product-updatecart-button").show(); //show update cart
+                $(".fieldset.fieldset-section-1").show();
+                $(".fieldset").show();
+                $("#product-addtocart-button").show();
+                $(".pre-consultation").show();
+                $(".pharm-desc").show();
+                $(".pharmacy-logo").show();
+                $(".description").hide();
+                $(".new-additional-info").hide();
+                $(".field.qty").hide();
+                $(".price-box.price-final_price").hide();
+                $(".page-title").hide();
+                $(".gallery-placeholder").hide();
+                //Header Footer Display none
+                $(".page-header").hide();
+                $(".breadcrumbs").hide();
+                $(".page-footer").hide();
+                $(".footer-bottom").hide();
+                $(".product-logo-slider").hide();
+                //Header Footer Display none
+            }else{
+                console.log("Validation not done");
+            }
+        });
+
+    $(".pre-consultation").click(function(event){
+        $("body").removeClass('start_consultation');
+        // if(dataForm.validation('isValid')){
+            event.preventDefault();
+            location.hash = "";
+            $(".pre-consultation").hide();
+            $("#product-addtocart-button").hide();
+            $("#product-updatecart-button").hide(); //hide update cart
+            $("#itoris_dynamicproductoptions").show();
+            $(".swatch-opt").hide();
+
+            $(".pharm-desc").hide();
+            $(".question-text").hide();
+            $(".head-info").hide();
+            $(".pharmacy-logo").hide();
+            $(".attribute.overview").show();
+            $(".prod-desprection").show();
+            $(".pharmacyvideo").show();
+            $(".start-consultation").show();
+            $(".description").show();
+            $(".new-additional-info").show();
+            $(".field.qty").show();
+            $(".price-box.price-final_price").show();
+            $(".page-title").show();
+            $(".gallery-placeholder").show();
+
+            //Header Footer Show
+            $(".page-header").show();
+            $(".breadcrumbs").show();
+            $(".page-footer").show();
+            $(".footer-bottom").show();
+            $(".product-logo-slider").show();
+            //Header Footer Show
+        // }
+    });
+
+    /* $(document).ready(function () {
+        if(location.hash == "#editconsultation"){
+            // console.log(location.hash);
+            setTimeout(() => {
+                $(".start-consultation").trigger('click');
+            }, 1000);
+            setTimeout(() => {
+                if(location.hash == "#editconsultation"){
+                    $(".start-consultation").trigger('click');
+                }
+            }, 2000);
+            setTimeout(() => {
+                if(location.hash == "#editconsultation"){
+                    $(".start-consultation").trigger('click');
+                }
+            }, 3000);
+        }
+    }); */
+
+    });
+
+    function myHashChange() {
+        // console.log(stopTrigger);
+        require(['jquery'], function($) {
+            var x = location.hash;
+            if(x != "#consultation"){
+                history.pushState(null,  document.title, location.href);
+                $(".pre-consultation").trigger('click');
+            }
+        });
+    }
+</script>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="layout_generate_blocks_after">
+        <observer name="dan0sz_resource_hints_framework_view_layout_builder" instance="Nilesh\Prefech\Observer\Framework\View\Layout\Builder" />
+    </event>
+</config>

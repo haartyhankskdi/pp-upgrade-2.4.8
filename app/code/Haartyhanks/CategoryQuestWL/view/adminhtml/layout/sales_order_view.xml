@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- <head>
+            <css src="Haartyhanks_CategoryQuestWL::css/CategoryQuestWLadmin.css"/>
+        </head> -->
+        <!-- <referenceBlock name="order_additional_info">
+            <block class="Haartyhanks\CategoryQuestWL\Block\Adminhtml\Order\View\View" name="custom_view" template="order/view/view.phtml"/>
+        </referenceBlock> -->
+        <referenceBlock name="order_items">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">
+                    Haartyhanks_CategoryQuestWL::order/view/custom.phtml
+                </argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

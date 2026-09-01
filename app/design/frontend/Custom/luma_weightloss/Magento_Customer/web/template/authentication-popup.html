@@ -1,0 +1,90 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+ -->
+
+<div class="block-authentication"
+     data-bind="afterRender: setModalElement, blockLoader: isLoading"
+     style="display: none">
+
+    <div class="block block-customer-login custom-block-customer-login"
+         data-bind="attr: {'data-label': $t('or')}">
+        <div class="block-title">
+            <h2 id="block-customer-login-heading"
+                    role="heading"
+                    aria-level="2"
+                    data-bind="i18n: 'Existing Customers'"></h2>
+            <fieldset class="small-header">
+                <legend class="exiting-customer" data-bind="i18n: 'Login below if already registered'">Login below if already registered</legend>
+            </fieldset>
+            <!-- <p><small >Login below iF previously registered</small></p> -->
+        </div>
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <!-- ko foreach: getRegion('before') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+        <div class="block-content" aria-labelledby="block-customer-login-heading">
+            <form class="form form-login custom-form"
+                  method="post"
+                  data-bind="event: {submit: login }"
+                  id="login-form">
+                <div class="fieldset login" data-bind="attr: {'data-hasrequired': $t('* Required Fields')}">
+                    <div class="field email required">
+                        <!-- <label class="label" for="customer-email"><span data-bind="i18n: 'Email Address'"></span></label> -->
+                        <div class="control">
+                            <input name="username"
+                                id="customer-email"
+                                type="email"
+                                placeholder="Email Address"
+                                class="input-text"
+                                data-mage-init='{"mage/trim-input":{}}'
+                                data-bind="attr: {autocomplete: autocomplete, value: authUserName}"
+                                data-validate="{required:true, 'validate-email':true}">
+                        </div>
+                    </div>
+                    <div class="field password required">
+                        <!-- <label for="pass" class="label"><span data-bind="i18n: 'Password'"></span></label> -->
+                        <div class="control">
+                            <input name="password"
+                            type="password"
+                            class="input-text"
+                            placeholder="Password"
+                            id="pass"
+                            data-bind="attr: {autocomplete: autocomplete, value: authPassword}"
+                            data-validate="{required:true}">
+                            <button class="btn btn-link" id="showpassword1" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <!-- ko foreach: getRegion('additional-login-form-fields') -->
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                    <!-- /ko -->
+                    <div class="actions-toolbar custom-login-actions-toolbar">
+                        <div id="remember-me-box" class="field choice persistent initial" data-was-processed="true">
+                            <input type="checkbox" name="rememberme" class="checkbox" id="remember_me" checked="checked"
+                                title="Remember Me">
+                            <label for="remember_me" class="label"><span>Remember Me</span></label>
+                        </div>
+                        <input name="context" type="hidden" value="checkout" />
+                        <div class="primary">
+                            <button type="submit" class="action action-login secondary" name="send" id="send2">
+                                <span data-bind="i18n: 'Sign In'"></span>
+                            </button>
+                        </div>
+                        <div class="secondary">
+                            <a class="action " data-bind="attr: {href: forgotPasswordUrl}">
+                                <span data-bind="i18n: 'Forgot Your Password?'"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="footer-model-reg register-text">
+                <p class="reg-link">Don't have an account? <a href="/weightloss/customer/account/create/refback/cart">Register here</a></p>
+            </div>
+        </div>
+    </div>
+</div>

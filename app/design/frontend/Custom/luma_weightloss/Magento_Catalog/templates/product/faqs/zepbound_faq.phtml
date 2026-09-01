@@ -1,0 +1,368 @@
+<!doctype html>
+
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>CSS Accordion</title>
+
+<style>
+
+.product-faq-section .faq-list input {
+    display: none;
+}
+
+.product-faq-section .faq-list label {
+    text-align: left;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    padding: 20px 0 8px 0;
+    width: 100%; 
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    box-shadow: none !important;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+    transition: ease .5s;
+    display: inline-block;
+    background: url(/pub/media/wysiwyg/WLImage/Poly.png) right 32px no-repeat !important;
+
+}
+
+.product-faq-section .faq-list label:hover,
+.product-faq-section .faq-list label:focus{
+    background: url(/pub/media/wysiwyg/WLImage/Poly.png) right 32px no-repeat !important;
+}
+
+.product-faq-section .faq-list .panel-p {
+    text-align: left;
+    letter-spacing: 0px;
+    font-size: 16px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    text-align: left;
+    padding: 0px 0;
+    padding: 0 0;  
+    background: transparent;
+    overflow: hidden;
+      max-height: 0px;
+      transition: max-height 0.5s ease;
+}
+.product-faq-section .faq-list .panel-p:target{
+      max-height: 150px;
+}
+.product-faq-section .faq-list .panel-p p{
+    font-size: 16px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    text-align: left;
+    padding: 0px 0 15px 0;
+    margin: 0;
+}
+
+.product-faq-section .faq-list input + label + .panel-p { 
+    overflow: hidden;
+      max-height: 0px;
+      transition: max-height 0.3s ease-out;
+}
+
+.product-faq-section .faq-list input:checked + label + .panel-p { 
+    max-height: 165px;
+}
+
+
+.product-faq-section{
+    width: 100%;
+    float: left;
+    padding: 80px 0 80px 0;
+    margin: 0;
+    background: #E7F2F4;
+}
+.product-faq-section .h-title {
+        width: 100%;
+        float: left;
+        padding: 0;
+        margin: 0 0 22px 0;
+        font-size: 38px;
+        color: #101010;
+        font-family: 'Lato', sans-serif;
+        line-height: 48px;
+        font-weight: 300;
+        text-align: center;
+}
+.product-faq-section .faq-list {
+    border-bottom: 1px solid #96D8F0;
+    padding-bottom: 12px;
+    width: 100%;
+    display: inline-block;
+}
+
+@media screen and (min-width: 768px) {
+    .product-faq-section .container {
+        max-width: 670px !important;
+        margin: 0 auto;
+    }
+    .product-faq-section .faq-list label{
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .product-faq-section .h-title{
+        text-align: left;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: auto !important;
+        font-weight: 300;
+        margin: 0 0 25px 0;
+        font-size: 32px;
+        color: #000;
+        font-family: 'Lato', sans-serif;
+        line-height: 36px;
+        font-weight: 400;
+        text-align: left;
+        padding: 0px 0;
+        letter-spacing: 0px;
+    }
+    .product-faq-section .container{
+        width: 90%;
+    }
+    .product-faq-section .faq-list label{
+        font-size: 15px !important;
+        padding-left: 0 !important;
+        padding-right: 20px !important;
+        line-height: 22px;
+    }
+     
+    .product-faq-section .faq-list .panel-p p{
+        font-size: 14px !important;
+        line-height: 22px !important;
+    }
+}
+
+</style>
+
+</head>
+
+<div class="product-faq-section">
+<div class="container reveal1">
+<div class="h-title" data-was-processed="true">Weight Loss everything you need to know</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title3" />
+  <label for="title3"><h3>What should I know before starting Zepbound?</h3></label>
+  <div class="panel-p">
+    <p>Zepbound contains Tirzepatide, the same active ingredient as in Mounjaro. Originally developed for type 2 diabetes, Tirzepatide has shown significant effectiveness in promoting weight loss by acting on GLP-1 and GIP receptors, which regulate appetite and energy balance.</p>
+    <p>Before starting Zepbound, ensure you consult your healthcare provider to discuss your health history, current medications, and any potential risks. Zepbound should be used as part of a comprehensive weight management plan that includes diet and exercise.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title4" />
+  <label for="title4"><h3>How does Zepbound help with weight loss?</h3></label>
+  <div class="panel-p">
+    <p>Zepbound aids weight loss by targeting two key hormones involved in regulating hunger and energy expenditure. Tirzepatide, the active ingredient, mimics the actions of GLP-1 and GIP, hormones that naturally reduce appetite and enhance feelings of fullness.</p>
+    <p>By activating these receptors, Zepbound significantly curbs hunger, leading to a reduction in calorie intake and promoting sustained weight loss when combined with lifestyle changes. Clinical trials have demonstrated that Zepbound can result in greater weight loss compared to other treatments.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title5" />
+  <label for="title5"><h3>Who is eligible to use Zepbound?</h3></label>
+  <div class="panel-p">
+    <p>Zepbound is suitable for adults with a BMI of 30 or higher or those with a BMI of 27 or more who have obesity-related conditions. Its effectiveness in weight loss is especially beneficial for individuals who have not achieved their desired results with diet and exercise alone.</p>
+    <p>A consultation with your clinician is required; ensuring that Zepbound is safe and appropriate based on your medical history and weight management goals.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title6" />
+  <label for="title6"><h3>How is Zepbound different from other weight loss medications?</h3></label>
+  <div class="panel-p">
+    <p>Zepbound is unique because it combines the effects of GLP-1 and GIP receptor agonists in one medication, offering a dual approach to appetite regulation and energy balance. While other weight loss drugs may target just one of these pathways, Zepbound's dual action results in more significant and sustained weight loss.</p>
+    <p>This makes Zepbound an advanced option for individuals who have not responded well to other treatments.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title7" />
+  <label for="title7"><h3>How does Zepbound support long-term weight management?</h3></label>
+  <div class="panel-p">
+    <p>Zepbound supports long-term weight management by continuously regulating the hormones that control appetite. Tirzepatide not only helps in reducing weight but also in maintaining weight loss by keeping hunger at bay.</p>
+    <p>When combined with a balanced diet and regular physical activity, Zepbound can be an integral part of a sustainable weight management plan.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title8" />
+  <label for="title8"><h3>Can I use Zepbound if I have other medical conditions?</h3></label>
+  <div class="panel-p">
+    <p>If you have other medical conditions such as cardiovascular issues or high blood pressure, you must discuss these with your healthcare provider before starting Zepbound. While Tirzepatide is effective for weight loss, your doctor will evaluate whether it's safe in the context of your overall health and existing conditions.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title9" />
+  <label for="title9"><h3>Can I use Zepbound if I have a history of allergies?</h3></label>
+  <div class="panel-p">
+    <p>Patients with a history of allergic reactions to medications should consult their healthcare provider before starting Zepbound. Although allergic reactions to Tirzepatide are rare, it’s important to be cautious. Your provider will assess your allergy history and determine if Zepbound is safe for you.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title10" />
+  <label for="title10"><h3>How long does it take to see results with Zepbound?</h3></label>
+  <div class="panel-p">
+    <p>Results with Zepbound can typically be observed within the first 4-8 weeks of treatment. The rate of weight loss varies depending on individual factors such as adherence to diet and exercise plans. For optimal results, it’s important to use Zepbound consistently and follow your healthcare provider’s advice.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title11" />
+  <label for="title11"><h3>Can I take Zepbound with other medications?</h3></label>
+  <div class="panel-p">
+    <p>It's essential to inform your healthcare provider of all medications you are currently taking, as Zepbound may interact with other drugs. Particularly, medications that affect blood sugar levels or those used for weight management should be closely monitored to avoid adverse interactions.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title12" />
+  <label for="title12"><h3>What should I do if I miss a dose of Zepbound?</h3></label>
+  <div class="panel-p">
+    <p>If you miss a dose of Zepbound, take it as soon as you remember unless it's close to the time for your next dose. In that case, skip the missed dose and resume your regular schedule. Do not double up on doses to make up for the missed one, as this could increase the risk of side effects.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title13" />
+  <label for="title13"><h3>What lifestyle changes should I make while using Zepbound?</h3></label>
+  <div class="panel-p">
+    <p>To maximize the benefits of Zepbound, you should adopt a low-calorie, balanced diet and engage in regular physical activity. These lifestyle changes will enhance the medication’s effectiveness and help you achieve long-term weight management goals. Avoid high-calorie, nutrient-poor foods that could undermine your progress.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title14" />
+  <label for="title14"><h3>How much does Zepbound cost?</h3></label>
+  <div class="panel-p">
+    <p>The cost of Zepbound can vary based on where you purchase it. At Pharmacy Planet, you can find competitive pricing and reliable service when you buy Zepbound online. For the latest pricing and potential savings, visit the website or contact the pharmacy directly.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title15" />
+  <label for="title15"><h3>Can I drink alcohol while taking Zepbound?</h3></label>
+  <div class="panel-p">
+    <p>Moderate alcohol consumption may be permissible, but it’s advisable to discuss this with your healthcare provider. Alcohol can interfere with your weight loss efforts and may exacerbate side effects such as nausea. For the best results with Zepbound, it’s recommended to limit alcohol intake.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title16" />
+  <label for="title16"><h3>What should I do if I experience severe side effects?</h3></label>
+  <div class="panel-p">
+    <p>If you experience severe side effects such as intense nausea, vomiting, or signs of an allergic reaction while taking Zepbound, seek immediate medical attention. Contact your healthcare provider to report these symptoms and discuss whether to continue with the treatment.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title17" />
+  <label for="title17"><h3>Can pregnant or breastfeeding women use Zepbound?</h3></label>
+  <div class="panel-p">
+    <p>Zepbound is not recommended for use during pregnancy or while breastfeeding. Weight loss during pregnancy can be harmful to the unborn baby, and it’s important to prioritize maternal and fetal health. If you are pregnant or planning to become pregnant, discuss alternative weight management options with your healthcare provider.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title18" />
+  <label for="title18"><h3>How long can I stay on Zepbound?</h3></label>
+  <div class="panel-p">
+    <p>The duration of Zepbound treatment should be determined by your healthcare provider, based on your weight loss progress and overall health. Some individuals may require long-term use for sustained weight management, but regular monitoring is essential to ensure continued safety and effectiveness.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title19" />
+  <label for="title19"><h3>Can Zepbound be used for diabetes treatment?</h3></label>
+  <div class="panel-p">
+    <p>While Tirzepatide is also used in diabetes management, Zepbound is prescribed specifically for weight loss, however, it also has licensing to be used in the management of Type 2 Diabetes. If you have diabetes and are considering Zepbound, consult your healthcare provider to discuss how it may fit into your overall treatment plan.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title20" />
+  <label for="title20"><h3>What should I discuss with my doctor before starting Zepbound?</h3></label>
+  <div class="panel-p">
+    <p>Before starting Zepbound, discuss your medical history, any current medications, and any past experiences with weight loss treatments with your doctor. It’s also important to talk about your weight management goals and any potential risks associated with the medication. This will help your doctor determine if Zepbound is the right choice for you.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title21" />
+  <label for="title21"><h3>Are there any dietary restrictions while taking Zepbound?</h3></label>
+  <div class="panel-p">
+    <p>There are no strict dietary restrictions while taking Zepbound, but it’s important to follow a balanced, low-calorie diet to support your weight loss goals. Focus on nutrient-dense foods, and avoid excessive intake of sugary or high-fat foods, which could counteract the effects of Zepbound.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title22" />
+  <label for="title22"><h3>How does Zepbound compare to Wegovy?</h3></label>
+  <div class="panel-p">
+    <p>Zepbound and Wegovy are both effective weight loss medications, but they differ in their active ingredients. Zepbound contains Tirzepatide, which targets both GLP-1 and GIP receptors, potentially offering greater weight loss benefits. Wegovy contains Semaglutide, which targets only GLP-1 receptors. The choice between them should be based on your specific needs and your healthcare provider’s recommendation.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title23" />
+  <label for="title23"><h3>What medication can’t you take with Zepbound?</h3></label>
+  <div class="panel-p">
+    <p>Certain medications, particularly those that affect blood sugar or other weight loss drugs, may interact with Zepbound. It’s essential to provide your healthcare provider with a complete list of all medications you are taking to avoid potential interactions. Always follow your doctor’s guidance on medication compatibility.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title24" />
+  <label for="title24"><h3>What happens when you stop taking Zepbound?</h3></label>
+  <div class="panel-p">
+    <p>When you stop taking Zepbound, you may notice an increase in appetite and the potential for weight regain. To prevent this, it’s important to continue practicing healthy eating and exercise habits. Your healthcare provider may suggest a gradual tapering off the medication to minimize these effects.</p>
+  </div>
+</div>
+
+<div class="faq-list">
+  <input type="checkbox" id="title25" />
+  <label for="title25"><h3>Will I get withdrawal symptoms from stopping Zepbound?</h3></label>
+  <div class="panel-p">
+    <p>Stopping the use of Zepbound is not known to cause withdrawal symptoms. However, stopping the medication abruptly without a proper weaning-off plan may lead to increased appetite and weight regain. To mitigate this, discuss a discontinuation plan with your healthcare provider and continue with lifestyle changes that support weight maintenance.</p>
+  </div>
+</div>
+
+
+</div>
+</div>
+
+
+</html>
+
+
+<script>
+        document.querySelectorAll('.product-faq-section .faq-list input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    document.querySelectorAll('.product-faq-section .faq-list input[type="checkbox"]').forEach(otherCheckbox => {
+                        if (otherCheckbox !== this) {
+                            otherCheckbox.checked = false;
+                        }
+                    });
+                }
+            });
+        });
+    </script>

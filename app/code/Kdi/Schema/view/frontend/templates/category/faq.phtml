@@ -1,0 +1,67 @@
+<?php
+/** @var \Kdi\Schema\Block\Category\Faq $block */
+$faqs = $block->getCategoryFaqs();
+?>
+
+<?php if (!empty($faqs)): ?>
+    <!-- ✅ FAQ SCHEMA (Structured Data) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            <?php foreach ($faqs as $index => $faq): ?>
+            {
+                "@type": "Question",
+                "name": "<?= $block->escapeHtml($faq['question']) ?>",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "<?= nl2br($block->escapeHtml($faq['answer'])) ?>"
+                }
+            }<?= $index < count($faqs) - 1 ? ',' : '' ?>
+            <?php endforeach; ?>
+        ]
+    }
+    </script>
+<?php endif; ?>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Pharmacy Planet",
+  "image": "https://www.pharmacyplanet.com/static/frontend/Custom/luma_child/en_GB/images/phramacy_planet.svg",
+  "url": "https://www.pharmacyplanet.com/",
+  "logo": "https://www.pharmacyplanet.com/static/frontend/Custom/luma_child/en_GB/images/phramacy_planet.svg",
+  "telephone": "+44 0800 978 8956",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "4 Progress Business Centre, Whittle Parkway",
+    "addressLocality": "Slough",
+    "addressRegion": "Berkshire",
+    "postalCode": "SL1 6DQ",
+    "addressCountry": "GB"
+  },
+  "openingHours": "Mo-Fr 09:00-17:30",
+  "priceRange": "£",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+44 0800 978 8956",
+    "contactType": "Customer Support",
+    "areaServed": "GB",
+    "availableLanguage": ["English"]
+  },
+  "sameAs": [
+    "https://www.facebook.com/pharmacyplanet/",
+    "https://x.com/pharmacy_planet",
+    "https://www.youtube.com/channel/UCiAuTkRyzKHy5KlH7FHXdDg",
+    "https://www.instagram.com/pharmacyplanetuk/"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.4",
+    "reviewCount": "2414"
+  }
+}
+</script>

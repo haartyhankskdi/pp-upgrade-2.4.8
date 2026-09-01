@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Data\Form\FormKey\Validator">
+        <plugin name="Amasty_Customform::validate-csrf" type="Amasty\Customform\Plugin\Data\Form\FormKey\Validator" />
+    </type>
+
+    <type name="Amasty\Customform\Model\Form\Rendering\Autocomplete\Processor">
+        <arguments>
+            <argument name="variableValueProviders" xsi:type="array">
+                <item name="0" xsi:type="array">
+                    <item name="sort_order" xsi:type="string">10</item>
+                    <item name="processor" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\CustomerFieldsProvider</item>
+                </item>
+                <item name="1" xsi:type="array">
+                    <item name="sort_order" xsi:type="string">20</item>
+                    <item name="processor" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\CustomerAttributeProvider</item>
+                </item>
+                <item name="2" xsi:type="array">
+                    <item name="sort_order" xsi:type="string">30</item>
+                    <item name="processor" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\CustomerAddressAttributeProvider</item>
+                </item>
+                <item name="3" xsi:type="array">
+                    <item name="sort_order" xsi:type="string">40</item>
+                    <item name="processor" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\ProductFieldsProvider</item>
+                </item>
+                <item name="4" xsi:type="array">
+                    <item name="sort_order" xsi:type="string">50</item>
+                    <item name="processor" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\ProductAttributeProvider</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\Retrievers\AttributeRetriever"
+                 type="Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\Retrievers\CompositeRetriever">
+        <arguments>
+            <argument name="retrieversPool" xsi:type="array">
+                <item name="text" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\Retrievers\TextRetriever\Proxy</item>
+                <item name="textarea" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\Retrievers\TextRetriever\Proxy</item>
+                <item name="boolean" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\Retrievers\DropdownRetriever\Proxy</item>
+                <item name="select" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\Retrievers\DropdownRetriever\Proxy</item>
+                <item name="multiline" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\Retrievers\MultilineRetriever\Proxy</item>
+                <item name="date" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\Retrievers\DateRetriever\Proxy</item>
+                <item name="multiselect" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\Retrievers\MultiselectRetriever\Proxy</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\CustomerAttributeProvider">
+        <arguments>
+            <argument name="attributeValueRetriever" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\Retrievers\AttributeRetriever</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\ProductAttributeProvider">
+        <arguments>
+            <argument name="attributeValueRetriever" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\Retrievers\AttributeRetriever</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\Submit">
+        <arguments>
+            <argument name="canProcessSubmitFilesByAjax" xsi:type="boolean">true</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\CustomerAddressAttributeProvider">
+        <arguments>
+            <argument name="attributeValueRetriever" xsi:type="object">Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue\Retrievers\AttributeRetriever</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\Utils\ProductRegistry" shared="true"/>
+</config>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:Ui/etc/ui_configuration.xsd">
+    <fieldset name="search_engine_optimisation">
+        <field name="is_page_review_enable" formElement="select">
+        <settings>
+            <dataType>boolean</dataType>
+            <label translate="true">Is Page Review Section Active</label>
+            <dataScope>is_page_review_enable</dataScope>
+            <notice translate="true">After Enable This Page Google EEAT Will Show On Frontent</notice>
+        </settings>
+        <formElements>
+            <select>
+                <settings>
+                    <options class="Magento\Config\Model\Config\Source\Yesno"/>
+                </settings>
+            </select>
+        </formElements>
+    </field>
+
+        <field name="page_review_by" sortOrder="90" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Page Review By</label>
+                <visible>true</visible>
+                <dataScope>page_review_by</dataScope>
+                <notice translate="true">Select the type of page for ad handling</notice>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="\Haartyhanks\AuthReview\Model\Product\Attribute\Source\ProductReviewBy"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="page_author_by" sortOrder="90" formElement="select">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Page Author By</label>
+                <visible>true</visible>
+                <dataScope>page_author_by</dataScope>
+                <notice translate="true">Select the type of Author of this CMS Page</notice>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="\Haartyhanks\AuthReview\Model\Product\Attribute\Source\ProductReviewBy"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+</form>

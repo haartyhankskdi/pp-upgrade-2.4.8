@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="sales_email" showInDefault="1" showInStore="1" showInWebsite="1" translate="label">
+			<!-- <label>sales_email</label> -->
+			<tab>sales</tab>
+			<resource>Nilesh_Reorder::config_nilesh_reorder</resource>
+			<group id="reoder_email" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>reoder_email</label>
+				<field id="enable" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enable</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+				</field>
+				<field id="identifier" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Email Sender</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+				</field>
+				<field id="template" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Email Template</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

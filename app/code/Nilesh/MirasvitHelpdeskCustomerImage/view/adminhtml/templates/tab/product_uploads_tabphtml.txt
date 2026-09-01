@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @var \Nilesh\MirasvitHelpdeskCustomerImage\Block\Adminhtml\ProductUploadsTab $block
+ * */
+?>
+
+<div>
+    <h2 class="questionnaire-uploads-section">Uploads</h2>
+    <?php $orders = $block->getCustomerOrder();
+    $orderIds = array();
+    foreach ($orders as $order) {
+        $details = [
+            'entity_id' => $order['entity_id'],
+            'increment_id' => $order['increment_id'],
+            'created_at' => $order['created_at']
+        ];
+        array_push($orderIds, $details);
+        $items = $order->getItems();
+        foreach ($items as $item) {
+            $options = $item->getProductOptions();
+            if (isset($options['options']) && !empty($options['options'])) {
+                foreach ($options['options'] as $option) {
+                    if ($option['option_type'] == 'file') {
+                        $values = json_decode($option['option_value'], true); ?>
+                        <div class="questions-response-body">
+                            <p><strong>Order ID : </strong>#<?= $details['increment_id'] ?><strong> | Created At : </strong><?= $details['created_at'] ?></p>
+                            <div class="response-items">
+                                <p><strong>Title: </strong><?= $option['label'] ?></p>
+                                <p><strong>Response: </strong><a href="<?php echo $block->getBaseUrl() . $values['url']['route'] . '/id/' . $values['url']['params']['id'] . '/key/' . $values['url']['params']['key']; ?>">Get File</a></p>
+                            </div>
+                        </div> <?php
+                    }
+                }
+            }
+        }
+    }
+
+    ?>
+</div>
+
+<style type="text/css">
+    .questionnaire-uploads-section {
+        width: 100%;
+        text-transform: uppercase;
+        background: #efae8c;
+        padding: 15px 10px;
+        /* margin-top: 100px; */
+        font-weight: 600 !important;
+        display: inline-block;
+        border: 1px solid #333;
+        color: #000 !important;
+
+    }
+</style>

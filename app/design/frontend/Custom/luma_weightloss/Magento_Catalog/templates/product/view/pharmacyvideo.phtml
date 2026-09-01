@@ -1,0 +1,84 @@
+<?php $_product = $block->getProduct();
+$mediaDir = $block->getUrl("media");
+if(!($_product->isSaleable())){
+?>
+<div class="out-of-stock"><span>Out of Stock</span></div>
+
+<?php } ?> 
+<div class="info-how-itwork">
+<div class="header-search-panel">
+<ul>
+        <li>No prescription required</li>
+        <li>Online assessment</li>
+        <li>No hidden fees</li>
+    </ul>
+</div>
+<div class="img-1"> 
+    <a href="https://medicine-seller-register.mhra.gov.uk/search-registry/386" target="_blank" rel="noreferrer"><img src="<?= @$mediaDir ?>static/frontend/Custom/luma_child/en_GB/Magefan_LazyLoad/images/pixel.jpg" data-original="<?php echo $this->getViewFileUrl('images/mhra.svg'); ?>" alt="MHRA" class="mhra-logo" /></a>
+    <a href="https://www.pharmacyregulation.org/registers/pharmacy/registrationnumber/1035466" target="_blank" rel="noreferrer"><img src="<?= @$mediaDir ?>static/frontend/Custom/luma_child/en_GB/Magefan_LazyLoad/images/pixel.jpg" data-original="<?php echo $this->getViewFileUrl('images/pharmacy-logo.svg'); ?>" alt="Pharmacy logo" class="pharmacy-logo" /></a>
+</div>
+<div class="img-2 ">  
+    <img class="how-it-work-img-product" src="<?= @$mediaDir ?>static/frontend/Custom/luma_child/en_GB/Magefan_LazyLoad/images/pixel.jpg" data-original="<?php echo $this->getViewFileUrl('images/info-video.jpg'); ?>" />
+</div>
+</div>
+<div class="product-question-right">
+<div class="info-1">
+    <div class="info-img"><img src="<?php echo $this->getViewFileUrl('images/manesha-img.jpg'); ?>" alt="Manesha" class="" /></div>
+    <div class="info_details_1 question-text">
+    <h3>You’re almost there!</h3>
+      <p>It is the prescribers duty to ensure that the medicine is being used safely and appropriately. please answer a few questions about yourself to help us process your request.</p>
+      </div>
+      <h3>- Manesha</h3>
+      <p><span>Customer Service Team</span></p>
+ </div>
+<div class="info-1 info_list"> 
+    <h2 class="info_title_1">Confidentiality & Authenticity Assured</h2>
+    <ul>
+      <li>Fully Regulated UK Pharmacy</li>
+      <li>Authentic UK sourced medicines only.</li>
+      <li>Trading for more than 10 years.</li>
+      <li>Information Governance lead ensures all data is confidential</li>
+    </ul>
+  </div>
+<div class="info-1 info_list info_2"> 
+    <h2 class="info_title_2">Need Help With Your Questionnaire?</h2>
+    <p>Our customer service team is on hand Monday-Friday to help you with your queries.</p>
+    <p>Please call us on <strong><a class="tel-link" href="tel:08009788956">08009788956</a></strong> or<br/>
+    email us at: <a href="mailto:headoffice@pharmacyplanet.com"><strong>headoffice@pharmacyplanet.com</strong></a></p>
+</div>
+<div class="img-1"> 
+
+<!-- TrustBox widget - Mini Carousel -->
+<div class="trustpilot-widget" data-locale="en-GB" data-template-id="539ad0ffdec7e10e686debd7" data-businessunit-id="5b55f778afee7a0001b505dc" data-style-height="350px" data-style-width="100%" data-theme="light" data-stars="1,2,3,4,5" data-review-languages="en">
+  <a href="https://uk.trustpilot.com/review/pharmacyplanet.co.uk" target="_blank" rel="noopener">Trustpilot</a>
+</div>
+<!-- End TrustBox widget -->
+</div>
+
+<div class="img-1"> 
+    <a href="https://medicine-seller-register.mhra.gov.uk/search-registry/386" target="_blank" rel="noreferrer"><img src="<?= @$mediaDir ?>static/frontend/Custom/luma_child/en_GB/Magefan_LazyLoad/images/pixel.jpg" data-original="<?php echo $this->getViewFileUrl('images/mhra.svg'); ?>" alt="MHRA" class="mhra-logo" /><img src="<?php echo $this->getViewFileUrl('images/mhra.svg'); ?>" height="120" width="120"></a>
+    <a href="https://www.pharmacyregulation.org/registers/pharmacy/registrationnumber/1035466" target="_blank" rel="noreferrer"><img src="<?= @$mediaDir ?>static/frontend/Custom/luma_child/en_GB/Magefan_LazyLoad/images/pixel.jpg" data-original="<?php echo $this->getViewFileUrl('images/pharmacy-logo.svg'); ?>" alt="Pharmacy logo" class="pharmacy-logo" /><img src="<?php echo $this->getViewFileUrl('images/pharmacy-logo.svg'); ?>" height="170" width="140"></a>
+     
+</div>
+</div>
+
+ <!-- For displaying embedded video -->
+<div id="popup-youtube-video-section" style="display:none;">
+    <div class="popup-youtube-video-wrapper">
+        <video width="100%" height="100%" preload playsinline controls>
+            <source src="<?= @$mediaDir ?>static/frontend/Custom/luma_child/en_GB/Magefan_LazyLoad/images/pixel.jpg" data-original="<?php echo $this->helper('\Magento\Cms\Helper\Wysiwyg\Images')->getBaseUrl().'video/how-it-works.mp4'; ?>" type="video/mp4">
+        </video> 
+    </div>
+</div>
+
+
+
+<!-- JS to show video on homepage for How It Works section -->
+<script>
+    // require(['jquery','Magento_Ui/js/modal/modal'],function($,modal) {var options = {type: 'popup',responsive: true,innerScroll: true,title: 'How It Works',buttons: [],modalClass: 'popup-youtube-video-modal'};var popup = modal(options, $('#popup-youtube-video-section'));$(".how-it-work-img-product").on('click',function(){ $(".popup-youtube-video-wrapper").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/9WC8W26L0Dc?autoplay=1&color=white&mute=1" frameborder="0" allowfullscreen>');$("#popup-youtube-video-section").modal("openModal");});$('.action-close').on('click', function() {$(".popup-youtube-video-wrapper").innerHTML = '';});$('.close-modal').on('click', function() {$(".popup-youtube-video-wrapper").innerHTML = '';});});
+</script>
+
+<script>
+require(['jquery','Magento_Ui/js/modal/modal'],function($,modal) {var options = {type: 'popup',responsive: true,innerScroll: true,title: 'How It Works',buttons: [],modalClass: 'popup-youtube-video-modal'};var videoEl = document.querySelector(".popup-youtube-video-wrapper video");var popup = modal(options, $('#popup-youtube-video-section'));$(".how-it-work-img-product").on('click',function(){ $("#popup-youtube-video-section").modal("openModal");videoEl.querySelector('source').setAttribute("src", videoEl.querySelector('source').dataset.original);videoEl.load();videoEl.play();});$('.action-close').on('click', function() {videoEl.pause();videoEl.currentTime = 0;});$('.close-modal').on('click', function() {videoEl.pause();videoEl.currentTime = 0;});videoEl.onended = function() {$("#popup-youtube-video-section").modal("closeModal");}});
+</script>
+

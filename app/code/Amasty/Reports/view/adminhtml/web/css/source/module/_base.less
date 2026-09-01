@@ -1,0 +1,429 @@
+//
+//  Base Styles
+//  _______________________________________________
+
+//
+//  Imports
+//  _______________________________________________
+
+@import '_helpers';
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amreports-body-container {
+        & {
+            min-width: auto;
+        }
+
+        .page-header {
+            padding: 0 15px;
+        }
+
+        .admin__form-field-label {
+            &:extend(.am-ellipsis);
+        }
+
+        .notices-wrapper {
+            display: none;
+        }
+
+        .page-title-wrapper {
+            display: none;
+        }
+
+        .page-content {
+            padding: 0;
+        }
+
+        .page-footer {
+            padding: 15px;
+        }
+
+        .footer-legal {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-direction(column);
+            .lib-vendor-box-align(center);
+        }
+
+        .footer-legal .copyright {
+            margin-bottom: 30px;
+        }
+
+        .footer-legal-system {
+            text-align: center;
+        }
+    }
+
+    .amreports-body-container .page-header-actions {
+        & {
+            .lib-vendor-prefix-display(flex);
+
+            -webkit-box-pack: end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+        }
+
+        > .admin-user,
+        > .notifications-wrapper,
+        > .search-global {
+            display: block;
+            float: initial;
+        }
+
+        > .admin-user {
+            .lib-vendor-prefix-order(3);
+        }
+
+        > .notifications-wrapper {
+            .lib-vendor-prefix-order(2);
+        }
+
+        > .search-global {
+            .lib-vendor-prefix-order(1);
+
+            position: initial;
+        }
+
+        .search-global-field {
+            min-width: 3rem;
+        }
+
+        .search-global-label {
+            padding: 0;
+            position: initial;
+        }
+
+        .search-global-field {
+            margin-top: 6px;
+        }
+
+        .search-global-field._active .search-global-input,
+        .search-global-field._active .autocomplete-results {
+            top: 57px;
+            width: 100%;
+        }
+
+        .admin__action-dropdown-menu {
+            min-width: initial;
+            width: auto;
+        }
+
+        .notifications-wrapper {
+            position: initial;
+        }
+    }
+
+    .amreports-main-container {
+        .lib-vendor-prefix-display(flex);
+        .lib-vendor-prefix-flex-direction(column);
+    }
+
+    // General styles for other pages
+    .amreports-other-pages {
+        .amreport-main-title {
+            color: #363636;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        .amreports-amchart-container {
+            min-height: 460px;
+            width: 100%;
+        }
+
+        .amreports-amchart-wrapper {
+            padding-right: 10px;
+        }
+    }
+
+    .amasty_reports-report_sales-country {
+        .amreports-amchart-container {
+            height: 400px;
+        }
+    }
+
+    .amreports-container-content {
+        & {
+            background: #fff;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(23, 63, 224, .1);
+            margin-top: 20px;
+        }
+
+        > .amreports-toolbar {
+            padding: 20px 10px;
+        }
+
+        .admin__data-grid-header-row {
+            width: 100%;
+        }
+
+        .admin__form-field-control {
+            position: relative;
+        }
+    }
+
+    .amreports-ranges-fieldset .legend:after {
+        border-radius: 50%;
+        content: ' ';
+        display: inline-block;
+        height: 13px;
+        width: 13px;
+    }
+
+    #from_to_0 .legend:after {
+        background-color: #78b5d9;
+    }
+
+    #from_to_1 .legend:after {
+        background-color: #6f94d7;
+    }
+
+    #from_to_2 .legend:after {
+        background-color: #7c69d6;
+    }
+
+    //  Product performance styles
+    .amreports-perfomanceproduct-container {
+        .amreports-amchart-wrapper {
+            padding: 0;
+        }
+
+        .amreports-error-sku {
+            .lib-css(border-top, 1px solid @amrep-input-border__color);
+
+            padding: 20px 10px;
+        }
+    }
+
+    .amreports-perfomance-content {
+        .amreports-info {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-direction(column);
+            .lib-vendor-box-align(center);
+            .lib-css(border-top, 1px solid @amrep-input-border__color);
+
+            padding: 15px 10px 0;
+        }
+
+        .amreports-information {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-wrap(wrap);
+
+            margin-bottom: 30px;
+        }
+
+        .amreports-facts {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-direction(column);
+
+            font-size: 16px;
+            justify-content: center;
+        }
+
+        .amreports-image {
+            margin-right: 20px;
+        }
+
+        .amreports-bottom {
+            .lib-vendor-prefix-display(flex);
+        }
+
+        .amreports-name {
+            margin-bottom: 10px;
+        }
+
+        .amreports-price {
+            .lib-css(color, @amrep-gray__color);
+
+            margin-right: 15px;
+        }
+
+        .amreports-sku {
+            & {
+                .lib-css(color, @amrep-gray__color);
+
+                padding-left: 15px;
+                position: relative;
+            }
+
+            &:before {
+                .lib-css(background, @amrep-gray__color);
+
+                border-radius: 50%;
+                content: '';
+                height: 4px;
+                left: 0;
+                position: absolute;
+                top: 9px;
+                width: 4px;
+            }
+        }
+
+        .amreports-statistic {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-prefix-flex-wrap(wrap);
+        }
+
+        .amreports-item {
+            & {
+                .lib-vendor-prefix-display(flex);
+                .lib-vendor-prefix-flex-direction(column);
+
+                font-size: 16px;
+                margin: 0 30px 20px 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        .amreports-option {
+            & {
+                .lib-css(color, @amrep-gray__color);
+
+                margin: 10px 20px 0 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .advertising {
+        font-weight: 600;
+        margin: 15px 15px 0;
+    }
+}
+
+//
+//  Tablet
+//  ----------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .amreports-body-container .page-header-actions {
+        .search-global {
+            position: relative;
+        }
+
+        .search-global-label {
+            padding: .75rem 1.4rem .55rem;
+            position: absolute;
+        }
+
+        .search-global-field._active .search-global-input,
+        .search-global-field._active .autocomplete-results {
+            top: 0;
+            width: 25rem;
+        }
+
+        .admin__action-dropdown-menu {
+            width: 32rem;
+        }
+
+        .notifications-wrapper {
+            position: relative;
+        }
+    }
+
+    .amreports-body-container {
+        .page-footer {
+            padding: 2.6rem 2rem 6rem 3rem;
+        }
+
+        .footer-legal {
+            .lib-vendor-prefix-flex-direction(row);
+        }
+
+        .footer-legal .copyright {
+            margin-bottom: 0;
+        }
+
+        .footer-legal-system {
+            text-align: right;
+        }
+    }
+
+    .amreports-container-content {
+        & {
+            margin-top: 30px;
+        }
+
+        > .amreports-toolbar {
+            padding: @amrep__indent;
+        }
+    }
+
+    .amreports-other-pages .amreports-amchart-wrapper {
+        padding-right: 20px;
+    }
+
+    //  Product performance styles
+    .amreports-perfomanceproduct-container {
+        .amreports-amchart-wrapper {
+            padding: 0;
+        }
+
+        .amreports-error-sku {
+            padding: 20px;
+        }
+    }
+
+    .amreports-perfomance-content {
+        .amreports-info {
+            .lib-vendor-prefix-flex-direction(row);
+            .lib-vendor-box-align(center);
+
+            padding: 15px 20px 0;
+        }
+
+        .amreports-statistic {
+            margin-left: auto;
+            min-height: 80px;
+        }
+    }
+}
+
+//
+//  Desktop
+//  ----------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .amreports-main-container {
+        .lib-vendor-prefix-flex-direction(row);
+        .lib-css(border-top, 1px solid @amrep-border__color);
+    }
+
+    .amreports-other-pages .amreports-dashboard-container {
+        width: calc(100% - @amrep-menu__width);
+    }
+
+    .amreports-toolbar-container {
+        .am-flex(space-between, center, wrap);
+    }
+
+    .amreports-perfomance-content {
+        .amreports-information {
+            .lib-vendor-prefix-flex-wrap(nowrap);
+        }
+
+        .amreports-statistic {
+            .lib-vendor-prefix-flex-wrap(nowrap);
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .amreports-other-pages .amreports-dashboard-container {
+        padding: 30px 40px;
+    }
+
+    .amreports-perfomance-content .amreports-statistic {
+        margin-left: 150px;
+    }
+}

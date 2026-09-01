@@ -1,0 +1,442 @@
+
+
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Kdi\Testimonials\ViewModel\View $viewModel (assumed) */
+
+$vm = $block->getViewModel();
+$mediaUrl = $block->getUrl('media/');
+$title = $vm->getTitle();
+$writer = $vm->getReviewWriter();
+$before = $vm->getBeforeImage();
+$after = $vm->getAfterImage();
+
+$review = $vm->getReview();
+$data = $vm->getModelData() ?: [];
+
+
+           
+                if (strpos($before, 'media') === false) {
+                    $before = $mediaUrl . ltrim($before, '/');
+                }
+                if (strpos($after, 'media') === false) {
+                    $after = $mediaUrl . ltrim($after, '/');
+                }
+              
+
+
+
+
+/**
+ * Helpers:
+ * - escapeHtml / escapeHtmlAttr / escapeUrl are available on block context in Magento.
+ * - filterHtml: optional method on $block that filters CMS directives (if you added FilterProvider in block).
+ */
+?>
+
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif !important;
+            background: #fff;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .testimonial-body h2,
+        .section h2{
+            font-size: 25px;
+            font-weight: 700;
+            font-family: 'Lato', sans-serif !important;
+            padding: 0;
+            margin: 20px 0 15px 0;
+        }
+        .testimonial-body p,
+        .section p{
+            font-family: 'Lato', sans-serif !important;
+            font-size: 15px;
+            line-height: 22px;
+            color: #000;
+            font-weight: 400;
+        }
+        .main-header {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding-top: 40px;
+        }
+        
+        .main-header img {
+            border-radius: 0;
+           
+            box-shadow: 0 0;
+        }
+        .headline {
+            font-size: 45px;
+            color: #000;
+            line-height: 52px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .desc {
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+            font-size: 1.08em;
+            width: 80%;
+        }
+        .value {
+            color: #2294be;
+            font-weight: bold;
+        }
+        .section,
+        .storey-sec{
+            max-width: 650px;
+            margin: 30px auto 0 auto;
+            padding: 0px; 
+            border-radius: 0px; 
+        }
+        .image-row {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+        .image-row img {
+            border-radius: 9px;
+            max-height: 220px;
+            box-shadow: 0 2px 8px #eee;
+        }
+        .promo {
+            margin: 30px auto;
+            text-align: center;
+        }
+        .promo img {
+            max-width: 450px;
+            border-radius: 10px;
+        }
+        .share {
+            margin-top: 17px;
+            font-size: 1.24em;
+        }
+        .share-icon {
+            display: inline-block;
+            margin: 0 8px;
+            text-decoration: none;
+            color: #555;
+            font-size: 1.5em;
+        }
+        .share-icon:hover { color: #2294be; }
+        .section.bg{
+            background-color: #e8f3f5;
+        }
+        .before-after-img{
+            display: flex;
+            vertical-align: top;
+            margin-top: 25px;
+            position: relative;
+        }
+        .weightloss-journey-s {
+    background: #000000;
+    width: 100%;
+    float: left;
+    padding: 35px 0;
+    margin: 50px 0;
+}
+
+.weightloss-journey-s .h-banner-btn a {
+    width: 220px;
+    display: inline-block;
+    text-align: center;
+    background: #EC3237;
+    font-size: 13px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 52px;
+    padding: 0 0px;
+    font-weight: 400;
+    border-radius: 28px;
+    letter-spacing: 0.26px;
+    text-transform: uppercase;
+}
+
+.weightloss-journey-s .h-banner-btn a:hover {
+    background: #53CAF5 !important;
+}
+
+.weightloss-journey-s h3 {
+    width: auto;
+    float: left;
+    padding: 0;
+    margin: 0;
+    font-size: 25px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 35px;
+    font-weight: 300;
+    text-align: left;
+    background: none !important;
+}
+
+.weightloss-journey-s .h-banner-btn {
+    width: auto;
+    float: right;
+    margin-top: 10px;
+}
+.myaccount-bottom{
+    display: none;
+}
+
+ 
+            .before-i,
+            .after-i{
+                width: 211px;
+                display: inline-block;
+                border-radius: 28px;
+                background-color: #fff;
+                text-align: center;
+                font-size: 15px;
+                color: #000;
+                font-family: 'Lato', sans-serif;
+                line-height: 50px;
+                padding: 0 0px;
+                font-weight: 400;
+                position: absolute;
+                bottom: 20px;
+            }
+            .left-i,
+            .right-i{
+                display: inline-block;
+            }
+        @media (max-width:767px) {
+            .main-header { flex-direction: column; }
+            .main-header .left, .main-header .right { padding: 10px; }
+            .section{ padding:10px;}
+            .headline{
+                font-size: 32px !important;
+                line-height: 40px !important;
+            }
+            .section, .storey-sec{
+                max-width: 100% !important;
+            }
+            .testimonial-body.section{
+                order: 2;
+            }
+            .blog-bottom-review-sec{
+                order: 3;
+            }
+             .before-i{
+                left: 30px; 
+            }
+            .after-i{
+                left: 30px;
+            }
+            .main-header img{
+                height: 100%;
+            }
+            .before-i, .after-i{
+                padding: 0 30px !important;
+                width: auto !important;
+                line-height: 40px;
+            }
+            .weightloss-journey-s h3{
+                width: 100% !important;
+                text-align: center !important;
+            }
+            .weightloss-journey-s .h-banner-btn {
+                width: 100% !important;
+                float: none !important;
+                margin-top: 20px !important;
+            }
+            .left-i,
+            .right-i{
+                position: relative;
+            }
+            .left-i, .right-i{
+                width: 50%;
+            }
+            .left-i, .right-i{
+                width: 50%;
+            }
+            .blog-bottom-review-sec{
+                width: 100%;
+                display: inline-block;
+            }
+            .blog-bottom-review-team .reviewved-by{
+                display: inline-block;
+            }
+            .blog-bottom-review-team .reviewved-by.sep-l {
+                border-right:0 !important;
+                margin-right: 0 !important;
+                border-bottom: 1px solid #46C0EC;
+                margin-bottom: 30px !important;
+                margin-left: 0 !important;
+            }
+            .blog-bottom-review-team .reviewved-by .review-title-box{
+                width: 210px !important;
+                float: left;
+            }
+            
+        }
+
+        @media screen and (min-width: 768px) {
+            
+            .weightloss-journey-s .container{
+                width: 88% !important;
+            }
+            .before-i{
+                left: 40px;
+            }
+            .after-i{
+                right: 40px;
+            }
+            .main-header img{
+                height: 100%;
+            }
+            .left-i,
+            .right-i{
+                width:100%; 
+            }
+            .blog-bottom-review-team .reviewved-by{
+                width: 44% !important;
+            }
+        }
+    </style>
+
+    <!-- Top Section -->
+    <div class="main-header storey-sec">
+        
+        <div class="right">
+        <?php if ($writer): ?>
+          <div class="headline">
+            <h1 class="author"><?= $block->escapeHtml($writer); ?> — Weight Loss Journey with Mounjaro and Pharmacy Planet</h1>
+          </div> 
+        <?php endif; ?>
+            <!-- <div class="desc">
+                At nearly 17st (108kg), Nicola Graham was low in confidence and desperate to make a lasting lifestyle change. Read on to discover the 14-letter word that was key to her weight loss success...
+            </div> -->
+            <!-- <span style="color:#2294be;"> <?= $writer ?> , 54</span>
+            <div class="data-row"><span>Starting weight</span><span class="value">16st 13lbs</span></div>
+            <div class="data-row"><span>Weight now</span><span class="value">9st 13lbs</span></div>
+            <div class="data-row"><span>Height</span><span class="value">5ft 6ins</span></div>
+            <div class="share">
+                Share:
+                <a href="#" class="share-icon">&#9993;</a>
+                <a href="#" class="share-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1877F2" viewBox="0 0 24 24">
+  <path d="M22.675 0H1.325A1.326 1.326 0 0 0 0 1.325v21.351A1.326 1.326 0 0 0 1.325 24h11.494v-9.294H9.691v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116A1.326 1.326 0 0 0 24 22.676V1.325A1.326 1.326 0 0 0 22.675 0z"/>
+</svg>
+</a>
+                <a href="#" class="share-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000" viewBox="0 0 24 24">
+  <path d="M18.244 2H21.5l-7.53 8.59L23 22h-6.843l-5.353-6.832L4.67 22H1.41l8.06-9.2L1 2h6.93l4.834 6.27L18.244 2zm-1.2 17.52h1.86L7.08 4.39H5.11l11.934 15.13z"/>
+</svg>
+</a>
+            </div> -->
+        </div>
+
+        <div class="left before-after-img">
+
+             
+                 <?php if ($before): ?>
+        <div class="left-i">
+        <img
+          src="<?= $block->escapeUrl($before); ?>"
+          alt="<?= $block->escapeHtmlAttr($writer ? $writer . ' before' : 'before image'); ?>"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="before-i">BEFORE</div>
+        </div>
+    <?php endif; ?>
+
+        <?php if ($after): ?>
+        <div class="right-i">
+        <img
+          src="<?= $block->escapeUrl($after); ?>"
+          alt="<?= $block->escapeHtmlAttr($writer ? $writer . ' after' : 'after image'); ?>"
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="after-i">AFTER</div>
+     </div>
+    <?php endif; ?>
+
+       
+
+    
+
+    
+       </div>
+
+    </div>
+    <!-- Promo Banner -->
+    <div class="promo" style="display: none;">
+    <?php if ($after): ?>
+        <img
+          src="<?= $block->escapeUrl($after); ?>"
+          alt="<?= $block->escapeHtmlAttr($writer ? $writer . ' after' : 'after image'); ?>"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    <?php endif; ?>
+        <!-- <div class="section bg-s">
+            <h2>Save... and supercharge your weight loss!</h2>
+            <p>Join Slimming World and get three recipe books (worth up to £14.85/€23.85)! Offer ends 1st November 2025. Terms and conditions apply.</p>
+            <a style="color:#2294be; text-decoration: underline;">Find out more here.</a>
+        </div> -->
+    </div>
+
+    <div class="testimonial-body section">
+    <?php echo $review ;?>
+    <div class="weightloss-journey-s">
+        <div class="container">
+<h3>Start your<br> <strong>weight loss journey</strong></h3>
+<div class="h-banner-btn" data-was-processed="true"><a href="https://www.pharmacyplanet.com/general-health/weight-loss.html" class="back-to-start-consultation">Start My Consultation </a>
+</div>
+</div>
+</div>
+  </div>
+
+
+
+  <div class="blog-bottom-review-sec">
+   <div class="container-2">
+      <div class="blog-bottom-review-team">
+         <div class="reviewved-by sep-l">
+            <div class="review-right-img">
+               <img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/HARMY-PROFILE-PIC.jpg" width="800" height="400" alt="Pharmacist Image">
+            </div>
+            <div class="review-title-box">
+               <p class="review-text">Authored By</p>
+               <p class="pharmacist-title name">HARMINDER ‘HARMY’ KAUR</p>
+               <p class="review-text">BSc(hons) Pharmacy</p>
+               <p class="gphc-no">GPhC Number: 2061107</p>
+            </div>
+         </div>
+         <div class="reviewved-by">
+            <div class="review-right-img">
+               <picture>
+                  <source srcset="https://magento-1195784-4216081.cloudwaysapps.com/pub/media/gurdev-sehmi-img.webp" type="image/webp">
+                  <img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/gurdev-sehmi-img.jpg" alt="Pharmacist Image" />
+               </picture>
+            </div>
+            <div class="review-title-box">
+               <p class="review-title"><?php //$_post->getPublishDate(); ?></p>
+               <p class="review-text">Reviewed By</p>
+               <p class="pharmacist-title name">GURDEV SEHMI</p>
+               <p class="review-text">BSc Pharm, MRPharmS, Independent Prescriber, Superintendent Pharmacist, Clinical Lead</p>
+               <p class="gphc-no">GPhC Number: 2050925</p>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

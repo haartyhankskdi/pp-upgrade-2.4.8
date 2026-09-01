@@ -1,0 +1,246 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Newsletter\Block\Subscribe $block */
+
+$firstname = $this->getData('show_firstname');
+$lastname  = $this->getData('show_lastname');
+$type      = $this->getData('layout_type') ? $this->getData('layout_type') : 'inline';
+$id        = $this->getHtmlId();
+?>
+<div class="mgz-newsletter-form-wrapper">
+    <form class="<?= $id ?> mgz-newsletter-form mgz-newsletter-form-<?= $type ?>"
+        novalidate
+        action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
+        method="post"
+        data-mage-init='{"Magezon_Newsletter/js/form":{"emailAjaxUrl": "<?= $block->escapeUrl($block->getEmailUrl()) ?>"}}'>
+        <div class="mgz-newsletter-fields">
+            <div class="mgz-newsletter-field email required">
+                <input name="email" type="email"
+                       placeholder="<?= $block->escapeHtmlAttr(__('Your Email')) ?>"
+                       data-mage-init='{"mage/trim-input":{}}'
+                       data-validate="{required:true, 'validate-email':true}"
+                />
+            </div>
+            <?php if ($firstname) { ?>
+            <div class="mgz-newsletter-field firstname required">
+                <input name="firstname" type="text"
+                       placeholder="<?= $block->escapeHtmlAttr(__('First Name')) ?>"
+                       data-mage-init='{"mage/trim-input":{}}'
+                       data-validate="{required:true}"
+                />
+            </div>
+            <?php } ?>
+            <?php if ($lastname) { ?>
+            <div class="mgz-newsletter-field lastname required">
+                <input name="lastname" type="text"
+                       placeholder="<?= $block->escapeHtmlAttr(__('Last Name')) ?>"
+                       data-mage-init='{"mage/trim-input":{}}'
+                       data-validate="{required:true}"
+                />
+            </div>
+            <?php } ?>
+        </div>
+        <div class="actions">
+            <button class="action primary mgz-newsletter-btn"
+                    title="<?= $block->escapeHtmlAttr(__('Subscribe')) ?>"
+                    type="submit"
+                    aria-label="Subscribe">
+                <span><?= $block->escapeHtml(__('SUBSCRIBE')) ?></span>
+            </button>
+        </div>
+    </form>
+    <?php if ($styleHtml = $this->getStyleHtml()) { ?>
+    <style class="mgz-style"><?= $styleHtml ?></style>
+    <?php } ?>
+</div>
+<style>
+    .custom-success-alert {
+        animation: fadeIn 0.3s ease-in-out;
+        position: relative;
+    }
+
+    .alert-close-btn {
+/*     background-color: "black";*/
+        color: black;
+        border: none;
+        padding: 8px 16px;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+</style>
+
+<style>
+    
+#popupbuilder-popup4.popupbuilder-popup-modal{
+  background-color: rgba(0, 0, 0, .8) !important;
+  top: 50% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  z-index: 999999 !important;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex !important;
+
+}
+
+#popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content{
+    align-items: center;
+    width: 600px;
+    margin: 0 auto;
+    float: none;
+    position: relative !important;
+}
+
+#popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-close-button i{
+  color: #fff;
+}
+
+#popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content .mgz-element-heading-text,
+#popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content .mgz-element-inner{ 
+    font-family: 'Lato', sans-serif;  
+}
+#popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content h1.mgz-element-heading-text{
+  color: #000;
+}
+
+.popupbuilder-widget-content .mgz-newsletter-form .actions button{
+    background-size: 100% 200% !important;
+    background-image: linear-gradient(to bottom, #ED3237 50%, #ED3237 50%) !important;
+    -webkit-transition: background-position 0.7s;
+    -moz-transition: background-position 0.7s;
+    transition: background-position 0.7s !important; 
+    text-decoration: none !important; 
+    background: #ED3237;
+    opacity: 1;
+    border: 0;
+    text-decoration: none;
+    font-size: 15px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 45px; 
+    height: 45px;
+    padding: 0; 
+}
+ 
+
+.popupbuilder-widget-content .mgz-newsletter-form .actions button:hover{
+  background-size: 100% 200% !important;
+  background-image: linear-gradient(to bottom, #ED3237 50%, #53CAF5 50%) !important;
+  background-position: 0 -100% !important;
+  text-decoration: none !important;
+  background-color: #53CAF5 !important;
+}
+#popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content h2.mgz-element-heading-text{
+  font-size: 20px !important; 
+}
+
+#popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content .mgz-element-text p:last-child{
+  font-size: 15px;
+}
+#popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content .mgz-newsletter-field input{
+  height: 45px !important;
+}
+#popupbuilder-popup4.popupbuilder-popup-modal .mgz-newsletter-form .mgz-newsletter-fields .mgz-newsletter-field,
+#popupbuilder-popup4.popupbuilder-popup-modal .mgz-element-popup_action .mgz-element-inner{
+  margin-bottom: 5px !important;
+}
+#popupbuilder-popup4.popupbuilder-popup-modal .mgz-element-popup_action .mgz-element-inner a{
+  text-decoration: underline;
+  color: #2C596D !important;
+}
+
+#popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content .mgz-newsletter-form-wrapper,
+#popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content .mgz-element-newsletter_form .mgz-element-inner{
+  margin-bottom: 0 !important;
+}
+
+@media only screen and (min-width: 768px) {
+  #popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content h1.mgz-element-heading-text{
+    font-size: 26px !important;
+    letter-spacing: 11px;
+    line-height: 28px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+  }
+  #popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content h1.mgz-element-heading-text span{
+    font-size: 110px !important;
+    line-height: 70px;
+    color: #ED3237 !important;
+    font-weight: 900;
+    
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  #popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-close-button{
+    top: -25px !important;
+    right: -35px !important;
+  }
+  #popupbuilder-popup4.popupbuilder-popup-modal{
+    left: 49.99% !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+    #popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content h1.mgz-element-heading-text{ 
+        font-size: 38px !important;
+    }
+    #popupbuilder-popup4.popupbuilder-popup-modal{
+    left: 49.99% !important;
+    transform: translate(-49.9%, -50.1%);
+  }
+  #popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content .mgz-newsletter-form .actions button{
+    line-height: 45px !important;
+  }
+
+    #popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content h1.mgz-element-heading-text{
+    font-size: 26px !important;
+    letter-spacing: 11px;
+    line-height: 28px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+  }
+  #popupbuilder-popup4.popupbuilder-popup-modal .popupbuilder-widget-content h1.mgz-element-heading-text span{
+    font-size: 110px !important;
+    line-height: 70px;
+    color: #ED3237 !important;
+    font-weight: 900;
+    
+  }
+  .mgz-newsletter-message.mgz-newsletter-message-success{
+    padding-top: 70px !important;
+    padding-bottom: 70px !important;
+  }
+}
+
+
+.popupbuilder-widget-content .mgz-newsletter-message-success p.subscrib-success{
+  font-size: 29px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 40px; 
+    font-weight: 700;
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+
+.popupbuilder-widget-content .mgz-newsletter-message-success p.coupan-code{
+  background-color: #ED3237;
+    font-size: 17px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 44px;
+    font-weight: 700;
+}
+
+</style>

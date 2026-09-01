@@ -1,0 +1,126 @@
+.popupbuilder-popup {
+	display: none;
+}
+
+.popupbuilder-prevent-scroll {
+	overflow: hidden;
+}
+
+.mgz-flex {
+	&.mgz-flex-position-top-left,
+	&.mgz-flex-position-center-left,
+	&.mgz-flex-position-bottom-left {
+		.popupbuilder-widget-content {
+			left: 0;
+		}
+	}
+
+	&.mgz-flex-position-top-right,
+	&.mgz-flex-position-center-right,
+	&.mgz-flex-position-bottom-right {
+		.popupbuilder-widget-content {
+			right: 0;
+		}
+	}
+
+	&.mgz-flex-position-top-left,
+	&.mgz-flex-position-top-center,
+	&.mgz-flex-position-top-right {
+		.popupbuilder-widget-content {
+			top: 0;
+		}	
+	}
+
+	&.mgz-flex-position-bottom-left,
+	&.mgz-flex-position-bottom-center,
+	&.mgz-flex-position-bottom-right {
+		.popupbuilder-widget-content {
+			bottom: 0;
+		}	
+	}
+}
+
+.popupbuilder-popup-modal {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	pointer-events: none;
+	background-color: transparent;
+	-webkit-user-select: auto;
+	-moz-user-select: auto;
+	-ms-user-select: auto;
+	user-select: auto;
+
+	.popupbuilder-buttons-wrapper,
+	.popupbuilder-header {
+		display: none;
+	}
+
+	.popupbuilder-message {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.popupbuilder-widget-content {
+		background-color: #fff;
+		position: absolute;
+		pointer-events: all;
+		width: 700px;
+	}
+
+	.popupbuilder-poup-content-inner {
+		.mgzFlex();
+		margin: 0;
+		max-width: 100%;
+		max-width: 100vw;
+		max-height: 100vh;
+		width: 100%;
+		overflow: auto;
+		box-sizing: border-box;
+
+		> .magezon-builder {
+			width: 100%;
+		}
+	}
+
+	.popupbuilder-popup {
+		display: block;
+		width: 100%;
+	}
+
+	.popupbuilder-popup-close {
+		display: flex;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-pack: center;
+		-webkit-justify-content: center;
+		-ms-flex-pack: center;
+		justify-content: center;
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		-ms-flex-align: center;
+		align-items: center;
+		position: absolute;
+		right: 20px;
+		top: 20px;
+		color: #000;
+		z-index: 1200;
+		cursor: pointer;
+		pointer-events: all;
+	}
+}
+
+//  Mobile
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+	.popupbuilder-popup-modal {
+		.popupbuilder-popup-close {
+			right: 10px !important;
+			top: 10px !important;
+		}
+	}
+}

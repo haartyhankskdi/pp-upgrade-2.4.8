@@ -1,0 +1,237 @@
+<?php
+$helperCatProduct = $this->helper(\Nilesh\Theme\Helper\CatProduct::class);
+// $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+// $category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+// $subcats = $category->getChildrenCategories(); 
+$subcats = $helperCatProduct->getChildrenCategories(); 
+
+?>
+<h2>Select your product</h2>
+<div class="product details product-item-details sub-category-details custom-row-category">
+    <?php
+    foreach ($subcats as $subcat) {
+        if ($subcat->getIsActive()) {
+                $sub_category = $helperCatProduct->getSubCategory($subcat->getId());
+                                    // $sub_category = $objectManager->create('Magento\Catalog\Model\Category')->load($subcat->getId());
+                                    $subcat_url = $subcat->getUrl();
+                                    //echo "<pre>";print_r($sub_category->getData());exit();
+                                     ?>
+            
+            <div class="sub-cat-wrapper custom-col-category">
+                <div class="sub-cat-info custom-col-wrapper-category">
+                    <span class="product-image hello">
+                        <a href="<?php echo $subcat_url; ?>">
+                            <?php
+/*                            <img src="<?php echo $sub_category->getImageUrl() ?>" alt="<?php echo $subcat->getName(); ?>">*/
+                            ?>
+                                    <img src="<?php echo "/" . ltrim(ltrim($sub_category->getImageUrl(), "/pub"), "/") ?>" alt="<?php echo $subcat->getName(); ?>">
+                        </a>
+                    </span>
+                    <span class="product-item-name">
+                        <a class="sub-cat-url" data-href="<?php echo $subcat_url; ?>" href="<?php echo $subcat_url?>" class="product-item-link"><?php echo $subcat->getName(); ?></a>
+                    </span>
+                    <div class="product-item-details sub-cat-desc">
+                        <?php //echo $sub_category->getDescription(); ?> 
+                    </div>
+                    
+                    <div class="content-page">
+                        <ul>
+                            <li>Injection</li>
+                            <li>Taken weekly</li>
+                            <li>Lose up to 15% of body weight</li>
+                            <li>Suppresses appetite</li>
+                        </ul>
+                    </div>
+                    <div class="product-item-details sub-cat-price"><span>£199</span>/first month
+                        <p>£249 every month thereafter</p>
+                        <div class="h-banner-btn"><a href="#">SELECT PRODUCT</a></div>
+                        <img src="/media/wysiwyg/WLImage/info.png" alt="Info">
+                    </div>
+                    <div class="two-cat-product">
+                        <?php 
+                            $_prod = $helperCatProduct->getProductCollectionByCategories($subcat->getId());
+                            if(is_array($_prod)){
+                                foreach ($_prod as $prod) {
+                                    ?>
+                                        <a href="<?php echo $prod['url']; ?>"><?php //echo $prod['name']; ?></a>
+                                    <?php
+                                }
+                            }
+                        ?>
+                    </div>
+
+                    <!-- <div class="view-product">
+                        <a href="<?php echo $subcat_url; ?>" class="view-prducts-a">View Products</a>
+                    </div> -->
+                </div>
+            </div>
+            
+         
+            <?php                           
+        }
+    } ?>
+
+</div>
+
+<div class="weightloss-treatment-comparison">
+    <h2>Weight loss treatments comparison</h2>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    <img src="/media/wysiwyg/WLImage/wegovy.png" alt="Info">
+                    <h3>Wegovy Injections</h3>
+                </th>
+                <th>
+                    <img src="/media/wysiwyg/WLImage/saxenda.png" alt="Info">
+                    <h3>Saxenda</h3>
+                </th>
+                <th>
+                    <img src="/media/wysiwyg/WLImage/saxenda.png" alt="Info">
+                    <h3>Orlistat/Xenical</h3>
+                </th>
+                <th>
+                    <img src="/media/wysiwyg/WLImage/wegovy.png" alt="Info">
+                    <h3>Mysimba</h3>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Active ingredient</td>
+                <td>Semaglutide</td>
+                <td>Liraglutide</td>
+                <td>Orlistat</td>
+                <td>Naltrexone/Bupropion</td>
+            </tr>
+
+            <tr>
+                <td>How to take it</td>
+                <td>Wegovy Injection</td>
+                <td>Daily Injection</td>
+                <td>Up to three daily tablets</td>
+                <td>Up to four daily tablets</td>
+            </tr>
+
+            <tr>
+                <td>How it works</td>
+                <td>Reduces/regulates appetite</td>
+                <td>Reduces/regulates appetite</td>
+                <td>Reduces/regulates appetite</td>
+                <td>Reduces/regulates appetite</td>
+            </tr>
+
+            <tr>
+                <td>Effectiveness</td>
+                <td>Around 85%</td>
+                <td>60%</td>
+                <td>45%</td>
+                <td>65%</td>
+            </tr>
+           
+        </tbody>
+    </table>
+    <p>*% of people losing more than 5% of body weight.</p>
+</div>
+
+<!-- FAQs -->
+<div class="faq">
+<h2>Weight loss Everything you need to know</h2>
+    <div>
+     <p class="question">How much weight will I lose? <span onclick='faq(this)' class="opener"><img src='/media/wysiwyg/WLImage/Poly.png' alt="poly image"></span></p>
+     <p class="answer">HTML stands for HyperText Markup Language.</p>
+    </div>
+    
+    <div>    
+     <p class="question">How long is the program? <span onclick='faq(this)' class="opener"><img src='/media/wysiwyg/WLImage/Poly.png' alt="poly image"></span></p>
+     <p class="answer">CSS stands for Cascading Style Sheets.</p>
+    </div>
+    
+    <div>    
+     <p class="question">Do the medications have side effects? <span onclick='faq(this)' class="opener"><img src='/media/wysiwyg/WLImage/Poly.png' alt="poly image"></span></p>
+     <p class="answer">JavaScript is a client side programming language.</p>  
+    </div>
+
+    <div>
+        <p class="question">How much weight will I lose? <span onclick='faq(this)' class="opener"><img src='/media/wysiwyg/WLImage/Poly.png' alt="poly image"></span></p>
+        <p class="answer">HTML stands for HyperText Markup Language.</p>
+       </div>
+       
+       <div>    
+        <p class="question">How long is the program? <span onclick='faq(this)' class="opener"><img src='/media/wysiwyg/WLImage/Poly.png' alt="poly image"></span></p>
+        <p class="answer">CSS stands for Cascading Style Sheets.</p>
+       </div>
+       
+       <div>    
+        <p class="question">Do the medications have side effects? <span onclick='faq(this)' class="opener"><img src='/media/wysiwyg/WLImage/Poly.png' alt="poly image"></span></p>
+        <p class="answer">JavaScript is a client side programming language.</p>  
+       </div>
+    </div>
+    
+</div>
+
+<!-- Whats Included -->
+<?= $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/included.phtml")->toHtml(); ?>
+
+
+<script>
+    require(['jquery'], function($){
+        $(".sub-cat-desc").each(function () {
+            var text = jQuery(this).text();
+            var href = $(this).parent().find(".sub-cat-url").data("href");
+            if (text.length > 100) {
+                $(this).text(text.substr(0, text.lastIndexOf(' ', 97))).append(` <a href='${href}' title="">...</a>`);
+            }
+        });
+    });
+</script>
+
+<script>
+    function faq(ele)
+    {
+    var x = ele.parentElement.nextElementSibling.style.cssText;
+    if(x=='max-height: 500px;')
+    {    
+    ele.style.cssText='transform: rotate(0deg);';     
+    ele.parentElement.nextElementSibling.style.cssText = "transition:0.3s;max-height:0px;";    
+    }
+    else
+    {
+    ele.style.cssText='transform: rotate(45deg);';   
+    ele.parentElement.nextElementSibling.style.cssText = "max-height:500px;";
+    }
+    }
+ </script>
+<style>      
+body {
+font-family:monospace;
+background-color:#f2d241;
+}
+.faq {
+width:70%;
+margin: 0 auto;
+}
+
+.question {
+font-size:18px;
+margin:0px;
+padding: 10px;
+}
+.answer {
+font-size:12px;
+margin:0px;
+padding: 0px 15px;
+line-height:2;
+max-height:0px;
+overflow:hidden;
+transition:2s;
+}
+.opener
+{
+font-size:25px;
+float:right;
+line-height:0.8;
+cursor: pointer;
+}
+</style>           

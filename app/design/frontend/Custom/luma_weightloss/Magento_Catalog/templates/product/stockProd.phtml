@@ -1,0 +1,313 @@
+<?php
+/** @var \Magento\Catalog\Block\Product\ListProduct $block */
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$productCollection = $objectManager->get('Magento\Catalog\Model\ResourceModel\Product\CollectionFactory')->create();
+
+$_helperCatalog = $this->helper(Haartyhanks\CategoryQuestWL\Helper\Data::class);
+$productId = $_helperCatalog->getCurrentProductId();
+
+// Add filters to get products storewise
+// $productCollection->addStoreFilter(3);
+$productCollection->setPageSize(10); // Limit the number of products if needed
+
+// Add filter to exclude the product with the specific productId
+$productCollection->addFieldToFilter('entity_id', ['neq' => $productId]);
+
+// Add this line to select all attributes for each product
+$productCollection->addAttributeToSelect('*');
+
+// Add a filter to include only configurable products
+$productCollection->addAttributeToFilter('type_id', ['eq' => 'configurable']);
+
+/** @var \Magento\Store\Model\StoreManagerInterface $storeManager */
+$storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+$currentStore = $storeManager->getStore();
+$baseUrl = $currentStore->getBaseUrl();
+
+$stockRegistry = $objectManager->get('Magento\CatalogInventory\Api\StockRegistryInterface');
+$baseUrl = 'https://www.pharmacyplanet.com/';
+$logUrls = [
+    '9411' => $baseUrl . 'wegovy.html',
+    '9424' => $baseUrl . 'mounjaro.html',
+    '9426' => $baseUrl . 'orlistat-xenical-capsules.html',
+    '9429' => $baseUrl . 'mysimba.html',
+    '9434' => $baseUrl . 'saxenda.html',
+    '9701' => $baseUrl . 'nevolat.html',
+    '9744' => $baseUrl . 'wegovy-pill.html',
+    '9778' => $baseUrl . 'foundayo-orforglipron.html'
+];
+// Append the desired path to the base URL
+// $detailsUrl = $baseUrl . 'weightloss-sub.html';
+?>
+
+<div class="treatment-options Satyam 11th March">
+    <div class="container">
+        <div class="h-title">Other Treatment Options</div>
+        <div class="home-treatment-block">
+            <div class="carousel-container">
+                <div class="carousel">
+                        <?php foreach ($productCollection as $product): ?>
+                            <?php 
+                                $stockItem = $stockRegistry->getStockItem($product->getId()); 
+                                $inStock = $stockItem->getIsInStock();
+                            ?>
+                            <?php if ($inStock): ?>
+                                <!-- <?php //print_r($product->getData());die; ?> -->
+                                <div class="carousel-item">
+                                    <?php
+                                     $productUrl = $product->getProductUrl();
+                                     $detailsUrl = $logUrls[$product->getId()] ?? $productUrl;
+                                     
+                                    ?> 
+                                        <div class="home_block_1 reveal1">
+                                            <div class="home_block_img">
+                                                <!-- Wrap the image in a form to redirect on click -->
+                                                <a href="<?= $detailsUrl ?>">
+                                                    <input type="hidden" name="product_id" value="<?php echo $product->getId(); ?>">
+                                                    <button type="submit" style="border: none; background: none; padding: 0;">
+                                                        <!-- <?php echo "product url : " . $product->getProductUrl(); ?> -->
+                                                        <?php if ( $product->getId() == 9424) : ?>
+                                                            <img src="https://www.pharmacyplanet.com/pub/media/catalog/product/b/u/buy_mounjaro_online_uk_pharmacy_planet.jpg" alt="<?php echo $block->escapeHtml($product->getName()); ?>" />
+                                                        <?php else : ?>
+                                                            <img src="<?php echo $this->helper('Magento\Catalog\Helper\Image')->init($product, 'product_page_image_small')->resize(380)->getUrl(); ?>" alt="<?php echo $block->escapeHtml($product->getName()); ?>" />
+                                                        <?php endif; ?>
+                                                    </button>
+                                                        </a>
+                                            </div>
+                                            <div class="h-product-title">
+                                            <a href="<?= $detailsUrl ?>">
+                                                        <input type="hidden" name="product_id" value="<?php echo $product->getId(); ?>">
+                                                        <button type="submit" style="border: none; background: none; padding: 0; font: inherit; color: inherit; text-align: left;">
+                                                            <?php
+                                                                $productName = $product->getName();
+                                                                $words = explode(' ', $productName);
+                                                                $prodName = implode(' ', array_slice($words, 0, 5));
+                                                                echo $block->escapeHtml($prodName); 
+                                                            ?>
+                                                        </button>
+                                                        </a>
+                                            </div>
+                                                <!-- <p><?php 
+                                                $shortDescription = $product->getShortDescription();
+                                                $words = explode(' ', $shortDescription);
+                                                $shortenedDescription = implode(' ', array_slice($words, 0, 15));
+                                                echo $block->escapeHtml($shortenedDescription);
+                                                ?></p> -->
+
+                                                <ul>
+                                                    <?php
+                                                    $bulletPoints = $product->getPrBulletPoints(); // Fetch the bullet points attribute value
+                                                    $bulletPointsArray = explode("\n", $bulletPoints); // Split the attribute value by new lines into an array
+                                                    foreach ($bulletPointsArray as $bulletPoint): ?>
+                                                        <li><img src="/media/wysiwyg/WLImage/tick.svg" alt="tick"><?= $block->escapeHtml($bulletPoint); ?></li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+
+                                                <div class="product-price">
+                                                    <?php
+                                                    $price = $product->getPriceInfo()->getPrice('regular_price')->getValue();
+                                                    echo '£' . $block->escapeHtml($price);
+                                                    ?>
+                                                </div>
+
+                                                <div class="h-banner-btn" data-was-processed="true">
+                                                    <!-- Use a form with POST method to pass the product ID without it showing in the URL -->
+                                                    <a href="<?= $detailsUrl ?>">
+                                                        <input type="hidden" name="product_id" value="<?php echo $product->getId(); ?>">
+                                                        <button type="submit">View Details</button>
+                                                    </a>
+                                                        <div class="info">
+                                                            <img src="/media/wysiwyg/WLImage/info-i.png" alt="Info">
+                                                        </div>
+                                                        <div class="info-tooltip">
+                                                            <?= $block->escapeHtml($product->getShortDescription()); ?>
+                                                        </div>
+                                                    
+                                                </div>
+                                        </div>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                </div>
+                <button class="carousel-prev"><img src="/media/wysiwyg/WLImage/product-slider-arrow-left.png" alt="Prev"></button>
+                <button class="carousel-next"><img src="/media/wysiwyg/WLImage/product-slider-arrow-right.png" alt="Next"></button>
+            </div>
+            <!-- <div class="fixed-image reveal1">
+              <img src="/media/wysiwyg/WLImage/Mask.png" alt="mask">
+                <h2>Start your weight management journey today</h2>
+                <div class="h-banner-btn">
+                    <a href="https://phpstack-732705-2678695.cloudwaysapps.com/phpwl/home-repeat">START MY CONSULTATION</a>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<style>
+/* info button css */
+
+.info-tooltip {
+    display:none;
+  }
+
+.info:hover + .info-tooltip {
+  display: block;
+}
+
+/* slidercss */
+    .carousel-container {
+    /*position: relative;*/
+    overflow: hidden;
+    margin-top: 20px; /* Adjust as needed */
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    flex: 0 0 auto;
+    width: 25%; /* Adjust the width of each item */
+    padding: 0 10px; /* Adjust spacing between items */
+    box-sizing: border-box;
+}
+
+.carousel-prev,
+.carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    box-shadow: none !important;
+}
+
+.carousel-prev {
+    left: -38px;
+}
+
+.carousel-next {
+    right: -38px;
+}
+.carousel-prev:hover,
+.carousel-next:hover{
+    background: transparent !important;
+    border: 0 !important;
+}
+
+@media screen and (max-width: 767px) {
+
+    .treatment-options .carousel-container{
+        position: relative;
+    }
+    .treatment-options .carousel-prev, .carousel-next{
+        top: 50% !important;
+        opacity: 0;
+    }
+
+    
+}
+
+
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const carousel = document.querySelector('.carousel');
+        const prevButton = document.querySelector('.carousel-prev');
+        const nextButton = document.querySelector('.carousel-next');
+        const intervalTime = 3000; // Time in milliseconds
+        let slidesToShow = 4;
+        let currentIndex = 0;
+
+        const totalItems = carousel.querySelectorAll('.carousel-item').length;
+
+        function updateSlidesToShow() {
+            if (window.innerWidth <= 768) {
+                slidesToShow = 1;
+            } else {
+                slidesToShow = 4;
+            }
+        }
+
+        // Initial update for slidesToShow
+        updateSlidesToShow();
+
+        // Listen for window resize to update slidesToShow
+        window.addEventListener('resize', () => {
+            updateSlidesToShow();
+            updateCarousel();
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < totalItems - slidesToShow) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        function updateCarousel() {
+            const itemWidth = carousel.querySelector('.carousel-item').offsetWidth;
+            const offset = -1 * currentIndex * itemWidth;
+            carousel.style.transform = `translateX(${offset}px)`;
+        }
+
+        // Auto-slide functionality
+        function autoSlide() {
+            if (currentIndex < totalItems - slidesToShow) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateCarousel();
+        }
+
+        // Set interval for auto-slide
+        setInterval(autoSlide, intervalTime);
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var carousel = document.querySelector('.carousel');
+    var startX, startY, endX, endY;
+
+    carousel.addEventListener('touchstart', function (event) {
+        startX = event.touches[0].clientX;
+        startY = event.touches[0].clientY;
+    }, false);
+
+    carousel.addEventListener('touchmove', function (event) {
+        endX = event.touches[0].clientX;
+        endY = event.touches[0].clientY;
+    }, false);
+
+    carousel.addEventListener('touchend', function () {
+        var diffX = startX - endX;
+        var diffY = startY - endY;
+
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            // Swipe left or right
+            if (diffX > 0) {
+                // Swipe left
+                document.querySelector('.carousel-next').click();
+            } else {
+                // Swipe right
+                document.querySelector('.carousel-prev').click();
+            }
+        }
+    }, false);
+});
+
+</script>

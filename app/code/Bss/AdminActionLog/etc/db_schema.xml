@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<!--
+/**
+* BSS Commerce Co.
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the EULA
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://bsscommerce.com/Bss-Commerce-License.txt
+*
+* @category   BSS
+* @package    Bss_AdminActionLog
+* @author     Extension Team
+* @copyright  Copyright (c) 2017-2018 BSS Commerce Co. ( http://bsscommerce.com )
+* @license    http://bsscommerce.com/Bss-Commerce-License.txt
+*/
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="bss_admin_action_log" resource="default" engine="innodb" comment="Action Log">
+    <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Log Id"/>
+    <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+    <column xsi:type="varchar" name="group_action" nullable="false" length="255" comment="Group Action"/>
+    <column xsi:type="text" name="info" nullable="false" comment="Info Item"/>
+    <column xsi:type="varchar" name="action_type" nullable="false" length="255" comment="Action Type"/>
+    <column xsi:type="varchar" name="action_name" nullable="false" length="255" comment="Action Name "/>
+    <column xsi:type="varchar" name="ip_address" nullable="false" length="255" comment="Ip Address"/>
+    <column xsi:type="int" name="user_id" padding="11" unsigned="false" nullable="false" identity="false" comment="User Id"/>
+    <column xsi:type="varchar" name="user_name" nullable="false" length="255" comment="User Name"/>
+    <column xsi:type="boolean" name="result" nullable="false" comment="Result Action"/>
+    <column xsi:type="boolean" name="revert" nullable="false" comment="Revert config"/>
+    <column xsi:type="smallint" name="store_id" padding="6" unsigned="false" nullable="false" identity="false" comment="Action Name "/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="id"/>
+    </constraint>
+  </table>
+  <table name="bss_admin_action_detail_log" resource="default" engine="innodb" comment="Action Log Details">
+    <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+    <column xsi:type="int" name="log_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Log Id"/>
+    <column xsi:type="varchar" name="source_data" nullable="false" length="255" comment="Lable"/>
+    <column xsi:type="mediumtext" name="old_value" nullable="false" comment="Old Value"/>
+    <column xsi:type="mediumtext" name="new_value" nullable="false" comment="New Value"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="id"/>
+    </constraint>
+    <constraint xsi:type="foreign" referenceId="ADMIN_ACTION_LOG_VALUE_LOG_ID_ADMIN_ACTION_LOG_ID" table="bss_admin_action_detail_log" column="log_id" referenceTable="bss_admin_action_log" referenceColumn="id" onDelete="CASCADE"/>
+  </table>
+  <table name="bss_admin_login_log" resource="default" engine="innodb" comment="Login Log">
+    <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+    <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Date time"/>
+    <column xsi:type="varchar" name="user_name" nullable="false" length="255" comment="User name"/>
+    <column xsi:type="varchar" name="ip_address" nullable="false" length="255" comment="Ip Address"/>
+    <column xsi:type="text" name="browser" nullable="false" comment="Browser"/>
+    <column xsi:type="smallint" name="status" padding="6" unsigned="false" nullable="false" identity="false" comment="Status"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="id"/>
+    </constraint>
+  </table>
+  <table name="bss_admin_active_log" resource="default" engine="innodb" comment="Active Sessions">
+    <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+    <column xsi:type="datetime" name="created_at" on_update="false" nullable="true" comment="Created at"/>
+    <column xsi:type="varchar" name="ip_address" nullable="false" length="255" comment="Ip Address"/>
+    <column xsi:type="varchar" name="session_id" nullable="false" length="255" comment="Session Id"/>
+    <column xsi:type="varchar" name="user_name" nullable="false" length="255" comment="User name"/>
+    <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+    <column xsi:type="datetime" name="recent_activity" on_update="false" nullable="true" comment="Recent Activity"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="id"/>
+    </constraint>
+    <index referenceId="BSS_ADMIN_ACTION_LOG_SESSION_ID" indexType="btree">
+      <column name="session_id"/>
+    </index>
+  </table>
+  <table name="bss_admin_visit_log" resource="default" engine="innodb" comment="Visit Page">
+    <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+    <column xsi:type="varchar" name="ip_address" nullable="false" length="255" comment="Ip Address"/>
+    <column xsi:type="varchar" name="user_name" nullable="false" length="255" comment="User name"/>
+    <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+    <column xsi:type="varchar" name="session_id" nullable="false" length="255" comment="Session Id"/>
+    <column xsi:type="datetime" name="session_start" on_update="false" nullable="true" comment="Session Start"/>
+    <column xsi:type="datetime" name="session_end" on_update="false" nullable="true" comment="Session End"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="id"/>
+    </constraint>
+  </table>
+  <table name="bss_admin_visit_detail_log" resource="default" engine="innodb" comment="Visit Detail">
+    <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+    <column xsi:type="varchar" name="session_id" nullable="false" length="255" comment="Session Id"/>
+    <column xsi:type="varchar" name="page_name" nullable="false" length="255" comment="Page Name"/>
+    <column xsi:type="varchar" name="page_url" nullable="false" length="255" comment="Url pf Page"/>
+    <column xsi:type="int" name="stay_duration" padding="11" unsigned="false" nullable="false" identity="false" comment="Stay Duration"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="id"/>
+    </constraint>
+  </table>
+</schema>

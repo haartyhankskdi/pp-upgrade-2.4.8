@@ -1,0 +1,183 @@
+<?php
+
+$vm = $block->getViewModel();
+$data = $vm->getAllTestimonials();
+$mediaUrl = $block->getUrl('media/');
+?> 
+
+
+  
+
+  <div class="story-main">
+    <h1>Making a Difference Together</h1>
+    <div class="subtitle">
+      Discover how we've made a positive impact on patients, families, and the community through care you can trust.
+    </div>
+    <div class="cards">
+        <?php if(count($data->getData())): ?>
+            <?php foreach($data->getData() as $item): ?>
+              <?php
+                // Check if 'image1' and 'image2' already have 'media' in the URL
+                // If not, prepend the $mediaUrl
+                $image1 = $item['image1'];
+                $image2 = $item['image2'];
+                if (strpos($image1, 'media') === false) {
+                    $image1 = $mediaUrl . ltrim($image1, '/');
+                }
+                if (strpos($image2, 'media') === false) {
+                    $image2 = $mediaUrl . ltrim($image2, '/');
+                }
+              ?>
+      <!-- Card 1 -->
+      <div class="card">
+        <a href="<?= '/successstory/post/' .$item['meta_url']  ?>">
+        <img src="<?= $image1 ?> " alt="<?= $item['title'] ?>" class="card-image">
+        <img src="<?= $image2 ?> " alt="<?= $item['title'] ?>" class="card-image">
+        </a>
+        <div class="card-content">
+          <div class="card-title">
+                <?= $item['title'] ?>
+          </div>
+          <div class="card-desc">
+                <p> <?= $item['review_listing'] ?> </p>
+        </div>
+        <div class="read-btn"><a href="<?= '/successstory/post/' .$item['meta_url']  ?>">
+            READ FULL STORY
+        </a></div>
+        </div>
+      </div>
+      <?php endforeach; ?>
+      <!-- Card 2 -->
+        <?php endif; ?>
+
+    </div>
+  </div>
+
+
+
+   <style>
+   
+    .container {
+      margin: 50px auto;
+      max-width: 1300px;
+    }
+    h1 {
+      font-size: 2.7em;
+      margin-bottom: 16px;
+    }
+    .subtitle {
+      color: #222;
+      margin-bottom: 40px;
+      font-size: 1.1em;
+    }
+    .cards {
+      width: 100%;
+      display: inline-block;
+      text-align: left;
+    }
+    .card {
+      width: 370px;
+      display: inline-block;
+      border: 1px solid #D5D5D5;
+      box-shadow: 4px 4px 13px 0px #00000029;
+      padding:10px 10px 30px 10px;
+      vertical-align: top;
+      margin: 15px 10px;
+    }
+    .card-image {
+      width: 49%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px 10px 0 0;
+      margin-bottom: 20px;
+      background: #eee;
+    }
+    .card-content {
+      padding: 0 24px;
+      flex: 1;
+      text-align: left;
+    }
+    .card-title {
+      font-size: 23px;
+      font-weight: 400;
+      margin-bottom: 15px;
+      font-family: 'Lato', sans-serif;
+    }
+    .card-desc {
+      font-size: 1.1em;
+      margin-bottom: 18px;
+      color: #444;
+    }
+    .read-btn a{
+      display: block;
+      width: 190px;
+      color: #fff;
+      background: #ED3237;
+      border-radius: 25px;
+      padding: 15px;
+      font-size: 14px;
+      font-family: 'Lato', sans-serif;
+      border: none;
+      margin: 0 auto;
+      cursor: pointer;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+      text-align: center;
+      float: left;
+    }
+     .read-btn a:hover {
+      background: #53CAF5;
+    }
+    .page-main{
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+    .read-btn{
+      width: 100%;
+      text-align: left;
+      display: inline-block;
+      margin-top: 15px;
+    }
+
+.story-main h1,
+.story-main .subtitle{
+      text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .story-main{
+      width: 1260px;
+      margin: 50px auto;
+    }
+    .story-main .card-title{
+      height: 100px;
+    }
+  }
+
+  @media (max-width:767px){
+    .cards{
+      text-align: center !important;
+    }
+    .card{
+      width: 88% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    h1{
+      font-size: 35px !important;
+      line-break: 45px !important;
+    }
+    .testimonials-index-index .story-main{ 
+      padding: 0 15px;
+    }
+    .testimonials-index-index .story-main .card{
+       width: 90% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        display: block;
+        margin-bottom: 25px !important;
+    }
+     
+  }
+  </style>

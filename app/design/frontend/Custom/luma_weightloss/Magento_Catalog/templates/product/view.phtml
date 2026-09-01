@@ -1,0 +1,690 @@
+<?php
+/** @var \Magento\Catalog\Block\Product\View $block */
+/** @var \Magento\Catalog\Model\Product $_product */
+$product = $block->getProduct();
+$productId = $product->getID();
+
+/** @var \Magento\Catalog\Helper\Image $imageHelper */
+$imageHelper = $block->getImage($product, 'product_page_image_large');
+
+/** @var \Magento\Framework\ObjectManagerInterface $objectManager */
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$stockRegistry = $objectManager->get('Magento\CatalogInventory\Api\StockRegistryInterface');
+$session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
+
+
+if ($productId) {
+    // Load the product details based on the product ID
+    /** @var \Magento\Catalog\Model\ProductRepository $productRepository */
+    // $productRepository = $objectManager->get(\Magento\Catalog\Model\ProductRepository::class);
+    // $imageHelper = $objectManager->get(Magento\Catalog\Helper\Image::class);
+
+
+    try {
+        // $product = $productRepository->getById($productId);
+        
+        // Prepare the product details array
+        $productDetails = [
+            // 'image' => $imageHelper->init($product, 'product_page_image_small')->resize(500)->getUrl(),
+            'images' => $product->getMediaGalleryImages(),
+            'title' => $product->getName(),
+            'description' => $product->getShortDescription(),
+            'features' => explode("\n", $product->getData('features')), // Assuming 'features' is a multi-line attribute
+            'price' => $product->getFinalPrice(),
+            'is_salable' => $product->getIsSalable(),
+            'stockItem' => $stockRegistry->getStockItem($product->getId()),
+        ];
+        $images = $productDetails['images'];
+
+        // custom alt tag
+        $altText = $productDetails['title'];
+        $Zepbound = "Injection Effective for Weight Loss";
+        $Mounjaro = "weight loss medications";
+        $orlistat = "Buy Orlistat/ Xenical Capsules Online";
+        $Mysimba =  "Weight Loss Tablets";
+        $Saxenda = "Weight-Loss Pen";
+        $wegovy = "Wegovy Weight Loss Treatment";
+
+        // Replace Alt Text
+
+        if ($productId == 9436) {
+            $altText = $Zepbound;
+        } elseif ($productId == 9424) {
+            $altText = $Mounjaro;
+        } elseif ($productId == 9426) {
+            $altText = $orlistat;
+        } elseif ($productId == 9429) {
+            $altText = $Mysimba;
+        } elseif ($productId == 9434) {
+            $altText = $Saxenda;
+        } elseif ($productId == 9411) {
+            $altText = $wegovy;
+        }
+
+        ?>
+    
+        <div class="category-description main-cat-desc">
+            <div class="container">
+                <div class="category-image-right">
+                <div class="category-image">
+                    <div class="slideshow-container">
+                        <?php 
+                        foreach($images as $child){ ?>
+                            <div class="mySlides fade">
+                                <img id="main-image" src="<?php echo $child->getUrl(); ?>" alt="<?php echo $altText; ?>" />
+                            </div>
+                        <?php } ?>
+                    </div>
+
+                </div><br>
+                <div class="dots-sec" style="text-align:center">
+                    <?php for($i = 0; $i < count($images); $i++) { ?>
+                        <span class="dot" onclick="currentSlide(<?php echo $i + 1; ?>)"></span> 
+                    <?php } ?>
+                </div>
+
+                <!-- <div class="thumbnails">
+                    <?php
+                    $thumbnailCount = 0;
+                    foreach($images as $image) {
+                        if ($thumbnailCount >= 4) {
+                            break; // Display only 4 thumbnails
+                        }
+                        echo '<img src="' . $image->getUrl() . '" class="thumbnail" onclick="updateMainImage(this)">';
+                        $thumbnailCount++;
+                    }
+                    ?>
+                </div> -->
+            </div>
+                <div class="category-details">
+                    <div class="category-c">
+                        <p class='wl-product-name'><?php echo $productDetails['title']; ?></p>
+                        <p><?php //echo $productDetails['description']; ?></p>
+
+                    </div>
+                    <div class="price-s">PRICE<span>Starting from &nbsp; <b>£<?php echo $productDetails['price']; ?></b></span></div><br>
+                    <p>A medicated weight loss plan proven to help you lose weight</p>
+                    <li><img src="/media/wysiwyg/WLImage/tick.svg" alt="tick">Science-backed approach</li>
+                    <li><img src="/media/wysiwyg/WLImage/tick.svg" alt="tick"> Lose up to 15% of body weight</li>
+                    <li><img src="/media/wysiwyg/WLImage/tick.svg" alt="tick">Hassle-free online consultation</li>
+                    
+                    <?php
+                        $stockItem = $productDetails['stockItem'];
+                        $inStock = $stockItem->getIsInStock();
+                        if (!$inStock) { ?>
+                            <form id="notify-form" action="<?php echo $block->getUrl('theme/notify/index'); ?>" method="post">
+                                <div class="start-const-btn">
+                                    <a href="#" id="notifyBtn">Notify me once available</a>
+                                </div>
+                                <div class="email-input-box" id="emailInputBox" style="display: none;">
+                                    <input type="email" id="emailInput" name="email" placeholder="Enter your email" required>
+                                    <button id="submitBtn">Submit</button>
+                                </div>
+                                <div class="success-message" id="successMessage" style="display: none;">
+                                    Thank you! You will be notified once available.
+                                </div>
+                            </form>
+                        <?php
+                        } else { ?>
+                            <div class="start-const-btn"><a href="https://phpstack-732705-2678695.cloudwaysapps.com/phpwl/home-repeat">START MY CONSULTATION</a></div>
+                            <?php $session->setData('product_id' , $productId); ?>
+                        <?php
+                        }
+                    ?>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+<?php
+
+    } 
+    catch (\Exception $e) {
+        echo "An error occurred: " . $e->getMessage();
+    }
+} else {
+
+    header("Location: " . $baseUrl);
+    exit;
+}
+
+?>
+
+<!-- Whats Included -->
+<div class="category-section-2">
+    <div class="container">
+        <div class="subsection-b reveal1">
+            <h3>No hidden fees</h3>
+            <div class="category-s-i">
+                <img src="/media/wysiwyg/WLImage/Group-icon.png" alt="Free Online Consultation">
+            </div>
+        </div>
+
+        <div class="subsection-b reveal1">
+            <h3>Secure checkout</h3>
+            <div class="category-s-i">
+                <img src="/media/wysiwyg/WLImage/secure-icon.png" alt="Continuous Care">
+            </div>
+        </div>
+
+        <div class="subsection-b reveal1">
+            <h3>UK Regulated online pharmacy</h3>
+            <div class="category-s-i">
+                <img src="/media/wysiwyg/WLImage/Mask-icon.png" alt="Discreet & Speedy Delivery">
+            </div>
+        </div>
+
+        <div class="subsection-b last reveal1">
+            <h3>Trusted by over 100,000+ customers</h3>
+            <div class="category-s-i">
+                <img src="/media/wysiwyg/WLImage/star-icon.png" alt="Cancel anytime">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- product info -->
+<div class="product-info-sec reveal1">
+<?php
+// desktop view
+if ($productId == 9426) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('orlistat_product_info')
+    ->toHtml();
+} elseif ($productId == 9434) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('saxenda_product_info')
+    ->toHtml();
+} elseif ($productId == 9411) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('wegovy_product_info')
+    ->toHtml();
+} elseif ($productId == 9424) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('mounjaro_product_info')
+    ->toHtml();
+} elseif ($productId == 9429) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('mysimba_product_info')
+    ->toHtml();
+} elseif ($productId == 9436) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('zepbound_product_info')
+    ->toHtml();
+} 
+// else {
+//     echo $this->getLayout()
+//     ->createBlock('Magento\Cms\Block\Block')
+//     ->setBlockId('wegovy_product_info')
+//     ->toHtml();
+// }
+
+
+// mobile view
+
+if ($productId == 9426) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('orlistat_mob_product_info')
+    ->toHtml();
+} elseif ($productId == 9434) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('saxenda_mob_product_view')
+    ->toHtml();
+} elseif ($productId == 9411) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('wegovy_mob_product_info')
+    ->toHtml();
+} elseif ($productId == 9424) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('mounjaro_mob_product_info')
+    ->toHtml();
+} elseif ($productId == 9429) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('mysimba_mob_product_info')
+    ->toHtml();
+} elseif ($productId == 9436) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('zepbound_mob_product_info')
+    ->toHtml();
+} 
+// else {
+//     echo $this->getLayout()
+//     ->createBlock('Magento\Cms\Block\Block')
+//     ->setBlockId('wegovy_mob_product_info')
+//     ->toHtml();
+// }
+?>
+
+</div>
+
+
+<div class="out-of-stock-product">
+<?php
+// check product stock status
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$stockRegistry = $objectManager->get('Magento\CatalogInventory\Api\StockRegistryInterface');
+$stockItem = $stockRegistry->getStockItem($product->getId()); 
+$inStock = $stockItem->getIsInStock();
+
+    // if (!$inStock) { 
+    $treatoption = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/stockProd.phtml")->toHtml();
+    echo $treatoption; 
+// }
+?>
+</div>
+
+<!-- What our patients are saying -->
+<?php echo $this->getLayout()->createBlock("Magento\Cms\Block\Widget\Block")->setTemplate("widget/static_block/default.phtml")->setBlockId("151")->toHtml(); ?>
+<?php echo $this->getLayout()->createBlock("Magento\Cms\Block\Widget\Block")->setTemplate("widget/static_block/default.phtml")->setBlockId("150")->toHtml(); ?>
+
+
+<!-- Our results speak for themselves -->
+
+<div class="our-results our-results-2">
+    <div class="container">
+        <h2>Our results speak for themselves</h2>
+
+        <div class="result-list reveal1">
+            <h3>97%</h3>
+            
+                <p><span>Improved confidence</span></p>
+                <p>97% of patients felt more<br> confident after program</p>
+            
+        </div>
+        
+        <div class="result-list result-2 reveal1">
+            <h3>10-15%</h3>
+            
+                <p><span>Body Weight Loss</span></p>
+                <p>Average body weight loss when<br> using GLP1 medication</p>
+        
+        </div>
+
+
+        <div class="result-list last reveal1">
+            <h3>97%</h3>
+            
+                <p><span>Improved overall health</span></p>
+                <p>97% of patients felt the their overall health<br> had improved after the program</p>
+            
+        </div>
+    </div>
+</div>
+
+<!-- How It Works -->
+<div class="how-it-works-section inner">
+<div class="h-title">How It Works</div>
+    <div class="Works-1 reveal1">
+        <img src="/media/wysiwyg/WLImage/work-img-1-11.png" alt="Start Consultation" />
+        <div class="work-c">
+            <div class="h-title-2">Complete our online <br> clinical consultation</div>
+            <!-- <p><strong>Your content for Start Consultation goes here.</strong></p> -->
+            <p>Answer a few questions on your health and your fitness goals.</p>
+        </div>
+    </div>
+   <div class="Works-1 reveal1">
+    <img src="/media/wysiwyg/WLImage/work-img-2-1.png" alt="Setup Coaching" />
+     <div class="work-c">
+        <div class="h-title-2">Clinical <br> assessment</div>
+        
+        <!-- <p><strong>Your content for Setup Coaching goes here.</strong></p> -->
+        <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+      <img src="/media/wysiwyg/WLImage/work-img-3-1.png" alt="Ongoing Support" />
+       <div class="work-c">
+        <div class="h-title-2">Welcome <br> aboard!</div>
+      
+        <!-- <p><strong>Your content for Get Ongoing Support goes here.</strong></p> -->
+        <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- Need Help -->
+<div class="need-help-section">
+<div class="container"> 
+<h2>Need Help?</h2>   
+<div class="new-two-column">
+
+    <div class="left-column reveal-l">
+        <img src="/media/wysiwyg/WLImage/need-help.png" alt="question mark"/>
+    </div>
+    
+    <div class="right-column revealr">
+        <div class="content-title">Do you have a question about weight loss treatment?</div>
+        <p>Start your weight loss journey heading in the right direction. Our team are here to help. Whether you’re unsure about which medicine is right for you or need help navigating the world of weight loss drugs, our team are on hand to help you make the right decision. We can put you in touch with one of our experienced weight loss clinicians so you can be sure you’re making the best decision with the most accurate information.</p>
+        <p>To get in touch, contact our Customer Service team on <a href="tel:08009788956">0800 978 8956</a> or email <a href="mailto:headoffice@pharmacyplanet.com">headoffice@pharmacyplanet.com</a>.</p>
+    </div>
+</div>
+
+
+</div>
+</div>
+
+
+<?php
+// Treatment Options 
+$treatoption = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/treatment-option.phtml")->toHtml();
+// echo $treatoption;
+?>
+
+<!-- Meet The Team -->
+<div class="hm-meet-team reveal1">
+<div class="container">
+    <?php echo $this->getLayout()->createBlock("WeltPixel\OwlCarouselSlider\Block\Slider\Custom")->setSliderId("1")->toHtml(); ?>
+</div>
+</div>
+
+<?php
+
+// Faq
+$maounjaro = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/mounjaro_faq.phtml")->toHtml();
+$orlistat = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/orlistat_faq.phtml")->toHtml();
+$wegovy = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/wegovy_faq.phtml")->toHtml();
+$saxenda = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/saxenda_faq.phtml")->toHtml();
+$zepbound = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/zepbound_faq.phtml")->toHtml();
+$mysimba = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/mysimba_faq.phtml")->toHtml();
+
+
+if ($productId == 9426) {
+    echo $orlistat;
+}
+elseif ($productId == 9434) {
+    echo $saxenda;
+} 
+elseif ($productId == 9411) {
+    echo $wegovy;
+} 
+elseif ($productId == 9424) {
+    echo $maounjaro; 
+} 
+elseif ($productId == 9429) {
+    echo $mysimba;
+} 
+elseif ($productId == 9436) {
+    echo $zepbound;
+} 
+// elseif ($productId == 9386) {
+//     echo $this->getLayout()
+//     ->createBlock('Magento\Cms\Block\Block')
+//     ->setBlockId('retatrutide_product_info')
+//     ->toHtml();
+// } 
+// else {
+//     echo $storiesContent;
+// }
+?>
+
+<div class="mob-consult-btn">
+    <!-- {{block class="Amasty\Customform\Block\Init" template="Amasty_Customform::init.phtml" form_id="54"}}
+    {{block class="Magento\Framework\View\Element\Template" template="Haartyhanks_CategoryQuestWL::category_id_template.phtml"}} -->
+
+    <?= $this->helper("Amasty\Customform\Helper\Data")->renderForm("54") ?>
+    <?= $this->getLayout()->createBlock('Magento\Framework\View\Element\Template')->setTemplate('Haartyhanks_CategoryQuestWL::category_id_template.phtml')->toHtml() ?>
+</div>
+
+
+<?php
+$Blog = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/blogSlider.phtml")->toHtml();
+echo $Blog;
+
+?>
+
+<style>
+/* Add CSS to style the thumbnails */
+.thumbnails .thumbnail {
+    width: 100px; /* Set the desired width for thumbnails */
+    height: auto; /* Maintain aspect ratio */
+    margin: 5px; /* Add some margin between thumbnails */
+}
+
+/* slideshow */
+
+.mySlides {display: none;}
+img {vertical-align: middle;}
+
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+
+
+/* End slideshow */
+
+/* Email box  */
+.email-input-box {
+    margin-top: 20px;
+}
+
+.email-input-box input {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.email-input-box button {
+    padding: 10px 20px;
+    background-color: #28A745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.success-message {
+    margin-top: 20px;
+    color: #28A745;
+    font-weight: bold;
+}
+
+
+.left-column {
+    flex: 1;
+    padding: 20px;
+}
+
+.right-column {
+    flex: 2;
+    padding: 20px;
+}
+
+.header.content {
+    padding: 0 !important;
+}
+</style>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var pageHeaders = document.querySelectorAll('.page-header');
+
+    pageHeaders.forEach(function(header) {
+        var offerDiv = document.createElement('div');
+        offerDiv.classList.add('offer1', 'mf-initial');
+        offerDiv.setAttribute('data-was-processed', 'true');
+
+        var offerSpan = document.createElement('span');
+        offerSpan.classList.add('wl-offer');
+        offerSpan.textContent = 'JOIN OUR WEIGHT LOSS SUBSCRIPTION PROGRAM AND GET 50% ON YOUR FIRST ORDER';
+
+        offerDiv.appendChild(offerSpan);
+
+        header.insertBefore(offerDiv, header.firstChild);
+    });
+});
+</script>
+
+<script>
+    require(['jquery'], function($) {
+        $(document).ready(function() {
+            $('#notify-form').on('submit', function(event) {
+                event.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            // alert(response.message);
+                            location.reload();
+                        } else {
+                            alert('Login failed: ' + response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('An error occurred while processing your request. Please try again.');
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+
+
+<script>
+function updateMainImage(thumbnail) {
+    var mainImage = document.getElementById('main-image');
+    mainImage.src = thumbnail.src;
+}
+
+document.getElementById('notifyBtn').addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('emailInputBox').style.display = 'block';
+});
+
+document.getElementById('submitBtn').addEventListener('click', function() {
+    var email = document.getElementById('emailInput').value;
+    if (validateEmail(email)) {
+        document.getElementById('emailInputBox').style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+    } else {
+        alert('Please enter a valid email address.');
+    }
+});
+
+function validateEmail(email) {
+    var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return re.test(String(email).toLowerCase());
+}
+
+</script>
+
+
+
+<script>
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 5000); // Change image every 2 seconds
+}
+</script>
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+
+
+if (document.getElementById("defaultOpen").length) {
+document.getElementById("defaultOpen").click();
+    
+}
+</script>
+
+
+<script type="text/javascript">
+  function reveal1() {
+  var reveals1 = document.querySelectorAll(".reveal1");
+
+  for (var i = 0; i < reveals1.length; i++) {
+    var windowHeight = window.innerHeight;
+    var elementTop = reveals1[i].getBoundingClientRect().top;
+    var elementVisible = 150;
+
+    if (elementTop < windowHeight - elementVisible) {
+      reveals1[i].classList.add("active");
+    } else {
+      reveals1[i].classList.remove("active");
+    }
+  }
+}
+
+window.addEventListener("scroll", reveal1);
+
+</script>
+
+ 
+<?php
+$MeetInfo = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/meetinfo.phtml")->toHtml();
+echo $MeetInfo;
+?>

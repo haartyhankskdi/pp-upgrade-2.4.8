@@ -1,0 +1,164 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category  Mageplaza
+ * @package   Mageplaza_PromoBanner
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<?php
+/** @var \Mageplaza\PromoBanner\Block\Adminhtml\Config\Field\SliderImage $block */
+$_htmlId  = $block->getHtmlId() ?: '_' . uniqid('-', false);
+$_colspan = $block->isAddAfter() ? 2 : 1;
+?>
+<div class="design_theme_ua_regexp" id="mppromobanner-grid<?= /* @noEscape */
+$_htmlId ?>">
+    <div class="admin__control-table-wrapper">
+        <script id="mppromobanner_row_template"
+                type="text/x-magento-template">
+            <tr id="<%- _id %>">
+                <?php foreach ($block->getColumns() as $columnName => $column) : ?>
+                    <td class="col-<?= /* @noEscape */ $columnName ?> control-table-actions-cell col-items">
+                        <?= /* @noEscape */ $block->renderCellTemplate($columnName) ?>
+                    </td>
+                <?php endforeach; ?>
+                <td class="col-action">
+                    <button type="button" class="action-default action-delete">
+                        <span><?= /* @noEscape */ __('Delete') ?></span>
+                    </button>
+                </td>
+            </tr>
+        </script>
+        <table id="mppromobanner-slider-table" class="admin__control-table">
+            <thead id="gallery_thead" class="admin__control-table">
+            <tr>
+                <th valign="middle" align="center"><?= /* @noEscape */ __('Image') ?></th>
+                <th valign="middle" align="center"><?= /* @noEscape */ __('Direct URL') ?></th>
+                <th valign="middle" align="center"><?= /* @noEscape */ __('Sort Order') ?></th>
+                <th class="col-actions" valign="middle" align="center"><?= /* @noEscape */ __('Action') ?></th>
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <td colspan="<?= count($block->getColumns()) + $_colspan ?>" class="col-actions-add">
+                    <button id="addToEndBtn<?= /* @noEscape */$_htmlId ?>"
+                            class="action-add"
+                            title="<?= /* @noEscape */__('Add') ?>"
+                            type="button"
+                        ><span><?= /* @noEscape */ __('Add New Image') ?></span>
+                    </button>
+                </td>
+            </tr>
+            </tfoot>
+
+            <tbody id="mppromobanner-row-container" data-role="options-container">
+
+            <?php if ($block->getColumns() !== null && $block->getValues() !== null) : ?>
+                <?php foreach ($block->getValues() as $key => $image) : ?>
+                    <tr id="<?= /* @noEscape */
+                    $key ?>">
+                        <td class="col-image control-table-actions-cell col-items">
+                            <a href="<?= /* @noEscape */ $block->getMediaPath($image['image']) ?>"
+                               onclick="imagePreview('<?= $block->getElement()->getHtmlId() ?><?= /* @noEscape */ $key ?>'); return false;">
+                                <img id="<?= $block->getElement()->getHtmlId() ?><?= /* @noEscape */ $key ?>"
+                                     src="<?= /* @noEscape */ $block->getMediaPath($image['image']) ?>"
+                                     alt="<?= /* @noEscape */ $image['image'] ?>"
+                                     height="25" class="small-image-preview v-middle"/>
+                            </a><br/>
+                            <input type="file" name="slider_images<?= /* @noEscape */
+                            $key ?>_image" size="1"
+                                   id="<?= $block->getElement()->getHtmlId() ?>[<?= /* @noEscape */
+                                    $key ?>][image]"
+                                   value="<?= /* @noEscape */
+                                    $image['image'] ?>"
+                                   class="input-file">
+                            <input type="hidden" name="<?= /* @noEscape */ $block->getElement()->getName() ?>[<?= /* @noEscape */ $key ?>][image]"
+                                   value="<?= /* @noEscape */
+                                    $image['image'] ?>">
+                        </td>
+                        <td class="col-url control-table-actions-cell col-items">
+                            <label for="<?= $block->getElement()->getHtmlId() ?>[<?= /* @noEscape */
+                            $key ?>][url]"></label>
+                            <input type="text"
+                                   name="<?= /* @noEscape */
+                                    $block->getElement()->getName() ?>[<?= /* @noEscape */ $key ?>][url]"
+                                   value="<?= /* @noEscape */
+                                    $image['url'] ?>"
+                                   id="<?= $block->getElement()->getHtmlId() ?>[<?= /* @noEscape */
+                                    $key ?>][url]"
+                                   class="validate-url validate-no-html-tags input-text"
+                                   size="40"
+                            />
+                        </td>
+                        <td class="col-sort_order control-table-actions-cell col-items">
+                            <label for="<?= $block->getElement()->getHtmlId() ?>[<?= /* @noEscape */
+                            $key ?>][sort_order]"></label>
+                            <input type="text"
+                                   name="<?= /* @noEscape */
+                                    $block->getElement()->getName() ?>[<?= /* @noEscape */ $key ?>][sort_order]"
+                                   value="<?= /* @noEscape */
+                                    $image['sort_order'] ?>"
+                                   id="<?= $block->getElement()->getHtmlId() ?>[<?= /* @noEscape */
+                                    $key ?>][sort_order]"
+                                   class="required-entry validate-digits"
+                                   size="5"
+                            />
+                        </td>
+                        <td class="col-actions">
+                            <button type="button" class="action-default action-delete">
+                                <span><?= /* @noEscape */ __('Delete') ?></span>
+                            </button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+            </tbody>
+        </table>
+
+        <script type="text/javascript">
+            require([
+                'jquery',
+                'mage/template'
+            ], function ($, mageTemplate) {
+                "use strict";
+                actionDelete();
+                $('#mppromobanner-slider-table button.action-add').on('click', function () {
+                    var d       = new Date(),
+                        tBody   = $(this).parents('#mppromobanner-slider-table').find('#mppromobanner-row-container'),
+                        rowHtml = mageTemplate(
+                            '#mppromobanner_row_template',
+                            {
+                                _id: '_' + d.getTime() + '_' + d.getMilliseconds(),
+                                image: '',
+                                url: '',
+                                sort_order: 0
+                            }
+                        );
+                    tBody.append(rowHtml);
+                    actionDelete();
+                });
+
+                function actionDelete () {
+                    $('#mppromobanner-slider-table button.action-delete').on('click', function () {
+                        $(this).closest('tr').remove();
+                    });
+                }
+            });
+        </script>
+    </div>
+</div>

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<?php
+/** @var \Magento\Catalog\Model\Product $currentProduct */
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+/** @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory */
+$productCollectionFactory = $objectManager->get('Magento\Catalog\Model\ResourceModel\Product\CollectionFactory');
+
+/** @var \Magento\Catalog\Model\Product $currentProduct */
+$currentProduct = $objectManager->get('Magento\Catalog\Model\ProductRepository')->getById($block->getProduct()->getId());
+$productId = $currentProduct->getId();
+// $currentProduct = ;
+
+
+$categoryId = 84; // Your specific category ID
+
+$productCategoryIds = $currentProduct->getCategoryIds();
+
+// if (in_array($categoryId, $productCategoryIds)) {
+if (in_array($categoryId, $productCategoryIds)) {
+  $bodyClass = 'weightloss-product'; // Your custom body class
+} else {
+  $bodyClass = ''; // No class if the condition isn't met
+}
+
+if ($bodyClass) { ?>
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('<?= $bodyClass ?>');
+    });
+  </script>
+<?php }
+
+if ($productId == 9305){ ?>
+<div class="product-details-sec-new desktop-cont-tab">
+  <div class="container">
+    <div class="product-details">
+      <nav class="section-nav">
+        <p class="links-sec">LINKS</p>
+        <ul>
+          <li>
+            <a href="#buy-mounjaro-injections">Buy Mounjaro Injections Online UK</a>
+          </li>
+          <li>
+            <a href="#what-is-mounjaro">What is Mounjaro?</a>
+          </li>
+          <li>
+            <a href="#how-much-mounjaro-injections-cost">How much does the Mounjaro injections cost in UK?</a>
+          </li>
+          <li>
+            <a href="#how-does-mounjaro-work">How does Mounjaro work in the body?</a>
+          </li>
+          <li>
+            <a href="#mounjaro-dosage-guide">Mounjaro dosage guide for weight loss</a>
+          </li>
+          <li>
+            <a href="#buying-mounjaro-injection">Buying Mounjaro injection for first time</a>
+          </li>
+          <li>
+            <a href="#how-to-use-mounjaro=pen">How to use Mounjaro Pen : A Step by Step Guide</a>
+          </li>
+          <li>
+            <a href="#where-to-inject-mounjaro">Where to inject Mounjaro for weight loss?</a>
+          </li>
+          <li>
+            <a href="#mounjaro-side-effects">Mounjaro Side Effects</a>
+          </li>
+          <li>
+            <a href="#what-are-some-alternative">What are some alternative weight loss treatments?</a>
+          </li>
+          <li>
+            <a href="#who-is-eligible">Who is eligible for Mounjaro?</a>
+          </li>
+          <li>
+            <a href="#reference-websites">Reference websites</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="tab-content-right-sec">
+        <section id="buy-mounjaro-injections">
+          <h2>Buy Mounjaro Injections Online UK</h2>
+          <div class="tab-content-sec">
+            <p>You can buy Mounjaro, the latest GLP-1 weekly weight loss injections from Pharmacy Planet, a registered online pharmacy based in the UK. It is approved for weight loss treatment in the UK and prescribed for adults with obesity (BMI of 30+) and for those with a BMI of 27 or above with health conditions such as high blood pressure, high cholesterol and type 2 diabetes.</p>
+            <p>Complete the simple online consultation and start your weight loss journey with Pharmacy Planet.</p>
+          </div>
+        </section>
+        <section id="what-is-mounjaro">
+          <h2>What is Mounjaro?</h2>
+          <div class="tab-content-sec">
+            <p>Mounjaro is the brand name for the drug tirzepatide, an approved for weight loss drug in the UK. The prescription only medicine helps control appetite and reduce cravings, making you feel fuller for longer. As a result of reduced calorie intake and increased physical activity, effective weight loss can be achieved in patients.</p>
+            <p><strong>Mounjaro Overview</strong></p>
+            <p><img src="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Strengths_1.png" data-original="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Strengths_1.png" id="JXHNOL5" alt="Mounjaro Starting Dose" width="698" height="349" class="mf-loaded" data-was-processed="true"></p>
+          </div>
+        </section>
+        <section id="how-much-mounjaro-injections-cost">
+          <h2>How much does the Mounjaro injections cost in UK?</h2>
+          <div class="tab-content-sec">
+            <p>The price of Mounjaro starts from £149 per month at Pharmacy Planet in the UK. It is available in six different strengths. You can check out the complete list of Mounjaro prices below</p>
+            <p><strong>Current In stock Mounjaro Pen Dosages and their Prices:</strong></p>
+            <p><strong>Starting Dosage:</strong></p>
+            <p>Weeks 1 – 4: 2.5 mg (4 doses) Starter Pack at £149</p>
+            <p><strong>Intermediate Dosage:</strong></p>
+            <p>Weeks 5 – 8: 5 mg (4 doses) at £149</p>
+            <p>Weeks 9-12: 7.5 mg (4 doses) at £175</p>
+            <p>Weeks 13-16: 10 mg (4 doses) at £175</p>
+            <p>Weeks 17- 20: 12.5 mg (4 doses) at £209</p>
+            <p><strong>Highest Dosage:</strong></p>
+            <p>After 21 weeks: 15 mg (4 doses) at £209</p>
+          </div>
+        </section>
+        <section id="how-does-mounjaro-work">
+          <h2>How does Mounjaro work in the body?</h2>
+          <div class="tab-content-sec">
+            <p>Tirzepatide, the active ingredient in Mounjaro, belongs to a class of drugs called GLP-1 and GIP receptor agonists. These drugs mimic the naturally occurring hormone GLP-1 which is released in the gut after a meal to suppress hunger. It also slows down gastric emptying to make you feel fuller for longer. This results in reduced intake of food which can lead to weight loss.</p>
+            <p>Mounjaro prevents the conversion of excess sugar into fat by regulating blood sugar levels in our body. It is usually prescribed when lifestyle modifications have not been effective in weight loss.</p>
+          </div>
+        </section>
+        <section id="mounjaro-dosage-guide">
+          <h2>Mounjaro dosage guide for weight loss</h2>
+          <div class="tab-content-sec">
+            <p>It is important to follow a Mounjaro dosage plan to make sure that the medication is taken regularly to achieve the maximum weight loss and lessen the chances of side effects</p>
+            <p><strong>Mounjaro dosing schedule</strong></p>
+            <p><strong><img src="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Dosage_Schedule.png" data-original="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Dosage_Schedule.png" style="display: block; margin-left: auto; margin-right: auto; width: 814px; height: 682px;" alt="Mounjaro_Dosage_Schedule" width="814" height="682" class="mf-loaded" data-was-processed="true"></strong></p>
+            <p>If you are a first-time user, start at the lowest dose of 2.5mg per week for 4 weeks. As long as you are tolerating the medicine, your dose will increase to 5mg per week for the next 4 weeks and then to 7.5mg per week for 4 weeks. The dose can increase again to 10mg per week for 4 weeks, then 12.5mg for 4 weeks, and finally to 15mg per week. You can remain on this dose until your target weight is reached. This is known as the maintenance dose.</p>
+            <p>Sticking to the dosing regimen of once weekly until reaching your goal weight is imperative.</p>
+            <p>The potential for serious side effects is heightened when Mounjaro is misused. It is important to consult your healthcare provider before adjusting your dosage outside the established dosing schedule and to discuss side effects that might be affecting you.</p>
+          </div>
+        </section>
+        <section id="buying-mounjaro-injection">
+          <h2>Buying Mounjaro injection for first time</h2>
+          <div class="tab-content-sec">
+            <p>If you are ordering Mounjaro for first time, each pen will have 4 weekly doses (one dose per week) lasting for 28 days. It is important to keep it refrigerated at 2-8C between uses, however, if kept outside of refrigerate conditions, the pen will be stable for at least 4 weeks before its effectiveness begins to be affected.</p>
+            <p>Each pack of Mounjaro consist of:</p>
+            <p>· Four needles</p>
+            <p>· One Mounjaro Pen (4 doses)</p>
+            <p>· Patient information leaflet and Instruction leaflet</p>
+          </div>
+        </section>
+        <section id="how-to-use-mounjaro=pen">
+          <h2>How to use Mounjaro Pen : A Step by Step Guide</h2>
+          <div class="tab-content-sec">
+            <p>Mounjaro must be injected under the skin (Subcutaneously) in your stomach (abdomen), thigh or upper arm part of your body. Make sure the selected injection site area is clean before inserting the needle.</p>
+            <p>· Remove the pen cap and clean the end (where needle will be inserted) with a swab.</p>
+            <p>· Take one needle from the pack, peel off the paper cover, and firmly push and twist the needle cap until it is securely attached to the Mounjaro Pen. Now remove the plastic cap.</p>
+            <p>· Twist the pen until the first line appears in the Window. Hold the pen upside down and twist until a small liquid drop appears at the tip of the needle.</p>
+            <p>· Twist the plunger until the number one appears in the treatment window.</p>
+            <p>· Once the injection site is chosen, insert the pen at a 90-degree angle and push down the plunger gently until the zero appears again in the treatment window. Hold the needle in place for 10 seconds to make sure the full dose is administered.</p>
+            <p>· Remove the needle and close the Mounjaro pen with plastic cap. Safely dispose of the needle.</p>
+            <p>· Keep the pen stored safely for your next dose.</p>
+            <p>Important Instructions:</p>
+            <p>· Always check the expiration date and ensure it is not frozen or damaged before opening the pen.</p>
+            <p>· A new needle needs to be inserted each time.</p>
+          </div>
+        </section>
+        <section id="where-to-inject-mounjaro">
+          <h2>Where to inject Mounjaro for weight loss?</h2>
+          <div class="tab-content-sec">
+            <p>The best place to inject Mounjaro are the fleshier areas of your body. This includes your stomach (at least 5 cm away from belly button), thigh or upper arm area. It is important to rotate the injection site as inserting the needle in same place every time can cause irritation.</p>
+          </div>
+        </section>
+        <section id="mounjaro-side-effects">
+          <h2>Mounjaro Side Effects</h2>
+          <div class="tab-content-sec">
+            <p>Like any other medications, Mounjaro also can cause side effects.</p>
+            <p>The most common side effects of Mounjaro include:</p>
+            <p>· Diarrhoea</p>
+            <p>· Feeling sickness or fatigue</p>
+            <p>· Nausea and Vomiting</p>
+            <p>· Constipation</p>
+            <p>· Rashes or Pain in injected body areas</p>
+            <p>These symptoms are more likely to disappear over the time since your body slowly gets adjusted to the medication.</p>
+            <p>If the symptoms remain same or becomes severe, please consult your clinician or local healthcare provider immediately.</p>
+          </div>
+        </section>
+        <section id="what-are-some-alternative">
+          <h2>What are some alternative weight loss treatments?</h2>
+          <div class="tab-content-sec">
+            <p>Like Mounjaro , there are other GLP- 1 medicines available for weight loss treatment in the UK. See the list of options below:</p>
+            <p>Injectable Medications:</p>
+            <p>Wegovy is considered as one of the best alternatives for Mounjaro. Wegovy contains active ingredient semaglutide which belong to the same category of GLP-1 receptor agonist. Wegovy does have a more well-known counterpart, known as Ozempic. However, Ozempic is only licensed for use for patients with Type 2 Diabetes.</p>
+            <p>You can compare <a tabindex="0" href="https://www.pharmacyplanet.com/blog/post/wegovy-vs-mounjaro-choosing-weight-loss-methods" target="_blank" rel="noopener">Mounjaro vs Wegovy</a> and <a tabindex="0" href="https://www.pharmacyplanet.com/blog/post/is-mounjaro-superior-to-ozempic-for-weight-loss-treatment" target="_blank" rel="noopener">Ozempic Vs Mounjaro</a> to understand their mechanisms, dosages and effects to help choose the right medication for you.</p>
+          </div>
+        </section>
+        <section id="who-is-eligible">
+          <h2>Who is eligible for Mounjaro?</h2>
+          <div class="tab-content-sec">
+            <p>Mounjaro (weekly injectable pen), is usually prescribed for patients who fit the following criteria:</p>
+            <p>· Has to be aged 18-75 years old.</p>
+            <p>· Is diagnosed with obesity or has a BMI that is 30 or above.</p>
+            <p>· BMI of 27 – 30 with at least one weight related condition like prediabetes, hypertension, high cholesterol or heart problems</p>
+            <p>Mounjaro is not recommended or prescribed if you are:</p>
+            <p>· Below 18 years.</p>
+            <p>· Pregnant or breastfeeding.</p>
+            <p>· Having any kidney or liver related conditions</p>
+            <p>· Suffering from Inflammation of the pancreas (Pancreatitis), diabetic retinopathy, macular oedema, or other eye problems.</p>
+            <p>· History of thyroid issues or medullary thyroid carcinoma (MTC), or if there is a family history of MTC.</p>
+            <p>· Diagnosed with Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).</p>
+            <p>· Allergic to any of the ingredients used in Mounjaro.</p>
+          </div>
+        </section>
+        <section id="reference-websites">
+          <h2>Reference websites</h2>
+          <div class="tab-content-sec">
+            <p><a href="https://www.uchealth.org/today/what-is-mounjaro-and-how-does-it-work-for-weight-loss/" target="_blank">https://www.uchealth.org/today/what-is-mounjaro-and-how-does-it-work-for-weight-loss/</a></p>
+            <p><a href="https://www.gov.uk/government/news/mhra-authorises-diabetes-drug-mounjaro-tirzepatide-for-weight-management-and-weight-loss" target="_blank">https://www.gov.uk/government/news/mhra-authorises-diabetes-drug-mounjaro-tirzepatide-for-weight-management-and-weight-loss</a></p>
+            <p><a href="https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/treating-your-diabetes/tablets-and-medication/glp-1/mounjaro" target="_blank">https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/treating-your-diabetes/tablets-and-medication/glp-1/mounjaro</a></p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mobile-cont-tab">
+  <div class="faq-section-new">
+    <div class="container reveal1">
+      <div class="h-title">
+        LINKS
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">Buy Mounjaro Injections Online UK</button>
+        <div class="panel-p">
+          <p>You can buy Mounjaro, the latest GLP-1 weekly weight loss injections from Pharmacy Planet, a registered online pharmacy based in the UK. It is approved for weight loss treatment in the UK and prescribed for adults with obesity (BMI of 30+) and for those with a BMI of 27 or above with health conditions such as high blood pressure, high cholesterol and type 2 diabetes.</p>
+          <p>Complete the simple online consultation and start your weight loss journey with Pharmacy Planet.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">What is Mounjaro?</button>
+        <div class="panel-p">
+          <p>Mounjaro is the brand name for the drug tirzepatide, an approved for weight loss drug in the UK. The prescription only medicine helps control appetite and reduce cravings, making you feel fuller for longer. As a result of reduced calorie intake and increased physical activity, effective weight loss can be achieved in patients.</p>
+          <p><strong>Mounjaro Overview</strong></p>
+          <p><img src="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Strengths_1.png" data-original="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Strengths_1.png" id="JXHNOL5" alt="Mounjaro Starting Dose" width="698" height="349" class="mf-loaded" data-was-processed="true"></p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">How much does the Mounjaro injections cost in UK?</button>
+        <div class="panel-p">
+          <p>The price of Mounjaro starts from £149 per month at Pharmacy Planet in the UK. It is available in six different strengths. You can check out the complete list of Mounjaro prices below</p>
+          <p><strong>Current In stock Mounjaro Pen Dosages and their Prices:</strong></p>
+          <p><strong>Starting Dosage:</strong></p>
+          <p>Weeks 1 – 4: 2.5 mg (4 doses) Starter Pack at £149</p>
+          <p><strong>Intermediate Dosage:</strong></p>
+          <p>Weeks 5 – 8: 5 mg (4 doses) at £149</p>
+          <p>Weeks 9-12: 7.5 mg (4 doses) at £175</p>
+          <p>Weeks 13-16: 10 mg (4 doses) at £175</p>
+          <p>Weeks 17- 20: 12.5 mg (4 doses) at £209</p>
+          <p><strong>Highest Dosage:</strong></p>
+          <p>After 21 weeks: 15 mg (4 doses) at £209</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">How does Mounjaro work in the body?</button>
+        <div class="panel-p">
+          <p>Tirzepatide, the active ingredient in Mounjaro, belongs to a class of drugs called GLP-1 and GIP receptor agonists. These drugs mimic the naturally occurring hormone GLP-1 which is released in the gut after a meal to suppress hunger. It also slows down gastric emptying to make you feel fuller for longer. This results in reduced intake of food which can lead to weight loss.</p>
+          <p>Mounjaro prevents the conversion of excess sugar into fat by regulating blood sugar levels in our body. It is usually prescribed when lifestyle modifications have not been effective in weight loss.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">Mounjaro dosage guide for weight loss</button>
+        <div class="panel-p">
+          <p>It is important to follow a Mounjaro dosage plan to make sure that the medication is taken regularly to achieve the maximum weight loss and lessen the chances of side effects</p>
+          <p><strong>Mounjaro dosing schedule</strong></p>
+          <p><strong><img src="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Dosage_Schedule.png" data-original="https://www.pharmacyplanet.com/media/wysiwyg/WLImage/Mounjaro_Dosage_Schedule.png" style="display: block; margin-left: auto; margin-right: auto; width: 814px; height: 682px;" alt="Mounjaro_Dosage_Schedule" width="814" height="682" class="mf-loaded" data-was-processed="true"></strong></p>
+          <p>If you are a first-time user, start at the lowest dose of 2.5mg per week for 4 weeks. As long as you are tolerating the medicine, your dose will increase to 5mg per week for the next 4 weeks and then to 7.5mg per week for 4 weeks. The dose can increase again to 10mg per week for 4 weeks, then 12.5mg for 4 weeks, and finally to 15mg per week. You can remain on this dose until your target weight is reached. This is known as the maintenance dose.</p>
+          <p>Sticking to the dosing regimen of once weekly until reaching your goal weight is imperative.</p>
+          <p>The potential for serious side effects is heightened when Mounjaro is misused. It is important to consult your healthcare provider before adjusting your dosage outside the established dosing schedule and to discuss side effects that might be affecting you.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">Buying Mounjaro injection for first time</button>
+        <div class="panel-p">
+          <p>If you are ordering Mounjaro for first time, each pen will have 4 weekly doses (one dose per week) lasting for 28 days. It is important to keep it refrigerated at 2-8C between uses, however, if kept outside of refrigerate conditions, the pen will be stable for at least 4 weeks before its effectiveness begins to be affected.</p>
+          <p>Each pack of Mounjaro consist of:</p>
+          <p>· Four needles</p>
+          <p>· One Mounjaro Pen (4 doses)</p>
+          <p>· Patient information leaflet and Instruction leaflet</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">How to use Mounjaro Pen : A Step by Step Guide</button>
+        <div class="panel-p">
+          <p>Mounjaro must be injected under the skin (Subcutaneously) in your stomach (abdomen), thigh or upper arm part of your body. Make sure the selected injection site area is clean before inserting the needle.</p>
+          <p>· Remove the pen cap and clean the end (where needle will be inserted) with a swab.</p>
+          <p>· Take one needle from the pack, peel off the paper cover, and firmly push and twist the needle cap until it is securely attached to the Mounjaro Pen. Now remove the plastic cap.</p>
+          <p>· Twist the pen until the first line appears in the Window. Hold the pen upside down and twist until a small liquid drop appears at the tip of the needle.</p>
+          <p>· Twist the plunger until the number one appears in the treatment window.</p>
+          <p>· Once the injection site is chosen, insert the pen at a 90-degree angle and push down the plunger gently until the zero appears again in the treatment window. Hold the needle in place for 10 seconds to make sure the full dose is administered.</p>
+          <p>· Remove the needle and close the Mounjaro pen with plastic cap. Safely dispose of the needle.</p>
+          <p>· Keep the pen stored safely for your next dose.</p>
+          <p>Important Instructions:</p>
+          <p>· Always check the expiration date and ensure it is not frozen or damaged before opening the pen.</p>
+          <p>· A new needle needs to be inserted each time.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">Where to inject Mounjaro for weight loss?</button>
+        <div class="panel-p">
+          <p>The best place to inject Mounjaro are the fleshier areas of your body. This includes your stomach (at least 5 cm away from belly button), thigh or upper arm area. It is important to rotate the injection site as inserting the needle in same place every time can cause irritation.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">Mounjaro Side Effects</button>
+        <div class="panel-p">
+          <p>Like any other medications, Mounjaro also can cause side effects.</p>
+          <p>The most common side effects of Mounjaro include:</p>
+          <p>· Diarrhoea</p>
+          <p>· Feeling sickness or fatigue</p>
+          <p>· Nausea and Vomiting</p>
+          <p>· Constipation</p>
+          <p>· Rashes or Pain in injected body areas</p>
+          <p>These symptoms are more likely to disappear over the time since your body slowly gets adjusted to the medication.</p>
+          <p>If the symptoms remain same or becomes severe, please consult your clinician or local healthcare provider immediately.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">What are some alternative weight loss treatments?</button>
+        <div class="panel-p">
+          <p>Like Mounjaro , there are other GLP- 1 medicines available for weight loss treatment in the UK. See the list of options below:</p>
+          <p>Injectable Medications:</p>
+          <p>Wegovy is considered as one of the best alternatives for Mounjaro. Wegovy contains active ingredient semaglutide which belong to the same category of GLP-1 receptor agonist. Wegovy does have a more well-known counterpart, known as Ozempic. However, Ozempic is only licensed for use for patients with Type 2 Diabetes.</p>
+          <p>You can compare <a tabindex="0" href="https://www.pharmacyplanet.com/blog/post/wegovy-vs-mounjaro-choosing-weight-loss-methods" target="_blank" rel="noopener">Mounjaro vs Wegovy</a> and <a tabindex="0" href="https://www.pharmacyplanet.com/blog/post/is-mounjaro-superior-to-ozempic-for-weight-loss-treatment" target="_blank" rel="noopener">Ozempic Vs Mounjaro</a> to understand their mechanisms, dosages and effects to help choose the right medication for you.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">Who is eligible for Mounjaro?</button>
+        <div class="panel-p">
+          <p>Mounjaro (weekly injectable pen), is usually prescribed for patients who fit the following criteria:</p>
+          <p>· Has to be aged 18-75 years old.</p>
+          <p>· Is diagnosed with obesity or has a BMI that is 30 or above.</p>
+          <p>· BMI of 27 – 30 with at least one weight related condition like prediabetes, hypertension, high cholesterol or heart problems</p>
+          <p>Mounjaro is not recommended or prescribed if you are:</p>
+          <p>· Below 18 years.</p>
+          <p>· Pregnant or breastfeeding.</p>
+          <p>· Having any kidney or liver related conditions</p>
+          <p>· Suffering from Inflammation of the pancreas (Pancreatitis), diabetic retinopathy, macular oedema, or other eye problems.</p>
+          <p>· History of thyroid issues or medullary thyroid carcinoma (MTC), or if there is a family history of MTC.</p>
+          <p>· Diagnosed with Multiple Endocrine Neoplasia syndrome type 2 (MEN 2).</p>
+          <p>· Allergic to any of the ingredients used in Mounjaro.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <button class="accordion-p">Reference websites</button>
+        <div class="panel-p">
+          <p><a href="https://www.uchealth.org/today/what-is-mounjaro-and-how-does-it-work-for-weight-loss/" target="_blank">https://www.uchealth.org/today/what-is-mounjaro-and-how-does-it-work-for-weight-loss/</a></p>
+          <p><a href="https://www.gov.uk/government/news/mhra-authorises-diabetes-drug-mounjaro-tirzepatide-for-weight-management-and-weight-loss" target="_blank">https://www.gov.uk/government/news/mhra-authorises-diabetes-drug-mounjaro-tirzepatide-for-weight-management-and-weight-loss</a></p>
+          <p><a href="https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/treating-your-diabetes/tablets-and-medication/glp-1/mounjaro" target="_blank">https://www.diabetes.org.uk/guide-to-diabetes/managing-your-diabetes/treating-your-diabetes/tablets-and-medication/glp-1/mounjaro</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+    <div class="work-c">
+      <div class="h-title-2">
+        Complete our online<br>
+        clinical consultation
+      </div>
+      <p>Answer a few questions on your health and your fitness goals.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-2.webp" alt="Setup Coaching">
+    <div class="work-c">
+      <div class="h-title-2">
+        Clinical<br>
+        assessment
+      </div>
+      <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-3.webp" alt="Ongoing Support">
+    <div class="work-c">
+      <div class="h-title-2">
+        Welcome<br>
+        aboard!
+      </div>
+      <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div>
+<?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faq-mounjaro.phtml")->toHtml(); ?>
+<?php } 
+
+elseif ($productId == 9221) { 
+  echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/tabs/wegovy.phtml")->toHtml(); ?>
+<div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+    <div class="work-c">
+      <div class="h-title-2">
+        Complete our online<br>
+        clinical consultation
+      </div>
+      <p>Answer a few questions on your health and your fitness goals.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-2.webp" alt="Setup Coaching">
+    <div class="work-c">
+      <div class="h-title-2">
+        Clinical<br>
+        assessment
+      </div>
+      <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-3.webp" alt="Ongoing Support">
+    <div class="work-c">
+      <div class="h-title-2">
+        Welcome<br>
+        aboard!
+      </div>
+      <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div>
+
+ <?php  echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/wegovy-faq.phtml")->toHtml();  
+} 
+
+elseif ($productId == 9338) {
+ echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/tabs/mysimba.phtml")->toHtml(); ?> 
+<div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+    <div class="work-c">
+      <div class="h-title-2">
+        Complete our online<br>
+        clinical consultation
+      </div>
+      <p>Answer a few questions on your health and your fitness goals.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-2.webp" alt="Setup Coaching">
+    <div class="work-c">
+      <div class="h-title-2">
+        Clinical<br>
+        assessment
+      </div>
+      <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-3.webp" alt="Ongoing Support">
+    <div class="work-c">
+      <div class="h-title-2">
+        Welcome<br>
+        aboard!
+      </div>
+      <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div>
+<?php 
+
+} 
+
+elseif ($productId == 9567) {
+  //echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/tabs/orforglipron.phtml")->toHtml(); ?>
+<div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+    <div class="work-c">
+      <div class="h-title-2">
+        Complete our online<br>
+        clinical consultation
+      </div>
+      <p>Answer a few questions on your health and your fitness goals.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-2.webp" alt="Setup Coaching">
+    <div class="work-c">
+      <div class="h-title-2">
+        Clinical<br>
+        assessment
+      </div>
+      <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-3.webp" alt="Ongoing Support">
+    <div class="work-c">
+      <div class="h-title-2">
+        Welcome<br>
+        aboard!
+      </div>
+      <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div>
+<?php //echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/orforglipron-faq.phtml")->toHtml();
+ } 
+
+elseif ($productId == 2703) {
+  echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/tabs/orlistat-xenical-capsules.phtml")->toHtml(); ?>
+ <div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+    <div class="work-c">
+      <div class="h-title-2">
+        Complete our online<br>
+        clinical consultation
+      </div>
+      <p>Answer a few questions on your health and your fitness goals.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-2.webp" alt="Setup Coaching">
+    <div class="work-c">
+      <div class="h-title-2">
+        Clinical<br>
+        assessment
+      </div>
+      <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-3.webp" alt="Ongoing Support">
+    <div class="work-c">
+      <div class="h-title-2">
+        Welcome<br>
+        aboard!
+      </div>
+      <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div>  
+<?php 
+echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/orlistat-xenical-capsules-faq.phtml")->toHtml(); 
+} elseif ($productId == 9395) {
+  //echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/tabs/retatrutide.phtml")->toHtml(); ?>
+<div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+    <div class="work-c">
+      <div class="h-title-2">
+        Complete our online<br>
+        clinical consultation
+      </div>
+      <p>Answer a few questions on your health and your fitness goals.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-2.webp" alt="Setup Coaching">
+    <div class="work-c">
+      <div class="h-title-2">
+        Clinical<br>
+        assessment
+      </div>
+      <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-3.webp" alt="Ongoing Support">
+    <div class="work-c">
+      <div class="h-title-2">
+        Welcome<br>
+        aboard!
+      </div>
+      <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div> 
+<?php
+//echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/retatrutide-faq.phtml")->toHtml();  
+} elseif ($productId == 9232) {
+   echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/tabs/rybelsus-tablets-semaglutide.phtml")->toHtml(); ?>
+<div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+    <div class="work-c">
+      <div class="h-title-2">
+        Complete our online<br>
+        clinical consultation
+      </div>
+      <p>Answer a few questions on your health and your fitness goals.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-2.webp" alt="Setup Coaching">
+    <div class="work-c">
+      <div class="h-title-2">
+        Clinical<br>
+        assessment
+      </div>
+      <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-3.webp" alt="Ongoing Support">
+    <div class="work-c">
+      <div class="h-title-2">
+        Welcome<br>
+        aboard!
+      </div>
+      <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div>
+<?php 
+echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/rybelsus-tablets-semaglutide-faq.phtml")->toHtml(); 
+} elseif ($productId == 8294) {// code...List PHTML ?>
+<div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+    <div class="work-c">
+      <div class="h-title-2">
+        Complete our online<br>
+        clinical consultation
+      </div>
+      <p>Answer a few questions on your health and your fitness goals.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-2.webp" alt="Setup Coaching">
+    <div class="work-c">
+      <div class="h-title-2">
+        Clinical<br>
+        assessment
+      </div>
+      <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-3.webp" alt="Ongoing Support">
+    <div class="work-c">
+      <div class="h-title-2">
+        Welcome<br>
+        aboard!
+      </div>
+      <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div>
+<?php 
+echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/saxenda-faq.phtml")->toHtml();
+} elseif ($productId == 9405) {
+  echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/tabs/survodutide.phtml")->toHtml(); ?>
+<div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+    <div class="work-c">
+      <div class="h-title-2">
+        Complete our online<br>
+        clinical consultation
+      </div>
+      <p>Answer a few questions on your health and your fitness goals.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-2.webp" alt="Setup Coaching">
+    <div class="work-c">
+      <div class="h-title-2">
+        Clinical<br>
+        assessment
+      </div>
+      <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-3.webp" alt="Ongoing Support">
+    <div class="work-c">
+      <div class="h-title-2">
+        Welcome<br>
+        aboard!
+      </div>
+      <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div>
+<?php } elseif ($productId == 9337) {
+  echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/tabs/zepbound.phtml")->toHtml(); ?>
+<div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+    <div class="work-c">
+      <div class="h-title-2">
+        Complete our online<br>
+        clinical consultation
+      </div>
+      <p>Answer a few questions on your health and your fitness goals.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-2.webp" alt="Setup Coaching">
+    <div class="work-c">
+      <div class="h-title-2">
+        Clinical<br>
+        assessment
+      </div>
+      <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-3.webp" alt="Ongoing Support">
+    <div class="work-c">
+      <div class="h-title-2">
+        Welcome<br>
+        aboard!
+      </div>
+      <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div>
+<?php } elseif ($productId == 9705) {
+ // echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/tabs/wegovy-tab.phtml")->toHtml(); ?>
+<div class="how-it-works-section">
+  <div class="h-title">
+    How it works
+  </div>
+  <div class="Works-1 reveal1">
+    <img src="/pub/media/wysiwyg/WLImage/work-img-1.webp" alt="Start Consultation">
+    <div class="work-c">
+
+<?php } ?>
+
+ 
+
+
+
+
+<script>
+var acc = document.getElementsByClassName("accordion-p");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+   
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      if (entry.intersectionRatio > 0) {
+        document.querySelector(`nav li a[href="#${id}"]`).parentElement.classList.add('active');
+      } else {
+        document.querySelector(`nav li a[href="#${id}"]`).parentElement.classList.remove('active');
+      }
+    });
+  });
+
+  // Track all sections that have an `id` applied
+  document.querySelectorAll('section[id]').forEach((section) => {
+    observer.observe(section);
+  });
+  
+});
+</script>
+
+</html> 

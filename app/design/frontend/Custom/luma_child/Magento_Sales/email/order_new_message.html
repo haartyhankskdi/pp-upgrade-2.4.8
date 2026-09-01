@@ -1,0 +1,228 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{trans "Your %store_name order confirmation" store_name=$store.getFrontendName()}} @-->
+<!--@vars {
+"var formattedBillingAddress|raw":"Billing Address",
+"var order.getEmailCustomerNote()":"Email Order Note",
+"var order.increment_id":"Order Id",
+"layout handle=\"sales_email_order_items\" order=$order area=\"frontend\"":"Order Items Grid",
+"var payment_html|raw":"Payment Details",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var order.getShippingDescription()":"Shipping Description",
+"var shipping_msg":"Shipping message"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+<tr>
+        <td class="thank-you-img"  align="center"><img src="{{media url='wysiwyg/thankyou-img.jpg'}}" alt="" /></td>
+    </tr>
+    <tr>
+        <td class="thank-you-img"  align="center">
+            <h1 style="font-size: 59px; font-weight: 700; text-transform: uppercase; text-align: center; color: #393939; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: 10px; margin-top: 20px; margin-bottom: 10px;">Thank you!</h1>
+            <p style="font-size: 16px; margin-bottom: 55px;">{{trans "for your order at %store_name." store_name=$store.frontend_name}}</p>
+
+        </td>
+    </tr>
+
+    <tr class="email-intro" style="background: #fff; ">
+        <td style="padding: 30px 30px 0 30px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+            <p class="greeting" style="margin-bottom: 15px;">Dear {{trans "%name," name=$order_data.customer_name}}</p>
+            <p style="line-height: 22px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                {{trans "Thank you for placing your order at %store_name." store_name=$store.frontend_name}}<br/><br/>
+                {{trans "Your order has been received and is currently under review."}}<br/>          
+                {{trans 'You can check the status of your order by <a href="%account_url">logging into your account</a>.' account_url=$this.getUrl($store,'customer/account/',[_nosid:1]) |raw}}<br/> <br/> 
+                <!-- {{trans "Once your package is shipped, we will send you a tracking number."}} -->
+                {{trans 'If you have any questions about your order, please email us at  <a href="mailto:%store_email">%store_email' store_email=$store_email |raw}}</a> {{depend store_phone}} {{trans 'or call us at <a href="tel:%store_phone">%store_phone</a>' store_phone=$store_phone |raw}}{{/depend}}.
+                {{depend store_hours}}
+                    {{trans 'Our hours are <span class="no-link">%store_hours</span>.' store_hours=$store_hours |raw}}
+                {{/depend}}
+            </p>
+        </td>
+    </tr>
+     <tr><td>
+        <div class="x-msg">
+            <div class="x-mas-mailer">
+                <div class="order-update-shipping">
+                    <div class="order-update-shipping-title">Holiday Order Update - Important Shipping Information</div>
+                    <p>Thank you for placing your order with us during this festive period! We're excited to help you with your purchase. Please note that any orders placed between 23rd and 28th December will be dispatched on Monday, 29th December, if your order is approved during this time.</p>
+                    <p>We appreciate your understanding and patience as we ensure your order reaches you as soon as possible after the holiday break. </p>
+                    <p>If you have any questions about your order, please email us at <a style="color:#ffffff !important" href="mailto:headoffice@pharmacyplanet.com">headoffice@pharmacyplanet.com</a> or call us at <a style="color:#ffffff !important"  href="tel:+448009788956">+44 (0)800 978 8956</a>. </p>
+                    <p><span>Wishing you a joyful and peaceful festive season!</span></p>
+                </div>
+            </div>
+        </div>
+        </td>
+    </tr>
+    <tr class="email-summary"  style="background: #fff; ">
+        <td style="padding: 30px 30px 0 30px;">
+            <h2 style="text-align: center; font-size: 20px;
+    font-weight: 700; 
+    text-transform: uppercase;
+    letter-spacing: 1px; background: #f9dfdc;
+    padding-top: 10px; padding-bottom: 10px; margin-top: 0; line-height: 40px; border-bottom: 0; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; float: left;width: 100%;">{{trans 'Your Order <span class="no-link">#%increment_id</span>' increment_id=$order.increment_id |raw}}</h2>
+            <p>{{trans 'Placed on <span class="no-link">%created_at</span>' created_at=$created_at_formatted |raw}}</p>
+        </td>
+    </tr>
+    <tr class="email-information"  style="background: #fff; ">
+        <td style="padding: 30px 30px 30px 30px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+            {{depend order_data.email_customer_note}}
+            <table class="message-info">
+                <tr>
+                    <td>
+                        {{var order_data.email_customer_note|escape|nl2br}}
+                    </td>
+                </tr>
+            </table>
+            {{/depend}}
+            <table class="order-details">
+                <tr>
+                    <td class="address-details">
+                        <h3 style="color: #5cb3e3; font-size: 16px; font-weight: 700; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">{{trans "Billing Info"}}</h3>
+                        <p>{{var formattedBillingAddress|raw}}</p>
+                    </td>
+                    {{depend order_data.is_not_virtual}}
+                    <td class="address-details">
+                        <h3 style="color: #5cb3e3; font-size: 16px; font-weight: 700; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">{{trans "Shipping Info"}}</h3>
+                        <p>{{var formattedShippingAddress|raw}}</p>
+                    </td>
+                    {{/depend}}
+                </tr>
+                <tr>
+                    <td class="method-info" style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                        <h3 style="font-weight: 400;">{{trans "Payment Method"}}</h3>
+                        {{var payment_html|raw}}
+                    </td>
+                    {{depend order_data.is_not_virtual}}
+                    <td class="method-info" style="font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+                        <h3 style="font-weight: 400;">{{trans "Shipping Method"}}</h3>
+                        <p>{{var order.shipping_description}}</p>
+                        {{if shipping_msg}}
+                        <p>{{var shipping_msg}}</p>
+                        {{/if}}
+                    </td>
+                    {{/depend}}
+                </tr>
+            </table>
+            {{layout handle="sales_email_order_items" order=$order area="frontend"}}
+        </td>
+    </tr>
+</table>
+ 
+{{template config_path="design/email/footer_template"}}
+
+
+
+<style>
+.x-mas-mailer {
+    width: 740px;
+    float: none;
+    margin: 0 auto;
+}
+
+.order-update-shipping {
+    width: auto;
+    float: left;
+    padding: 50px 50px;
+    margin: 40px 0;
+    background: url(https://magento-1195784-5659490.cloudwaysapps.com/pub/media/wysiwyg/order-update-bg.jpg) 0 0 no-repeat !important;
+}
+
+.order-update-shipping .order-update-shipping-title {
+    width: 100%;
+    float: left;
+    font-size: 22px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px;
+    font-weight: 700;
+    text-align: left;
+    padding: 0px 0 12px 0;
+    margin: 0;
+    text-align: center;
+}
+
+.order-update-shipping p {
+    width: 100%;
+    float: left;
+    font-size: 14px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 18px;
+    font-weight: 400;
+    text-align: left;
+    padding: 0px 0 13px 0;
+    text-align: center;
+    margin: 0;
+}
+
+.order-update-shipping p a{
+    color: #fff;
+}
+
+.order-update-shipping p span {
+    color: #A7F5E6 !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+}
+
+@media only screen and (max-width: 767px) {
+    .x-mas-mailer .order-update-shipping {
+        width: auto;
+        float: left;
+        padding: 45px 15px 70px 15px;
+        background: url(https://magento-1195784-5659490.cloudwaysapps.com/pub/media/wysiwyg/order-update-bg-m4.jpg) 0 0 no-repeat !important;
+        background-size: 100% !important;
+        margin: 50px 15px;
+    }
+    .x-mas-mailer {
+        width: 100% !important;
+    }
+    .order-update-shipping .order-update-shipping-title {
+        font-size: 14px !important;
+        line-height: 18px !important;
+    }
+    .order-update-shipping p {
+        font-size: 12px !important;
+        line-height: 14px !important;
+        padding-bottom: 5px !important;
+    }
+    .order-update-shipping p span {
+        font-size: 12px !important;
+    }
+}
+
+@media only screen and (min-width:380px) and (max-width:395px) {
+    .x-mas-mailer .order-update-shipping {
+        padding-bottom: 55px !important;
+    }
+    .order-update-shipping p {
+        line-height: 18px !important;
+    }
+}
+
+@media only screen and (min-width:400px) and (max-width:480px) {
+    .x-mas-mailer .order-update-shipping p {
+        font-size: 13px !important;
+        line-height: 16px !important;
+    }
+    .x-mas-mailer .order-update-shipping p span {
+        font-size: 13px !important;
+    }
+    .x-mas-mailer .order-update-shipping {
+        padding-left: 35px !important;
+        padding-right: 35px !important;
+        padding-bottom: 50px !important;
+    }
+}
+
+.x-msg {
+    width: 100%;
+    float: left;
+}
+</style>

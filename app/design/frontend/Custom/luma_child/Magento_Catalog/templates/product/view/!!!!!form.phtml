@@ -1,0 +1,195 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
+
+/**
+ * Product view template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View
+ */
+?>
+<?php $_helper = $this->helper(Magento\Catalog\Helper\Output::class); ?>
+<?php $_product = $block->getProduct();
+      $proCustopt = $_product->getOptions();
+ ?>
+
+<div class="product-add-form">
+    <form data-product-sku="<?= $block->escapeHtmlAttr($_product->getSku()) ?>"
+          action="<?= $block->escapeUrl($block->getSubmitUrl($_product)) ?>" method="post"
+          id="product_addtocart_form"<?php if ($_product->getOptions()) :?> enctype="multipart/form-data"<?php endif; ?>>
+          
+          <div class="prev-btn">
+            <button type="button" class="pre-consultation">< back to product</button>
+          </div>
+
+          <h2>Condition Specific Questions</h2>
+          <p class="p-description">We're going to ask you some brief questions about your health and history in 
+order to assess if a prescription is appropriate for you.</p>
+          
+        <input type="hidden" name="product" value="<?= (int)$_product->getId() ?>" />
+        <input type="hidden" name="selected_configurable_option" value="" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+        <input type="hidden" name="item"  value="<?= (int)$block->getRequest()->getParam('id') ?>" />
+        <?= $block->getBlockHtml('formkey') ?>
+        <?= $block->getChildHtml('form_top') ?>
+        
+        <?php if (!$block->hasOptions()) :?>
+            <?= $block->getChildHtml('product_info_form_content') ?>
+        <?php else :?>
+          
+            <?php if ($_product->isSaleable() && $block->getOptionsContainer() == 'container1') :?>
+                <?= $block->getChildChildHtml('options_container') ?>
+            <?php endif;?>
+        <?php endif; ?>
+
+        <?php if ($_product->isSaleable() && $block->hasOptions() && $block->getOptionsContainer() == 'container2') :?>
+            <?= $block->getChildChildHtml('options_container') ?>
+        <?php endif;?>
+        <?= $block->getChildHtml('form_bottom') ?>
+        
+        <div class="info-btn">
+        <?php if(!empty($proCustopt) && $_product->isSaleable()){  ?>
+          <!-- For Config product with custom option/Questionaire -->
+        <button type="button" class="start-consultation">Start Consultation</button>
+      <?php }
+      if($this->getRequest()->getFullActionName() == 'checkout_cart_configure'){ 
+        $buttonTitle = __('Update Cart'); 
+        }
+        else{ 
+            $buttonTitle = __('Add to Cart'); 
+        }
+      if(empty($proCustopt) && $_product->isSaleable()){  ?> 
+        <!-- For Config product without custom option/Questionaire -->
+        <button type="submit" class=""><?= $block->escapeHtml($buttonTitle) ?></button>
+      <?php }
+
+      ?>
+        
+      </div>
+    </form>
+</div>
+
+
+
+
+<script type="text/x-magento-init">
+    {
+        "[data-role=priceBox][data-price-box=product-id-<?= $block->escapeHtml($_product->getId()) ?>]": {
+            "priceBox": {
+                "priceConfig":  <?= /* @noEscape */ $block->getJsonConfig() ?>
+            }
+        }
+    }
+</script>
+
+<script>
+   
+   // document.getElementById("product-addtocart-button").style.display = "none";
+
+   // function startConsult(){
+   //  document.querySelector(".start-consultation").style.display = "none";
+   //  document.getElementById("itoris_dynamicproductoptions").style.display = "block";
+   //  document.getElementById("product-addtocart-button").style.display = "block";
+   //  document.querySelector(".pre-consultation").style.display = "block";
+   //  document.querySelector(".fieldset").style.display = "none";
+   //  document.querySelector(".description").style.display = "none";
+   //  document.querySelector(".new-additional-info").style.display = "none";
+   // }
+
+   // function preConsult(){
+   //  document.querySelector(".pre-consultation").style.display = "none";
+   //  document.getElementById("product-addtocart-button").style.display = "none";
+   //  document.getElementById("itoris_dynamicproductoptions").style.display = "none";
+   //  document.querySelector(".start-consultation").style.display = "block";
+   //  document.querySelector(".fieldset").style.display = "block";
+   //  document.querySelector(".description").style.display = "block";
+   //  document.querySelector(".new-additional-info").style.display = "block";
+   // }
+   require(['jquery','jquery/ui', "mage/mage"], function($){
+   	jQuery('.datetime-picker').datepicker( "option", "maxDate", "+0d" );
+    var dataForm = $('#product_addtocart_form');
+        dataForm.mage('validation', {ignore: ':hidden'});
+    
+           // $('.admin__field-option:contains("None")').addClass("sasa");
+           // $(".sasa").remove();
+      $("#product-addtocart-button").hide();
+    
+     
+        $(document).on('click','body .action.primary.continue', function(){
+            if($('._required._error:visible:first').offset() !== undefined) {
+                $('html, body').animate({
+                    scrollTop: $('._required._error:visible:first').offset().top
+                }, 500);
+            }
+        });
+
+         $(".start-consultation").click(function(event){
+            if(dataForm.validation('isValid')){
+                $("body").addClass('start_consultation');
+                event.preventDefault();
+                window.scrollTo(0, 0);
+                $(".start-consultation").hide();
+                $(".attribute.overview").hide();
+                $(".pharmacyvideo").hide();
+                $(".prod-desprection").hide();
+                $("#itoris_dynamicproductoptions").show();
+                $(".fieldset.fieldset-section-1").show();
+                $("#product-addtocart-button").show();
+                $(".pre-consultation").show();
+                $(".pharm-desc").show();
+                $(".pharmacy-logo").show();
+                $(".swatch-opt").hide();
+                $(".description").hide();
+                $(".new-additional-info").hide();
+                $(".field.qty").hide();
+                $(".price-box.price-final_price").hide();
+                $(".page-title").hide();
+                $(".gallery-placeholder").hide();
+                //Header Footer Display none
+                $(".page-header").hide();
+                $(".breadcrumbs").hide();    
+                $(".page-footer").hide();
+                $(".footer-bottom").hide();
+                //Header Footer Display none
+            }else{
+                console.log("Validation not done");
+            }
+        });
+
+    $(".pre-consultation").click(function(event){
+        $("body").removeClass('start_consultation');
+        // if(dataForm.validation('isValid')){
+            event.preventDefault();
+            $(".pre-consultation").hide();
+            $("#product-addtocart-button").hide();
+            $("#itoris_dynamicproductoptions").hide();
+
+            $(".pharm-desc").hide();
+            $(".pharmacy-logo").hide();
+            $(".attribute.overview").show();
+            $(".prod-desprection").show();
+            $(".pharmacyvideo").show();
+            $(".start-consultation").show();
+            $(".swatch-opt").show();
+            $(".description").show();
+            $(".new-additional-info").show();
+            $(".field.qty").show();
+            $(".price-box.price-final_price").show();
+            $(".page-title").show();
+            $(".gallery-placeholder").show();
+
+            //Header Footer Show
+            $(".page-header").show();
+            $(".breadcrumbs").show();    
+            $(".page-footer").show();
+            $(".footer-bottom").show();
+            //Header Footer Show
+        // }
+    });
+
+    });
+</script>

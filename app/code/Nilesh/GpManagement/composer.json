@@ -1,0 +1,26 @@
+{
+    "name": "nilesh/module-gpmanagement",
+    "description": "",
+    "type": "magento2-module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mage2Gen",
+            "email": "info@mage2gen.com"
+        },
+        {
+            "name": "Nilesh Dubey",
+            "email": "nileshdubeynd5101@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Nilesh\\GpManagement\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

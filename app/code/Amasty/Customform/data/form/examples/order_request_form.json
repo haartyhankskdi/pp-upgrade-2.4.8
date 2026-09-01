@@ -1,0 +1,83 @@
+{
+  "title": "Quote Request form",
+  "code": "request",
+  "status": 1,
+  "customer_group": 0,
+  "store_id": 0,
+  "send_notification": 0,
+  "submit_button": "Submit",
+  "success_message": "Thanks for contacting us. Your request was saved successfully.",
+  "form_json": [
+    [
+      {
+        "type": "textinput",
+        "name": "full_name",
+        "label": "Full name",
+        "className": "form-control",
+        "required": true,
+        "validation": ""
+      },
+      {
+        "type": "textinput",
+        "name": "email_text",
+        "label": "Email",
+        "className": "form-control",
+        "required": true,
+        "validation": "validate-email"
+      },
+      {
+        "type": "number",
+        "name": "phone_number",
+        "label": "Phone Number",
+        "className": "form-control",
+        "required": true,
+        "validation": ""
+      },
+      {
+        "type": "dropdown",
+        "name": "request",
+        "label": "Request Type",
+        "className": "form-control",
+        "required": true,
+        "values": [
+          {
+            "label": "Type 1",
+            "value": "option-1",
+            "selected": true
+          },
+          {
+            "label": "Type 2",
+            "value": "option-2"
+          },
+          {
+            "label": "Type 3",
+            "value": "option-3"
+          }
+        ],
+        "validation": ""
+      },
+      {
+        "type": "time",
+        "name": "time",
+        "label": "Best Time to Contact",
+        "className": "amform-time",
+        "required": true,
+        "validation": ""
+      },
+      {
+        "type": "textarea",
+        "name": "message",
+        "label": "Message",
+        "className": "form-control",
+        "validation": ""
+      },
+      {
+        "type": "file",
+        "name": "document",
+        "label": "Attach a document",
+        "className": "form-control",
+        "validation": ""
+      }
+    ]
+  ]
+}

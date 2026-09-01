@@ -1,0 +1,224 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$registry = $objectManager->get(\Magento\Framework\Registry::class);
+$product = $registry->registry('current_product');
+
+if ($product && $product->getId()) {
+    $categoryIds = $product->getCategoryIds();
+
+    if (!empty($categoryIds)) {
+        $categoryRepository = $objectManager->get(\Magento\Catalog\Model\CategoryRepository::class);
+        $blogCategoryFactory = $objectManager->get(\Magefan\Blog\Model\CategoryFactory::class);
+        $blogCategoryModel = $objectManager->get(\Magefan\Blog\Model\Category::class);
+
+        
+        // Magento Category ID => Blog Category ID mapping
+        $categoryBlogMap = [
+            161 => 44, 160 => 43, 107 => 41, 148 => 40, 143 => 39,
+            149 => 38, 101 => 37, 98 => 36, 95 => 35, 147 => 34,
+            145 => 33, 142 => 32, 141 => 30, 91 => 29, 140 => 28,
+            88 => 27, 85 => 26, 84 => 25, 181 => 24, 95 => 22,
+            81 => 21, 99 => 20, 121 => 19, 90 => 17, 91 => 16,
+            89 => 15, 108 => 14, 162 => 13, 106 => 12, 92 => 11,
+            85 => 9, 104 => 8, 83 => 7, 82 => 6, 102 => 4,
+            87 => 3, 168 => 2, 96 => 1,
+        ];
+
+        $matchedBlogCategoryIds = [];
+        $firstBlogCategoryId = null;
+
+        foreach ($categoryBlogMap as $magentoCatId => $blogCatId) {
+            if (in_array($magentoCatId, $categoryIds)) {
+                $matchedBlogCategoryIds[] = $blogCatId;
+                if (!$firstBlogCategoryId) {
+                    $firstBlogCategoryId = $blogCatId;
+                }
+            }
+        }
+
+        if (!empty($matchedBlogCategoryIds)) {
+            /** @var \Magefan\Blog\Model\PostFactory $postFactory */
+            $postFactory = $objectManager->get(\Magefan\Blog\Model\PostFactory::class);
+            $collection = $postFactory->create()->getCollection();
+
+            // Join blog post with blog post category relation table
+            $collection->getSelect()->join(
+                ['rel' => 'magefan_blog_post_category'],
+                'main_table.post_id = rel.post_id',
+                []
+            )->where('rel.category_id IN (?)', $matchedBlogCategoryIds);
+
+            // Filter + order + limit
+            $collection->addFieldToFilter('is_active', 1)
+                       ->getSelect()
+                       ->group('main_table.post_id')
+                       ->order('publish_time DESC')
+                       ->limit(10);
+
+            // Get blog category URL
+            $blogCategoryUrl = '#';
+            if ($firstBlogCategoryId) {
+                try {
+                    $blogCategory = $blogCategoryModel->load($firstBlogCategoryId);
+                    $blogCategoryUrl = $blogCategory->getUrl();
+                } catch (\Exception $e) {
+                    $blogCategoryUrl = '#';
+                }
+            }
+
+          
+            echo '<div class="footer-blog reveal1"> <div class="post-list-wrapper">';
+            echo '<h3 class="title">' . $block->escapeHtml(__('Further Reading')) . '</h3>';
+            echo '<ul class="post-list clearfix">';
+            $maxLength = 42;
+            foreach ($collection as $post) {
+                $postTitle = $post->getTitle();
+                $shortTitle = strlen($postTitle) > $maxLength ? mb_substr($postTitle, 0, $maxLength) . '...' : $postTitle;
+                echo '<li><a href="' . $post->getPostUrl() . '" >' . $block->escapeHtml($shortTitle) . '</a></li>';
+            }
+            echo '</ul>';
+
+            // View More Button
+           echo '<div class="view_more_similar_blog">';
+            echo '<a href="' . $block->getUrl('blog') . '" target="_blank">VIEW MORE SIMILAR BLOG</a>';
+            echo '</div>';
+
+            echo '</div></div>'; // close .footer-blog
+        }
+    }
+}
+?>
+
+
+
+
+<style>
+    
+/*-----------Further Reading--------------*/
+
+.catalog-product-view .footer-blog{
+  width: 100% !important;
+  float: left;
+  padding:70px 0;
+  margin:50px 0 0 0;
+  background-color: #E7F2F4;
+}
+.catalog-product-view .footer-blog .post-list{
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.catalog-product-view .footer-blog .post-list li,
+ .catalog-product-view .footer-blog .post-list li a{
+  font-size: 13px !important;
+    color: #000;
+    font-family: 'Ubuntu', sans-serif;  
+    line-height: 20px !important;
+    font-weight: 400;
+    text-align: left;
+}
+ 
+.catalog-product-view .footer-blog .post-list li a{
+  width: auto;
+  height: auto;
+}
+
+.catalog-product-view .footer-blog ul.post-list li:before{
+  width: 25px;
+  float: left;
+  height: 28px;
+  content: " " !important;
+  background:url(/pub/media/wysiwyg/tick-icon-2.svg) 0 5px no-repeat;
+}
+.catalog-product-view .footer-blog .post-list-wrapper ul.post-list li{
+  margin-bottom: 5px !important;
+}
+
+.catalog-product-view .footer-blog .post-list-wrapper h3.title {
+    font-size: 38px !important;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 46px !important;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 0;
+}
+
+.catalog-product-view .footer-blog .view_more_similar_blog{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 40px 0 0 0;
+  text-align: center;
+}
+.catalog-product-view .footer-blog .view_more_similar_blog a{
+    background-size: 100% 200% !important;
+    background-image: linear-gradient(to bottom, #ED3237 50%, #ED3237 50%) !important;
+    -webkit-transition: background-position 0.7s;
+    -moz-transition: background-position 0.7s;
+    transition: background-position 0.7s !important; 
+    text-decoration: none !important; 
+    background: #ED3237;
+    opacity: 1;
+    border: 0;
+    text-decoration: none;
+    width: 237px;
+    display: inline-block;
+    text-align: center; 
+    font-size: 13px;
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    line-height: 55px;
+    padding: 0 0px;
+    font-weight: 400;
+    border-radius: 30px;
+    letter-spacing: 0.26px;
+    height: auto;
+    text-transform: uppercase;
+}
+ 
+
+.catalog-product-view .footer-blog .view_more_similar_blog a:hover{
+  background-size: 100% 200% !important;
+  background-image: linear-gradient(to bottom, #ED3237 50%, #53CAF5 50%) !important;
+  background-position: 0 -100% !important;
+  text-decoration: none !important;
+  background-color: #53CAF5 !important;
+}
+
+@media screen and (min-width: 768px) {
+    .catalog-product-view .footer-blog .post-list-wrapper .post-list li{
+        width: 45% !important;
+        padding: 0 !important;
+        margin: 0 0 0 15px !important;
+        float: none;
+        display: inline-block;
+        text-align: left;
+    }
+    .catalog-product-view .footer-blog .post-list-wrapper{
+      text-align: center;
+    }
+    .catalog-product-view .footer-blog .post-list{
+      width: 60%;
+      margin: 0 auto;
+    }
+}
+
+
+@media only screen and (max-width: 767px) {
+  .catalog-product-view .footer-blog .post-list-wrapper.blog-widget-recent{
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+  .footer-blog .post-list-wrapper.blog-widget-recent h3.title{
+    padding-bottom: 0 !important;
+  }
+  .catalog-product-view .footer-blog .post-list-wrapper ul.post-list li{
+    float: left;
+  }
+}
+
+/*-----------Further Reading end--------------*/
+</style>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Widget/etc/widget.xsd">
+    <widget id="mst_helpdesk_contact_form" class="Mirasvit\Helpdesk\Block\Widget\Contacts">
+        <label translate="true">Helpdesk Contact Form</label>
+        <description></description>
+    </widget>
+    <widget id="mst_helpdesk_satisfaction_block" class="Mirasvit\Helpdesk\Block\Widget\Satisfaction">
+        <label translate="true">Helpdesk Satisfaction Block</label>
+        <description></description>
+        <parameters>
+            <parameter name="satisfaction_list_url" xsi:type="text" required="false" visible="true">
+                <label translate="true">Satisfaction List Url</label>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="mst_helpdesk_satisfaction_list" class="Mirasvit\Helpdesk\Block\Widget\SatisfactionList">
+        <label translate="true">Helpdesk Satisfaction List</label>
+        <description></description>
+    </widget>
+</widgets>

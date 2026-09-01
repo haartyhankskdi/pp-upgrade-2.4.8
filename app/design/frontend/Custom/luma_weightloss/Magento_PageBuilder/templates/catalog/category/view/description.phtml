@@ -1,0 +1,79 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundHelper
+
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+?>
+<?php if ($description = $block->getCurrentCategory()->getDescription()):?>
+    <div class="category-description main-cat-desc">
+        <?php $descriptionHtml = $this->helper(Magento\Catalog\Helper\Output::class)->categoryAttribute(
+            $block->getCurrentCategory(),
+            $description,
+            'description'
+        );?>
+        <?php if (stripos($description, 'data-appearance') === false):?>
+            <div data-content-type="row" data-appearance="contained" data-element="main">
+                <div data-enable-parallax="0" data-parallax-speed="0.5" data-background-images="{}" data-element="inner"
+                     style="justify-content: flex-start; display: flex; flex-direction: column;
+                     background-position: left top; background-size: cover; background-repeat: no-repeat;
+                     background-attachment: scroll; border-style: none; border-width: 1px; border-radius: 0px;
+                     margin: 0px 0px 10px; padding: 10px;">
+                    <div data-content-type="html" data-appearance="default" data-element="main"
+                         style="border-style: none; border-width: 1px; border-radius: 0px; margin: 0px; padding: 0px;">
+                        <?= /* @noEscape */$descriptionHtml; ?>
+                    </div>
+                </div>
+            </div>
+        <?php else: ?>
+            <?= /* @noEscape */$descriptionHtml; ?>
+        <?php endif; ?>
+    </div>
+<!-- <button class="main-cat-btn btn btn-primary" type="button">
+        <span class="readmore">Read More</span>
+        <span class="icona"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+    </button>
+    
+    <script>
+        require(['jquery'], function($){
+
+            var descHtml = `<?php // echo /* @noEscape */ $descriptionHtml; ?>`;
+
+            $(".main-cat-desc").each(function () {
+                if (descHtml.length > 300) {
+                    $(this).html(descHtml.substr(0, descHtml.lastIndexOf(' ', 297)) + ' ..');
+                    $(".main-cat-btn").addClass('active');
+                }
+            });
+
+            $(".main-cat-btn").click(function (e) {
+                e.preventDefault();
+                if($(this).hasClass('active-read')){
+                    $(this).find('span.icona').html('<i class="fa fa-caret-down" aria-hidden="true"></i>');
+                    $(this).find('.readmore').html('Read More');
+                    $(this).removeClass('active-read');
+                    $(".main-cat-desc").html(descHtml.substr(0, descHtml.lastIndexOf(' ', 297)) + ' ..');
+                    $('html, body').animate({
+                    scrollTop: $('.content-page').offset().top
+                }, 500);
+                }else{
+                    $(this).find('span.icona').html('<i class="fa fa-caret-up" aria-hidden="true"></i>');
+                    $(this).find('.readmore').html('Read less');
+                    $(this).addClass('active-read');
+                    $(".main-cat-desc").html(descHtml);
+                    $('html, body').animate({
+                    scrollTop: $('.content-page').offset().top
+                }, 500);
+                }
+            });
+        });
+    </script> -->
+<?php endif; ?>

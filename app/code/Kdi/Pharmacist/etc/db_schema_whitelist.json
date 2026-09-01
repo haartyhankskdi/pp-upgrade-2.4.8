@@ -1,0 +1,21 @@
+{
+    "pharmacist": {
+        "column": {
+            "entity_id": true,
+            "date": true,
+            "name": true,
+            "gphc_no": true,
+            "pharmacist_type": true,
+            "description": true,
+            "is_enabled": true,
+            "image": true,
+            "qualification": true
+        },
+        "index": {
+            "PHARMACIST_GPHC_NO": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

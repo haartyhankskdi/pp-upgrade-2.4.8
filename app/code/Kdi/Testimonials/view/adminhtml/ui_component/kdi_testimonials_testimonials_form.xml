@@ -1,0 +1,313 @@
+<?xml version="1.0" ?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">kdi_testimonials_testimonials_form.testimonials_form_data_source</item>
+		</item>
+		<item name="label" xsi:type="string" translate="true">General Information</item>
+		<item name="template" xsi:type="string">templates/form/collapsible</item>
+	</argument>
+	<settings>
+		<buttons>
+			<button name="back" class="Kdi\Testimonials\Block\Adminhtml\Testimonials\Edit\BackButton"/>
+			<button name="delete" class="Kdi\Testimonials\Block\Adminhtml\Testimonials\Edit\DeleteButton"/>
+			<button name="save" class="Kdi\Testimonials\Block\Adminhtml\Testimonials\Edit\SaveButton"/>
+			<button name="save_and_continue" class="Kdi\Testimonials\Block\Adminhtml\Testimonials\Edit\SaveAndContinueButton"/>
+		</buttons>
+		<namespace>kdi_testimonials_testimonials_form</namespace>
+		<dataScope>data</dataScope>
+		<deps>
+			<dep>kdi_testimonials_testimonials_form.testimonials_form_data_source</dep>
+		</deps>
+	</settings>
+	<dataSource name="testimonials_form_data_source">
+		<argument name="data" xsi:type="array">
+			<item name="js_config" xsi:type="array">
+				<item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+			</item>
+		</argument>
+		<settings>
+			<submitUrl path="*/*/save"/>
+		</settings>
+		<dataProvider name="testimonials_form_data_source" class="Kdi\Testimonials\Model\Testimonials\DataProvider">
+			<settings>
+				<requestFieldName>testimonials_id</requestFieldName>
+				<primaryFieldName>testimonials_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<fieldset name="general">
+		<settings>
+			<label>General</label>
+		</settings>
+		 <field name="category_id" sortOrder="100" formElement="select" component="Magento_Ui/js/form/element/ui-select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">true</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <item name="listens" xsi:type="array">
+                        <item name="${ $.namespace }.${ $.namespace }:responseData" xsi:type="string">setParsed</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Featured Categories</label>
+                <dataType>text</dataType>
+                <elementTmpl>ui/grid/filters/elements/ui-select</elementTmpl>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Catalog\Ui\Component\Product\Form\Categories\Options"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+		<field name="custom_button" sortOrder="50" formElement="container">
+			<settings>
+				<label translate="true">Custom Button</label>
+				<elementTmpl>Kdi_Testimonials/form/element/custom-button</elementTmpl>
+			</settings>
+		</field>
+		<field name="product_id">
+			<argument name="data" xsi:type="array">
+				<item name="options" xsi:type="object">Kdi\Testimonials\Model\Config\Source\Product</item>
+				<item name="config" xsi:type="array">
+					<item name="componentType" xsi:type="string">field</item>
+					<item name="formElement" xsi:type="string">select</item>
+					<item name="label" xsi:type="string">Store</item>
+					<item name="visible" xsi:type="boolean">true</item>
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="source" xsi:type="string">Customer</item>
+					<item name="dataScope" xsi:type="string">product_id</item>
+				</item>
+			</argument>
+		</field>
+		
+		
+		<field name="review">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Review</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">wysiwyg</item>
+                    <item name="dataScope" xsi:type="string">review</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                    <item name="wysiwygConfigData" xsi:type="array">
+                        <item name="add_images" xsi:type="boolean">true</item>
+                        <item name="add_widgets" xsi:type="boolean">true</item>
+                        <item name="add_variables" xsi:type="boolean">true</item>
+                        <item name="buttons" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+		 <field name="image1">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="dataType" xsi:type="string">string</item>
+                <item name="source" xsi:type="string">Label    </item>
+                <item name="label" xsi:type="string" translate="true">Label Image</item>
+                <item name="visible" xsi:type="boolean">true</item>
+                <item name="formElement" xsi:type="string">fileUploader</item>
+                <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                <item name="previewTmpl" xsi:type="string">Venor_Module/image-preview</item>
+                <item name="required" xsi:type="boolean">false</item>
+                <item name="sortOrder" xsi:type="number">4</item>
+                <item name="uploaderConfig" xsi:type="array">
+                    <item name="url" xsi:type="url" path="router_name/index/upload"/>
+                </item>
+            </item>
+        </argument>
+</field>
+<field name="title" formElement="input" sortOrder="20">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">title</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Testimonials Title</label>
+				<dataScope>title</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		 <field name="image1" formElement="input" sortOrder="20">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Testimonials Image Before</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Testimonials Image Before</label>
+				<dataScope>image1</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		<field name="image2" formElement="input" sortOrder="20">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">image2</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Testimonials Image After</label>
+				<dataScope>image2</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		<field name="review_writer" formElement="input" sortOrder="20">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">image1</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Review By</label>
+				<dataScope>review_writer</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		<field name="review_writer" formElement="input" sortOrder="20">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">image1</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Review By</label>
+				<dataScope>review_writer</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		<field name="review_date" sortOrder="60" formElement="date">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">Review Date</item>
+                <item name="source" xsi:type="string">test</item>
+                <item name="options" xsi:type="array">
+                    <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                    <item name="timeFormat" xsi:type="string">hh:mm</item>
+                    <item name="showsTime" xsi:type="boolean">true</item>
+                    <item name="minDate" xsi:type="string">new Date()</item>
+                </item>
+            </item>
+        </argument>
+        <settings>
+            <validation>
+                <rule name="required-entry" xsi:type="boolean">true</rule>
+            </validation>
+            <dataType>timestamp</dataType>
+            <dataScope>review_date</dataScope>
+            <label translate="true">From</label>
+        </settings>
+    </field>
+	<field name="product_consuming_start_from" sortOrder="60" formElement="date">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">Product Consuming Start From</item>
+                <item name="source" xsi:type="string">test</item>
+                <item name="options" xsi:type="array">
+                    <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                    <item name="timeFormat" xsi:type="string">hh:mm</item>
+                    <item name="showsTime" xsi:type="boolean">true</item>
+                    <item name="minDate" xsi:type="string">new Date()</item>
+                </item>
+            </item>
+        </argument>
+        <settings>
+            <validation>
+                <rule name="required-entry" xsi:type="boolean">true</rule>
+            </validation>
+            <dataType>timestamp</dataType>
+            <dataScope>product_consuming_start_from</dataScope>
+            <label translate="true">From</label>
+        </settings>
+    </field>
+	</fieldset>
+	<fieldset>
+	<settings>
+			<label>Search Ingine Optimization</label>
+		</settings>
+		<field name="meta_url" formElement="input" sortOrder="20">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">meta_url</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Custom Url For Testimonials</label>
+				<dataScope>meta_url</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		<field name="meta_title" formElement="input" sortOrder="20">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">meta_title</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Custom Title For Testimonials</label>
+				<dataScope>meta_title</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		<field name="meta_desc" formElement="input" sortOrder="20">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">meta_desc</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Custom Description For Testimonials</label>
+				<dataScope>meta_desc</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		<field name="meta_keyword" formElement="input" sortOrder="20">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">meta_keyword</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Meta Keyword For Testimonials</label>
+				<dataScope>meta_keyword</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+	</fieldset>
+</form>

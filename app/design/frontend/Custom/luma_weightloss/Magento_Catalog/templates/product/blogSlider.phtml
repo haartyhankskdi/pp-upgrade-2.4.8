@@ -1,0 +1,322 @@
+<div class="footer-blog reveal1">
+    <!-- <div class="blog-slider"> -->
+    <?php echo $this->getLayout()->createBlock("Magefan\Blog\Block\Widget\Recent")
+        ->setTitle("Our Blogs")
+        ->setNoRepeatPostsEnable(3)
+        ->setNumberOfPosts(3)
+        ->setCategoryId(25)
+        ->setTagId(0)
+        ->setAuthorId(0)
+        ->toHtml(); 
+        ?>
+        <button class="post-prev"><img src="/media/wysiwyg/WLImage/product-slider-arrow-left.png" alt="Prev"></button>
+        <button class="post-next"><img src="/media/wysiwyg/WLImage/product-slider-arrow-right.png" alt="Next"></button>
+    <!-- </div> -->
+
+</div>
+
+
+<style>
+    /* slidercss */
+.footer-blog {
+    overflow: hidden;
+    padding: 65px 0;
+    margin: 0px;
+    position: relative; /* Ensure position relative for absolute buttons */
+}
+
+.footer-blog .post-list {
+    display: inline-flex;
+    transition: transform 0.5s ease-in-out;
+    padding-left: 0; /* Remove default padding */
+}
+
+.footer-blog .post-holder {
+    flex: 0 0 auto;
+    width: 25%; 
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.footer-blog .post-prev,
+.footer-blog .post-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.footer-blog .post-prev {
+    left: 0px;
+}
+
+.footer-blog .post-next {
+    right: 0px;
+}
+
+
+.footer-blog .post-holder .post-header .post-info .item.post-posed-date{
+    margin-bottom: 10px;
+}
+.footer-blog .post-holder .post-header .post-info .item.post-posed-date span{
+    font-size: 11px !important;
+    color: #6B6B6B !important;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px;
+    font-weight: 400 !important;
+    text-align: left;
+    padding: 0px 0 0px 0;
+    margin: 0;
+    font-style: normal !important;
+}
+
+.footer-blog .post-list .post-header .post-title{
+    width: 100%;
+    float: left;
+    font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 26px;
+    font-weight: 700;
+    text-align: left;
+    padding: 0px 0 10px 0;
+    margin: 0
+}
+.footer-blog .post-list .post-header .post-title a{
+    font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 26px;
+    font-weight: 700;
+}
+
+.footer-blog .blog-widget-recent .post-description .post-text-hld p{
+    width: 100%;
+    float: left;
+    font-size: 13px;
+    color: #101010;
+    font-family: 'Lato', sans-serif;
+    line-height: 20px;
+    font-weight: 400;
+    text-align: left;
+    padding: 0px 0 5px 0;
+    margin: 0;
+}
+
+.blog-widget-recent .post-holder{
+margin : 0% !important;
+}
+
+@media screen and (min-width: 768px) {
+
+    .footer-blog .post-prev, 
+    .footer-blog .post-next{
+        display: none;
+    }
+    .footer-blog .post-list .post-header .post-title{
+        height: 90px;
+    }
+    .footer-blog .post-list-wrapper.blog-widget-recent{
+        overflow: hidden;
+    }
+    .footer-blog .post-list-wrapper.blog-widget-recent{
+        max-width: 1040px !important;
+    }
+    .footer-blog .h-title{
+        margin-bottom: 40px !important;
+    }
+
+}
+
+@media screen and (min-width: 1025px) {
+    .footer-blog .post-list-wrapper .post-holder {
+        width: 345px !important;
+    }
+}
+
+
+@media only screen and (min-width:768px) and (max-width:991px){
+    .footer-blog .post-list-wrapper.blog-widget-recent .post-holder{
+        width: 50% !important;
+    }
+    .footer-blog .post-prev, 
+    .footer-blog .post-next{
+        display: block !important;
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        top: 41.5% !important;
+    }
+    .footer-blog {
+        width: 98% !important; 
+        display: block !important;
+        margin: 0 auto;
+        float: none;
+    }
+}
+
+
+@media only screen and (min-width:992px) and (max-width:1024px){
+    .footer-blog .post-list-wrapper.blog-widget-recent .post-holder{
+        width: 33% !important;
+    }
+    .footer-blog .post-prev, 
+    .footer-blog .post-next{
+        display: block !important;
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        top: 35% !important;
+    }
+    .footer-blog {
+        width: 98% !important; 
+        display: block !important;
+        margin: 0 auto;
+        float: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .footer-blog .post-holder{
+        width: 100% !important;
+        padding: 0 !important;
+        margin-bottom: 10px !important;
+    }
+    .footer-blog .post-list-wrapper.blog-widget-recent{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .footer-blog {
+        width: 94% !important; 
+        display: block !important;
+        margin: 0 auto;
+        float: none;
+    }
+    .footer-blog .post-prev, 
+    .footer-blog .post-next{
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        top: 41.5% !important;
+    }
+}
+
+
+
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const carousel = document.querySelector('.post-list');
+        const prevButton = document.querySelector('.post-prev');
+        const nextButton = document.querySelector('.post-next');
+        const intervalTime = 3000; // Time in milliseconds
+        let slidesToShow = 4;
+        let currentIndex = 0;
+
+        const totalItems = carousel.querySelectorAll('.post-holder').length;
+
+        function updateSlidesToShow() {
+            if (window.innerWidth <= 768) {
+                slidesToShow = 1;
+            } else {
+                slidesToShow = 3;
+            }
+        }
+
+        // Initial update for slidesToShow
+        updateSlidesToShow();
+
+        // Listen for window resize to update slidesToShow
+        window.addEventListener('resize', () => {
+            updateSlidesToShow();
+            updateCarousel();
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < totalItems - slidesToShow) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        function updateCarousel() {
+            const itemWidth = carousel.querySelector('.post-holder').offsetWidth;
+            const offset = -1 * currentIndex * itemWidth;
+            carousel.style.transform = `translateX(${offset}px)`;
+        }
+
+        // Auto-slide functionality
+        function autoSlide() {
+            if (currentIndex < totalItems - slidesToShow) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateCarousel();
+        }
+
+        // Set interval for auto-slide
+        // setInterval(autoSlide, intervalTime);
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var carousel = document.querySelector('.post-list');
+    var startX, startY, endX, endY;
+
+    carousel.addEventListener('touchstart', function (event) {
+        startX = event.touches[0].clientX;
+        startY = event.touches[0].clientY;
+    }, false);
+
+    carousel.addEventListener('touchmove', function (event) {
+        endX = event.touches[0].clientX;
+        endY = event.touches[0].clientY;
+    }, false);
+
+    carousel.addEventListener('touchend', function () {
+        var diffX = startX - endX;
+        var diffY = startY - endY;
+
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            // Swipe left or right
+            if (diffX > 0) {
+                // Swipe left
+                document.querySelector('.post-next').click();
+            } else {
+                // Swipe right
+                document.querySelector('.post-prev').click();
+            }
+        }
+    }, false);
+});
+
+</script>
+

@@ -1,0 +1,57 @@
+<?php
+/** @var \Mirasvit\Helpdesk\Block\Widget\SatisfactionList $block */
+$collection = $block->getCollection();
+$rate = $block->getAggregatedRate();
+?>
+<div class="helpdesk_satisfaction-list">
+    <div class="helpdesk_satisfaction-row">
+        <div class="helpdesk_satisfaction-col-md-4">
+            <div class="helpdesk_satisfaction-rate rate-great">
+                <img src="<?= $block->getViewFileUrl('Mirasvit_Helpdesk::images/smile/3.png') ?>">
+                <div class="helpdesk_satisfaction-bar">
+                    <div class="inner" style="width: <?= $rate['great'] ?>%"><?= $rate['great'] ?>%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="helpdesk_satisfaction-col-md-4">
+            <div class="helpdesk_satisfaction-rate rate-ok">
+                <img src="<?= $block->getViewFileUrl('Mirasvit_Helpdesk::images/smile/2.png') ?>">
+                <div class="helpdesk_satisfaction-bar">
+                    <div class="inner" style="width: <?= $rate['ok'] ?>%"><?= $rate['ok'] ?>%</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="helpdesk_satisfaction-col-md-4">
+            <div class="helpdesk_satisfaction-rate rate-bad">
+                <img src="<?= $block->getViewFileUrl('Mirasvit_Helpdesk::images/smile/1.png') ?>">
+                <div class="helpdesk_satisfaction-bar">
+                    <div class="inner" style="width: <?= $rate['bad'] ?>%"><?= $rate['bad'] ?>%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="helpdesk_satisfaction-smiles">
+        <?php foreach ($collection as $item): ?>
+            <figure>
+                <?php
+                $comment = $block->parseComment($item->getComment());
+                ?>
+                <img src="<?= $block->getViewFileUrl('Mirasvit_Helpdesk::images/smile/' . $item->getRate() . '.png') ?>">
+                <?php if ($comment['mark']): ?>
+                    <div class="mark"><?= $comment['mark'] ?></div>
+                <?php endif ?>
+                <?php if ($comment['note']): ?>
+                    <div class="note">
+                        <i class="icon icon-speech"></i>
+                        <div class="note-body">
+                            <?= $comment['note'] ?>
+                        </div>
+                    </div>
+                <?php endif ?>
+            </figure>
+        <?php endforeach ?>
+    </div>
+</div>

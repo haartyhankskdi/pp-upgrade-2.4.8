@@ -1,0 +1,57 @@
+<!--@subject {{trans "Your Order has been Approved"}} @-->
+<!--@vars {} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr>
+        <td class="thank-you-img"  align="center"><img src="{{media url='wysiwyg/thankyou-img.jpg'}}" alt="" /></td>
+    </tr>
+    <tr>
+        <td class="thank-you-img"  align="center">
+            <h1 style="font-size: 59px; font-weight: 700; text-transform: uppercase; text-align: center; color: #393939; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: 10px; margin-top: 20px; margin-bottom: 10px;">Thank You!</h1>
+            <p style="font-size: 16px; margin-bottom: 40px;">{{trans "for your order at %store_name." store_name=$store.frontend_name}}</p>
+
+        </td>
+    </tr>
+    <tr class="email-intro" style="background: #fff; ">
+        <td style="padding: 30px 30px 25px 30px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+            <p class="greeting">Dear {{var custName}},</p>
+            <!-- <p>
+                {{trans "Thank you for placing your order at %store_name." store_name=$store.frontend_name}}
+
+                {{trans "We have reviewed your medical  questionnaire, and your consultation has been approved. We will send you the shipping details and  tracing number for your order once it is shipped."}}
+                <br/><br/>
+                {{trans 'You can check the status of your order by <a href="%account_url">logging into your account</a>.' account_url=$this.getUrl($store,'customer/account/',[_nosid:1]) |raw}}
+                 
+            </p> -->
+
+            <p>Good News! We have reviewed your medical questionnaire and your order has been approved. It has been passed to our dispensary for preparation. You will receive confirmation of delivery as soon as your order has been dispatched.</p>
+            <p>You can check the status of your order by <a href="https://www.pharmacyplanet.com/customer/account">logging in to your Account</a></p>
+
+            <!-- <p style="font-size:14px; font-family: Arial, Helvetica, sans-serif; font-weight:normal;">If you have any questions about your order, please email us at <a href="mailto:{{config path='trans_email/ident_support/email'}}" style="color:#1E7EC8;">{{config path='trans_email/ident_support/email'}}</a> or call {{config path='general/store_information/phone'}}.</p> -->
+            <p>{{trans 'If you have any questions about your order, please email us at <a href="mailto:%store_email">%store_email' store_email=$store_email |raw}}</a> {{depend store_phone}} {{trans 'or call us at <a href="tel:%store_phone">%store_phone</a>' store_phone=$store_phone |raw}}{{/depend}}.</p>
+        </td>
+    </tr>
+    <!-- <tr class="email-summary"  style="background: #fff; ">
+        <td style="padding: 30px 30px 0 30px;">
+            <h1 style="text-align: center; font-size: 20px;
+    font-weight: 700; 
+    text-transform: uppercase;
+    letter-spacing: 1px; background: #f9dfdc;
+    padding-top: 10px; padding-bottom: 10px; margin-top: 0; line-height: 40px; border-bottom: 0; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; float: left;width: 100%; margin-bottom: 20px;">{{trans "APPROVE EMAIL"}}</h1>
+            <p>
+                {{trans "Example Email Summary"}}
+            </p>
+        </td>
+    </tr>
+    <tr class="email-information" style="background: #fff; ">
+        <td style="padding: 30px 30px 30px 30px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+            <p>
+                {{trans "Example Email Information"}}
+            </p>
+        </td>
+    </tr> -->
+</table>
+
+{{template config_path="design/email/footer_template"}}

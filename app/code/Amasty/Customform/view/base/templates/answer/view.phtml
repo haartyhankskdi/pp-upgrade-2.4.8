@@ -1,0 +1,54 @@
+<?php
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/
+?>
+<?php
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Amasty\Customform\ViewModel\Answser\AnswerIndex $viewModel
+ */
+
+$viewModel = $block->getViewModel();
+?>
+
+<section class="amcform-table-wrap">
+    <h3 class="amcform-title">
+        <?= /* @noEscape */ __('Data') ?>
+    </h3>
+    <div class="amcform-content">
+        <table class="amcform-table-block">
+            <?php foreach ($viewModel->getResponseData() as $key => $data): ?>
+                <tr class="amcform-tr">
+                    <th class="amcform-th"><?= $escaper->escapeHtml($data['label']) ?></th>
+                    <td class="amcform-td">
+                        <?php if ($data['type'] == 'googlemap'): ?>
+                            <div id="map-<?= $escaper->escapeHtmlAttr($key) ?>" class="fb-googlemap"></div>
+                            <script type="text/javascript">
+                                require([
+                                    'jquery',
+                                    'https://maps.googleapis.com/maps/api/js'
+                                     + '?libraries=places&key=<?= $escaper->escapeUrl($viewModel->getGoogleKey()) ?>',
+                                    'Amasty_Customform/js/am-google-map'
+                                ], function ($) {
+                                    $('#map-<?= $escaper->escapeHtmlAttr($key) ?>').amGoogleMap(Object.assign(
+                                        <?= /* @noEscape */ $data['value'] ?>,
+                                        {
+                                            'enabledMarker': false,
+                                            'showFormattedAddress': true
+                                        }
+                                    ));
+                                });
+                            </script>
+                        <?php else: ?>
+                            <?= /* @noEscape */ $data['value'] ?>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endforeach;?>
+        </table>
+    </div>
+</section>

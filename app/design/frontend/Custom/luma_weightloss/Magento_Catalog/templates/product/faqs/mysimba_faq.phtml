@@ -1,0 +1,240 @@
+<!doctype html>
+
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>CSS Accordion</title>
+
+<style>
+
+.product-faq-section .faq-list input {
+    display: none;
+}
+
+.product-faq-section .faq-list label {
+    text-align: left;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    padding: 20px 0 8px 0;
+    width: 100%; 
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    box-shadow: none !important;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+    transition: ease .5s;
+    display: inline-block;
+    background: url(/pub/media/wysiwyg/WLImage/Poly.png) right 32px no-repeat !important;
+
+}
+
+.product-faq-section .faq-list label:hover,
+.product-faq-section .faq-list label:focus{
+    background: url(/pub/media/wysiwyg/WLImage/Poly.png) right 32px no-repeat !important;
+}
+
+.product-faq-section .faq-list .panel-p {
+    text-align: left;
+    letter-spacing: 0px;
+    font-size: 16px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    text-align: left;
+    padding: 0px 0;
+    padding: 0 0;  
+    background: transparent;
+    overflow: hidden;
+      max-height: 0px;
+      transition: max-height 0.5s ease;
+}
+.product-faq-section .faq-list .panel-p:target{
+      max-height: 150px;
+}
+.product-faq-section .faq-list .panel-p p{
+    font-size: 16px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    text-align: left;
+    padding: 0px 0 15px 0;
+    margin: 0;
+}
+
+.product-faq-section .faq-list input + label + .panel-p { 
+    overflow: hidden;
+      max-height: 0px;
+      transition: max-height 0.3s ease-out;
+}
+
+.product-faq-section .faq-list input:checked + label + .panel-p { 
+    max-height: 165px;
+}
+
+
+.product-faq-section{
+    width: 100%;
+    float: left;
+    padding: 80px 0 80px 0;
+    margin: 0;
+    background: #E7F2F4;
+}
+.product-faq-section .h-title {
+        width: 100%;
+        float: left;
+        padding: 0;
+        margin: 0 0 22px 0;
+        font-size: 38px;
+        color: #101010;
+        font-family: 'Lato', sans-serif;
+        line-height: 48px;
+        font-weight: 300;
+        text-align: center;
+}
+.product-faq-section .faq-list {
+    border-bottom: 1px solid #96D8F0;
+    padding-bottom: 12px;
+    width: 100%;
+    display: inline-block;
+}
+
+@media screen and (min-width: 768px) {
+    .product-faq-section .container {
+        max-width: 670px !important;
+        margin: 0 auto;
+    }
+    .product-faq-section .faq-list label{
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .product-faq-section .h-title{
+        text-align: left;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: auto !important;
+        font-weight: 300;
+        margin: 0 0 25px 0;
+        font-size: 32px;
+        color: #000;
+        font-family: 'Lato', sans-serif;
+        line-height: 36px;
+        font-weight: 400;
+        text-align: left;
+        padding: 0px 0;
+        letter-spacing: 0px;
+    }
+    .product-faq-section .container{
+        width: 90%;
+    }
+    .product-faq-section .faq-list label{
+        font-size: 15px !important;
+        padding-left: 0 !important;
+        padding-right: 20px !important;
+        line-height: 22px;
+    }
+     
+    .product-faq-section .faq-list .panel-p p{
+        font-size: 14px !important;
+        line-height: 22px !important;
+    }
+}
+
+</style>
+
+</head>
+
+
+<div class="product-faq-section">
+<div class="container reveal1">
+<div class="h-title" data-was-processed="true">Weight Loss everything you need to know</div>
+
+<div class="faq-list">
+<input type="checkbox" id="title1" />
+<label for="title1">What is Mysimba, and how does it work?</label>
+<div class="panel-p">
+<p>Mysimba is a medication used for weight management that contains a combination of naltrexone and bupropion. Naltrexone is an opioid receptor antagonist, while bupropion is a dopamine and norepinephrine reuptake inhibitor. Together, they work to reduce appetite and cravings, helping individuals control their food intake and achieve weight loss.</p>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title2" />
+<label for="title2">How effective is Mysimba?</label>
+<div class="panel-p">
+<p>Mysimba has been shown to help individuals achieve significant weight loss when combined with lifestyle modifications such as diet and exercise. Clinical studies have demonstrated that people taking Mysimba experienced greater weight loss compared to those following a placebo, with improvements in various metabolic parameters.</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title3" />
+<label for="title3">Who is eligible for Mysimba?</label>
+<div class="panel-p">
+<p>Mysimba is suitable for adults with a body mass index (BMI) of 30 kg/m² or greater, or adults with a BMI of 27 kg/m² or greater with weight-related conditions such as high blood pressure, type 2 diabetes, or high cholesterol.</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title4" />
+<label for="title4">How do I use Mysimba?</label>
+<div class="panel-p">
+<p>Mysimba is taken orally in tablet form, with the dosage gradually increased over several weeks to minimize the risk of side effects. The medication is typically taken twice daily, with one tablet in the morning and one in the evening. It is important to follow the dosing instructions provided by your healthcare provider.</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title5" />
+<label for="title5">How does dosing work with Mysimba?</label>
+<div class="panel-p">
+<p>The initial dose of Mysimba is usually one tablet in the morning for the first week, followed by an increase to one tablet in the morning and one tablet in the evening from the second week onward. Dosing may be adjusted based on individual response and tolerability.</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title6" />
+<label for="title6">What are the potential side effects of Mysimba?</label>
+<div class="panel-p">
+<p>Common side effects of Mysimba include nausea, constipation, headache, dizziness, dry mouth, and insomnia. Some individuals may also experience increased blood pressure or heart rate. It is important to report any persistent or severe side effects to your healthcare provider.</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title7" />
+<label for="title7">Is Mysimba suitable for me?</label>
+<div class="panel-p">
+<p>Mysimba may be prescribed for adults who are overweight or obese and have not achieved sufficient weight loss with diet and exercise alone. However, it is not suitable for everyone, including individuals with a history of seizures, eating disorders, or uncontrolled hypertension. Your healthcare provider will assess your eligibility for Mysimba and discuss the potential risks and benefits with you.</p>
+</div>
+</div>
+
+
+</div>
+</div>
+
+</html>
+
+
+<script>
+        document.querySelectorAll('.product-faq-section .faq-list input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    document.querySelectorAll('.product-faq-section .faq-list input[type="checkbox"]').forEach(otherCheckbox => {
+                        if (otherCheckbox !== this) {
+                            otherCheckbox.checked = false;
+                        }
+                    });
+                }
+            });
+        });
+    </script>

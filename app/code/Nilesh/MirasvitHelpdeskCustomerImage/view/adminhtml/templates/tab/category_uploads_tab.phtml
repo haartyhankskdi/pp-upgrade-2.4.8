@@ -1,0 +1,53 @@
+<?php 
+
+?>
+
+<div>
+    <h2 class="questionnaire-uploads-section">Uploads</h2>
+    <?php $orders = $block->getCustomerOrder()->getData();
+    foreach ($orders as $order) {
+        $uniqueKeys = json_decode($order['questionnaire_unique_id']);
+        if ($uniqueKeys != null && $uniqueKeys != 'null') {
+            foreach ($uniqueKeys as $key) {
+                $answers = $block->getCategoryAnswer($key);
+                foreach ($answers as $answer) {
+                    if (!empty($answer)) {
+                        $formName =  $answer['form_name'];
+                        $objects = json_decode($answer['response_json']);
+                        $values = json_decode(json_encode($objects), true);
+                        // echo "<pre>";print_r($values);echo "</pre>";
+                        foreach ($values as $value) {
+                            if ($value['type'] == 'file') {
+                                $path = $block->getBaseUrl() . "media/amasty/amcustomform/" . $value['value']; ?>
+                                <div class="category-questionnaire-images">
+                                    <div class="category-name">
+                                        <div><?php echo 'Category From Name : ' . $formName; ?></div>
+                                    </div>
+                                    <div class="uploaded-file-link">
+                                        <p><strong>Title : </strong><?= $value['label']; ?></p>
+                                        <span>Submitted File : <a href="<?= $path ?>" target="_blank">View File</a></span>
+                                    </div>
+                                </div> <?php
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ?>
+</div>
+
+<style>
+    .questionnaire-uploads-section {
+        width: 100%;
+        text-transform: uppercase;
+        background: #efae8c;
+        padding: 15px 10px;
+        /* margin-top: 100px; */
+        font-weight: 600 !important;
+        display: inline-block;
+        border: 1px solid #333;
+        color: #000 !important;
+    }
+</style>

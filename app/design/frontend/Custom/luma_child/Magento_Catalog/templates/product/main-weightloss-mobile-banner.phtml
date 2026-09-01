@@ -1,0 +1,30 @@
+<?php
+$helperCust = $this->helper(\Nilesh\Theme\Helper\Customer::class);
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$cart = $objectManager->get('\Magento\Checkout\Model\Cart');
+
+/** @var \Magento\Store\Model\StoreManagerInterface $storeManager */
+$storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+$currentStore = $storeManager->getStore();
+$baseUrl = $currentStore->getBaseUrl();
+$media_url= $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+?>
+
+ 
+
+<div class="weight-loss-category-mobile-banner"> 
+ <img fetchpriority="high" src="/pub/media/wysiwyg/weight-loss-banner-img.webp" alt="wl-mob-banner" width="480" height="480" class="main-wl-banner-i" />
+</div>
+ 
+<div class="review-content-mobile">
+            <!-- TrustBox widget - Mini mobile banner-->
+            <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8807dec7e10d38f59f32" data-businessunit-id="62de404543cebd829464951e" data-style-height="150px" data-style-width="100%">
+              <a href="https://uk.trustpilot.com/review/magento-1195784-5659490.cloudwaysapps.com" target="_blank" rel="noopener">Trustpilot</a>
+            </div>
+            <!-- End TrustBox widget -->
+            <div class="google-rev-img"><img fetchpriority="high" src="https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/google-review.svg" alt="Google Review"/></div>
+        </div>
+<div class="mob-consult-btn category-page">
+    <a href="<?php echo $baseUrl?>weightloss/wl-login">START MY CONSULTATION</a>
+</div>
+ 

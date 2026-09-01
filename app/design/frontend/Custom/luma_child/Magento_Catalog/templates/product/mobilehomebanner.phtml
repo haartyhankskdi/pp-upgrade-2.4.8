@@ -1,0 +1,259 @@
+<?php
+$helperCust = $this->helper(\Nilesh\Theme\Helper\Customer::class);
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$cart = $objectManager->get('\Magento\Checkout\Model\Cart');
+
+/** @var \Magento\Store\Model\StoreManagerInterface $storeManager */
+$storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+$currentStore = $storeManager->getStore();
+$baseUrl = $currentStore->getBaseUrl();
+$media_url= $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+?>
+
+
+
+<div class="homepage-banner-new-mobile home-page-banner">
+        <div class="container">
+
+<div class="homepage-banner-outer-wrapper-m"> 
+  <div class="h-banner-wrap-m s-type-1-m" role="slider" aria-checked="false">
+    <input type="radio" id="s-1-m" name="slider-control" checked="checked">
+    <input type="radio" id="s-2-m" name="slider-control">
+    <input type="radio" id="s-3-m" name="slider-control">
+    <input type="radio" id="s-4-m" name="slider-control">
+    <input type="radio" id="s-5-m" name="slider-control">
+    <ul class="home-banner-content-m">
+      <li class="s-item-m s-item-1-m">
+          <div class="h-banner-content-sec">
+    <p class="heading-b">Online<br> UK Pharmacy</p>
+
+
+      <div class="h-banner-content">
+      
+        <div class="banner-right-c">
+            <ul>
+              <li>
+                <div class="banner-icon">
+                  <img fetchpriority="high"  src="<?php echo $media_url?>wysiwyg/WLImage/web-app-i.png" alt="Simple Monthly Plan">
+                </div>
+               <p class="online_assesmnt">Online<br> Assessment</p>
+              </li>
+              <li>
+                <div class="banner-icon">
+                  <img fetchpriority="high"  src="<?php echo $media_url?>wysiwyg/WLImage/cancel-i.png" alt="Cancel Anytime" />
+                </div>
+                <p class="no_fees">No Hidden<br> Fees</p>
+              </li>
+              <li>
+                <div class="banner-icon">
+                  <img fetchpriority="high"  src="<?php echo $media_url?>wysiwyg/WLImage/uk-medical-i.png" alt="UK medical professionals​" />
+                </div>
+                <p class="uk_medical">UK medical<br> professionals​</p>
+              </li>
+              <li>
+                <div class="banner-icon">
+                  <img fetchpriority="high"  src="<?php echo $media_url?>wysiwyg/WLImage/free-online-consultation.svg" alt="Free Online Consultation" />
+                </div>
+                <p class="no_prescptn">Free Online<br> Consultation</p>
+              </li>
+            </ul>
+        </div>
+
+      </div>
+    </div>
+      </li>
+       
+    </ul>
+    <div class="s-control-m">
+      <label class="s-c-1-m" for="s-1-m"></label>
+      <label class="s-c-2-m" for="s-2-m"></label> 
+    </div>
+     
+  </div>
+
+   
+</div>
+</div>
+</div> 
+
+<div class="weight-loss-category-mobile-banner">
+<div class="homepage-banner-new-mobile">
+<div class="container">
+
+ <div class="h-banner-content-sec">
+  <?php if ($block->getRequest()->getFullActionName() != 'cms_index_index'): ?>
+                            <h1 class="heading-b">Clinically Proven Weight Loss Medication</h1>
+                        <?php endif; ?>
+   
+
+      <div class="h-banner-content">
+      
+          
+        <div class="banner-right-c">
+            <ul>
+              <li>
+                <div class="banner-icon">
+                  <img fetchpriority="high"  src="<?php echo $media_url?>wysiwyg/WLImage/web-app-i.png" alt="Simple Monthly Plan">
+                </div>
+                <p class="simple_plan">Simple <br> Monthly Plan </p>
+              </li>
+              <li>
+                <div class="banner-icon">
+                  <img fetchpriority="high"  src="<?php echo $media_url?>wysiwyg/WLImage/cancel-i.png" alt="Cancel Anytime" />
+                </div>
+                <p class="cancel_anytime">Cancel <br> Anytime </p>
+              </li>
+              <li>
+                <div class="banner-icon">
+                  <img fetchpriority="high"  src="<?php echo $media_url?>wysiwyg/WLImage/uk-medical-i.png" alt="UK medical professionals​" />
+                </div>
+                <p class="uk_medical1">UK medical <br> professionals​ </p>
+              </li>
+              <li>
+                <div class="banner-icon">
+                  <img fetchpriority="high"  src="<?php echo $media_url?>wysiwyg/WLImage/support-i.png" alt="1:1 coaching and support" />
+                </div>
+                <p class="coching_support">1:1 coaching <br> and support </p>
+              </li>
+            </ul>
+        </div>
+
+      </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="review-content-mobile">
+            <!-- TrustBox widget - Mini mobile banner-->
+            <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8807dec7e10d38f59f32" data-businessunit-id="62de404543cebd829464951e" data-style-height="150px" data-style-width="100%">
+              <a href="https://uk.trustpilot.com/review/magento-1584919-6629151.cloudwaysapps.com" target="_blank" rel="noopener">Trustpilot</a>
+            </div>
+            <!-- End TrustBox widget -->
+            <div class="google-rev-img"><img fetchpriority="high" src="https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/google-review.svg" alt="Google Review"/></div>
+        </div>
+<div class="mob-consult-btn category-page">
+    <a href="<?php echo $baseUrl?>weightloss/wl-login">START MY CONSULTATION</a>
+</div>
+
+
+<div class="mob-consult-btn homepage">
+    <a href="/view-all-treatments">VIEW ALL TREATMENTS</a>
+</div>
+
+<style>
+ .heading-b {
+      visibility: hidden;
+    }
+
+    .heading-b.visible {
+      visibility: visible;
+    }
+    .home_banner_category_page{
+  visibility: hidden;
+}
+.home_banner_category_page.visible{
+      visibility: visible;
+    }
+      
+    .mob-consult-btn.homepage{
+      visibility: hidden;
+
+    }
+    .mob-consult-btn.homepage.visible{
+      visibility: hidden;
+    }
+    
+  .minisearch{
+      visibility: hidden;
+
+    }
+    .minisearch.visible{
+      visibility: hidden;
+    }
+     .no_prescptn{
+      visibility: hidden;
+
+    }
+    .no_prescptn.visible{
+      visibility: hidden;
+    }
+     .online_assesmnt{
+      visibility: hidden;
+
+    }
+    .online_assesmnt.visible{
+      visibility: hidden;
+    }
+     .no_fees{
+      visibility: hidden;
+
+    }
+    .no_fees.visible{
+      visibility: hidden;
+    }
+     .uk_medical{
+      visibility: hidden;
+
+    }
+    .uk_medical.visible{
+      visibility: hidden;
+    }
+     .banner-icon{
+      visibility: hidden;
+
+    }
+    .banner-icon.visible{
+      visibility: hidden;
+    }
+    .simple_plan{
+      visibility: hidden;
+
+    }
+    .simple_plan.visible{
+      visibility: hidden;
+    }
+  .uk_medical1{
+      visibility: hidden;
+
+    }
+    .uk_medical1.visible{
+      visibility: hidden;
+    }
+.cancel_anytime{
+      visibility: hidden;
+
+    }
+    .cancel_anytime.visible{
+      visibility: hidden;
+    }
+    .coching_support{
+      visibility: hidden;
+
+    }
+    .coching_support.visible{
+      visibility: hidden;
+    }
+</style>
+
+ <script>
+require(['jquery'], function($) {
+    $(document).ready(function () {
+        $('.heading-b').css('visibility', 'visible');
+         $('.home_banner_category_page').css('visibility', 'visible');
+         $('.mob-consult-btn.homepage').css('visibility', 'visible');
+         $('.minisearch').css('visibility', 'visible');
+          $('.no_prescptn').css('visibility', 'visible');
+          $('.online_assesmnt').css('visibility', 'visible');
+          $('.no_fees').css('visibility', 'visible');
+          $('.uk_medical').css('visibility', 'visible');
+          $('.banner-icon').css('visibility', 'visible');
+          $('.simple_plan').css('visibility', 'visible');
+          $('.uk_medical1').css('visibility', 'visible');
+          $('.cancel_anytime').css('visibility', 'visible');
+          $('.coching_support').css('visibility', 'visible');
+          
+
+    });
+});
+</script>

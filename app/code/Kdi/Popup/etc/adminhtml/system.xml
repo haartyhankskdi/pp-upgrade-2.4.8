@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="kdi" translate="label" sortOrder="200">
+            <label>Kdi</label>
+        </tab>
+        <section id="kdi_productpopup" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Product Launch Popup</label>
+            <tab>kdi</tab>
+            <resource>Kdi_ProductPopup::config</resource>
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Popup</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="product_id" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product ID to Promote</label>
+                    <comment>Entity ID of the new variant being launched.</comment>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup Title</label>
+                </field>
+                <field id="message" translate="label" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Popup Message</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

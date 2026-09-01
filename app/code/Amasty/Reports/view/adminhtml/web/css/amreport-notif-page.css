@@ -1,0 +1,28 @@
+.admin__field .admin__field-control .am_label {
+    display: inline-block;
+    margin-top: unset;
+}
+
+.admin__field .admin__field-control .interval_qty {
+    display: inline-block;
+    margin-top: unset;
+}
+
+.admin__field .admin__field-control .interval {
+    display: inline-block;
+    margin-top: unset;
+}
+
+.admin__fieldset .cron_schedule .admin__field {
+    display: inline-block;
+    margin-top: unset;
+    max-width: 146px;
+}
+
+.admin__fieldset .cron_schedule .tooltip {
+    position: absolute;
+}
+
+.admin__fieldset .cron_schedule .admin__field:not(.days_of_week) {
+    margin-right: 20px;
+}

@@ -1,0 +1,68 @@
+<?php
+/** @var \Magento\Catalog\Model\Product $currentProduct */
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+/** @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory */
+$productCollectionFactory = $objectManager->get('Magento\Catalog\Model\ResourceModel\Product\CollectionFactory');
+
+/** @var \Magento\Catalog\Model\Product $currentProduct */
+$currentProduct = $objectManager->get('Magento\Catalog\Model\ProductRepository')->getById($block->getProduct()->getId());
+$productId = $currentProduct->getId();
+   
+
+if ($productId == 9305 || $productId == 9221 ||  $productId == 9337 || $productId == 9443 || $productId == 9441 || $productId == 2703 || $productId == 9232 || $productId == 9439   ) : ?>
+    
+
+
+
+<!--
+<div class="blog-bottom-references">
+    <div class="references-content">
+        <h2>References:</h2>
+        <ul>
+            <li><span>Healthy Weight Loss In Depth</span> - Mayo Clinic</li>
+            <li>Orlistat-associated <span>adverse effects and drug interactions:</span> a critical review - PubMed - Theodosios D Filippatos 1, Christos S Derdemezis, Irene F Gazi, Eleni S Nakou, Dimitri P Mikhailidis, Moses S Elisaf</li>
+            <li><span>Weight Loss Medicine</span> - Patient Info - Authored by Dr Laurence Knott</li>
+            <li>How to use <span>Orlistat 120 Mg Capsule</span> Fat Absorption Decreasing Agents - WebMD</li>
+        </ul>
+    </div>
+</div>
+-->
+<div class="blog-bottom-review-team">
+<div class="reviewved-by sep-l">
+    <div class="review-right-img">
+        <img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/HARMY-PROFILE-PIC.jpg" alt="Pharmacist Image" />
+    </div>
+    <div class="review-title-box">
+    <p class="review-title"><?php //$_post->getPublishDate(); ?></p>
+        <p class="review-text">Authored By</p>
+        <p class="pharmacist-title name">HARMINDER ‘HARMY’ KAUR</p>
+        <p class="review-text">BSc(hons) Pharmacy</p>
+        <p class="gphc-no">GPhC Number: 2061107</p>
+    </div>
+</div>
+
+<div class="reviewved-by">
+    <div class="review-right-img">
+        <img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/gurdev-sehmi-img.jpg" alt="Pharmacist Image" />
+    </div>
+     <div class="review-title-box">
+    <p class="review-title"><?php //$_post->getPublishDate(); ?></p>
+        <p class="review-text">Reviewed By</p>    
+        <p class="pharmacist-title name">GURDEV SEHMI</p>
+        <p class="review-text">BSc Pharm, MRPharmS, Independent Prescriber, Superintendent Pharmacist, Clinical Lead</p>
+        <p class="gphc-no">GPhC Number: 2050925</p>
+    </div>
+</div>
+</div>
+</div>
+</div>
+ 
+
+
+<?php endif;?>
+
+ 
+
+

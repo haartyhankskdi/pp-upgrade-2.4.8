@@ -1,0 +1,85 @@
+{
+  "title": "Booking\/Reservation form",
+  "code": "reservation",
+  "status": 1,
+  "customer_group": 0,
+  "store_id": 0,
+  "send_notification": 0,
+  "submit_button": "Submit",
+  "success_message": "Thanks for contacting us. Your request was saved successfully.",
+  "form_json": [
+    [
+      {
+        "type": "textinput",
+        "name": "first_name",
+        "label": "First Name",
+        "className": "form-control",
+        "required": true,
+        "validation": ""
+      },
+      {
+        "type": "textinput",
+        "name": "last_name",
+        "label": "Last Name",
+        "className": "form-control",
+        "required": true,
+        "validation": ""
+      },
+      {
+        "type": "textinput",
+        "name": "email",
+        "label": "Email",
+        "className": "form-control",
+        "required": true,
+        "validation": "validate-email"
+      },
+      {
+        "type": "number",
+        "name": "phone",
+        "label": "Phone Number",
+        "className": "form-control",
+        "required": true,
+        "validation": ""
+      },
+      {
+        "type": "date",
+        "name": "date",
+        "label": "Date",
+        "className": "amform-date",
+        "required": true,
+        "validation": ""
+      },
+      {
+        "type": "time",
+        "name": "time",
+        "label": "Time",
+        "className": "amform-time",
+        "required": true,
+        "validation": ""
+      },
+      {
+        "type": "dropdown",
+        "name": "peopleD",
+        "label": "Number of people",
+        "className": "form-control",
+        "required": true,
+        "values": [
+          {
+            "label": "1",
+            "value": "option-1",
+            "selected": true
+          },
+          {
+            "label": "2",
+            "value": "option-2"
+          },
+          {
+            "label": "3",
+            "value": "option-3"
+          }
+        ],
+        "validation": ""
+      }
+    ]
+  ]
+}

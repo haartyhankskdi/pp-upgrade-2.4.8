@@ -1,0 +1,79 @@
+<?php
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/
+?>
+<?php
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Amasty\Customform\ViewModel\Export\Pdf\SubmittedData\Document $viewModel
+ */
+$viewModel = $block->getViewModel();
+$answerId = $viewModel->getAnswer()->getAnswerId();
+?>
+
+<header class="amform-pdf-header">
+    <img class="amform-pdf-logo"
+         src="<?= $escaper->escapeUrl($viewModel->getLogoSrc()) ?>"
+         alt="<?= $escaper->escapeHtmlAttr(__('Logo')) ?>">
+    <div class="amform-header-title">
+        <h1 class="amform-title">
+            <?= $escaper->escapeHtml(__('Submitted data #')) ?><?= $escaper->escapeHtml($answerId) ?>
+        </h1>
+        <div class="amform-separator"></div>
+    </div>
+</header>
+
+<h2 class="amform-pdf-title"><?= $escaper->escapeHtml(__('Information')) ?></h2>
+<table class="amform-pdf-table">
+    <tbody>
+    <?php foreach ($viewModel->getFormInformationData() as $data): ?>
+        <tr class="amform-tr">
+            <th class="amform-th"><?= $escaper->escapeHtml($data['label'] ?? '') ?></th>
+            <td class="amform-td"><?= /* @noEscape */ $data['value'] ?? '' ?></td>
+        </tr>
+    <?php endforeach;?>
+    </tbody>
+</table>
+
+<h2 class="amform-pdf-title"><?= $escaper->escapeHtml(__('Data')) ?></h2>
+<table class="amform-pdf-table">
+    <tbody>
+    <?php foreach ($viewModel->getFieldsBlocks() as $label => $fieldBlock): ?>
+        <tr class="amform-tr">
+            <th class="amform-th"><?= $escaper->escapeHtml($label) ?></th>
+            <td class="amform-td"><?= $fieldBlock->toHtml() ?></td>
+        </tr>
+    <?php endforeach;?>
+    </tbody>
+</table>
+
+<h2 class="amform-pdf-title"><?= $escaper->escapeHtml(__('Admin Response')) ?></h2>
+<table class="amform-pdf-table">
+    <tbody>
+    <?php foreach ($viewModel->getAdminResponseData() as $label => $fieldText): ?>
+        <tr class="amform-tr">
+            <th class="amform-th"><?= $escaper->escapeHtml($label) ?></th>
+            <td class="amform-td"><?= $escaper->escapeHtml($fieldText) ?></td>
+        </tr>
+    <?php endforeach;?>
+    </tbody>
+</table>
+
+<script type="text/php">
+    if (isset($pdf)) {
+        $x = 565;
+        $y = 765;
+        $text = __('Page %1', "{PAGE_NUM}")->render();
+        $font = $fontMetrics->get_font("helvetica", "bold");
+        $size = 8;
+        $color = [0, 0, 0, 0.25];
+        $word_space = 0.0;
+        $char_space = 0.0;
+        $angle = 0.0;
+        $pdf->page_text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
+    }
+</script>

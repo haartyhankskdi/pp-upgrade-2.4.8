@@ -1,0 +1,18 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block name="customer_prescriber_note_tab_js_button" class="Nilesh\PrescriberNotes\Block\Adminhtml\PrescriberNotes\RemoteNotes" template="Nilesh_PrescriberNotes::tab/remote_new_button.phtml" />
+            <referenceBlock name="customer_form">
+                <block class="Nilesh\PrescriberNotes\Block\Adminhtml\PrescriberNotes\RemoteNotes"
+                   name="customer_prescriber_notes_tab"  template="Nilesh_PrescriberNotes::tab/remote_grid_inner.phtml" />
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">Prescriber Notice</argument>
+                    <argument name="block" xsi:type="string">nilesh_prescribernotes_prescribernotes_listing</argument>
+                </action>
+            </referenceBlock>
+            <uiComponent name="nilesh_prescribernotes_prescribernotes_listing"/>
+            <block name="customer_prescriber_note_tab_js" class="Magento\Framework\View\Element\Template" template="Nilesh_PrescriberNotes::tab/remote_grid.phtml" />
+        </referenceContainer>
+    </body>
+</page>

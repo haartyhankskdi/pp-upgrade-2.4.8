@@ -1,0 +1,41 @@
+<?php
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/
+?>
+<?php
+/** @var \Amasty\Customform\Block\Adminhtml\Data\Edit\Answer $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+
+<?= $block->getChildHtml('amasty.custom.form.answer.body') ?>
+
+<?php if ($block->isShowEmailSendingForm()): ?>
+<section class="admin__page-section request-view-answer-section">
+    <div id="request-view-answer" class="request-view-answer">
+        <form class='am-send-email-form' action="<?= $escaper->escapeUrl($block->getSubmitUrl()) ?>" method="post">
+            <input name="form_key" type="hidden" value="<?= $escaper->escapeHtml($block->getFormKey()) ?>" />
+            <div class="request-answer-block">
+                <div class="admin__field field-row">
+                    <label class="admin__field-label"
+                           for="email_text"><?= /* @noEscape */ __('Email Text') ?></label>
+                    <div class="admin__field-control">
+                        <textarea name="email_text"
+                                  class="admin__control-textarea"
+                                  rows="3"
+                                  cols="5"
+                                  id="email_text"></textarea>
+                    </div>
+                </div>
+                <div class="admin__field">
+                    <div class="review-actions">
+                        <?= $block->getChildHtml('submit_button') ?>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<?php endif;?>

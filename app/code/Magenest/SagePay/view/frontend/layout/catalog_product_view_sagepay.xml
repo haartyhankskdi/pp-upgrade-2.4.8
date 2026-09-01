@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Magenest_SagePay::css/tooltip.css" />
+    </head>
+    <body>
+        <referenceBlock name="product.info.options.wrapper">
+            <block class="Magenest\SagePay\Block\Catalog\Product\View" name="catalog.product.view.sagepay" as="subscription_options" template="Magenest_SagePay::catalog/product/view.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

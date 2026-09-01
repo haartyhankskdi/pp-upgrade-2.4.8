@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <!-- <add id="Kdi::top_level" title="Kdi" module="Kdi_Popup" sortOrder="9999" resource="Magento_Backend::content"/> -->
+        <add id="Kdi_Popup::kdi_popup_email" title="Subscribed Email List" module="Kdi_Popup" sortOrder="9999" resource="Magento_Backend::content" parent="Kdi::top_level" action="kdi_popup/email/index"/>
+        <!-- <add id="Kdi_Popup::kdi_popup_email_export" title="Export Email Popup" module="Kdi_Popup" sortOrder="9999" resource="Magento_Backend::content" parent="Kdi::top_level" action="kdi_popup/email/exportcsv"/> -->
+
+    </menu>
+</config>

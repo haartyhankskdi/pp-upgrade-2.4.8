@@ -1,0 +1,22 @@
+{
+    "name": "magenest/module-sage-pay",
+    "description": "N/A",
+    "require": {
+        "magenest/core": ">=1.2.1",
+        "magenest/sagepay-lib" : ">=1.1.0"
+    },
+    "type": "magento2-module",
+    "version": "2.2.0",
+    "license": [
+        "OSL-3.0",
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Magenest\\SagePay\\": ""
+        }
+    }
+}

@@ -1,0 +1,12 @@
+<?php
+
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+
+$collection = $om->get('Magento\Reports\Model\ResourceModel\Quote\Collection');
+
+$store_id = 1;
+$collection->prepareForAbandonedReport([$store_id]);
+$rows = $collection->load();
+//echo count($rows->getData());exit();
+echo "<pre>";print_r($rows->getData());
+?>

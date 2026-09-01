@@ -1,0 +1,36 @@
+<?php $viewModel = $block->getViewModel(); ?>
+<?php if($viewModel->getStatus()) : ?>
+    <?php $review = $viewModel->getReview() ?>
+    <?php $author = $viewModel->getAuthor() ?>
+
+    <div class="blog-bottom-review-team">
+    <div class="reviewved-by sep-l">
+        <div class="review-right-img">
+            <img src="<?= $author['photo'] ?>" alt="Profile Image" />
+        </div>
+        <div class="review-title-box">
+            <p class="review-title"><?php //$_post->getPublishDate(); ?></p>
+            <p class="review-text">Authored By</p>
+            <p class="pharmacist-title name"><?= $author['name'] ?></p>
+            <p class="review-text"><?= $author['specialist'] ?></p>
+            <p class="gphc-no"><?= 'GPhC Number : '. $author['registration_number'] ?></p>
+        </div>
+    </div>
+
+    <div class="reviewved-by">
+        <div class="review-right-img">
+            <img src="<?= $review['photo'] ?>" alt="Pharmacist Image" />
+        </div>
+        <div class="review-title-box">
+            <p class="review-title"><?php //$_post->getPublishDate(); ?></p>
+            <p class="review-text">Reviewed By</p>    
+            <p class="pharmacist-title name"><?= $review['name'] ?></p>
+            <p class="review-text"><?= $review['specialist'] ?></p>
+            <p class="gphc-no"> <?= 'GPhC Number : '. $review['registration_number'] ?></p>
+        </div>
+    </div>
+</div>
+
+<?php endif; ?>
+
+

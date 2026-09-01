@@ -1,0 +1,226 @@
+<?php
+$helperCust = $this->helper(\Nilesh\Theme\Helper\Customer::class);
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$cart = $objectManager->get('\Magento\Checkout\Model\Cart');
+$customerSession = $objectManager->get('\Magento\Customer\Model\Session');
+
+/** @var \Magento\Store\Model\StoreManagerInterface $storeManager */
+$storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+$currentStore = $storeManager->getStore();
+$baseUrl = $currentStore->getBaseUrl();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Two Column Layout</title>
+    <style>
+        .repeat-container {
+            display: flex;
+        }
+        .repeat-left-column, .repeat-right-column {
+            width: 50%;
+            padding: 20px;
+        }
+        .repeat-left-column {
+            border-right: 1px solid #ddd;
+        }
+
+        .page-layout-1column.amform-body .custom-login-body .weightloss-custom-login, 
+        .page-layout-1column .custom-login-body .weightloss-custom-login{
+            padding-top: 10px !important;
+        }
+        .cms-wl-login.amform-body .header.content{
+            padding-bottom: 10px !important;
+        }
+    </style>
+</head>
+<body>
+<div class="custom-login-body">
+
+    <div class="weightloss-custom-login <?php if ($customerSession->isLoggedIn()) { echo 'custlogged-in'; } ?>">
+        <div class="repeat-container <?php if ($customerSession->isLoggedIn()) { echo 'logged-in'; } ?>">
+            <p class="redirect-text">Redirecting</p>
+            <!-- Left Column: Login Form or Logged-in Message -->
+            <div class="repeat-left-column">
+                <?php if ($customerSession->isLoggedIn()): ?>
+                    <?php 
+                         // Get the customer data
+                        $customer = $customerSession->getCustomer();
+                            // Get the customer's first name and last name
+                        $customerFirstName = $customer->getFirstname();
+                        $customerLastName = $customer->getLastname();
+
+                        // Combine the names to get the full name
+                        $customerName = $customerFirstName . ' ' . $customerLastName;
+                    ?>
+                    <!-- <p>Welcome to Pharmacy Planet,</p> -->
+                    <p class="cutomer-name"><?php echo  $customerName; ?></p>
+                    <p>We're thrilled to have you here. You've taken the first step towards a healthier you.<br> Click the button below to start your weight loss consultation.</p>
+                    <div class="h-banner-btn">
+                        <!-- Repeat Customer -->
+                        <?= $this->helper("Amasty\Customform\Helper\Data")->renderForm("54") ?>
+                        <?= $this->getLayout()->createBlock('Magento\Framework\View\Element\Template')->setTemplate('Haartyhanks_CategoryQuestWL::category_id_template.phtml')->toHtml() ?>
+                    </div>
+                    <script>
+                        window.onload = function() {
+                            setTimeout(function() {
+                                var button = document.querySelector('.amform-show-popup');
+                                if (button) {
+                                    button.click();
+                                }
+                            }); // 100 milliseconds = 0.1 seconds
+                        };
+                    </script>
+
+
+                <?php else: ?>
+                <h2>Existing Customers</h2>
+                <p>Have you ordered this medicine from us before?</p>
+                <p class="login-t">Login to save time completing your assessment</p>
+                <form id="login-form" action="<?php echo $block->getUrl('login/index/index'); ?>" method="post">
+                <div>
+                    <input type="email" id="email" name="email" placeholder="Email Address" required>
+                </div>
+                <div>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <button type="button" id="toggle-password"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                </div>
+
+                <!-- <div class="repeat">
+                    <div class="control">
+                        <label for="repeat" class="label">
+                            <input name="rememberme" type="checkbox" class="input-checkbox" id="repeat-check" title="Are you repeat customer?">
+                            <span>Are you repeat customer?</span>
+                        </label>
+                    </div>
+                </div> -->
+                <div>
+                    <button type="submit" id="sign-in-button" >Sign In</button>
+                </div>
+                <div class="forgot-pass">
+                <a class="action remind forgot-password-link" href="<?php echo $baseUrl . 'customer/account/forgotpassword'; ?>">
+                    <span>Forgot Your Password?</span>
+                </a>
+            </div>
+            <!-- <p>Don't have an account? <a href="https://phpstack-732705-2678695.cloudwaysapps.com/phpwl/customer/account/create">Register here</a></p> -->
+                </form>
+                <?php endif; ?>
+            </div>
+            
+            <!-- Right Column: Static Content -->
+            <div class="repeat-right-column">
+                <?php if ($customerSession->isLoggedIn()): ?>
+                    <p class="offer-title">What we offer</p>
+                    <div class="banner-right-c">
+                    <ul>
+                    <li>
+                        <div class="banner-icon">
+                        <img src="/media/wysiwyg/WLImage/web-app-i.png" alt="Simple Monthly Plan">
+                        </div>
+                        <p>Simple <br> Monthly Plan </p>
+                    </li>
+                    <li>
+                        <div class="banner-icon">
+                        <img src="/media/wysiwyg/WLImage/cancel-i.png" alt="Cancel Anytime" />
+                        </div>
+                        <p>Cancel <br> Anytime </p>
+                    </li>
+                    <li>
+                        <div class="banner-icon">
+                        <img src="/media/wysiwyg/WLImage/uk-medical-i.png" alt="UK medical professionals​" />
+                        </div>
+                        <p>UK medical <br> professionals​ </p>
+                    </li>
+                    <li>
+                        <div class="banner-icon">
+                        <img src="/media/wysiwyg/WLImage/support-i.png" alt="1:1 coaching and support" />
+                        </div>
+                        <p>1:1 coaching <br> and support </p>
+                    </li>
+                    </ul>
+                </div>
+                <?php else: ?>
+                    <h2>New to<br> Pharmacy Planet?</h2>
+                    <p>Click the button below to begin your weight loss consultation</p>
+                    <div class="h-banner-btn">
+                        <!-- For New Customer -->
+                        <?= $this->helper("Amasty\Customform\Helper\Data")->renderForm("55") ?>
+                        <?= $this->getLayout()->createBlock('Magento\Framework\View\Element\Template')->setTemplate('Haartyhanks_CategoryQuestWL::category_id_template.phtml')->toHtml() ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    var repeatCheckbox = document.getElementById('repeat-check');
+    var signInButton = document.getElementById('sign-in-button');
+    
+    if (repeatCheckbox && signInButton) {
+        repeatCheckbox.addEventListener('change', function() {
+            console.log('Checkbox state changed:', this.checked);
+            signInButton.disabled = !this.checked;
+            console.log('Sign In button disabled state:', signInButton.disabled);
+        });
+    } else {
+        console.error('Elements not found');
+    }
+});
+document.getElementById('toggle-password').addEventListener('click', function () {
+    var passwordField = document.getElementById('password');
+    var icon = this.querySelector('i');
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    } else {
+        passwordField.type = 'password';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    }
+
+});
+</script>
+
+
+<script>
+    require(['jquery'], function($) {
+        $(document).ready(function() {
+            $('#login-form').on('submit', function(event) {
+                event.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            // alert(response.message);
+                            location.reload();
+                        } else {
+
+                            alert('Login failed: ' + response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('An error occurred while processing your request. Please try again.');
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+<script>
+document.querySelector('.amcform-button.-clear.-with-icon.-close-popup').addEventListener('click', function() {
+    window.location.href = '/general-health/weight-loss.html';
+});
+</script>

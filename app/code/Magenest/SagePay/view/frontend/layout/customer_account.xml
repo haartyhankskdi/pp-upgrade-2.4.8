@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-sagepay-profiles">
+                <arguments>
+                    <argument name="path" xsi:type="string">sagepay/customer/profile/</argument>
+                    <argument name="label" xsi:type="string" translate="true">Opayo Subscription Profiles</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-sagepay-cards">
+                <arguments>
+                    <argument name="path" xsi:type="string">sagepay/customer/card/</argument>
+                    <argument name="label" xsi:type="string" translate="true">Opayo Card Management</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

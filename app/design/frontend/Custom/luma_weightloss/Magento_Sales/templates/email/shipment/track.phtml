@@ -1,0 +1,33 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_shipment = $block->getShipment() ?>
+<?php $_order = $block->getOrder() ?>
+<?php $trackCollection = $_order->getTracksCollection($_shipment->getId()) ?>
+<?php if ($_shipment && $_order && $trackCollection): ?>
+    <br />
+    <table class="shipment-track" style="margin-bottom: 15px;">
+        <thead>
+        <tr>
+            <th style="background-color: transparent; padding: 0 0 10px 0; color: #5cb3e3;
+    font-size: 16px;"><?= /* @escapeNotVerified */  __('Shipped By') ?></th>
+            <th style="background-color: transparent; padding: 0 0 10px 0; color: #5cb3e3;
+    font-size: 16px;"><?= /* @escapeNotVerified */  __('Tracking Number') ?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($trackCollection as $_item): ?>
+            <tr>
+                <td style="background-color: transparent; padding: 0 0 10px 0;"><?= $block->escapeHtml($_item->getTitle()) ?>:</td>
+                <td style="background-color: transparent; padding: 0 0 10px 0;"><a href="https://www.royalmail.com/track-trace?trackNumber=<?= (!empty($_item->getNumber()) ? $block->escapeHtml($_item->getNumber()) : '') ?>"><?= $block->escapeHtml($_item->getNumber()) ?></a></td>
+            </tr>
+        <?php endforeach ?>
+        </tbody>
+    </table>
+<?php endif; ?>

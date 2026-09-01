@@ -1,0 +1,167 @@
+<?php
+$googlehelper = $this->helper('Magecomp\Googlelangtranslator\Helper\Data');
+$isenabled = $googlehelper->isEnabled();
+if($isenabled) :
+    $lanselected = $googlehelper->SelectLanguage();
+    $layoutselected = $googlehelper->SelectLayout();
+    $bashlanguage = substr($googlehelper->BashLanguage(), 0, 2);
+    $getUrl = $block->getViewFileUrl("Magecomp_Googlelangtranslator::js/googel.js");
+    $layouthtml = 'google.translate.TranslateElement.InlineLayout.'.$layoutselected; ?>
+
+    <div class="google_translate-section">
+        <div class="container">
+            <div id="google_translate_element" style="float: right;"></div>
+        </div>
+    </div>
+  
+
+         <?php
+$scriptString = <<<SCRIPT
+
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {
+                pageLanguage: 'zu',
+                includedLanguages: '{$googlehelper->SelectLanguage()}',
+                layout: '{$layouthtml}'
+            },
+            'google_translate_element'
+        );
+    }
+
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'; 
+        document.body.appendChild(script);
+   
+SCRIPT;
+?>
+
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+
+        <style type="text/css">
+            body { 
+                top : 0 !important;}
+            /*.goog-te-banner-frame.skiptranslate {
+                display: none !important;
+            }
+            .goog-te-gadget-simple{
+                position: absolute !important;
+                top:10px;
+            }
+            .action.skip:not(:focus)
+            {
+                border: 0;
+                clip: rect(0, 0, 0, 0);
+                height: 0px;
+                margin-top: 2px;
+                overflow: hidden;
+                padding: 4px;
+                position: relative;
+                width: 0px;
+                display: inline-table;
+                font-size: 7px;
+                display: none;
+            }
+            .panel.wrapper{
+                height: 65px;
+            }
+              #google_translate_element{
+                    margin-left: -21%;
+                margin-top: -9%;
+                          } 
+               @media  (max-width: 480px) and (min-width: 360px) {
+                #google_translate_element {
+                      margin-left: -39%;
+                    margin-top: 24%;
+                }   
+            }
+              @media  (max-width: 767px) and (min-width: 481px) {
+                #google_translate_element {
+                     margin-top: -14%;
+                }   
+            }*/
+
+
+
+            .google_translate-section{
+                width: 100%;
+                float: left;
+                margin: 0 0 30px 0;
+                padding: 7px 0;
+                background: #e8f3f5;
+                position: relative;
+                z-index: 99999;
+            }
+            .cms-index-index .google_translate-section{
+                background: transparent !important;
+                margin-bottom: 20px !important;
+                border-bottom: 1px solid #dde8ea;
+            }
+
+            .google_translate-section .goog-te-gadget .goog-te-combo{
+                border-radius: 10px;
+                float: right;
+                width: 130px;
+                font-size: 11px;
+                line-height: 22px;
+                margin-left: 10px;
+            }
+
+            /*.page-wrapper{
+                padding-top: 50px;
+            }*/
+
+
+            @media only screen and (min-width:768px) and (max-width:1024px){
+                .google_translate-section #google_translate_element{
+                    margin-right: 10px;
+                }
+            }
+
+
+            @media (max-width: 767px) {
+
+                .google_translate-section{
+                    position: relative;
+                    z-index: 9;
+                    margin-bottom: 20px;
+                }
+                .google_translate-section #google_translate_element{
+                    margin-right: 10px;
+                }
+                .cms-index-index .google_translate-section{
+                    background: #e8f3f5 !important; 
+                    border-bottom: 0px solid #dde8ea;
+                }
+                .goog-te-gadget img{
+                    margin-right: 0 !important;
+                }
+
+            }
+
+            .google_translate-section .skiptranslate{
+                line-height: 40px;
+                width: 290px;
+            }
+
+            .google_translate-section .skiptranslate a{
+                font-size: 11px !important;
+            }
+
+            @media screen and (min-width: 768px) { 
+
+            html.translated-ltr .nav-sections{
+                margin-top: 95px !important;
+            }
+
+            html.translated-ltr .top-container{
+                margin-top: 150px !important;
+            }
+
+
+
+            }
+
+        </style>
+<?php endif; ?>

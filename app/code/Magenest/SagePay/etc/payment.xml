@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+-->
+<payment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Payment/etc/payment.xsd">
+    <methods>
+        <method name="magenest_sagepay">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="magenest_sagepay_form">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+        <method name="magenest_sagepay_direct">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+        <method name="magenest_sagepay_server">
+            <allow_multiple_address>0</allow_multiple_address>
+        </method>
+    </methods>
+</payment>

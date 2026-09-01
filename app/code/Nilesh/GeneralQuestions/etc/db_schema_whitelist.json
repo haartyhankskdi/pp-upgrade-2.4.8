@@ -1,0 +1,25 @@
+{
+    "nilesh_generalquestions_generalquestions": {
+        "column": {
+            "generalquestions_id": true,
+            "customer_id": true,
+            "suffer_diagnosed": true,
+            "suffer_diagnosed_yes": true,
+            "other_medication": true,
+            "other_medication_yes": true,
+            "have_allergies": true,
+            "have_allergies_yes": true,
+            "registered_gp": true,
+            "registered_gp_permission": true,
+            "registered_gp_surgery": true,
+            "upload_documents_prescriber": true,
+            "upload_documents_prescriber_yes": true,
+            "prescriber_to_know": true,
+            "prescriber_to_know_yes": true,
+            "question_one": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

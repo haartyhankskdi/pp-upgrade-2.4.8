@@ -1,0 +1,12 @@
+.cc-radio{
+    float: left;
+    margin-top: 10px !important;
+}
+.cc-label{
+    display: table;
+}
+.cc-span{
+    vertical-align: middle;
+    display: table-cell;
+    padding-left: 10px;
+}

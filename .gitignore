@@ -1,0 +1,83 @@
+ # ==========================================
+# PharmacyPlanet (Magento 2) .gitignore
+# ==========================================
+
+# --- Sensitive: NEVER commit ---
+/app/etc/env.php
+/app/etc/config.php.bak
+auth.json
+*.sql
+db_bkp*.sql
+*.env
+
+# --- Magento generated/cache directories ---
+/generated/
+/var/*
+!/var/.htaccess
+/pub/static/*
+!/pub/static/.htaccess
+/pub/media/*
+!/pub/media/.htaccess
+!/pub/media/customer/
+!/pub/media/downloadable/
+!/pub/media/import/
+/setup/src/Magento/Setup/*.log
+/pub/errors/local.xml
+/pub/errors/reports/*
+!/pub/errors/reports/.htaccess
+/pub/sitemap/
+
+# --- Composer / vendor ---
+/vendor/
+composer.phar
+
+# --- Node / build tools ---
+/node_modules/
+npm-debug.log
+package-lock.json.bak
+
+# --- IDE / OS files ---
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+*.swp
+
+# --- Logs ---
+*.log
+var/log/*
+
+# --- Backup / stray files found during audit (safe to exclude going forward) ---
+*.bak
+*copy*.phtml
+*_backup.zip
+*-26thMay2021.php
+*_version_101.php
+login.phtml[0-9]*
+*.tar
+*.phar
+*.zip
+*.sql
+*.log
+*.bz
+*.gz
+
+# --- Session / temp / cache runtime dirs ---
+/session/
+/tmp/
+
+# --- Sample/example config files (keep the real ones, ignore .sample noise if regenerated) ---
+# Note: DO track the original *.sample files already in the repo; only ignore NEW generated ones
+# (leave this commented unless you confirm duplicates appear)
+# *.sample
+
+# --- Cloudways / hosting specific ---
+php_errorlog
+sg-phpinfo-*.php
+info.php
+adminer-*.php
+
+# --- Editor backups ---
+*~

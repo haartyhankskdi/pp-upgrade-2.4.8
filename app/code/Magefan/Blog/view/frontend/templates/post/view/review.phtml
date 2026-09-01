@@ -1,0 +1,252 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$request = $objectManager->get(\Magento\Framework\App\Request\Http::class);
+$params = $request->getParams();
+$post = $objectManager->get(\Magefan\Blog\Model\PostFactory::class)->create()->load($params['id']);
+
+$postId =  $params['id'];
+//echo $postId;
+
+// Default Author Info
+$authorName  = "HARMINDER ‘HARMY’ KAUR";
+$authorTitle = "BSc(hons) Pharmacy";
+$authorExtra = "GPhC Number: 2061107";
+$authorImage = "https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/HARMY-PROFILE-PIC.jpg";
+
+// Custom Post IDs for Dr. Pranay Singh Deo
+$postids = [1306, 1307, 1308,1297];
+
+// Apply custom author info if post ID matches
+if (in_array($postId, $postids)) {
+    $authorName  = "Dr Pranay Singh Deo";
+    $authorTitle = "HCPC Practitioner Psychologist";
+    $authorExtra = "Level 4 diabetes & obesity personal trainer";
+    $authorImage = "https://www.pharmacyplanet.com/pub/media/wysiwyg/Profile-Image.jpeg";
+}
+?>
+
+
+<div class="blog-bottom-review-team">
+<div class="reviewved-by sep-l">
+    <div class="review-right-img">
+        <img src="<?= $authorImage ?>" alt="Pharmacist Image" />
+    </div>
+    <div class="review-title-box">
+    <!-- <p class="review-title"><?php //$_post->getPublishDate(); ?></p> -->
+        <p class="review-text">Authored By</p>
+        <p class="pharmacist-title name"><?= $authorName ?></p>
+        <p class="review-text"><?= $authorTitle ?></p>
+        <p class="gphc-no"><?= $authorExtra ?></p>
+    </div>
+</div>
+
+<div class="reviewved-by">
+    <div class="review-right-img">
+        <img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/gurdev-sehmi-img.jpg" alt="Pharmacist Image" />
+    </div>
+     <div class="review-title-box">
+    <!-- <p class="review-title"><?php //$_post->getPublishDate(); ?></p> -->
+        <p class="review-text">Reviewed By</p>    
+        <p class="pharmacist-title name">GURDEV SEHMI</p>
+        <p class="review-text">BSc Pharm, MRPharmS, Independent Prescriber, Superintendent Pharmacist, Clinical Lead</p>
+        <p class="gphc-no">GPhC Number: 2050925</p>
+    </div>
+</div>
+</div>
+
+
+
+<style type="text/css">
+
+
+.blog-bottom-review-team{
+    width: 100%;
+    display: inline-block;
+    padding:30px 0;
+    margin: 0 0 30px 0;
+    background-color: #F1F7F9;
+}
+
+.blog-bottom-review-team .reviewved-by{
+    margin:0 !important;
+    padding: 0 20px;
+}
+.blog-bottom-review-team .reviewved-by .review-right-img{
+    float: left;
+    margin-top: 5px;
+    margin-right: 15px;
+    border: 0 !important;
+}
+.blog-bottom-review-team .reviewved-by .pharmacist-title.name{
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 2px 0 5px 0;
+    font-size: 16px;
+    color: #2C596D;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 24px;
+    font-weight: 500;
+}
+.blog-bottom-review-team .reviewved-by .review-text {
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0;
+    font-size: 11px;
+    color: #000;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 18px;
+    font-weight: 400;
+}
+.blog-bottom-review-team .reviewved-by p.gphc-no{
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin:3px 0 0 0;
+    font-size: 12px;
+    color: #46C0EC;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 18px;
+    font-weight: 400;
+}
+
+.blog-bottom-review-team .reviewved-by.sep-l{
+    border-right: 1px solid #46C0EC; 
+}
+
+.blog-bottom-references{
+    border: 4px solid #46C0EC;
+    display: inline-block;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.blog-bottom-references .references-content{
+    padding: 30px;
+}
+.references-content h2{
+    width: 100%;
+    float: left;
+    padding: 0 0 15px 0;
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    color: #000;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 30px;
+    font-weight: 400;
+    border-bottom: 1px solid #46C0EC;
+}
+
+.references-content ul{
+    padding: 0;
+    margin: 0 !important;
+    display: inline-block;
+}
+.references-content ul li{ 
+    padding: 0 0 15px 25px;
+    margin: 0;
+    font-size: 13px;
+    color: #000;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 22px;
+    font-weight: 400;
+    list-style-type: none;
+    background: url(/pub/media/wysiwyg/link-svgrepo-com.png) left 5px no-repeat;
+}
+.references-content ul li span{
+    color: #46C0EC;
+}
+.references-content ul li a{
+    font-size: 13px;
+    color: #46C0EC;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.blog-bottom-references .references-content{
+    position: relative;
+}
+.blog-bottom-references .references-content:after{
+    content: " " !important;
+    background: url(/pub/media/wysiwyg/blog-pres-icon.svg) left 5px no-repeat;
+    width: 95px;
+    height: 150px;
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    right: -35px;
+}
+
+.blog-bottom-review-team .reviewved-by:before{
+        display: none;
+    }
+
+@media screen and (min-width: 768px) {
+    
+    .blog-bottom-review-team .reviewved-by{
+        width: 44%;
+        float: left;
+    }
+    .blog-bottom-review-team .review-title-box{
+        width: 214px !important;
+        float: left;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+.blog-bottom-review-team .reviewved-by.sep-l {
+    border-right: 0px solid #46C0EC;
+    border-bottom: 1px solid #46C0EC;
+    padding-bottom: 40px;
+    margin-bottom: 40px !important;
+
+}
+.blog-bottom-review-team .reviewved-by .review-title-box {
+    width: 215px !important;
+    float: left;
+}
+.blog-bottom-references .references-content:after{
+    display: none;
+}
+
+.blog-bottom-review-team .reviewved-by{
+    display: inline-block;
+    padding: 0;
+    width: 100%;
+}
+.blog-bottom-review-team .reviewved-by .review-right-img{
+    margin-left: 15px;
+}
+
+}
+
+
+@media only screen and (min-width:768px) and (max-width:1024px){
+    .blog-bottom-review-team .reviewved-by {
+        width: 41% !important;
+        float: left;
+    }
+    .blog-bottom-review-team .reviewved-by .review-right-img{
+        width: 70px !important;
+        float: left !important;
+    }
+    .blog-bottom-review-team .review-title-box {
+        width: 121px !important;
+    }
+}
+
+
+.blog-bottom-review-team .reviewved-by .review-right-img{
+    width: 90px;
+    float: left;
+}
+.reviewved-by .review-right-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+}
+
+
+</style>

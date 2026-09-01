@@ -1,0 +1,41 @@
+<?php
+/* @var Escaper $escaper */
+/* @var Chart $block */
+
+use Amasty\Reports\Block\Adminhtml\Report\Chart;
+use Magento\Framework\Escaper;
+
+$axis = $block->getAxisFields();
+$collection = $block->getCollection();
+?>
+
+<div class="amreports-amchart-wrapper" data-role="amreports-content">
+    <?php if ($collection->getSize()): ?>
+
+        <?php foreach ($collection as $item) {
+            $chartData[] = [
+                'date' => $escaper->escapeHtml($item->getData($axis['y'])),
+                'count' => $escaper->escapeHtml($item->getData('count'))
+            ];
+        } ?>
+
+        <div id="chart-column" class="amreports-amchart-container" data-chart-identifier="abandoned"></div>
+
+        <script>
+            require([
+                "Amasty_Reports/vendor/amcharts4/core.min"
+            ], function () {
+                require([
+                    "jquery",
+                    "<?= /* @noEscape */ $block->getWidgetName('amreports_simple_column_chart') ?>"
+                ], function ($, widget) {
+                    widget({
+                        "data" : <?= /* @noEscape */ json_encode($chartData); ?>,
+                        "currency" : "<?= /* @noEscape */ $block->getCurrencySymbol(); ?>",
+                        "selectorInit" : "chart-column"
+                    }, $('#chart-column'));
+                });
+            });
+        </script>
+    <?php endif; ?>
+</div>

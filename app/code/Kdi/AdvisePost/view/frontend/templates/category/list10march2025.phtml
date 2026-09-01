@@ -1,0 +1,149 @@
+<?php
+$breadcrumbs = $this->getLayout()->getBlock('breadcrumbs');
+if ($breadcrumbs) {
+    $breadcrumbs->addCrumb('home', [
+        'label' => __('Home'),
+        'title' => __('Home'),
+        'link'  => $this->getUrl('')
+    ]);
+
+    $breadcrumbs->addCrumb('advice_center', [
+        'label' => __('Advice Center'),
+        'title' => __('Advice Center'),
+        'link'  => ''
+    ]);
+}
+if ($breadcrumbs) { echo $breadcrumbs->toHtml(); }
+?>
+<?php $collection = $block->getCollection() ?>
+<div class="advice-center-info-sec counter-sec">
+    <div class="container"> 
+        <div class="advice-info-top-left">
+            <h2>Advice Center</h2>
+            <p>At Pharmacy Planet, we're here to provide you with the advice and resources you need to take control of your health. Whether you're looking to manage a condition or explore ways to improve your well-being, our expert team is ready to support you with reliable, up-to-date information.</p>
+        </div> 
+<!--         <div class="advice-center-count-list">
+            <div class="counter-list">
+                <p><span>80+</span></p>
+                <p>million impressions</p>
+            </div>
+            <div class="counter-list">
+                <p><span>150+</span></p>
+                <p>quality articles</p>
+            </div>
+            <div class="counter-list">
+                <p><span>15+</span></p>
+                <p>reading monthly</p>
+            </div> 
+        </div>  -->
+        <div class="advice-info-top-right">
+            <div class="advice-info-cont">
+                <div class="join-cont-img"><img src="/media/wysiwyg/join-cont-img.svg" alt="join-cont-img"></div>
+                <div class="advice-info-title">Join the Conversation!</div>
+                <p>Grab a chance to feature your article with us and showcase your insights.</p>
+                <p><span>Mail us <a href="mailto:article@pharmacyplanet.com">article@pharmacyplanet.com</a></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="advice-center-info-sec2">
+<div class="container">
+    <div class="advice-info-top2">
+            <div class="advice-info-title2">What are you looking for?</div>
+            <div class="advice-info-search">
+            <div class="widget block blog-search" data-bind="scope: 'blog-search'">
+    <div class="block-content">
+        <form class="form" id="blog_search_mini_form"
+              action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
+              method="get">
+            <div class="field search">
+                <label class="label" for="blog_search">
+                    <span><?= $block->escapeHtml(__('Search')) ?></span>
+                </label>
+                <div class="control">
+                    <input id="blog_search"
+                           type="text"
+                           name="q"
+                           value="<?= $block->escapeHtml($block->getQuery()) ?>"
+                           placeholder="<?= $block->escapeHtml(__('Let us know what you are looking for')) ?>"
+                           class="input-text"
+                           maxlength="128" role="combobox"
+                           aria-haspopup="false"
+                           aria-autocomplete="both"
+                           autocomplete="off">
+                </div>
+            </div>
+            <div class="actions">
+                <button type="submit"
+                        onclick="return goBlogSearch(this);"
+                        title="<?= $block->escapeHtml(__('Search')) ?>"
+                        class="action">
+                    <span><?= $block->escapeHtml(__('Search')) ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+<div class="advice-info-list">
+    <div class="advice-info-block">
+        <a href="/advice/post/view?id=1">
+        <img src="/media/wysiwyg/weight-loss-img-2.jpg" alt="Weight Loss">
+        <p>Weight<br> Loss</p>
+        </a>
+    </div>
+    <div class="advice-info-block">
+        <a href="/advice/post/view?id=2">
+            <img src="/media/wysiwyg/high-blood-pressure-img.jpg" alt="High Blood Pressure">
+            <p>High Blood<br> Pressure</p>
+        </a>        
+    </div>
+    <div class="advice-info-block">
+        <a href="/advice/post/view?id=13">
+        <img src="/media/wysiwyg/stop-smoking-img-2.jpg" alt="Stop Smoking">
+        <p>Stop<br> Smoking</p>
+        </a>
+    </div>
+</div>
+<?php $categories = $collection->getData();?>
+    <div class="advice-info-list-sec">
+        <ul>
+            <?php  foreach ($categories as $item) : ?>
+                <?php $url = '/advice/post/view?id='. $item['entity_id']; ?>
+               <li> 
+                <a href="<?= $url ?>" > <?= $item['name'] ?></a>
+            </li>
+            <?php endforeach ;?>
+        </ul>
+    </div>
+    </div>
+</div>
+<div class="trustpilot-review-slider">
+<?= $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('169')->toHtml(); ?>
+<!-- End TrustBox widget -->    
+</div>
+<script type="text/javascript">
+    require(['jquery', 'jquery/ui', 'slick'], function($){
+    $(document).ready(function() {
+        $('.slick-slider').slick({
+            dots: true,
+            infinite: false,
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            autoplay: false
+            });
+        });
+    });
+</script>
+<script type="text/javascript">
+    function goBlogSearch(e)
+    {
+        var value = document.getElementById('blog_search').value;
+        if (value) {
+            var a = e.form.action;
+            window.location = a + ( ('/' != a.charAt(a.length - 1)) ? '/' : '' ) + encodeURI(value) + '/';
+        }
+        return false;
+    }
+</script>

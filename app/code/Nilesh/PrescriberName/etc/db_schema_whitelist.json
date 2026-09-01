@@ -1,0 +1,19 @@
+{
+    "sales_order": {
+        "column": {
+            "prescriber_name": true,
+            "order_status": true
+        }
+    },
+    "nilesh_prescribername_prescribername": {
+        "column": {
+            "prescribername_id": true,
+            "name": true,
+            "status": true,
+            "Comment": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

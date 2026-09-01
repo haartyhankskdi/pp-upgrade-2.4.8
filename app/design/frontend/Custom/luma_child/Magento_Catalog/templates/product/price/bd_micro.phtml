@@ -1,0 +1,261 @@
+<?php
+// wegovy.php
+
+// ------- DATA (edit prices/options here) -------
+$catalog = [
+  '4MM' => [
+    ['label'=>'BD Micro-Fine Ultra 4mm Needles',  'note'=>'4mm',         'price'=>10.99, 'per_pen'=>10.99],
+]
+];
+
+// Selected strength (server-side fallback)
+$default = '4MM';
+$strength = isset($_GET['strength'], $catalog[$_GET['strength']]) ? $_GET['strength'] : $default;
+
+// Helper
+$money = fn($n) => '£'.number_format($n, 2);
+?>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wegovy – Strength & Pricing</title>
+<style>
+  :root{ --bg1:#e9f1ff; --bg2:#e9e6f8; --card:#fff; --muted:#65748b; --ok:#10b981; --ring:#e6e8ef; --ink:#0f172a; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;background:#f6f7fb;color:var(--ink)}
+  /*.wrap{max-width:920px;margin:28px auto;padding:0 16px}
+  .panel{background:linear-gradient(90deg,var(--bg1),var(--bg2));border-radius:24px;padding:26px;box-shadow:0 1px 0 rgba(0,0,0,.04)}
+  .select-shell{position:relative;max-width:460px}
+  select{width:100%;appearance:none;-webkit-appearance:none;background:#fff;border:1px solid var(--ring);border-radius:9999px;padding:14px 44px 14px 16px;font-size:16px;color:#111827}
+  .caret{position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none}
+  .hint{color:var(--muted);text-align:center;margin:14px 0 12px;font-size:14px}
+  .cards{max-width:460px}
+  .card{background:var(--card);border:1px solid #eff2f7;border-radius:10px;margin:10px auto;padding:12px 14px;
+        display:grid;grid-template-columns:auto 1fr auto;gap:6px;align-items:center}
+  .title{font-weight:700}
+  .sub{grid-column:1 / -1;color:var(--muted);font-size:13px;margin-top:-2px}
+  .price{font-weight:700}
+  .per{color:var(--ok);font-size:12px;text-align:right}*/
+
+
+  .price-comparison-sec{
+    background: transparent linear-gradient(129deg, #D4F2FC 0%, #C2DDFB 100%) 0% 0% no-repeat !important;
+    padding: 40px;
+  }
+  .comparison-title{
+    font-size: 35px;
+    color: #000;
+    font-family: 'Roboto', sans-serif;
+    line-height: 45px;
+    padding: 0 0px;
+    font-weight: 400;
+    margin-top: 0 !important;
+    margin-bottom: 10px;
+}
+.price-comparison-sec p{
+    font-size: 14px;
+    color: #000;
+    font-family: 'Roboto', sans-serif;
+    line-height: 22px;
+    padding: 0 0px;
+    font-weight: 400;
+    margin-top: 0 !important;
+}
+
+.select-option-sec{
+  background-color: #fff;
+    display: inline-block;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.select-shell label{
+    font-size: 14px;
+    color: #000;
+    font-family: 'Roboto', sans-serif;
+    line-height: 22px;
+    padding: 0 0 10px 0;
+    font-weight: 400;
+}
+
+.select-shell select{ 
+    width: 100% !important;
+    border: 0;
+    background: url(https://magento-1195784-4216081.cloudwaysapps.com/static/frontend/Custom/luma_child/en_GB/images/select-dropdown-arrow.png) no-repeat right 15px center #F1F7F9 !important;
+    border-radius: 50px;
+    height: 55px;
+    padding: 0 35px 0 20px;
+    font-size: 14px;
+    color: #000;
+    font-family: 'Roboto', sans-serif;
+    line-height: 22px;
+}
+.select-option-sec .card-price-table{
+  width: 100% !important;
+    background-color: #F1F7F9;
+    border: 0;
+    padding: 20px;
+    margin-top: 20px;
+}
+.select-option-sec .cards .card{
+  width: 100%;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  color: #111;
+    font-size: 13px;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 22px;
+    font-weight: 400;
+    padding: 5px 0px;
+}
+.select-option-sec .cards .card .card-title .title,
+.select-option-sec .card-price-table .card-h{
+  width: 80%;
+  float: left;
+}
+.select-option-sec .cards .card .card-title .price,
+.select-option-sec .card-price-table .card-p{
+  width: 20%;
+  float: left;
+  text-align: right;
+  padding-right: 15px;
+}
+.select-option-sec .card-price-table .card-table{
+  width: 100%;
+  display: inline-block;
+}
+
+.select-option-sec .cards{
+  height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 180px; 
+
+}
+
+.select-option-sec .cards::-webkit-scrollbar {
+  width: 7px;
+   background-color: rgba(166, 211, 230, 1);
+}
+.select-option-sec .cards::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  border: 0px solid white;
+  background-color: rgba(88, 127, 143, 1);
+}
+
+
+@media only screen and (max-width: 767px) {
+
+.price-comparison-sec{
+  padding: 30px 20px !important;
+}
+.select-option-sec .cards .card .card-title .title, 
+.select-option-sec .card-price-table .card-h{
+  width: 60% !important;
+}
+.select-option-sec .cards .card .card-title .price, 
+.select-option-sec .card-price-table .card-p{
+  width: 35% !important;
+}
+
+}
+
+</style>
+  <div class="wrap">
+    <div class="panel price-comparison-sec">
+      <div class="comparison-title">Price Comparison</div>
+      <p>Select your preferred options and see the best price</p>
+      <!-- Dropdown -->
+      <div class="select-option-sec">
+      <form method="get" class="select-shell" id="strengthForm">
+        <label for="brand">Brand</label>
+        <select name="strength" id="strengthSelect" aria-label="Select strength">
+          <?php foreach(array_keys($catalog) as $s): ?>
+            <option value="<?= htmlspecialchars($s) ?>" <?= $s===$strength?'selected':'' ?>><?= htmlspecialchars($s) ?></option>
+          <?php endforeach; ?>
+        </select>
+        <!-- <svg class="caret" width="18" height="18" viewBox="0 0 20 20" fill="none">
+          <path d="M5 7l5 6 5-6" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg> -->
+        <noscript><button type="submit" style="margin-top:10px">Update</button></noscript>
+      </form>
+
+      <!-- <p class="hint">Prices include next-day delivery and prescription</p> -->
+
+      <!-- Cards: server-side initial render -->
+      <div class="card-price-table">
+      <div class="card-table">
+              <div class="card-h"><strong>Pack</strong></div> 
+              <div class="card-p"><strong>Price (£)</strong></div>
+        </div>
+      <div id="cards" class="cards">
+        
+        <?php foreach ($catalog[$strength] as $o): ?>
+          <div class="card">
+            <div class="card-title">
+              <div class="title"><?= htmlspecialchars($o['label']) ?></div> 
+              <div class="price"><?= $money($o['price']) ?></div>
+            </div>
+            <!-- <div class="sub">= htmlspecialchars($o['note']) ?></div>  -->
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
+      <!-- <p class="hint">Select your treatment after the consultation:</p> -->
+    </div>
+    </div>
+  </div>
+
+  <!-- Safe JSON payload for JS -->
+  <script id="optionsData" type="application/json">
+<?= json_encode($catalog, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES) . "\n" ?>
+  </script>
+
+  <script>
+  (function(){
+    function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn)}
+    ready(function(){
+      var select = document.getElementById('strengthSelect');
+      var cards  = document.getElementById('cards');
+      var dataEl = document.getElementById('optionsData');
+
+      var OPTIONS = {};
+      try { OPTIONS = JSON.parse((dataEl.textContent||'{}').trim()); } catch(e){ console.error(e); }
+
+      function money(n){ return '£' + Number(n).toFixed(2); }
+
+      function render(strength){
+        var items = OPTIONS[strength] || [];
+        cards.innerHTML = items.map(function(o){
+          return '<div class="card"> <div class="card-title">'
+              +   '<div class="title">'+ o.label +'</div>'
+              
+              +   '<div class="price">'+ money(o.price) +'</div>'
+               
+              
+              
+              + '</div> </div>';
+        }).join('');
+
+        // keep URL in sync (no reload)
+        /**
+        try{
+          var url=new URL(location.href);
+          url.searchParams.set('strength', strength);
+          history.replaceState({},'',url);
+        }catch(_){} 
+        */
+      }
+
+      // Initial sync and on-change behavior
+      render(select.value);
+      select.addEventListener('change', function(e){ render(e.target.value); });
+    });
+  })();
+  </script>

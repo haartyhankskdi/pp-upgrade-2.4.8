@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	<route method="POST" url="/V1/nilesh-generalquestions/generalquestions">
+		<service class="Nilesh\GeneralQuestions\Api\GeneralQuestionsRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Nilesh_GeneralQuestions::GeneralQuestions_save"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/nilesh-generalquestions/generalquestions/search">
+		<service class="Nilesh\GeneralQuestions\Api\GeneralQuestionsRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Nilesh_GeneralQuestions::GeneralQuestions_view"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/nilesh-generalquestions/generalquestions/:generalquestionsId">
+		<service class="Nilesh\GeneralQuestions\Api\GeneralQuestionsRepositoryInterface" method="get"/>
+		<resources>
+			<resource ref="Nilesh_GeneralQuestions::GeneralQuestions_view"/>
+		</resources>
+	</route>
+	<route method="PUT" url="/V1/nilesh-generalquestions/generalquestions/:generalquestionsId">
+		<service class="Nilesh\GeneralQuestions\Api\GeneralQuestionsRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Nilesh_GeneralQuestions::GeneralQuestions_update"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/nilesh-generalquestions/generalquestions/:generalquestionsId">
+		<service class="Nilesh\GeneralQuestions\Api\GeneralQuestionsRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Nilesh_GeneralQuestions::GeneralQuestions_delete"/>
+		</resources>
+	</route>
+</routes>

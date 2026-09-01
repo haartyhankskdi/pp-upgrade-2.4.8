@@ -1,0 +1,184 @@
+<?php
+
+/** @var $block \Haartyhanks\CategoryQuest\Block\Index */
+$_helperCatalog = $this->helper(Haartyhanks\CategoryQuest\Helper\Data::class);
+$productId = $_helperCatalog->getProdValueSession();
+$categoryId = $_helperCatalog->getCatValueSession();
+$products = $block->getCategoryProducts($categoryId);
+$ids = $block->getProductIds($products);
+$productsArr = [];
+?>
+<div class="discretion-confidentiality-panel new-flow-top">
+    <div class="container">
+        <div class="main-container">
+            <!-- Discretion & Confidentiality -->
+            <div class="discretion-section">
+                <div class="discretion_block_section">
+                    <div class="discretion_block">
+                        <span>01</span>
+                        <div class="discretion-cont">
+                            <div class="discretion_img"><img src="/media/medicine-icon.svg" alt="" /></div>
+                            <h4>Select</h4>
+                            <p>the items you wish<br> to order</p>
+                        </div>
+                    </div>
+
+                    <div class="discretion_block block_2">
+                        <span>02</span>
+                        <div class="discretion-cont">
+                            <div class="discretion_img"><img src="/media/order-review-img.svg" alt="" /></div>
+                            <h4>Order reviewed</h4>
+                            <p>by our qualified<br> prescriber</p>
+                        </div>
+
+                    </div>
+
+                    <div class="discretion_block block_3">
+                        <span>03</span>
+                        <div class="discretion-cont">
+                            <div class="discretion_img"><img src="/media/delivery-icon.svg" alt="" /></div>
+                            <h4>Delivered</h4>
+                            <p>to your door step</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php if ($categoryId) { ?>
+    <div class="content">
+        <div class="selected-product">
+            <div class="select-product">
+                <h2><?= __('Select Treatment') ?></h2>
+                <div class="step-p"><a href="<?= $_helperCatalog->getCatUrlById($categoryId); ?>"><span><?= __('Back') ?></span></a></div>
+                <p>Please select your treatment. You can choose your strength/size once you select and continue.</p>
+
+                <?php if ($productId) : ?>
+                    <?php foreach ($ids as $id) { ?>
+                        <?php $_product = $block->getProduct($id); ?>
+                        <?php $imageUrl = $this->helper('Magento\Catalog\Helper\Image')->init($_product, 'product_base_image')->constrainOnly(true)->keepAspectRatio(true)->keepTransparency(true)->keepFrame(false)->resize(150, 150)->getUrl(); ?>
+                        <?php if ($_product->isSaleable()) { ?>
+                            <?php if ($_product->getId() == $productId) { ?>
+                                <div class="selected-product">
+                                    <div class="selected product-body">
+                                    <div class="product-name"><span>
+                                            <h3><?= $_product->getName(); ?></h3>
+                                        </span></div>
+                                    
+                                        <div class=" product-image"><span><img src="<?= $imageUrl ?>" alt="<?= $_product->getName(); ?>"></span></div>
+                                        <div class="selected product-price"><span class="price">
+                                            <?php $regularPrice =  $_product->getPriceInfo()->getPrice('regular_price')->getMinRegularAmount(); ?>
+                                            <?= __('Prices From') ?></span><?php echo '£'.$regularPrice; ?>
+                                        </div>
+                                        <div class="product-order-now">
+                                            <span><a href="<?php echo $_product->getProductUrl() . '?true'; ?>">
+                                                <button><?= __("SELECT & CONTINUE") ?></button></a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
+                        
+                    <?php } ?>
+                    <div class="other-products">
+                        <h2><?= __('Other Available Treatment') ?></h2>
+                    </div>
+                <?php endif ?>
+                <input class="treatment" type="text" placeholder="Enter treatment here..." id="treatment">
+                <?php foreach ($ids as $id) { ?>
+                    <?php $_product = $block->getProduct($id); ?>
+                    <?php $imageUrl = $this->helper('Magento\Catalog\Helper\Image')->init($_product, 'product_base_image')->constrainOnly(true)->keepAspectRatio(true)->keepTransparency(true)->keepFrame(false)->resize(150, 150)->getUrl(); ?>
+                    <?php if ($_product->isSaleable()) { ?>
+                        <?php $regularPrice =  $_product->getPriceInfo()->getPrice('regular_price')->getMinRegularAmount(); ?>
+                        <?php $object = (object) [
+                                'product_id' => $id,
+                                'product_name' => $_product->getName(),
+                                'regular_price' => '£'.$regularPrice,
+                                'image_url' => $imageUrl,
+                                'product_url' => $_product->getProductUrl() . '?true'
+                            ]; 
+                            array_push($productsArr, $object);
+                        ?>
+                    <?php } ?>
+                <?php } ?>
+                <div class="products" id="products"></div>
+            </div>
+            
+        </div>
+    </div>
+<?php }?>
+
+<script>
+    require(['jquery', 'jquery/ui', "mage/mage"], function($) {
+        var products = <?php echo json_encode($productsArr); ?>;
+        console.log(products);
+        $(document).ready(function () {
+            var data = "";
+            $.each(products, function(index, product) {
+                data += '<div class="product-body">';
+                data += '<div class="product-name" onclick="show_para(this)"><span><h3>'+product['product_name']+'</h3></span></div>';
+                data += '<div class="accordian-product" style="display: none;"><div class=" product-image"><span><img src="'+product['image_url']+'" alt="'+product['product_name']+'"></span></div>';
+                data += '<div class="product-price"><span class="price">Prices From</span>'+product['regular_price']+'</div>';
+                data += '<div class="product-order-now"><span><a href="'+product['product_url']+'"><button>SELECT & CONTINUE</button></a></span></div></div>';
+                data += '</div>';
+            });
+            $('#products').html(data);
+        });
+        $('#treatment').on('keyup', function(){
+            var inputData = "";
+            var data = "";
+            var inputKeyword = $('#treatment').val();
+            $.each(products, function(index, product) {
+                let name = product['product_name'].toLowerCase();
+                if(name.includes(inputKeyword)){
+                    data += '<div class="product-body">';
+                    data += '<div class="product-name" onclick="show_para(this)"><span><h3>'+product['product_name']+'</h3></span></div>';
+                    data += '<div class="accordian-product" style="display: none;"><div class=" product-image"><span><img src="'+product['image_url']+'" alt="'+product['product_name']+'"></span></div>';
+                    data += '<div class="product-price"><span class="price">Prices From</span>'+product['regular_price']+'</div>';
+                    data += '<div class="product-order-now"><span><a href="'+product['product_url']+'"><button>SELECT & CONTINUE</button></a></span></div></div>';
+                    data += '</div>';
+                }
+            });
+            $('#products').html(data);
+        });
+    });
+
+    
+</script>
+
+<script>
+// function hide_para() {
+//     var h2 = document.querySelectorAll(".accordian-product");
+//     for (var i = 0; i < h2.length; i++) {
+//         h2[i].style.display = 'none';
+//     }
+// }
+
+// window.onload = hide_para();
+
+function show_para(currElement) {
+    if (currElement.nextElementSibling.style.display == "none") {
+        currElement.nextElementSibling.style.display = "block";
+    } else {
+        currElement.nextElementSibling.style.display = "none";
+    }
+}
+</script>
+
+
+
+<style type="text/css">
+    /*----------04-01-2023--------*/
+
+.select-product .treatment{
+  background-color: #fff;
+    padding: 0 17px;
+    border: 1px solid #b7b7b7;
+    border-radius: 15px;
+    height: 60px !important;
+    position: relative;
+}
+ 
+</style>

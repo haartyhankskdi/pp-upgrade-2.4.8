@@ -1,0 +1,275 @@
+<!doctype html>
+
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>CSS Accordion</title>
+
+<style>
+
+.product-faq-section .faq-list input {
+    display: none;
+}
+
+.product-faq-section .faq-list label {
+    text-align: left;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    padding: 20px 0 8px 0;
+    width: 100%; 
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    box-shadow: none !important;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+    transition: ease .5s;
+    display: inline-block;
+    background: url(/pub/media/wysiwyg/WLImage/Poly.png) right 32px no-repeat !important;
+
+}
+
+.product-faq-section .faq-list label:hover,
+.product-faq-section .faq-list label:focus{
+    background: url(/pub/media/wysiwyg/WLImage/Poly.png) right 32px no-repeat !important;
+}
+
+.product-faq-section .faq-list .panel-p {
+    text-align: left;
+    letter-spacing: 0px;
+    font-size: 16px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    text-align: left;
+    padding: 0px 0;
+    padding: 0 0;  
+    background: transparent;
+    overflow: hidden;
+      max-height: 0px;
+      transition: max-height 0.5s ease;
+}
+.product-faq-section .faq-list .panel-p:target{
+      max-height: 150px;
+}
+.product-faq-section .faq-list .panel-p p{
+    font-size: 16px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    text-align: left;
+    padding: 0px 0 15px 0;
+    margin: 0;
+}
+
+.product-faq-section .faq-list input + label + .panel-p { 
+    overflow: hidden;
+      max-height: 0px;
+      transition: max-height 0.3s ease-out;
+}
+
+.product-faq-section .faq-list input:checked + label + .panel-p { 
+    max-height: 165px;
+}
+
+
+.product-faq-section{
+    width: 100%;
+    float: left;
+    padding: 80px 0 80px 0;
+    margin: 0;
+    background: #E7F2F4;
+}
+.product-faq-section .h-title {
+        width: 100%;
+        float: left;
+        padding: 0;
+        margin: 0 0 22px 0;
+        font-size: 38px;
+        color: #101010;
+        font-family: 'Lato', sans-serif;
+        line-height: 48px;
+        font-weight: 300;
+        text-align: center;
+}
+.product-faq-section .faq-list {
+    border-bottom: 1px solid #96D8F0;
+    padding-bottom: 12px;
+    width: 100%;
+    display: inline-block;
+}
+
+@media screen and (min-width: 768px) {
+    .product-faq-section .container {
+        max-width: 670px !important;
+        margin: 0 auto;
+    }
+    .product-faq-section .faq-list label{
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .product-faq-section .h-title{
+        text-align: left;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: auto !important;
+        font-weight: 300;
+        margin: 0 0 25px 0;
+        font-size: 32px;
+        color: #000;
+        font-family: 'Lato', sans-serif;
+        line-height: 36px;
+        font-weight: 400;
+        text-align: left;
+        padding: 0px 0;
+        letter-spacing: 0px;
+    }
+    .product-faq-section .container{
+        width: 90%;
+    }
+    .product-faq-section .faq-list label{
+        font-size: 15px !important;
+        padding-left: 0 !important;
+        padding-right: 20px !important;
+        line-height: 22px;
+    }
+     
+    .product-faq-section .faq-list .panel-p p{
+        font-size: 14px !important;
+        line-height: 22px !important;
+    }
+}
+
+</style>
+
+</head>
+
+
+<div class="product-faq-section">
+<div class="container reveal1">
+<div class="h-title" data-was-processed="true">Weight Loss everything you need to know</div>
+
+<div class="faq-list">
+<input type="checkbox" id="title1" />
+<label for="title1">Is Nevolat right for me?</label>
+<div class="panel-p">
+<p>Nevolat may be suitable if you are living with overweight or obesity and have found it difficult to manage your appetite through lifestyle changes alone. Eligibility is usually based on your BMI and overall health. A medical assessment is required to determine whether Nevolat is appropriate for you.</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title2" />
+<label for="title2">How is Nevolat different from weekly weight loss injections?</label>
+<div class="panel-p">
+<p>Nevolat is taken once daily, whereas some newer weight loss injections are taken weekly. Both approaches aim to support appetite control, but the dosing schedule and active ingredients differ. Your prescriber can help decide which option best suits your preferences and medical history.
+</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title3" />
+<label for="title3">Will Nevolat stop me feeling hungry completely?</label>
+<div class="panel-p">
+<p>Nevolat is designed to reduce appetite and increase feelings of fullness, not eliminate hunger entirely. Most people find that cravings become more manageable and portion sizes feel more satisfying, but normal hunger signals still occur.
+</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title4" />
+<label for="title4">What kind of weight loss can I expect?</label>
+<div class="panel-p">
+<p>Weight loss with Nevolat is typically gradual and develops over time. Results vary between individuals and depend on consistency, diet, activity levels and how your body responds to treatment. It is intended to support sustainable progress rather than rapid changes.
+</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title5" />
+<label for="title5">Can I exercise while taking Nevolat?</label>
+<div class="panel-p">
+<p>Yes, in fact, regular physical activity is encouraged. Nevolat works best when combined with healthy lifestyle habits, including balanced nutrition and movement that suits your ability and goals.
+</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title6" />
+<label for="title6">What if I feel nauseous when starting Nevolat?</label>
+<div class="panel-p">
+<p>Mild nausea is one of the most reported side effects when starting liraglutide-based treatments. This often improves as your body adjusts, especially after the gradual dose increases. Eating smaller meals and avoiding heavy, high-fat foods may help.</p>
+<p>If symptoms are severe or persistent, seek medical advice.</p>
+</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title7" />
+<label for="title7">Do I need to follow a specific diet while using Nevolat?</label>
+<div class="panel-p">
+<p>There is no strict diet plan required, but Nevolat is most effective when combined with a reduced-calorie, balanced eating plan. Your prescriber may offer guidance to help you make sustainable changes.
+</p>
+</div>
+</div>
+
+<div class="faq-list">
+<input type="checkbox" id="title7" />
+<label for="title7">Can I travel with Nevolat?</label>
+<div class="panel-p">
+<p>Yes, but you should follow proper storage guidelines. Unused pens should be kept refrigerated. If travelling, especially by air, ensure the medication is stored correctly and carried in hand luggage with appropriate documentation if needed.
+</p>
+</div>
+</div>
+
+<div class="faq-list">
+<input type="checkbox" id="title7" />
+<label for="title7">Is Nevolat a long-term treatment?</label>
+<div class="panel-p">
+<p>For some people, Nevolat may be used longer term if it remains effective and well tolerated. Your prescriber will review your progress regularly to assess whether continuing treatment is appropriate.
+</p>
+</div>
+</div>
+
+<div class="faq-list">
+<input type="checkbox" id="title7" />
+<label for="title7">Where can I read full safety information?</label>
+<div class="panel-p">
+<p>Full safety information, including detailed side effects and contraindications, can be found in the Patient Information Leaflet supplied with your medication. You should read this carefully before starting treatment.
+</p>
+</div>
+</div>
+
+
+</div>
+</div>
+
+</html>
+
+
+<script>
+        document.querySelectorAll('.product-faq-section .faq-list input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    document.querySelectorAll('.product-faq-section .faq-list input[type="checkbox"]').forEach(otherCheckbox => {
+                        if (otherCheckbox !== this) {
+                            otherCheckbox.checked = false;
+                        }
+                    });
+                }
+            });
+        });
+    </script>

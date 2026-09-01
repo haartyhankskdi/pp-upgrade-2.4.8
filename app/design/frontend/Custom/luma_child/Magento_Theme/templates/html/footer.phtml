@@ -1,0 +1,28 @@
+<?php
+/* 
+    Call static blog
+*/
+
+// Static block for main footer
+
+//echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('theme_footer')->toHtml();
+?>
+
+<?php
+$pageId = (int) $block->getRequest()->getParam('page_id');
+$footerHtml = $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('theme_footer')
+    ->toHtml();
+
+
+
+if ($pageId != 196 || $pageId != 201) {
+   echo $footerHtml;
+}
+
+?>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+ 

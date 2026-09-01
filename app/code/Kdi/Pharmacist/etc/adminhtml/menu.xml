@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/menu.xsd">
+
+    <!-- Main menu entry -->
+    <menu>
+        <add id="Kdi_Pharmacist::pharmacist"
+             title="Pharmacist"
+             module="Kdi_Pharmacist"
+             sortOrder="100"
+             resource="Kdi_Pharmacist::pharmacist" />
+             
+        <!-- Submenu entry -->
+        <add id="Kdi_Pharmacist::pharmacist_details"
+             title="Pharmacist Details"
+             module="Kdi_Pharmacist"
+             sortOrder="10"
+             parent="Kdi_Pharmacist::pharmacist"
+             action="pharmamenu/pharmacist/index"
+             resource="Kdi_Pharmacist::pharmacist_details"/>
+    </menu>
+</config>

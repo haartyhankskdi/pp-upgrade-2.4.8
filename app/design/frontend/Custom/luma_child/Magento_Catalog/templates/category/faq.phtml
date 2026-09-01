@@ -1,0 +1,29 @@
+<?php
+$blockObj = $block->getLayout()->createBlock('Haartyhanks\RemoveObjectManager\Block\RemoveObj');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$category = $blockObj->getCurrentCategory();
+
+
+
+if ($category) {
+   $collection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')
+                ->create()
+                ->addAttributeToSelect('*')
+                ->addAttributeToFilter('entity_id',['eq'=>$category->getId()])
+                ->setPageSize(1);
+
+$catObj = $collection->getFirstItem();
+$catData = $catObj->getData(); 
+
+$faqContent=  $catObj->getData('faq_content');
+
+
+
+if ($faqContent) {
+    echo html_entity_decode($faqContent);
+}
+}
+
+
+
+

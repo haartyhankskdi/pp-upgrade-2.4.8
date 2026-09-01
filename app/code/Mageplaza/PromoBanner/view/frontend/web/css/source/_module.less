@@ -1,0 +1,99 @@
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_PromoBanner
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+.mppromobanner-banner-style {
+  width: fit-content;
+  position: relative;
+  margin: auto;
+}
+
+.mppromobanner-container {
+  clear: both;
+}
+
+/* Floating style */
+.mppromobanner-floating {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  outline: 0;
+  position: fixed;
+  bottom: 5px;
+  z-index: 12;
+  background: #ffffff;
+  color: #444444;
+  text-decoration: none;
+  transition: opacity 0.2s ease-out;
+}
+
+#mppromobanner-right-floating {
+  right: 3px;
+  box-shadow: 2px 2px #888888;
+}
+
+#mppromobanner-left-floating {
+  left: 3px;
+  box-shadow: -2px 2px #888888;
+}
+
+.mppromobanner-close {
+  margin-right: 15px;
+  margin-left: 10px;
+  float: right;
+  cursor: pointer;
+}
+
+.mppromobanner-close-btn {
+  background: url(images/btn-close.png) no-repeat center;
+  -moz-background-size: contain;
+  font-size: 2rem;
+  border: none;
+  position: absolute;
+  z-index: 2;
+  width: 15px;
+  height: 15px;
+}
+
+.mppromobanner-close:hover .mppromobanner-close-btn {
+  font-weight: bolder;
+  color: #8b0000;
+}
+
+/* Popup Style */
+.mppromobanner-white-popup {
+  position: relative;
+  background: #FFF;
+  padding: 10px 10px 20px;
+  margin: 20px auto;
+}
+
+.mppromobanner-popup-full_screen {
+  width: 95%;
+  height: 100%;
+  text-align: center;
+}
+
+.mppromobanner-popup-center {
+  text-align: center;
+}
+
+.mppromobanner-popup-label {
+  cursor: pointer;
+}
+

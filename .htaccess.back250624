@@ -1,0 +1,13 @@
+Header unset Upgrade
+
+RewriteEngine On
+RewriteCond %{HTTP_USER_AGENT} ^.*(SCspider|Textbot|s2bot|MJ12bot|YandexBot|SemrushBot|AspiegelBot|BLEXBot|webmeup-crawler|oBot|Semrush|SiteExplorer|BaiDuSpider).*$ [NC]
+RewriteRule .* - [F,L]
+
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !^/pub/
+RewriteCond %{REQUEST_URI} !^/setup/
+RewriteCond %{REQUEST_URI} !^/update/
+RewriteCond %{REQUEST_URI} !^/dev/
+RewriteRule .* /pub/$0 [L]
+DirectoryIndex index.php

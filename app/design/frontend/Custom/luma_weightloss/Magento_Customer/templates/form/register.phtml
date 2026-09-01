@@ -1,0 +1,974 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Form\Register $block */
+?>
+
+<?php
+    $registerSuccessHelper = $this->helper(\Nilesh\Theme\Helper\RegisterSuccess::class);
+?>
+
+<div class="custom-block-customer-register">
+    <div class="reg-header">
+        <h2><?php echo __("Create an Account"); ?></h2>
+        <div class="login-text">
+        <p><?php echo __("Already registered?"); ?> <a href="<?php echo $block->getBaseUrl(); ?>customer/account/login">Login Here</a></p>
+        </div>
+
+    </div>
+
+
+    <?= $block->getChildHtml('form_fields_before') ?>
+    <?php /* Extensions placeholder */ ?>
+    <?= $block->getChildHtml('customer.form.register.extra') ?>
+    <form class="form create account form-create-account custom-form" action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>" method="post" id="form-validate" enctype="multipart/form-data" autocomplete="off">
+        <?= /* @noEscape */ $block->getBlockHtml('formkey'); ?>
+        <div class="basic-registration-elements">
+            <fieldset class="fieldset create info">
+                <fieldset class="small-header">
+                    <legend class="legend"><?= $block->escapeHtml(__('Create an account and make your checkout fast and easy')) ?></legend>
+                </fieldset>
+                <input type="hidden" name="success_url" value="<?= $block->escapeUrl($block->getSuccessUrl()) ?>">
+                <input type="hidden" name="error_url" value="<?= $block->escapeUrl($block->getErrorUrl()) ?>">
+                <?php
+                    if($registerSuccessHelper->getRefBack() == "cart" || $block->getFormData()->getRefback() == 'yes'){
+                        ?>
+                        <input type="hidden" name="refback" value="yes">
+                        <?php
+                    }else{
+                        ?>
+                        <input type="hidden" name="refback" value="no">
+                        <?php
+                    }
+                ?>
+
+                <?= $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Name::class)->setObject($block->getFormData())->setForceUseCustomerAttributes(true)->toHtml() ?>
+
+
+                <div class="custom-row row-phone-dob">
+                    <div class="dob">
+                        <?php $_dob = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Dob::class) ?>
+                        <?php if ($_dob->isEnabled()) : ?>
+                            <?= $_dob->setDate($block->getFormData()->getDob())->toHtml() ?>
+                        <?php endif ?>
+                    </div>
+                    <?php if ($block->getShowAddressFields()) : ?>
+
+                        <?php $_telephone = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Telephone::class) ?>
+                        <?php if ($_telephone->isEnabled()) : ?>
+                            <?= $_telephone->setTelephone($block->getFormData()->getTelephone())->toHtml() ?>
+                        <?php endif ?>
+                    <?php endif ?>
+                </div>
+
+
+                <?php $_taxvat = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Taxvat::class) ?>
+                <?php if ($_taxvat->isEnabled()) : ?>
+                    <?= $_taxvat->setTaxvat($block->getFormData()->getTaxvat())->toHtml() ?>
+                <?php endif ?>
+
+                <?php $_gender = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Gender::class) ?>
+                <?php if ($_gender->isEnabled()) : ?>
+                    <?= $_gender->setGender($block->getFormData()->getGender())->toHtml() ?>
+                <?php endif ?>
+
+
+
+            </fieldset>
+            <?php if ($block->getShowAddressFields()) : ?>
+                <fieldset class="fieldset fetchify">
+                    <div class="enter-manual-address">
+                    <input type="text" id="fetchify_address" name="fetchify_address" placeholder="Search Address" >
+                    <div class="enter-btn"><a id="manual_address"><span>Enter address manually</span></a></div>
+                    </div>
+                    <div class="spinner-loader" style="display:none"><span><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></span></div>
+                    <span id="fetchify_address_message" style="display: none;"> please type continue for exact address </span>
+                    <select id="fetchify_address_select" style="display: none;">  
+                    </select>
+                </fieldset>
+
+                <fieldset class="fieldset address" style="display: none;">
+                    <fieldset class="small-header" style="display: none;"> 
+                        <legend class="legend"><?= $block->escapeHtml(__('Address Information')) ?></legend>
+                    </fieldset>
+                    <input type="hidden" name="create_address" value="1" />
+
+                    <?php $_company = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Company::class) ?>
+                    <?php if ($_company->isEnabled()) : ?>
+                        <?= $_company->setCompany($block->getFormData()->getCompany())->toHtml() ?>
+                    <?php endif ?>
+
+                    <?php $_fax = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Fax::class) ?>
+                    <?php if ($_fax->isEnabled()) : ?>
+                        <?= $_fax->setFax($block->getFormData()->getFax())->toHtml() ?>
+                    <?php endif ?>
+                    <?php //phpcs:disable ?>
+                    <?php $_streetValidationClass = $this->helper(\Magento\Customer\Helper\Address::class)->getAttributeValidationClass('street'); ?>
+                    <?php //phpcs:enable ?>
+                    <div class="field street required">
+                        <label for="street_1" class="label"><span><?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('street') ?></span></label>
+                        <div class="control">
+                            <input type="text" name="street[]" value="<?= $block->escapeHtmlAttr($block->getFormData()->getStreet(0)) ?>" title="<?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('street') ?>" id="street_1" class="input-text <?= $block->escapeHtmlAttr($_streetValidationClass) ?>">
+                            <div class="nested">
+                                <?php $_streetValidationClass = trim(str_replace('required-entry', '', $_streetValidationClass)); ?>
+                                <?php //phpcs:disable ?>
+                                <?php for ($_i = 2, $_n = $this->helper(\Magento\Customer\Helper\Address::class)->getStreetLines(); $_i <= $_n; $_i++) : ?>
+                                <?php //phpcs:enable ?>
+                                    <div class="field additional">
+                                        <label class="label" for="street_<?= /* @noEscape */ $_i ?>">
+                                            <span><?= $block->escapeHtml(__('Address')) ?></span>
+                                        </label>
+                                        <div class="control">
+                                            <input type="text" name="street[]" value="<?= $block->escapeHtmlAttr($block->getFormData()->getStreetLine($_i - 1)) ?>" title="<?= $block->escapeHtmlAttr(__('Street Address %1', $_i)) ?>" id="street_<?= /* @noEscape */ $_i ?>" class="input-text <?= $block->escapeHtmlAttr($_streetValidationClass) ?>">
+                                        </div>
+                                    </div>
+                                <?php endfor; ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reg-form-grouped">
+
+
+                        <div class="field region required">
+                            <!-- <label for="region_id" class="label"><span><?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('region') ?></span></label> -->
+                            <label for="region_id" class="label"><span><?= /* @noEscape */ __('County') ?></span></label>
+                            <div class="control">
+                                <select id="region_id" name="region_id" title="<?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('region') ?>" class="validate-select region_id" style="display:none;">
+                                    <option value=""><?= $block->escapeHtml(__('Please select a region, state or province.')) ?></option>
+                                </select>
+                                <?php //phpcs:disable ?>
+                                <input type="text" id="region" name="region" value="<?= $block->escapeHtmlAttr($block->getRegion()) ?>" title="<?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('region') ?>" class="input-text <?= $block->escapeHtmlAttr($this->helper(\Magento\Customer\Helper\Address::class)->getAttributeValidationClass('region')) ?>" style="display:none;">
+                                <?php //phpcs:enable ?>
+                            </div>
+                        </div>
+
+                        <div class="field required">
+                            <label for="city" class="label"><span><?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('city') ?></span></label>
+                            <div class="control">
+                                <?php //phpcs:disable ?>
+                                <input type="text" name="city" value="<?= $block->escapeHtmlAttr($block->getFormData()->getCity()) ?>" title="<?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('city') ?>" class="input-text <?= $block->escapeHtmlAttr($this->helper(\Magento\Customer\Helper\Address::class)->getAttributeValidationClass('city')) ?>" id="city">
+                                <?php //phpcs:enable ?>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="reg-form-grouped">
+
+                        <div class="field country required">
+                            <label for="country" class="label"><span><?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('country_id') ?></span></label>
+                            <div class="control">
+                                <?= $block->getCountryHtmlSelect() ?>
+                            </div>
+                        </div>
+
+                        <div class="field zip required">
+                            <label for="zip" class="label"><span><?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('postcode') ?></span></label>
+                            <div class="control">
+                                <?php //phpcs:disable ?>
+                                <input type="text" name="postcode" value="<?= $block->escapeHtmlAttr($block->getFormData()->getPostcode()) ?>" title="<?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('postcode') ?>" id="zip" class="input-text validate-zip-international <?= $block->escapeHtmlAttr($this->helper(\Magento\Customer\Helper\Address::class)->getAttributeValidationClass('postcode')) ?>">
+                                <?php //phpcs:enable ?>
+                            </div>
+                        </div>
+                        <div class="enter-btn">
+                        <a id="back_to_address_search" style="display: none;"> <span>Back to Address Search</span></a>
+                        </div>
+                    </div>
+
+                    <?php $addressAttributes = $block->getChildBlock('customer_form_address_user_attributes');?>
+                    <?php if ($addressAttributes) : ?>
+                        <?php $addressAttributes->setEntityType('customer_address'); ?>
+                        <?php $addressAttributes->setFieldIdFormat('address:%1$s')->setFieldNameFormat('address[%1$s]');?>
+                        <?php $block->restoreSessionData($addressAttributes->getMetadataForm(), 'address');?>
+                        <?= $addressAttributes->setShowContainer(false)->toHtml() ?>
+                    <?php endif;?>
+                    <input type="hidden" name="default_billing" value="1">
+                    <input type="hidden" name="default_shipping" value="1">
+                </fieldset>
+
+            <?php endif; ?>
+             <?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Haartyhanks_CustomerAttributes::customer/ethnicity.phtml")->toHtml();?>
+            <fieldset class="fieldset create account" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+                <fieldset class="small-header">
+                    <legend class="legend"><?= $block->escapeHtml(__('Sign-in Information')) ?></legend><br>
+                </fieldset>
+                <div class="reg-form-grouped">
+
+                <div class="field required">
+                    <label for="email_address" class="label"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+                    <div class="control">
+                        <input type="email" name="email"  autocomplete="username" id="email_address" value="<?= $block->escapeHtmlAttr($block->getFormData()->getEmail()) ?>" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" class="input-text" data-mage-init='{"mage/trim-input":{}}' data-validate="{required:true, 'validate-email':true}">
+                        <div style="display:none; color:#e02b27;" id="email_address-custom-error">This email address is already in use by other user</div>
+                    </div>
+                </div>
+                <div class="field password required">
+                    <label for="password" class="label"><span><?= $block->escapeHtml(__('Password')) ?></span></label>
+                    <div class="control">
+                        <input type="password" name="password" id="password"
+                            title="<?= $block->escapeHtmlAttr(__('Password')) ?>"
+                            class="input-text"
+                            data-password-min-length="<?= $block->escapeHtmlAttr($block->getMinimumPasswordLength()) ?>"
+                            data-password-min-character-sets="<?= $block->escapeHtmlAttr($block->getRequiredCharacterClassesNumber()) ?>"
+                            data-validate="{required:true, 'validate-customer-password':true}"
+                            autocomplete="new-password">
+                            <button class="btn btn-link" id="showpassword" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                            <input type="hidden" name="password_confirmation" id="password_confirmation">
+                        <div id="password-strength-meter-container" data-role="password-strength-meter" aria-live="polite">
+                            <div id="password-strength-meter" class="password-strength-meter">
+                                <?= $block->escapeHtml(__('Password Strength')) ?>:
+                                <span id="password-strength-meter-label" data-role="password-strength-meter-label">
+                                    <?= $block->escapeHtml(__('No Password')) ?>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+                <!-- <div class="field confirmation required">
+                    <label for="password-confirmation" class="label"><span><?= $block->escapeHtml(__('Confirm Password')) ?></span></label>
+                    <div class="control">
+                        <input type="password" name="password_confirmation" title="<?= $block->escapeHtmlAttr(__('Confirm Password')) ?>" id="password-confirmation" class="input-text" data-validate="{required:true, equalTo:'#password'}" autocomplete="off">
+                    </div>
+                </div> -->
+
+                <!-- GENERAL QUESTION -->
+                    <!-- Display Div -->
+                    <input type="hidden" id="general_question" name="general_question" value="<?php echo !empty($block->getFormData()->getQuestionOne())?$block->getFormData()->getQuestionOne():0; ?>">
+                    <?php if(1 == 0): ?>
+                    <div class="general-question-regpage-div">
+                        <div class="general-question-regpage-text">
+                            <h5>General Health Questions</h5>
+                           <!-- <h6>Would you like to fill in your General Health Questions now?</h6>
+                            <p>Please note: You can update/edit this information later in the my account section, after registration.</p> -->
+                            <h6>Because you are ordering for the first time, we need to make sure our prescriber has all the relevant information about you. For example, allergies, medical conditions, etc.</h6>
+                            <p>Please note: You can fill this information now or later.</p>
+                        </div>
+                        <div class="general-question-regpage-btn">
+                            <button type="button" class="btn btn-primary" id="general_question_btn">General questions</button>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                <!-- GENERAL QUESTION -->
+
+                <?php echo $block->getChildHtml('form_additional_info') ?>
+
+                    <div class="temsCondition">
+                        <input type="checkbox" value="1" name="accept_term_condition" class="required-entry">
+                        <label class="accept-and-go">
+                            <span>By ticking this box you confirm you have read, understood and accept our <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">Terms & Conditions</a> and <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a></span>
+                        </label>
+                        <div for="accept_term_condition" generated="true" class="mage-error" style="display:none" id="accept_term_condition-error">This is a required field.</div>
+                    </div>
+
+                    <?php
+                /* Newsletter */
+                if ($block->isNewsletterEnabled()) : ?>
+                    <div class="field choice newsletter">
+                        <input type="checkbox" name="is_subscribed" title="<?= $block->escapeHtmlAttr(__('Sign Up for Newsletter')) ?>" value="1" id="is_subscribed"<?php if ($block->getFormData()->getIsSubscribed()) : ?> checked="checked"<?php endif; ?> class="checkbox">
+                        <label for="is_subscribed" class="label"><span><?= $block->escapeHtml(__('Keep me informed of new product and promotions.')) ?></span></label>
+                    </div>
+                    <?php /* Extensions placeholder */ ?>
+                    <?= $block->getChildHtml('customer.form.register.newsletter') ?>
+                <?php endif ?>
+            </fieldset>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button type="submit" class="action submit primary" title="<?= $block->escapeHtmlAttr(__('Create an Account')) ?>"><span><?= $block->escapeHtml(__('Create an Account')) ?></span></button>
+                </div>
+                <div class="secondary">
+                    <a class="action back" href="<?= $block->escapeUrl($block->getBackUrl()) ?>"><span><?= $block->escapeHtml(__('Back')) ?></span></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- General Question Popup -->
+        <div class="general-question-elements">
+            <div class="general-question-fixed">
+                <!-- <span class="floating-general-question general_question_btn_cancel">X</span> -->
+                <div class="main-container">
+                    <div class="register-step-left">
+                    <div class="consultation-section question-text">
+
+<div class="consultation_block_section question-text">
+<div class="consultation_block question-text">
+<span class="question-text ">01</span>
+<div class="consultation-cont question-text">
+<div class="consultation_img question-text"><img class="question-text" src="<?php echo $this->getViewFileUrl('images/clinical-consultation3.svg'); ?>" alt="" /></div>
+<h4 class="question-text">Create Account</h4> 
+</div>
+
+</div>
+
+<div class="consultation_block question-text">
+<span class="question-text step_1">02</span>
+<div class="consultation-cont question-text">
+<div class="consultation_img question-text"><img class="question-text" src="<?php echo $this->getViewFileUrl('images/add-to-cart-icon.png'); ?>" alt="" /></div>
+<h4 class="question-text">Add to cart</h4> 
+</div>
+
+</div>
+
+
+<div class="consultation_block question-text">
+<span class="question-text step_2">03</span>
+<div class="consultation-cont question-text">
+<div class="consultation_img question-text"><img class="question-text" src="<?php echo $this->getViewFileUrl('images/fill-questions.png'); ?>" alt="" /></div>
+<h4 class="question-text">Fill in Questions</h4> 
+</div>
+
+</div>
+
+<div class="consultation_block question-text">
+<span class="question-text step_3">04</span>
+<div class="consultation-cont question-text">
+<div class="consultation_img question-text"><img class="question-text" src="<?php echo $this->getViewFileUrl('images/commerce-and-shopping.svg'); ?>" alt="" /></div>
+<h4 class="question-text">Checkout</h4> 
+</div>
+
+</div>
+</div>
+</div>
+                    <div class="question-wrapper">
+                        <div class="general-question-title-wrapper">
+                            <div class="title">
+                                <h3 class="general-question-title"><?php echo __("General Health Questions"); ?></h3>
+                                <p class="general-question-text">To assess the suitability of the item you have ordered we’re going to have to ask you some brief questions regarding your general health</p>
+                            </div>
+                            <div class="back-to-register">
+                                <span class="floating-general-question general_question_btn_cancel">< back to registration</span>
+                            </div>
+                        </div>
+                        <div class="questiondiv">
+                            <?php
+                                $gq = array();
+                                $gq['suffer_diagnosed'] = $block->getFormData()->getSufferDiagnosed();
+                                $gq['suffer_diagnosed_yes'] = $block->getFormData()->getSufferDiagnosedYes();
+                                $gq['other_medication'] = $block->getFormData()->getOtherMedication();
+                                $gq['other_medication_yes'] = $block->getFormData()->getOtherMedicationYes();
+                                $gq['have_allergies'] = $block->getFormData()->getHaveAllergies();
+                                $gq['have_allergies_yes'] = $block->getFormData()->getHaveAllergiesYes();
+                                $gq['registered_gp'] = $block->getFormData()->getRegisteredGp();
+                                $gq['registered_gp_permission'] = $block->getFormData()->getRegisteredGpPermission();
+                                $gq['registered_gp_surgery'] = $block->getFormData()->getRegisteredGpSurgery();
+                                $gq['upload_documents_prescriber'] = $block->getFormData()->getUploadDocumentsPrescriber();
+                                $gq['upload_documents_prescriber_yes'] = $block->getFormData()->getUploadDocumentsPrescriberYes();
+                                $gq['prescriber_to_know'] = $block->getFormData()->getPrescriberToKnow();
+                                $gq['prescriber_to_know_yes'] = $block->getFormData()->getPrescriberToKnowYes();
+                            ?>
+                            <?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setGq($gq)->setTemplate("Nilesh_GeneralQuestions::general/fields.phtml")->toHtml() ?>
+                        </div>
+                        <div class="general-question-submit">
+                            <div class="button">
+                                <button type="button" class="btn btn-primary" id="general_question_submit">Submit</button>
+                            </div>
+                            <div class="back-to-register">
+                                <span class="floating-general-question general_question_btn_cancel">< back to registration</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="text-wrapper">
+                       <!--  <p>Don’t forget, only our qualified prescribers see the answers you provide.</p> -->
+
+                       <div class="product-question-right"> 
+
+  <div class="info-1">
+    <div class="info-img"><img src="<?php echo $this->getViewFileUrl('images/manesha-img.jpg'); ?>" alt="Manesha" class="" /></div>
+    <div class="info_details_1 question-text">
+      
+      <h3>You’re almost there!</h3>
+      <p>It is the prescribers duty to ensure that the medicine is being used safely and appropriately. please answer a few questions about yourself to help us process your request.</p>
+      </div>
+      
+         <h3>- Manesha</h3>
+         <p><span>Customer Service Team</span></p>
+      
+
+  </div>
+
+  <div class="info-1 info_list"> 
+    <h2 class="info_title_1">Confidentiality & Authenticity Assured</h2>
+    <ul>
+      <li>Fully Regulated UK Pharmacy</li>
+      <li>Authentic UK sourced medicines only.</li>
+      <li>Trading for more than 10 years.</li>
+      <li>Information Governance lead ensures all data is confidential</li>
+    </ul>
+  </div>
+
+  <div class="info-1 info_list info_2"> 
+    <h2 class="info_title_2">Need Help With Your Questionnaire?</h2>
+    <p>Our customer service team is on hand Monday-Friday to help you with your queries.</p>
+    <p>Please call us on <strong><a class="tel-link" href="tel:08009788956">08009788956</a></strong> or<br/>
+    email us at: <a href="mailto:headoffice@pharmacyplanet.com"><strong>headoffice@pharmacyplanet.com</strong></a> </p>
+  </div>
+
+
+  <div class="img-1"> 
+ 
+
+
+<!-- TrustBox widget - Mini Carousel -->
+<div class="trustpilot-widget" data-locale="en-GB" data-template-id="539ad0ffdec7e10e686debd7" data-businessunit-id="5b55f778afee7a0001b505dc" data-style-height="350px" data-style-width="100%" data-theme="light" data-stars="1,2,3,4,5" data-review-languages="en">
+  <a href="https://uk.trustpilot.com/review/pharmacyplanet.co.uk" target="_blank" rel="noopener">Trustpilot</a>
+</div>
+<!-- End TrustBox widget -->
+</div>
+
+<div class="img-1"> 
+    <a href="https://medicine-seller-register.mhra.gov.uk/search-registry/386" target="_blank" rel="noreferrer"><img src="/pub/static/frontend/Custom/luma_child/en_GB/Magefan_LazyLoad/images/pixel.jpg" data-original="<?php echo $this->getViewFileUrl('images/mhra.svg'); ?>" alt="MHRA" class="mhra-logo" /></a>
+    <a href="https://www.pharmacyregulation.org/registers/pharmacy/registrationnumber/1035466" target="_blank" rel="noreferrer"><img src="/pub/static/frontend/Custom/luma_child/en_GB/Magefan_LazyLoad/images/pixel.jpg" data-original="<?php echo $this->getViewFileUrl('images/pharmacy-logo.svg'); ?>" alt="Pharmacy logo" class="pharmacy-logo" /></a>
+     
+</div>
+                        <!-- <div class="img-wrapper">
+                            <a href="https://medicine-seller-register.mhra.gov.uk/search-registry/386" rel="noreferrer">
+                                <img src="<?php //echo $this->getViewFileUrl('images/mhra-logo.jpg'); ?>" alt="">
+                            </a>
+                            <a href="https://www.pharmacyregulation.org/registers/pharmacy/registrationnumber/1035466" rel="noreferrer">
+                                <img src="<?php //echo $this->getViewFileUrl('images/pharmacy-img.jpg'); ?>" alt="">
+                            </a>
+                        </div>
+                        <div class="img-wrapper">
+                            <div class="trustpilot-widget" data-locale="en-GB" data-template-id="5419b6ffb0d04a076446a9af" data-businessunit-id="5b55f778afee7a0001b505dc" data-style-height="20px" data-style-width="100%" data-theme="light">
+                                <a href="https://uk.trustpilot.com/review/pharmacyplanet.co.uk" target="_blank" rel="noopener">Trustpilot</a>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        <!-- General Question Popup -->
+    </form>
+</div>
+<script>
+require([
+    'jquery',
+    'mage/storage',
+    'mage/mage'
+], function($,storage){
+
+    var dataForm = $('#form-validate');
+    var ignore = <?= /* @noEscape */ $_dob->isEnabled() ? '\'input[id$="full"]\'' : 'null' ?>;
+
+    dataForm.mage('validation', {
+    <?php if ($_dob->isEnabled()) : ?>
+        errorPlacement: function(error, element) {
+            if (element.prop('id').search('full') !== -1) {
+                var dobElement = $(element).parents('.customer-dob'),
+                    errorClass = error.prop('class');
+                error.insertAfter(element.parent());
+                dobElement.find('.validate-custom').addClass(errorClass)
+                    .after('<div class="' + errorClass + '"></div>');
+            }
+            else {
+                error.insertAfter(element);
+            }
+        },
+        ignore: ':hidden:not(' + ignore + ')'
+    <?php else : ?>
+        ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+    <?php endif ?>
+    }).find('input:text').attr('autocomplete', 'off');
+
+    // Open General Question Section
+    $("#general_question_btn").click(function (e) {
+        e.preventDefault();
+        $('.basic-registration-elements').addClass('hide');
+        $('.custom-block-customer-register .reg-header').addClass('hide');
+        window.scrollTo(0, 0);
+        $(".general-question-fixed").addClass("active");
+    });
+
+    // Close General Question
+    $(".general_question_btn_cancel").click(function (e) {
+        e.preventDefault();
+        if(dataForm.validation('isValid')){
+            $("#general_question").val(1);
+        }else{
+            var r = confirm("Are you sure you want to leave? \r\nGeneral Questions will not be submitted");
+            if (r == true) {
+                $('.basic-registration-elements').removeClass('hide');
+                $('.custom-block-customer-register .reg-header').removeClass('hide');
+                $("#general_question").val(0);
+                $(".general-question-fixed").removeClass("active");
+                var genQuestionPosition = $('.general-question-regpage-div').offset();
+                window.scrollTo(0, genQuestionPosition.top);
+            }
+        }
+    });
+
+    // Submit of Genral Question
+    $('#general_question_submit').click( function() {
+
+        if(dataForm.validation('isValid')){
+            $("#general_question").val(1);
+            $('.basic-registration-elements').removeClass('hide');
+            $('.custom-block-customer-register .reg-header').removeClass('hide');
+            $(".general-question-fixed").removeClass("active");
+            var genQuestionPosition = $('.general-question-regpage-div').offset();
+            window.scrollTo(0, genQuestionPosition.top);
+        }
+    });
+
+    <?php if(!empty($block->escapeHtmlAttr($block->getFormData()->getEmail()))){ ?>
+        var returnNe = true;
+    <?php }else{ ?>
+        var returnNe = false;
+    <?php } ?>
+
+    $("#email_address").change(function (e) {
+        e.preventDefault();
+        var emailVal = $(this).val();
+        var emailError = $("#email_address-custom-error");
+        /*
+            *this is for email availability
+        */
+        storage.post(
+            BASE_URL+'/rest/V1/customers/isEmailAvailable',
+            JSON.stringify({
+                customerEmail: emailVal
+            }),
+            false
+        ).done(function (isEmailAvailable) {
+            console.log(isEmailAvailable);
+            if (isEmailAvailable) {
+                emailError.hide();
+                returnNe = true;
+            }else{
+                emailError.html("This email address is already in use by other user");
+                emailError.show();
+                returnNe = false;
+            }
+        });
+    });
+
+    // Removing re-enter password
+    $("#form-validate").submit(function (e) {
+        /*
+        *This is use for prevent revalidation
+        */
+        var pass = $("#password").val();
+        $("#password_confirmation").val(pass);
+
+        if(returnNe == false){
+            e.preventDefault();
+        }
+    });
+
+    // Add hide show password
+    $("#showpassword").click(function (e) {
+        e.preventDefault();
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+            $(this).html(`<i class="fa fa-eye-slash" aria-hidden="true"></i>`);
+        } else {
+            x.type = "password";
+            $(this).html(`<i class="fa fa-eye" aria-hidden="true"></i>`);
+        }
+    });
+
+    // this is for DOB
+    $('.dob-day').keyup(function(){
+        if($(this).val().length >= 2){
+            $(".dob-month").focus();
+        }
+    });
+
+    $('.dob-month').keyup(function(){
+        if($(this).val().length >= 2){
+            $(".dob-year").focus();
+        }
+    });
+});
+</script>
+
+<?php if ($block->getShowAddressFields()) : ?>
+<script type="text/x-magento-init">
+    {
+        "#country": {
+            "regionUpdater": {
+                "optionalRegionAllowed": <?= /* @noEscape */ $block->getConfig('general/region/display_all') ? 'true' : 'false' ?>,
+                "regionListId": "#region_id",
+                "regionInputId": "#region",
+                "postcodeId": "#zip",
+                "form": "#form-validate",
+                <?php //phpcs:disable ?>
+                "regionJson": <?= /* @noEscape */ $this->helper(\Magento\Directory\Helper\Data::class)->getRegionJson() ?>,
+                <?php //phpcs:enable ?>
+                "defaultRegion": "<?= (int) $block->getFormData()->getRegionId() ?>",
+                <?php //phpcs:disable ?>
+                "countriesWithOptionalZip": <?= /* @noEscape */ $this->helper(\Magento\Directory\Helper\Data::class)->getCountriesWithOptionalZip(true) ?>
+                <?php //phpcs:enable ?>
+            }
+        }
+    }
+</script>
+<?php endif; ?>
+
+<script type="text/x-magento-init">
+    {
+        ".field.password": {
+            "passwordStrengthIndicator": {
+                "formSelector": "form.form-create-account"
+            }
+        }
+    }
+</script>
+
+
+<script>
+    require([
+	'jquery',
+	'mage/validation'
+], function($) {
+
+
+
+
+	$('#fetchify_address').on('input', function(e) {
+        $('#fetchify_address_select').val('')
+        $('#fetchify_address_message').show();
+		spinnerLoader = $(".spinner-loader");
+		spinnerLoader.show();
+		let postCodeValue = $('#zip').val();
+		if (postCodeValue == '') {
+		    spinnerLoader.hide();
+            $('#zip-error').hide();
+		}
+
+		console.log('loadPostcode');
+		let Url = "<?php echo $block->getUrl("fetchify/get/address");?>";
+		$.ajax({
+			url: Url,
+            data: {
+                'query': $('#fetchify_address').val()
+            },
+			type: 'GET',
+			success: function(response) {
+				spinnerLoader = $(".spinner-loader");
+				spinnerLoader.hide();
+				console.log(response);
+				if (response.status == 200) {
+                    $('#fetchify_address_select').empty(); // clear any existing
+                    $('#fetchify_address_select').show(); // make sure it's visible
+                    console.log('if block executed :200 ')
+                    console.log(response.response.results);
+                    if (response.response.results.length > 0) {
+                    // Remove existing options except default if needed
+                    $('#fetchify_address').find('option:not(:first)').remove();
+                    var i = 0
+                    // Create and append options from results.labels
+                    response.response.results.forEach(function(item) {
+                        
+                        let label = item.labels.join(', ');
+                        console.log( label);
+                        var option = $('<option>', {
+                            value: label,
+                            text: label
+                        });
+                        
+                        $('#fetchify_address_select').append(option);
+                                            
+                    });
+
+                    // Select the first option by default if there is at least one
+                    $('#fetchify_address_select').prop('selectedIndex', 0).trigger('change');
+
+                    // Show the select if it's hidden
+                    $('#fetchify_address').show();
+                    } else {
+                    var noAddressDiv = $('<div>', {
+                        'class': 'mage-error fetchify-no-address-found',
+                        'text': 'No address found'
+                    });
+                    // Remove previous messages if exist
+                    $('.fetchify-no-address-found').remove();
+                    // Insert the message after the input field (you may adjust selector if needed)
+                    $('#fetchify_address').after(noAddressDiv);
+                    }
+                } else {
+                    console.log('else block executed :200 ')
+                }
+
+					
+				
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log("AJAX request failed:", textStatus, errorThrown);
+				// Optionally, show a user notification
+				var errorDiv = $('<div>', {
+					'class': 'mage-error',
+					'id': 'postcode-ajax-error',
+					'text': 'Sorry, we were unable to look up your address. Please try again later.'
+				});
+				// Remove previous error if exists
+				$('#postcode-ajax-error').remove();
+				// Insert after postcode field (or another appropriate place)
+				$('#zip').after(errorDiv);
+				// Optionally reset fields as appropriate
+				$('#postcodes').hide().empty();
+			}
+		});
+	});
+
+	$('#fetchify_address_select').on('change', function() {
+		var selectedAddress = $(this).val();
+		fillAddressFieldsFromString(selectedAddress);
+	});
+
+	$('#postcodes').change(function() {
+
+		console.log('postcodes changed');
+		var postcode = $(this).val();
+		var line1 = $(this).find('option:selected').data('line_1');
+		var line2 = $(this).find('option:selected').data('line_2');
+		$('#street_1').val(postcode);
+		$('#street_2').val(line2);
+
+		console.log('postcode: ' + postcode);
+	});
+
+    $('#manual_address').click(function(){
+        $('.fieldset.address').show();
+        $('.fieldset.fetchify').hide();
+        $('#back_to_address_search').show();
+
+        
+    })
+
+    $('#back_to_address_search').click(function(){
+        $('.fieldset.address').hide();
+        $('.fieldset.fetchify').show();
+        $('#back_to_address_search').hide();
+    })
+
+
+	function showRegionIdAndHideRegionInput() {
+	    // Hide the region input text
+	    $('#region').hide();
+
+	    // Show the region_id select
+	    $('#region_id').show();
+
+	    // Enable region_id in case it is disabled
+	    $('#region_id').prop('disabled', false);
+	}
+
+
+	function cleanForm() {
+	    // Reset street_1 and street_2
+		$('#street_1').val('');
+		$('#street_2').val('');
+		// Reset county/region (for both select and input)
+		$('#region_id').val('').trigger('change');
+		$('#region').val('');
+		// Reset city
+		$('#city').val('');
+		// Hide and clear the Available Towns select
+		$('#Postcodes').val('')
+		$('#Postcodes_Container').hide();
+	};
+
+function fillAddressFieldsFromString(str) {
+    cleanForm();
+    if (!str) {
+        return;
+    }
+    var arr = str.split(",");
+    arr = arr.map(function(item) { return $.trim(item); });
+
+    // If array has 5 items, use 2nd and 3rd as street1 and street2
+    if (arr.length === 5) {
+        if (arr[0]) {
+            $('#zip').val(arr[0]);
+        }
+        if (arr[1]) {
+            $('#street_1').val(arr[1]);
+        }
+        if (arr[2]) {
+            $('#street_2').val(arr[2]);
+        }
+        if (arr[3]) {
+            $('#city').val(arr[3]);
+        }
+        if (arr[4]) {
+            $('#region_id').hide();
+            $('#region_id').prop('disabled', true);
+            $('#region').val(arr[4]);
+            $('#region').show();
+        }
+    } else {
+        // Fallback for old logic: postcode, street1, city, region
+        if (arr[0]) {
+            $('#zip').val(arr[0]);
+        }
+        if (arr[1]) {
+            $('#street_1').val(arr[1]);
+        }
+        if (arr[2]) {
+            $('#city').val(arr[2]);
+        }
+        if (arr[3]) {
+            $('#region_id').hide();
+            $('#region_id').prop('disabled', true);
+            $('#region').val(arr[3]);
+            $('#region').show();
+        }
+    }
+}
+    // If you wish to select in region_id dropdown (when present)
+    // $('#region_id option').filter(function() {
+    //     return $(this).text().toLowerCase() === arr[3].toLowerCase();
+    // }).prop('selected', true).trigger('change');
+});
+</script>
+
+
+
+<style>
+    .postcode-btn{
+    display: inline-block;
+    text-align: center; 
+    font-size: 13px;
+    color: #fff !important;
+    font-family: 'Lato', sans-serif;
+    line-height: 38px;
+    padding: 0 15px;
+    font-weight: 400;
+    border-radius: 35px;
+    letter-spacing: 0.26px;
+    height: auto;
+    text-transform: capitalize;
+    border: 0 !important;
+    background-size: 100% 200% !important;
+    background-image: linear-gradient(to bottom, #ED3237 50%, #ED3237 50%) !important;
+    -webkit-transition: background-position 0.7s;
+    -moz-transition: background-position 0.7s;
+    transition: background-position 0.7s !important;
+    text-decoration: none !important;
+    background: #ED3237;
+}
+
+.postcode-btn:hover{
+    background-size: 100% 200% !important;
+    background-image: linear-gradient(to bottom, #ED3237 50%, #53CAF5 50%) !important;
+    background-position: 0 -100% !important;
+    text-decoration: none !important;
+    background-color: #53CAF5 !important;
+}
+
+.field.postcodes .control{
+    position: relative;
+}
+.cancel-postcode-btn{
+    background: #ED3237;
+    border-radius: 50px;
+    height: 30px;
+    width: 30px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: #fff; border: 0;
+    position: absolute;
+    top: 20px;
+    right: -40px;
+}
+@media only screen and (min-width: 1025px) {
+    .customer-account-create .form-create-account{
+        width: 90% !important;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .postcode-btn{
+        margin-bottom: 25px;
+    }
+    .cancel-postcode-btn{
+        top: -33px !important;
+        right: 0 !important;
+    }
+    .enter-btn{
+        margin-top: 15px;
+    }
+}
+
+@media only screen and (min-width: 1025px) {
+    .enter-manual-address{
+        display: flex;
+        gap: 15px;
+    }
+}
+
+.ethnicity-field{
+    border-top: 1px solid #ddd;
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+.basic-registration-elements .fieldset.fetchify{
+    border-top: 1px solid #ddd;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #ddd;
+}
+#fetchify_address{
+    background: url(/pub/media/wysiwyg/location-i.png) left 20px center no-repeat;
+    padding-left: 50px !important;
+}
+.enter-btn{
+    width: 100%;
+    align-items: center;
+    display: flex;
+}
+.enter-btn a{
+    color: #2998c1;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: underline;
+}
+/*.enter-btn a{
+    display: inline-block;
+    text-align: center; 
+    font-size: 13px;
+    color: #fff !important;
+    font-family: 'Lato', sans-serif;
+    line-height: 38px;
+    padding: 0 15px;
+    font-weight: 400;
+    border-radius: 35px;
+    letter-spacing: 0.26px;
+    height: auto;
+    text-transform: capitalize;
+    border: 0 !important;
+    background-size: 100% 200% !important;
+    background-image: linear-gradient(to bottom, #ED3237 50%, #ED3237 50%) !important;
+    -webkit-transition: background-position 0.7s;
+    -moz-transition: background-position 0.7s;
+    transition: background-position 0.7s !important;
+    text-decoration: none !important;
+    background: #ED3237;
+}*/
+#fetchify_address_message{
+    padding: 10px 0 20px 0;
+    display: inline-block;
+    color: #000;
+}
+
+input#fetchify_address::placeholder{
+  text-align: left;
+}
+.enter-btn a#back_to_address_search{
+    margin-top: -20px;
+}
+
+
+</style>

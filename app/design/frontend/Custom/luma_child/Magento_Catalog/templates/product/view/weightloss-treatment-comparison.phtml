@@ -1,0 +1,360 @@
+<?php
+
+$blockObj = $block->getLayout()
+    ->createBlock(\Haartyhanks\ProductPage\Block\WeightlossComparison::class);
+
+$productId = $blockObj->getProductId();
+$treatments = $blockObj->getTreatments();
+
+?>
+
+<?php if ($blockObj->isAllowedProduct()): ?>
+
+    <div class="weightloss-treatment-comparison reveal1">
+        <div class="container">
+
+            <h2>Weight loss treatments comparison</h2>
+
+            <div class="weight-loss-com">
+
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+
+                        <!-- Labels -->
+                        <td valign="top" class="weight-d-1">
+                            <table width="100%" border="0">
+                                <tr>
+                                    <td class="weight-d-1">&nbsp;</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="first-1">Active ingredient</td>
+                                </tr>
+
+                                <tr>
+                                    <td>How to take it</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="last-2">How it works</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="last-1">Effectiveness</td>
+                                </tr>
+                            </table>
+                        </td>
+
+                        <!-- Dynamic Treatments -->
+                        <?php foreach ($treatments as $treatment): ?>
+
+                            <td valign="top"
+                                class="<?= $block->escapeHtmlAttr($treatment['class']) ?>">
+
+                                <table width="100%" border="0">
+
+                                    <tr>
+                                        <td class="weight-d">
+
+                                            <div class="weight-cont">
+
+                                                <div class="weight-i">
+                                                    <img
+                                                        src="<?= 
+                                                                    
+                                                                        $treatment['image']
+                                                                 ?>"
+                                                        alt="<?= $block->escapeHtmlAttr(
+                                                                    $treatment['name']
+                                                                ) ?>">
+                                                </div>
+
+                                                <h3>
+                                                    <?= $block->escapeHtml(
+                                                        $treatment['name']
+                                                    ) ?>
+                                                </h3>
+
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="l-space one">
+                                            <?= $block->escapeHtml(
+                                                $treatment['ingredient']
+                                            ) ?>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="l-space">
+                                            <?= $block->escapeHtml(
+                                                $treatment['how_to_take']
+                                            ) ?>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="l-space last2">
+                                            <?= $block->escapeHtml(
+                                                $treatment['how_it_works']
+                                            ) ?>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="l-space last">
+                                            <?= $block->escapeHtml(
+                                                $treatment['effectiveness']
+                                            ) ?>
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                            </td>
+
+                        <?php endforeach; ?>
+
+                    </tr>
+                </table>
+
+            </div>
+
+            <p>*% of people losing more than 5% of body weight.</p>
+
+        </div>
+    </div>
+
+<?php endif; ?>
+
+
+
+
+
+<script>
+    require([
+        'jquery',
+        'slick'
+    ], function($) {
+
+        $('.comparison-slider').slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            arrows: true,
+            dots: false,
+            infinite: false,
+            responsive: [{
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 3
+                    }
+                },
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        });
+
+    });
+</script>
+
+<style>
+    .weight-loss-comparison-wrapper {
+        display: flex;
+        width: 100%;
+    }
+
+    .comparison-labels {
+        width: 220px;
+        flex-shrink: 0;
+    }
+
+    .comparison-slider-wrapper {
+        width: calc(100% - 220px);
+        overflow: hidden;
+    }
+
+    .comparison-slide {
+        text-align: center;
+    }
+
+    .comparison-row {
+        min-height: 100px;
+        padding: 20px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .comparison-header {
+        min-height: 220px;
+    }
+
+    .comparison-last {
+        border-bottom: 0;
+    }
+
+    .weight-cont {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .weight-i img {
+        max-width: 120px;
+        height: auto;
+    }
+
+    .comparison-slider .slick-prev,
+    .comparison-slider .slick-next {
+        z-index: 10;
+    }
+
+    @media (max-width: 767px) {
+
+        .weight-loss-comparison-wrapper {
+            display: block;
+        }
+
+        .comparison-labels {
+            width: 100%;
+            display: none;
+        }
+
+        .comparison-slider-wrapper {
+            width: 100%;
+        }
+
+    }
+
+/*-----------27-08-2026--------------*/
+
+.catalog-product-view.weightloss-product .weight-cont h3{
+        font-size: 13px !important;
+    }
+    .catalog-product-view.weightloss-product .weight-loss-com table td.l-space{
+        font-size: 13px !important;
+         
+    }
+@media screen and (min-width: 768px) {
+    
+     .catalog-product-view.weightloss-product .weight-loss-com{
+        overflow-x: scroll;
+     }
+
+     .weightloss-treatment-comparison .container{
+        max-width: 100% !important;
+     }
+     .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table{
+        width: 100%;
+        min-width: 1500px;
+    }
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table table{
+        width: 100%;
+        min-width: 100% !important;
+    }
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com::-webkit-scrollbar:horizontal {
+        height: 12px;
+    }
+
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com::-webkit-scrollbar-thumb {
+        border-radius: 0px;
+        border: 0px solid white;
+        background-color: rgba(150, 217, 241, .4);
+    }
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td{
+        min-width: 150px;
+    }
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-2,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-3 { 
+        min-width: 250px;
+    }
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.l-space,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td{
+        height: 115px !important;
+    }
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-2 td.l-space.one,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-2 td.l-space.last,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-3 td.l-space.one,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-3 td.l-space.last,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-1 td.first-1,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-1 td.last-1,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-1 td.last2,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-1 td.last2
+    {
+        height: 75px !important;
+    }
+     
+}
+
+
+@media only screen and (max-width: 767px) { 
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.l-space,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td{
+        height: 140px !important;
+    }
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.l-space{
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+    .catalog-product-view .weightloss-treatment-comparison .weight-d-1 table td{
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-2 td.l-space.one,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-2 td.l-space.last,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-3 td.l-space.one,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-3 td.l-space.last,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-1 td.first-1,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-1 td.last-1
+    {
+        height: 70px !important;
+    }
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-2 td.l-space.last2,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-2 td.l-space.last2,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-3 td.l-space.last2,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-3 td.l-space.last2,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-1 td.last2,
+    .catalog-product-view .weightloss-treatment-comparison .weight-loss-com table td.weight-d-1 td.last2
+    {
+        height: 115px !important;
+    }
+
+}
+
+.catalog-product-view .weightloss-treatment-comparison .weight-loss-com {
+    width: 100%;
+    overflow-x: auto !important;
+    overflow-y: visible;
+    position: relative;
+}
+
+.catalog-product-view .weightloss-treatment-comparison .weight-loss-com table {
+    width: max-content !important;
+    min-width: 100%;
+}
+
+/* First column fixed */
+.catalog-product-view .weightloss-treatment-comparison .weight-loss-com > table > tbody > tr > td.weight-d-1 {
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    background: #fff;
+    min-width: 140px;
+    width: 140px;
+}
+</style>

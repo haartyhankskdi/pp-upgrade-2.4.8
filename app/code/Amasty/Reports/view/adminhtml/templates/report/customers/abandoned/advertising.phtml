@@ -1,0 +1,26 @@
+<?php
+/* @var Information $block */
+/* @var Escaper $escaper */
+
+use Amasty\Reports\Block\Adminhtml\Report\Customers\Abandoned\Information;
+use Magento\Framework\Escaper;
+
+// phpcs:disable Generic.Files.LineLength
+?>
+<p class="advertising">
+    <?php if (!$block->isAcartEnabled()): ?>
+        <?= $escaper->escapeHtml(__(
+            'Send catchy reminders to your customers using <a href="%1" target="_blank">Abandoned Cart Email extension</a> extension.',
+            $escaper->escapeUrl($block->getAcartUrl())
+        ), ['a']) ?>
+    <?php endif; ?>
+    <?php if (!$block->isRequestQuoteEnabled()): ?>
+        <?= $escaper->escapeHtml(
+            __(
+                'Create personal offer with <a href="%1" target="_blank">Custom Quote extension</a>.',
+                $escaper->escapeUrl($block->getRequestQuoteUrl())
+            ),
+            ['a']
+        ) ?>
+    <?php endif; ?>
+</p>

@@ -1,0 +1,207 @@
+Back,Back
+Delete,Delete
+"Are you sure you want to do this?","Are you sure you want to do this?"
+Report,Report
+Save,Save
+"Save & New","Save & New"
+"Save & Duplicate","Save & Duplicate"
+"Save & Close","Save & Close"
+View,View
+"Add New Popup","Add New Popup"
+"Manage Popup","Manage Popup"
+Settings,Settings
+Reports,Reports
+"User Guide","User Guide"
+"Change Log","Change Log"
+"Get Support","Get Support"
+"The popup has been deleted.","The popup has been deleted."
+"We can't find a popup to delete.","We can't find a popup to delete."
+"Popup Builder","Popup Builder"
+"Manage Popups","Manage Popups"
+"This popup no longer exists.","This popup no longer exists."
+"Edit Popup","Edit Popup"
+"New Popup","New Popup"
+Popup,Popup
+Popups,Popups
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"You saved the popup.","You saved the popup."
+"You duplicated the popup","You duplicated the popup"
+"Something went wrong while saving the popup.","Something went wrong while saving the popup."
+"Popup Reports","Popup Reports"
+"Action Type","Action Type"
+Link,Link
+"Leave Page","Leave Page"
+"Close Popup","Close Popup"
+"Close Popup Сonstantly","Close Popup Сonstantly"
+"Close All Popups Сonstantly","Close All Popups Сonstantly"
+"All Store Views","All Store Views"
+"Could not save popup: %1","Could not save popup: %1"
+"Cannot delete popup with id %1","Cannot delete popup with id %1"
+Custom,Custom
+Edit,Edit
+"Delete %1","Delete %1"
+"Are you sure you want to delete a %1 record?","Are you sure you want to delete a %1 record?"
+Width,Width
+"Set the popup width (px).","Set the popup width (px)."
+Height,Height
+"Set the popup height.","Set the popup height."
+"Custom Height","Custom Height"
+"Content Position","Content Position"
+"Set position of the content in the popup.","Set position of the content in the popup."
+Position,Position
+"Set position of the popup on a page.","Set position of the popup on a page."
+Overlay,Overlay
+"Show/hide the background overlay.","Show/hide the background overlay."
+"Close Button","Close Button"
+"Show/hide the close button.","Show/hide the close button."
+"Entrance Animation","Entrance Animation"
+"Select one from multiple animation effects when the popup appears.","Select one from multiple animation effects when the popup appears."
+"Exit Animation","Exit Animation"
+"Select one from multiple animation effects when the popup exits.","Select one from multiple animation effects when the popup exits."
+"Animation Duration","Animation Duration"
+"Set the time duration for the animation (seconds).","Set the time duration for the animation (seconds)."
+"Show Close Button After X seconds","Show Close Button After X seconds"
+"Set after how many seconds the close button will appear.","Set after how many seconds the close button will appear."
+"Automatically Close After X seconds","Automatically Close After X seconds"
+"Set after how many seconds the popup is closed automatically.","Set after how many seconds the popup is closed automatically."
+"Prevent Closing on Overlay","Prevent Closing on Overlay"
+"If Yes, the popup won’t be closed even if the user clicks on the background overlay.","If Yes, the popup won’t be closed even if the user clicks on the background overlay."
+"Prevent Closing on ESC key","Prevent Closing on ESC key"
+"If Yes, the popup won’t be closed even if the user presses ESC key.","If Yes, the popup won’t be closed even if the user presses ESC key."
+"Disable Page Scrolling","Disable Page Scrolling"
+"Set to Yes to prevent page scrolling when the popup is open.","Set to Yes to prevent page scrolling when the popup is open."
+"Avoid Multiple Popups","Avoid Multiple Popups"
+"If the user has seen another popup on the page hide this popup.","If the user has seen another popup on the page hide this popup."
+"Top Left","Top Left"
+"Top Center","Top Center"
+"Top Right","Top Right"
+"Center Left","Center Left"
+"Center Center","Center Center"
+"Center Right","Center Right"
+"Bottom Left","Bottom Left"
+"Bottom Center","Bottom Center"
+"Bottom Right","Bottom Right"
+Advanced,Advanced
+Down,Down
+Up,Up
+"Fit To Content","Fit To Content"
+"Fit To Screen","Fit To Screen"
+Top,Top
+Center,Center
+Bottom,Bottom
+"Show after X page views","Show after X page views"
+"If Yes, set the number of page views before the popup is triggered.","If Yes, set the number of page views before the popup is triggered."
+"Page Views","Page Views"
+"Show after X minutes","Show after X minutes"
+"If Yes, set after how many minutes the popup will show again.","If Yes, set after how many minutes the popup will show again."
+Minutes,Minutes
+"On up to X times","On up to X times"
+"Specify max times the popup will appear.","Specify max times the popup will appear."
+Times,Times
+Count,Count
+"When arriving from specific URL","When arriving from specific URL"
+"If Yes, Show or Hide the popup if the user arrives from a specific URL.","If Yes, Show or Hide the popup if the user arrives from a specific URL."
+Action,Action
+URL,URL
+"Show when arriving from","Show when arriving from"
+"If Yes, the popup will show if the users arrives from Search Engines, External Links and/or Internal Links.","If Yes, the popup will show if the users arrives from Search Engines, External Links and/or Internal Links."
+"Show on devices","Show on devices"
+"If Yes, choose to show the popup on Desktop, Tablet Landscape, Tablet Portrait, Mobile Landscape and/or Mobile Portrait.","If Yes, choose to show the popup on Desktop, Tablet Landscape, Tablet Portrait, Mobile Landscape and/or Mobile Portrait."
+"Hide from existing subscribers","Hide from existing subscribers"
+"If Yes, the popup will be hidden from existing subscribers of your site.","If Yes, the popup will be hidden from existing subscribers of your site."
+"Sale Rules","Sale Rules"
+"The popup will be displayed if specific cart price rules are met.","The popup will be displayed if specific cart price rules are met."
+"Advanced Rules","Advanced Rules"
+"On Open","On Open"
+"On Close","On Close"
+Show,Show
+Hide,Hide
+Regex,Regex
+"Search Engines","Search Engines"
+"External Links","External Links"
+"Internal Links","Internal Links"
+Desktop,Desktop
+"Tablet Landscape","Tablet Landscape"
+"Tablet Portrait","Tablet Portrait"
+"Mobile Landscape","Mobile Landscape"
+"Mobile Portrait","Mobile Portrait"
+"Vertical Position","Vertical Position"
+"Horizontal Position","Horizontal Position"
+Color,Color
+"Hover Color","Hover Color"
+"Background Color","Background Color"
+"Hover Background Color","Hover Background Color"
+"Icon Size","Icon Size"
+"Border Radius","Border Radius"
+"Box Size","Box Size"
+"Box Shadow","Box Shadow"
+Horizontal,Horizontal
+Vertical,Vertical
+Blur,Blur
+Spread,Spread
+Inside,Inside
+Outside,Outside
+No-repeat,No-repeat
+Repeat,Repeat
+Repeat-x,Repeat-x
+Repeat-y,Repeat-y
+Auto,Auto
+Cover,Cover
+Contain,Contain
+Outline,Outline
+Inset,Inset
+Conditions,Conditions
+"Background Image","Background Image"
+"Background Position","Background Position"
+Default,Default
+"Custom Background Position","Custom Background Position"
+"Background Repeat","Background Repeat"
+"Background Size","Background Size"
+"Custom Background Size","Custom Background Size"
+"On Page Load","On Page Load"
+"If Yes, set the number of seconds to wait, upon page load, before the popup is triggered.","If Yes, set the number of seconds to wait, upon page load, before the popup is triggered."
+"Within (sec)","Within (sec)"
+"On Scroll","On Scroll"
+"If Yes, select Direction (Up or Down) and set the amount to scroll (%) before the popup is triggered.","If Yes, select Direction (Up or Down) and set the amount to scroll (%) before the popup is triggered."
+Direction,Direction
+"Within (%)","Within (%)"
+"On Scroll To Element","On Scroll To Element"
+"If Yes, enter the Selector name (element ID or class) that will trigger the popup when users scroll to it.","If Yes, enter the Selector name (element ID or class) that will trigger the popup when users scroll to it."
+Selector,Selector
+"On Hover","On Hover"
+"If Yes, enter the Selector name (element ID or class) that will trigger the popup when the user hovers over it.","If Yes, enter the Selector name (element ID or class) that will trigger the popup when the user hovers over it."
+"On Click","On Click"
+"If Yes, enter the number of clicks (on anywhere on the page) that will trigger the popup.","If Yes, enter the number of clicks (on anywhere on the page) that will trigger the popup."
+Clicks,Clicks
+"After Inactivity","After Inactivity"
+"If Yes, specify the number of seconds of user inactivity (mouse cursor inactivity) that will trigger the popup.","If Yes, specify the number of seconds of user inactivity (mouse cursor inactivity) that will trigger the popup."
+"On Page Exit Intent","On Page Exit Intent"
+"If Yes, the popup will appear when the user’s mouse activity indicates intent to exit the page (when the cursor moves outside the upper page boundary).","If Yes, the popup will appear when the user’s mouse activity indicates intent to exit the page (when the cursor moves outside the upper page boundary)."
+Triggers,Triggers
+views,views
+clicks,clicks
+closes,closes
+conversion,conversion
+"Magezon Popup Builder","Magezon Popup Builder"
+"General Settings","General Settings"
+"Current Version","Current Version"
+"Enable Popup Builder","Enable Popup Builder"
+"Popup Action Button","Popup Action Button"
+"Popup Information","Popup Information"
+"Enable Popup","Enable Popup"
+"Popup Name","Popup Name"
+"Store View","Store View"
+"Customer Groups","Customer Groups"
+From,From
+To,To
+"What To Display","What To Display"
+"Display Conditions","Display Conditions"
+Style,Style
+"Delete items","Delete items"
+"Are you sure you wan't to delete selected items?","Are you sure you wan't to delete selected items?"
+ID,ID
+DESC,DESC
+Name,Name
+Views,Views
+CTR,CTR
+Status,Status

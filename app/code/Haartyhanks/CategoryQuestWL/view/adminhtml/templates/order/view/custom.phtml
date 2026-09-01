@@ -1,0 +1,214 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Sales\Block\Adminhtml\Order\View\Items $block
+ */
+$_order = $block->getOrder() ?>
+<div class="admin__table-wrapper">
+    <table class="data-table admin__table-primary edit-order-table">
+        <thead>
+            <tr class="headings">
+                <?php $i = 0;
+                $columns = $block->getColumns();
+                $lastItemNumber = count($columns) ?>
+                <?php foreach ($columns as $columnName => $columnTitle) : ?>
+                    <?php $i++; ?>
+                    <th class="col-<?= $block->escapeHtmlAttr($columnName) ?><?= /* @noEscape */ ($i === $lastItemNumber ? ' last' : '') ?>"><span><?= $block->escapeHtml($columnTitle) ?></span></th>
+                <?php endforeach; ?>
+            </tr>
+        </thead>
+        <?php $_items = $block->getItemsCollection();?>
+        <?php $i = 0; foreach ($_items as $_item) : ?>
+            <?php if ($_item->getParentItem()) :
+                continue;
+            else :
+                $i++;
+            endif; ?>
+            <tbody class="<?= /* @noEscape */ $i%2 ? 'even' : 'odd' ?>">
+                <?= $block->getItemHtml($_item) ?>
+
+                
+                
+                <?= $block->getItemExtraInfoHtml($_item) ?>
+                <?php if(!empty($_item['questionnaire_unique_id'])) : ?>
+                    <?php $productName = $_item->getName(); ?>
+                    <div class="questionnire_container">
+                        <button id="modal-btn" class="load-questionnaire" data-questionnaire-unique-id="<?= $block->escapeHtmlAttr($_item['questionnaire_unique_id']) ?>"><?=  $_item->getName(). ' Questionaire' ?> <strong></strong></button>
+                    </div>
+                <?php endif; ?>
+                
+            </tbody>
+        <?php endforeach; ?>
+    </table>
+</div>
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function($, modal) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Category Questionnaire Response',
+                buttons: [{
+                    text: $.mage.__('Close'),
+                    class: 'modal-close',
+                    click: function() {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            modal(options, $('#modal-content'));
+            $("#modal-btn").on('click', function() {
+                $("#modal-content").modal("openModal");
+            });
+        }
+    );
+</script>
+
+
+<script type="text/javascript">
+    require(['jquery'], function($) {
+        $(document).ready(function() { 
+            $('.load-questionnaire').on('click', function(e) {
+                e.preventDefault();
+                var questionnaireUniqueId = $(this).data('questionnaire-unique-id');
+                console.log('questionnaire_unique_id:', questionnaireUniqueId);
+               
+                var formKey = "<?= /* @escapeNotVerified */ $block->getFormKey() ?>";
+
+                $.ajax({
+                    url: '<?= /* @escapeNotVerified */ $block->getUrl("categoryquestad/get/response") ?>',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        questionnaire_unique_id: questionnaireUniqueId,
+                        form_key: formKey
+                    },
+                    showLoader: true,
+                    success: function(response) {
+                        if (response.success) {
+                            console.log(response.answer)
+                        
+                            if (response.answer) {
+                               
+                                var generalInfo = response.answer;
+                                const formDataArray = JSON.parse(response.answer.response_json);
+
+                                
+                                console.log(formDataArray); 
+                                console.log(typeof formDataArray); 
+                                
+                                var html = '';
+                                html += '<div class="section">';
+                                html += '<h2>General Information</h2>';
+                                html += '<div class="general">';
+                                html += '<div class="field"><span class="label">Form Name:</span> <span class="value">' + (generalInfo.form_name ? generalInfo.form_name : '-') + '</span></div>';
+                                html += '<div class="field"><span class="label">Questionnaire Unique ID:</span> <span class="value">' + (generalInfo.questionnaire_unique_id ? generalInfo.questionnaire_unique_id : response.unique_id) + '</span></div>';
+                                html += '<div class="field"><span class="label">Created At:</span> <span class="value">' + (generalInfo.created_at ? generalInfo.created_at : '-') + '</span></div>';
+                                html += '</div></div>';
+
+                                // Form Responses (assuming 'response_data' is an array of field responses)
+                                html += '<div class="section">';
+                                html += '<h2>Form Responses</h2>';
+                                html += '<table><thead><tr><th>Question</th><th>Answer</th></tr></thead><tbody>';
+
+                                if (formDataArray && typeof formDataArray === 'object') {
+                                    Object.keys(formDataArray).forEach(function(key) {
+                                        var row = formDataArray[key];
+                                        html += '<tr>';
+                                        html += '<td>' + (row.label ? row.label : '-') + '</td>';
+                                        if (row.type == 'file') {
+                                            if (row.value !== undefined && row.value !== null && row.value !== '') {
+                                                html += '<td>'
+                                                    + '<button type="button" class="image_btn" onclick="window.open(\'https://www.pharmacyplanet.com/pub/media/amasty/amcustomform/' + row.value + '\', \'_blank\'); return false;">View Image</button>'
+                                                    + '</td>';
+                                                html += '<td>-</td>';
+                                            }
+                                        } else {
+                                            html += '<td>' + (row.value !== undefined && row.value !== null && row.value !== '' ? row.value : '-') + '</td>';
+                                        }
+                                       
+                                        html += '</tr>';
+                                    });
+                                } else {
+                                    html += '<tr><td colspan="4">No form responses found.</td></tr>';
+                                }
+
+                                html += '</tbody></table></div>';
+
+                                $('#modal-content .modal-inner-content').html(html);
+                            } else {
+                                $('#modal-content .modal-inner-content').html('<p>No answer data available.</p>');
+                            }
+                            // );
+                            $('#modal-content').modal('openModal');
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('An error occurred while fetching the questionnaire response.');
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+
+
+<div id="modal-content">
+    <div class="modal-inner-content">
+    </div>
+</div>
+
+
+<style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #333; }
+        .section { margin-bottom: 20px; }
+        .field { margin-bottom: 10px; }
+        .label { font-weight: bold; }
+        .value { margin-left: 10px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+
+
+        .questionnire_container{
+            width: auto;
+            float: left;
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+        .questionnire_container button.load-questionnaire{
+            color: #fff;
+            background-color: #eb5202;
+            border: 0;
+            padding: 10px 15px;
+        }
+        button.image_btn{
+            color: #fff;
+            background-color: #eb5202;
+            border: 0;
+            padding: 10px 15px;
+        }
+        .admin__table-wrapper .admin__table-primary.edit-order-table{
+            margin-top: 25px;
+            display: inline-block;
+        }
+        .admin__table-wrapper .admin__table-primary th:first-child, 
+        .admin__table-wrapper .admin__table-primary td:first-child{
+            padding-left: 1.5rem;
+        }
+    </style>

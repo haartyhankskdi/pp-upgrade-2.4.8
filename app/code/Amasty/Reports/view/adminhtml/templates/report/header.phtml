@@ -1,0 +1,11 @@
+<?php
+/**
+ * @var \Amasty\Reports\Block\Adminhtml\Report\Toolbar $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<h1 class="amreport-main-title">
+    <?= $escaper->escapeHtml($block->getCurrentTitle()) ?>
+</h1>
+<?= /* @noEscape */ $block->getChildHtml('additional_info') ?>

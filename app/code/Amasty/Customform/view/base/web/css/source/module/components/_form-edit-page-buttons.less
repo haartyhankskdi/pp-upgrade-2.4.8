@@ -1,0 +1,41 @@
+//
+//  Form edit page buttons Component
+//  ____________________________________________
+
+//
+//  Common
+//  --------------------------------------------
+
+& when (@media-common = true) {
+    @media (min-width: 1500px) {
+        .amasty_customform-forms-edit .page-main-actions .page-actions .page-actions-buttons {
+            .-amasty-customform-export-button {
+                position: absolute;
+                padding-right: 4rem;
+                padding-left: 4rem;
+                background: #e3e3e3;
+            }
+
+            #export_form_data_to_csv {
+                left: 133px;
+            }
+
+            #export_form_data_to_pdf {
+                left: 460px;
+            }
+        }
+
+        .amasty_customform-forms-edit .page-main-actions .page-actions._fixed {
+            .page-actions-inner:before {
+                content: none;
+            }
+
+            .page-actions-buttons #export_form_data_to_csv {
+                left: 15px;
+            }
+            .page-actions-buttons #export_form_data_to_pdf {
+                left: 342px;
+            }
+        }
+    }
+}

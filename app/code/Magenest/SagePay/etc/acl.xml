@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magenest_SagePay::sagepay" title="Magenest Opayo Payment">
+                    <resource id="Magenest_SagePay::transaction" title="Transactions" sortOrder="10"/>
+                    <resource id="Magenest_SagePay::profile" title="Subscription Profiles" sortOrder="20"/>
+                    <resource id="Magenest_SagePay::settings" title="Settings" sortOrder="30"/>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

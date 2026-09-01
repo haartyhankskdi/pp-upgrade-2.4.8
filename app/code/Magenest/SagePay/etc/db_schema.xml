@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="sales_order">
+        <column xsi:type="varchar" length="100" name="paypal_transaction_id" nullable="true" comment="Paypal Transaction ID" />
+        <column xsi:type="text" name="md_code" nullable="true" comment="MD code" />
+    </table>
+    <table name="magenest_sagepay_transaction" resource="default" engine="innodb" comment="Opayo Transaction Detail">
+        <column xsi:type="int" name="id" padding="11" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="transaction_id" nullable="false" length="50" comment="Transaction Id"/>
+        <column xsi:type="varchar" name="transaction_type" nullable="true" length="10" comment="Transaction Type"/>
+        <column xsi:type="varchar" name="transaction_status" nullable="true" length="20" comment="Transaction Status"/>
+        <column xsi:type="varchar" name="card_secure" nullable="true" length="30" comment="3D Secure Status"/>
+        <column xsi:type="text" name="status_detail" nullable="true" comment="Transaction Status Detail"/>
+        <column xsi:type="varchar" name="order_id" nullable="true" length="20" comment="Order ID"/>
+        <column xsi:type="varchar" name="customer_email" default="" length="255" comment="Customer Email"/>
+        <column xsi:type="text" name="response_data" comment="Sage response data"/>
+        <column xsi:type="text" name="vendor_tx_code" comment="VendorTxCode"/>
+        <column xsi:type="smallint" name="customer_id" nullable="true" comment="Customer ID"/>
+        <column xsi:type="int" name="quote_id" nullable="false" comment="Quote Id"/>
+        <column xsi:type="timestamp" name="created_at" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="smallint" name="is_subscription" nullable="true" comment="Is this a subscription order"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="MAGENEST_SAGEPAY_TRANSACTION_ID" indexType="btree">
+            <column name="id"/>
+        </index>
+        <index referenceId="MAGENEST_SAGEPAY_TRANSACTION_TRANSACTION_ID" indexType="btree">
+            <column name="transaction_id"/>
+        </index>
+    </table>
+    <table name="magenest_sagepay_subscription_plans" resource="default" engine="innodb" comment="Subscription Plans Table">
+        <column xsi:type="int" name="id" padding="11" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="int" name="product_id" nullable="true" comment="Product Id"/>
+        <column xsi:type="smallint" name="enabled" nullable="true" comment="Is product enabled with subscription"/>
+        <column xsi:type="varchar" name="subscription_value" nullable="true" length="10" comment="Subscription Value"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="MAGENEST_SAGEPAY_SUBSCRIPTION_PLANS_ID" indexType="btree">
+            <column name="id"/>
+        </index>
+    </table>
+    <table name="magenest_sagepay_saved_card" resource="default" engine="innodb" comment="Subscription Plans Table">
+        <column xsi:type="int" name="id" padding="11" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="customer_id" length="50" nullable="true" comment="Customer ID"/>
+        <column xsi:type="varchar" name="customer_email" default="" length="255" comment="Customer Email"/>
+        <column xsi:type="varchar" name="card_id" length="50" nullable="true" comment="Card ID"/>
+        <column xsi:type="varchar" name="last_4" length="50" nullable="true" comment="Last 4 number"/>
+        <column xsi:type="varchar" name="card_type" length="30" nullable="true" comment="Card type"/>
+        <column xsi:type="varchar" name="expire_date" length="30" nullable="true" comment="Expire date"/>
+        <column xsi:type="timestamp" name="created_at" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="MAGENEST_SAGEPAY_SUBSCRIPTION_PLANS_ID" indexType="btree">
+            <column name="id"/>
+        </index>
+    </table>
+    <table name="magenest_sagepay_subscription_profile" resource="default" engine="innodb" comment="Subscription Plans Table">
+        <column xsi:type="int" name="id" padding="11" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="varchar" name="transaction_id" nullable="true" length="50" comment="Transaction Id"/>
+        <column xsi:type="varchar" name="order_id" nullable="true" length="20" comment="Order ID"/>
+        <column xsi:type="smallint" name="customer_id" nullable="true" comment="Customer ID"/>
+        <column xsi:type="varchar" name="status" nullable="true" length="10" comment="Profile Status"/>
+        <column xsi:type="decimal" name="amount" nullable="true" scale="4" precision="12" comment="Amount"/>
+        <column xsi:type="smallint" name="total_cycles" nullable="true" comment="Total Cycles"/>
+        <column xsi:type="varchar" name="currency" nullable="true" length="5" comment="Currency Code"/>
+        <column xsi:type="varchar" name="frequency" nullable="true" length="20" comment="Frequency"/>
+        <column xsi:type="smallint" name="remaining_cycles" nullable="true" comment="Remaining cycles"/>
+        <column xsi:type="date" name="start_date" nullable="true" comment="Start Date"/>
+        <column xsi:type="date" name="last_billed" nullable="true" comment="Last Billed Date"/>
+        <column xsi:type="date" name="next_billing" nullable="true" comment="Next Billing Day"/>
+        <column xsi:type="text" name="sequence_order_ids" nullable="true" comment="Sequential Order ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="MAGENEST_SAGEPAY_SUBSCRIPTION_PROFILE_ID" indexType="btree">
+            <column name="id"/>
+        </index>
+    </table>
+</schema>

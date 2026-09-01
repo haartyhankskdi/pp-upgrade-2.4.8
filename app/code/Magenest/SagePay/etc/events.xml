@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_save_after">
+        <observer name="save_transaction_record" instance="Magenest\SagePay\Observer\SaveTransaction" />
+    </event>
+
+    <event name="magenest_sagepay_save_transaction">
+        <observer name="magenest_sagepay_save_transaction" instance="Magenest\SagePay\Observer\SaveTransactionEvent" />
+    </event>
+</config>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Amasty_Customform::css/amcustomform.css"/>
+        <css src="Amasty_Customform::css/form-builder.css"/>
+        <css src="Amasty_Customform::css/form-render.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="amasty_customform_forms_edit"/>
+        </referenceContainer>
+    </body>
+</page>

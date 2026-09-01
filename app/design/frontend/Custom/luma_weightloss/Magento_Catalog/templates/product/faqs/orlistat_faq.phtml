@@ -1,0 +1,238 @@
+<!doctype html>
+
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>CSS Accordion</title>
+
+<style>
+
+.product-faq-section .faq-list input {
+    display: none;
+}
+
+.product-faq-section .faq-list label {
+    text-align: left;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    padding: 20px 0 8px 0;
+    width: 100%; 
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    box-shadow: none !important;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+    transition: ease .5s;
+    display: inline-block;
+    background: url(/pub/media/wysiwyg/WLImage/Poly.png) right 32px no-repeat !important;
+
+}
+
+.product-faq-section .faq-list label:hover,
+.product-faq-section .faq-list label:focus{
+    background: url(/pub/media/wysiwyg/WLImage/Poly.png) right 32px no-repeat !important;
+}
+
+.product-faq-section .faq-list .panel-p {
+    text-align: left;
+    letter-spacing: 0px;
+    font-size: 16px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    text-align: left;
+    padding: 0px 0;
+    padding: 0 0;  
+    background: transparent;
+    overflow: hidden;
+      max-height: 0px;
+      transition: max-height 0.5s ease;
+}
+.product-faq-section .faq-list .panel-p:target{
+      max-height: 150px;
+}
+.product-faq-section .faq-list .panel-p p{
+    font-size: 16px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    text-align: left;
+    padding: 0px 0 15px 0;
+    margin: 0;
+}
+
+.product-faq-section .faq-list input + label + .panel-p { 
+    overflow: hidden;
+      max-height: 0px;
+      transition: max-height 0.3s ease-out;
+}
+
+.product-faq-section .faq-list input:checked + label + .panel-p { 
+    max-height: 165px;
+}
+
+
+.product-faq-section{
+    width: 100%;
+    float: left;
+    padding: 80px 0 80px 0;
+    margin: 0;
+    background: #E7F2F4;
+}
+.product-faq-section .h-title {
+        width: 100%;
+        float: left;
+        padding: 0;
+        margin: 0 0 22px 0;
+        font-size: 38px;
+        color: #101010;
+        font-family: 'Lato', sans-serif;
+        line-height: 48px;
+        font-weight: 300;
+        text-align: center;
+}
+.product-faq-section .faq-list {
+    border-bottom: 1px solid #96D8F0;
+    padding-bottom: 12px;
+    width: 100%;
+    display: inline-block;
+}
+
+@media screen and (min-width: 768px) {
+    .product-faq-section .container {
+        max-width: 670px !important;
+        margin: 0 auto;
+    }
+    .product-faq-section .faq-list label{
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .product-faq-section .h-title{
+        text-align: left;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: auto !important;
+        font-weight: 300;
+        margin: 0 0 25px 0;
+        font-size: 32px;
+        color: #000;
+        font-family: 'Lato', sans-serif;
+        line-height: 36px;
+        font-weight: 400;
+        text-align: left;
+        padding: 0px 0;
+        letter-spacing: 0px;
+    }
+    .product-faq-section .container{
+        width: 90%;
+    }
+    .product-faq-section .faq-list label{
+        font-size: 15px !important;
+        padding-left: 0 !important;
+        padding-right: 20px !important;
+        line-height: 22px;
+    }
+     
+    .product-faq-section .faq-list .panel-p p{
+        font-size: 14px !important;
+        line-height: 22px !important;
+    }
+}
+
+</style>
+
+</head>
+
+<div class="product-faq-section">
+<div class="container reveal1">
+<div class="h-title" data-was-processed="true">Weight Loss everything you need to know</div>
+
+<div class="faq-list">
+<input type="checkbox" id="title1" />
+<label for="title1">What is Orlistat, and how does it work?</label>
+<div class="panel-p">
+<p>Orlistat is a medication used for weight management that works by inhibiting the absorption of dietary fat in the intestines. It accomplishes this by blocking the action of lipase, an enzyme responsible for breaking down fat molecules during digestion. As a result, the body absorbs fewer calories from fat, aiding in weight loss.</p>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title2" />
+<label for="title2">How effective is Orlistat?</label>
+<div class="panel-p">
+<p>Orlistat has been shown to help individuals lose more weight than dieting alone. Studies indicate that people taking Orlistat in conjunction with a reduced-calorie diet can achieve modest but significant weight loss compared to those following diet and exercise alone.</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title3" />
+<label for="title3">Who is eligible for Orlistat?</label>
+<div class="panel-p">
+<p>Orlistat is suitable for adults who are overweight or obese with a BMI of 30 or higher, or with a BMI of 27 or higher with weight-related conditions such as high blood pressure, diabetes, or high cholesterol.</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title4" />
+<label for="title4">How do I use Orlistat?</label>
+<div class="panel-p">
+<p>Orlistat is typically taken orally three times a day with each main meal containing fat or within one hour of eating. It should be swallowed with water and is best taken alongside a well-balanced, reduced-calorie diet. The dosage may be adjusted based on individual response and tolerability.</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title5" />
+<label for="title5">How does dosing work with Orlistat?</label>
+<div class="panel-p">
+<p>The recommended dose of Orlistat is 120 mg three times a day with each main meal. If a meal is missed or does not contain fat, the dose can be skipped. It is important not to exceed the prescribed dosage.</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title6" />
+<label for="title6">What are the potential side effects of Orlistat?</label>
+<div class="panel-p">
+<p>Common side effects of Orlistat include gastrointestinal symptoms such as oily spotting, flatulence, fecal urgency, and oily or fatty stools. These side effects are often mild and temporary, particularly when following a low-fat diet. Rare but serious side effects may include liver injury and severe allergic reactions.</p>
+</div>
+</div>
+
+
+<div class="faq-list">
+<input type="checkbox" id="title7" />
+<label for="title7">Is Orlistat suitable for me?</label>
+<div class="panel-p">
+<p>Orlistat may be prescribed for adults who are overweight or obese and have not responded adequately to diet and exercise alone. However, it is not suitable for everyone, including pregnant or breastfeeding women, individuals with certain gastrointestinal conditions, or those taking cyclosporine. Your healthcare provider will assess your eligibility for Orlistat and discuss the potential risks and benefits with you.</p>
+</div>
+</div>
+
+</div>
+</div>
+
+</html>
+
+
+<script>
+        document.querySelectorAll('.product-faq-section .faq-list input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                    document.querySelectorAll('.product-faq-section .faq-list input[type="checkbox"]').forEach(otherCheckbox => {
+                        if (otherCheckbox !== this) {
+                            otherCheckbox.checked = false;
+                        }
+                    });
+                }
+            });
+        });
+    </script>

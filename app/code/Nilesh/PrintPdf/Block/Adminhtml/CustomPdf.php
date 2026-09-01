@@ -1,0 +1,82 @@
+<?php
+namespace Nilesh\PrintPdf\Block\Adminhtml;
+
+/**
+ * @author     Kristof Ringleff
+ * @package    Fooman_PrintOrderPdf
+ * @copyright  Copyright (c) 2015 Fooman Limited (http://www.fooman.co.nz)
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+class CustomPdf extends \Magento\Backend\Block\Widget\Container
+{
+    /**
+     * Core registry
+     *
+     * @var \Magento\Framework\Registry
+     */
+    protected $coreRegistry = null;
+
+    /**
+     * @param \Magento\Backend\Block\Widget\Context $context
+     * @param \Magento\Framework\Registry           $registry
+     * @param array                                 $data
+     */
+    public function __construct(
+        \Magento\Backend\Block\Widget\Context $context,
+        \Magento\Framework\Registry $registry,
+        array $data = []
+    ) {
+        $this->coreRegistry = $registry;
+        parent::__construct($context, $data);
+    }
+
+    // phpcs:ignore PSR2.Methods.MethodDeclaration -- Magento 2 core use
+    protected function _construct()
+    {
+        $this->addButton(
+            'nilesh_print_custom',
+            [
+                'label'   => __('Custom PDF'),
+                'class'   => 'print',
+                'onclick' => 'setLocation(\'' . $this->getPdfPrintUrl() . '\')'
+            ]
+        );
+        
+        $this->addButton(
+            'nilesh_print_gppdf',
+            [
+                'label'   => __('Gp PDF'),
+                'class'   => 'print',
+                'onclick' => 'setLocation(\'' . $this->getGpPdfUrl() . '\')'
+            ]
+        );
+
+        parent::_construct();
+    }
+
+    /**
+     * @return string
+     */
+    public function getPdfPrintUrl()
+    {
+        return $this->getUrl('generate/pdf/customc/order_id/' . $this->getOrderId());
+    }
+
+    /**
+     * @return string
+     */
+    public function getGpPdfUrl()
+    {
+        return $this->getUrl('generate/pdf/gppdf/order_id/' . $this->getOrderId());
+    }
+
+    /**
+     * @return integer
+     */
+    public function getOrderId()
+    {
+        return $this->coreRegistry->registry('sales_order')->getId();
+    }
+}

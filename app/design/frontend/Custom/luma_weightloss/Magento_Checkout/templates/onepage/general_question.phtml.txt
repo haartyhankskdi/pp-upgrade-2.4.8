@@ -1,0 +1,12 @@
+<?php
+
+$cartThemeHelper = $this->helper(\Nilesh\Theme\Helper\CartButton::class);
+$registerSuccessHelper = $this->helper(\Nilesh\Theme\Helper\RegisterSuccess::class);
+
+$needtoShow = $cartThemeHelper->getCartNeedGeneralQuestion();
+
+$cartThemeHelper->isLogin();
+
+if($needtoShow && ($cartThemeHelper->getNeedOfGQ() == 0) && $cartThemeHelper->isLogin()){
+    $redirect = $registerSuccessHelper->setCartRedirect();
+}

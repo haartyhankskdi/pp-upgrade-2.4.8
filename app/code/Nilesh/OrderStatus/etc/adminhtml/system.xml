@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="sales_email" showInDefault="1" showInStore="1" showInWebsite="1" translate="label">
+			<resource>Nilesh_OrderStatus::config_nilesh_orderstatus</resource>
+			<group id="custom_approve_status" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="997" translate="label">
+				<label>Approval Status</label>
+				<field id="enable" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enable</label>
+					<!-- <comment>1</comment> -->
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="identity" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Email Sender</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+				</field>
+				<field id="approve_template" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Select Email Template</label>
+					<comment>Email template chosen based on theme fallback when &quot;Default&quot; option is selected</comment>
+					<source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+				</field>
+				<field id="copy_to" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Send Order Email Copy To</label>
+					<comment>Your email added in cc of email. Also please use Comma-separated &quot;,&quot;</comment>
+				</field>
+			</group>
+			<group id="custom_disapprove_status" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="997" translate="label">
+				<label>Disapprove Status</label>
+				<field id="enable" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enable</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="identity" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Email Sender</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+				</field>
+				<field id="disapprove_template" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Select Email Template</label>
+					<comment>Email template chosen based on theme fallback when &quot;Default&quot; option is selected</comment>
+					<source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+				</field>
+				<field id="copy_to" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Send Order Email Copy To</label>
+					<comment>Your email added in cc of email. Also please use Comma-separated &quot;,&quot;</comment>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

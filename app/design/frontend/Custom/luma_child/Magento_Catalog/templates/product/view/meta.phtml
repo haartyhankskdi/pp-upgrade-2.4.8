@@ -1,0 +1,85 @@
+<?php
+// Get Object Manager instance
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+// Get current category from registry
+$registry = $objectManager->get(\Magento\Framework\Registry::class);
+$category = $registry->registry('current_category');
+
+
+
+
+function getImagePath($cat_id)
+{
+    $categories = [
+    ['cat_id' => 82,  'label' => 'Acne/Rosacea',    'img' => 'media/phase_2/Acne-Rosacea.webp'],
+    ['cat_id' => 157, 'label' => 'Allergy Anaphylaxis',    'img' => 'media/phase_2/AllergyAnaphylaxis.webp'],
+    ['cat_id' => 87,  'label' => 'Allergy',                'img' => 'media/phase_2/Allergy.webp'],
+    ['cat_id' => 142, 'label' => 'Anti-inflammatories',    'img' => 'media/phase_2/Acne-Rosacea.webp'],
+    ['cat_id' => 89,  'label' => 'Asthma/COPD',            'img' => 'media/phase_2/Asthma-COPD.webp'],
+    ['cat_id' => 165, 'label' => 'Cardiovascular',         'img' => 'media/phase_2/Cardiovascular.webp'],
+    ['cat_id' => 166, 'label' => 'Angina',                 'img' => 'media/phase_2/Angina.webp'],
+    ['cat_id' => 160, 'label' => 'Diabetes Tablets',       'img' => 'media/phase_2/Diabetes-Tablets.webp'],
+    ['cat_id' => 161, 'label' => 'Diabetes Injections',    'img' => 'media/phase_2/Diabetes_Injections.webp'],
+    ['cat_id' => 149, 'label' => 'Dressings',              'img' => 'media/phase_2/Dressing.jpg'],
+    ['cat_id' => 106, 'label' => 'Eczema/Psoriasis',       'img' => 'media/phase_2/Eczema-Psoriasis.webp'],
+    ['cat_id' => 170, 'label' => 'Eye Glaucoma',           'img' => 'media/phase_2/eye-glaucoma.webp'],
+    ['cat_id' => 171, 'label' => 'Dry Eye',                'img' => 'media/phase_2/dry-eye.webp'],
+    ['cat_id' => 140, 'label' => 'Eye/Ear/Nose',           'img' => 'media/phase_2/eye-ear-nose.webp'],
+    ['cat_id' => 91,  'label' => 'Flu',                    'img' => 'media/phase_2/Flu.webp'],
+    ['cat_id' => 176, 'label' => 'For Schools',            'img' => 'media/phase_2/for-schools.webp'],
+    ['cat_id' => 158, 'label' => 'Enzymes',                'img' => 'media/phase_2/Enzymes.webp'],
+    ['cat_id' => 167, 'label' => 'IBS',                    'img' => 'media/phase_2/IBS.webp'],
+    ['cat_id' => 168, 'label' => 'Acid Reflux',            'img' => 'media/phase_2/acid-reflux.webp'],
+    ['cat_id' => 169, 'label' => 'Ulcers',                 'img' => 'media/phase_2/Ulcers.webp'],
+    ['cat_id' => 173, 'label' => 'Incontinence',           'img' => 'media/phase_2/Incontinence.webp'],
+    ['cat_id' => 174, 'label' => 'Urinary',                'img' => 'media/phase_2/Urinary.webp'],
+    ['cat_id' => 175, 'label' => 'Nocturnal Enuresis',                'img' => 'media/phase_2/Nocturnal-Enuresis.webp'],
+    ['cat_id' => 145, 'label' => 'Gout',                'img' => 'media/phase_2/Gout.webp'],
+    ['cat_id' => 108, 'label' => 'Haemorrhoids',                'img' => 'media/phase_2/Haemorrhoids.webp'],
+    ['cat_id' => 96, 'label' => 'High Blood Pressure',                'img' => 'media/phase_2/HighBloodPressure.webp'],
+    ['cat_id' => 95, 'label' => 'High cholesterol',                'img' => 'media/phase_2/high-cholesterol.webp'],
+    ['cat_id' => 92, 'label' => 'Migraine Treatment',                'img' => 'media/phase_2/MigraineTreatment.webp'],
+    ['cat_id' => 85, 'label' => 'Stop Smoking',                'img' => 'media/phase_2/StopSmoking.webp'],
+    ['cat_id' => 141, 'label' => 'Thrush',                'img' => 'media/phase_2/Thrush.webp'],
+    ['cat_id' => 147, 'label' => 'Underactive Thyroid',                'img' => 'media/phase_2/Underactive-Thyroid.webp'],
+    ['cat_id' => 141, 'label' => 'Vitamins',                'img' => 'media/phase_2/Vitamins.webp'],
+    ['cat_id' => 180, 'label' => 'Over the Counter',                'img' => 'media/phase_2/over_the_counter.webp'],
+    ['cat_id' => 182, 'label' => 'Infections',                'img' => 'media/phase_2/Acne-Rosacea.webp'],
+    ['cat_id' => 185, 'label' => 'Ozempic',                'img' => 'media/phase_2/Ozempic.webp'],
+    ['cat_id' => 81, 'label' => 'Erectile Dysfunction',                'img' => 'media/phase_2/erectile-dysfunction.webp'],
+    ['cat_id' => 83, 'label' => 'Hair Loss',                'img' => 'media/phase_2/hair-loss.webp'],
+    ['cat_id' => 159, 'label' => 'Premature Ejaculation',                'img' => 'media/phase_2/premature-ejaculation.webp'],
+    ['cat_id' => 84, 'label' => 'Premature Ejaculation',                'img' => 'app/design/frontend/Custom/luma_weightloss/Magento_Theme/templates/images/main-banner.jpg'],
+];
+
+    foreach ($categories as $category) {
+        if ($category['cat_id'] == $cat_id) {
+            return $category['img'];
+        }
+    }
+
+    return null;
+}
+
+$getImagePath = getImagePath($category->getId());
+
+// $getImagePath = $block->getBaseUrl() .$getImagePath;
+
+$getImagePath = 'https://www.pharmacyplanet.com/' .$getImagePath;
+
+$currentUrl = $objectManager->get(\Magento\Framework\UrlInterface::class)->getCurrentUrl();
+
+?>
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:url" content="<?=$currentUrl ?>" />
+<meta property="og:title" content="<?=$category->getMetaTitle()  ?>" />
+<meta property="og:description" content="<?=$category->getMetaDescription()  ?>" />
+<meta property="og:image" content= "<?=$getImagePath ?>" />
+
+<meta property="og:type" content="Pharmacy" />
+<meta property="og:logo" content="https://www.pharmacyplanet.com/static/version1749531653/frontend/Custom/luma_child/en_GB/images/phramacy_planet.svg" />
+

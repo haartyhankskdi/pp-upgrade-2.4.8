@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<page  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- Top Column Block -->
+        <referenceContainer name="page.top">
+            <block class="Magento\Framework\View\Element\Template" name="custom.product.top" template="Haartyhanks_Htheme::detail/page_top.phtml"/>
+        </referenceContainer>
+
+        <!-- Main Product Content (Left Column) -->
+        <referenceContainer name="content">
+            <block class="Magento\Catalog\Block\Product\View" name="custom.product.info" template="Haartyhanks_Htheme::detail/view.phtml"/>
+        </referenceContainer>
+
+        <referenceContainer name="page.bottom.container">
+          <container name="before-footer-link" htmlTag="div" htmlClass="before-footer-review">
+            <block class="Magento\Framework\View\Element\Template" name="before-footer-link-block" template="Haartyhanks_Htheme::review/footer.phtml" />
+          </container>
+        </referenceContainer>
+    </body>
+
+</page>

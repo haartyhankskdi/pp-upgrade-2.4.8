@@ -1,0 +1,29 @@
+<div class="osc-place-order-block checkout-comment-block">
+    <div class="field-row">
+        <label for="comments" data-bind="i18n: 'Comments'"></label>
+        <div class="input-box">
+            <textarea
+                name="comments"
+                id="comments"
+                rows="2"
+                data-validate='{"alphanumeric":true}'
+                data-bind="value: commentValue, event: { input: validateComment }"
+            ></textarea>
+            <div
+                id="comment-validation-msg"
+                class="mage-error"
+                style="
+                    display: none;
+                    background-color: #e02b27;
+                    color: #ffffff;
+                    padding: 6px 10px;
+                    border-radius: 4px;
+                    font-size: 12px;
+                    margin-top: 5px;
+                "
+            >
+                Only alphanumeric characters and spaces are allowed.
+            </div>
+        </div>
+    </div>
+</div>

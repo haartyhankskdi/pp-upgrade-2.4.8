@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<page layout="2columns-left" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<update handle="customer_account"/>
+	<head>
+        <title>
+            Delete Account
+        </title>
+    </head>
+	<body>
+		<!-- Breadcrumbs -->
+	<!-- <referenceBlock name="breadcrumbs">
+		<action method="addCrumb">
+			<argument name="crumbName" xsi:type="string">home</argument>
+			<argument name="crumbInfo" xsi:type="array">
+				<item name="title" xsi:type="string" translate="true">Home</item>
+				<item name="label" xsi:type="string" translate="true">Home</item>
+				<item name="link" xsi:type="string">{{baseUrl}}</item>
+			</argument>
+		</action>
+		<action method="addCrumb">
+			<argument name="crumbName" xsi:type="string">account</argument>
+			<argument name="crumbInfo" xsi:type="array">
+				<item name="title" xsi:type="string" translate="true">Account</item>
+				<item name="label" xsi:type="string" translate="true">Account</item>
+				<item name="last" xsi:type="boolean">true</item>
+				<item name="link" xsi:type="string">{{baseUrl}}customer/edit</item>
+			</argument>
+		</action>
+	</referenceBlock> -->
+
+		<referenceContainer name="content">
+			<!-- <block class="Sachin\Customer\Block\Delete\Index" name="delete.index" template="Sachin_Customer::delete/index.phtml"/> -->
+			<block class="Magento\Framework\View\Element\Template" name="gdpr_customer_delete_info" after="-" template="Mageplaza_Gdpr::account/edit/delete.phtml" ifconfig="gdpr/general/enabled"/>
+		</referenceContainer>
+	</body>
+</page>

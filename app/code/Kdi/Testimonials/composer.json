@@ -1,0 +1,22 @@
+{
+    "name": "kdi/module-testimonials",
+    "description": "No",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Satyam Kumar",
+            "email": "satyam@haartyhanks.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Kdi\\Testimonials\\": ""
+        }
+    }
+}

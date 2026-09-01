@@ -1,0 +1,157 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Widget\Dob $block */
+
+/*
+<?= $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Dob')
+   ->setDate($block->getCustomer()->getDob())
+   ->toHtml() ?>
+
+For checkout/onepage/billing.phtml:
+
+<?= $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Dob')
+   ->setDate($block->getCustomer()->getDob())
+   ->setFieldIdFormat('billing:%s')
+   ->setFieldNameFormat('billing[%s]')
+   ->toHtml() ?>
+
+NOTE: Regarding styles - if we leave it this way, we'll move it to boxes.css. Alternatively we could calculate widths
+automatically using block input parameters.
+*/
+
+$fieldCssClass = 'field date field-' . $block->getHtmlId();
+$fieldCssClass .= $block->isRequired() ? ' required' : '';
+?>
+
+<?php
+    $helperDob = $this->helper(\Nilesh\Theme\Helper\Dob::class);
+    $getDate = $block->getValue();
+
+    $y = $helperDob->getYear($getDate);
+    $d = $helperDob->getDay($getDate);
+    $m = $helperDob->getMonth($getDate);
+
+    $formatedDate = $helperDob->getFormatedDob($getDate);
+
+    $currentYear = date("Y");
+?>
+
+<div class="date-in-dmy <?= $block->escapeHtmlAttr($fieldCssClass) ?>">
+    <label class="label" for="<?= /* @noEscape */ $block->getHtmlId() ?>"><span><?= $block->escapeHtml($block->getStoreLabel('dob')) ?></span></label>
+    <div class="date-dob-group">
+        <div class="control">
+            <input type="text" placeholder="DD" maxlength="2" value="<?php echo /* @noEscape */ @$d ?>" class="input-form only_numeric dob-date dob-day" id="dob_d">
+        </div>
+        <div class="control">
+            <input type="text" placeholder="MM" maxlength="2" value="<?php echo /* @noEscape */ @$m ?>" class="input-form only_numeric dob-date dob-month" id="dob_m">
+        </div>
+        <div class="control">
+            <input type="text" placeholder="YYYY" maxlength="4" value="<?php echo /* @noEscape */ @$y ?>" class="input-form only_numeric dob-date dob-year" id="dob_y">
+        </div>
+    </div>
+</div>
+
+<div class="dob-absolute-underground">
+    <div class="make-it-invisible">
+        <div class="control customer-dob">
+            <?php // echo $block->getFieldHtml() ?>
+            <input type="text" name="dob" id="dob" value="<?php echo $formatedDate;  ?>" class="_has-datepicker" data-validate="{required:true,'validate-date':{'dateFormat':'dd\/MM\/yyyy'},'validate-dob-custom':true}" autocomplete="off">
+        </div>
+        <?php if ($_message = $block->getAdditionalDescription()) : ?>
+            <div class="note"><?= $block->escapeHtml($_message) ?></div>
+        <?php endif; ?>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+       "*": {
+           "Magento_Customer/js/validation": {}
+       }
+    }
+ </script>
+
+ <script>
+    require(['jquery','jquery/ui', 'jquery/validate', 'mage/translate'], function($){
+        $(document).ready(function () {
+
+            // Custom DOB Validation
+            $.validator.addMethod('validate-dob-custom', function (value, element) {
+                    var today = new Date();
+                    var dateEntered = new Date();
+                    dateEntered.setFullYear($('#dob_y').val(), $('#dob_m').val() - 1, $('#dob_d').val());
+                    // alert(dateEntered + ' - ' + today);
+                    return dateEntered < today;
+            }, $.mage.__('The Date of Birth should not be greater than today.'));
+
+            $("#dob").change(function () {
+                var  dob_m = $("#dob_m").val();
+                var  dob_d = $("#dob_d").val();
+                var  dob_y = $("#dob_y").val();
+                if(dob_m.length != 0 && dob_d.length != 0 && dob_y.length != 0){
+                    $("#dob").val(`${dob_d}/${dob_m}/${dob_y}`);
+                }else{
+                    $("#dob").val("");
+                }
+            });
+
+            $("#dob_d").change(function (e) {
+                var selfval = $(this).val();
+                if(selfval > 31){
+                    selfval = 31;
+                }
+                var  dob_m = $("#dob_m").val();
+                var  dob_d = padMe(selfval);
+                var  dob_y = $("#dob_y").val();
+                $(this).val(dob_d);
+                if(dob_m.length != 0 && dob_d.length != 0 && dob_y.length != 0 && dob_y.length == 4 && dob_y >= 1900){
+                    $("#dob").val(`${dob_d}/${dob_m}/${dob_y}`);
+                }else{
+                    $("#dob").val("");
+                }
+            });
+
+            $("#dob_m").change(function (e) {
+                var selfval = $(this).val();
+                if(selfval > 12){
+                    selfval = 12;
+                }
+                var  dob_m = padMe(selfval);
+                var  dob_d = $("#dob_d").val();
+                var  dob_y = $("#dob_y").val();
+                $(this).val(dob_m);
+                if(dob_m.length != 0 && dob_d.length != 0 && dob_y.length != 0 && dob_y.length == 4 && dob_y >= 1900){
+                    $("#dob").val(`${dob_d}/${dob_m}/${dob_y}`);
+                }else{
+                    $("#dob").val("");
+                }
+            });
+
+            $("#dob_y").change(function (e) {
+                var  dob_m = $("#dob_m").val();
+                var  dob_d = $("#dob_d").val();
+                var  dob_y = $(this).val();
+                $(this).val(dob_y);
+                if(dob_m.length != 0 && dob_d.length != 0 && dob_y.length != 0 && dob_y.length == 4 && dob_y >= 1900){
+                    $("#dob").val(`${dob_d}/${dob_m}/${dob_y}`);
+                }else{
+                    $("#dob").val("");
+                }
+            });
+
+            function padMe(d) {
+                return (d < 10 && d.length == 1) ? '0' + d.toString() : d.toString();
+            }
+
+            $(".only_numeric").on('propertychange input', function(e) {
+                var contact_num = jQuery(this).val();
+                $(this).val(contact_num.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'));
+            });
+
+        });
+    });
+ </script>

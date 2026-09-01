@@ -1,0 +1,13 @@
+<?php
+$_helper = $this->helper(Haartyhanks\CategoryQuestWL\Helper\Data::class);
+$currentCategory = $_helper->getCurrentCategory();
+$product_id = $_helper->getCurrentProductId();
+// echo $product_id;
+
+$storeId = $_helper->getCurrentStoreId();
+if ($storeId == 2) {
+    $_helper->setCatValueSession(183);
+    $_helper->setProdValueSession($product_id);
+} else {
+    $_helper->setCatValueSession($currentCategory->getId());
+}

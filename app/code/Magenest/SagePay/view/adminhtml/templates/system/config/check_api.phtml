@@ -1,0 +1,70 @@
+<?php
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+// @codingStandardsIgnoreFile
+?>
+<div class="actions actions-get-auth-token">
+    <div id="auth_token_result" class="message-validation hide"></div>
+    <button class="action-validate-get-auth-token sage-button-callback <?php echo $block->getAddClass();?>" type="button" id="<?php echo $block->getHtmlId() ?>">
+        <span id="span-for-active-button"><?php /* @escapeNotVerified */
+            echo $block->escapeHtml($block->getButtonLabel()) ?></span>
+    </button>
+</div>
+<style>
+    .callback-actived {
+        background-color: #99ff99 !important;
+        border: 1px white solid !important;
+        cursor: default;
+        pointer-events: none;
+    }
+</style>
+<script>
+    require(['jquery', 'Magento_Ui/js/modal/alert'], function ($, alert) {
+        $('#check_sage_api_button').click(function () {
+            var vendor = $('input[name ="groups[magenest_sagepay][groups][require][fields][vendor_name][value]"]').val();
+            if(vendor === null || vendor.length < 1) {
+                alert({
+                    title: $.mage.__('Missing configuration'),
+                    content: $.mage.__('You must enter Vendor name before check.'),
+                    actions: {
+                        always: function(){}
+                    }
+                });
+                return false;
+            }
+            var data = {vendor_name: vendor};
+            $.ajax({
+                type: "GET",
+                url: '<?= $block->getUrl('sagepay/system_config/checkApi'); ?>',
+                data: data,
+                showLoader: true,
+                success: function (response) {
+                    var result_token = $('#auth_token_result');
+                    if (response.success) {
+                        $("span#span-for-active-button").html("Api working");
+                        $('button.action-validate-get-auth-token.sage-button-callback').addClass("callback-actived");
+                        alert({
+                            title: $.mage.__('Api working'),
+                            content: $.mage.__('Api working.'),
+                            actions: {
+                                always: function(){}
+                            }
+                        });
+                    }
+                    if (response.error) {
+                        $("span#span-for-active-button").html("Api error");
+                        alert({
+                            title: $.mage.__('Cannot check'),
+                            content: $.mage.__('Something error.'),
+                            actions: {
+                                always: function(){}
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+    });
+</script>

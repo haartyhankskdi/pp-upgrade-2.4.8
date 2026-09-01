@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Kdi_Testimonials::Testimonials" title="Testimonials" sortOrder="10">
+					<resource id="Kdi_Testimonials::Testimonials_save" title="Save Testimonials" sortOrder="10"/>
+					<resource id="Kdi_Testimonials::Testimonials_delete" title="Delete Testimonials" sortOrder="20"/>
+					<resource id="Kdi_Testimonials::Testimonials_update" title="Update Testimonials" sortOrder="30"/>
+					<resource id="Kdi_Testimonials::Testimonials_view" title="View Testimonials" sortOrder="40"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

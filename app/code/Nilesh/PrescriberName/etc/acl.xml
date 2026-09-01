@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Nilesh_PrescriberName::PrescriberName" sortOrder="10" title="PrescriberName">
+					<resource id="Nilesh_PrescriberName::PrescriberName_save" sortOrder="10" title="Save PrescriberName"/>
+					<resource id="Nilesh_PrescriberName::PrescriberName_delete" sortOrder="20" title="Delete PrescriberName"/>
+					<resource id="Nilesh_PrescriberName::PrescriberName_update" sortOrder="30" title="Update PrescriberName"/>
+					<resource id="Nilesh_PrescriberName::PrescriberName_view" sortOrder="40" title="View PrescriberName"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

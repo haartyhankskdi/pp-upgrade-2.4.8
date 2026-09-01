@@ -1,0 +1,289 @@
+<?php
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+// @codingStandardsIgnoreFile
+/**
+ * @var \Magento\Payment\Block\Form\Cc $block
+ */
+
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$code = $block->escapeHtml($block->getMethodCode());
+$controller = $block->escapeHtml($block->getRequest()->getControllerName());
+$ccExpMonth = $block->getInfoData('cc_exp_month');
+$ccExpYear = $block->getInfoData('cc_exp_year');
+/** @var Magenest\SagePay\Helper\SageHelper $sageHelper */
+$sageHelper = $this->helper("Magenest\SagePay\Helper\SageHelper");
+$isDropin = $sageHelper->useDropIn();
+$isTest = $sageHelper->getIsSandbox();
+?>
+<br/>
+<fieldset class="admin__fieldset payment-method" id="payment_form_<?php /* @noEscape */ echo $code; ?>"
+          style="display:none;">
+    <input type="hidden" name="payment[card_identifier]" id="card_identifier">
+    <input type="hidden" name="payment[merchant_sessionKey]" id="merchant_sessionKey">
+
+    <?php if(!$isDropin){ ?>
+        <div class="admin__field _required">
+            <label for="<?php /* @noEscape */ echo $code; ?>_cc_name" class="admin__field-label">
+                <span><?php echo $block->escapeHtml(__('Credit Card Holder Name')); ?></span>
+            </label>
+
+            <div class="admin__field-control">
+                <input type="text" id="<?php /* @noEscape */ echo $code; ?>_cc_name"
+                       name="payment[cc_name]"
+                       class="input-text required-entry admin__control-text" />
+            </div>
+        </div>
+        <div class="admin__field _required">
+            <label for="<?php /* @noEscape */ echo $code; ?>_cc_number" class="admin__field-label">
+                <span><?php echo $block->escapeHtml(__('Credit Card Number')); ?></span>
+            </label>
+
+            <div class="admin__field-control">
+                <input type="number" id="<?php /* @noEscape */ echo $code; ?>_cc_number"
+                       name="payment[cc_number]"
+                       class="input-text required-entry validate-cc-number admin__control-text"
+                       value="<?php /* @noEscape */ echo $block->getInfoData('cc_number'); ?>"/>
+            </div>
+        </div>
+        <div class="admin__field _required">
+            <label for="<?php /* @noEscape */ echo $code; ?>_expiration" class="admin__field-label">
+                <span><?php echo $block->escapeHtml(__('Expiration Date')); ?></span>
+            </label>
+
+            <div class="admin__field-control">
+                <select id="<?php /* @noEscape */ echo $code; ?>_expiration"
+                        name="payment[cc_exp_month]"
+                        class="validate-cc-exp required-entry admin__control-select admin__control-select-month">
+                    <?php foreach ($block->getCcMonths() as $k => $v): ?>
+                        <option value="<?php echo $block->escapeHtml($k); ?>"
+                                <?php if ($k == $ccExpMonth): ?>selected="selected"<?php endif; ?>>
+                            <?php echo $block->escapeHtml($v); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <select id="<?php /* @noEscape */ echo $code; ?>_expiration_yr"
+                        name="payment[cc_exp_year]"
+                        class="required-entry admin__control-select admin__control-select-year">
+                    <?php foreach ($block->getCcYears() as $k => $v): ?>
+                        <option value="<?php /* @noEscape */ echo $k ? $block->escapeHtml($k) : ''; ?>"
+                                <?php if ($k == $ccExpYear): ?>selected="selected"<?php endif; ?>>
+                            <?php echo $block->escapeHtml($v); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <?php if ($block->hasVerification()): ?>
+            <div class="admin__field _required field-cvv">
+                <label for="<?php /* @noEscape */ echo $code; ?>_cc_cid" class="admin__field-label">
+                    <span><?php echo $block->escapeHtml(__('Card Verification Number')); ?></span>
+                </label>
+
+                <div class="admin__field-control">
+                    <input type="number"
+                           class="required-entry input-text validate-cc-cvn admin__control-text"
+                           id="<?php /* @noEscape */ echo $code; ?>_cc_cid" name="payment[cc_cid]"
+                           value="<?php /* @noEscape */ echo $block->getInfoData('cc_cid') ?>"/>
+                </div>
+            </div>
+        <?php endif; ?>
+    <?php } else { ?>
+        <!--        <div id="sagepay-dropin-container"></div>-->
+        <!--        <button id="show_dropin" value="">Display form</button>-->
+    <?php } ?>
+    <!--    <div id="sagepay-dropin-modal">-->
+    <!--        <form class="form" id="sagepay-dropin-form">-->
+    <!--            <div id="sagepay-dropin-container"></div>-->
+    <!--        <form>-->
+    <!--    </div>-->
+</fieldset>
+
+
+
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/modal',
+        'prototype',
+        'Magento_Sales/order/create/scripts',
+        'Magento_Sales/order/create/form'
+    ], function($, modal){
+        /**
+         * Disable card server validation in admin
+         */
+        order.addExcludedPaymentMethod('<?= /* @noEscape */ $code ?>');
+        if(!window.mgn_list_payment){
+            window.mgn_list_payment = [];
+        }
+        var methodCode = '<?=$block->getMethodCode()?>';
+        window.mgn_list_payment.push(methodCode);
+        var is_select = false;
+        var merchantSessionKey = "";
+        var month, year, date = "";
+        var is_dropin_init = false;
+        var selector = $('#submit_order_top_button, .order-totals-actions>.actions>button');
+
+        setInterval(function () {
+            month = $('#magenest_sagepay_expiration').val();
+            year = $('#magenest_sagepay_expiration_yr').val();
+            if (month && (month < 10)) {
+                date = '0'.concat(month);
+            } else if (month && (month >= 10)) {
+                date = month
+            }
+            if (year) {
+                year = year.slice(2);
+                date = date.concat(year);
+            }
+            if($('#p_method_magenest_sagepay').is(":checked")){
+                is_select = true;
+                selector.attr("onclick", "");
+            }else{
+                if(window.mgn_list_payment.indexOf(order.paymentMethod) === -1) {
+                    is_select = false;
+                    selector.attr("onclick", "order.submit()");
+                }
+            }
+
+        },100);
+
+        // selector.unbind('click');
+        selector.on("click", function (e) {
+            if( (is_select)&&($('#p_method_magenest_sagepay').is(":checked"))&&($('#edit_form').valid()) ){
+                if(typeof window.sagecheckout != 'undefined'){
+                    $('#sagepay-dropin-modal').modal("openModal");
+                }else {
+                    loadSageJs(function () {
+                        $.ajax({
+                                type: "GET",
+                                data: {},
+                                url: '<?=$this->getUrl('sagepay/checkout/merchantSessionKey')?>',
+                                success: function (response) {
+                                    console.log(response);
+                                    if (response.success) {
+                                        $('#merchant_sessionKey').val(response.merchantSessionKey);
+                                        merchantSessionKey = response.merchantSessionKey;
+                                        if ('<?=$isDropin?>' == 1) {
+                                            initSageDropin();
+                                        } else {
+                                            var cardDetail = {
+                                                cardholderName: $("#magenest_sagepay_cc_name").val(),
+                                                cardNumber: $("#magenest_sagepay_cc_number").val(),
+                                                expiryDate: date,
+                                                securityCode: $("#magenest_sagepay_cc_cid").val()
+                                            };
+                                            sagepayOwnForm({merchantSessionKey: merchantSessionKey}).tokeniseCardDetails({
+                                                cardDetails: cardDetail,
+                                                onTokenised: function (result, response) {
+                                                    console.log(result);
+                                                    if (result.success) {
+                                                        $("#card_identifier").val(result['cardIdentifier']);
+                                                        $('#edit_form').submit();
+                                                    } else {
+                                                        $('#edit_form').trigger('processStop');
+                                                        $(".loading-mask").css("display", "none");
+                                                        alert(result.errors[0]['message']);
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+                                    if (response.error) {
+                                        $('#edit_form').trigger('processStop');
+                                        $(".loading-mask").css("display", "none");
+                                        alert("Cannot get merchant key");
+                                    }
+                                },
+                                dataType: "json",
+                                showLoader: true
+                            }
+                        ).done(function () {
+                        });
+                    });
+                }
+            }
+        });
+
+        function initSageDropin() {
+            $('body').append(
+                "<div id=\"sagepay-dropin-modal\">\n" +
+                "        <form class=\"form\" id=\"sagepay-dropin-form\">\n" +
+                "            <div id=\"sagepay-dropin-container\"></div>\n" +
+                "        <form>\n" +
+                "    </div>");
+
+            if('<?=$isDropin?>' == 1) {
+                //console.log(typeof window.modalDropin);
+                if (typeof window.modalDropin == 'undefined') {
+                    //console.log("initdropin");
+                    window.modalDropin = modal({
+                        type: 'popup',
+                        title: "SagePay Dropin",
+                        responsive: true,
+                        innerScroll: true,
+                        buttons: [
+                            {
+                                text: $.mage.__('Cancel'),
+                                class: 'action checkout',
+                                click: function () {
+                                    this.closeModal();
+                                }
+                            },
+                            {
+                                text: $.mage.__('Place order'),
+                                class: 'action primary checkout',
+                                click: function () {
+                                    //console.log("click");
+                                    window.sagecheckout.tokenise();
+                                }
+                            }
+                        ]
+                    }, $('#sagepay-dropin-modal'));
+                }
+            }
+
+            //console.log("init");
+            window.sagecheckout = sagepayCheckout({
+                merchantSessionKey: merchantSessionKey,
+                containerSelector: '#sagepay-dropin-container',
+                onTokenise: function (tokenisationResult) {
+                    if (tokenisationResult.success) {
+                        $("#card_identifier").val(tokenisationResult.cardIdentifier);
+                        $('#edit_form').submit();
+                        $('body').trigger("processStart");
+                    } else {
+                        alert("Error");
+                    }
+                }
+            });
+            window.sagecheckout.form();
+            $('#sagepay-dropin-modal').modal("openModal");
+        }
+
+        function loadSageJs (callback) {
+            var isTest = '<?=$isTest?>';
+            var jsUrl = "https://pi-live.sagepay.com/api/v1/js/sagepay.js";
+            if (isTest == 1) {
+                jsUrl = "https://pi-test.sagepay.com/api/v1/js/sagepay.js";
+            }
+            //console.log(typeof sagepayCheckout);
+            if (typeof sagepayCheckout === "undefined") {
+                $.ajax({
+                    url: jsUrl,
+                    dataType: 'script',
+                    success: function (result) {
+                        callback();
+                    },
+                    async: true,
+                    showLoader: true
+                });
+            }
+            else {
+                callback();
+            }
+        }
+    })
+</script>

@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="haartyhanks_authreview_entity" resource="default" engine="innodb" comment="haartyhanks_authreview_entity Table">
+		<column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="entity_id"/>
+		</constraint>
+		<column name="name" nullable="true" xsi:type="varchar" comment="name" length="255"/>
+		<column name="photo" nullable="true" xsi:type="varchar" comment="photo" length="255"/>
+		<column name="credentials" nullable="true" xsi:type="varchar" comment="credentials" length="255"/>
+		<column name="specialist" nullable="true" xsi:type="varchar" comment="specialist" length="255"/>
+		<column name="registration_number" nullable="true" xsi:type="varchar" comment="NMC/GMC registration number" length="255"/>
+		<column name="bio" nullable="true" xsi:type="text" comment="Bio"/>
+		<column name="external_link" nullable="true" xsi:type="text" comment="External validation links (LinkedIn, research, awards)"/>
+		<column name="articles" nullable="true" xsi:type="text" comment="Links to all articles written"/>
+		<column name="schema" nullable="true" xsi:type="text" comment="Person + Author Schema"/>
+		<column name="default_review" nullable="true" xsi:type="int" comment="Default Reviewer" identity="false"/>
+		<column name="default_author" nullable="true" xsi:type="int" comment="Default Reviewer" identity="false"/>
+		<column name="status" nullable="true" xsi:type="int" comment="Status " identity="false"/>
+	</table>
+	<table name="cms_page">
+        <column xsi:type="int"
+                name="page_review_by"
+                nullable="true"
+                comment="Page Review By (User ID)"/>
+
+        <column xsi:type="int"
+                name="page_author_by"
+                nullable="true"
+                comment="Page Author By (User ID)"/>
+
+        <column xsi:type="int"
+                name="is_page_review_enable"
+                nullable="true"
+                default="0"
+                comment="Is Ad CMS Page (0/1)"/>
+	</table>
+
+	<table name="magefan_blog_post">
+        <column xsi:type="int"
+                name="post_review_id"
+                nullable="true"
+                comment="Post Review By (User ID)"/>
+
+        <column xsi:type="int"
+                name="post_author_id"
+                nullable="true"
+                comment="Post Author By (User ID)"/>
+
+        <column xsi:type="int"
+                name="is_active_google_eeat"
+                nullable="true"
+                default="0"
+                comment="Is Google Eeat Enable for this post (0/1)"/>
+	</table>
+</schema>
+
+
+

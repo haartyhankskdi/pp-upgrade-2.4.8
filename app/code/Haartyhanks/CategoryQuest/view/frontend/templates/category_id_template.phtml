@@ -1,0 +1,5 @@
+<?php
+
+$_helper = $this->helper(Haartyhanks\CategoryQuest\Helper\Data::class);
+$currentCategory = $_helper->getCurrentCategory();
+$_helper->setCatValueSession($currentCategory->getId());

@@ -1,0 +1,21 @@
+<script>
+    require([
+       'jquery',
+       'Magento_Ui/js/modal/alert'
+   ],
+   function($, alert) {
+      $('#html-body').on('click', '.nd-prescriber-note-modal-button', function(event){
+           alert({
+               content: $(event.target).parent().find(".note_text").html(),
+               title: "Note"
+           })
+      })
+
+      $('#html-body').on('click', '.nd-prescriber-attachment-modal-button', function(event){
+           alert({
+               content: $(event.target).parent().find(".note_text").text(),
+               title: "Attachment"
+           })
+      })
+   });
+</script>

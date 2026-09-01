@@ -1,0 +1,72 @@
+<?php
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Google Invisible reCaptcha for Magento 2
+*/
+?>
+<?php
+/**
+ * @var $block Magento\Framework\View\Element\Template
+ * @var $viewModel Amasty\InvisibleCaptcha\ViewModel\Captcha
+ * @var $escaper Magento\Framework\Escaper
+ */
+
+$viewModel = $block->getViewModel();
+?>
+
+<?php if ($viewModel->isNeedToShowCaptcha()): ?>
+    <script>
+        require([
+            'Amasty_InvisibleCaptcha/js/model/am-recaptcha',
+    ], function (amRecaptchaModel) {
+            amRecaptchaModel.setConfig({
+                "formsToProtect": "<?= $escaper->escapeJs(implode(',', $viewModel->getAllFormSelectors())) ?>",
+                "isEnabledOnPayments": "<?= $escaper->escapeJs($viewModel->isCaptchaOnPayments())?>",
+                "checkoutRecaptchaValidateUrl": "<?= $escaper->escapeHtml($viewModel->getCheckoutValidateCaptchaUrl()) ?>",
+                "invisibleCaptchaCustomForm": "<?= $escaper->escapeHtml($viewModel->getInvisibleCaptchaCustomForm()) ?>",
+                "recaptchaConfig": {
+                    "lang": "<?= $escaper->escapeJs($viewModel->getLanguage()) ?>",
+                    "theme": "<?= $escaper->escapeHtml($viewModel->getBadgeTheme()) ?>",
+                    "badge": "<?= $escaper->escapeHtml($viewModel->getBadgePosition()) ?>",
+                    "sitekey": "<?= $escaper->escapeHtml($viewModel->getSiteKey()) ?>"
+                }
+            })
+    });
+    </script>
+    <script>
+        // Fix to prevent 'no reCaptcha Token' error while slow site loading.
+        // Submit button should catch am-captcha.js initialization8 first
+        (function () {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', onReadyState);
+            } else {
+                onReadyState();
+            }
+
+            function onReadyState () {
+                let formsToProtect = "<?= $escaper->escapeJs(implode(',', $viewModel->getAllFormSelectors())) ?>";
+                let forms = formsToProtect.split(',');
+                let formsOnPage = [];
+
+                forms.forEach(form => {
+                    let existingForm = document.querySelectorAll(form);
+
+                    if (existingForm.length) {
+                        formsOnPage.push(existingForm);
+                    }
+                })
+
+                formsOnPage.forEach(form => {
+                    let submit = form[0].querySelector('[type="submit"]');
+                    let isAlreadyDisabled = submit.getAttribute('disabled');
+
+                    if (!isAlreadyDisabled) {
+                        submit.setAttribute('disabled', true);
+                        submit.setAttribute('am-captcha-protect', true);
+                    }
+                })
+            }
+        })();
+    </script>
+<?php endif; ?>

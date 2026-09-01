@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Kdi\Popup\Api\EmailRepositoryInterface" type="Kdi\Popup\Model\EmailRepository"/>
+	<preference for="Kdi\Popup\Api\Data\EmailInterface" type="Kdi\Popup\Model\Data\Email"/>
+	<preference for="Kdi\Popup\Api\Data\EmailSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Kdi\Popup\Model\ResourceModel\Email\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">kdi_popup_email</argument>
+			<argument name="resourceModel" xsi:type="string">Kdi\Popup\Model\ResourceModel\Email\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="kdi_popup_email_listing_data_source" xsi:type="string">Kdi\Popup\Model\ResourceModel\Email\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

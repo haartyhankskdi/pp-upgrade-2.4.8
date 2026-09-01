@@ -1,0 +1,113 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_PromoBanner
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\PromoBanner\Block\PromoBanner $block */
+$collection    = $block->getPromoBannerCollection();
+$changeTimeOut = $block->getChangeTimeOut();
+$showNavs = $block->showNavs();
+if ($collection && $collection->getSize()) : ?>
+    <div id="mppromobanner-<?= /* @noEscape */ $block->getPosition() ?>" class="mppromobanner-style ">
+        <?php foreach ($collection as $banner) : ?>
+            <?php if ($banner->getType() === \Mageplaza\PromoBanner\Model\Config\Source\Type::SLIDER && $block->getSliderItems($banner)) : ?>
+                <?php
+                $sliderId = $banner->getId() . uniqid('-', false);
+                $sliderItems = $block->getSliderItems($banner);
+                ?>
+                <div class="mppromobanner-banner-<?= /* @noEscape */ $banner->getId() ?> carousel-container" style="display: none">
+                    <?php if ($block->showCloseBtn()) : ?>
+                        <div class="mppromobanner-close">
+                            <div class="mppromobanner-close-btn" title="Close"></div>
+                        </div>
+                    <?php endif; ?>
+                    <div class="mppromobanner-container">
+                        <?php $iterator = 1; ?>
+                        <div id="mppromobanner-list-items-<?= /* @noEscape */ $sliderId ?>"
+                             class="owl-carousel owl-theme">
+                            <?php foreach ($sliderItems as $item) : ?>
+                                <?php
+                                $bnUrl = $item['url'];
+                                $bnImg = $block->getImageSrc($item['image']);
+                                ?>
+                                <?= ($iterator++ === 1) ? '<div class="banner-item banner-slider">' : '</div><div class="banner-item banner-slider">' ?>
+                                <div class="item-image">
+                                    <?php if (empty($bnUrl)) : ?>
+                                        <img class="owl-image mppromobanner-image img-responsive"
+                                             data-src="<?= $block->escapeUrl($bnImg) ?>"
+                                             alt="<?= /* @noEscape */ $item['image'] ?>"  style="display: block; visibility: hidden;" >
+                                    <?php else : ?>
+                                        <a class="owl-image mppromobanner-url"
+                                           href="<?= $block->escapeUrl($bnUrl) ?>" target="_blank"
+                                           rel="noopener noreferrer">
+                                            <img class="mppromobanner-image img-responsive"
+                                                 data-src="<?= $block->escapeUrl($bnImg) ?>"
+                                                 alt="<?= /* @noEscape */ $item['image'] ?>" style="display: block; visibility: hidden;">
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                                <?= ($iterator === count($sliderItems) + 1) ? '</div>' : '' ?>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            <script>
+                require(['jquery', 'mageplaza/core/owl.carousel'], function ($) {
+                    $('#mppromobanner-list-items-<?= /* @noEscape */ $sliderId ?>').owlCarousel({
+                        items:1,
+                        loop: true,
+                        margin:10,
+                        autoHeight:true,
+                        autoplay:true,
+                        autoplayHoverPause:true,
+                        dots: false,
+                        nav: <?= /* @noEscape */ $showNavs ?>,
+                        autoplayTimeout: <?= /* @noEscape */ $changeTimeOut ?>
+                    });
+                });
+            </script>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+    <script type="text/x-magento-init">
+    {
+        "#mppromobanner-<?= /* @noEscape */ $block->getPosition() ?>": {
+            "Mageplaza_PromoBanner/js/promobanner": {
+                "type": "content",
+                "media_path": "<?= /* @noEscape */ $block->getImageSrc('') ?>",
+                "isCartPage": "<?= /* @noEscape */ $block->getRequest()->getFullActionName() ?>",
+                "collection": <?= /* @noEscape */ \Mageplaza\PromoBanner\Helper\Data::jsonEncode($collection) ?>
+            }
+        }
+    }
+    </script>
+<?php endif; ?>
+
+<script>
+ document.addEventListener("DOMContentLoaded", function() {
+    const img = document.querySelector(".mppromobanner-image");
+    if (img) {
+        img.src = img.dataset.src;
+        img.onload = function() {
+            img.style.visibility = "visible"; 
+        };
+    }
+})
+
+</script>

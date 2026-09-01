@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Kdi\Pharmacist\Block\Adminhtml\Pharmacist\Edit" name="pharmacist_form" template="Kdi_Pharmacist::pharmacist/edit.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

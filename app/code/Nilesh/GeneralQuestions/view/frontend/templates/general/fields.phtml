@@ -1,0 +1,858 @@
+<?php 
+    /**
+     * This Phtml is use as widget and act as widget
+     * 
+     * @result array
+     */
+    $gq = $block->getGq();
+    //echo "<pre>";print_r($gq);exit();
+?>
+
+
+<!-- Question =0 Gender -->
+<?php if(1==0): ?>
+<div class="field required gender_fieldset">
+    <label for="gender" class="label"><span><?php echo __('Gender') ?></span></label>
+    <div class="control">
+        <div class="field-1 gender_male">
+        <input type="radio" name="gender" id="gender-yes"  <?php echo (isset($gq['gender']) && ($gq['gender'] == "1"))?'checked':''; ?> value="1" class="Male_input input-text gender" data-validate="{required:true}">
+        <label class="gender radio-btn-lable" for="gender-yes">
+        <span>Male</span>
+        </label>
+    </div>
+
+    <div class="field-1 gender_female">
+        <input type="radio" name="gender" id="gender-no" <?php echo (isset($gq['gender']) && !empty($gq['gender']) && ($gq['gender'] == "0")) ? 'checked' : ''; ?> value="0" class="Female_input input-text gender" data-validate="{required:true}">
+        <label class="gender radio-btn-lable" for="gender-no">
+            <span>Female</span>
+        </label>
+    </div>
+</div>
+<?php endif; ?>
+
+<!-- Question 1 suffer diagnosed -->
+<div class="field required suffer_diagnosed_fieldset">
+    <label for="suffer_diagnosed" class="label"><span><?php echo __(' Do you suffer from or have you been diagnosed with any other medical condition(s)?') ?></span></label> <i class="info-icon fa fa-info-circle" aria-hidden="true"></i>
+    <div class="info-icon-message" style="display:none">
+        Please describe any condition you suffer from or have been diagnosed with, past or present, for example: diabetes, high blood pressure etc… Please also describe any operations or conditions you have previously had or suffered from that may effect your treatment, for example: heart bypass operation
+    </div>
+    <div class="control">
+        <div class="field-1">
+        <input type="radio" name="suffer_diagnosed" id="suffer_diagnosed-yes" <?php echo (isset($gq['suffer_diagnosed']) && ($gq['suffer_diagnosed'] == 1))?'checked':''; ?> value="1" class="input-text suffer_diagnosed" data-validate="{required:true}" id="suffer-diagnosed">
+        <label class="suffer_diagnosed radio-btn-lable" for="suffer_diagnosed-yes">
+        <span>Yes</span></label>
+    </div>
+    <div class="field-1">
+        <input type="radio" name="suffer_diagnosed" id="suffer_diagnosed-no" <?php echo (isset($gq['suffer_diagnosed']) && !$gq['suffer_diagnosed'] && ($gq['suffer_diagnosed'] == 0)) ? 'checked' : ''; ?> value="0" class="input-text suffer_diagnosed" data-validate="{required:true}" id="suffer-diagnosed">
+        <label class="suffer_diagnosed radio-btn-lable" for="suffer_diagnosed-no">
+        <span>No</span> 
+        </label>
+    </div>
+</div>
+<div class="field required suffer_diagnosed_yes_fieldset" <?php echo (isset($gq['suffer_diagnosed']) && ($gq['suffer_diagnosed'] == 1))?'':'style="display:none"'; ?>>
+    <label for="suffer_diagnosed_yes" class="label"><span><?php echo __('If yes, please list') ?></span></label>
+    <div class="control">
+        <textarea name="suffer_diagnosed_yes" id="suffer_diagnosed_yes" class="input-text" data-validate="{required:true}"><?php echo isset($gq['suffer_diagnosed_yes'])?$gq['suffer_diagnosed_yes']:''; ?></textarea>
+    </div>
+</div>
+</div>
+<!-- Question 2 other medication -->
+<div class="field required other_medication_fieldset">
+    <label for="other_medication" class="label"><span><?php echo __('Are you on any other medication (including prescription medicine, over the counter medicines, vitamins or supplements)?') ?></span></label>
+    <div class="control">
+        <div class="field-1">
+        <input type="radio" name="other_medication" id="other_medication-yes"  <?php echo (isset($gq['other_medication']) && ($gq['other_medication'] == 1))?'checked':''; ?> value="1" class="input-text other_medication" data-validate="{required:true}">
+        <label class="other_medication radio-btn-lable" for="other_medication-yes">
+        <span>Yes</span>
+        
+        </label>
+
+    </div>
+
+    <div class="field-1">
+        <input type="radio" name="other_medication" id="other_medication-no" <?php echo (isset($gq['other_medication']) && !$gq['other_medication'] && ($gq['other_medication'] == 0)) ? 'checked' : ''; ?> value="0" class="input-text other_medication" data-validate="{required:true}">
+        <label class="other_medication radio-btn-lable" for="other_medication-no">
+        <span>No</span>
+        
+        </label>
+    </div>
+</div>
+<div class="field required other_medication_yes_fieldset" <?php echo (isset($gq['other_medication']) && ($gq['other_medication'] == 1))?'':'style="display:none"'; ?>>
+    <label for="other_medication_yes" class="label"><span><?php echo __('If yes, please list') ?></span></label>
+    <div class="control">
+        <textarea name="other_medication_yes" id="other_medication_yes" class="input-text" data-validate="{required:true}"> <?php echo isset($gq['other_medication_yes'])?$gq['other_medication_yes']:''; ?></textarea>
+    </div>
+</div>
+</div>
+
+<!-- Question 3 have allergies -->
+<div class="field required have_allergies_fieldset">
+    <label for="have_allergies" class="label"><span><?php echo __('Do you have any allergies?') ?></span></label>
+    <div class="control">
+        <div class="field-1">
+        <input type="radio" name="have_allergies" id="have_allergies-yes" <?php echo (isset($gq['have_allergies']) && ($gq['have_allergies'] == 1))?'checked':''; ?> value="1" class="input-text have_allergies" data-validate="{required:true}">
+        <label class="have_allergies radio-btn-lable" for="have_allergies-yes">
+        <span>Yes</span>
+        
+        </label>
+    </div>
+
+    <div class="field-1">
+        <input type="radio" name="have_allergies" id="have_allergies-no" <?php echo (isset($gq['have_allergies']) && !$gq['have_allergies'] && ($gq['have_allergies'] == 0)) ? 'checked' : ''; ?> value="0" class="input-text have_allergies" data-validate="{required:true}">
+        <label class="have_allergies radio-btn-lable" for="have_allergies-no">
+        <span>No</span>
+        
+        </label>
+    </div>
+</div>
+<div class="field required have_allergies_yes_fieldset" <?php echo (isset($gq['have_allergies']) && ($gq['have_allergies'] == 1))?'':'style="display:none"'; ?>>
+    <label for="have_allergies_yes" class="label"><span><?php echo __('If yes, please give details') ?></span></label>
+    <div class="control">
+        <textarea name="have_allergies_yes" id="have_allergies_yes" class="input-text" data-validate="{required:true}"><?php echo isset($gq['have_allergies_yes'])?$gq['have_allergies_yes']:''; ?></textarea>
+    </div>
+</div>
+</div>
+
+<!-- Question 4 registered gp  -->
+<div class="field required registered_gp_fieldset">
+    <label for="registered_gp " class="label"><span><?php echo __('Are you registered with a GP in the UK?') ?></span></label>
+    <div class="control">
+        <div class="field-1">
+        <input type="radio" name="registered_gp" id="registered_gp-yes" <?php echo (isset($gq['registered_gp']) && ($gq['registered_gp'] == 1))?'checked':''; ?> value="1" class="input-text registered_gp" data-validate="{required:true}">
+        <label class="registered_gp radio-btn-lable" for="registered_gp-yes">
+        <span>Yes</span>
+        
+        </label>
+    </div>
+
+    <div class="field-1">
+        <input type="radio" name="registered_gp" id="registered_gp-no" <?php echo (isset($gq['registered_gp']) && !$gq['registered_gp'] && ($gq['registered_gp'] == 0)) ? 'checked' : ''; ?> value="0" class="input-text registered_gp" data-validate="{required:true}">
+        <label class="registered_gp radio-btn-lable" for="registered_gp-no">
+        <span>No</span>
+        
+        </label>
+    </div>
+</div>
+</div>
+
+<div class="field required registered_gp_permission_fieldset" <?php echo (isset($gq['registered_gp']) && ($gq['registered_gp'] == 1))?'':'style="display:none"'; ?>>
+    <label for="registered_gp_permission " class="label"><span><?php echo __(' If yes,  Do you give permission for Pharmacy Planet to inform your GP of this supply?') ?></span></label>
+    <div class="control">
+
+        <div class="field-1">
+            <input type="radio" name="registered_gp_permission" id="registered_gp_permission-yes"  <?php echo (isset($gq['registered_gp_permission']) && ($gq['registered_gp_permission'] == 1))?'checked':''; ?> value="1" class="input-text registered_gp_permission" data-validate="{required:true}">
+            <label class="registered_gp_permission radio-btn-lable" for="registered_gp_permission-yes">
+            <span>Yes</span>
+            
+            </label>
+        </div>
+
+        <div class="field-1">
+            <input type="radio" name="registered_gp_permission" id="registered_gp_permission-no" <?php echo (isset($gq['registered_gp_permission']) && !$gq['registered_gp_permission'] && ($gq['registered_gp_permission'] == 0)) ? 'checked' : ''; ?> value="0" class="input-text registered_gp_permission" data-validate="{required:true}">
+            <label class="registered_gp_permission radio-btn-lable" for="registered_gp_permission-no">
+            <span>No</span>
+            
+            </label>
+        </div>
+    </div>
+
+    <div class="field required registered_gp_surgery_fieldset" <?php echo (isset($gq['registered_gp_permission']) && ($gq['registered_gp_permission'] == 1))?'':'style="display:none"'; ?>>
+        <label for="registered_gp_surgery" class="label"><span><?php echo __('If yes, Please select your GP surgery from the list') ?></span></label>
+        <div class="control">
+            <div id="surgery__display" <?php echo (isset($gq['registered_gp_surgery']) && !empty($gq['registered_gp_surgery']))?'':'style="display:none"'; ?>></div>
+            <button id="btn__surgery__close" type="button" class="btn btn__surgery"  <?php echo (isset($gq['registered_gp_surgery']) && !empty($gq['registered_gp_surgery']))?'':'style="display:none"'; ?>><i class="fa fa-close"></i></button>
+            <input type="text" class="search_surgery" id="search_surgery" placeholder="Search for surgery" autocomplete="off"  <?php echo (isset($gq['registered_gp_surgery']) && !empty($gq['registered_gp_surgery'])) ? 'style="display:none"' : ''; ?>>
+            <div class="spinner-loader" style="display:none"><span><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></span></div>
+            <div id="search_surgery_div" <?php echo (isset($gq['registered_gp_surgery']) && !empty($gq['registered_gp_surgery']))?'':'style="display:none"'; ?>>
+                <?php if(isset($gq['registered_gp_surgery']) && !empty($gq['registered_gp_surgery'])): ?>
+                <?php $gpSurg =  json_decode($gq['registered_gp_surgery']); ?>
+                <?php if($gpSurg->name_of_practice!=""){?>
+                    <span class="name_of_practice"><span class="highlight">Practice Name: </span><?php echo $gpSurg->name_of_practice; ?></span>
+                <?php }?>
+                <?php if($gpSurg->address_line_one!="" || $gpSurg->address_line_two!="" || $gpSurg->city!="" || $gpSurg->county!= "" || $gpSurg->postcode!=""){?>
+                    <span class="name_of_practice"><span class="highlight">Address: </span>
+                        <?php echo "$gpSurg->address_line_one, $gpSurg->address_line_two, $gpSurg->city, $gpSurg->county, $gpSurg->postcode";?>
+                    </span>
+                <?php }?>
+                <?php endif; ?>
+            </div>
+
+            <!-- Opacity -->
+            <textarea name="registered_gp_surgery" class="hidden_field" id="registered_gp_surgery" rows="4"  data-validate="{required:true}"><?php echo isset($gq['registered_gp_surgery'])?$gq['registered_gp_surgery']:''; ?></textarea>
+        </div>
+    </div>
+</div>
+
+<!-- question 4 -->
+<div class="field required upload_documents_prescriber_fieldset">
+    <label for="upload_documents_prescriber" class="label"><span><?php echo __('Would you like to upload any documents for the prescriber to see (for example, prescription, doctors letter or blood tests)?') ?></span></label>
+    <div class="control">
+        <div class="field-1">
+        <input type="radio" name="upload_documents_prescriber" id="upload_documents_prescriber-yes" <?php echo (isset($gq['upload_documents_prescriber']) && ($gq['upload_documents_prescriber'] == 1))?'checked':''; ?> value="1" class="input-text upload_documents_prescriber" data-validate="{required:true}">
+        <label class="upload_documents_prescriber radio-btn-lable" for="upload_documents_prescriber-yes">
+        <span>Yes</span>
+        
+        </label>
+    </div>
+
+
+    <div class="field-1">
+        <input type="radio" name="upload_documents_prescriber" id="upload_documents_prescriber-no" <?php echo (isset($gq['upload_documents_prescriber']) && !$gq['upload_documents_prescriber'] && ($gq['upload_documents_prescriber'] == 0)) ? 'checked' : ''; ?> value="0" class="input-text upload_documents_prescriber" data-validate="{required:true}">
+        <label class="upload_documents_prescriber radio-btn-lable" for="upload_documents_prescriber-no">
+            <span>No</span>
+        </label>
+    </div>
+</div>
+<div class="field required upload_documents_prescriber_yes_fieldset" <?php echo (isset($gq['upload_documents_prescriber']) && ($gq['upload_documents_prescriber'] == 1))?'':'style="display:none"'; ?>>
+    <label for="upload_documents_prescriber_yes" class="label"><span><?php echo __('If yes, (Browse and Upload file)') ?></span></label>
+    <div class="control">
+        <?php $filesUploaded = isset($gq['upload_documents_prescriber_yes'])?$gq['upload_documents_prescriber_yes']:'';
+            // if(isset($gq['upload_documents_prescriber']) && ($gq['upload_documents_prescriber'] == 1) && !empty($gq['upload_documents_prescriber_yes'])){
+                $filesUploadedArray = explode(",", trim($filesUploaded, ","));
+                $iCount = count($filesUploadedArray); //(count($filesUploadedArray) <= 4)?count($filesUploadedArray):4;
+                $yC = 0; // For secount count
+                $iC=0;
+                if(isset($gq['upload_documents_prescriber']) && ($gq['upload_documents_prescriber'] == 1)){
+                    for ($iC; $iC < $iCount; $iC++) { 
+                        ?>
+                            <div class="filelink ic">
+                                <a data-title="<?php echo /* noescape */ $filesUploadedArray[$iC]; ?>" class="files_download" href="<?php echo $this->getUrl('pub/media').'gq_uploads/'.$filesUploadedArray[$iC]; ?>" download title="Click to download"><i class="fa fa-file-o" aria-hidden="true"></i> <span><?php echo /* noescape */ $filesUploadedArray[$iC]; ?></span></a>
+                                <!-- <button class="btn btn-link delete_file" type="button" data-file="<?php echo /* noescape */ $filesUploadedArray[$iC]; ?>"><i class="fa fa-close"></i></button> -->
+                                <div class="fileuplod_custom" style="display:none">
+                                    <span>Choose File</span>
+                                    <input type="file" class="filesLoader <?php if($iC == 0){ echo 'required_upload_field'; } ?>" accept=".jpg,.jpeg,.pdf,.png,.doc,.bmp">
+                                </div>
+                            </div>
+                        <?php  
+                        $yC++;
+                    }
+                }
+                // for ($i=$yC; $i < 4; $i++) { // Because limit set to 4
+                    ?>
+                        <div class="filelink yc">
+                            <a data-title="" class="files_download" href="" style="display:none" download title="Click to download"><i class="fa fa-file-o" aria-hidden="true"></i> <span></span></a>
+                            <!-- <button class="btn btn-link delete_file" style="display:none" type="button" data-file=""><i class="fa fa-close"></i></button> -->
+                            <div class="fileuplod_custom">
+                                <span>Choose File</span>
+                                <input type="file" class="filesLoader <?php if($iC == 0){ echo 'required_upload_field'; } ?>" accept=".jpg,.jpeg,.pdf,.png,.doc,.bmp" />
+                            </div>
+                        </div>
+                    <?php
+                    // if($iC == 0){
+                    //     $iC++;
+                    // }
+                // }
+                ?>
+                    <input type="hidden" name="upload_documents_prescriber_yes" id="upload_documents_prescriber_yes" value="<?php echo trim($filesUploaded, ","); ?>">
+                    <input type="hidden" name="upload_documents_prescriber_yes_uploaded" value="<?php echo trim($filesUploaded, ","); ?>">
+                <?php
+        ?>
+        <!-- <textarea name="upload_documents_prescriber_yes" id="upload_documents_prescriber_yes" class="input-text" data-validate="{required:true}">
+            <?php echo isset($gq['upload_documents_prescriber_yes'])?$gq['upload_documents_prescriber_yes']:''; ?>
+        </textarea> -->
+
+    </div>
+</div>
+</div>
+
+<!-- Question 5 -->
+<div class="field required prescriber_to_know_fieldset">
+    <label for="prescriber_to_know" class="label"><span><?php echo __(' Do you suffer from or have you been diagnosed with any other medical condition(s)?') ?></span></label>
+    <div class="control">
+        <div class="field-1">
+        <input type="radio" name="prescriber_to_know" id="prescriber_to_know-yes"  <?php echo (isset($gq['prescriber_to_know']) && ($gq['prescriber_to_know'] == 1))?'checked':''; ?> value="1" class="input-text prescriber_to_know" data-validate="{required:true}">
+        <label class="prescriber_to_know radio-btn-lable" for="prescriber_to_know-yes">
+        <span>Yes</span>
+        </label>
+    </div>
+
+
+    <div class="field-1">
+        <input type="radio" name="prescriber_to_know" id="prescriber_to_know-no"  <?php echo (isset($gq['prescriber_to_know']) && !$gq['prescriber_to_know'] && ($gq['prescriber_to_know'] == 0)) ? 'checked' : ''; ?> value="0" class="input-text prescriber_to_know" data-validate="{required:true}">
+        <label class="prescriber_to_know radio-btn-lable" for="prescriber_to_know-no">
+        <span>No</span>
+        </label>
+    </div>
+</div>
+<div class="field required prescriber_to_know_yes_fieldset"  <?php echo (isset($gq['prescriber_to_know']) && ($gq['prescriber_to_know'] == 1))?'':'style="display:none"'; ?>>
+    <label for="prescriber_to_know_yes" class="label"><span><?php echo __('If yes, please list') ?></span></label>
+    <div class="control">
+        <textarea name="prescriber_to_know_yes" id="prescriber_to_know_yes" class="input-text" data-validate="{required:true}"><?php echo isset($gq['prescriber_to_know_yes'])?$gq['prescriber_to_know_yes']:''; ?></textarea>
+    </div>
+</div>
+</div>
+
+
+
+<style>
+
+    
+/*-------------------multidoc upload css-----------------*/
+
+
+ 
+.customer-general-question.file-loader .column.main::before{
+    content: ' ';
+    background-color: rgb(255, 255, 255, 1);
+    background-image: url('../images/loading-img.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 999;
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 40px 0;
+}
+.myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive a .fa.fa-file-o{
+       margin-top: 0px;
+       font-size: 25px;
+    }
+
+.upload_documents_prescriber_yes_fieldset .files_download{
+   /* background: url('../images/upload-file.png') center no-repeat #fff;*/
+    width: 60px;
+    height: 60px;
+    float: left; 
+    border-radius: 50px;
+    border: 2px solid #75c4f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ 
+
+.upload_documents_prescriber_yes_fieldset .delete_file{
+  width: 30px;
+    height: 30px;
+    background: #feefef;
+    border-radius: 50px;
+    text-align: center;
+    padding: 0;
+    position: absolute;
+    top: -25px;
+    left: 35px;
+    color: #da1414;
+    border: 0;
+}
+
+.upload_documents_prescriber_yes_fieldset label[for=upload_documents_prescriber_yes]{
+  margin-bottom: 20px;
+    display: inline-block;
+    width: 100%;
+} 
+
+
+.myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive a .fa.fa-file-pdf-o{
+       margin-top: 0px;
+       font-size: 25px;
+    }
+
+
+@media only screen and (max-width: 767px) {
+
+
+  .customer-general-question.page-layout-2columns-left .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink{
+    position: relative !important;
+  }
+   .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink{
+    height: auto !important;
+  } 
+
+  .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset input[type=file]{
+      padding-left: 32px !important;
+    }
+  .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question input[type=file]{
+    text-indent: -10px !important;
+    padding-left: 32px !important;
+  } 
+  .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question input[type=file]{
+    text-indent: -10px !important;
+  } 
+
+  .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink .fileuplod_custom input[type=file]:before{
+    margin-left: -23px !important;
+  }
+  .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question input[type=file]:before{
+    margin-left: -23px !important;
+  }
+  .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink{
+    width: 100%;
+    float: left;
+    position: relative;
+    margin-bottom: 20px !important;
+    height: auto;
+  }
+  .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive{
+    width: 100% !important;
+    float: left;
+  }
+  .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive img.uf_image{
+    margin-left: 13px;
+  }
+  .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive a .fa.fa-file-o{
+       margin-left: 0px;
+       margin-top: 0;
+    }
+
+    .customer-general-question.file-loader .column.main::before{
+   
+    background-position: center 80% !important; 
+  }
+
+  .upload_documents_prescriber_yes_fieldset .files_download{
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .upload_documents_prescriber_yes_fieldset .delete_file{
+    top: -5px;
+    left: 50px;
+  }
+  .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive img.uf_image{
+    margin-left: 0px;
+    margin-top: 0 !important;
+    width: 70% !important;
+    height: 70% !important;
+  }
+  .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset .upload_documents_prescriber_yes_fieldset .control .files_download span{
+    top: 20px !important;
+    left: 90px !important;
+  }
+  .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset .upload_documents_prescriber_yes_fieldset .control .files_download span{
+    width: 65%;
+    word-break: break-word;
+    top: 0px !important;
+    height: 70px;
+    align-items: center;
+    justify-content: left;
+    display: flex !important;
+  }
+
+}
+
+@media only screen and (min-width: 1025px) {
+
+    .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset input[type=file]{
+      padding-left: 20px !important;
+    }
+  .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive{
+    width: 40% !important;
+    float: left;
+  }
+  .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink{
+    width: 40% !important;
+    float: left;
+  } 
+  .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset .upload_documents_prescriber_yes_fieldset .control .files_download span{
+    width: 65%;
+    word-break: break-word;
+    top: -5px !important;
+    height: 55px;
+    align-items: center;
+    justify-content: left;
+    display: flex !important;
+  }
+
+}
+
+
+  @media only screen and (min-width: 768px) and (max-width: 977px) {
+
+
+    .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset input[type=file]{
+      padding-left: 20px !important;
+    }
+    .myaccount-general-question.page-layout-2columns-left .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive{
+      width: 50% !important;
+    }
+      .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset .upload_documents_prescriber_yes_fieldset .control .files_download span{
+      width: 65%;
+      word-break: break-word;
+      top: -5px !important;
+      height: 55px;
+      align-items: center;
+      justify-content: left;
+      display: flex !important;
+    }
+
+  }
+
+    @media only screen and (min-width: 978px) and (max-width: 1024px) {
+
+      .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset input[type=file]{
+      padding-left: 20px !important;
+    }
+    .myaccount-general-question.page-layout-2columns-left .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive{
+      width: 100% !important;
+    }
+      .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset .upload_documents_prescriber_yes_fieldset .control .files_download span{
+      width: 65%;
+      word-break: break-word;
+      top: -5px !important;
+      height: 55px;
+      align-items: center;
+      justify-content: left;
+      display: flex !important;
+    }
+
+  }
+
+.myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive img.uf_image{
+    margin-top: 0px;
+    width: 70%;
+    height: 70%;
+    border-radius: 50px;
+}
+
+.account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset .upload_documents_prescriber_yes_fieldset .control .files_download span{
+    padding: 0;
+    display: block;
+    top: 10px;
+    left: 80px;
+    background: transparent;
+    color: #000;
+    text-align: left;
+}
+
+
+.catalog-category-view .page-bottom .before-footer .discretion-section,
+.checkout-cart-index .page-bottom .before-footer .discretion-section{
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+
+
+
+
+#bss-cookie-notice{
+  z-index: 9999;
+  max-width: 100% !important;
+}
+
+
+
+
+@-moz-document url-prefix() {
+ .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question input[type="file"] {
+    text-indent: 0px !important;
+    padding-left: 1px !important;
+}
+.account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset input[type="file"] {
+    padding-left: 1px !important;
+}
+
+
+}
+</style>
+
+
+<script>
+    require(['jquery'], function ($) {
+        
+        // Suffer Diagnosed
+        $(".suffer_diagnosed").change(function (e) {
+            // e.preventDefault();
+            var self = $("input[name='suffer_diagnosed']:checked");
+            if(self.val() == 1){
+                self.parent().addClass('active');
+                $('.suffer_diagnosed_yes_fieldset').show();
+            }else{
+                self.parent().removeClass('active');
+                $('.suffer_diagnosed_yes_fieldset').hide();
+            }
+        });
+
+        // other medication
+        $(".other_medication").change(function (e) {
+            // e.preventDefault();
+            var self = $("input[name='other_medication']:checked");
+            if(self.val() == 1){
+                self.parent().addClass('active');
+                $('.other_medication_yes_fieldset').show();
+            }else{
+                self.parent().removeClass('active');
+                $('.other_medication_yes_fieldset').hide();
+            }
+        });
+
+        // have allergies
+        $(".have_allergies").change(function (e) {
+            // e.preventDefault();
+            var self = $("input[name='have_allergies']:checked");
+            if(self.val() == 1){
+                self.parent().addClass('active');
+                $('.have_allergies_yes_fieldset').show();
+            }else{
+                self.parent().removeClass('active');
+                $('.have_allergies_yes_fieldset').hide();
+            }
+        });
+
+        // GP
+        $(".registered_gp").change(function (e) {
+            // e.preventDefault();
+            var self = $("input[name='registered_gp']:checked");
+            if(self.val() == 1){
+                self.parent().addClass('active');
+                $('.registered_gp_permission_fieldset').show();
+            }else{
+                self.parent().removeClass('active');
+                $('.registered_gp_permission_fieldset').hide();
+            }
+        });
+
+        // GP permission
+        $(".registered_gp_permission").change(function (e) {
+            // e.preventDefault();
+            var self = $("input[name='registered_gp_permission']:checked");
+            if(self.val() == 1){
+                self.parent().addClass('active');
+                $('.registered_gp_surgery_fieldset').show();
+            }else{
+                self.parent().removeClass('active');
+                $('.registered_gp_surgery_fieldset').hide();
+            }
+        });
+
+
+        // GP permission
+        $(".upload_documents_prescriber").change(function (e) {
+            // e.preventDefault();
+            var self = $("input[name='upload_documents_prescriber']:checked");
+            if(self.val() == 1){
+                self.parent().addClass('active');
+                $('.upload_documents_prescriber_yes_fieldset').show();
+            }else{
+                self.parent().removeClass('active');
+                $('.upload_documents_prescriber_yes_fieldset').hide();
+            }
+        });
+
+        // prescriber to know
+        $(".prescriber_to_know").change(function (e) {
+            // e.preventDefault();
+            var self = $("input[name='prescriber_to_know']:checked");
+            // alert(self.val());
+            if(self.val() == 1){
+                self.parent().addClass('active');
+                $('.prescriber_to_know_yes_fieldset').show();
+            }else{
+                self.parent().removeClass('active');
+                $('.prescriber_to_know_yes_fieldset').hide();
+            }
+        });
+
+        $(".info-icon").hover(function () {
+            // over
+                $(".info-icon-message").show();
+            }, function () {
+                // out
+                $(".info-icon-message").hide();
+            }
+            );
+
+            function stringEncrypter(str) {
+                var buf = [];
+                for (var i=str.length-1;i>=0;i--) {
+                    buf.unshift(['&#', str[i].charCodeAt(), ';'].join(''));
+                }
+                return buf.join('');
+            }
+
+            /* TODO surgery select box */
+            // $("#registered_gp_surgery").select2();
+            //
+            //
+
+            var search_surgery_div = $("#search_surgery_div"), spinnerLoader = $(".spinner-loader");
+            $("#search_surgery").keyup(function (e) {
+                var self = $(this);
+                search_surgery_div.html('');
+                //  * Check input lenght is greater then 2 or not
+                if(self.val().length >= 2){
+                    //  *Show Loader here
+                    spinnerLoader.show();
+                    search_surgery_div.show();
+                    $.post("<?php echo $block->getBaseUrl(); ?>gpapi", {
+                        q : self.val()
+                    },
+                    function (data) {
+                            // console.log(data);
+                            if(data.length > 0){
+                                if(search_surgery_div.html('')){
+                                    $.map(data, function (element,Key) {
+                                        search_surgery_div.append(`
+                                        <div class="clickable__search" data-val='{"gpmanagement_id": "${stringEncrypter(element.gpmanagement_id)}","practice_code": "${stringEncrypter(element.practice_code)}","name_of_practice": "${stringEncrypter(element.name_of_practice)}","email": "${stringEncrypter(element.email)}","telephone": "${stringEncrypter(element.telephone)}","address_line_one": "${stringEncrypter(element.address_line_one)}","address_line_two": "${stringEncrypter(element.address_line_two)}","city": "${stringEncrypter(element.city)}","county": "${stringEncrypter(element.county)}","postcode": "${stringEncrypter(element.postcode)}"}'>
+                                        ${stringEncrypter(element.name_of_practice)}
+                                        <span class="small">${stringEncrypter(element.address_line_one)}, ${stringEncrypter(element.address_line_two)},${stringEncrypter(element.city)},${stringEncrypter(element.county)} ${stringEncrypter(element.postcode)}</span>
+                                        </div>
+                                        `);
+                                    });
+                                }
+                            }else{
+                                if(search_surgery_div.html('')){
+                                    search_surgery_div.append(`
+                                        <div class="no__search">No surgery found</div>
+                                    `);
+                                }
+                            }
+                            spinnerLoader.hide();
+                        },
+                        "json"
+                    );
+                }else{
+                    search_surgery_div.hide();
+                }
+            });
+
+            search_surgery_div.on('click', '.clickable__search' , function () {
+                var data = $(this).data('val');
+                $("#surgery__display").html(`
+                    <span class="name_of_practice"><span class="highlight">Practice Name: </span>${data.name_of_practice}</span>
+                    <span class="name_of_practice"><span class="highlight">Address: </span>${data.address_line_one}, ${data.address_line_two},${data.city},${data.county} ${data.postcode}</span>
+                `);
+                $("#registered_gp_surgery").val(JSON.stringify(data));
+                search_surgery_div.hide();
+                $("#search_surgery").hide();
+                $("#btn__surgery__close").show();
+                $("#surgery__display").show();
+                $("#registered_gp_surgery-error").hide();
+            });
+
+            $("#btn__surgery__close").click(function (e) {
+                e.preventDefault();
+                $("#btn__surgery__close").hide();
+                $("#surgery__display").hide();
+                $("#search_surgery").show();
+                $("#search_surgery").val('');
+                $("#registered_gp_surgery").val('');
+                search_surgery_div.hide();
+            });
+
+            /* =================================
+
+                * AJAX UPLOAD system 
+
+             =================================== */
+            var mediaUrl = "<?php echo $this->helper('\Magento\Cms\Helper\Wysiwyg\Images')->getBaseUrl(); ?>";
+            $('.filesLoader').change(function(){
+                //on change event
+                var self = $(this);
+                // Activate Page loader here
+                $("body").addClass("file-loader");
+                formData = new FormData();
+                if(self.prop('files').length > 0)
+                {
+                    file = self.prop('files')[0];
+                    formData.append("files", file);
+
+                    var fileExtension = file.name.substr( (file.name.lastIndexOf('.') +1) );
+                    fileExtension = fileExtension.toLowerCase();
+                    if(fileExtension == "jpg" || fileExtension == "png" || fileExtension == "jpeg" || fileExtension == "pdf" || fileExtension == "doc" || fileExtension == "bmp"){
+                        jQuery.ajax({
+                            url: '<?php echo $block->getBaseUrl(); ?>customer/general/ajax',
+                            type: "POST",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            dataType: "json",
+                            success: function (result) {
+                                console.log(result);
+                                if(result.status == true){
+                                    self.closest("div.filelink").find(".files_download").find('span').text(result.message);
+                                    self.closest("div.filelink").find(".files_download").attr('href', (mediaUrl+result.target+result.message)).data("title", result.message).show();
+                                    self.closest("div.filelink").find(".delete_file").data('file', result.message).show();
+                                    self.closest("div.filelink").find("div.fileuplod_custom").hide();
+                                    self.closest("div.filelink").addClass("uploadfileactive");
+                                    var updateStatusVal = $("#upload_documents_prescriber_yes");
+                                    if(updateStatusVal.val() == ''){
+                                        updateStatusVal.val(result.message);
+                                    }else{
+                                        updateStatusVal.val(updateStatusVal.val() + ',' + result.message);
+                                    }
+                                }else{
+                                    alert(result.message);
+                                }
+                                // run beatify
+                                self.val('');
+                                file_beautify();
+                                // Activate Page loader here
+                                $("body").removeClass("file-loader");
+                            }
+                        });
+                    }else{
+                        self.val('');
+                        alert("We only allow the following extensions ( jpeg, jpg, doc, pdf, png and bmp files)");
+                    }
+                }
+            });
+
+            $(".delete_file").click(function (e) {
+                e.preventDefault();
+                var self = $(this);
+                var updateStatusVal = $("#upload_documents_prescriber_yes");
+                var returnVal = updateStatusVal.val();
+                var fileName = self.data('file');
+                updateStatusVal.val(returnVal.replace(fileName, '').replace(',,', ',').replace(/,\s*$/, ""));
+                self.closest("div.filelink").find(".files_download").find('span').text('');
+                self.closest("div.filelink").find(".files_download").attr('href', '').hide();
+                self.closest("div.filelink").find(".delete_file").data('file', '').hide();
+                self.closest("div.filelink").find("div.fileuplod_custom").show();
+                self.closest("div.filelink").removeClass("uploadfileactive");
+                file_beautify()
+            });
+
+            function file_beautify(){
+                var eleCount = 0;
+                $(".upload_documents_prescriber_yes_fieldset .filelink").each(function (index, element) {
+                    var ele = $(element);
+                    ele.removeClass("uploadfileactive");
+                    var fileExtension = ele.find("a").attr("href").substr( (ele.find("a").attr("href").lastIndexOf('.') +1) );
+                    fileExtension = fileExtension.toLowerCase();
+                    if(ele.find("a").attr("href").length <= 0){
+                        eleCount++;
+                        console.log(eleCount);
+                        if(eleCount == 4){
+                            $(".upload_documents_prescriber_yes_fieldset .required_upload_field").addClass("required");
+                        }else{
+                            $(".upload_documents_prescriber_yes_fieldset .required_upload_field").removeClass("required");
+                        }
+                        return;
+                    } else if( fileExtension == "jpg" || fileExtension == "png" || fileExtension == "jpeg" ){
+                        ele.addClass("uploadfileactive");
+                        ele.find("a").removeAttr("download");
+                        ele.find("a").attr("target", "_blank");
+                        ele.find("a").html(`<img src="${ele.find("a").attr("href")}" class="uf_image">`);
+                        return;
+                    } else if(fileExtension == "pdf"){
+                        ele.addClass("uploadfileactive");
+                        ele.find("a").attr("target", "_blank");
+                        ele.find("a").removeAttr("download");
+                        ele.find("a").html(`<i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span>${ele.find("a").data("title")}</span>`);
+                        return;
+                    }else{
+                        ele.addClass("uploadfileactive");
+                        ele.find("a").removeAttr("target");
+                        ele.find("a").attr("download", "download");
+                        ele.find("a").html(`<i class="fa fa-file-o" aria-hidden="true"></i> <span>${ele.find("a").data("title")}</span>`);
+                        return;
+                    }
+                });
+            }
+
+            $(document).ready(function () {
+                file_beautify();
+            });
+
+        }); // require end here
+    </script>

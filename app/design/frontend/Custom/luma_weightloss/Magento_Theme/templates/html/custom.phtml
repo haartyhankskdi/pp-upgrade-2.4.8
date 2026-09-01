@@ -1,0 +1,26 @@
+<?php
+$helperCust = $this->helper(\Nilesh\Theme\Helper\Customer::Class);
+?>
+
+<div class="btn-login-signup">
+        <?php if($helperCust->isLogIn()): ?>
+            <a href="<?php echo $block->getBaseUrl(); ?>customer/account/" class="btn-link btn btn-custom btn-login-myaccount">My Account</a>
+            <a href="<?php echo $block->getBaseUrl(); ?>customer/account/logout/" class="btn-link btn btn-custom btn-login-logout">Logout</a>
+            <?php else: ?>
+                <a href="<?php echo $block->getBaseUrl(); ?>customer/account/login/" class="btn-link btn btn-custom btn-login-signup">Login/Sign up</a>
+        <?php endif; ?>
+        <!-- <button type="button" class="btn-link btn btn-custom btn-login-signup">Login/Sign up</button> -->
+    </div>
+
+    <div class="btn-login-signup-mobile">
+        <?php if($helperCust->isLogIn()): ?>
+        <!-- <a href="<?php //echo $block->getBaseUrl(); ?>customer/account/logout/" class="btn-link btn btn-custom btn-logout-myaccount"></a> -->
+            <a href="<?php echo $block->getBaseUrl(); ?>customer/account/" class="btn-link btn btn-custom btn-logout-myaccount">
+                <span style="display:none">My Account</span>
+            </a>
+        <?php else: ?>
+            <a href="<?php echo $block->getBaseUrl(); ?>customer/account/" class="btn-link btn btn-custom btn-login-myaccount">
+                <span style="display:none">My Account</span>
+            </a>
+        <?php endif; ?>
+    </div>

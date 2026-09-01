@@ -1,0 +1,25 @@
+<?php
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/
+?>
+<?php
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Amasty\Customform\ViewModel\Answser\Email\FieldsDataProvider $viewModel
+ */
+
+$viewModel = $block->getViewModel();
+?>
+
+<table cellpadding="7">
+    <?php foreach ($viewModel->getFieldsData() as $filed): ?>
+    <tr>
+        <td style="width: 50%;"><?= $escaper->escapeHtml($filed->getLabel()) ?></td>
+        <td><?= $escaper->escapeHtml($filed->getValue()) ?></td>
+    </tr>
+    <?php endforeach;?>
+</table>

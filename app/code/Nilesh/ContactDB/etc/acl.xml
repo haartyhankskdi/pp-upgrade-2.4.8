@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Nilesh_ContactDB::ContactDB" sortOrder="10" title="ContactDB">
+					<resource id="Nilesh_ContactDB::ContactDB_save" sortOrder="10" title="Save ContactDB"/>
+					<resource id="Nilesh_ContactDB::ContactDB_delete" sortOrder="20" title="Delete ContactDB"/>
+					<resource id="Nilesh_ContactDB::ContactDB_update" sortOrder="30" title="Update ContactDB"/>
+					<resource id="Nilesh_ContactDB::ContactDB_view" sortOrder="40" title="View ContactDB"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

@@ -1,0 +1,69 @@
+<?php 
+$_product = $block->getProduct();
+$faqCount = 10; 
+$hasFaq = false;
+
+for ($i = 1; $i <= $faqCount; $i++) {
+    if (!empty($_product->getData("faq_ques$i"))) {
+        $hasFaq = true;
+        break;
+    }
+}
+?>
+<?php if ($hasFaq) : ?>
+<div class="product-faq-section">
+  <div class="container reveal1">
+    <div class="h-title">Frequently Asked Questions</div>
+    
+    <div class="faq-list-sec">
+      <?php for ($i = 1; $i <= $faqCount; $i++) : 
+        $question = $_product->getData("faq_ques$i");
+        $answer = $_product->getData("faq_ans$i");
+        if (!empty($question)) : ?>
+          <div class="faq-list">
+          <input type="checkbox" id="faq-title<?php echo $i; ?>" />
+          <label for="faq-title<?php echo $i; ?>" class="faq-item"><?php echo $question; ?></label>
+        <?php endif; 
+        if (!empty($answer)) : ?>
+          <div class="panel-p faq-answer">
+            <p><?php echo $answer; ?></p>
+          </div>
+        </div>
+        <?php endif; 
+      endfor; ?>
+    </div>
+
+  </div>
+</div>
+<?php endif; ?>
+<?php
+$faqSchema = [
+    "@context" => "https://schema.org",
+    "@type" => "FAQPage",
+    "mainEntity" => []
+];
+
+for ($i = 1; $i <= $faqCount; $i++) {
+    $question = $_product->getData("faq_ques$i");
+    $answer = $_product->getData("faq_ans$i");
+
+    if (!empty($question) && !empty($answer)) {
+        $faqSchema['mainEntity'][] = [
+            "@type" => "Question",
+            "name" => strip_tags($question),
+            "acceptedAnswer" => [
+                "@type" => "Answer",
+                "text" => strip_tags($answer)
+            ]
+        ];
+    }
+}
+
+// Output the JSON-LD schema
+if (!empty($faqSchema['mainEntity'])):
+?>
+<script type="application/ld+json">
+<?php echo json_encode($faqSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT); ?>
+</script>
+<?php endif; ?>
+

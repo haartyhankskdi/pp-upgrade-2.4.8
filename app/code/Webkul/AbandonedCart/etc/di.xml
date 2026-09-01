@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+* Webkul Software.
+*
+* @category  Webkul
+* @package   Webkul_AbandonedCart
+* @author    Webkul
+* @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+* @license   https://store.webkul.com/license.html
+*/
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Webkul\AbandonedCart\Model\ResourceModel\Quote\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">quote</argument>
+            <argument name="eventPrefix" xsi:type="string">quote</argument>
+            <argument name="eventObject" xsi:type="string">quote</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\AbandonedCart\Model\ResourceModel\Quote</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                 <item name="abandonedcart_customer_customerlist_data_source" xsi:type="string">Webkul\AbandonedCart\Model\ResourceModel\Quote\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Webkul\AbandonedCart\Model\ResourceModel\MailsLog\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wk_abandoned_cart_mail_logs</argument>
+            <argument name="eventPrefix" xsi:type="string">wk_abandoned_cart_mail_logs</argument>
+            <argument name="eventObject" xsi:type="string">wk_abandoned_cart_mail_logs</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\AbandonedCart\Model\ResourceModel\MailsLog</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                 <item name="abandonedcart_customer_mailssent_data_source" xsi:type="string">Webkul\AbandonedCart\Model\ResourceModel\MailsLog\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Webkul\AbandonedCart\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\AbandonedCart\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">wk_abandonedcart_logger</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Webkul\AbandonedCart\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="\Magento\Quote\Model\Quote\Item\AbstractItem">
+        <plugin name="Webkul_AbandonedCart::checkData"
+                type="Webkul\AbandonedCart\Model\Quote\Item\AbstractItem"
+                sortOrder="12" />
+    </type>
+</config>

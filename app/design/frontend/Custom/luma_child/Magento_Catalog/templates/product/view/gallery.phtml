@@ -1,0 +1,73 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Product media data template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View\Gallery
+ */
+?>
+
+<?php
+$images = $block->getGalleryImages()->getItems();
+$mainImage = current(array_filter($images, function ($img) use ($block) {
+    return $block->isMainImage($img);
+}));
+
+if (!empty($images) && empty($mainImage)) {
+    $mainImage = $block->getGalleryImages()->getFirstItem();
+}
+
+$helper = $block->getData('imageHelper');
+$mainImageData = $mainImage ?
+    $mainImage->getData('medium_image_url') :
+    $helper->getDefaultPlaceholderUrl('image');
+
+$mainImageAlt = $mainImage ? $mainImage->getLabel() : 'Default Image'; // Dynamically set the alt attribute
+
+// Add WebP format for better compression (if available)
+$optimizedImageData = str_replace(".jpg", ".webp", $mainImageData);  // This is an example, modify as per your image format
+?>
+
+<!-- Preload Image for LCP (Above-the-fold) -->
+<link rel="preload" as="image" href="<?= /* @noEscape */ $optimizedImageData ?>" />
+
+<div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
+    <!-- Use srcset for responsive images (optional) -->
+    <img
+        alt="<?= /* @noEscape */ $mainImageAlt ?>"
+        class="gallery-placeholder__image prod_img"
+        data-src="<?= /* @noEscape */ $optimizedImageData ?>"
+        srcset="<?= /* @noEscape */ $optimizedImageData ?> 315w, <?= /* @noEscape */ $mainImageData ?> 640w"
+        style="display: block; visibility: hidden;"
+    />
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "[data-gallery-role=gallery-placeholder]": {
+            "mage/gallery/gallery": {
+                "mixins":["magnifier/magnify"],
+                "magnifierOpts": <?= /* @noEscape */ $block->getMagnifier() ?>,
+                "data": <?= /* @noEscape */ $block->getGalleryImagesJson() ?>,
+                "options": <?= /* @noEscape */ $block->getGalleryOptions()->getOptionsJson() ?>,
+                "fullscreen": <?= /* @noEscape */ $block->getGalleryOptions()->getFSOptionsJson() ?>,
+                "breakpoints": <?= /* @noEscape */ $block->getBreakpoints() ?>
+            }
+        }
+    }
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const img = document.querySelector(".prod_img");
+    if (img) {
+        img.src = img.dataset.src;
+        img.onload = function() {
+            img.style.visibility = "visible"; 
+        };
+    }
+});
+</script>

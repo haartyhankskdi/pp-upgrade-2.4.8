@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Reports\Controller\Adminhtml\Report\Statistics">
+        <arguments>
+            <argument name="reportTypes" xsi:type="array">
+                <item name="amasty_reports_customers_customers" xsi:type="string">Amasty\Reports\Model\ResourceModel\Customers\Customers\Statistic</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Reports\Model\ReportsDataProvider">
+        <arguments>
+            <argument name="customSalesAndOrdersReports" xsi:type="array">
+                <item name="quote" xsi:type="array">
+                    <item name="title" translate="true" xsi:type="string">Quotes</item>
+                    <item name="url" xsi:type="string">amasty_reports/report_sales/quote</item>
+                    <item name="resource" xsi:type="string">Amasty_Reports::reports_sales_quote</item>
+                    <item name="module" xsi:type="string">Amasty_RequestQuote</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="amquoteStatus" type="Amasty\Reports\Model\Di\Wrapper">
+        <arguments>
+            <argument name="name" xsi:type="string">Amasty\RequestQuote\Model\Source\Status</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\Reports\Model\Source\Quote\Status">
+        <arguments>
+            <argument name="status" xsi:type="object">amquoteStatus</argument>
+        </arguments>
+    </type>
+</config>

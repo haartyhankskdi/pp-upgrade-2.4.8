@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="1column" >
+    <body>
+        <referenceContainer name="content">
+            <block name="helpdesk.satisfaction.form" class="Mirasvit\Helpdesk\Block\Satisfaction\Form" template="satisfaction/form.phtml">
+                <block class="Mirasvit\Helpdesk\Block\MspRecaptcha\Frontend\ReCaptcha\Recaptcha" name="hdmx-msp-recaptcha" after="-" ifconfig="helpdesk/extended/enable_recaptcha"
+                       template="MSP_ReCaptcha::msp_recaptcha.phtml">
+                    <arguments>
+                        <argument name="jsLayout" xsi:type="array">
+                            <item name="components" xsi:type="array">
+                                <item name="msp-recaptcha" xsi:type="array">
+                                    <item name="component" xsi:type="string">MSP_ReCaptcha/js/reCaptcha</item>
+                                    <item name="zone" xsi:type="string">contact</item>
+                                    <item name="reCaptchaId" xsi:type="string">msp-recaptcha-satisfaction</item>
+                                </item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
+

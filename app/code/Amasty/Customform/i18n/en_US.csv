@@ -1,0 +1,419 @@
+Back,Back
+"Delete Data","Delete Data"
+"Download PDF","Download PDF"
+"Send Email","Send Email"
+"Form Creator","Form Creator"
+"Please update Amasty Base module. Re-upload it and replace all the files.","Please update Amasty Base module. Re-upload it and replace all the files."
+"Enable module-magento-custom-form-graphql module to activate GraphQl and Custom Forms. Please, run the following command in the SSH: composer require amasty/module-magento-custom-form-graphql","Enable module-magento-custom-form-graphql module to activate GraphQl and Custom Forms. Please, run the following command in the SSH: composer require amasty/module-magento-custom-form-graphql"
+Address,Address
+"Address, City, State / Province / Region, Zipcode, Country","Address, City, State / Province / Region, Zipcode, Country"
+City,City
+"State / Province / Region","State / Province / Region"
+Zipcode,Zipcode
+Country,Country
+"Checkbox v.1","Checkbox v.1"
+"Checkbox unselected","Checkbox unselected"
+"Checkbox selected","Checkbox selected"
+"Checkbox v.2","Checkbox v.2"
+"--Select a country--","--Select a country--"
+Date,Date
+"Date Range","Date Range"
+DropDown,DropDown
+"--Select an option--","--Select an option--"
+File,File
+"Google Map","Google Map"
+Hidden,Hidden
+H1,H1
+H3,H3
+H2,H2
+ListBox,ListBox
+"Number Input","Number Input"
+"Radio v.1","Radio v.1"
+"Radio button unselected","Radio button unselected"
+"Radio button selected","Radio button selected"
+"Radio v.2","Radio v.2"
+Rating,Rating
+Text,Text
+"Sphinx of black quartz, judge my vow","Sphinx of black quartz, judge my vow"
+Textarea,Textarea
+"Text Input","Text Input"
+Time,Time
+Wysiwyg,Wysiwyg
+"Answer was deleted.","Answer was deleted."
+"Can't delete item right now. Please review the log and try again.","Can't delete item right now. Please review the log and try again."
+"Can't find a item to delete.","Can't find a item to delete."
+"Response was not found.","Response was not found."
+"This Response no longer exists.","This Response no longer exists."
+"Submitted Data #","Submitted Data #"
+"Amasty: Custom Forms","Amasty: Custom Forms"
+"Submitted Data","Submitted Data"
+"Requested answer was not found","Requested answer was not found"
+"Submitted data was not found.","Submitted data was not found."
+"Something went wrong while export answers. Check exception log for more details","Something went wrong while export answers. Check exception log for more details"
+"No answers were selected for export","No answers were selected for export"
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"Please enter a Email Text.","Please enter a Email Text."
+"Email response is already sent.","Email response is already sent."
+"Please choose a field to be used as an e-mail address in Email Address Field setting of the form configuration.","Please choose a field to be used as an e-mail address in Email Address Field setting of the form configuration."
+"Email response is sent.","Email response is sent."
+"Submitted data id is not specified.","Submitted data id is not specified."
+"The form has been deleted.","The form has been deleted."
+"We can't find a form to delete.","We can't find a form to delete."
+"Copy of %1","Copy of %1"
+"Custom Form was successfully duplicated","Custom Form was successfully duplicated"
+"Custom Form was not found","Custom Form was not found"
+"Something went wrong during duplication","Something went wrong during duplication"
+"Edit Custom Form `%1`","Edit Custom Form `%1`"
+"This form no longer exists...","This form no longer exists..."
+"New Custom Form","New Custom Form"
+Content,Content
+"Manage Custom Forms","Manage Custom Forms"
+"Custom Forms","Custom Forms"
+"A total of %1 record(s) have been disabled.","A total of %1 record(s) have been disabled."
+"A total of %1 record(s) have been enabled.","A total of %1 record(s) have been enabled."
+"You have saved this form.","You have saved this form."
+"Something went wrong while saving the page.","Something went wrong while saving the page."
+"Server error occurred while saving form data.  Please try again later or use Contact Us link in the menu.","Server error occurred while saving form data.  Please try again later or use Contact Us link in the menu."
+"Sorry. There is a problem with Your Form Request. Please try again or use Contact Us link in the menu.","Sorry. There is a problem with Your Form Request. Please try again or use Contact Us link in the menu."
+"Attached file %1 does not exists.","Attached file %1 does not exists."
+Guest,Guest
+"Can't save file without extensions name","Can't save file without extensions name"
+"Field exceeds the allowed file size(%1 mb).","Field exceeds the allowed file size(%1 mb)."
+"Add Option +","Add Option +"
+"All fields were removed.","All fields were removed."
+"Allow Select","Allow Select"
+"Allow users to upload multiple files","Allow users to upload multiple files"
+Autocomplete,Autocomplete
+Button,Button
+"This field cannot be empty","This field cannot be empty"
+"Checkbox Group","Checkbox Group"
+Checkbox,Checkbox
+Checkboxes,Checkboxes
+Class,Class
+"Are you sure you want to clear all fields?","Are you sure you want to clear all fields?"
+Clear,Clear
+Close,Close
+"Copy To Clipboard","Copy To Clipboard"
+&#43;,&#43;
+Copy,Copy
+"Date Field","Date Field"
+Tooltip,Tooltip
+Description,Description
+"Developer Mode","Developer Mode"
+"Edit Names","Edit Names"
+"Form Elements","Form Elements"
+"Edit XML","Edit XML"
+"Enable &quot;Other&quot;","Enable &quot;Other&quot;"
+"Let users to enter an unlisted option","Let users to enter an unlisted option"
+"Field Variables","Field Variables"
+"This field cannot be edited.","This field cannot be edited."
+"Are you sure you want to remove this field?","Are you sure you want to remove this field?"
+"File Upload","File Upload"
+"Form Updated","Form Updated"
+"Drag a field from the right to this area","Drag a field from the right to this area"
+Header,Header
+Edit,Edit
+"Hidden Input","Hidden Input"
+"Field Title","Field Title"
+"Field Label cannot be empty","Field Label cannot be empty"
+"Limit access to one or more of the following roles:","Limit access to one or more of the following roles:"
+Mandatory,Mandatory
+"Max Length","Max Length"
+"This field requires a minimum of 2 options","This field requires a minimum of 2 options"
+"Multiple Files","Multiple Files"
+"Allowed Extensions","Allowed Extensions"
+"Max. File Size (MB)","Max. File Size (MB)"
+Code,Code
+No,No
+Number,Number
+Off,Off
+On,On
+Option,Option
+Star,Star
+Comment,Comment
+optional,optional
+Label,Label
+Value,Value
+"Option value required","Option value required"
+Other,Other
+Paragraph,Paragraph
+Placeholder,Placeholder
+"Enter you email","Enter you email"
+"space separated classes","space separated classes"
+"Enter your password","Enter your password"
+Preview,Preview
+"Radio Group","Radio Group"
+Radio,Radio
+"Remove Element","Remove Element"
+"Remove Option","Remove Option"
+&#215;,&#215;
+Required,Required
+"Rich Text Editor","Rich Text Editor"
+Access,Access
+Save,Save
+Options,Options
+Select,Select
+"Select Color","Select Color"
+"Allow Multiple Selections","Allow Multiple Selections"
+Size,Size
+"Extra Small","Extra Small"
+Small,Small
+Default,Default
+Large,Large
+Layout,Layout
+"One Column","One Column"
+"Two Column","Two Column"
+"Three Column","Three Column"
+"Custom Style","Custom Style"
+Danger,Danger
+Info,Info
+Primary,Primary
+Success,Success
+Warning,Warning
+Validation,Validation
+RegExp,RegExp
+"Invalidation Message","Invalidation Message"
+Type,Type
+"Text Field","Text Field"
+"Text Area","Text Area"
+Toggle,Toggle
+Warning!,Warning!
+"Default Value","Default Value"
+"{  }","{  }"
+&lt;/&gt;,&lt;/&gt;
+Yes,Yes
+Dependency,Dependency
+"Add Variable for Logged In Customer","Add Variable for Logged In Customer"
+"First Name - %1","First Name - %1"
+"Last Name - %1","Last Name - %1"
+"Email -  %1","Email -  %1"
+"Company -  %1","Company -  %1"
+"Phone Number -  %1","Phone Number -  %1"
+"Street Address -  %1","Street Address -  %1"
+"City -  %1","City -  %1"
+"State/Province -  %1","State/Province -  %1"
+"Zip/Postal Code -  %1","Zip/Postal Code -  %1"
+"Add Product Page Form Variable","Add Product Page Form Variable"
+"You can use the following variables on the product page forms:","You can use the following variables on the product page forms:"
+"Product Paget Url -  %1","Product Paget Url -  %1"
+"Regular Price -  %1","Regular Price -  %1"
+"Actual Price -  %1","Actual Price -  %1"
+"Attribute Value, e.g. {product_color} - {product_ATTRIBUTE%CODE}","Attribute Value, e.g. {product_color} - {product_ATTRIBUTE%CODE}"
+"Please make sure that the attribute is used in the %1product listing%2","Please make sure that the attribute is used in the %1product listing%2"
+"Any Text Field|Text Area|Date|Dropdown|Multiple Select|Yes/No Customer or Customer Address attribute code is supported here.","Any Text Field|Text Area|Date|Dropdown|Multiple Select|Yes/No Customer or Customer Address attribute code is supported here."
+"Regular Expression","Regular Expression"
+"Email is not specified for customer with id#%1.","Email is not specified for customer with id#%1."
+"Email is not specified.","Email is not specified."
+"Unable to save answer with ID %1. Error: %2","Unable to save answer with ID %1. Error: %2"
+"Unable to save new answer. Error: %1","Unable to save new answer. Error: %1"
+"Answer with specified ID ""%1"" was not found.","Answer with specified ID ""%1"" was not found."
+"Unable to remove answer with ID %1. Error: %2","Unable to remove answer with ID %1. Error: %2"
+"Unable to remove answer. Error: %1","Unable to remove answer. Error: %1"
+"Custom Form","Custom Form"
+"NOT LOGGED IN","NOT LOGGED IN"
+"Linear Theme","Linear Theme"
+"Circle Theme","Circle Theme"
+Pending,Pending
+Answered,Answered
+"Invalid DI configuration. Result renderer must implements %1","Invalid DI configuration. Result renderer must implements %1"
+"Invalid DI configuration. Result name generator must implements %1","Invalid DI configuration. Result name generator must implements %1"
+"DI configuration for result type %1 does not exists or is invalid","DI configuration for result type %1 does not exists or is invalid"
+"To use ZIP functionality, please install the library maennchen/zipstream-php. To do this, run the command ""composer require maennchen/zipstream-php"" in the main site folder.","To use ZIP functionality, please install the library maennchen/zipstream-php. To do this, run the command ""composer require maennchen/zipstream-php"" in the main site folder."
+"To use PDF functionality, please install the library dompdf/dompdf. To do this, run the command ""composer require dompdf/dompdf"" in the main site folder.","To use PDF functionality, please install the library dompdf/dompdf. To do this, run the command ""composer require dompdf/dompdf"" in the main site folder."
+"Registry key ""%1"" already exists","Registry key ""%1"" already exists"
+"Form with code %1 already exists.","Form with code %1 already exists."
+"Unable to save request with ID %1. Error: %2","Unable to save request with ID %1. Error: %2"
+"Unable to save new request. Error: %1","Unable to save new request. Error: %1"
+"Form with specified ID ""%1"" not found.","Form with specified ID ""%1"" not found."
+"Unable to remove form with ID %1. Error: %2","Unable to remove form with ID %1. Error: %2"
+"Unable to remove form. Error: %1","Unable to remove form. Error: %1"
+"Form code was not found","Form code was not found"
+"To create a message, you need it's prototype...","To create a message, you need it's prototype..."
+"Unable to send the email.","Unable to send the email."
+"Email was not sent. Please specify email sender in Amasty Custom Form module configuration.","Email was not sent. Please specify email sender in Amasty Custom Form module configuration."
+"Use System Config Value","Use System Config Value"
+"-- Please select --","-- Please select --"
+"-- Please save this form first --","-- Please save this form first --"
+Enabled,Enabled
+Disabled,Disabled
+"form_id is not resolved.","form_id is not resolved."
+"Form key is not valid. Please try to reload the page.","Form key is not valid. Please try to reload the page."
+"Please agree to the Privacy Policy","Please agree to the Privacy Policy"
+"File with name ""%1"" exceeds the allowed file size. Form was not submitted","File with name ""%1"" exceeds the allowed file size. Form was not submitted"
+"File upload error. Failed to write file to disk","File upload error. Failed to write file to disk"
+"File upload error. Missing a temporary folder","File upload error. Missing a temporary folder"
+"File upload error.  The uploaded file was only partially uploaded","File upload error.  The uploaded file was only partially uploaded"
+"Requested Product","Requested Product"
+"Please enter a %1.","Please enter a %1."
+"Please enter a valid email address.","Please enter a valid email address."
+"The length of %1 must be %2 characters or fewer.","The length of %1 must be %2 characters or fewer."
+"Can't submit form. Post data is too large.","Can't submit form. Post data is too large."
+Delete,Delete
+"Are you sure you want to do this?","Are you sure you want to do this?"
+Duplicate,Duplicate
+"Export Submissions to CSV (%1)","Export Submissions to CSV (%1)"
+"Export Submissions to PDF (%1)","Export Submissions to PDF (%1)"
+"Save and Continue Edit","Save and Continue Edit"
+"Export Submitted Data To CSV","Export Submitted Data To CSV"
+"Export Submitted Data To PDF","Export Submitted Data To PDF"
+View,View
+"View All (%1)","View All (%1)"
+"Answered (%1)","Answered (%1)"
+"Pending (%1)","Pending (%1)"
+Sent,Sent
+"Response Status","Response Status"
+Recipient,Recipient
+"Response Message","Response Message"
+"Download: %1","Download: %1"
+Response,Response
+Form,Form
+Submitted,Submitted
+Updated,Updated
+IP,IP
+Customer,Customer
+Store,Store
+"Referrer URL","Referrer URL"
+"  (removed)","  (removed)"
+"This form #%1 was removed","This form #%1 was removed"
+"Answer model was not set","Answer model was not set"
+"View Model must implements %1","View Model must implements %1"
+"Invalid Answer Data","Invalid Answer Data"
+"Google Api error","Google Api error"
+"View model wasn't initialized","View model wasn't initialized"
+Submit,Submit
+"Email Text","Email Text"
+Information,Information
+"Admin Response","Admin Response"
+Data,Data
+Logo,Logo
+"Submitted data #","Submitted data #"
+Download,Download
+Download:,Download:
+"Google map","Google map"
+GDPR,GDPR
+"Thank you for filling the form out. Your feedback is much appreciated!","Thank you for filling the form out. Your feedback is much appreciated!"
+"Best Regards","Best Regards"
+"Submitted Data:","Submitted Data:"
+"You have new submitted custom form.","You have new submitted custom form."
+"%form_title form was submitted  by ","%form_title form was submitted  by "
+"which you can see by the following ","which you can see by the following "
+link,link
+Sincerely,Sincerely
+" Form#"," Form#"
+" (removed)"," (removed)"
+Attention,Attention
+"You haven’t selected any items!","You haven’t selected any items!"
+"Page ","Page "
+Error,Error
+"You have exceeded the maximum allowed number of fields. Please try to create several forms instead of this one.","You have exceeded the maximum allowed number of fields. Please try to create several forms instead of this one."
+"This form can be submitted only once. Ready to proceed?","This form can be submitted only once. Ready to proceed?"
+Previous,Previous
+Next,Next
+"Admin Notification","Admin Notification"
+"Enable Notification to Email","Enable Notification to Email"
+"Send Emails To","Send Emails To"
+"Comma separated Emails, no spaces.","Comma separated Emails, no spaces."
+"Email Sender","Email Sender"
+"Email Template","Email Template"
+"Reply Form Configuration","Reply Form Configuration"
+"Send Blind Copy to","Send Blind Copy to"
+"Comma-separated list","Comma-separated list"
+Autoresponder,Autoresponder
+"Enable Auto Response","Enable Auto Response"
+"Set 'Yes' to automatically answer the submitted form via e-mail. It delivers an e-mail to an address given in the form or an address specified in the customer account. Setting may be configured on per-form level.","Set 'Yes' to automatically answer the submitted form via e-mail. It delivers an e-mail to an address given in the form or an address specified in the customer account. Setting may be configured on per-form level."
+"GDPR Consent","GDPR Consent"
+"Consent Text","Consent Text"
+Advanced,Advanced
+"Google Api Key","Google Api Key"
+"Used for Google Map Field","Used for Google Map Field"
+"Add Google Map Address and Image to PDF files","Add Google Map Address and Image to PDF files"
+"If you have more than 10,000 PDF downloads per month,
+                        please make sure to track your Google Map API quotas. You can check them
+                        <a href=""https://console.cloud.google.com/google/maps-apis/overview"">here</a>.
+                        Google Map API pricing can be viewed via the following
+                        <a href=""https://cloud.google.com/maps-platform/pricing"">link</a>.","If you have more than 10,000 PDF downloads per month,
+                        please make sure to track your Google Map API quotas. You can check them
+                        <a href=""https://console.cloud.google.com/google/maps-apis/overview"">here</a>.
+                        Google Map API pricing can be viewed via the following
+                        <a href=""https://cloud.google.com/maps-platform/pricing"">link</a>."
+"Date Format","Date Format"
+"File Upload Links Lifetime (days)","File Upload Links Lifetime (days)"
+"After set amount of days file links will no longer be valid.
+                        Use “0” to disable this functionality","After set amount of days file links will no longer be valid.
+                        Use “0” to disable this functionality"
+"Please disable the setting if you use consent checkboxes configured for Custom Forms via <a href='%1'>GDPR Consent Checkboxes.</a>","Please disable the setting if you use consent checkboxes configured for Custom Forms via <a href='%1'>GDPR Consent Checkboxes.</a>"
+"Amasty Custom Form","Amasty Custom Form"
+"Form ID","Form ID"
+"Show on Button Click","Show on Button Click"
+"Custom Form popup will be displayed after the button is clicked. This setting has priority over the form value.","Custom Form popup will be displayed after the button is clicked. This setting has priority over the form value."
+"Button Text","Button Text"
+Template,Template
+CSV,CSV
+"Individual PDFs","Individual PDFs"
+"Delete items","Delete items"
+"Are you sure you wan't to delete selected items?","Are you sure you wan't to delete selected items?"
+ID,ID
+"Form Code","Form Code"
+"Store View","Store View"
+"Created at","Created at"
+"IP Address","IP Address"
+"Customer Email","Customer Email"
+Survey,Survey
+"Form Configuration","Form Configuration"
+General,General
+"Enable Form","Enable Form"
+"Scheduled From","Scheduled From"
+"Scheduled To","Scheduled To"
+Title,Title
+"Success Url","Success Url"
+"Leave empty for redirect to homepage. Set '/' to use AJAX without page reload. Form with file upload requires page reload anyway.","Leave empty for redirect to homepage. Set '/' to use AJAX without page reload. Form with file upload requires page reload anyway."
+"Customer Group","Customer Group"
+"Leave empty for redirect to homepage. Set '/' to use AJAX without page reload.
+                    Form with file upload requires page reload anyway.
+                ","Leave empty for redirect to homepage. Set '/' to use AJAX without page reload.
+                    Form with file upload requires page reload anyway.
+                "
+"When enabled, customer will be able to submit the form only once.","When enabled, customer will be able to submit the form only once."
+"Use as Survey","Use as Survey"
+"Save Referrer Url","Save Referrer Url"
+Notifications,Notifications
+"Email Notifications","Email Notifications"
+"Send Notification to Email","Send Notification to Email"
+"Recipients Email","Recipients Email"
+"Answer the Submitted Form","Answer the Submitted Form"
+"Email Address Field","Email Address Field"
+"Set 'Yes' to automatically hide Email Address Field in the form for logged
+                        in customer
+                        and use email address specified in the customer account.
+                    ","Set 'Yes' to automatically hide Email Address Field in the form for logged
+                        in customer
+                        and use email address specified in the customer account.
+                    "
+"Hide Email Address Field","Hide Email Address Field"
+"Please note. ""Email Address Field"" should be selected for detecting
+                        recipient email.
+                    ","Please note. ""Email Address Field"" should be selected for detecting
+                        recipient email.
+                    "
+"Form Design","Form Design"
+"Submit Button","Submit Button"
+"Success Message","Success Message"
+"Custom Form popup will be displayed after the button is clicked.","Custom Form popup will be displayed after the button is clicked."
+Creator,Creator
+"Form Json","Form Json"
+"Form Title","Form Title"
+Embedding,Embedding
+"Cms Embedding Code","Cms Embedding Code"
+"Copy this code into CMS Page Editor to insert form into any CMS page.","Copy this code into CMS Page Editor to insert form into any CMS page."
+"Template Embedding Code","Template Embedding Code"
+"Insert this code into *.phtml template directly to display form in any block.
+                ","Insert this code into *.phtml template directly to display form in any block.
+                "
+"Layout Embedding Code","Layout Embedding Code"
+"Insert this code into layout to display the form.","Insert this code into layout to display the form."
+"Add New Form","Add New Form"
+"All Store Views","All Store Views"
+Disable,Disable
+Enable,Enable
+Status,Status
+Results,Results

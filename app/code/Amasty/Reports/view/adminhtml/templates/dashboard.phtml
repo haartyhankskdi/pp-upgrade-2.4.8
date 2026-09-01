@@ -1,0 +1,380 @@
+<?php
+
+use Amasty\Reports\Model\Widget;
+
+/** @var \Amasty\Reports\Block\Adminhtml\Dashboard $block */
+/** @var \Magento\Framework\Escaper $escaper */
+
+// phpcs:disable Generic.Files.LineLength
+?>
+<h1 class="amreports-title">
+    <?= $escaper->escapeHtml(__('Dashboard')) ?>
+</h1>
+<div class="amreports-toolbar" data-role="amreports-toolbar">
+    <?=$block->getFormHtml();?>
+</div>
+<?php
+$funnelData = $block->getConversionFunnel();
+?>
+
+<div id="amreportsDashboard">
+    <div class="amreports-overview-wrapper">
+        <div class="amreports-block-container -widgets" data-mage-init='{ "amreports_tabs": {} }'>
+            <ul class="amreports-tabs-wrapper -widgets" data-reports-tabs="wrapper" >
+                <li class="amreports-tab -current"
+                    data-reports-tabs="tab"
+                    data-amrepgroup-js="<?= /* @noEscape */ Widget::TOTAL_WIDGET ?>">
+                    <?= $escaper->escapeHtml(__('Total Overview')) ?>
+                </li>
+                <li class="amreports-tab"
+                    data-reports-tabs="tab"
+                    data-amrepgroup-js="<?= /* @noEscape */ Widget::LIVE_WIDGET ?>">
+                    <?= $escaper->escapeHtml(__('Today & Live')) ?>
+                </li>
+            </ul>
+            <div class="amreports-tabs-container" data-reports-tabs="tabs-container">
+                <?php foreach ($block->getWidgetGroups() as $group): ?>
+                    <ul class="amreports-widget-container amreports-tab-content
+                    <?= /* @noEscape */ $group == Widget::TOTAL_WIDGET ? '-current' : '' ?>"
+                        data-reports-tabs="tabs-content"
+                        data-amrepgroup-js="<?= /* @noEscape */ $group ?>">
+                        <?php foreach ($block->getCurrentWidgets($group) as $widget => $currentWidget): ?>
+                            <li class="amreports-widget" data-reports-js="widget">
+                                <div class="amreports-switch" data-reports-js="options-switch">
+                                    <div class="amreports-options" data-reports-js="options-container">
+                                        <?php foreach ($block->getAllWidgets($group) as $key => $value): ?>
+                                            <a href="#"
+                                               data-parent="<?= $escaper->escapeHtml($widget) ?>"
+                                               name="<?= /* @noEscape */ $key ?>"
+                                               class="amreports-item"
+                                               data-reports-js="options-item"
+                                               title="<?= $escaper->escapeHtml($value['title']) ?> <?= $escaper->escapeHtml(__('statistics')) ?>">
+                                                <?= $escaper->escapeHtml($value['title']) ?>
+                                            </a>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                                <span class="amreports-header">
+                                    <span class="amreports-text" data-reports-js="header-widget">
+                                        <?= $escaper->escapeHtml($currentWidget['title']) ?>
+                                    </span>
+                                    <div class="amreports-total" data-reports-js="total-widget">
+                                        <?= $escaper->escapeHtml($block->getWidgetsData($currentWidget['name'])) ?>
+                                    </div>
+                                </span>
+                                <div class="amreports-wrap">
+                                    <?php
+                                    list($link, $availabilityClass) = isset($currentWidget['link']) ? [$block->getUrl($currentWidget['link']), ''] : ['#', 'amreports-detail-disabled'];
+                                    ?>
+                                    <a class="amreports-detail <?= $escaper->escapeHtml($availabilityClass) ?>"
+                                       href="<?= $escaper->escapeUrl($link) ?>"
+                                       data-reports-js="detail-widget"
+                                       title="<?= $escaper->escapeHtml(__('Go to statistic')) ?>">
+                                        <?= $escaper->escapeHtml(__('Details')) ?>
+                                    </a>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <form id="salesForm" class="amreports-block-container -overview">
+            <div class="amreports-top">
+                <h3 class="amreports-title">
+                    <?= $escaper->escapeHtml(__('Sales Overview')) ?>
+                </h3>
+                <div class="amreports-controls-container">
+                    <div class="amreports-row">
+                        <label class="amreports-label" for="from" data-ui-id="amreports-report-toolbar-element-text-from-label">
+                            <?= $escaper->escapeHtml(__('From')) ?>
+                        </label>
+                        <input name="from"
+                               id="from"
+                               value="<?= $escaper->escapeHtml($block->getFromDate()) ?>"
+                               type="text"
+                               class=" admin__control-text  input-text amreports-input"
+                               data-mage-init="{&quot;calendar&quot;:{&quot;dateFormat&quot;:&quot;y-MM-dd&quot;,&quot;showsTime&quot;:false,&quot;timeFormat&quot;:null,&quot;buttonImage&quot;:null,&quot;buttonText&quot;:&quot;Select Date&quot;,&quot;disabled&quot;:null}}"
+                        />
+                    </div>
+                    <div class="amreports-row">
+                        <label class="amreports-label" for="to" data-ui-id="amreports-report-toolbar-element-text-to-label">
+                            <?= $escaper->escapeHtml(__('To')) ?>
+                        </label>
+                        <input name="to"
+                               id="to"
+                               value="<?= $escaper->escapeHtml($block->getToDate()) ?>"
+                               type="text"
+                               class=" admin__control-text  input-text amreports-input"
+                               data-mage-init="{&quot;calendar&quot;:{&quot;dateFormat&quot;:&quot;y-MM-dd&quot;,&quot;showsTime&quot;:false,&quot;timeFormat&quot;:null,&quot;buttonImage&quot;:null,&quot;buttonText&quot;:&quot;Select Date&quot;,&quot;disabled&quot;:null}}"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="content amreports-chart-container">
+                <div id="chart-overview" class="amreports-chart amreports-dashboard-overview">
+                    <span class="not-found-data-message" style="display:none">
+                        <?= /* @noEscape */ __("We couldn't find any records"); ?>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="amreports-sellers-wrapper">
+        <div class="amreports-block-container -funnel">
+            <div class="amreports-tabs-wrapper">
+                <button class="amreports-tab funnel active" data-amreports-js="tab-funnel-rate">
+                    <?= $escaper->escapeHtml(__('Conversion Funnel')) ?>
+                </button>
+                <button class="amreports-tab rate" data-amreports-js="tab-funnel-rate">
+                    <?= $escaper->escapeHtml(__('Visitors vs. Orders')) ?>
+                </button>
+            </div>
+            <div class="amreports-top">
+                <h3 class="amreports-title">
+                    <?= $escaper->escapeHtml(__('Conversion Overview')) ?>
+                </h3>
+                <form id="funnel" class="amreports-controls-container">
+                    <div class="amreports-row">
+                        <label class="amreports-label"
+                               for="funnel_from"
+                               data-ui-id="amreports-report-toolbar-element-text-from-label">
+                            <?= $escaper->escapeHtml(__('From')) ?>
+                        </label>
+                        <input name="<?= $escaper->escapeHtml(__('funnel_from')) ?>"
+                               id="funnel_from"
+                               value="<?= $escaper->escapeHtml($block->getFromDate()) ?>"
+                               type="text"
+                               class=" admin__control-text  input-text amreports-input"
+                               data-mage-init="{&quot;calendar&quot;:{&quot;dateFormat&quot;:&quot;y-MM-dd&quot;,&quot;showsTime&quot;:false,&quot;timeFormat&quot;:null,&quot;buttonImage&quot;:null,&quot;buttonText&quot;:&quot;Select Date&quot;,&quot;disabled&quot;:null}}"
+                        />
+                    </div>
+                    <div class="amreports-row">
+                        <label class="amreports-label" for="funnel_to" data-ui-id="amreports-report-toolbar-element-text-to-label">
+                            <?= $escaper->escapeHtml(__('To')) ?>
+                        </label>
+                        <input name="<?= $escaper->escapeHtml(__('funnel_to')) ?>"
+                               id="funnel_to"
+                               value="<?= $escaper->escapeHtml($block->getToDate()) ?>"
+                               type="text"
+                               class=" admin__control-text  input-text amreports-input"
+                               data-mage-init="{&quot;calendar&quot;:{&quot;dateFormat&quot;:&quot;y-MM-dd&quot;,&quot;showsTime&quot;:false,&quot;timeFormat&quot;:null,&quot;buttonImage&quot;:null,&quot;buttonText&quot;:&quot;Select Date&quot;,&quot;disabled&quot;:null}}"
+                        />
+                    </div>
+                </form>
+            </div>
+
+            <div id="funnel_tab" class="amreports-chart-container" data-amreports-js="tabcontent">
+                <div class="amreports-funnel-container">
+                    <?= /* @noEscape */ $block->getEnableReportComment() ?>
+                    <div class="amreports-stage">
+                        <div class="amreports-info">
+                            <div class="amreports-all">
+                                <?= $escaper->escapeHtml(__('Products viewed:')) ?>
+                                <span id="viewedCount" class="amreports-number" data-amreports-js="viewedCount">
+                                    <?= $escaper->escapeHtml($funnelData['productViewed']) ?>
+                                </span>
+                            </div>
+                            <div class="amreports-view-chart">
+                                <div id="chart-funnel-first" class="amreports-chart"></div>
+                                <div id="legend-div" class="amreports-legend"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="amreports-stage">
+                        <div class="amreports-info">
+                            <div class="amreports-all">
+                                <?= $escaper->escapeHtml(__('Added to cart:')) ?>
+                                <span id="addedCount" class="amreports-number" data-amreports-js="addedCount">
+                                    <?= $escaper->escapeHtml(round($funnelData['addedCount'])) ?>
+                                </span>
+                            </div>
+                            <div class="amreports-view-chart">
+                                <div id="chart-funnel-second" class="amreports-chart"></div>
+                                <div id="legend-div-second" class="amreports-legend"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="amreports-stage">
+                        <div class="amreports-all">
+                            <?= $escaper->escapeHtml(__('Ordered:')) ?>
+                            <span id="orderedCount" class="amreports-number" data-amreports-js="orderedCount">
+                                <?= $escaper->escapeHtml(round($funnelData['orderedCount'])) ?>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="rate_tab" class="amreports-chart-container -hidden" data-amreports-js="tabcontent">
+                <div class="amreports-funnel-container">
+                    <div class="amreports-stage">
+                        <div class="amreports-info">
+                            <div class="amreports-all">
+                                <?= $escaper->escapeHtml(__('Unique visitors:')) ?>
+                                <span id="uniqueCount" class="amreports-number" data-amreports-js="uniqueCount">
+                                    <?= $escaper->escapeHtml(round($funnelData['uniqueVisitors'])) ?>
+                                </span>
+                            </div>
+                            <div class="amreports-view-chart amreports-visitors-vs-orders">
+                                <div id="chart-rate-first" class="amreports-chart"></div>
+                                <div id="legend-div-rate" class="amreports-legend"></div>
+                            </div>
+                            <div class="amreports-orders-more-customers">
+                                <div class="amreports-all">
+                                    <?= $escaper->escapeHtml(__('Orders placed:')) ?>
+                                    <span id="placedOrdersCount"
+                                          class="amreports-number"
+                                          data-amreports-js="placedOrdersCount">
+                                        <?= $escaper->escapeHtml(round($funnelData['placedOrdersCount'])) ?>
+                                    </span>
+                                </div>
+                                <div class="amreports-all amreport-congratulations">
+                                    <?= $escaper->escapeHtml(__('Congratulations! Your customers tend to place more than 1 order.')) ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="amreports-detail"
+                   href="<?= /* @noEscape */ $block->getConversionReportUrl() ?>"
+                   data-reports-js="detail-widget"
+                   title="<?= $escaper->escapeHtml(__('Go to report')) ?>">
+                    <?= $escaper->escapeHtml(__('Details')) ?>
+                </a>
+                <div class="rate-comment">
+                    <?= $escaper->escapeHtml(__('Please kindly keep in mind that the current tab is displaying data from All Store Views')) ?>
+                </div>
+            </div>
+        </div>
+
+        <?php $bestsellers = $block->getBestsellers(); ?>
+        <?php $bestsellerSize = $bestsellers->getSize(); ?>
+        <div class="amreports-block-container -bestsellers">
+            <h3 class="amreports-title">
+                <?= $escaper->escapeHtml(__('Bestsellers (Last 30 days)')) ?>
+            </h3>
+            <div class="amreports-table-container <?= /* @noEscape */ $bestsellerSize > 0 ? : 'amreports-not-found-data'; ?>">
+                <?php if ($bestsellerSize > 0): ?>
+                    <table class="amreports-table">
+                        <thead>
+                            <tr>
+                                <th class="amreports-headline">
+                                    #
+                                </th>
+                                <th class="amreports-headline">
+                                    <?= $escaper->escapeHtml(__('Name')) ?>
+                                </th>
+                                <th class="amreports-headline">
+                                    <?= $escaper->escapeHtml(__('Quantity')) ?>
+                                </th>
+                                <th class="amreports-headline">
+                                    <?= $escaper->escapeHtml(__('Revenue')) ?>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php $i = 1; foreach ($bestsellers as $bestseller): ?>
+                                <tr>
+                                    <td class="amreports-td -item">
+                                        <?= $escaper->escapeHtml($i) ?>
+                                    </td>
+                                    <td class="amreports-td -name">
+                                        <?= $escaper->escapeHtml($bestseller->getName()) ?>
+                                    </td>
+                                    <td class="amreports-td -orders">
+                                        <?= $escaper->escapeHtml($bestseller->getQty()) ?>
+                                    </td>
+                                    <td class="amreports-td -amount">
+                                        <?= $escaper->escapeHtml($block->formatPrice($bestseller->getTotal())) ?>
+                                    </td>
+                                </tr>
+                            <?php $i++; ?>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php else: ?>
+                    <span class="not-found-data-message"><?= /* @noEscape */ __("We couldn't find any records") ?></span>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    <?php $orders = $block->getLastOrders(); ?>
+    <div class="amreports-block-container -order">
+        <h3 class="amreports-title">
+            <?= $escaper->escapeHtml(__('Last Orders')) ?>
+        </h3>
+        <div class="amreports-table-container <?= /* @noEscape */ $orders->getSize() ?: 'amreports-not-found-data'; ?>">
+            <?php if ($orders->getSize()): ?>
+                <table class="amreports-table">
+                    <thead>
+                        <tr>
+                            <th class="amreports-headline">
+                                <?= $escaper->escapeHtml(__('Order')) ?>
+                            </th>
+                            <th class="amreports-headline">
+                                <?= $escaper->escapeHtml(__('Customer')) ?>
+                            </th>
+                            <th class="amreports-headline">
+                                <?= $escaper->escapeHtml(__('Status')) ?>
+                            </th>
+                            <th class="amreports-headline">
+                                <?= $escaper->escapeHtml(__('Date')) ?>
+                            </th>
+                            <th class="amreports-headline">
+                                <?= $escaper->escapeHtml(__('Items')) ?>
+                            </th>
+                            <th class="amreports-headline">
+                                <?= $escaper->escapeHtml(__('Grand Total')) ?>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($orders as $order): ?>
+                            <tr>
+                                <td class="amreports-td">
+                                    #<?= $escaper->escapeHtml($order->getIncrementId()) ?>
+                                </td>
+                                <td class="amreports-td">
+                                    <?= $escaper->escapeHtml($block->getOrderCustomerName($order)) ?>
+                                </td>
+                                <td class="amreports-td">
+                                    <?= $escaper->escapeHtml($order->getStatus()) ?>
+                                </td>
+                                <td class="amreports-td">
+                                    <?= $escaper->escapeHtml($block->getFormattedDate($order->getCreatedAt())) ?>
+                                </td>
+                                <td class="amreports-td">
+                                    <?= $escaper->escapeHtml($order->getTotalItemCount()) ?>
+                                </td>
+                                <td class="amreports-td">
+                                    <?= $escaper->escapeHtml($block->formatPrice($order->getBaseGrandTotal())) ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <span class="not-found-data-message"><?= /* @noEscape */ __("We couldn't find any records"); ?></span>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<script>
+    require([
+        "Amasty_Reports/vendor/amcharts4/core.min"
+    ], function() {
+        require([
+            "jquery",
+            "amreports_dashboard"
+        ], function($) {
+            $('#amreportsDashboard').amreportsDashboard();
+        });
+    });
+</script>

@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Nilesh\ContactDB\Api\ContactDBRepositoryInterface" type="Nilesh\ContactDB\Model\ContactDBRepository"/>
+	<preference for="Nilesh\ContactDB\Api\Data\ContactDBInterface" type="Nilesh\ContactDB\Model\Data\ContactDB"/>
+	<preference for="Nilesh\ContactDB\Api\Data\ContactDBSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Nilesh\ContactDB\Model\ResourceModel\ContactDB\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">nilesh_contactdb_contactdb</argument>
+			<argument name="resourceModel" xsi:type="string">Nilesh\ContactDB\Model\ResourceModel\ContactDB\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="nilesh_contactdb_contactdb_listing_data_source" xsi:type="string">Nilesh\ContactDB\Model\ResourceModel\ContactDB\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

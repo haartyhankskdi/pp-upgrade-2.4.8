@@ -1,0 +1,66 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AbandonedCart
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+
+    <?php $data = $block->getMailDetails(); ?> 
+<div id="element">
+    <?php
+    if ($data->getSize()):
+        foreach ($data as $email):
+            ?>
+    <div style="margin-bottom:20px">
+        <div data-role="collapsible">
+            <div data-role="trigger" class="heading">
+                <span><?= /* @noEscape */__("Email Sent by ").$email->getSentBy().' on '. $email->getSentOn();?></span>
+            </div>
+        </div>
+        <div data-role="content" class="content"><?= /* @noEscape */ $email->getMailContent();?></div>
+    </div>
+    <?php endforeach;
+else: ?>
+<p><?= /* @noEscape */ __('No data to display'); ?></p>
+    <?php endif;?> 
+</div>
+
+<script>
+    require([
+        'jquery',
+        'accordion'], function ($) {
+        $("#element").accordion();
+        $("#element").accordion({ active: "0 0"});
+    });
+</script>
+<style>
+    .heading{
+        border-bottom: 1px solid #e3e3e3;
+        color: #303030;
+        display: block;
+        font-size: 1.4rem;
+        line-height: 1.2;
+        margin: 0 0 -1px;
+        padding: 1.8rem 1.5rem;
+        position: relative;
+        background: #f1f1f1;
+        border: 1px solid #e3e3e3;
+    }
+    .content{
+        border: 1px solid transparent;
+        border-width: 1px 0;
+        color: #303030;
+        font-weight: 500;
+        line-height: 1.2;
+        margin: 0 0 -1px;
+        padding: 2rem 4rem 2rem 3rem;
+        transition: border-color 0.1s ease-out, background-color 0.1s ease-out;
+        word-wrap: break-word;
+        background: #f9f9f9;
+        }
+</style>

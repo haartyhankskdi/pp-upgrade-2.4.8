@@ -1,0 +1,56 @@
+<?php 
+
+$_product = $block->getProduct();
+$prod = $_product->getName();
+$imageUrl = $this->helper('Magento\Catalog\Helper\Image')
+                    ->init($_product, 'product_base_image')
+                    ->constrainOnly(true)
+                    ->keepAspectRatio(true)
+                    ->keepTransparency(true)
+                    ->keepFrame(false)
+                    ->resize(150, 150)->getUrl();
+$prodName = $_product->getName();
+$prodDesc = $_product->getDescription();
+$prodSku = $_product->getSku();
+$prodPrice = $_product->getPriceInfo()->getPrice('final_price')->getValue();
+$prodUrl = $_product->getProductUrl();
+ $proCustopt = $_product->getOptions();
+?>
+
+
+<?php if(!empty($proCustopt) && $_product->isSaleable()){  ?>
+<div class="consultation-section question-text">
+<div class="consultation_block_section question-text">
+<div class="consultation_block question-text">
+<span class="question-text ">01</span>
+<div class="consultation-cont question-text">
+<div class="consultation_img question-text"><img class="question-text" src="<?php echo $this->getViewFileUrl('images/clinical-consultation3.svg'); ?>" alt="" /></div>
+<h4 class="question-text">Clinical Consultation</h4> 
+</div>
+</div>
+<div class="consultation_block question-text">
+<span class="question-text step_1">02</span>
+<div class="consultation-cont question-text">
+<div class="consultation_img question-text"><img class="question-text" src="<?php echo $this->getViewFileUrl('images/login-register.svg'); ?>" alt="" /></div>
+<h4 class="question-text">Register / Login</h4> 
+</div>
+</div>
+<div class="consultation_block question-text">
+<span class="question-text step_2">03</span>
+<div class="consultation-cont question-text">
+<div class="consultation_img question-text"><img class="question-text" src="<?php echo $this->getViewFileUrl('images/commerce-and-shopping.svg'); ?>" alt="" /></div>
+<h4 class="question-text">Easy Checkout</h4> 
+</div>
+</div>
+</div>
+</div>
+<div class="prev-btn question-text"><button type="button" class="pre-consultation question-text">< back to product</button>
+</div>
+<div class="question-text">
+<h2 class="question-text">Clinical Consultation</h2>
+<p class="p-description question-text">We're going to ask you some brief questions about your health and history in order to assess if a prescription is appropriate for you.</p>
+<p  class="p-description question-text order-message" style="background-color: red; color: white;border-radius: 10px; padding: 10px 20px;">
+If our prescriber is unable to approve your order for any reason, you will receive a full refund</p>
+</p>
+</div>
+<?php } ?>

@@ -1,0 +1,47 @@
+<?php
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+// @codingStandardsIgnoreFile
+/** @var \Magenest\SagePay\Block\Customer\Profile $block */
+$profiles = $block->getCustomerProfiles();
+?>
+
+<table id="customer-booking-order-list" class="data table table-downloadable-products">
+    <?php if (!sizeof($profiles)) { ?>
+        <div class="message info empty">
+            <span><?php echo __('You don\'t have any subscription profile yet.'); ?></span>
+        </div>
+    <?php } else { ?>
+        <thead>
+        <tr>
+            <th><?php echo __('Ref. Transaction ID'); ?></th>
+            <th><?php echo __('Status'); ?></th>
+            <th><?php echo __('Last 4'); ?></th>
+            <th><?php echo __('Amount'); ?></th>
+            <th><?php echo __('Frequency'); ?></th>
+            <th><?php echo __('Action'); ?></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <?php foreach ($profiles as $profile) { ?>
+            <tr>
+                <td><?php echo $profile->getData('transaction_id'); ?></td>
+                <td><?php echo $profile->getStatus(); ?></td>
+                <td><?php echo $block->getCcLast4($profile->getOrderId()); ?></td>
+                <td><?php echo $profile->getData('amount'); ?></td>
+                <td><?php echo $profile->getData('frequency'); ?></td>
+                <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                    <a href="<?php echo $block->getProfileViewUrl($profile->getId()); ?>" class="action view">
+                        <span><?php echo __('View Profile') ?></span>
+                    </a>
+                    <a href="<?php echo $block->getOrderViewUrl($profile->getOrderId()); ?>" class="action view">
+                        <span><?php echo __('View Order') ?></span>
+                    </a>
+                </td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    <?php } ?>
+</table>

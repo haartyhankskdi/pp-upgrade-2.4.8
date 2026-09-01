@@ -1,0 +1,151 @@
+<?php 
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$messageManager = $objectManager->get('Magento\Framework\Message\ManagerInterface');
+$messages = $messageManager->getMessages();
+$productCollectionFactory = $objectManager->get('Magento\Catalog\Model\ResourceModel\Product\CollectionFactory');
+
+// Retrieve the product collection
+$productCollection = $productCollectionFactory->create()
+    ->addAttributeToSelect('name');
+?>
+<div class="container">
+    <form action="<?= $block->getUrl('customexport/customexport/downloadcsv') ?>" method="get" class="export-form">
+        <fieldset>
+            <legend>Export Custom Reports</legend>
+           
+            <div class="form-group">
+                <label for="gender"><strong>Gender</strong></label>
+                <select name="gender" id="gender">
+                    <option value="">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name"><strong>Product Name</strong></label>
+                 <select name="name" id="product_name_filter">
+                       <option value="">Select Product</option>
+                        <?php foreach ($productCollection as $product): ?>
+                      <option value="<?php echo $product->getName() ?>"><?php echo $product->getName() ?></option>
+                    <?php endforeach; ?>
+                   </select>
+               <!--  <label for="name"><strong>Product Name</strong></label>
+                <input type="text" name="name" id="name"  placeholder="Enter product name"/> -->
+            </div>
+             <div class="form-group">
+                <label for="coupon_code"><strong>Coupon Code</strong></label>
+                <input type="text" name="coupon_code" id="coupon_code" />
+            </div>
+            <div class="form-group">
+                <label for="email"><strong>Customer Eamil</strong></label>
+                <input type="text" name="email" id="email" />
+            </div>
+            <div class="form-group">
+                <label for="date_from"><strong>From Date</strong></label>
+                <input type="date" name="date_from" id="date_from" />
+            </div>
+            <div class="form-group">
+                <label for="date_to"><strong>To Date</strong></label>
+                <input type="date" name="date_to" id="date_to" />
+            </div>
+            <div class="form-group">
+                <button type="submit">Export Report</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<style>
+.container {
+    background: #f9f9f9; /* Light background for contrast */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    margin: auto; /* Center the container */
+}
+
+.export-form {
+    display: flex;
+    flex-direction: column;
+}
+
+fieldset {
+    border: none;
+}
+
+legend {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333; /* Darker color for better readability */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 5px;
+    display: block;
+    font-weight: bold; /* Bold labels for emphasis */
+}
+
+select, input[type="text"], input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em; /* Consistent font size */
+}
+
+select:focus, input[type="text"]:focus, input[type="date"]:focus {
+    border-color: #007bff; /* Highlight border on focus */
+    outline: none; /* Remove default outline */
+}
+
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    button {
+        font-size: 0.9em;
+    }
+}
+#product_name_filter {
+    position: relative;
+    z-index: 999;
+    background-color: white;
+}
+
+/* Force dropdown to open upwards */
+#product_name_filter option {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    z-index: 1000;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+
+/* Fix dropdown appearing too low
+
+</style>

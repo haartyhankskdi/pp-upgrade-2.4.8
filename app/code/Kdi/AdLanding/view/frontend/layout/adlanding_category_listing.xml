@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block
+            name="category.list" class="Kdi\AdLanding\Block\Category\Listing" template="Kdi_AdLanding::category/list.phtml"/>
+        <!-- <block class="Haartyhanks\CategoryQuestWL\Block\Index" name="categoryquestwl_index_index" template="Haartyhanks_CategoryQuestWL::index.phtml"/> -->
+        </referenceContainer>
+    </body>
+</page>

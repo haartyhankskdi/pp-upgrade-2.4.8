@@ -1,0 +1,26 @@
+{
+    "name": "nilesh/module-generalquestions",
+    "description": "Free to use by every one",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Mage2Gen",
+            "email": "info@mage2gen.com"
+        },
+        {
+            "name": "Nilesh Dubey",
+            "email": "nileshdubeynd5101@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Nilesh\\GeneralQuestions\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

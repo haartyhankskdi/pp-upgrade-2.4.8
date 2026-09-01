@@ -1,0 +1,23 @@
+<?php
+
+namespace Haartyhanks\CategoryQuestWL\Plugin;
+
+use Magento\Framework\Serialize\SerializerInterface;
+
+
+class QuoteItemToOrderItemPlugin
+{
+
+    public function aroundConvert(
+        \Magento\Quote\Model\Quote\Item\ToOrderItem $subject,
+        \Closure $proceed,
+        \Magento\Quote\Model\Quote\Item\AbstractItem $item,
+        $additional = []
+    ) {
+        /** @var $orderItem \Magento\Sales\Model\Order\Item */
+        $orderItem = $proceed($item, $additional);
+        $orderItem->setQuestionnaireUniqueId($item->getQuestionnaireUniqueId());
+        // file_put_contents('/home/master/applications/bzhyrrvjxm/public_html/test.txt', $item->getQuestionnaireUniqueId());
+        return $orderItem;
+    }
+}

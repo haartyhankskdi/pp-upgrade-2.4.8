@@ -1,0 +1,22 @@
+{
+    "name": "kdi/module-adlanding",
+    "description": "no",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Satyam Singh",
+            "email": "satyam@haartyhanks.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Kdi\\AdLanding\\": ""
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+    	<meta name="robots" content="noindex, nofollow"/>
+	</head>
+	<body>
+		<referenceContainer name="content">
+			<block name="post.view" 
+					class="Magento\Framework\View\Element\Template" 
+					template="Kdi_Testimonials::index/index.phtml"> 
+				<arguments> 
+      				<argument name="view_model" xsi:type="object">Kdi\Testimonials\ViewModel\Index</argument> 
+				</arguments> 
+			</block>
+		</referenceContainer>
+		<referenceBlock name="page.main.title" remove="true"/>
+	</body>
+</page>
+  

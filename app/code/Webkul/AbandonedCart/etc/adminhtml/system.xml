@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AbandonedCart
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="webkul" translate="label" sortOrder="7">
+            <label>WEBKUL</label>
+        </tab>
+        <section id="webkul_abandoned_cart" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" >
+            <label>Abandoned Cart</label>
+            <tab>webkul</tab>
+            <resource>Webkul_AbandonedCart::config_abandonedcart</resource>
+            <group id="abandoned_cart_settings" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" >
+                <label>Settings</label>
+                <field id="enable_disable_abandoned_cart" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" >
+                    <label>Enable Webkul Abandoned Cart</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="abandoned_cart_time_hours" translate="label comment" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" >
+                    <label>Hours for abandoned cart</label>
+                    <comment>After these hours, cart will be abandoned.</comment>
+                    <validate>validate-digits</validate>
+                    <depends>
+                        <field id="enable_disable_abandoned_cart">1</field>
+                    </depends>
+                </field>
+                <field id="abanconed_cart_days" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" >
+                    <label>Days for abandoned cart</label>
+                    <comment>Get Abandoned cart between today and this day.</comment>
+                    <validate>validate-digits</validate>
+                    <depends>
+                        <field id="enable_disable_abandoned_cart">1</field>
+                    </depends>
+                </field>
+                <field id="follow_up_second_mail" translate="label comment" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" >
+                    <label>Follow Up For Second Mail</label>
+                    <comment>After these days, second mail will be sent to customer.</comment>
+                    <validate>validate-digits</validate>
+                    <depends>
+                        <field id="enable_disable_abandoned_cart">1</field>
+                    </depends>
+                </field>
+                <field id="follow_up_third_mail" translate="label comment" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" >
+                    <label>Follow Up For Third Mail</label>
+                    <comment>After these days, third mail will be sent to customer.</comment>
+                    <validate>validate-digits</validate>
+                    <depends>
+                        <field id="enable_disable_abandoned_cart">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="abandoned_cart_cron" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cron Schedule</label>
+                <field id="crone_schedule" translate="label" type="time" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Time</label>
+                    <comment>HH : MM : SS</comment>
+                </field>
+            </group>
+            <group id="abandoned_cart_mail_configuration" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Email Configuration</label>
+                <field id="abandoned_cart_auto_mail_status" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" >
+                    <label>Allow Auto Email to customer</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="admin_name_in_email" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Admin Name in Email</label>
+                    <validate>validate-no-html-tags</validate>
+                    <frontend_model>Webkul\AbandonedCart\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+                <field id="admin_email_id" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Admin Email Id</label>
+                    <validate>validate-email</validate>
+                    <frontend_model>Webkul\AbandonedCart\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+                <field id="abandoned_cart_first_mail_template" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="0" >
+                    <label>First Abandoned Cart Mail Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <frontend_model>Webkul\AbandonedCart\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+                <field id="abandoned_cart_mail_content_1" translate="label" type="editor" sortOrder="4" showInDefault="1" showInWebsite="0" >
+                    <label>First Abandoned Cart Mail Content</label>
+                    <frontend_model>Webkul\AbandonedCart\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+                <field id="abandoned_cart_second_mail_template" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="0" >
+                    <label>Second Abandoned Cart Mail Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <frontend_model>Webkul\AbandonedCart\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+                <field id="abandoned_cart_mail_content_2" translate="label" type="editor" sortOrder="5" showInDefault="1" showInWebsite="1" >
+                    <label>Second Abandoned Cart Mail Content</label>
+                    <frontend_model>Webkul\AbandonedCart\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+                <field id="abandoned_cart_third_mail_template" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="0" >
+                    <label>Third Abandoned Cart Mail Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <frontend_model>Webkul\AbandonedCart\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+                <field id="abandoned_cart_mail_content_3" translate="label" type="editor" sortOrder="6" showInDefault="1" showInWebsite="1" >
+                    <label>Third Abandoned Cart Mail Content</label>
+                    <frontend_model>Webkul\AbandonedCart\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,200 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="custom_theme" sortOrder="100" translate="label">
+			<label>Custom Theme</label>
+		</tab>
+		<section id="homepage" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Home Page</label>
+			<tab>custom_theme</tab>
+			<resource>Nilesh_Theme::config_nilesh_theme</resource>
+			<group id="section_one" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Section One</label>
+				<field id="enable" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enable</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+				</field>
+				<field id="container" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="select">
+					<label>Container</label>
+					<comment>Container</comment>
+					<source_model>Nilesh\Theme\Model\Config\Source\ContainerOptions</source_model>
+				</field>
+                <!-- Note -->
+                <field id="enable_note" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="25" type="note">
+					<label>Note</label>
+                    <frontend_class>custom_note</frontend_class>
+					<comment><![CDATA[
+                        <style>
+                            tr[id$='_note'] td.label{
+                                opacity: 0;
+                            }
+                            tr[id$='_note'] td:last-child{
+                                opacity: 0;
+                            }
+                            tr[id$='_note'] td.value{
+                                position: relative;
+                            }
+                            tr[id$='_note'] .note{
+                                position: absolute;
+                                top: 18px;
+                                border-bottom: 2px solid #e0e0e0;
+                                width: 500px;
+                                left: -110px;
+                            }
+                        </style>
+                    ]]></comment>
+				</field>
+                <!-- Note -->
+                <!-- <field id="banner_one_title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="text">
+					<label>First Banner Title</label>
+					<comment><![CDATA[Banner Title]]></comment>
+				</field> -->
+                <field id="banner_one_template" translate="label" type="editor" sortOrder="31" showInDefault="1" showInWebsite="0" >
+                    <label>Banner Template</label>                    
+                    <frontend_model>Nilesh\Theme\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+				<!-- <field id="banner_one_image" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="image">
+					<label>First Banner Image</label>
+					<comment><![CDATA[Allowed file types: jpg, jpeg, gif, png]]></comment>
+					<backend_model>Nilesh\Theme\Model\Config\Backend\CustomFileType</backend_model>
+                    <upload_dir config="system" scope_info="1">custom_theme/homepage</upload_dir>
+                    <base_url type="media" scope_info="1">custom_theme/homepage</base_url>
+				</field> -->
+				<field id="banner_one_link" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50" translate="label" type="text">
+					<label>First Banner Link</label>
+					<comment><![CDATA[Keep empty to hide button in store-front]]></comment>
+				</field>
+				<field id="banner_one_button_name" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="60" translate="label" type="text">
+					<label>First Button Name</label>
+					<comment><![CDATA[By Default <em style="color:#777">shop now</em>]]></comment>
+				</field>
+				<!-- Note -->
+                <field id="banner_one_note" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="70" type="note">
+					<label>Note</label>
+                    <frontend_class>custom_note</frontend_class>
+					<comment><![CDATA[
+                        <style>
+                            tr[id$='_note'] td.label{
+                                opacity: 0;
+                            }
+                            tr[id$='_note'] td:last-child{
+                                opacity: 0;
+                            }
+                            tr[id$='_note'] td.value{
+                                position: relative;
+                            }
+                            tr[id$='_note'] .note{
+                                position: absolute;
+                                top: 18px;
+                                border-bottom: 2px solid #e0e0e0;
+                                width: 500px;
+                                left: -110px;
+                            }
+                        </style>
+                    ]]></comment>
+				</field>
+                <!-- Note -->
+
+                <!-- <field id="banner_two_title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="130" translate="label"
+                    type="text">
+                    <label>Second Banner Title</label>
+                    <comment>
+                        <![CDATA[Banner Title]]>
+                    </comment>
+                </field> -->
+                <field id="banner_two_template" translate="label" type="editor" sortOrder="131" showInDefault="1" showInWebsite="0" >
+                    <label>Banner Template</label>                    
+                    <frontend_model>Nilesh\Theme\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+                <!-- <field id="banner_two_image" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="140" translate="label"
+                    type="image">
+                    <label>Second Banner Image</label>
+                    <comment>
+                        <![CDATA[Allowed file types: jpg, jpeg, gif, png]]>
+                    </comment>
+                    <backend_model>Nilesh\Theme\Model\Config\Backend\CustomFileType</backend_model>
+                    <upload_dir config="system" scope_info="1">custom_theme/homepage</upload_dir>
+                    <base_url type="media" scope_info="1">custom_theme/homepage</base_url>
+                </field> -->
+                <!-- <field id="banner_two_link" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="150" translate="label"
+                    type="text">
+                    <label>Second Banner Link</label>
+                    <comment>
+                        <![CDATA[Keep empty to hide button in store-front]]>
+                    </comment>
+                </field> -->
+                <!-- <field id="banner_two_button_name" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="160" translate="label"
+                    type="text">
+                    <label>Second Button Name</label>
+                    <comment>
+                        <![CDATA[By Default <em style="color:#777">shop now</em>]]>
+                    </comment>
+                </field> -->
+                <!-- Note -->
+                <field id="banner_two_note" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="170" type="note">
+                    <label>Note</label>
+                    <frontend_class>custom_note</frontend_class>
+                    <comment>
+                        <![CDATA[
+                                        <style>
+                                            tr[id$='_note'] td.label{
+                                                opacity: 0;
+                                            }
+                                            tr[id$='_note'] td:last-child{
+                                                opacity: 0;
+                                            }
+                                            tr[id$='_note'] td.value{
+                                                position: relative;
+                                            }
+                                            tr[id$='_note'] .note{
+                                                position: absolute;
+                                                top: 18px;
+                                                border-bottom: 2px solid #e0e0e0;
+                                                width: 500px;
+                                                left: -110px;
+                                            }
+                                        </style>
+                                    ]]>
+                    </comment>
+                </field>
+                <!-- Note -->
+
+                <!-- <field id="banner_three_title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="230" translate="label" type="text">
+                    <label>Third Banner Title</label>
+                    <comment>
+                        <![CDATA[Banner Title]]>
+                    </comment>
+                </field>
+                <field id="banner_three_template" translate="label" type="editor" sortOrder="231" showInDefault="1" showInWebsite="0" >
+                    <label>Banner Template</label>                    
+                    <frontend_model>Nilesh\Theme\Block\Adminhtml\System\Config\Editor</frontend_model>
+                </field>
+                <field id="banner_three_image" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="240" translate="label"
+                    type="image">
+                    <label>Third Banner Image</label>
+                    <comment>
+                        <![CDATA[Allowed file types: jpg, jpeg, gif, png]]>
+                    </comment>
+                    <backend_model>Nilesh\Theme\Model\Config\Backend\CustomFileType</backend_model>
+                    <upload_dir config="system" scope_info="1">custom_theme/homepage</upload_dir>
+                    <base_url type="media" scope_info="1">custom_theme/homepage</base_url>
+                </field>
+                <field id="banner_three_link" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="250" translate="label"
+                    type="text">
+                    <label>Third Banner Link</label>
+                    <comment>
+                        <![CDATA[Keep empty to hide button in store-front]]>
+                    </comment>
+                </field>
+                <field id="banner_three_button_name" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="260" translate="label"
+                    type="text">
+                    <label>Third Button Name</label>
+                    <comment>
+                        <![CDATA[By Default <em style="color:#777">shop now</em>]]>
+                    </comment>
+                </field> -->
+			</group>
+		</section>
+	</system>
+</config>

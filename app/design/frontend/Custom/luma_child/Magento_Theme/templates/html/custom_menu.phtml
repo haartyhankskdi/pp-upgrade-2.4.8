@@ -1,0 +1,174 @@
+<?php
+    // Helper Namespace - Nilesh\Theme\Helper/Customer
+    $helperCust = $this->helper(\Nilesh\Theme\Helper\Customer::Class);
+    $pageId = (int) $block->getRequest()->getParam('page_id');
+    $pageType = $block->getKdiAdType($pageId);
+?>
+<div class="custom-menu">
+    <ul class="custom-menu-ul">
+        <li class="trustpoilet">
+            <!-- TrustBox widget - Micro Combo -->
+            <div class="trustpilot-widget" data-locale="en-GB" data-template-id="5419b6ffb0d04a076446a9af" data-businessunit-id="62de404543cebd829464951e" data-style-height="20px" data-style-width="100%">
+                <a href="https://uk.trustpilot.com/review/magento-1584919-6629151.cloudwaysapps.com" target="_blank" rel="noopener">Trustpilot</a>
+            </div>
+        </li>
+        <!-- End TrustBox widget -->
+       <?php if ($pageType != 'google_ad'): ?>
+
+        <li class="view-all-treatment">
+            <button type="button" id="view-add-treatment-click" class="btn-link btn btn-custom nav-hide" data-toggle="0">
+                View all treatments
+            </button>
+            <button type="button" id="menu-add-treatment-click" class="btn-link btn btn-custom" data-toggle="0">
+                View all treatments
+            </button>
+        </li>
+        <li class="view-all-treatment advice-m">
+            <a href="/blog">Advice Centre</a>
+        </li>
+       <?php endif; ?>
+        <li class="btn-login-signup">
+            <?php if ($helperCust->isLogIn()): ?>
+                <a href="<?php echo $block->getBaseUrl(); ?>customer/account/" class="btn-link btn btn-custom btn-login-myaccount">My Account</a>
+                <a href="<?php echo $block->getBaseUrl(); ?>customer/account/logout/" class="btn-link btn btn-custom btn-login-logout">Logout</a>
+            <?php else: ?>
+                <a href="<?php echo $block->getBaseUrl(); ?>customer/account/login/" class="btn-link btn btn-custom btn-login-signup">Login/Sign up</a>
+            <?php endif; ?>
+        </li>
+        <li class="btn-login-signup-mobile">
+            <?php if ($helperCust->isLogIn()): ?>
+                <a href="<?php echo $block->getBaseUrl(); ?>customer/account/" class="btn-link btn btn-custom btn-logout-myaccount">
+                    <span style="display: none;">My Account</span>
+                </a>
+            <?php else: ?>
+                <a href="<?php echo $block->getBaseUrl(); ?>customer/account/login/" class="btn-link btn btn-custom btn-login-myaccount">
+                    <span style="display: none;">Login/Sign up</span>
+                </a>
+            <?php endif; ?>
+        </li>
+    </ul>
+    
+    <?php if ($pageType != 'google_ad'): ?>
+            <div id="view-add-treatment-display" class="view-all-treatment-menu">
+         <button class="menu-close-btn" style="float: right; height: 20px;">X</button>
+        <?php
+            echo $this->getLayout()
+          ->createBlock('Magento\Cms\Block\Block')
+          ->setBlockId('view-add-treatment-static')
+          ->toHtml();
+        ?>
+    </div>
+   
+    <?php endif; ?>
+</div>
+
+<script>
+require(['jquery'], function ($) {
+    $(document).ready(function () {
+
+        let treatmentMenu = $("#view-add-treatment-display");
+        let treatmentButton = $("#view-add-treatment-click, #menu-add-treatment-click");
+        let closeButton = $(".menu-close-btn");
+        treatmentButton.on("click", function (e) {
+            e.preventDefault();
+            let toggle = $(this).attr('data-toggle');
+            if (toggle == "0") {
+                $(this).attr('data-toggle', "1");
+                treatmentMenu.addClass("menu-active").show();
+            } else {
+                $(this).attr('data-toggle', "0");
+                treatmentMenu.removeClass("menu-active").hide();
+            }
+        });
+
+        closeButton.on("click", function () {
+            treatmentMenu.removeClass("menu-active").hide();
+            treatmentButton.attr('data-toggle', "0");
+        });
+
+        $('li.main-megamenu').first().addClass('active');
+        function checkMobile() {
+            if ($(window).width() <= 768) { 
+                $('li.main-megamenu').removeClass('active'); 
+                setupMobileMenu(); 
+            } else {
+                setupDesktopMenu(); 
+            }
+        }
+
+        checkMobile();
+
+        $(window).resize(function() {
+            checkMobile();
+        });
+        function setupDesktopMenu() {
+            $('li.main-megamenu').hover(
+                function () {
+                    $('li.main-megamenu').removeClass('active');
+                    $(this).addClass('active');
+                },
+                function () {
+                    $(this).removeClass('active');
+                }
+            );
+        }
+
+        // Mobile menu setup
+        function setupMobileMenu() {
+            if ($(window).width() <= 991) {  
+                $('.main-megamenu').show();  
+                $('body').css('overflow', 'hidden'); 
+
+                $('.mobile-list label').off('click').on('click', function (e) {
+                    e.preventDefault();
+
+                    var $parent = $(this).closest('.main-megamenu');
+                    var $submenu = $parent.find('.view-treatment-mneu-list');
+                    var $toggleIcon = $parent.find('.toggle-icon');
+                      if ($parent.hasClass('no-dropdown')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                     var href = $(this).find('a').attr('href');
+                   if (href) {
+                       window.location.href = href;
+                    }
+                        return false;
+                       }
+
+                    e.preventDefault(); 
+                    $('.main-megamenu').not($parent).removeClass('active');
+                    $('.view-treatment-mneu-list').not($submenu).slideUp();
+                    $('.toggle-icon').not($toggleIcon).html('<i class="fa fa-plus"></i>');
+
+                    if ($submenu.is(":visible")) {
+                        $submenu.slideUp();
+                        $toggleIcon.html('<i class="fa fa-plus"></i>');
+                        $parent.removeClass('active');
+                    } else {
+                        $submenu.slideDown();
+                        $toggleIcon.html('<i class="fa fa-minus"></i>');
+                        $parent.addClass('active');
+                    }
+                });
+
+                $('.view-treatment-mneu-list a').off('click').on('click', function (e) {
+                    e.stopPropagation(); 
+                });
+
+            } else {
+               
+                $('.main-megamenu').show();
+                $('body').css('overflow', 'auto');
+            }
+        }
+        // setupMobileMenu();
+        // setupDesktopMenu();
+    });
+});
+</script>
+
+
+
+
+
+ 

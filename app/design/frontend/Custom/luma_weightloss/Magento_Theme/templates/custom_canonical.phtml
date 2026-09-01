@@ -1,0 +1,18 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$currentUrl = $objectManager->get(\Magento\Framework\UrlInterface::class)->getCurrentUrl();
+
+
+$urls = [
+   
+    'https://www.pharmacyplanet.com/weightloss/buy-zepbound'
+
+];
+
+
+// Check if the current URL exists in the array
+if (in_array($currentUrl, $urls)) {
+
+    echo '<link rel="canonical" href="' . $currentUrl . '" />' . PHP_EOL;
+}  
+?>

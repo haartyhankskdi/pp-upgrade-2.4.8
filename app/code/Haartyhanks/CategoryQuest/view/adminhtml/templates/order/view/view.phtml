@@ -1,0 +1,147 @@
+<div>
+    <button id="modal-btn" style="color: Green;"><strong><?php echo $block->myFunction() . ' ' . 'Response' ?></strong></button>
+</div>
+<?php
+$AnsCollection = $block->getAnserCollection();
+$data = $AnsCollection->getData();
+$order = $block->getOrderDetails($block->getOrderId());
+// $collection = $order->getAllItems();
+$collection = $order->getAllVisibleItems();
+$hashKey = json_decode($block->getQuestionnaireHashKey());
+?>
+<div id="modal-content">
+    <div class="modal-inner-content">
+        <?php
+        echo "Order Id : " . $order->getIncrementId() . "<br>";
+        echo "ip Address:" . $order->getRemoteIp() . "<br>";
+        $orderIp = $order->getRemoteIp();
+        $orderDate = explode(" ", $order->getCreatedAt());
+
+        foreach ($collection as $item) {
+
+            if (
+                $item->getProductType() !== \Magento\Catalog\Model\Product\Type::TYPE_SIMPLE
+                && $item->getProductType() !== \Magento\Catalog\Model\Product\Type::TYPE_VIRTUAL
+            ) {
+                echo "Product SKU : " . $item->getSku() . "<br>";
+                echo "Product Name :" . $item->getName() . "<br>";
+                // echo "Item Id" . $item->getId() . "<br>";
+                
+                $questionnaireUniqueId = str_replace(array('[', '"', ']'), '', $item->getQuestionnaireUniqueId());
+                echo "Unique Hash Key : " . $questionnaireUniqueId . "<br>";
+                if($questionnaireUniqueId != null) 
+                {
+                    foreach ($data as $items) {
+                        if ($questionnaireUniqueId == $items['questionnaire_unique_id']) {
+                            echo $items['form_name'] . "<hr>";
+                            $objects = json_decode($items['response_json']);
+                            $values = json_decode(json_encode($objects), true);
+
+                            foreach ($values as $value) {
+                                $path = $block->getBaseUrl() . "media/amasty/amcustomform/" . $value['value'];
+                                echo 'Question : ' . $value['label'] . '<br>';
+                                if ($value['type'] == "file") { ?>
+                                    <p>Answer : <a href="<?php echo $path ?>" target="blank"><?php echo $value['value']; ?></a></p>
+                                <?php  } else {
+                                    echo 'Answer : ' . $value['value'] . '<br>';
+                                }
+                            }
+                            echo "<hr><hr>";
+                        }
+                    }
+                }
+                else if ($hashKey != null) {
+                    foreach ($hashKey as $key) {
+                        foreach ($data as $items) {
+                            if ($key === $items['questionnaire_unique_id']) {
+                                echo $items['form_name'] . "<hr>";
+                                $objects = json_decode($items['response_json']);
+                                $values = json_decode(json_encode($objects), true);
+
+                                foreach ($values as $value) {
+                                    $path = $block->getBaseUrl() . "media/amasty/amcustomform/" . $value['value'];
+                                    echo 'Question : ' . $value['label'] . '<br>';
+                                    if ($value['type'] == "file") { ?>
+                                        <p>Answer : <a href="<?php echo $path ?>" target="blank"><?php echo $value['value']; ?></a></p>
+                                    <?php  } else {
+                                        echo 'Answer : ' . $value['value'] . '<br>';
+                                    }
+                                }
+                                echo "<hr><hr>";
+                            }
+                        }
+                    }
+                } 
+                else {
+                    foreach ($data as $items) {
+                        $date = explode(" ", $items['created_at']);
+                        if ($orderIp == $items['ip'] && $orderDate[0] == $date[0]) {
+                            echo $items['form_name'] . " | Submitted At :" . $items['created_at'] . "<hr>";
+                            $objects = json_decode($items['response_json']);
+                            $values = json_decode(json_encode($objects), true);
+
+                            foreach ($values as $value) {
+                                $path = $block->getBaseUrl() . "media/amasty/amcustomform/" . $value['value'];
+                                echo 'Question : ' . $value['label'] . '<br>';
+                                if ($value['type'] == "file") { ?>
+                                    <p>Answer : <a href="<?php echo $path ?>" target="blank"><?php echo $value['value']; ?></a></p>
+                                <?php  } else {
+                                    echo 'Answer : ' . $value['value'] . '<br>';
+                                }
+                            }
+                            echo "<hr>";
+                        }
+                    }
+                }
+            }
+        }
+        ?>
+    </div>
+</div>
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function($, modal) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Category Questionnaire Response',
+                buttons: [{
+                    text: $.mage.__('Close'),
+                    class: 'modal-close',
+                    click: function() {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            modal(options, $('#modal-content'));
+            $("#modal-btn").on('click', function() {
+                $("#modal-content").modal("openModal");
+            });
+        }
+    );
+</script>
+<style>
+    @media screen and (min-width: 1025px) {
+        .modal-popup._inner-scroll .modal-inner-wrap {
+            width: 40% !important;
+            left: auto;
+            right: 7%;
+        }
+
+        .modals-wrapper .modals-overlay {
+            background: transparent !important;
+        }
+
+        body._has-modal {
+            overflow: scroll;
+        }
+    }
+</style>
+<!-- ["Yc5LH0mgIopIWf4uL5JnB2RDdJCJqgN6"] -->

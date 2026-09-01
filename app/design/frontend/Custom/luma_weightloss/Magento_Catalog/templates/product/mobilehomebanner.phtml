@@ -1,0 +1,247 @@
+<?php
+$helperCust = $this->helper(\Nilesh\Theme\Helper\Customer::class);
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$cart = $objectManager->get('\Magento\Checkout\Model\Cart');
+
+/** @var \Magento\Store\Model\StoreManagerInterface $storeManager */
+$storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+$currentStore = $storeManager->getStore();
+$baseUrl = $currentStore->getBaseUrl();
+?>
+<style>
+.popup-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+.popup-button:hover {
+    background-color: #0056b3;
+}
+.overlay-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.popup-box {
+    background: #fff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    width: 600px; /* Adjust width to fit two columns */
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+.form-container {
+    display: flex;
+    /* flex-direction: column; */
+}
+
+.question-cols {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.question-col {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.form-label {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #444;
+    text-align: left;
+}
+.form-input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.btn-submit, .btn-close-popup {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.btn-submit {
+    background-color: green;
+    color: #fff;
+}
+.btn-close-popup {
+    margin-top: 12px;
+    background-color: #e74c3c;
+    color: #fff;
+}
+.btn-submit:hover, .btn-close-popup:hover {
+    background-color: #4caf50;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.overlay-container.show {
+    display: flex;
+    opacity: 1;
+}
+
+</style>
+
+<div class="homepage-banner-new-mobile">
+  <div class="container">
+    <div class="h-banner-content-sec">
+    <h2>Clinically Proven Weight Loss Medication</h2>
+
+
+      <div class="h-banner-content">
+        <div class="banner-left-c">
+          <!-- <h2>Clinically Proven Weight Loss Medication</h2> -->
+          <!-- <p>Start your weight management journey today supported by our team of healthcare professionals and experts</p><br> -->
+
+        </div>
+
+          
+        <div class="banner-right-c">
+            <ul>
+              <li>
+                <div class="banner-icon">
+                  <img src="/media/wysiwyg/WLImage/web-app-i.png" alt="Simple Monthly Plan">
+                </div>
+                <p>Simple <br> Monthly Plan </p>
+              </li>
+              <li>
+                <div class="banner-icon">
+                  <img src="/media/wysiwyg/WLImage/cancel-i.png" alt="Cancel Anytime" />
+                </div>
+                <p>Cancel <br> Anytime </p>
+              </li>
+              <li>
+                <div class="banner-icon">
+                  <img src="/media/wysiwyg/WLImage/uk-medical-i.png" alt="UK medical professionals​" />
+                </div>
+                <p>UK medical <br> professionals​ </p>
+              </li>
+              <li>
+                <div class="banner-icon">
+                  <img src="/media/wysiwyg/WLImage/support-i.png" alt="1:1 coaching and support" />
+                </div>
+                <p>1:1 coaching <br> and support </p>
+              </li>
+            </ul>
+        </div>
+
+      </div>
+<!-- 
+      <div class="review-content">
+            <img src="/media/wysiwyg/WLImage/trustpilot-img.webp" alt="Trustpilot" />
+            <img src="/media/wysiwyg/WLImage/Google-review-img.webp" alt="Google Review" />
+        </div> -->
+    </div>
+  </div>
+</div>
+
+
+<div class="review-content-mobile">
+            <a href="https://www.trustpilot.com/review/magento-1584919-6629151.cloudwaysapps.com" target="_blank"><img src="/media/wysiwyg/WLImage/Trust-pilot.svg" alt="Trustpilot" /></a>
+            <img src="/media/wysiwyg/WLImage/google-review.svg" alt="Google Review" />
+        </div>
+
+<div id="popupOverlay" class="overlay-container">
+    <div class="popup-box">
+        <h2 style="color: green;">Login Form</h2>
+        <form class="form-container">
+          <div class="question-col">
+            <label class="form-label" for="email">Email:</label>
+              <input class="form-input" type="email" id="email" name="email" required>
+
+              <label class="form-label" for="password">Password:</label>
+              <input class="form-input" type="password" id="password" name="password" required>
+
+              <button class="btn-submit" type="button" onclick="signIn()">Sign In</button>
+              <a class="forgot" href=<?php echo $baseUrl . 'customer/account/forgotpassword/'; ?>>
+                  <span>Forgot Your Password?</span>
+              </a>
+          </div>
+
+            <div class="question-col">
+                        <h2>New to PharmacyPlanet?</h2>
+                        <p>Continue to questionnaire</p>
+                        <div class="h-banner-btn">
+                            <a href="<?php echo $baseUrl . 'wl-login'; ?>">Start my consultation</a>
+
+                        </div>
+                    </div>
+        </form>
+        <button class="btn-close-popup" onclick="togglePopup()">Close</button>
+    </div>
+</div>
+
+<div class="mob-consult-btn">
+    <a href="<?php echo $baseUrl . 'wl-login'; ?>">START MY CONSULTATION</a>
+</div>
+
+<script>
+    function togglePopup() {
+        const overlay = document.getElementById('popupOverlay');
+        overlay.classList.toggle('show');
+    }
+
+    function signIn() {
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+
+        if (!email || !password) {
+            alert('Both fields are required');
+            return;
+        }
+
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            alert('Please enter a valid email address');
+            return;
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/custom_module/login/index", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    window.location.reload();
+                } else {
+                    alert('Login failed: ' + response.message);
+                }
+            }
+        };
+        xhr.send("email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password));
+    }
+</script>

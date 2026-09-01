@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	<route method="POST" url="/V1/nilesh-prescribername/prescribername">
+		<service class="Nilesh\PrescriberName\Api\PrescriberNameRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Nilesh_PrescriberName::PrescriberName_save"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/nilesh-prescribername/prescribername/search">
+		<service class="Nilesh\PrescriberName\Api\PrescriberNameRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Nilesh_PrescriberName::PrescriberName_view"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/nilesh-prescribername/prescribername/:prescribernameId">
+		<service class="Nilesh\PrescriberName\Api\PrescriberNameRepositoryInterface" method="get"/>
+		<resources>
+			<resource ref="Nilesh_PrescriberName::PrescriberName_view"/>
+		</resources>
+	</route>
+	<route method="PUT" url="/V1/nilesh-prescribername/prescribername/:prescribernameId">
+		<service class="Nilesh\PrescriberName\Api\PrescriberNameRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Nilesh_PrescriberName::PrescriberName_update"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/nilesh-prescribername/prescribername/:prescribernameId">
+		<service class="Nilesh\PrescriberName\Api\PrescriberNameRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Nilesh_PrescriberName::PrescriberName_delete"/>
+		</resources>
+	</route>
+</routes>

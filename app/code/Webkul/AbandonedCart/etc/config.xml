@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AbandonedCart
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <webkul_abandoned_cart>
+            <abandoned_cart_settings>
+                <enable_disable_abandoned_cart>1</enable_disable_abandoned_cart>
+                <abanconed_cart_days>2</abanconed_cart_days>
+                <abandoned_cart_time_hours>5</abandoned_cart_time_hours>
+                <follow_up_second_mail>4</follow_up_second_mail>
+                <follow_up_third_mail>6</follow_up_third_mail>
+            </abandoned_cart_settings>
+            <abandoned_cart_mail_configuration>
+                <admin_email_id>test@example.com</admin_email_id>
+                <admin_name_in_email>john Doe</admin_name_in_email>
+                <abandoned_cart_auto_mail_status>0</abandoned_cart_auto_mail_status>
+                <abandoned_cart_mail_content_1>You have left products waiting for checkout in your cart</abandoned_cart_mail_content_1>
+                <abandoned_cart_mail_content_2>You have left products waiting for checkout in your cart</abandoned_cart_mail_content_2>
+                <abandoned_cart_mail_content_3>You have left products waiting for checkout in your cart</abandoned_cart_mail_content_3>
+            </abandoned_cart_mail_configuration> 
+        </webkul_abandoned_cart>
+    </default>
+</config>

@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Kdi\Testimonials\Api\TestimonialsRepositoryInterface" type="Kdi\Testimonials\Model\TestimonialsRepository"/>
+	<preference for="Kdi\Testimonials\Api\Data\TestimonialsInterface" type="Kdi\Testimonials\Model\Testimonials"/>
+	<preference for="Kdi\Testimonials\Api\Data\TestimonialsSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Kdi\Testimonials\Model\ResourceModel\Testimonials\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">kdi_testimonials</argument>
+			<argument name="resourceModel" xsi:type="string">Kdi\Testimonials\Model\ResourceModel\Testimonials\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="kdi_testimonials_listing_data_source" xsi:type="string">Kdi\Testimonials\Model\ResourceModel\Testimonials\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<type name="Vendor\Module\Model\ImageUploader">
+    <arguments>
+        <argument name="baseTmpPath" xsi:type="string">label/tmp/image</argument>
+        <argument name="basePath" xsi:type="string">label/image</argument>
+        <argument name="allowedExtensions" xsi:type="array">
+            <item name="jpg" xsi:type="string">jpg</item>
+            <item name="jpeg" xsi:type="string">jpeg</item>
+            <item name="gif" xsi:type="string">gif</item>
+            <item name="png" xsi:type="string">png</item>
+        </argument>
+    </arguments>
+</type>
+</config>

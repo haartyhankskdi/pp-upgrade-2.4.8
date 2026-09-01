@@ -1,0 +1,51 @@
+<?php
+/** @var \Mirasvit\Helpdesk\Block\Satisfaction\Rate $block */
+?>
+<div class="processing-block"><?= __('If the processing doesn\'t start automatically in a few seconds, please click the button below'); ?></div>
+<div class="confirm-block">
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" title="<?= __('Process Rate') ?>" class="action submit primary">
+                <span><?= __('Process Rate') ?></span>
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    require([
+        "jquery"
+    ], function ($) {
+        const mdBreakpoint = 992;
+
+        const width = $(window).width();
+
+        var isSentRequest = false;
+
+        // is mobile
+        if (width < mdBreakpoint) {
+            sendRate();
+        } else {
+            $(document).on('mousemove', sendRate);
+        }
+
+        // if mobile was not detected correctly
+        $('.confirm-block').on('click', sendRate);
+
+        function sendRate() {
+            if (!isSentRequest) {
+                isSentRequest = true;
+                $.ajax("<?= $block->getSubmitUrl() ?>", {
+                    data: <?= $block->getSubmitData() ?>,
+                    type:     'POST',
+                    dataType: 'json',
+
+                    success: function (response) {
+                        if (response.url) {
+                            window.location = response.url;
+                        }
+                    }
+                });
+            }
+        }
+    });
+</script>

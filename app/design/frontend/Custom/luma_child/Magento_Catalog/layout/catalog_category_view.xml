@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="head.additional">
+             <block class="Magento\Framework\View\Element\Template" name="mfblog.head.fb_api" template="Magento_Catalog::product/view/meta.phtml" />
+             <block class="Kdi\Popup\Block\Index\Index" name="kdi.productpopup" template="Kdi_Popup::index/index.phtml" before="-"/>
+        </referenceBlock>
+        <referenceContainer name="columns.top">
+            <container name="category.view.container" htmlTag="div" htmlClass="category-view" after="-">
+                
+                       <block class="Kdi\Schema\Block\Category\Faq" name="category.faq" template="Kdi_Schema::category/faq.phtml"/>
+                <block class="Magento\Catalog\Block\Category\View" name="category.image" template="Magento_Catalog::category/image.phtml"/>
+                <block class="Magento\Catalog\Block\Category\View" name="category.cms" template="Magento_Catalog::category/cms.phtml"/>
+                <container name="category.view.top" htmlTag="div" htmlClass="category-view-top" after="category.view.container">
+                <container name="category.view.top.tp" htmlTag="div" htmlClass="pp_cat_trustpilot">
+                    
+                     <!-- <block class="Magento\Framework\View\Element\Template" name="homecss" template="Magento_Theme::homecss.phtml" /> --> 
+                    <block class="Magento\Framework\View\Element\Template" name="begin_your_Journey" template="Magento_Catalog::category/journey.phtml" />
+                    <block class="Magento\Cms\Block\Block" name="Trust-Pilot-for-Category-Page">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">Trust-Pilot-for-Category-Page</argument>
+                            </arguments>
+                    </block>
+                    <block class="Magento\Cms\Block\Block" name="trustpilot-mobile-for-category">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">trustpilot-mobile-for-category</argument>
+                            </arguments>
+                    </block>
+                    <block class="Magento\Framework\View\Element\Template" name="how_it_works" template="Magento_Catalog::category/how_it_work.phtml" />
+                  </container>
+                  
+            </container>
+            </container>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Magento\Catalog\Block\Category\View" name="category.products" template="Magento_Catalog::category/products.phtml">
+                <block class="Magento\Catalog\Block\Product\ListProduct" name="category.products.list" as="product_list" template="Magento_Catalog::product/list.phtml">
+                    <container name="category.product.list.additional" as="additional" />
+                    <block class="Magento\Framework\View\Element\RendererList" name="category.product.type.details.renderers" as="details.renderers">
+                        <block class="Magento\Framework\View\Element\Template" name="category.product.type.details.renderers.default" as="default"/>
+                    </block>
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="category.product.addto" as="addto">
+                        <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare"
+                               name="category.product.addto.compare" as="compare"
+                               template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                    </block>
+                    <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="Magento_Catalog::product/list/toolbar.phtml">
+                        <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockName">
+                        <argument name="name" xsi:type="string">product_list_toolbar</argument>
+                    </action>
+                </block>
+            </block>
+            <block class="Magento\Cookie\Block\RequireCookie" name="require-cookie" template="Magento_Cookie::require_cookie.phtml">
+                <arguments>
+                    <argument name="triggers" xsi:type="array">
+                        <item name="compareProductLink" xsi:type="string">.action.tocompare</item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="page.bottom.container">
+             <container name="category.view.bottom" htmlTag="div" htmlClass="category-view-bottom" before="before-footer-link">
+                <container name="category.view.bottom.included" htmlTag="div" htmlClass="pp_cat_what_include">
+                    <block class="Magento\Cms\Block\Block" name="what_included">
+                        <arguments>
+                            <argument name="block_id" xsi:type="string">what_included</argument>
+                        </arguments>
+                    </block>    
+                </container>
+                <container name="category.view.bottom.meetinfo" htmlTag="div" htmlClass="pp_cat_meetmyteam">
+                    <block class="Magento\Cms\Block\Block" name="meet_the_team">
+                            <arguments>
+                                <argument name="block_id" xsi:type="string">meet_the_team</argument>
+                            </arguments>
+                    </block>                    
+                </container>
+                <container name="category.view.top.meet_the_team2" htmlTag="div" htmlClass="meet_the_team2">
+                    <block class="Magento\Framework\View\Element\Template" name="meet_the_team2" template="Magento_Catalog::category/meet_the_team2.phtml" />
+                </container>
+                <container name="category.view.top.faq" htmlTag="div" htmlClass="faq">
+                    <block class="Magento\Framework\View\Element\Template" name="faq" template="Magento_Catalog::category/faq.phtml" />
+                </container>
+                <container name="category.view.top.blog" htmlTag="div" htmlClass="blog">
+                    <block class="Magento\Framework\View\Element\Template" name="blog" template="Magento_Catalog::product/blogSlider.phtml"/>
+                </container>
+            </container>
+        </referenceContainer>
+        <move element="page.main.title" destination="category.view.container" before="category.description"/>
+        <!-- <referenceBlock name="page.main.title">
+            <arguments>
+                <argument name="id" xsi:type="string">page-title-heading</argument>
+                <argument name="add_base_attribute_aria" xsi:type="string">page-title-heading toolbar-amount</argument>
+            </arguments>
+            <block class="Magento\Catalog\Block\Category\Rss\Link" name="rss.link" template="Magento_Catalog::category/rss.phtml"/>
+        </referenceBlock> -->
+    </body>
+</page>

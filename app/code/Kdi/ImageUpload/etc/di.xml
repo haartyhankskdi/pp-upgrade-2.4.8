@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Kdi\ImageUpload\Api\EntityRepositoryInterface" type="Kdi\ImageUpload\Model\EntityRepository"/>
+	<preference for="Kdi\ImageUpload\Api\Data\EntityInterface" type="Kdi\ImageUpload\Model\Entity"/>
+	<preference for="Kdi\ImageUpload\Api\Data\EntitySearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Kdi\ImageUpload\Model\ResourceModel\Entity\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">kdi_imageupload_entity</argument>
+			<argument name="resourceModel" xsi:type="string">Kdi\ImageUpload\Model\ResourceModel\Entity\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="kdi_imageupload_entity_listing_data_source" xsi:type="string">Kdi\ImageUpload\Model\ResourceModel\Entity\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<type name="Magento\Customer\Controller\Account\LoginPost">
+		<plugin name="Kdi_ImageUpload_Plugin_Magento_Customer_Controller_Account_LoginPost" type="Kdi\ImageUpload\Plugin\LoginPost" sortOrder="10" disabled="false"/>
+	</type>
+	<!-- <type name="Magento\Catalog\Model\Category">
+        <plugin name="sort_products_by_position_plugin" type="Kdi\ImageUpload\Plugin\CategorySortByPosition" />
+    </type>
+    <type name="Magento\Catalog\Model\ResourceModel\Product\Collection">
+        <plugin name="sort_by_stock_status_plugin" type="Kdi\ImageUpload\Plugin\StockSortPlugin" />
+    </type> -->
+      <type name="Magento\Catalog\Model\Layer">
+        <plugin name="sortOutOfStock_catalog_model_layer" type="Kdi\ImageUpload\Plugin\Layer" sortOrder="1000" />
+    </type>
+
+</config>

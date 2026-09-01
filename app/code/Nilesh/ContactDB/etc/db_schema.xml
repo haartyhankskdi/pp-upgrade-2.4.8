@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table comment="nilesh_contactdb_contactdb Table" engine="innodb" name="nilesh_contactdb_contactdb" resource="default">
+		<column comment="Entity Id" identity="true" name="contactdb_id" nullable="false" padding="6" unsigned="true" xsi:type="smallint"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="contactdb_id"/>
+		</constraint>
+		<column length="255" name="name" nullable="true" xsi:type="varchar"/>
+		<column length="255" name="email" nullable="true" xsi:type="varchar"/>
+		<column length="255" name="contact" nullable="true" xsi:type="varchar"/>
+		<column name="comment" nullable="true" xsi:type="text"/>
+		<column length="255" name="preference" nullable="true" xsi:type="varchar"/>
+		<column name="created_date" nullable="true" default="CURRENT_TIMESTAMP" on_update="false" xsi:type="timestamp"/>
+	</table>
+</schema>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="web">
+            <group id="resource_hints" translate="label comment" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Resource Hints</label>
+                <comment><![CDATA[Add resource hints to your store's header by editing the list below.]]></comment>
+                <field id="config" translate="label comment" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Configure</label>
+                    <comment><![CDATA[Want to find out more about the different types, <a href="https://www.w3.org/TR/resource-hints/#resource-hints">read more</a>. The 'preload as'-attribute only affects the Preload Resource Hint Type.]]></comment>
+                    <frontend_model>Nilesh\Prefech\Block\System\Config\Form\Field\FieldArray</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

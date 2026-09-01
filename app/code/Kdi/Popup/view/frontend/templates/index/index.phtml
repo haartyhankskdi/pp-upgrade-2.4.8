@@ -1,0 +1,89 @@
+<?php
+/** @var \Kdi\Popup\Block\Index\Index $block */
+if (!$block->isEnabled()) {
+    return;
+}
+$fullActionName = $block->getRequest()->getFullActionName();
+if ($fullActionName === 'catalog_product_view') {
+    $productId = $block->getRequest()->getParam('id');
+    if ($productId == $block->getProductId()) {
+        return;
+    }
+}
+?>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Kaushan+Script&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<div id="kdi-product-popup" class="kdi-popup-overlay fdy-overlay" style="display: none;">
+    <div class="fdy-modal" role="dialog" aria-modal="true" aria-labelledby="fdy-title">
+        <button type="button" class="kdi-popup-close fdy-close" aria-label="<?= $block->escapeHtmlAttr(__('Close')) ?>">&#10005;</button>
+
+        <div class="fdy-grid">
+            <div class="fdy-visual">
+                <div class="fdy-visual__dots" aria-hidden="true"></div>
+                <div class="fdy-visual__disc" aria-hidden="true"></div>
+                <div class="fdy-visual__ring" aria-hidden="true"></div>
+
+                <div class="fdy-pack">
+                    <img src="<?= $block->escapeUrl($block->getViewFileUrl('Kdi_Popup::images/foundayo-carton.png')) ?>"
+                         alt="<?= $block->escapeHtmlAttr(__('Foundayo 0.8 mg carton, 30 film-coated tablets')) ?>">
+                </div>
+                <img class="fdy-pill fdy-pill--a" src="<?= $block->escapeUrl($block->getViewFileUrl('Kdi_Popup::images/foundayo-tablet-a.png')) ?>" alt="" aria-hidden="true">
+                <img class="fdy-pill fdy-pill--b" src="<?= $block->escapeUrl($block->getViewFileUrl('Kdi_Popup::images/foundayo-tablet-c.png')) ?>" alt="" aria-hidden="true">
+                <img class="fdy-pill fdy-pill--c" src="<?= $block->escapeUrl($block->getViewFileUrl('Kdi_Popup::images/foundayo-tablet-b.png')) ?>" alt="" aria-hidden="true">
+
+                <div class="fdy-sticker"><?= $block->escapeHtml(__('NOW AVAILABLE TO PRE-ORDER')) ?></div>
+                <span class="fdy-visual__caption"><?= $block->escapeHtml(__('orforglipron · once daily · 30 tablets')) ?></span>
+            </div>
+
+            <div class="fdy-body">
+                <div class="fdy-intro">
+                    <h2 class="fdy-title" id="fdy-title">
+                        <span class="fdy-title__product">Foundayo</span>
+                        <?= $block->escapeHtml(__('The New Weight Loss Pill from')) ?> <span class="fdy-title__lilly">Lilly</span>
+                    </h2>
+                    <p class="fdy-lede"><?= $block->escapeHtml(__('Foundayo is now available to pre-order. Order today and be among the first to receive it when stock arrives.')) ?></p>
+                </div>
+
+                <div class="fdy-benefits">
+                    <div class="fdy-benefit fdy-benefit--blue"><span class="fdy-benefit__tick" aria-hidden="true">&#10003;</span><div class="fdy-benefit__text"><span class="fdy-benefit__title"><?= $block->escapeHtml(__('Pre-order now')) ?></span><span class="fdy-benefit__desc"><?= $block->escapeHtml(__('Secure your order ahead of stock arriving.')) ?></span></div></div>
+                    <div class="fdy-benefit fdy-benefit--red"><span class="fdy-benefit__tick" aria-hidden="true">&#10003;</span><div class="fdy-benefit__text"><span class="fdy-benefit__title"><?= $block->escapeHtml(__('Be one of the first')) ?></span><span class="fdy-benefit__desc"><?= $block->escapeHtml(__('Get early access to Foundayo when it becomes available.')) ?></span></div></div>
+                    <div class="fdy-benefit fdy-benefit--amber"><span class="fdy-benefit__tick" aria-hidden="true">&#10003;</span><div class="fdy-benefit__text"><span class="fdy-benefit__title"><?= $block->escapeHtml(__('Trusted pharmacy')) ?></span><span class="fdy-benefit__desc"><?= $block->escapeHtml(__('UK registered pharmacy.')) ?></span></div></div>
+                </div>
+
+                <div class="fdy-foot">
+                    <a class="fdy-cta" href="<?= $block->escapeUrl($block->getUrl('foundayo-orforglipron.html')) ?>"><?= $block->escapeHtml(__('PRE-ORDER FOUNDAYO')) ?><span class="fdy-cta__arrow" aria-hidden="true">&rarr;</span></a>
+                    <div class="fdy-trust"><span><?= $block->escapeHtml(__('GPhC registered pharmacy')) ?></span><span><?= $block->escapeHtml(__('UK clinical team')) ?></span><span><?= $block->escapeHtml(__('Secure & confidential')) ?></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+{
+    "#kdi-product-popup": {
+        "Kdi_Popup/js/popup": {
+            "cookieName": "kdi_foundayo_popup_closed",
+            "cookieLifetime": <?= (int) $block->getCookieLifetime() ?>,
+            "subscribeUrl": "<?= $block->escapeUrl($block->getSubscribeUrl()) ?>",
+            "productId": <?= (int) $block->getProductId() ?>
+        }
+    }
+}
+</script>
+
+<style>
+/* All rules are scoped to the popup so this template cannot style page content. */
+.fdy-overlay,.fdy-overlay *,.fdy-overlay *::before,.fdy-overlay *::after{box-sizing:border-box}.fdy-overlay{position:fixed;inset:0;z-index:9999999;align-items:center;justify-content:center;padding:25px 20px;background:rgba(9,17,44,.55);font-family:Inter,Helvetica,Arial,sans-serif;overflow-y:auto}.fdy-modal{position:relative;width:100%;max-width:910px;background:#fff;border:3px solid #0b1f52;border-radius:28px;box-shadow:14px 14px 0 #d81f26; margin: 0 auto;}.fdy-close{position:absolute;top:-16px;right:-16px;z-index:6;width:44px;height:44px;border:3px solid #0b1f52;border-radius:50%;background:#fff;color:#0b1f52;font:700 16px/1 Inter,Helvetica,Arial,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:3px 3px 0 #0b1f52}.fdy-close:hover{background:#ffe27a}.fdy-grid{display:grid;grid-template-columns:1.02fr .98fr;border-radius:25px;overflow:hidden}.fdy-visual{position:relative;min-height:540px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 25%,#7fa3e6 0%,#2a4fa3 100%);border-right:3px solid #0b1f52;overflow:hidden}.fdy-visual__dots{position:absolute;inset:0;background-image:radial-gradient(#fff 1.4px,transparent 1.4px);background-size:18px 18px;opacity:.18}.fdy-visual__disc,.fdy-visual__ring{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);border-radius:50%}.fdy-visual__disc{width:330px;height:330px;background:#fff;opacity:.16}.fdy-visual__ring{width:250px;height:250px;border:3px dashed #fff;opacity:.32}.fdy-pack{position:relative;z-index:3;width:92%;padding:14px 12px;background:#fff;border:3px solid #0b1f52;border-radius:14px;transform:rotate(-4deg);box-shadow:8px 8px 0 rgba(11,31,82,.45)}.fdy-pack img{display:block;width:100%}.fdy-pill{position:absolute}.fdy-pill--a{z-index:4;width:120px;bottom:34px;left:22px;filter:drop-shadow(0 12px 16px rgba(11,31,82,.28));animation:fdy-float-a 6s ease-in-out infinite}.fdy-pill--b{z-index:4;width:150px;top:36px;right:-24px;filter:drop-shadow(0 12px 16px rgba(11,31,82,.24));animation:fdy-float-b 7s ease-in-out infinite}.fdy-pill--c{z-index:2;width:86px;bottom:96px;right:34px;transform:rotate(-14deg);filter:drop-shadow(0 10px 14px rgba(11,31,82,.2))}@keyframes fdy-float-a{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-10px) rotate(-4deg)}}@keyframes fdy-float-b{0%,100%{transform:translateY(0) rotate(12deg)}50%{transform:translateY(-8px) rotate(6deg)}}.fdy-sticker{position:absolute;z-index:5;top:24px;left:22px;padding:9px 14px;background:#d81f26;color:#fff;border:3px solid #0b1f52;border-radius:999px;box-shadow:3px 3px 0 #0b1f52;font:800 11.5px/1 'Bricolage Grotesque',Inter,Helvetica,sans-serif;letter-spacing:.14em;white-space:nowrap;transform:rotate(-6deg)}.fdy-visual__caption{position:absolute;z-index:5;bottom:14px;left:24px;color:rgba(255,255,255,.8);font:500 11.5px/1.4 Inter,Helvetica,Arial,sans-serif;letter-spacing:.04em;white-space:nowrap}.fdy-body{display:flex;flex-direction:column;gap:17px;padding:23px 30px 23px;background:#fff}.fdy-intro{display:flex;flex-direction:column;gap:10px}.fdy-title{margin:0;font-family:'Bricolage Grotesque',Inter,Helvetica,sans-serif;font-size:34px;font-weight:800;line-height:1.1;letter-spacing:-.02em;color:#0b1f52}.fdy-title__product{display:block;font-size:1.45em;line-height:1}.fdy-title__lilly{font-family:'Kaushan Script',cursive;font-size:1.06em;font-weight:400;color:#d52b1e;padding-left:2px}.fdy-lede{margin:0;max-width:42ch;font-size:14px;line-height:1.4;color:#59617c}.fdy-benefits{display:flex;flex-direction:column;gap:8px}.fdy-benefit{display:grid;grid-template-columns:30px 1fr;gap:13px;align-items:center;padding:7px 14px;border:2px solid #0b1f52;border-radius:14px;box-shadow:3px 3px 0 rgba(11,31,82,.14)}.fdy-benefit--blue{background:#f2f6ff}.fdy-benefit--red{background:#fff3f3}.fdy-benefit--amber{background:#fffaea}.fdy-benefit__tick{width:30px;height:30px;border-radius:50%;color:#fff;font:700 14px/1 Inter,Helvetica,Arial,sans-serif;display:flex;align-items:center;justify-content:center}.fdy-benefit--blue .fdy-benefit__tick{background:#123a8f}.fdy-benefit--red .fdy-benefit__tick{background:#d81f26}.fdy-benefit--amber .fdy-benefit__tick{background:#e2a900}.fdy-benefit__text{display:flex;flex-direction:column;gap:1px}.fdy-benefit__title{font:700 15px/1.3 'Bricolage Grotesque',Inter,Helvetica,sans-serif;color:#0b1f52}.fdy-benefit__desc{font-size:13px;line-height:1.3;color:#6f7791}.fdy-foot{display:flex;flex-direction:column;gap:11px;margin-top:auto}.fdy-cta{display:flex;align-items:center;justify-content:center;gap:10px;padding:15px 22px;background:#d81f26;color:#fff!important;text-decoration:none;border:3px solid #0b1f52;border-radius:14px;box-shadow:5px 5px 0 #0b1f52;font:800 17px/1 'Bricolage Grotesque',Inter,Helvetica,sans-serif;letter-spacing:.02em;transition:transform .12s ease,box-shadow .12s ease,background .12s ease}.fdy-cta:hover,.fdy-cta:focus-visible{background:#c31d24;transform:translate(2px,2px);box-shadow:2px 2px 0 #0b1f52}.fdy-cta__arrow{font-size:18px}.fdy-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;font:500 11px/1.3 Inter,Helvetica,Arial,sans-serif;color:#7a839e}@media(prefers-reduced-motion:reduce){.fdy-pill--a,.fdy-pill--b{animation:none}}@media(max-width:780px){.fdy-overlay{padding:28px 16px;align-items:flex-start}.fdy-modal{box-shadow:8px 8px 0 #d81f26}.fdy-grid{grid-template-columns:1fr}.fdy-visual{min-height:300px;border-right:0;border-bottom:3px solid #0b1f52}.fdy-pack{width:74%}.fdy-pill--a{width:84px;bottom:18px;left:12px}.fdy-pill--b{width:100px;top:18px;right:-14px}.fdy-pill--c{display:none}.fdy-body{padding:30px 24px 26px;gap:14px}.fdy-title{font-size:26px}.fdy-trust{grid-template-columns:1fr;gap:4px}.fdy-close{top:10px;right:10px}}
+@media screen and (min-width:1025px) {
+    .fdy-overlay { 
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+}
+</style>

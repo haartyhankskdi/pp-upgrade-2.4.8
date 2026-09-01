@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<lexis_nexis_configuration>
+			<general>
+				<enable>1</enable>
+				<id/>
+				<ikey/>
+				<journey_id/>
+			</general>
+		</lexis_nexis_configuration>
+	</default>
+</config>

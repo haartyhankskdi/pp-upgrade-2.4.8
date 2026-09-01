@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="layout_generate_blocks_after">
+        <observer name="vendor_module_update_robots_meta" instance="Kdi\Robots\Observer\UpdateRobotsMeta"/>
+    </event> 
+    <event name="cms_page_render">
+        <observer name="add_meta_robots" instance="Kdi\Robots\Observer\AddMetaRobots"/>
+    </event>
+</config>

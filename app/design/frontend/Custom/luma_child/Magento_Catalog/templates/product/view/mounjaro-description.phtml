@@ -1,0 +1,74 @@
+<?php
+$blockObj = $block->getLayout()->createBlock('Haartyhanks\RemoveObjectManager\Block\RemoveObj');
+$product = $blockObj->getCurrentProductId();
+
+if ($product) {
+    $productId = $product->getId();
+} else {
+    echo "Product not found";
+    return; // Stop execution if product is not found
+}
+
+// Define product templates based on product IDs
+$productTemplates = [
+    9305 => "Magento_Catalog::product/tabs/mounjaro.phtml",
+    9221 => "Magento_Catalog::product/tabs/wegovy.phtml",
+    9338 => "Magento_Catalog::product/tabs/mysimba.phtml",
+    9567 => "Magento_Catalog::product/tabs/orforglipron.phtml",
+    2703 => "Magento_Catalog::product/tabs/orlistat-xenical-capsules.phtml",
+    9395 => "Magento_Catalog::product/tabs/retatrutide.phtml",
+    9232 => "Magento_Catalog::product/tabs/rybelsus-tablets-semaglutide.phtml",
+    9405 => "Magento_Catalog::product/tabs/survodutide.phtml",
+    9337 => "Magento_Catalog::product/tabs/zepbound.phtml",
+];
+
+// Check if the current product ID exists in the array and load the corresponding template
+if (array_key_exists($productId, $productTemplates)) {
+    echo $block->getLayout()
+        ->createBlock("Magento\Framework\View\Element\Template")
+        ->setTemplate($productTemplates[$productId])
+        ->toHtml();
+}
+?>
+
+
+
+<script>
+var acc = document.getElementsByClassName("accordion-p");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+   
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      if (entry.intersectionRatio > 0) {
+        document.querySelector(`nav li a[href="#${id}"]`).parentElement.classList.add('active');
+      } else {
+        document.querySelector(`nav li a[href="#${id}"]`).parentElement.classList.remove('active');
+      }
+    });
+  });
+
+  // Track all sections that have an `id` applied
+  document.querySelectorAll('section[id]').forEach((section) => {
+    observer.observe(section);
+  });
+  
+});
+</script>

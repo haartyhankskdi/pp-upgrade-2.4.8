@@ -1,0 +1,299 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+/** @var \Magento\Framework\Registry $registry */
+$registry = $objectManager->get(\Magento\Framework\Registry::class);
+
+/** @var \Magento\Catalog\Model\Product $product */
+$product = $registry->registry('current_product');
+
+if ($product && $product->getId()) : ?>
+   <?php  $productId = $product->getId(); ?>
+
+<div class="notify-email-sec">
+<div class="notify-me-wrapper">
+    <div class="notify-me-content">
+        <h3><?= $block->escapeHtml(__('Notify me once available')) ?></h3>
+        <p><?= $block->escapeHtml(__('Enter your email to get notified')) ?></p>
+
+        <div class="wk-oosn-notificationcontainer">
+            <div class="wk-oosn-emailBox form-fields" data-bind="scope: 'section'">
+
+                <input
+                    type="hidden"
+                    id="oosn_product_id"
+                    name="product_id"
+                    value="<?= $productId ?>" />
+
+                <div class="notify-field-box">
+                    <label>First name</label>
+                    <input
+                        type="text"
+                        id="oosn_name"
+                        name="name"
+                        class="wk-oosn-input wk-oosn-input-name"
+                        placeholder="<?= $block->escapeHtmlAttr(__('First name')) ?>"
+                        data-bind="value: customer().name"
+                        required />
+                <label>Email address</label>
+                    <input
+                        type="email"
+                        id="oosn_email"
+                        name="email"
+                        class="wk-oosn-input wk-oosn-input-email"
+                        placeholder="<?= $block->escapeHtmlAttr(__('Email address')) ?>"
+                        data-bind="value: customer().email"
+                        required />
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                id="wk-oosn-button"
+                class="action primary notify-btn">
+                <span><?= $block->escapeHtml(__('Notify Me')) ?></span>
+            </button>
+
+            <div class="wk-loading-mask wk-display-none">
+                <div class="wk-loader"></div>
+            </div>
+
+            <div id="wk-oosn-warning" class="message"></div>
+        </div>
+    </div>
+</div>
+
+<div class="wk-loading-mask-outer wk-display-none">
+    <div class="wk-loader"></div>
+</div>
+</div>
+
+<style>
+    .notify-me-wrapper {
+        background: #000;
+        padding: 48px 56px;
+        border-radius: 4px;
+        font-family: inherit;
+    }
+
+    .notify-email-sec h3{
+       font-family: 'Lato', sans-serif; 
+        font-weight: 700; 
+        font-size: 32px; 
+        line-height: 40px; 
+        color: #fff; 
+        margin-bottom: 5px;
+        margin-top: 0;
+    }
+    .notify-email-sec p{
+       font-family: 'Lato', sans-serif; 
+        font-weight: 400; 
+        font-size: 16px; 
+        line-height: 22px; 
+        color: #fff; 
+        margin-bottom: 18px;
+    }
+
+    .wk-oosn-notificationcontainer {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        
+    }
+
+    .wk-oosn-emailBox {
+        width: 100% !important;
+        margin-right: 0;
+    }
+
+    .wk-oosn-input {
+        border: none;
+        border-radius: 8px;
+        height: 56px;
+        padding: 0 20px;
+        font-size: 16px;
+        width: 260px;
+        box-sizing: border-box;
+        outline: none;
+    }
+
+    .wk-oosn-input-name {
+        background: #fff;
+        color: #111;
+    }
+
+    .wk-oosn-input-email {
+        background: #e3e1fb;
+        color: #111;
+    }
+
+    .wk-oosn-input::placeholder {
+        color: #666;
+    }
+
+    .notify-btn {
+        background: #b15535;
+        border: none;
+        border-radius: 32px;
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+        height: 56px;
+        padding: 0 36px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+    }
+
+    .notify-btn:hover {
+        background: #9c4a2d;
+    }
+
+    #wk-oosn-warning {
+        width: 100%;
+        margin-top: 12px;
+        font-size: 14px;
+    }
+
+    #wk-oosn-warning.success {
+       color: #58de7c;
+    background-color: transparent;
+    padding: 15px 0 0 0;
+    font-size: 17px;
+    }
+
+    #wk-oosn-warning.error {
+        color: #f06367;
+    background-color: transparent;
+    padding: 15px 0 0 0;
+    font-size: 17px;
+    }
+
+    .wk-display-none {
+        display: none !important;
+    }
+    
+    .notify-email-sec .notify-field-box input{
+        height: 50px;
+        background-color: #fff;
+        font-size: 15px;
+        padding: 0 15px;
+        margin-bottom: 15px;
+    }
+
+    .notify-email-sec #wk-oosn-button{
+        float: left;
+        background-size: 100% 200% !important;
+        background-image: linear-gradient(to bottom, #ED3237 50%, #ED3237 50%) !important;
+        -webkit-transition: background-position 0.7s;
+        -moz-transition: background-position 0.7s;
+        transition: background-position 0.7s !important;
+        text-decoration: none !important;
+        background: #ED3237;
+        opacity: 1;
+        border: 0;
+        text-decoration: none;
+        width: 190px;
+        display: inline-block;
+        text-align: center;
+        font-size: 15px;
+        color: #fff;
+        font-family: 'Lato', sans-serif;
+        line-height: 55px;
+        padding: 0 0px;
+        font-weight: 500;
+        border-radius: 30px;
+        letter-spacing: 0.26px;
+        height: auto; 
+        margin-top: 20px !important;
+    }
+    .notify-email-sec #wk-oosn-button span{
+        font-weight: 600;
+        font-size: 15px;
+        color: #fff;
+        font-family: 'Lato', sans-serif;
+    }
+    .notify-email-sec #wk-oosn-button:hover {
+        background-size: 100% 200% !important;
+        background-image: linear-gradient(to bottom, #ED3237 50%, #53CAF5 50%) !important;
+        background-position: 0 -100% !important;
+        text-decoration: none !important;
+        background-color: #53CAF5 !important;
+    }
+    .notify-email-sec .out-of-stock-new .wk-oosn-emailBox{
+        width: 100% !important;
+    }
+
+    @media only screen and (min-width: 768px) {
+        .notify-email-sec .notify-field-box label{
+            display: none;
+        }
+        .notify-email-sec .notify-field-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            width: 100% !important;
+        }
+    }
+
+    @media (max-width: 767px) {
+       
+        .notify-email-sec .notify-field-box label{
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 20px;
+            color: #fff;
+            font-family: 'Lato', sans-serif;
+            width: 100%;
+            display: inline-block;
+            margin-bottom: 5px;
+        } 
+        .notify-me-wrapper {
+            padding: 32px 24px;
+        }
+
+        .wk-oosn-input {
+            width: 100%;
+        }
+
+        .notify-btn {
+            width: 100%;
+        }
+        .wk-oosn-input::placeholder {
+            color: #666;
+            opacity: 0;
+        }
+        .catalog-product-view.page-layout-1column .product-info-main .out-of-stock-new{
+            margin: 0 !important;
+        }
+        .catalog-product-view.page-layout-1column .product-info-main .out-of-stock-new .wk-oosn-emailBox{
+            width: 100% !important;
+        }
+    }
+
+.wk-oosn-notificationcontainer #wk-oosn-warning.error {
+        color: #f06367;
+    background-color: transparent;
+    padding: 0 0 0 0;
+    font-size: 15px;
+    margin-top: 0 !important;
+}
+
+</style>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "section": {
+                        "component": "Webkul_OutOfStockNotification/js/section"
+                    }
+                }
+            }
+        }
+    }
+</script>
+
+<?php endif;?>

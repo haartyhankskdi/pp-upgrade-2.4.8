@@ -1,0 +1,26 @@
+{
+    "nilesh_prescribernotes_prescribernotes": {
+        "column": {
+            "prescribernotes_id": true,
+            "connect_id": true,
+            "subject": true,
+            "note": true,
+            "customer_name": true,
+            "prescribernotes_upload": true,
+            "created_by": true,
+            "created_at": true,
+            "set_priority": true,
+            "prescribernotes_upload2": true,
+            "prescribernotes_upload3": true,
+            "prescribernotes_upload4": true,
+            "prescribernotes_upload5": true,
+            "admin_user": true
+        },
+        "index": {
+            "NILESH_PRESCRIBERNOTES_PRESCRIBERNOTES_CONNECT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

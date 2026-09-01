@@ -1,0 +1,87 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+     <!-- <css src="css/phase2.css" />  -->
+     <!-- <css src="css/pdp-categorypage.css" />  -->
+     <css src="css/inline-css.css" /> 
+     <css src="css/desktopcss.css" />
+     <css src="css/ipad.css" /> 
+     <css src="css/mobilecss.css" /> 
+     
+    </head>
+  <body> 
+     <referenceContainer name="head.additional">
+        <block class="Magento\Cms\Block\Block" 
+           name="home_banner_all_page">
+        <arguments>
+            <argument name="block_id" xsi:type="string">home_banner_all_page</argument>
+        </arguments>
+        </block>
+            <block class="Magento\Framework\View\Element\Template" name="custom_canonical" template="Magento_Theme::custom_canonical.phtml"/>
+            <!-- <block class="Kdi\Popup\Block\Index\Index" name="kdi.productpopup" template="Kdi_Popup::index/index.phtml" before="-"/> -->
+        </referenceContainer>
+    <!-- Section removed by me -->
+      <referenceContainer name="header.panel.wrapper" remove="true" />  
+      <!-- <referenceContainer name="header-wrapper" remove="true" />   -->
+      <!-- <referenceBlock name="navigation.sections" remove="true" /> -->  
+      <!-- <referenceBlock name="store.menu" remove="true" />  
+      <referenceBlock name="store.links" remove="true" />  
+      <referenceBlock name="store.settings" remove="true" /> -->  
+      <!-- Removing newsletter from defult position -->
+      <referenceBlock name="form.subscribe" remove="true" />  
+      <referenceContainer name="header.container">
+          <block class="Magento\Framework\View\Element\Template" as="store_language" template="Magecomp_Googlelangtranslator::langtranslator.phtml" ifconfig="googlelangtranslator/general/enable" before="-"/>
+        </referenceContainer>
+      <!-- Add custom Block in header -->
+      <referenceContainer name="header-wrapper">
+        <container name="custom.header" htmlClass="customMenu" htmlTag="div">
+            <block class="Kdi\Adpage\Block\PageType" name="custom-menu" after="logo" template="Magento_Theme::html/custom_menu.phtml" />
+        </container>
+        <container name="header-search-wrapper" label="Page Search Header" htmlTag="div" htmlClass="header searchbar" after="-">
+        </container>
+      </referenceContainer>
+    
+    <move element="top.search" destination="header-search-wrapper" before="-"/>
+
+    <referenceContainer name="page.bottom.container">
+      <container name="before-footer-link" htmlTag="div" htmlClass="before-footer">
+          <block class="Magento\Framework\View\Element\Template" name="before-footer-link-block" template="Magento_Theme::html/above_footer.phtml"/>
+      </container>
+  </referenceContainer>
+
+    <referenceBlock name="footer_links">
+        <action method="setTemplate">
+            <argument name="template" xsi:type="string">Magento_Theme::html/footer.phtml</argument>
+        </action>
+    </referenceBlock>
+
+    <referenceBlock name="logo" >
+        <!-- <action method="setLogoFile">
+            <argument name="logo_file" xsi:type="string">images/logo1.svg</argument>
+        </action> -->
+        <arguments>
+            <argument name="logo_file" xsi:type="string">images/phramacy_planet.svg</argument>
+        </arguments>
+    </referenceBlock>
+    <referenceBlock name="header-wrapper">
+            <block class="Magento\Framework\View\Element\Template" name="custom.after.logo" after="logo">
+                <arguments>
+                    <argument name="template" xsi:type="string">Magento_Theme::custom/after_logo.phtml</argument>
+                </arguments>
+            </block>
+      </referenceBlock>
+
+    <!-- Development purpose only -->
+    <!-- Remove if you find this in production mode -->
+    <referenceContainer name="before.body.end">
+        <block class="Magento\Framework\View\Element\Template" cacheable="false" name="custom_inline_js" template="Magento_Theme::css/inline_css.phtml" before="-"/>
+        <block class="Magento\Framework\View\Element\Template" cacheable="false" name="custom_inline_css" template="Magento_Theme::css/custom_css.phtml" after="custom_inline_js"/>
+    </referenceContainer>
+
+    <referenceContainer name="after.body.start">
+        <block class="Magento\Framework\View\Element\Template" name="custom.js" template="Magento_Theme::custom-js.phtml"/>
+        <block class="Magento\Framework\View\Element\Template" name="gtm" template="Magento_Theme::gtm_noscript.phtml"/>
+        
+    </referenceContainer>
+
+  </body> 
+</page>

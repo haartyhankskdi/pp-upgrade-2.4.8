@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://www.magezon.com/license
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_PopupBuilder
+ * @copyright Copyright (C) 2020 Magezon (https://www.magezon.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magezon\PopupBuilder\Api\Data\PopupSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Magezon\PopupBuilder\Api\PopupRepositoryInterface" type="Magezon\PopupBuilder\Model\PopupRepository" />
+    <preference for="Magezon\PopupBuilder\Api\Data\PopupInterface" type="Magezon\PopupBuilder\Model\Popup" />
+    <type name="Magezon\PopupBuilder\Block\Adminhtml\Popup\Edit\Button\View">
+        <arguments>
+            <argument name="frontendUrlBuilder" xsi:type="object">Magento\Framework\Url</argument>
+        </arguments>
+    </type>
+	<type name="Magezon\PopupBuilder\Model\CompositeConfigProvider">
+		<arguments>
+			<argument name="configProviders" xsi:type="array">
+				<item name="default" xsi:type="object">Magezon\PopupBuilder\Model\DefaultConfigProvider</item>
+			</argument>
+		</arguments>
+	</type>
+    <preference for="Magezon\PopupBuilder\Api\Data\PopupInterface" type="Magezon\PopupBuilder\Model\Popup" />
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Magezon\PopupBuilder\Api\Data\PopupInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">mgz_popupbuilder_popup</item>
+                    <item name="identifierField" xsi:type="string">popup_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Magezon\PopupBuilder\Api\Data\PopupInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Magezon\PopupBuilder\Api\Data\PopupInterface" xsi:type="string">Magezon\PopupBuilder\Api\PopupRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="Magezon\PopupBuilder\Api\Data\PopupInterface" xsi:type="array">
+                    <item name="read" xsi:type="array">
+                        <item name="customerGroup" xsi:type="string">Magezon\PopupBuilder\Model\ResourceModel\Popup\Relation\CustomerGroup\ReadHandler</item>
+                        <item name="store" xsi:type="string">Magezon\PopupBuilder\Model\ResourceModel\Popup\Relation\Store\ReadHandler</item>
+                        <item name="salerule" xsi:type="string">Magezon\PopupBuilder\Model\ResourceModel\Popup\Relation\Salerule\ReadHandler</item>
+                    </item>
+                    <item name="create" xsi:type="array">
+                        <item name="customerGroup" xsi:type="string">Magezon\PopupBuilder\Model\ResourceModel\Popup\Relation\CustomerGroup\SaveHandler</item>
+                        <item name="store" xsi:type="string">Magezon\PopupBuilder\Model\ResourceModel\Popup\Relation\Store\SaveHandler</item>
+                        <item name="salerule" xsi:type="string">Magezon\PopupBuilder\Model\ResourceModel\Popup\Relation\Salerule\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="customerGroup" xsi:type="string">Magezon\PopupBuilder\Model\ResourceModel\Popup\Relation\CustomerGroup\SaveHandler</item>
+                        <item name="store" xsi:type="string">Magezon\PopupBuilder\Model\ResourceModel\Popup\Relation\Store\SaveHandler</item>
+                        <item name="salerule" xsi:type="string">Magezon\PopupBuilder\Model\ResourceModel\Popup\Relation\Salerule\SaveHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magezon\Builder\Data\Groups">
+        <arguments>
+            <argument name="groups" xsi:type="array">
+                <item name="popup" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Popup</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magezon\Builder\Data\Elements">
+        <arguments>
+            <argument name="elements" xsi:type="array">
+                <item name="single_image" xsi:type="array">
+                    <item name="disabled" xsi:type="boolean">false</item>
+                </item>
+                <item name="button" xsi:type="array">
+                    <item name="disabled" xsi:type="boolean">false</item>
+                </item>
+                <item name="countdown" xsi:type="array">
+                    <item name="disabled" xsi:type="boolean">false</item>
+                </item>
+                <item name="popup_action" xsi:type="array">
+                    <item name="name" xsi:type="string" translate="true">Popup Action Button</item>
+                    <item name="class" xsi:type="string">Magezon\PopupBuilder\Data\Element\PopupAction</item>
+                    <item name="block" xsi:type="string">Magezon\PopupBuilder\Block\Element\PopupAction</item>
+                    <item name="templateUrl" xsi:type="string">Magezon_Builder/js/templates/builder/element/button.html</item>
+                    <item name="template" xsi:type="string">Magezon_Builder::element/button.phtml</item>
+                    <item name="sortOrder" xsi:type="number">150</item>
+                    <item name="icon" xsi:type="string">fas mgz-fa-bold</item>
+                    <item name="icon_styles" xsi:type="array">
+                        <item name="background-color" xsi:type="string">#f6492f</item>
+                    </item>
+                    <item name="group" xsi:type="string">popup</item>
+                    <item name="builder_description" xsi:type="string">{{ element.title ? 'Text: ' + element.title : '' }}</item>
+                    <item name="demo_link" xsi:type="string">http://192.168.1.107/magezon/pagebuilder/button</item>
+                    <item name="area" xsi:type="string">popup</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

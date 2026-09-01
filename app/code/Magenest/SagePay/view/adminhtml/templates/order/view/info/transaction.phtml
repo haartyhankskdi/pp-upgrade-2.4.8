@@ -1,0 +1,48 @@
+<?php
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+// @codingStandardsIgnoreFile
+/** @var \Magenest\SagePay\Block\Adminhtml\Order\View\Info\Transaction $block */
+$transaction = $block->getTransaction();
+?>
+
+<br><br>
+<div class="admin__page-section-item">
+    <div class="admin__page-section-item-title">
+        <span class="title">Opayo Transaction Detail</span>
+    </div>
+    <div class="admin__page-section-item">
+        <table class="data-table admin__table-secondary">
+            <tbody>
+            <?php if($transaction->getData('id')) { ?>
+                <?php if($transaction->getData('vendor_tx_code')) { ?>
+                    <tr>
+                        <td>Vendor Tx Code</td>
+                        <td>
+                            <?php echo $transaction->getData('vendor_tx_code'); ?>
+                        </td>
+                    </tr>
+                <?php } ?>
+                <tr>
+                    <td>Transaction ID</td>
+                    <td><?php echo $transaction->getData('transaction_id'); ?></td>
+                </tr>
+                <tr>
+                    <td>Transaction Status</td>
+                    <td><?php echo $transaction->getData('transaction_status'); ?></td>
+                </tr>
+                <tr>
+                    <td>3D Secure Check</td>
+                    <td><?php echo $transaction->getData('card_secure'); ?></td>
+                </tr>
+                <tr>
+                    <td>Transaction Detail</td>
+                    <td><?php echo $transaction->getData('status_detail'); ?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+
+    </div>
+</div>

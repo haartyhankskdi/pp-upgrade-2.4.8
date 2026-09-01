@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_PromoBanner
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mageplaza_PromoBanner::manager" title="Promo Banners" module="Mageplaza_PromoBanner" sortOrder="100" resource="Mageplaza_PromoBanner::manager" parent="Magento_Backend::marketing"/>
+        <add id="Mageplaza_PromoBanner::banner" title="Manage Promo Banners" module="Mageplaza_PromoBanner" sortOrder="20" parent="Mageplaza_PromoBanner::manager" action="mppromobanner/banner/index" resource="Mageplaza_PromoBanner::banner"/>
+        <add id="Mageplaza_PromoBanner::configuration" title="Configuration" module="Mageplaza_PromoBanner" sortOrder="70" parent="Mageplaza_PromoBanner::manager" action="adminhtml/system_config/edit/section/mppromobanner" resource="Mageplaza_PromoBanner::configuration"/>
+    </menu>
+</config>

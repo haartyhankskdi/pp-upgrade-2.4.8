@@ -1,0 +1,126 @@
+<?php
+
+/**
+ * Product view template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View
+ */
+$_product = $block->getProduct();
+$_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+$_helperCatalog = $this->helper(Haartyhanks\CategoryQuest\Helper\Data::class);
+$proCustopt = $_product->getOptions();
+
+$moduleName = $this->getRequest()->getModuleName();
+$prodCategoryIds = $_helperCatalog->getCategoryIds($_product->getId());
+$catUrl = $_helperCatalog->getCatUrlById($prodCategoryIds[0]);
+
+if ($moduleName == "checkout") {
+    $button = "Edit Consultation";
+} else {
+    $button = "ORDER ITEM";
+}
+
+$_amastyCustomFormHelper = $this->helper(Amasty\Customform\Helper\Data::class);
+$hasCategoryQuestions = $_product->getAttributeText('has_category_questionnaire');
+$uniqueHash = $_amastyCustomFormHelper->getUniqueHash();
+$isFilledCategory = $_helperCatalog->getIsFilledCategory();
+$categoryIds = $_helperCatalog->getCategoryIds($_product->getId());
+// echo "is filled :";
+if($isFilledCategory){
+    $filledCategoryValue = json_encode($isFilledCategory);
+} else {
+    $filledCategoryValue = null;
+}
+
+$_helperCatalog->unsIsFilledCategory();
+
+// Weightloss product Ids
+$weightLossProductsId = [2703, 9221, 9305, 9337, 9338, 8294, 9746,9567];
+$currentProduct = $block->getProduct();
+$productUrl = $_product->getProductUrl();
+$questionnaireAttributeId = $_product->getData('questionnaire_attribute_id');
+$key = array_search($currentProduct->getId(), $weightLossProductsId);
+?>
+
+
+            
+            <?php if (!empty($questionnaireAttributeId) && $_product->isSaleable()) {
+
+                $_helperCatalog->setCatValueSession($prodCategoryIds[0]);
+                $_helperCatalog->setProdValueSession($_product->getId());
+
+            ?>
+               
+            <div class="footer-consultation">
+                <div class="container">
+                    <div class="main-container ">
+                        <h5>Get a free consultation<br>Speak with one of our clinicians and get personalised advice.</h5>
+                        <!-- <button type="button" class="start-consultation"><?php //echo $button; ?></button>  -->  
+                        <div class="start-cons-btn">
+                        <?php if ($key !== false) :  ?>
+                            <a href="/weightloss/wl-login" class="back-to-start-consultation">
+                                <button type="button"><?php echo __("Start Consultation"); ?></button>
+                            </a>
+                        <?php elseif(!empty($questionnaireAttributeId)) : ?>
+                           <?php   echo $block->getLayout()->createBlock(\Amasty\Customform\Block\Init::class)->setFormId($questionnaireAttributeId)->toHtml();
+                           ?>
+                        <?php endif; ?>
+                        </div>
+
+                    </div>
+                </div>
+            </div> 
+               
+
+
+
+            <?php } $buttonTitle = __('Add to Cart');
+            if (empty($questionnaireAttributeId) && $_product->isSaleable()) {  ?>
+                <!-- For Config product without custom option/Questionaire -->
+
+
+
+                <div class="footer-consultation">
+                <div class="container">
+                    <div class="main-container ">
+                        <h5>Get a free consultation<br>Speak with one of our clinicians and get personalised advice.</h5>
+                        <!-- <button type="button" class="start-consultation"><?php //echo $button; ?></button>  -->  
+                        <div class="start-cons-btn">
+                <?php if ($_product->getTypeId() == "simple" || $_product->getTypeId() == "virtual") : ?>
+                    <button type="submit" class=""><?= $block->escapeHtml($buttonTitle) ?></button>
+                
+                <?php elseif($key !== false) : ?>
+                    <a href="/weightloss/wl-login" class="back-to-start-consultation" data-product="<?= $block->escapeHtmlAttr(strtolower(trim($_product->getName()))) ?>">
+                        <button type="button"><?php echo __("Start Consultation"); ?></button>
+                    </a>
+                <?php else : ?>
+                    <a href="?true" class="back-to-start-consultation"><button type="button"><?= $block->escapeHtml($buttonTitle); ?></button></a>
+
+                   
+                <?php endif; ?>
+                        </div>
+
+                    </div>
+                </div>
+            </div> 
+
+            <?php }
+
+            ?>
+           
+
+
+        <script>
+                require(['jquery'], function ($) {
+                    $(document).ready(function () {
+                        $('a.back-to-start-consultation').on('click', function (e) {
+                            var product = $(this).attr('data-product');
+
+                            if (product) {
+                                var formatted = product.toLowerCase().trim().replace(/\s+/g, '-'); // "wegovy tab" → "wegovy-tab"
+                                document.cookie = "preselected_product=" + formatted + "; path=/; max-age=3600; SameSite=Lax";
+                            }
+                        });
+                    });
+                });
+        </script>

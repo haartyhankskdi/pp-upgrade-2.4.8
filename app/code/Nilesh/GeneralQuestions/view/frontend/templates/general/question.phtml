@@ -1,0 +1,68 @@
+<?php 
+
+$gQArray = $block->getCustomerData();
+$gq = @$gQArray[0];
+
+?>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="general-question-top">
+            <p>To assess the suitability of the item you have ordered we’re going to have to ask you some brief questions regarding your general health</p>
+        <div class="trustpoilet-section">
+            <div class="dialog"></div>
+            <div class="trustpoilet">
+                <div class="block-2">
+                    <!-- TrustBox script -->
+                    <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+                    <!-- End TrustBox script -->
+                    <!-- TrustBox widget - Mini -->
+                    <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8807dec7e10d38f59f32" data-businessunit-id="5b55f778afee7a0001b505dc" data-style-height="150px" data-style-width="100%" data-theme="light">
+                    <a href="https://uk.trustpilot.com/review/pharmacyplanet.co.uk" target="_blank" rel="noopener">Trustpilot</a>
+                    </div>
+                    <!-- End TrustBox widget -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="formsection">
+            <form action="<?php echo $block->getBaseUrl(); ?>customer/general/post" class="form" id="custom-form" method="post" autocomplete="off"  enctype="multipart/form-data">
+                <input type="hidden" name="gq_page" value="question">
+                <input type="hidden" name="gq_id" value="<?php echo @$gq['generalquestions_id'];  ?>">
+                <input type="hidden" name="referer" value="<?php echo $block->getReferalUrl(); ?>">
+                <fieldset class="fieldset myaccount-general-question">
+                    <?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setGq($gq)->setTemplate("Nilesh_GeneralQuestions::general/fields.phtml")->toHtml() ?>
+                </fieldset>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <button type="submit" class="action submit primary" title="<?php  echo __('Submit') ?>"><span><?php echo __('Submit') ?></span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+require([
+    'jquery',
+    'mage/mage'
+], function($){
+ 
+   var dataForm = $('#custom-form');
+   dataForm.mage('validation', {ignore: ':hidden'});
+
+    dataForm.submit(function (e) { 
+       if(!dataForm.validation('isValid')){
+       e.preventDefault();
+        // alert("Validate"); 
+        }
+   });
+ 
+    <?php if($block->comingFromRegister()): ?>
+        $("body").addClass("woolaa");
+    <?php endif; ?>
+
+});
+</script>

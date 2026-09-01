@@ -1,0 +1,32 @@
+<?php
+$blockObj = $block->getLayout()->createBlock('Haartyhanks\LumaChild\Block\WeightlossComparison');
+
+// Get 'references' attribute value using custom block method
+$references = $blockObj->getProductAttribute('references');
+
+// Clean and check actual content
+$cleanedValue = trim(strip_tags($references));
+
+if (!empty($cleanedValue)): ?>
+    <div class="blog-bottom-references-sec">
+        <div class="container-2">
+            <div class="blog-bottom-references">
+                <div class="references-content">
+                    <h2>References:</h2>
+                    <ul>
+                        <?php
+                        // Split lines using newline or <br> or |
+                        $lines = preg_split('/\r\n|\r|\n|<br\s*\/?>|\|/', $references);
+                        foreach ($lines as $line):
+                            $line = trim($line);
+                            if (!empty($line)):
+                                echo "<li>" . $line . "</li>";
+                            endif;
+                        endforeach;
+                        ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

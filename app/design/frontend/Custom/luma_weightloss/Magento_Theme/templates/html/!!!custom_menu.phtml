@@ -1,0 +1,115 @@
+<?php
+
+    // Helper Namespace - Nilesh\Theme\Helper/Customer
+    $helperCust = $this->helper(\Nilesh\Theme\Helper\Customer::Class);
+?>
+<div class="custom-menu">
+    
+    <ul class="custom-menu-ul">
+        <li class="trustpoilet">
+
+                <!-- <div class="block-img"><img src="{{skin url='images/trust-pilot-img.jpg'}}" alt="Trustpilot" /></div> -->
+                <!-- <div class="block-img"><img src="<?php echo $this->getViewFileUrl('images/trust-pilot-img.png'); ?>" /></div> -->
+                
+                <!-- TrustBox script -->
+                <!-- <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script> -->
+                <!-- End TrustBox script -->
+                <!-- TrustBox widget - Micro Combo -->
+                <!-- <div class="trustpilot-widget" data-locale="en-GB" data-schema-type="Organization" data-template-id="5419b6ffb0d04a076446a9af" data-businessunit-id="5b55f778afee7a0001b505dc" data-style-height="20px" data-style-width="100%" data-theme="light">
+                  <a href="https://uk.trustpilot.com/review/pharmacyplanet.co.uk" target="_blank" rel="noopener">Trustpilot</a>
+                </div> -->
+                <!-- End TrustBox widget -->
+                
+        </li>
+
+        <li class="view-all-treatment">
+            <!-- <a  href="https://phpstack-732705-2678695.cloudwaysapps.com/phpwl/weightloss-sub.html">START MY CONSULTATION</a> -->
+            <?php echo $block->getLayout()->createBlock('Amasty\Customform\Block\Init')->setTemplate('Amasty_Customform::init.phtml')->setData('form_id', '54')->toHtml(); ?>
+            <?php echo $block->getLayout()->createBlock('Magento\Framework\View\Element\Template')->setTemplate('Haartyhanks_CategoryQuestWL::category_id_template.phtml')->toHtml(); ?>
+        </li>
+        <li class="btn-login-signup">
+            <?php if($helperCust->isLogIn()): ?>
+                <a href="<?php echo $block->getBaseUrl(); ?>customer/account/" class="btn-link btn btn-custom btn-login-myaccount">My Account</a>
+                <a href="<?php echo $block->getBaseUrl(); ?>customer/account/logout/" class="btn-link btn btn-custom btn-login-logout">Logout</a>
+                <?php else: ?>
+                    <a href="<?php echo $block->getBaseUrl(); ?>customer/account/login/" class="btn-link btn btn-custom btn-login-signup">Login/Sign up</a>
+            <?php endif; ?>
+            <!-- <button type="button" class="btn-link btn btn-custom btn-login-signup">Login/Sign up</button> -->
+        </li>
+        <li class="btn-login-signup-mobile">
+            
+
+                <?php if($helperCust->isLogIn()): ?>
+                <!-- <a href="<?php //echo $block->getBaseUrl(); ?>customer/account/logout/" class="btn-link btn btn-custom btn-logout-myaccount"></a> -->
+                    <a href="<?php echo $block->getBaseUrl(); ?>customer/account/" class="btn-link btn btn-custom btn-logout-myaccount">
+                        <span style="display:none">My Account</span>
+                    </a>
+                <?php else: ?>
+                    <a href="<?php echo $block->getBaseUrl(); ?>customer/account/" class="btn-link btn btn-custom btn-login-myaccount">
+                        <span style="display:none">My Account</span>
+                    </a>
+            <?php endif; ?>
+                
+            
+        </li>
+    </ul>
+    <div id="view-add-treatment-display" class="view-all-treatment-menu" style="display:none">
+        <?php
+            echo $this->getLayout()
+          ->createBlock('Magento\Cms\Block\Block')
+          ->setBlockId('view-add-treatment-static')
+          ->toHtml();
+        ?>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    require(['jquery'], function ($) {
+        let view_add_treatment_display = $("#view-add-treatment-display");
+       // let view_add_treatment_display_object = $("#menu-treat");
+        var view_add_treatment_click = $("#view-add-treatment-click");
+        // Click event for menu dropdon
+        view_add_treatment_click.click(function (e) { 
+            e.preventDefault();
+
+            let toogle = $(this).data('toogle');
+            if(toogle === 0){
+                $(this).data('toogle', 1);
+                view_add_treatment_display.show();                
+            }else{
+                $(this).data('toogle', 0);
+                view_add_treatment_display.hide();               
+            }
+        });
+
+        // When the user clicks anywhere outside of the modal, close it
+        /* window.onclick = function(event) {
+            if (event.target == view_add_treatment_display_object) {
+                view_add_treatment_display.hide();
+                view_add_treatment_click.data('toogle', 0);
+            }
+        } */
+    });
+</script>
+
+<!-- <script>
+function myMenuFunction() {
+  var x = document.getElementById("menu-treat");
+  x.style.display = ((x.style.display!='block') ? 'block' : 'none')
+}
+</script> -->
+ 
+<script>
+function myMenuFunction() {
+    document.getElementById("view-add-treatment-display").style.width = "100%";
+    document.getElementById("view-add-treatment-display").style.display = "block";
+}
+
+function myCloseFunction() {
+    document.getElementById("view-add-treatment-display").style.width = "0";
+}
+</script> 

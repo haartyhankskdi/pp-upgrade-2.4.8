@@ -1,0 +1,42 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Widget\Telephone $block */
+?>
+
+<div class="field telephone <?= $block->isRequired() ? 'required' : '' ?>">
+    <label for="telephone" class="label">
+        <span>
+            <?= $block->escapeHtml(__('Phone Number')) ?>
+        </span>
+    </label>
+    <div class="control">
+            <?php
+            $_validationClass = $block->escapeHtmlAttr(
+                $this->helper(\Magento\Customer\Helper\Address::class)
+                     ->getAttributeValidationClass('telephone')
+            );
+            ?>
+        <input type="text"
+               name="telephone"
+               id="telephone"
+               value="<?= $block->escapeHtmlAttr($block->getTelephone()) ?>"
+               minlength="11"
+               maxlength="11"
+               title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>"
+               class="input-text only_numeric validate-digits validate-digits-range digits-range-0-99999999999 <?= $_validationClass ?: '' ?>"
+               data-msg-validate-digits-range="Please enter 11 digit"
+        >
+    </div>
+</div>
+<script>
+    require(['jquery'], function ($) { 
+        $(".only_numeric").on('propertychange input', function(e) {
+            var contact_num = jQuery(this).val();
+            $(this).val(contact_num.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'));
+        });
+     });
+</script>

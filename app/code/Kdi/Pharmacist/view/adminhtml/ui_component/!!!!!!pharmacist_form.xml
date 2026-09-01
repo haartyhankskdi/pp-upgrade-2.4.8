@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!-- app/code/Kdi/Pharmacist/view/adminhtml/ui_component/pharmacist_form.xml -->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui/etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">pharmacist_form.pharmacist_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Pharmacist Information</item>
+    </argument>
+
+    <!-- DataSource -->
+    <dataSource name="pharmacist_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Kdi\Pharmacist\Ui\DataProvider\Form\PharmacistDataProvider</argument>
+            <argument name="name" xsi:type="string">pharmacist_form</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">entity_id</argument>
+        </argument>
+        <settings>
+            <submitUrl path="*/*/save"/>
+        </settings>
+    </dataSource>
+
+    <!-- Form Fields -->
+    <fieldset name="general">
+        <field name="date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Date</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">date</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Pharmacist Name</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">name</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="gphc_no">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">GPhC Number</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">gphc_no</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="pharmacist_type">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Pharmacist Type</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">pharmacist_type</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Description</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="dataScope" xsi:type="string">description</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="is_enabled">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Enabled</item>
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="dataScope" xsi:type="string">is_enabled</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+
+        <field name="image">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Pharmacist Image</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="dataScope" xsi:type="string">image</item>
+                    <item name="allowedExtensions" xsi:type="string">jpg,jpeg,png</item>
+                    <item name="previewTmpl" xsi:type="string">Magento_Ui/form/element/file-uploader/preview</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="pharmamenu/pharmacist/upload"/>
+                    </item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field>
+
+
+    </fieldset>
+</form>

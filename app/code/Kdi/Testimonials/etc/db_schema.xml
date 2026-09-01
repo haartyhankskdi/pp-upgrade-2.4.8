@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!-- File: app/code/Kdi/Testimonials/etc/db_schema.xml -->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="kdi_testimonials" resource="default" engine="innodb" comment="KDI Testimonials Table">
+
+        <!-- Primary Key -->
+        <column xsi:type="int" name="testimonials_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Testimonial ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="testimonials_id"/>
+        </constraint>
+
+        <!-- Success Story status -->
+        <column xsi:type="int" name="status" unsigned="true" nullable="false" comment="status"/>
+
+        <!-- Product Reference -->
+        <column xsi:type="int" name="product_id" unsigned="true" nullable="false" comment="Product ID"/>
+        <column xsi:type="varchar" name="title" nullable="true" length="255" comment="Testimonials Title"/>
+        <column xsi:type="varchar" name="message" nullable="true" length="255" comment="Testimonials message"/>
+
+
+        
+        <!-- Review -->
+        <column xsi:type="text" name="review" nullable="true" comment="Review"/>
+        <column xsi:type="text" name="review_listing" nullable="true" comment="Review Listing"/>
+
+
+        <!-- URLs and Metadata -->
+        <column xsi:type="varchar" name="url" nullable="true" length="255" comment="URL"/>
+        <column xsi:type="varchar" name="meta_url" nullable="true" length="255" comment="Meta URL"/>
+        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Meta Title"/>
+        <column xsi:type="varchar" name="meta_desc" nullable="true" length="255" comment="Meta Description"/>
+        <column xsi:type="varchar" name="meta_keyword" nullable="true" length="255" comment="Meta Keywords"/>
+        <column xsi:type="int" name="robots" unsigned="true" nullable="false" comment="Robots"/>
+        <!-- Images -->
+        <column xsi:type="varchar" name="image1" nullable="true" length="255" comment="Image 1"/>
+        <column xsi:type="varchar" name="image2" nullable="true" length="255" comment="Image 2"/>
+
+        <!-- Category -->
+        <column xsi:type="int" name="category_id" unsigned="true" nullable="true" comment="Category ID"/>
+
+        <!-- Review Writer / Date -->
+        <column xsi:type="varchar" name="review_writer" nullable="true" length="255" comment="Review Writer"/>
+        <column xsi:type="datetime" name="review_date" nullable="true" comment="Review Date"/>
+
+        <!-- Custom Field -->
+        <column xsi:type="varchar" name="product_consuming_start_from" nullable="true" length="255" comment="Product Consuming Start From"/>
+
+        <!-- Timestamps -->
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Updated At"/>
+
+    </table>
+</schema>

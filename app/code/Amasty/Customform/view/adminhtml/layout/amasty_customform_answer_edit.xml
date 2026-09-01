@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block
+                class="Amasty\Customform\Block\Adminhtml\Data\Edit\Answer"
+                name="amasty_customform_edit_answer"
+                template="Amasty_Customform::edit/answer.phtml"
+            >
+                <arguments>
+                    <argument name="view_model" xsi:type="object">
+                        Amasty\Customform\ViewModel\Answser\AnswerIndex
+                    </argument>
+                </arguments>
+
+                <container name="amasty.custom.form.answer.body">
+                    <block
+                        class="Magento\Framework\View\Element\Template"
+                        name="amasty.custom.form.answer.information"
+                        template="Amasty_Customform::edit/answer/information.phtml"
+                    >
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">
+                                Amasty\Customform\ViewModel\Answser\Answer\Information
+                            </argument>
+                        </arguments>
+                    </block>
+                    <block
+                        class="Magento\Framework\View\Element\Template"
+                        name="amasty.custom.form.answer.data"
+                        template="Amasty_Customform::answer/view.phtml"
+                    >
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">
+                                Amasty\Customform\ViewModel\Answser\AnswerIndex
+                            </argument>
+                        </arguments>
+                    </block>
+                    <block
+                        class="Magento\Framework\View\Element\Template"
+                        name="amasty.custom.form.admin.response"
+                        template="Amasty_Customform::answer/admin_response.phtml"
+                    >
+                        <arguments>
+                            <argument name="view_model" xsi:type="object">
+                                Amasty\Customform\ViewModel\Answser\AnswerIndex
+                            </argument>
+                        </arguments>
+                    </block>
+                </container>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

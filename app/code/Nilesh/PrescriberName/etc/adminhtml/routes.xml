@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+	<router id="admin">
+		<route frontName="prescriber" id="prescriber">
+			<module before="Magento_Backend" name="Nilesh_PrescriberName"/>
+		</route>
+		<route frontName="nilesh_prescribername" id="nilesh_prescribername">
+			<module before="Magento_Backend" name="Nilesh_PrescriberName"/>
+		</route>
+	</router>
+</config>

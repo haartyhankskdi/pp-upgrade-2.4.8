@@ -1,0 +1,39 @@
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="customer">
+        <field name="tracesmart_dob" formElement="hidden">
+            <!-- <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="disabled" xsi:type="boolean">true</item>
+            </item>
+        </argument> -->
+        </field>
+        <field name="age_verification" formElement="hidden">
+            <!-- <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="disabled" xsi:type="boolean">true</item>
+            </item> 
+        </argument> -->
+        </field>
+        <field name="electroll_role" formElement="hidden">
+            <!-- <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="disabled" xsi:type="boolean">true</item>
+            </item>
+        </argument> -->
+        </field>
+        <field name="tracesmart_register" formElement="hidden">
+            <!-- <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="disabled" xsi:type="boolean">true</item>
+            </item> 
+        </argument> -->
+        </field>
+        <field name="tracesmart_telephone" formElement="hidden">
+            <!-- <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="disabled" xsi:type="boolean">true</item>
+            </item>
+        </argument> -->
+        </field>
+    </fieldset>
+</form> 

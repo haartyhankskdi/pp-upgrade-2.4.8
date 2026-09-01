@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance dc" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+          <link rel="canonical" src="https://www.pharmacyplanet.com" src_type="url"/>
+    </head>
+    <!-- Removing newsletter from defult position -->
+      <referenceBlock name="top.search" remove="true" /> 
+</page>

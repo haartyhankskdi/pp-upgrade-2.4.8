@@ -1,0 +1,113 @@
+<?php $collection = $block->getCollection() ?>
+<div class="advice-center-info-sec">
+<div class="container"> 
+        <div class="advice-info-top-left">
+            <h2>Advice Center</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent massa metus, ullamcorper at felis at, vehicula volutpat lorem. Sed efficitur, mauris nec luctus maximus, diam augue consequat dolor, tincidunt blandit leo justo sit amet leo.</p>
+        </div>
+        <div class="advice-info-top-right">
+            <div class="advice-info-cont">
+                <div class="join-cont-img"><img src="/media/wysiwyg/join-cont-img.svg" alt="join-cont-img"></div>
+                <div class="advice-info-title">Join the Conversation!</div>
+                <p>Grab a chance to feature your article with us and showcase your insights.</p>
+                <p><span>Mail us <a href="mailto:article@pharmacyplanet.com">article@pharmacyplanet.com</a></span></p>
+            </div>
+        </div> 
+
+    </div>
+</div>
+<div class="advice-center-info-sec2">
+    <div class="container">
+        <div class="advice-info-top2">
+            <div class="advice-info-title2">What are you looking for?</div>
+            <div class="advice-info-search">
+                <div class="widget block blog-search" data-bind="scope: 'blog-search'">
+                    <div class="block-content">
+                        <form class="form" id="blog_search_mini_form" action="<?= $block->escapeUrl($block->getFormUrl()) ?>" method="get">
+                            <div class="field search">
+                                <label class="label" for="blog_search">
+                                    <span><?= $block->escapeHtml(__('Search')) ?></span>
+                                </label>
+                                <div class="control">
+                                    <input id="blog_search" type="text" name="q" value="<?= $block->escapeHtml($block->getQuery()) ?>" placeholder="<?= $block->escapeHtml(__('Let us know what you are looking for')) ?>" class="input-text" maxlength="128" role="combobox" aria-haspopup="false"
+                                    aria-autocomplete="both" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="actions">
+                                <button type="submit" onclick="return goBlogSearch(this);" title="<?= $block->escapeHtml(__('Search')) ?>" class="action">
+                                    <span><?= $block->escapeHtml(__('Search')) ?></span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+        <div class="advice-info-list">
+            <div class="advice-info-block">
+                <img src="/media/wysiwyg/weight-loss-img-2.jpg" alt="Weight Loss">
+                <p>Weight<br> Loss</p>
+            </div>
+            <div class="advice-info-block">
+                <img src="/media/wysiwyg/high-blood-pressure-img.jpg" alt="High Blood Pressure">
+                <p>High Blood<br> Pressure</p>
+            </div>
+            <div class="advice-info-block">
+                <img src="/media/wysiwyg/stop-smoking-img-2.jpg" alt="Stop Smoking">
+                <p>Stop<br> Smoking</p>
+            </div>
+        </div>
+
+
+    <?php $categories = $collection->getData();?>
+
+        <div class="advice-info-list-sec">
+            <ul>
+                <?php  foreach ($categories as $item) : ?>
+                    <?php $url = '/advice/post/view?id='. $item['entity_id']; ?>
+                   <li> 
+                    <a href="<?= $url ?>" > <?= $item['name'] ?></a>
+                </li>
+                <?php endforeach ;?>
+            </ul>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="trustpilot-review-slider">
+
+<?php
+echo $this->getLayout()
+          ->createBlock('Magento\Cms\Block\Block')
+          ->setBlockId('google_slider_review')
+          ->toHtml();
+
+// echo $this->getLayout()
+//           ->createBlock('Magento\Cms\Block\Block')
+//           ->setBlockId('google review mobile slider')
+//           ->toHtml();
+
+?>
+
+
+</div>
+
+
+<script type="text/javascript">
+        require(['jquery', 'jquery/ui', 'slick'], function($){
+    $(document).ready(function() {
+        $('.slick-slider').slick({
+            dots: true,
+            infinite: false,
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            autoplay: false
+        });
+    });
+});
+    </script>

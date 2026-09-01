@@ -1,0 +1,124 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Checkout\Block\Onepage\Link */
+?>
+
+<?php 
+    /**
+     * 1. First we will get cart item
+     * 2. then get product id and then check weathear it required general question
+    */
+?>
+
+<?php
+    $cartThemeHelper = $this->helper(\Nilesh\Theme\Helper\CartButton::class);
+    $getItemNeedGQ = $cartThemeHelper->getCartNeedGeneralQuestion();
+    $getNeedOfGQ = $cartThemeHelper->getNeedOfGQ();
+    if($getItemNeedGQ && ($cartThemeHelper->getNeedOfGQ() == 0) && $cartThemeHelper->isLogin()){
+    // if((empty($getNeedOfGQ) || ($getNeedOfGQ == 0)) && $cartThemeHelper->isLogin()){
+        ?>
+            <a class="action primary checkout" href="<?php echo $this->getUrl("customer/general/question", array('referer'=>base64_encode($block->getBaseUrl().'onestepcheckout'))); ?>"><?= $block->escapeHtml(__('Proceed to Checkout')) ?></a>
+            <!-- <button type="button" class="action primary checkout general-question">
+                <span><?= $block->escapeHtml(__('Proceed to Checkout')) ?></span>
+            </button>
+            <script>
+                require([
+                    'jquery',
+                    'Magento_Ui/js/modal/confirm'
+                ], function($, confirmation) { // Variable that represents the `confirm` widget
+                    function openGeneralQuestionPrompt() {
+                        confirmation({
+                            title: $.mage.__('General question'),
+                            content: $.mage.__('(You haven\'t fill it after register)'),
+                            actions: {
+                                confirm: function(){},
+                                cancel: function(){},
+                                always: function(){}
+                            },
+                            buttons: [{
+                                text: $.mage.__('Yes'),
+                                class: 'action primary action-accept',
+                                click: function (event) {
+                                    window.location.href = '<?php echo $this->getUrl("customer/general/question", array("referer"=>base64_encode($block->getBaseUrl().'onestepcheckout'))); ?>';
+                                }
+                            }]
+                        });
+                    }
+
+                    $(".general-question").click(function (e) { 
+                        e.preventDefault();
+                        openGeneralQuestionPrompt();
+                    });
+
+                });
+            </script> -->
+        <?php
+    }elseif ($block->isPossibleOnepageCheckout() && $getItemNeedGQ && $cartThemeHelper->isLogin()) {
+        ?>
+            <button type="button" class="action primary checkout general-question">
+                <span><?= $block->escapeHtml(__('Proceed to Checkout')) ?></span>
+            </button>
+            <script>
+                require([
+                    'jquery',
+                    'Magento_Ui/js/modal/confirm'
+                ], function($, confirmation) { // Variable that represents the `confirm` widget
+                    function openGeneralQuestionPrompt() {
+                        confirmation({
+                            title: $.mage.__('Has anything changed with your general conditions?'),
+                            content: $.mage.__('(You completed the general questionnaire when you first registered)'),
+                            actions: {
+                                confirm: function(){},
+                                cancel: function(){},
+                                always: function(){}
+                            },
+                            buttons: [{
+                                text: $.mage.__('No'),
+                                class: 'action-secondary action-dismiss',
+                                click: function (event) {
+                                    window.location.href = "<?php echo $this->getUrl("onestepcheckout"); ?>";
+                                }
+                            },
+                            {
+                                text: $.mage.__('Yes'),
+                                class: 'action primary action-accept',
+                                click: function (event) {
+                                    window.location.href = '<?php echo $this->getUrl("customer/general/question", array("referer"=>base64_encode($block->getBaseUrl()."onestepcheckout"))); ?>';
+                                }
+                            }]
+                        });
+                    }
+
+                    $(".general-question").click(function (e) { 
+                        e.preventDefault();
+                        openGeneralQuestionPrompt();
+                    });
+
+                    <?php if(isset($_GET['confirm']) && $_GET['confirm']): ?>
+                        openGeneralQuestionPrompt();
+                    <?php endif; ?>
+
+                });
+            </script>
+        <?php
+    }
+    elseif ($block->isPossibleOnepageCheckout()){ ?>
+    <button type="button"
+            data-role="proceed-to-checkout"
+            title="<?= $block->escapeHtmlAttr(__('Proceed to Checkout')) ?>"
+            data-mage-init='{
+                "Magento_Checkout/js/proceed-to-checkout":{
+                    "checkoutUrl":"<?= $block->escapeJs($block->escapeUrl($block->getCheckoutUrl())) ?>"
+                }
+            }'
+            class="action primary checkout<?= ($block->isDisabled()) ? ' disabled' : '' ?>"
+            <?php if ($block->isDisabled()) :?>
+                disabled="disabled"
+            <?php endif; ?>>
+        <span><?= $block->escapeHtml(__('Proceed to Checkout')) ?></span>
+    </button>
+<?php }

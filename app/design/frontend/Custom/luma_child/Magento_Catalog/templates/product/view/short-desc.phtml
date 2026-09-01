@@ -1,0 +1,410 @@
+<?php
+$_product = $block->getProduct();
+$proCustopt = $_product->getOptions();
+$productDesc = $_product->getData('short_description');
+$prodPrice = $_product->getPriceInfo()->getPrice('final_price')->getValue();
+$prodStock = $_product->isSaleable();
+$imageUrl = $this->helper('Magento\Catalog\Helper\Image')
+    ->init($_product, 'product_base_image')
+    ->constrainOnly(true)
+    ->keepAspectRatio(true)
+    ->keepTransparency(true)
+    ->keepFrame(false)
+    ->resize(150, 150)->getUrl();
+$prodName = $_product->getName();
+$prodDesc = $_product->getDescription();
+$prodUrl = $_product->getProductUrl();
+$prodSku = $_product->getSku();
+?>
+
+<div class="prod-desprection">
+    <?php if ($productDesc != "") { ?>
+        <div id="short-desc">
+            <!--SHORT DESCRIPTIONS -->
+
+            <?php //echo implode(' ', array_slice(explode(' ', $productDesc), 0, 20)) . "\n"; ?>
+
+            <!-- <span id="product-view-dots">...</span> -->
+        </div>
+
+        <!--FULL DESCRIPTIONS -->
+        <!-- style="display: none;" removed for below span class -->
+        <div id="product-view-full-desc">
+            <?php /* @escapeNotVerified */ echo $productDesc; ?>
+        </div>
+
+        <!--READ MORE FUNCTION -->
+        <!-- <a onclick="readLessReadMore()" id="product-view-desc-hh">Read more</a> -->
+
+    <?php }
+    if ($prodStock && $_product->getTypeId() == "configurable") { ?>
+        <!-- <span class="select-custoption">Please make a selection</span> -->
+        <div class="question-text clinical-consultation">
+
+            <div class="consultation-section question-text">
+                <div class="consultation_block_section question-text">
+                    <div class="consultation_block question-text">
+                        <!-- <span class="question-text ">01</span> -->
+                        <div class="consultation-cont question-text">
+                            <div class="consultation_img question-text"><img class="question-text" src="https://www.pharmacyplanet.com/media/medicine-icon.svg" alt="" /></div>
+                            <div class="question-text">Consult</div>
+                        </div>
+                    </div>
+                    <div class="consultation_block question-text">
+                        <!-- <span class="question-text step_1">02</span> -->
+                        <div class="consultation-cont question-text">
+                            <div class="consultation_img question-text"><img class="question-text" src="https://www.pharmacyplanet.com/media/order-review-img.svg" alt="" /></div>
+                            <div class="question-text">Select</div>
+                        </div>
+                    </div>
+                    <div class="consultation_block question-text">
+                        <!-- <span class="question-text step_2">03</span> -->
+                        <div class="consultation-cont question-text">
+                            <div class="consultation_img question-text"><img class="question-text" src="https://www.pharmacyplanet.com/media/delivery-icon.svg" alt="" /></div>
+                            <div class="question-text">Checkout</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="before-start-consultation question-text" style="display: block;">< back</button>
+            <!-- Discretion & Confidentiality -->
+
+            <div class="discretion-confidentiality-panel new-flow-top">
+            <div class="discretion-section">
+                <div class="discretion_block_section">
+                    <div class="discretion_block">
+                        <span>01</span>
+                        <div class="discretion-cont">
+                            <div class="discretion_img"><img src="https://www.pharmacyplanet.com/media/medicine-icon.svg" alt="" /></div>
+                            <div class="discretion-t">Select</div>
+                            <p>the items you wish<br> to order</p>
+                        </div>
+
+                    </div>
+
+                    <div class="discretion_block block_2">
+                        <span>02</span>
+                        <div class="discretion-cont">
+                            <div class="discretion_img"><img src="https://www.pharmacyplanet.com/media/order-review-img.svg" alt="" /></div>
+                            <div class="discretion-t">Order reviewed</div>
+                            <p>by our qualified<br> prescriber</p>
+                        </div>
+
+                    </div>
+
+                    <div class="discretion_block block_3">
+                        <span>03</span>
+                        <div class="discretion-cont">
+                            <div class="discretion_img"><img src="https://www.pharmacyplanet.com/media/delivery-icon.svg" alt="" /></div>
+                            <div class="discretion-t">Delivered</div>
+                            <p>to your door step</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+            <div class="question-text your-select-t">Your Selection</div>
+            <p class="p-description question-text">Please use the options provided to make your final selection.</p>
+            <!-- <p  class="p-description question-text order-message" style="background-color: red; color: white;border-radius: 10px; padding: 10px 20px;">If our prescriber is unable to approve your order for any reason, you will receive a full refund</p> -->
+            </p>
+        </div>
+
+    <?php } ?>
+</div>
+<div class="product-det">
+    <div class="product-desc">
+        <div class="product-img">
+            <img src="<?= $imageUrl ?>" alt="prodName">
+        </div>
+        <div class="product-name"><?= $prodName ?></div>
+        <div class="product-price">
+            <span class="brnad-selection"></span>
+            <span class="size-selection"></span>
+            <span class="price"><?php echo "£" . $prodPrice; ?></span>
+        </div>
+    </div>
+    <div class="total">
+        <span>Total</span>
+    </div>
+</div>
+<?php
+if (!($_product->isSaleable()) && $_product->getTypeId() == "configurable") {
+?>
+    <div class="config-price">
+        <span class="price-label">Starts at</span>
+        <span class="price"><?php echo "£" . $prodPrice; ?></span>
+    </div>
+<?php } ?>
+
+<!-- Code for adding ozempic -->
+<script type="text/javascript">
+    require(['jquery'], function($) {
+        $(document).ready(function() {
+            // Get the current product SKU
+            var currentSku = "<?php echo $_product->getSku(); ?>";
+
+            //options_120448_3
+            $('#options_120448_3').click(function() {
+                $(".form-list").attr("id","ozempic");
+                $('#product-addtocart-button').css({'pointer-events':'none',
+                    'background-color':'#f6989b'});
+            });
+ 
+            //options_120448_2
+            $('#options_120448_2').click(function() {
+                $(".form-list").removeAttr("id","ozempic");
+                $('#product-addtocart-button').css({'pointer-events':'auto',
+                    'background-color':'#ED3237'});
+            });
+
+            // wegovy
+            $('#options_119647_3').click(function() {
+                $('#product-addtocart-button').css({'pointer-events':'none',
+                    'background-color':'#f6989b'});
+            });
+
+            //wegovy
+            $('#options_119647_2').click(function() {
+                $('#product-addtocart-button').css({'pointer-events':'auto',
+                    'background-color':'#ED3237'});
+            });
+
+            //Ozempic
+            $('#options_120532_3').click(function() {
+                $('#product-addtocart-button').css({'pointer-events':'none',
+                    'background-color':'#f6989b'});
+            });
+
+            //Ozempic
+            $('#options_120532_2').click(function() {
+                $('#product-addtocart-button').css({'pointer-events':'auto',
+                    'background-color':'#ED3237'});
+             });
+
+
+        // Function to check the state of both options
+        function checkOptions() {
+            if ($('#options_120925_2').is(':checked') && $('#options_120926_2').is(':checked')) {
+                $('#product-addtocart-button').css({
+                    'pointer-events': 'auto',
+                    'background-color': '#ED3237'
+                });
+            } else {
+                $('#product-addtocart-button').css({
+                    'pointer-events': 'none',
+                    'background-color': '#f6989b'
+                });
+            }
+        }
+
+        // Event listeners for each option to trigger the check function
+        $('#options_120925_2').click(checkOptions);
+        $('#options_120926_2').click(checkOptions);
+
+        // Ensure disabling if "no" options are clicked
+        $('#options_120925_3, #options_120926_3').click(function() {
+            $('#product-addtocart-button').css({
+                'pointer-events': 'none',
+                'background-color': '#f6989b'
+            });
+        });
+
+            //Mounjaro Product
+
+            $('#options_119828_3').click(function() {
+                $('#product-addtocart-button').css({'pointer-events':'none',
+                    'background-color':'#f6989b'});
+            });
+
+            //Mounjaro
+            $('#options_119828_2').click(function() {
+                $('#product-addtocart-button').css({'pointer-events':'auto',
+                    'background-color':'#ED3237'});
+             });
+        });
+    });
+</script>
+<script>
+    function readLessReadMore() {
+        var dots = document.getElementById("product-view-dots");
+        var moreText = document.getElementById("product-view-full-desc");
+        var btnText = document.getElementById("product-view-desc-hh");
+
+        if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more";
+            moreText.style.display = "none";
+            document.getElementById("short-desc").style.display = "block";
+
+        } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Read less";
+            moreText.style.display = "inline";
+            document.getElementById("short-desc").style.display = "none";
+        }
+    }
+</script>
+<script>
+    require(['jquery', 'jquery/ui', "mage/mage"], function($) {
+
+        $('.swatch-attribute-selected-option').on('change', function() {
+            var barndVal = $(this).text();
+            $('brnad-selection').text(barndVal);
+            // alert( this.value );
+        })
+    })
+</script>
+
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Pharmacy",
+        "image": "<?php echo $imageUrl; ?>",
+        "name": "<?php echo $prodName; ?>",
+        "openingHours": "Mo-Fr 08:00-17:30",
+        "PriceRange": "<?php echo $prodPrice; ?>",
+        "telephone": "+44 (0)800 978 8956",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "4 Progress Business Centre, Whittle Parkway",
+            "addressLocality": "Slough ",
+            "addressRegion": "Berkshire",
+            "addressCountry": "GB"
+        }
+    }
+</script>
+
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org/",
+        "@type": "Product",
+        "name": "<?php echo $prodName; ?>",
+        "brand": {
+            "@type": "Organization",
+            "legalName": "Pharmacy Planet"
+        },
+
+        "sku": "<?php echo $prodSku; ?>",
+        "mpn": "*******",
+        "image": [{
+            "@type": "ImageObject",
+            "url": "<?php echo $imageUrl; ?>",
+            "caption": "<?php echo $prodName; ?>"
+        }],
+        "offers": {
+            "@type": "Offer",
+            "availability": "http://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition",
+            "url": "<?php echo $prodUrl; ?>",
+            "price": "<?php echo $prodPrice; ?>",
+            "priceCurrency": "GBP",
+            "PriceValidUntil": "2050-12-31 14:44:20",
+            "seller": {
+                "@type": "WebSite",
+                "name": "https://www.pharmacyplanet.com"
+            }
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "bestRating": "5",
+            "worstRating": "1",
+            "reviewCount": "6",
+            "url": "<?php echo $prodUrl; ?>"
+        },
+        "review": [
+
+            {
+                "@type": "Review",
+                "author": {
+                    "@type": "Person",
+                    "name": "Linda Olbison"
+                },
+                "datePublished": "2020-03-02 10:09:21",
+                "reviewBody": "1st class. Very happy with professional service",
+                "url": "",
+                "reviewRating": {
+                    "@type": "Rating",
+                    "bestRating": 5,
+                    "ratingValue": 5,
+                    "worstRating": 1
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Trustpilot",
+                    "sameAs": "https://uk.trustpilot.com/review/pharmacyplanet.co.uk"
+                }
+            },
+
+            {
+                "@type": "Review",
+                "author": {
+                    "@type": "Person",
+                    "name": "Claire Cameron"
+                },
+                "datePublished": "2020-02-24 11:55:03",
+                "reviewBody": "Great service and quick delivery, would recommend.",
+                "url": "",
+                "reviewRating": {
+                    "@type": "Rating",
+                    "bestRating": 5,
+                    "ratingValue": 5,
+                    "worstRating": 1
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Trustpilot",
+                    "sameAs": "https://uk.trustpilot.com/review/pharmacyplanet.co.uk"
+                }
+            },
+
+            {
+                "@type": "Review",
+                "author": {
+                    "@type": "Person",
+                    "name": "Mrs julia gallacher"
+                },
+                "datePublished": "2020-02-23 16:25:40",
+                "reviewBody": "had what i needed-excellent service",
+                "url": "",
+                "reviewRating": {
+                    "@type": "Rating",
+                    "bestRating": 5,
+                    "ratingValue": 5,
+                    "worstRating": 1
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Trustpilot",
+                    "sameAs": "https://uk.trustpilot.com/review/pharmacyplanet.co.uk"
+                }
+            },
+
+            {
+                "@type": "Review",
+                "author": {
+                    "@type": "Person",
+                    "name": "Lisa Robinson"
+                },
+                "datePublished": "2020-02-21 10:55:36",
+                "reviewBody": "Excellent service, very helpful and efficient.",
+                "url": "",
+                "reviewRating": {
+                    "@type": "Rating",
+                    "bestRating": 5,
+                    "ratingValue": 5,
+                    "worstRating": 1
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Trustpilot",
+                    "sameAs": "https://uk.trustpilot.com/review/pharmacyplanet.co.uk"
+                }
+            }
+
+        ]
+    }
+</script>

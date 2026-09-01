@@ -1,0 +1,18 @@
+<?php
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+// @codingStandardsIgnoreFile
+/** @var $block \Magento\Framework\View\Element\Template */
+?>
+<?php
+$nexUrl = $block->getUrl('checkout/onepage/success');
+?>
+<script type="text/javascript">
+    var isInIFrame = (window.location != window.parent.location) ? true : false;
+    console.log(window.location);
+    console.log(window.parent.location);
+    if (isInIFrame) {
+        window.parent.location = '<?= $nexUrl?>';
+    }
+</script>

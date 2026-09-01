@@ -1,0 +1,101 @@
+
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+/** @var \Haartyhanks\AuthReview\Model\EntityFactory $entityFactory */
+$entityFactory = $objectManager->get(\Haartyhanks\AuthReview\Model\EntityFactory::class);
+
+/** @var \Haartyhanks\AuthReview\Model\Entity $entity */
+$entity = $entityFactory->create()->load(1);
+
+/** @var \Magefan\Blog\Model\Post $postModel */
+$postModel = $objectManager->get(\Magefan\Blog\Model\Post::class);
+
+/** @var \Magefan\Blog\Model\ResourceModel\Post\Collection $blogCollection */
+$blogCollection = $postModel->getCollection()
+    ->addFieldToFilter('post_author_id', ['eq' => 2]);
+// ->addFieldToFilter('status', 1); // optional extra filter
+
+$blogCollection->load();
+
+// example output
+
+// echo '<pre>';
+// print_r($entity->getData());
+// print_r($blogCollection->getData());
+// exit;
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Private Prescriber in London</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background:#f5f5f5; }
+    .container { max-width: 900px; margin: 0 auto; padding: 20px; background:#ffffff; }
+    header { text-align: center; padding: 20px 0; border-bottom: 1px solid #ddd; }
+    h1 { margin: 0; }
+    .tagline { color: #555; margin-top: 5px; }
+    .info-grid { display: flex; flex-wrap: wrap; margin-top: 20px; }
+    .info-item { flex: 1 1 250px; padding: 10px; }
+    .label { font-weight: bold; color:#333; }
+    .value { margin-top: 4px; }
+    .section { margin-top: 30px; }
+    .section h2 { margin-bottom: 10px; }
+    .cta { margin-top: 20px; }
+    .cta a { display:inline-block; padding:10px 20px; background:#0070f3; color:#fff; text-decoration:none; border-radius:4px; }
+    footer { margin-top: 40px; font-size: 0.85rem; color:#777; text-align:center; border-top:1px solid #eee; padding:15px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><?= $entity->getData('name') ?></h1>
+      <p class="tagline">Independent Prescriber – London</p>
+    </header>
+
+    <section class="info-grid">
+      <div class="info-item">
+        <div class="label">Full Name</div>
+        <div class="value"><?= $entity->getData('name') ?></div>
+      </div>
+      <div class="info-item">
+        <div class="label">Specialisation</div>
+        <div class="value"><?= $entity->getData('specialist') ?></div>
+      </div>
+      <div class="info-item">
+        <div class="label">GPhC Registration Number</div>
+        <div class="value"><?= $entity->getData('registration_number') ?></div>
+      </div>
+      <div class="info-item">
+        <div class="label">Location</div>
+        <div class="value">Harley Street, London, W1</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>About the Prescriber</h2>
+      <p>
+        Dr John Smith is a GPhC-registered independent prescriber providing safe, evidence-based prescribing for adults in London, working closely with GPs and specialist services.[web:6][web:9]
+      </p>
+    </section>
+    <?php if(count($blogCollection->getData())) : ?>
+    <section class="section">
+      <h2>Related Blogs</h2>
+      <ul>
+           <?php foreach($blogCollection->getData() as $data) : ?>
+            <li> <a href="<?= '/blog/post/'.$data['identifier']  ?> "> <?= $data['title'] ?>  </a> </li>
+            <?php endforeach; ?>
+      </ul>
+    </section>
+    <?php endif; ?>
+
+  </div>
+</body>
+</html>

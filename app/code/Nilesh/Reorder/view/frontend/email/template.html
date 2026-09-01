@@ -1,0 +1,28 @@
+<!--@subject {{trans "Re-order Notification"}} @-->
+
+{{template config_path="design/email/header_template"}}
+<div style="background-color: #fff; padding:20px; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; ">
+<table style="width: 100%;">
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Hey"}} {{var customer_name}},</p>
+        </td>
+    </tr>
+    <tr class="email-summary">
+        <td>
+            <p>It’s that time again!</p>
+            <p>
+                {{trans "A quick friendly reminder that it is time to reorder your previous medication."}}
+            </p>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <p>
+                {{block class="Nilesh\Reorder\Block\Adminhtml\Email" order=$order_id name="nilesh.reorder.email" template="Nilesh_Reorder::email/email_reorder.phtml"}}
+            </p>
+        </td>
+    </tr>
+</table>
+</div>
+{{template config_path="design/email/footer_template"}}

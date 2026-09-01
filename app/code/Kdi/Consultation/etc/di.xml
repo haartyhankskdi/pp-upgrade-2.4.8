@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="Magento\Catalog\Controller\Product\View">
+        <plugin name="set_product_id_session" type="Kdi\Consultation\Plugin\ProductViewPlugin" sortOrder="10"/>
+    </type>
+	<preference for="Amasty\Customform\Controller\Form\Submit" type="Kdi\Consultation\Rewrite\Amasty\Customform\Controller\Form\Submit"/>
+</config>

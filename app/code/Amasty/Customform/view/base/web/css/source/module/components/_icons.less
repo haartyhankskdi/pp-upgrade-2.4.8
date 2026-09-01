@@ -1,0 +1,115 @@
+//
+//  Icons Component
+//  ____________________________________________
+
+//
+//  Imports
+//  --------------------------------------------
+
+@import '../_mixins';
+
+//
+//  Variables
+//  --------------------------------------------
+
+@amcform-icon-font: 'amcform';
+@amcform-font-path: '@{baseDir}Amasty_Customform/fonts';
+
+@amcform-ico-chevron__right: '\e905';
+@amcform-ico-chevron__left: '\e906';
+@amcform-icon-cross: '\e904';
+@amcform-icon-sent: '\e903';
+@amcform-icon-pending: '\e94e';
+@amcform-icon-view: '\e900';
+@amcform-icon-edit: '\e901';
+@amcform-icon-remove: '\e902';
+
+//
+//  Mixins
+//  --------------------------------------------
+
+
+
+//
+//  Common
+//  --------------------------------------------
+
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: '@{amcform-icon-font}';
+    src: url('@{amcform-font-path}/@{amcform-icon-font}.eot?hcflpq');
+    src: url('@{amcform-font-path}/@{amcform-icon-font}.eot?hcflpq#iefix') format('embedded-opentype'),
+         url('@{amcform-font-path}/@{amcform-icon-font}.ttf?hcflpq') format('truetype'),
+         url('@{amcform-font-path}/@{amcform-icon-font}.woff?hcflpq') format('woff'),
+         url('@{amcform-font-path}/@{amcform-icon-font}.svg?hcflpq#@{amcform-icon-font}') format('svg');
+
+    font-display: block;
+}
+
+& when (@media-common = true) {
+    .amcform-icon {
+        & {
+            .amcform-icon-size(@amcform-icon-size__m);
+            .amcform-transition(.1);
+
+            text-transform: none;
+            font-weight: 400;
+            font-style: normal;
+            font-variant: normal;
+            font-family: '@{amcform-icon-font}';
+            line-height: 1;
+            speak: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        &.-chevron-left {
+            &:before {
+                content: @amcform-ico-chevron__left;
+            }
+        }
+
+        &.-chevron-right {
+            &:before {
+                content: @amcform-ico-chevron__right;
+            }
+        }
+
+        &.-cross {
+            &:before {
+                content: @amcform-icon-cross;
+            }
+        }
+
+        &.-sent {
+            &:before {
+                content: @amcform-icon-sent;
+            }
+        }
+
+        &.-pending {
+            &:before {
+                content: @amcform-icon-pending;
+            }
+        }
+
+        &.-view {
+            &:before {
+                content: @amcform-icon-view;
+            }
+        }
+
+        &.-edit {
+            &:before {
+                content: @amcform-icon-edit;
+            }
+        }
+
+        &.-remove {
+            &:before {
+                content: @amcform-icon-remove;
+            }
+        }
+    }
+}

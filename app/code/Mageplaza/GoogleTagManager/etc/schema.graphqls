@@ -1,0 +1,52 @@
+# Mageplaza
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Mageplaza.com license that is
+# available through the world-wide-web at this URL:
+# https://www.mageplaza.com/LICENSE.txt
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade this extension to newer
+# version in the future.
+#
+# @category    Mageplaza
+# @package     Mageplaza_GoogleTagManager
+# @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+# @license     https://www.mageplaza.com/LICENSE.txt
+
+type Query {
+    mpGTMCode (filters: MpGTMCodeFilters): GTMCodeOutput @resolver(class: "Mageplaza\\GoogleTagManager\\Model\\Resolver\\Get\\Code") @doc(description: "Get the code matching with the filter.")
+    mpGTMHead (filters: MpGTMHeadFilters): GTMHeadOutput @resolver(class: "Mageplaza\\GoogleTagManager\\Model\\Resolver\\Get\\Head") @doc(description: "Get the head matching with the filter.")
+    mpGTMCodeHome: GTMCodeOutput @resolver(class: "Mageplaza\\GoogleTagManager\\Model\\Resolver\\Get\\Code") @doc(description: "Get the code of the homepage.")
+}
+
+input MpGTMCodeFilters {
+    type: String! @doc(description: "The type of the code you want to get(GTM, GA or FbPixel).")
+    action: String! @doc(description: "The name of the page you want to get the code from(home, catalogsearch, category, product, checkoutindex, checkoutcart, mponestepcheckout, checkoutsuccess, multishippingcheckoutsuccess, mpthankyoupage).")
+    id: String! @doc(description: "The ID of the order, category, or product that you  want to get the code from.")
+    pageSize: Int = 20 @doc(description: "Specify the maximum number of results to return at once. This attribute is optional.")
+    currentPage: Int = 1 @doc(description: "Specify which page to display the results to return. The default value is 1.")
+    sort: ProductAttributeSortInput @doc(description: "Specify which attribute to sort on, and whether to display the results in an ascending or descending order.")
+}
+
+input MpGTMHeadFilters {
+    type: String! @doc(description: "The type of the code you want to get(GTM, GA or FbPixel).")
+}
+
+type GTMCodeOutput {
+    code: String @doc(description: "Code")
+}
+
+type GTMHeadOutput {
+    head: String @doc(description: "Head")
+}
+
+type Cart {
+    gtm_add_to_cart: String @resolver(class: "Mageplaza\\GoogleTagManager\\Model\\Resolver\\Get\\GtmAddOrRemoveCart") @doc(description: "GTM add to cart code.")
+    ga_add_to_cart: String @resolver(class: "Mageplaza\\GoogleTagManager\\Model\\Resolver\\Get\\GtmAddOrRemoveCart") @doc(description: "GA add to cart code.")
+    fb_add_to_cart: String @resolver(class: "Mageplaza\\GoogleTagManager\\Model\\Resolver\\Get\\GtmAddOrRemoveCart") @doc(description: "FB add to cart code.")
+    gtm_remove_from_cart: String @resolver(class: "Mageplaza\\GoogleTagManager\\Model\\Resolver\\Get\\GtmAddOrRemoveCart") @doc(description: "GTM remove from cart code.")
+    ga_remove_from_cart: String @resolver(class: "Mageplaza\\GoogleTagManager\\Model\\Resolver\\Get\\GtmAddOrRemoveCart") @doc(description: "GA remove from cart code.")
+}

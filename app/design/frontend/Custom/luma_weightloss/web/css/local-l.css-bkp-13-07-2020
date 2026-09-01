@@ -1,0 +1,508 @@
+.page-main{
+		max-width: 1100px;
+	}
+	.header.content{
+		max-width: 1100px;
+		padding: 28px 16px 0;
+	}
+	.logo img{
+		width: 175px;
+		height: 65px;
+	}
+	.customMenu{
+		width: 690px;
+		float: right;
+		text-align: right;
+	}
+	.customMenu li{
+		list-style-type: none;
+		display: inline-block;
+		margin-right: 12px;
+	}
+	.view-all-treatment button{
+		background: #ED3237;
+		font-size: 14px;
+		color: #fff;
+		font-family: 'Ubuntu', sans-serif;
+		line-height: 42px;
+		border: 0;
+		padding: 0 28px;
+		font-weight: 400;
+		box-shadow: inset 0 0px 0 0 #ffffff, inset 0 0 0 0 rgba(204, 204, 204, 0);
+		border-radius: 50px;
+	}	
+	.view-all-treatment button:hover{
+		background: #53CAF5;
+	}
+	.btn-login-signup button{
+		background: #53CAF5;
+		font-size: 14px;
+		color: #fff;
+		font-family: 'Ubuntu', sans-serif;
+		line-height: 42px;
+		border: 0;
+		padding: 0 28px;
+		font-weight: 400;
+		box-shadow: inset 0 0px 0 0 #ffffff, inset 0 0 0 0 rgba(204, 204, 204, 0);
+		border-radius: 50px;
+	}	
+	.btn-login-signup button:hover{
+		background: #ED3237;
+	}
+	.btn-login-signup a{
+		background: #53CAF5;
+		font-size: 14px;
+		color: #fff;
+		font-family: 'Ubuntu', sans-serif;
+		line-height: 42px;
+		border: 0;
+		padding: 0 28px;
+		font-weight: 400;
+		box-shadow: inset 0 0px 0 0 #ffffff, inset 0 0 0 0 rgba(204, 204, 204, 0);
+		border-radius: 50px;
+		display: inline-block;
+	}	
+	.btn-login-signup a:hover{
+		background: #ED3237;
+	}
+	.minicart-wrapper{
+		margin-left: 0;
+	}
+	.minicart-wrapper .action.showcart:before{
+		margin-left: 0;
+		width: 42px;
+		height: 42px;
+		border-radius: 100px;
+		color: #ED3237;
+		text-align: center;
+		vertical-align: middle;
+		border: 1px solid #ED3237;
+		line-height: 42px;
+	}
+	body.cms-index-index {
+		background: url("../images/body-bg.jpg") no-repeat top right !important;
+	}
+	#itoris_dynamicproductoptions{
+		display: none;
+	}
+	.pre-consultation{
+		display: none;
+	}
+	.header-search-panel{
+		width: 660px;
+		float: left;
+		margin-top: 35px;
+	}
+	.header-search-panel h1{
+		width: auto;
+		float: left;
+		padding: 0 0 10px 0;
+		margin: 0;
+		font-family: 'Ubuntu', sans-serif;
+		font-size: 32px;
+		color: #000;
+		line-height: 36px;
+		font-weight: 300;
+	}}
+	.header-search-panel h1:after{
+		content: "";
+		background: url("../images/sprites.png") no-repeat;
+		width: 40px;
+		height: 22px;
+		margin-left: 12px;
+		margin-top: 10px;
+		float: right;
+	}
+	.header-search-panel p{
+		width: auto;
+		float: left;
+		padding: 0;
+		margin: 0;
+		font-family: 'Ubuntu', sans-serif;
+		font-size: 18px;
+		color: #101010;
+		line-height: 24px;
+		font-weight: 400;
+	}
+	.header-search-panel ul{
+		width: 100%;
+		float: left;
+		padding: 0;
+		margin: 15px 0 0 0;
+	}
+	.header-search-panel ul li{
+		width: auto;
+		float: left;
+		padding: 0;
+		margin: 0 10px 0 0;
+		font-family: 'Ubuntu';
+		font-size: 14px;
+		color: #333;
+		line-height: 20px;
+		font-weight: 400;
+		list-style-type: none;
+	}
+	.header-search-panel ul li:before{
+		content: '';
+    	font-family: 'luma-icons';
+		color: #00B67A;
+		background: url("../images/sprites.png") no-repeat;
+		height: 22px;
+	    width: 20px;
+	    float: left;
+	    background-position: -4px -24px;
+	    margin-right: 5px;
+
+
+	}
+
+ 
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(../fonts/Ubuntu-Light.ttf) format('ttf');
+}
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/Ubuntu-Regular.ttf) format('ttf');
+}
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../fonts/Ubuntu-Medium.ttf) format('ttf');
+}
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/Ubuntu-Bold.ttf) format('ttf');
+}
+
+/* Common styling */
+
+.hide {
+	display: none;
+}
+
+/* Login page styling */
+
+.block-customer-login.custom-block-customer-login {
+    margin: 60px auto 0;
+    float: none !important;
+    width: 40%;
+}
+
+.custom-block-customer-login .block-title {
+    text-align: center;
+    color: #2C596D;
+	font-family: 'Ubuntu', sans-serif;
+	border-bottom: none !important;
+	margin-bottom: 0 !important;
+}
+
+.small-header {
+	font-family: 'Ubuntu', sans-serif;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+	border-color: rgba(225, 225, 225, 0.6);
+	border-width: 1px;
+	font-size: 15px;
+	color: #101010;
+	font-weight: 300;
+	margin-top: 10px;
+}
+
+.small-header legend {
+	padding-inline-start: 8px;
+	padding-inline-end: 8px;
+}
+
+.custom-block-customer-login .block-title #block-customer-login-heading {
+    font-size: 34px;
+}
+
+.block-customer-login.custom-block-customer-login .fieldset > .field > .control {
+	width: 100%;
+}
+
+.custom-form {
+	border-bottom: 1px solid #c6c6c6;
+}
+
+.custom-form input, .custom-form select {
+    background-color: #f1f7f9 !important;
+    border-radius: 40px !important;
+    padding: 23px 32px !important;
+    height: auto !important;
+    border-color: #d7e7ec !important;
+}
+
+.custom-form input::placeholder {
+    color: #161616;
+}
+
+.custom-form button.action.primary {
+    background-color: #ED3237;
+    font-size: 16px;
+    color: #fff;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 37px;
+    border: 0;
+    padding: 10px 40px;
+    font-weight: 400;
+    box-shadow: inset 0 0px 0 0 #ffffff, inset 0 0 0 0 rgba(204, 204, 204, 0);
+    border-radius: 50px;
+}
+
+.custom-login-actions-toolbar {
+    display: flex;
+}
+
+.custom-login-actions-toolbar .secondary {
+    align-self: center;
+    margin-left: auto;
+}
+
+.register-text {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 19px;
+    font-weight: normal;
+    text-align: center;
+	color: #101010;
+	margin-top: 40px;
+}
+
+.register-text a {
+	text-decoration: underline;
+	color: #101010;
+}
+
+.register-text a:hover {
+    color: #2C596D;
+}
+
+.forgot-password-link {
+    color: #2C596D;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+.forgot-password-link:hover {
+    color: #101010;
+}
+
+
+/* Register page additional styling */
+
+.custom-block-customer-register {
+	margin: 0 auto;
+}
+
+.custom-block-customer-register .form-create-account.custom-form {
+	width: 100%;
+}
+
+.small-header legend.legend {
+	padding-bottom: 0;
+	border: none;
+}
+
+.general-question-fixed {
+	display: none;
+}
+
+.general-question-fixed.active {
+	display: block;
+}
+
+
+
+@media only screen and (max-width: 767px) {
+	.block-customer-login.custom-block-customer-login {
+		width: 100%;
+	}
+	
+	.custom-block-customer-register {
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+	.block-customer-login.custom-block-customer-login {
+		width: 80%;
+	}
+
+	.custom-block-customer-register {
+		width: 80%;
+	}
+}
+
+@media only screen and (min-width: 1025px) {
+	.block-customer-login.custom-block-customer-login {
+		width: 40%;
+	}
+
+	.custom-block-customer-register {
+		width: 60%;
+	}
+}
+
+
+/* search box */
+
+.searchbar .block-search {
+     width: 100%;
+ }
+
+ .searchbar .block-search .control {
+    display: flex;
+    background-color: #fff;
+    padding: 17px;
+    border: 1px solid #373737;
+    border-radius: 34px;
+ }
+
+ .searchbar .block-search .control select {
+    width: auto;
+    border: none;
+    border-right: 1px solid #828282;
+ }
+
+ .searchbar .block-search .control input {
+    border: none;
+    box-shadow: none;
+    padding-left: 18px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+ }
+
+ .searchbar .block-search .control input:focus, .searchbar .block-search .control select:focus {
+    border: none;
+    box-shadow: none;
+ }
+ 
+.searchbar .block-search .actions .action.search {
+	 top: 17px;
+	 right: 30px;
+ }
+
+
+ .cms-index-index .header.searchbar{
+ 	width: 635px;
+ 	float: left;
+ 	margin-top: 40px;
+ }
+
+ .block-search .action.search{
+ 	opacity: 1 !important; 
+ }
+ .block-search .action.search:before{
+ 	font-size: 23px;
+ 	color: #000;
+ }
+ .p-1{
+ 	width: 100%;
+ 	float: left;
+ 	padding: 0 0 0 28px;
+ 	font-size: 12px;
+    color: #111;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 20px;
+    margin-top: 20px;
+    font-weight: 400;
+    background: url("../images/sprites.png") no-repeat;
+    background-position: -2px -47px;
+    text-decoration: underline;
+ 	
+ }
+ .trustpoilet{
+ 	width: 280px;
+ 	float: left;
+ }
+ .page-bottom .trustpilot-widget iframe{
+ 	height: 320px !important;
+ }
+ .page-bottom{
+ 	width: 1100px !important;
+ }
+
+ .discretion-section{
+ 	width: 100%;
+ 	float: left;
+ 	padding: 0;
+ 	margin: 0;
+ 	text-align: center;
+ }
+ .discretion-section h3{
+ 	width: auto;
+ 	float: none;
+ 	padding: 0 0 0 40px;
+ 	font-size: 26px;
+    color: #111;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 30px;
+    margin-top: 20px;
+    margin-bottom: 45px;
+    font-weight: 300;
+    background: url("../images/sprites.png") no-repeat;
+    background-position: 0px -41px;
+    display: inline-block;
+ }
+
+ .discretion-section h4{
+ 	width: 100%;
+ 	float: none;
+ 	padding: 0 0 0 0px;
+ 	font-size: 16px;
+    color:#2C596D;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 24px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-weight: 600; 
+ }
+ .discretion-section p{
+ 	width: 100%;
+ 	float: none;
+ 	padding: 0 0 0 0px;
+ 	font-size: 15px;
+    color:#2C596D;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 20px; 
+    margin-top: 5px;
+    font-weight: 400; 
+ }
+
+ .discretion-section span{
+ 	width: auto;
+ 	float: none;
+ 	padding: 0;
+ 	font-size: 22px;
+    color:#47BFEB;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 26px;  
+    font-weight: 400; 
+    position: absolute;
+    right: 0;
+    top: 33%;
+ }
+
+
+ .discretion_block{
+ 	width: 30%;
+ 	float: none;
+ 	display: inline-block;
+ 	position: relative;
+ }

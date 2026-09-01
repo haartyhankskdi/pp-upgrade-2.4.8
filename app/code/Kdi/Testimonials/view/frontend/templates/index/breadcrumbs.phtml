@@ -1,0 +1,29 @@
+
+<div class="breadcrumbs" id="breadcrumbs-example"></div>
+<script>
+    require([
+        'jquery',
+        'Magento_Theme/js/model/breadcrumb-list',
+        'breadcrumbs'
+    ], function ($, breadcrumbList) {
+        'use strict';
+
+        var breadcrumbs = [
+            {
+                'name': 'Success Stories',
+                'link': 'https://magento-1195784-4216081.cloudwaysapps.com/',
+                'title': 'Link title for page 1',
+                'label': 'Success Stories'
+            },
+            
+        ];
+
+        // adding breadcrumbs to the Breadcrumb List
+        breadcrumbs.forEach(function (breadcrumb) {
+            breadcrumbList.push(breadcrumb);
+        });
+
+        // Breadcrumbs widget initialization
+        $('#breadcrumbs-example').breadcrumbs();
+    });
+</script>

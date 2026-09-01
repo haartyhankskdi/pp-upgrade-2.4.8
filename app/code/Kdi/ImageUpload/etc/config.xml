@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <image_upload>
+            <general>
+                <status>1</status>
+            </general>
+            <image_upload_settings>
+                <image_upload_status>1</image_upload_status>
+                <submit_photos_email_template>image_upload_image_upload_settings_submit_photos_email_template</submit_photos_email_template>
+                <submit_photos_email_sender>general</submit_photos_email_sender>
+            </image_upload_settings>
+            <appointment_booking>
+                <appointment_book_status>1</appointment_book_status>
+                <appointment_book_url>https://calendly.com/rajesh-haartyhanks/image-verification</appointment_book_url>
+                <appointment_book_template>image_upload_appointment_booking_appointment_book_template</appointment_book_template>
+                <appointment_book_email_sender>general</appointment_book_email_sender>
+            </appointment_booking>
+        </image_upload>
+    </default>
+</config>

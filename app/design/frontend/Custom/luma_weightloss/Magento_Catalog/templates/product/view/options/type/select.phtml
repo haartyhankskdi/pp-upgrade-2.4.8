@@ -1,0 +1,46 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+
+<?php /* @var $block \Magento\Catalog\Block\Product\View\Options\Type\Select */ ?>
+<?php
+$_option = $block->getOption();
+$class = ($_option->getIsRequire()) ? ' required' : '';
+?>
+<div class="sachin-test field<?= /* @noEscape */ $class ?>">
+    <label class="label" for="select_<?= $block->escapeHtmlAttr($_option->getId()) ?>">
+        <span><?= $block->escapeHtml($_option->getTitle()) ?></span>
+    </label>
+    <div class="control">
+        <?= $block->getValuesHtml() ?>
+        <?php if ($_option->getIsRequire()) :?>
+            <?php if ($_option->getType() == \Magento\Catalog\Api\Data\ProductCustomOptionInterface::OPTION_TYPE_RADIO || $_option->getType() == \Magento\Catalog\Api\Data\ProductCustomOptionInterface::OPTION_TYPE_CHECKBOX) :?>
+                <span id="options-<?= $block->escapeHtmlAttr($_option->getId()) ?>-container"></span>
+            <?php endif; ?>
+        <?php endif;?>
+    </div>
+</div>
+<script>
+  require([
+          'jquery',
+          'domReady!'
+      ], function ($) {
+          $(document).ready(function () {
+          $('select.product-custom-option').change(function(){
+              $('option').each(function(){
+                      var selectedOption = $(this).text();
+                      if (selectedOption.indexOf('+') > -1) {
+                          selectedOption = selectedOption.substring(0, selectedOption.indexOf('+'));
+                          $(this).text(selectedOption);
+                      } else if (selectedOption.indexOf('-') > -1) {
+                          selectedOption = selectedOption.substring(0, selectedOption.indexOf('-'));
+                          $(this).text(selectedOption);
+                      }
+                  });     
+              });     
+          });
+       });
+</script>

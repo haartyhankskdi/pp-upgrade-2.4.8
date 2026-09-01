@@ -1,0 +1,133 @@
+<?php
+
+/** @var $block \Haartyhanks\CategoryQuest\Block\Index */
+//   $_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+$_helperCatalog = $this->helper(Haartyhanks\CategoryQuest\Helper\Data::class);
+$productId = $_helperCatalog->getProdValueSession();
+$categoryId = $_helperCatalog->getCatValueSession();
+$products = $block->getCategoryProducts($categoryId);
+$ids = $block->getProductIds($products);
+
+?>
+<div class="discretion-confidentiality-panel new-flow-top">
+    <div class="container">
+        <div class="main-container">
+            <!-- Discretion & Confidentiality -->
+            <div class="discretion-section">
+
+
+                <div class="discretion_block_section">
+                    <div class="discretion_block">
+                        <span>01</span>
+                        <div class="discretion-cont">
+                            <div class="discretion_img"><img src="/media/medicine-icon.svg" alt="" /></div>
+                            <h4>Select</h4>
+                            <p>the items you wish<br> to order</p>
+                        </div>
+                    </div>
+
+                    <div class="discretion_block block_2">
+                        <span>02</span>
+                        <div class="discretion-cont">
+                            <div class="discretion_img"><img src="/media/order-review-img.svg" alt="" /></div>
+                            <h4>Order reviewed</h4>
+                            <p>by our qualified<br> prescriber</p>
+                        </div>
+
+                    </div>
+
+                    <div class="discretion_block block_3">
+                        <span>03</span>
+                        <div class="discretion-cont">
+                            <div class="discretion_img"><img src="/media/delivery-icon.svg" alt="" /></div>
+                            <h4>Delivered</h4>
+                            <p>to your door step</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php if ($categoryId) { ?>
+    <div class="content">
+        <div class="selected-product">
+            <div class="select-product">
+                <h2><?= __('Select Treatment') ?></h2>
+                <div class="step-p"><a href="<?= $_helperCatalog->getCatUrlById($categoryId); ?>"><span><?= __('Back') ?></span></a></div>
+                <p>Please select your treatment. You can choose your strength/size once you select and continue.</p>
+
+                <?php if ($productId) : ?>
+                    <?php foreach ($ids as $id) { ?>
+                        <?php $_product = $block->getProduct($id); ?>
+                        <?php $imageUrl = $this->helper('Magento\Catalog\Helper\Image')->init($_product, 'product_base_image')->constrainOnly(true)->keepAspectRatio(true)->keepTransparency(true)->keepFrame(false)->resize(150, 150)->getUrl(); ?>
+                        <?php if ($_product->isSaleable()) { ?>
+                            <?php if ($_product->getId() == $productId) { ?>
+                                <div class="selected-product">
+                                    <div class="selected product-body">
+                                        <div class="product-name"><span>
+                                                <h3><?= $_product->getName(); ?></h3>
+                                            </span></div>
+
+                                        <div class=" product-image"><span><img src="<?= $imageUrl ?>" alt="<?= $_product->getName(); ?>"></span></div>
+                                        <div class="selected product-price"><span class="price"><?= __('Prices From') ?></span><?php echo '£' . $_product->getPriceInfo()->getPrice('regular_price')->getMinRegularAmount();
+                                                                                                                                ?></div>
+                                        <div class="product-order-now"><span><a href="<?php echo $_product->getProductUrl() . '?true'; ?>"><button><?= __('SELECT & CONTINUE') ?></button></a></span></div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
+                    <?php } ?>
+                    <div class="other-products">
+                        <h2><?= __('Other Available Treatment') ?></h2>
+                    </div>
+                <?php endif ?>
+
+                <?php foreach ($ids as $id) { ?>
+                    <?php if ($productId != $id) { ?>
+                        <?php $_product = $block->getProduct($id); ?>
+                        <?php $imageUrl = $this->helper('Magento\Catalog\Helper\Image')->init($_product, 'product_base_image')->constrainOnly(true)->keepAspectRatio(true)->keepTransparency(true)->keepFrame(false)->resize(150, 150)->getUrl(); ?>
+                        <?php if ($_product->isSaleable()) { ?>
+                            <div class="product-body">
+                                <div class="product-name" onclick='show_para(this)'>
+                                    <span>
+                                        <h3><?= $_product->getName(); ?></h3>
+                                    </span>
+                                </div>
+                                <div class="accordian-product">
+                                    <div class=" product-image"><span><img src="<?= $imageUrl ?>" alt="<?= $_product->getName(); ?>"></span></div>
+                                    <div class="product-price"><span class="price"><?= __('Price') ?></span><span><?php echo '£' . $_product->getPriceInfo()->getPrice('regular_price')->getMinRegularAmount();
+                                                                                                                    ?></span></div>
+                                    <div class="product-order-now"><span><a href="<?php echo $_product->getProductUrl() . '?true'; ?>"><button><?= __('SELECT & CONTINUE') ?></button></a></span></div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+<?php  } ?>
+
+
+<script>
+    function hide_para() {
+        var h2 = document.querySelectorAll(".accordian-product");
+        for (var i = 0; i < h2.length; i++) {
+            h2[i].style.display = 'none';
+        }
+    }
+
+    hide_para();
+
+    function show_para(currElement) {
+        //hide_para();
+        //console.log(currElement.nextElementSibling);
+        // currElement.nextElementSibling.style.display = "block";
+        if (currElement.nextElementSibling.style.display == "none") {
+            currElement.nextElementSibling.style.display = "block";
+        } else {
+            currElement.nextElementSibling.style.display = "none";
+        }
+    }
+</script>

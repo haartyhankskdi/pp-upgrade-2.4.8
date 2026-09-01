@@ -1,0 +1,34 @@
+<?php
+    // echo $orderId = $this->getRequest()->getParam('order_id'); exit();
+    $_order = $block->getOrder();
+    if ($this->helper(\Magento\Sales\Helper\Reorder::class)->canReorder($_order->getEntityId())) : ?>
+    <button type="button" id="reorder_autosubmission" data-post='<?= /* @noEscape */
+    $this->helper(\Magento\Framework\Data\Helper\PostHelper::class)
+        ->getPostData($block->getReorderUrl($_order))
+    ?>' class="action order reorder">
+        <span><?= $block->escapeHtml(__('Reorder')) ?></span>
+    </button>
+    <!-- <script>
+        require(['jquery'], function ($) {
+            $(document).ready(function () {
+                setTimeout(function() {
+                    $("#reorder_autosubmission").trigger('click');
+                }, 5000);
+            });
+        });
+    </script> -->
+<?php endif;
+
+// $imageHelper = $this->helper(Magento\Catalog\Helper\ImageFactory::class);
+
+$orderItems = $_order->getAllItems();
+
+foreach ($orderItems as $item) {
+        $itemQty[]= array('quantity'=>$item->getQtyOrdered(),'description'=>$item->getDescription(),'name'=>$item->getName(),'price'=>$item->getPrice());
+        echo "<pre>";
+        echo $product_id = $item->getProductId();
+        echo $block->getProductUrl($product_id)->getProductUrl();
+        echo $imageUrl = $block->getProductHelper($block->getProductUrl($product_id));
+        // var_dump($block->getProductUrl($product_id));
+        exit();
+    }

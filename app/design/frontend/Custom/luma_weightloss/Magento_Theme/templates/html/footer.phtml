@@ -1,0 +1,110 @@
+<?php
+/* 
+    Call static blog
+*/
+
+// Static block for main footer
+echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('wltheme_footer')->toHtml();
+?>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style type="text/css">	
+    @media screen and (min-width: 1200px) {
+
+    .home-private-pres .trustpilot-widget iframe{  
+        margin-left: -10px !important; 
+    }
+}
+</style>
+
+
+
+
+<script type="text/javascript">
+  function reveal1() {
+  var reveals1 = document.querySelectorAll(".reveal1");
+
+  for (var i = 0; i < reveals1.length; i++) {
+    var windowHeight = window.innerHeight;
+    var elementTop = reveals1[i].getBoundingClientRect().top;
+    var elementVisible = 150;
+
+    if (elementTop < windowHeight - elementVisible) {
+      reveals1[i].classList.add("active");
+    } else {
+      reveals1[i].classList.remove("active");
+    }
+  }
+}
+
+window.addEventListener("scroll", reveal1);
+
+</script>
+
+
+<script type="text/javascript">
+  function reveal1() {
+  var reveals1 = document.querySelectorAll(".revealr");
+
+  for (var i = 0; i < reveals1.length; i++) {
+    var windowHeight = window.innerHeight;
+    var elementTop = reveals1[i].getBoundingClientRect().top;
+    var elementVisible = 150;
+
+    if (elementTop < windowHeight - elementVisible) {
+      reveals1[i].classList.add("active");
+    } else {
+      reveals1[i].classList.remove("active");
+    }
+  }
+}
+
+window.addEventListener("scroll", reveal1);
+
+</script>
+
+
+<script type="text/javascript">
+  function reveal1() {
+  var reveals1 = document.querySelectorAll(".reveal-l");
+
+  for (var i = 0; i < reveals1.length; i++) {
+    var windowHeight = window.innerHeight;
+    var elementTop = reveals1[i].getBoundingClientRect().top;
+    var elementVisible = 150;
+
+    if (elementTop < windowHeight - elementVisible) {
+      reveals1[i].classList.add("active");
+    } else {
+      reveals1[i].classList.remove("active");
+    }
+  }
+}
+
+window.addEventListener("scroll", reveal1);
+
+</script>
+
+
+<script>
+// Get the button
+let mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>

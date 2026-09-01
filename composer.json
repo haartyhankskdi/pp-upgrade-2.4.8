@@ -1,0 +1,99 @@
+{
+    "name": "magento/project-community-edition",
+    "description": "eCommerce Platform for Growth (Community Edition)",
+    "type": "project",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "laminas/laminas-dependency-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "magento/magento-composer-installer": true,
+            "magento/inventory-composer-installer": true,
+            "magento/composer-dependency-version-audit-plugin": true,
+            "magento/composer-root-update-plugin": true
+        }
+    },
+    "require": {
+        "eglobe-it-solutions/googlemerchantapi": "2.0.0",
+        "elgentos/regenerate-catalog-urls": "^0.2.6",
+        "fooman/emailattachments-m2": "^3.0",
+        "laminas/laminas-serializer": "^2.12",
+        "magento/composer-dependency-version-audit-plugin": "~0.1",
+        "magento/composer-root-update-plugin": "~1.0",
+        "magento/data-migration-tool": "2.3.4",
+        "magento/product-community-edition": "2.4.3-p1"
+    },
+    "require-dev": {
+        "allure-framework/allure-phpunit": "~1.4",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+        "friendsofphp/php-cs-fixer": "~2.18.1",
+        "lusitanian/oauth": "~0.8.10",
+        "magento/magento-coding-standard": "*",
+        "magento/magento2-functional-testing-framework": "^3.0",
+        "pdepend/pdepend": "~2.7.1",
+        "phpcompatibility/php-compatibility": "^9.3",
+        "phpmd/phpmd": "^2.8.0",
+        "phpstan/phpstan": "^0.12.77",
+        "phpunit/phpunit": "^9",
+        "sebastian/phpcpd": "^6.0.3",
+        "squizlabs/php_codesniffer": "~3.5.4",
+        "symfony/finder": "^5.2"
+    },
+    "conflict": {
+        "gene/bluefoot": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Magento\\Framework\\": "lib/internal/Magento/Framework/",
+            "Magento\\Setup\\": "setup/src/Magento/Setup/",
+            "Magento\\": "app/code/Magento/"
+        },
+        "psr-0": {
+            "": [
+                "app/code/",
+                "generated/code/"
+            ]
+        },
+        "files": [
+            "app/etc/NonComposerComponentRegistration.php"
+        ],
+        "exclude-from-classmap": [
+            "**/dev/**",
+            "**/update/**",
+            "**/Test/**"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Magento\\Sniffs\\": "dev/tests/static/framework/Magento/Sniffs/",
+            "Magento\\Tools\\": "dev/tools/Magento/Tools/",
+            "Magento\\Tools\\Sanity\\": "dev/build/publication/sanity/Magento/Tools/Sanity/",
+            "Magento\\TestFramework\\Inspection\\": "dev/tests/static/framework/Magento/TestFramework/Inspection/",
+            "Magento\\TestFramework\\Utility\\": "dev/tests/static/framework/Magento/TestFramework/Utility/"
+        }
+    },
+    "version": "2.3.4",
+    "minimum-stability": "stable",
+    "repositories": {
+        "0": {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        },
+        "magento": {
+            "type": "composer",
+            "url": "https://repo.magento.com"
+        },
+        "data-migration-tool": {
+            "type": "git",
+            "url": "https://github.com/magento/data-migration-tool"
+        }
+    },
+    "extra": {
+        "magento-force": "override"
+    }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Nilesh\GpManagement\Api\GpManagementRepositoryInterface" type="Nilesh\GpManagement\Model\GpManagementRepository"/>
+	<preference for="Nilesh\GpManagement\Api\Data\GpManagementInterface" type="Nilesh\GpManagement\Model\Data\GpManagement"/>
+	<preference for="Nilesh\GpManagement\Api\Data\GpManagementSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Nilesh\GpManagement\Model\ResourceModel\GpManagement\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">nilesh_gpmanagement_gpmanagement</argument>
+			<argument name="resourceModel" xsi:type="string">Nilesh\GpManagement\Model\ResourceModel\GpManagement\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="nilesh_gpmanagement_gpmanagement_listing_data_source" xsi:type="string">Nilesh\GpManagement\Model\ResourceModel\GpManagement\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

@@ -1,0 +1,110 @@
+& when (@media-common = true) {
+    .helpdesk_satisfaction-block {
+        .helpdesk_satisfaction-rate-great {
+            position: relative;
+            background: #00c300;
+            border-radius: 3px;
+            margin-top: 2rem;
+            padding: .5rem 1rem;
+
+            img {
+                position: absolute;
+                width: 5.5rem;
+                top: -2.1rem;
+                left: 0;
+            }
+
+            .text {
+                font-family: "Roboto","Roboto",sans-serif;
+                font-size: 2.5rem;
+                font-weight: 400;
+                color: #fff;
+                text-shadow: 1px 1px 1px rgba(0,0,0,.2);
+                text-align: right;
+            }
+        }
+
+        .last-update {
+            color: #7d7d7d;
+            font-size: 1.2rem;
+            text-align: right;
+        }
+    }
+    .helpdesk_satisfaction-list {
+        .helpdesk_satisfaction-row {
+            margin: 0 -15px;
+
+            .helpdesk_satisfaction-col-md-4 {
+                float: left;
+                width: 33.33333333%;
+                margin-right: 0;
+                padding: 0 15px;
+                box-sizing: border-box;
+
+                .helpdesk_satisfaction-rate {
+                    position: relative;
+                    margin-top: 2rem;
+                    margin-bottom: 3rem;
+
+                    img {
+                        position: absolute;
+                        bottom: 0;
+                        right: 0;
+                        width: 5.5rem;
+                        height: 5.5rem;
+                    }
+
+                    .helpdesk_satisfaction-bar {
+                        background: #f8f8f8;
+                        height: 3rem;
+                        width: 100%;
+                        border-radius: 3px;
+
+                        .inner {
+                            background: #faf;
+                            height: 3rem;
+                            border-radius: 3px 0 0 3px;
+                            padding: .5rem 1rem;
+                            text-align: right;
+                            box-sizing: border-box;
+                            text-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+                            color: #fff;
+                        }
+                    }
+
+                    &.rate-great .inner {
+                        background: #09d011;
+                    }
+
+                    &.rate-ok .inner {
+                        background: #f5b92b;
+                    }
+
+                    &.rate-bad .inner {
+                        background: #fb6c6c;
+                    }
+                }
+            }
+        }
+
+        .helpdesk_satisfaction-smiles {
+            display: inline-flex;
+            flex-wrap: wrap;
+
+            figure {
+                width: 5rem;
+                height: 5rem;
+                margin: 1rem;
+                position: relative;
+
+                img {
+                    width: 5rem;
+                }
+            }
+        }
+    }
+
+    .processing-block {
+        margin-bottom: 10px;
+    }
+}

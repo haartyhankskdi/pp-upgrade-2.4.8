@@ -1,0 +1,71 @@
+<?php
+/**
+ * @var $block \Nilesh\ProductCustomOption\Block\Prefilled
+ */
+$customOption = $block->haveCustomOption();
+if($customOption['status'] === true && $this->getRequest()->getFullActionName() != 'checkout_cart_configure'):
+	echo '<input type="hidden" id="haveCustomOptionPrefillActive" value="'.$customOption['product_id'].'">';
+	echo '<input type="hidden" id="haveCustomOptionBaseUrl" value="'.$block->getBaseUrl().'">';
+?>
+
+<script>
+	require(['jquery'],function ($) {
+		"use strict";
+		$(document).ready(function () {
+
+			autoPreFilled();
+			var clickPrefilled = 0;
+			$(".start-consultation").click(function (e) { 
+				e.preventDefault();
+				if(clickPrefilled == 0){
+					autoPreFilled();
+					// alert("Auto Pre Filled");
+				}
+				clickPrefilled = 1;
+			});
+
+			function autoPreFilled() {
+				var product_id = $("#haveCustomOptionPrefillActive").val();
+				var baseurl = $("#haveCustomOptionBaseUrl").val();
+				// ajax for passing current product id
+				$.post(baseurl+"product/prefilled", {
+					product_id : product_id
+				},
+					function (data) {
+						console.log(data);
+						// console.log(data.length);
+						if(data.length > 0){
+							data.map(function (dt) {
+								// console.log(dt.order_id);
+								if(dt.order_field === 'radio'){
+									$('input[id^="options_'+dt.order_id+'"][value="'+dt.order_value+'"]').attr('checked', true);
+								}if(dt.order_field === 'checkbox'){
+									var chechInput = dt.order_value.split(',');
+									$.map(chechInput, function (val, key) {
+										$('input[id^="options_'+dt.order_id+'"][value="'+val+'"]').attr('checked', true);
+									});
+								}else if(dt.order_field === 'date'){
+									var date = new Date(dt.order_value);
+									var dateFormat = ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' +  ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) +  '/' + date.getFullYear();
+									// $('input[id^="options_'+dt.order_id+'"]').val(dt.order_value);
+									$('input[id^="options_'+dt.order_id+'"]').val(dateFormat);
+								}else if(dt.order_field === 'area'){
+									$('textarea[id^="options_'+dt.order_id+'"]').val(dt.order_value);
+								}else if(dt.order_field === 'field'){
+									$('input[id^="options_'+dt.order_id+'"]').val(dt.order_value);
+								}else if(dt.order_field === 'drop_down'){
+									$('select[id^="select_'+dt.order_id+'"]').val(dt.order_value);
+								}else{
+									console.log('skiped: '+dt.order_field);
+								}
+							});
+						}
+					},
+					"json"
+				);
+			 }
+		});
+	});
+</script>
+
+<?php endif; ?>

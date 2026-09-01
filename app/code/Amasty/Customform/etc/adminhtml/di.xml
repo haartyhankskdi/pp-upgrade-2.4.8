@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Amasty\Customform\Ui\DataProvider\Form\DataModifierPool"
+                 type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="embedding" xsi:type="array">
+                    <item name="class" xsi:type="string">Amasty\Customform\Ui\DataProvider\Modifiers\AddEmbeddingCode</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+                <item name="date_ranges" xsi:type="array">
+                    <item name="class" xsi:type="string">Amasty\Customform\Ui\DataProvider\Modifiers\AddScheduledRangesGroup</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\Customform\Ui\DataProvider\Form">
+        <arguments>
+            <argument name="uiDataModifiersPool" xsi:type="object">Amasty\Customform\Ui\DataProvider\Form\DataModifierPool</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Amasty\Customform\Model\Form\Save\Preparation\FormDataPreparationProcessor"
+                 type="Amasty\Customform\Model\Form\Save\Preparation\PreparationComposite">
+        <arguments>
+            <argument name="preparationProcessors" xsi:type="array">
+               <item name="0" xsi:type="object">Amasty\Customform\Model\Form\Save\Preparation\PrepareCustomerGroups</item>
+               <item name="1" xsi:type="object">Amasty\Customform\Model\Form\Save\Preparation\PrepareStoreIds</item>
+               <item name="2" xsi:type="object">Amasty\Customform\Model\Form\Save\Preparation\PrepareFormBuilderFields</item>
+               <item name="3" xsi:type="object">Amasty\Customform\Model\Form\Save\Preparation\AddEmailValidationForEmailField</item>
+               <item name="4" xsi:type="object">Amasty\Customform\Model\Form\Save\Preparation\PrepareActiveDateRanges</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\Customform\Controller\Adminhtml\Forms\Save">
+        <arguments>
+            <argument name="formDataPreparationProcessor" xsi:type="object">Amasty\Customform\Model\Form\Save\Preparation\FormDataPreparationProcessor</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\Answer\GetSecuredFileUrl">
+        <arguments>
+            <argument name="urlBuilder" xsi:type="object">\Magento\Framework\Url</argument>
+        </arguments>
+    </type>
+</config>

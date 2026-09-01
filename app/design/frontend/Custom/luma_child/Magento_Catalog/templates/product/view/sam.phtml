@@ -1,0 +1,37 @@
+<!-- <div class="out-of-stock-new">
+<?php
+  //  echo $this->getLayout()->createBlock("Webkul\OutOfStockNotification\Block\OutOfStockProduct")->setIfconfig("notificationsettings/enable/oosn")->setTemplate("Webkul_OutOfStockNotification::outofstockproduct.phtml")->toHtml();
+    //echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setIfconfig("notificationsettings/enable/oosn")->setTemplate("Webkul_OutOfStockNotification::emailid.phtml")->toHtml();
+?>
+</div> -->
+
+
+<div class="out-of-stock-new">
+    <?php
+    $product = $block->getProduct(); // or use registry fallback below if not available
+
+    if (!$product) {
+        $product = \Magento\Framework\App\ObjectManager::getInstance()
+            ->get(\Magento\Framework\Registry::class)
+            ->registry('current_product');
+    }
+
+    $stockRegistry = \Magento\Framework\App\ObjectManager::getInstance()
+        ->get(\Magento\CatalogInventory\Api\StockRegistryInterface::class);
+
+    // echo "<pre>";
+    // echo "Product ID: " . $product->getId() . "\n";
+    // echo "Product Type: " . $product->getTypeId() . "\n";
+
+    $stockItem = $stockRegistry->getStockItem($product->getId());
+    // echo "Parent Stock Status: " . ( ? 'IN STOCK' : 'OUT OF STOCK') . "\n";
+    // echo "Parent Qty: " . $stockItem->getQty() . "\n\n";
+
+    if (!$stockItem->getIsInStock()) {
+        echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setIfconfig("notificationsettings/enable/oosn")->setTemplate("Webkul_OutOfStockNotification::notify.phtml")->toHtml();
+    }
+
+    // echo $this->getLayout()->createBlock("Webkul\OutOfStockNotification\Block\OutOfStockProduct")->setIfconfig("notificationsettings/enable/oosn")->setTemplate("Webkul_OutOfStockNotification::outofstockproduct.phtml")->toHtml();
+
+    ?>
+</div>

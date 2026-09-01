@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing_data_source</item>
+            <item name="deps" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">sagepay_transaction_columns</item>
+    </argument>
+    <dataSource name="sagepay_transaction_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magenest\SagePay\Ui\Component\Listing\TransactionDataProvider</argument>
+            <argument name="name" xsi:type="string">sagepay_transaction_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <container name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="template" xsi:type="string">ui/grid/toolbar</item>
+            </item>
+        </argument>
+        <bookmark name="bookmarks">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="namespace" xsi:type="string">sagepay_transaction_listing</item>
+                    </item>
+                </item>
+            </argument>
+        </bookmark>
+        <component name="columns_controls">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsData" xsi:type="array">
+                        <item name="provider" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing.sagepay_transaction_columns</item>
+                    </item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/columns</item>
+                    <item name="displayArea" xsi:type="string">dataGridActions</item>
+                </item>
+            </argument>
+        </component>
+        <exportButton name="export_button">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing.sagepay_transaction_columns.ids</item>
+                </item>
+            </argument>
+        </exportButton>
+<!--        <filterSearch name="fulltext">-->
+<!--            <argument name="data" xsi:type="array">-->
+<!--                <item name="config" xsi:type="array">-->
+<!--                    <item name="provider" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing_data_source</item>-->
+<!--                    <item name="chipsProvider" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing.listing_top.listing_filters_chips</item>-->
+<!--                    <item name="storageConfig" xsi:type="array">-->
+<!--                        <item name="provider" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing.listing_top.bookmarks</item>-->
+<!--                        <item name="namespace" xsi:type="string">current.search</item>-->
+<!--                    </item>-->
+<!--                </item>-->
+<!--            </argument>-->
+<!--        </filterSearch>-->
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsProvider" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing.sagepay_transaction_columns</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.filters</item>
+                    </item>
+                    <item name="childDefaults" xsi:type="array">
+                        <item name="provider" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing.listing_top.listing_filters</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing.sagepay_transaction_columns.${ $.index }:visible</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </filters>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing.sagepay_transaction_columns.ids</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                    <item name="indexField" xsi:type="string">id</item>
+                </item>
+            </argument>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="sagepay/transaction/massDelete"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete profile</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure to delete the selected transaction(s)?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+        <paging name="listing_paging">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.paging</item>
+                    </item>
+                    <item name="selectProvider" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing.sagepay_transaction_columns.ids</item>
+                </item>
+            </argument>
+        </paging>
+    </container>
+    <columns name="sagepay_transaction_columns">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="storageConfig" xsi:type="array">
+                    <item name="provider" xsi:type="string">sagepay_transaction_listing.sagepay_transaction_listing.listing_top.bookmarks</item>
+                    <item name="namespace" xsi:type="string">current</item>
+                </item>
+            </item>
+        </argument>
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">id</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="increment_id" class="Magenest\SagePay\Ui\Component\Listing\Columns\OrderId">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Order ID</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </column>
+        <column name="order_status" class="Magenest\SagePay\Ui\Component\Listing\Columns\OrderStatus">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Order Status</item>
+                    <item name="sortOrder" xsi:type="number">25</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="options" xsi:type="array">
+                        <item name="5" xsi:type="array">
+                            <item name="value" xsi:type="string">complete</item>
+                            <item name="label" xsi:type="string" translate="true">Complete</item>
+                        </item>
+                        <item name="10" xsi:type="array">
+                            <item name="value" xsi:type="string">pending</item>
+                            <item name="label" xsi:type="string" translate="true">Pending</item>
+                        </item>
+                        <item name="20" xsi:type="array">
+                            <item name="value" xsi:type="string">processing</item>
+                            <item name="label" xsi:type="string" translate="true">Processing</item>
+                        </item>
+                        <item name="30" xsi:type="array">
+                            <item name="value" xsi:type="string">fraud</item>
+                            <item name="label" xsi:type="string" translate="true">Suspected Fraud</item>
+                        </item>
+                        <item name="40" xsi:type="array">
+                            <item name="value" xsi:type="string">pending_payment</item>
+                            <item name="label" xsi:type="string" translate="true">Pending Payment</item>
+                        </item>
+                        <item name="50" xsi:type="array">
+                            <item name="value" xsi:type="string">payment_review</item>
+                            <item name="label" xsi:type="string" translate="true">Payment Review</item>
+                        </item>
+                        <item name="60" xsi:type="array">
+                            <item name="value" xsi:type="string">canceled</item>
+                            <item name="label" xsi:type="string" translate="true">Canceled</item>
+                        </item>
+                        <item name="70" xsi:type="array">
+                            <item name="value" xsi:type="string">paypay_canceled_reversal</item>
+                            <item name="label" xsi:type="string" translate="true">PayPal Canceled Reversal</item>
+                        </item>
+                        <item name="80" xsi:type="array">
+                            <item name="value" xsi:type="string">pending_paypal</item>
+                            <item name="label" xsi:type="string" translate="true">Pending PayPal</item>
+                        </item>
+                        <item name="90" xsi:type="array">
+                            <item name="value" xsi:type="string">paypal_reversed</item>
+                            <item name="label" xsi:type="string" translate="true">PayPal Reversed</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </column>
+        <column name="transaction_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Transaction ID</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+        </column>
+        <column name="transaction_type">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Type</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="options" xsi:type="array">
+                        <item name="10" xsi:type="array">
+                            <item name="value" xsi:type="string">Direct</item>
+                            <item name="label" xsi:type="string" translate="true">Direct</item>
+                        </item>
+                        <item name="20" xsi:type="array">
+                            <item name="value" xsi:type="string">Server</item>
+                            <item name="label" xsi:type="string" translate="true">Server</item>
+                        </item>
+                        <item name="30" xsi:type="array">
+                            <item name="value" xsi:type="string">Form</item>
+                            <item name="label" xsi:type="string" translate="true">Form</item>
+                        </item>
+                        <item name="40" xsi:type="array">
+                            <item name="value" xsi:type="string">Refund</item>
+                            <item name="label" xsi:type="string" translate="true">Refund</item>
+                        </item>
+                        <item name="50" xsi:type="array">
+                            <item name="value" xsi:type="string">Repeat</item>
+                            <item name="label" xsi:type="string" translate="true">Repeat</item>
+                        </item>
+                        <item name="60" xsi:type="array">
+                            <item name="value" xsi:type="string">Payment</item>
+                            <item name="label" xsi:type="string" translate="true">Payment</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </column>
+        <column name="transaction_status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="options" xsi:type="array">
+                        <item name="10" xsi:type="array">
+                            <item name="value" xsi:type="string">OK</item>
+                            <item name="label" xsi:type="string" translate="true">OK</item>
+                        </item>
+                        <item name="20" xsi:type="array">
+                            <item name="value" xsi:type="string">NOTAUTHED</item>
+                            <item name="label" xsi:type="string" translate="true">NOTAUTHED</item>
+                        </item>
+                        <item name="30" xsi:type="array">
+                            <item name="value" xsi:type="string">3DAUTH</item>
+                            <item name="label" xsi:type="string" translate="true">3DAUTH</item>
+                        </item>
+                        <item name="40" xsi:type="array">
+                            <item name="value" xsi:type="string">REJECTED</item>
+                            <item name="label" xsi:type="string" translate="true">REJECTED</item>
+                        </item>
+                        <item name="50" xsi:type="array">
+                            <item name="value" xsi:type="string">AUTHENTICATED</item>
+                            <item name="label" xsi:type="string" translate="true">AUTHENTICATED</item>
+                        </item>
+                        <item name="60" xsi:type="array">
+                            <item name="value" xsi:type="string">REGISTERED</item>
+                            <item name="label" xsi:type="string" translate="true">REGISTERED</item>
+                        </item>
+                        <item name="70" xsi:type="array">
+                            <item name="value" xsi:type="string">PPREDIRECT</item>
+                            <item name="label" xsi:type="string" translate="true">PPREDIRECT</item>
+                        </item>
+                        <item name="80" xsi:type="array">
+                            <item name="value" xsi:type="string">MALFORMED</item>
+                            <item name="label" xsi:type="string" translate="true">MALFORMED</item>
+                        </item>
+                        <item name="90" xsi:type="array">
+                            <item name="value" xsi:type="string">INVALID</item>
+                            <item name="label" xsi:type="string" translate="true">INVALID</item>
+                        </item>
+                        <item name="91" xsi:type="array">
+                            <item name="value" xsi:type="string">ERROR</item>
+                            <item name="label" xsi:type="string" translate="true">ERROR</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="card_secure">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">3D Secure Status</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                    <item name="options" xsi:type="array">
+                        <item name="10" xsi:type="array">
+                            <item name="value" xsi:type="string">OK</item>
+                            <item name="label" xsi:type="string" translate="true">OK</item>
+                        </item>
+                        <item name="20" xsi:type="array">
+                            <item name="value" xsi:type="string">NOTAUTHED</item>
+                            <item name="label" xsi:type="string" translate="true">NOTAUTHED</item>
+                        </item>
+                        <item name="30" xsi:type="array">
+                            <item name="value" xsi:type="string">3DAUTH</item>
+                            <item name="label" xsi:type="string" translate="true">3DAUTH</item>
+                        </item>
+                        <item name="40" xsi:type="array">
+                            <item name="value" xsi:type="string">ATTEMPTONLY</item>
+                            <item name="label" xsi:type="string" translate="true">ATTEMPTONLY</item>
+                        </item>
+                        <item name="50" xsi:type="array">
+                            <item name="value" xsi:type="string">NOTCHECKED</item>
+                            <item name="label" xsi:type="string" translate="true">NOTCHECKED</item>
+                        </item>
+                        <item name="60" xsi:type="array">
+                            <item name="value" xsi:type="string">NOAUTH</item>
+                            <item name="label" xsi:type="string" translate="true">NOAUTH</item>
+                        </item>
+                        <item name="70" xsi:type="array">
+                            <item name="value" xsi:type="string">ERROR</item>
+                            <item name="label" xsi:type="string" translate="true">ERROR</item>
+                        </item>
+                        <item name="80" xsi:type="array">
+                            <item name="value" xsi:type="string">INVALID</item>
+                            <item name="label" xsi:type="string" translate="true">INVALID</item>
+                        </item>
+                        <item name="90" xsi:type="array">
+                            <item name="value" xsi:type="string">MALFORMED</item>
+                            <item name="label" xsi:type="string" translate="true">MALFORMED</item>
+                        </item>
+                        <item name="91" xsi:type="array">
+                            <item name="value" xsi:type="string">CANTAUTH</item>
+                            <item name="label" xsi:type="string" translate="true">CANTAUTH</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </column>
+        <column name="customer_id" class="Magenest\SagePay\Ui\Component\Listing\Columns\CustomerId">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Customer Id</item>
+                    <item name="sortOrder" xsi:type="number">80</item>
+                </item>
+            </argument>
+        </column>
+        <column name="customer_email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Customer Email</item>
+                    <item name="sortOrder" xsi:type="number">90</item>
+                </item>
+            </argument>
+        </column>
+        <column name="created_at">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sorting" xsi:type="string">desc</item>
+                    <item name="filter" xsi:type="string">date</item>
+                    <item name="label" xsi:type="string" translate="true">Created At</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                </item>
+            </argument>
+        </column>
+        <column name="response_data" class="Magenest\SagePay\Ui\Component\Listing\Columns\ResponseData">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">View transaction</item>
+                    <item name="sortOrder" xsi:type="number">150</item>
+                    <item name="component" xsi:type="string">Magenest_SagePay/js/column_fixed</item>
+                    <item name="bodyTmpl" xsi:type="string">Magenest_SagePay/view_template</item>
+                </item>
+            </argument>
+        </column>
+        <actionsColumn name="actions" class="Magenest\SagePay\Ui\Component\Listing\Columns\TransactionActions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">id</item>
+                    <item name="sortOrder" xsi:type="number">200</item>
+                </item>
+            </argument>
+        </actionsColumn>
+        <!--<column name="is_subscription">-->
+            <!--<argument name="data" xsi:type="array">-->
+                <!--<item name="options" xsi:type="object">Magenest\SagePay\Model\Source\IsSubscription</item>-->
+                <!--<item name="config" xsi:type="array">-->
+                    <!--<item name="filter" xsi:type="string">text</item>-->
+                    <!--<item name="label" xsi:type="string" translate="true">Includes Subscription</item>-->
+                    <!--<item name="sortOrder" xsi:type="number">90</item>-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</column>-->
+    </columns>
+</listing>

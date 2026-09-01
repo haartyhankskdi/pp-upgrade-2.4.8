@@ -1,0 +1,226 @@
+"Card Identifiers","Card Identifiers"
+"Add New Card Identifier","Add New Card Identifier"
+"Check Api","Check Api"
+"Payment Type","Payment Type"
+"Surcharges Type","Surcharges Type"
+Add,Add
+Deleted,Deleted
+Error,Error
+"Can't specify card","Can't specify card"
+Card,Card
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"Subscription Profiles","Subscription Profiles"
+"You cancelled the profile.","You cancelled the profile."
+Profiles,Profiles
+"A total of %1 record(s) have been updated.","A total of %1 record(s) have been updated."
+"View Profile","View Profile"
+"This profile no longer exists.","This profile no longer exists."
+Transactions,Transactions
+"Can't delete this transaction","Can't delete this transaction"
+"Warning: %1 SagePay transaction(s) have no order associated","Warning: %1 SagePay transaction(s) have no order associated"
+"Cannot find quote","Cannot find quote"
+"Restored order %1","Restored order %1"
+"Can't restore this transaction","Can't restore this transaction"
+"You deleted the card.","You deleted the card."
+"Quote is not active","Quote is not active"
+"3d secure authenticate fail","3d secure authenticate fail"
+"Payment exception","Payment exception"
+"Can't specify subscription","Can't specify subscription"
+"My Card Identifiers","My Card Identifiers"
+"My Subscription Profiles","My Subscription Profiles"
+"Payment Request Error","Payment Request Error"
+"Invalid request","Invalid request"
+"Payment error","Payment error"
+"The payment is not complete","The payment is not complete"
+"Invalid Form Key","Invalid Form Key"
+"Payment Error","Payment Error"
+"Redirect Error","Redirect Error"
+"The transaction was successfully processed.","The transaction was successfully processed."
+"Payment Complete","Payment Complete"
+"Refund Error","Refund Error"
+"get card identify error","get card identify error"
+"Invalid Surchange Value","Invalid Surchange Value"
+"Notified customer about invoice #%s.","Notified customer about invoice #%s."
+"Customer is not logged in","Customer is not logged in"
+"Card ID exception","Card ID exception"
+"Capture exception","Capture exception"
+"Refund Exception","Refund Exception"
+Exception,Exception
+"Invalid Quote","Invalid Quote"
+"Invaild payment action","Invaild payment action"
+Authenticated,Authenticated
+NotChecked,NotChecked
+NotAuthenticated,NotAuthenticated
+CardNotEnrolled,CardNotEnrolled
+IssuerNotEnrolled,IssuerNotEnrolled
+MalformedOrInvalid,MalformedOrInvalid
+AttemptOnly,AttemptOnly
+Incomplete,Incomplete
+"Default: Use default MySagePay settings","Default: Use default MySagePay settings"
+"Force: Apply authentication even if turned off","Force: Apply authentication even if turned off"
+"Disable: Disable authentication and rules","Disable: Disable authentication and rules"
+"Force & Ignore: Apply authentication but ignore rules","Force & Ignore: Apply authentication but ignore rules"
+"Modal UI","Modal UI"
+"Inline UI","Inline UI"
+Yes,Yes
+No,No
+Default,Default
+English,English
+French,French
+German,German
+Spanish,Spanish
+Portuguese,Portuguese
+Dutch,Dutch
+"Test Mode","Test Mode"
+"Live Mode","Live Mode"
+"Authorize and Capture (Payment)","Authorize and Capture (Payment)"
+"Authorize Only (Deferred)","Authorize Only (Deferred)"
+"Normal Profile Mode","Normal Profile Mode"
+"Low Profile Mode","Low Profile Mode"
+"VISA Credit","VISA Credit"
+"VISA Debit","VISA Debit"
+"VISA Electron","VISA Electron"
+MasterCard,MasterCard
+Maestro,Maestro
+"American Express","American Express"
+"Diner's Club","Diner's Club"
+"JCB Card","JCB Card"
+Laser,Laser
+"Do not send either customer or vendor Email","Do not send either customer or vendor Email"
+"Send customer and vendor transaction Email","Send customer and vendor transaction Email"
+"Send Vendor Email but not Customer Email","Send Vendor Email but not Customer Email"
+"Item with subscription option can be purchased standalone only","Item with subscription option can be purchased standalone only"
+"Cannot save sagepay product","Cannot save sagepay product"
+Delete,Delete
+"Delete ""${ $.$data.id }""","Delete ""${ $.$data.id }"""
+"Are you sure you wan't to delete a ""${ $.$data.id }"" record?","Are you sure you wan't to delete a ""${ $.$data.id }"" record?"
+Guest,Guest
+ERROR,ERROR
+View,View
+"Restore order","Restore order"
+"Restore this order","Restore this order"
+"Are you sure you wan't to restore this order from transaction ""${ $.$data.transaction_id }""?","Are you sure you wan't to restore this order from transaction ""${ $.$data.transaction_id }""?"
+"View order","View order"
+"Delete transaction","Delete transaction"
+"Are you sure you wan't to delete this transaction ""${ $.$data.transaction_id }""?","Are you sure you wan't to delete this transaction ""${ $.$data.transaction_id }""?"
+"Credit Card Holder Name","Credit Card Holder Name"
+"Credit Card Number","Credit Card Number"
+"Expiration Date","Expiration Date"
+"Card Verification Number","Card Verification Number"
+"Profile Information","Profile Information"
+"Recurring Detail","Recurring Detail"
+Status,Status
+Frequency,Frequency
+"Total Cycles","Total Cycles"
+"Ongoing Subscription","Ongoing Subscription"
+"Remaining Cycles","Remaining Cycles"
+Ongoing,Ongoing
+"Start Date","Start Date"
+"Last Billed Date","Last Billed Date"
+"Next Billing Date","Next Billing Date"
+"Order Detail","Order Detail"
+"Order ID","Order ID"
+"Grand Total","Grand Total"
+"Product Name","Product Name"
+"Customer Name","Customer Name"
+Action,Action
+"Subsequent Orders","Subsequent Orders"
+"Failed Payment","Failed Payment"
+"Submit a ticket","Submit a ticket"
+support@magenest.com,support@magenest.com
+"Add after","Add after"
+"Billing Cycle","Billing Cycle"
+"Recurring Payment Stop After","Recurring Payment Stop After"
+"Ongoing subscription","Ongoing subscription"
+"You don't store any card yet.","You don't store any card yet."
+"Credit Card","Credit Card"
+Expires,Expires
+"Created At","Created At"
+"Are you sure you want to cancel this card?","Are you sure you want to cancel this card?"
+"Cancel Profile","Cancel Profile"
+"Cancel Subscription","Cancel Subscription"
+"You don't have any subscription profile yet.","You don't have any subscription profile yet."
+"Ref. Transaction ID","Ref. Transaction ID"
+"Last 4","Last 4"
+Amount,Amount
+Actions,Actions
+"View Order","View Order"
+"Credit Card Information","Credit Card Information"
+"Credit Card Holder","Credit Card Holder"
+"What is this?","What is this?"
+"Card Type","Card Type"
+"Place Order","Place Order"
+Cancel,Cancel
+"Place order","Place order"
+"Transaction info","Transaction info"
+Close,Close
+"Error, please try again","Error, please try again"
+"SagePay Payment Gateway","SagePay Payment Gateway"
+"SagePay Global Config","SagePay Global Config"
+"Vendor Name","Vendor Name"
+User,User
+Password,Password
+Mode,Mode
+"Ignore address check","Ignore address check"
+"Server domain (Test Mode)","Server domain (Test Mode)"
+"Server domain (Live Mode)","Server domain (Live Mode)"
+"Form Encryption Password (Test Mode)","Form Encryption Password (Test Mode)"
+"Form Encryption Password (Live Mode)","Form Encryption Password (Live Mode)"
+"Apply 3D Secure","Apply 3D Secure"
+"Apply AVS CVC Check","Apply AVS CVC Check"
+"Allow Gift Aid","Allow Gift Aid"
+"Collect Recipient Details","Collect Recipient Details"
+"Send transaction email","Send transaction email"
+"Vendor email","Vendor email"
+"Payment language","Payment language"
+"Payment Surcharge Fee","Payment Surcharge Fee"
+"SagePay PI Integration","SagePay PI Integration"
+Enabled,Enabled
+Title,Title
+"PI Integration Key","PI Integration Key"
+"PI Integration Password","PI Integration Password"
+"Enabled MOTO","Enabled MOTO"
+"Use drop-in Interface","Use drop-in Interface"
+"Drop-in Display","Drop-in Display"
+"Save Customer CreditCard Token","Save Customer CreditCard Token"
+"Payment Action","Payment Action"
+"New Order Status","New Order Status"
+"Credit Card Types","Credit Card Types"
+"Payment from Applicable Countries","Payment from Applicable Countries"
+"Payment from Specific Countries","Payment from Specific Countries"
+Instructions,Instructions
+"Sort Order","Sort Order"
+"Minimum Order Total","Minimum Order Total"
+"Maximum Order Total","Maximum Order Total"
+"SagePay Form Integration/Paypal","SagePay Form Integration/Paypal"
+"SagePay Server Integration","SagePay Server Integration"
+"Payment Profile","Payment Profile"
+"SagePay Direct Integration","SagePay Direct Integration"
+"SagePay Paypal","SagePay Paypal"
+"Billing Agreement","Billing Agreement"
+"Enable Subscription","Enable Subscription"
+"Configure your subscription options for SagePay","Configure your subscription options for SagePay"
+"Add Option","Add Option"
+"New Option","New Option"
+"Period Unit","Period Unit"
+"Delete card","Delete card"
+"Are you sure to delete the selected card(s)?","Are you sure to delete the selected card(s)?"
+"Card Identifier","Card Identifier"
+"Customer ID","Customer ID"
+"Last 4 number","Last 4 number"
+"Delete profile","Delete profile"
+"Are you sure to delete the selected profile(s)?","Are you sure to delete the selected profile(s)?"
+"Change status","Change status"
+"Reference Transaction ID","Reference Transaction ID"
+"First Order ID","First Order ID"
+"Are you sure to delete the selected transaction(s)?","Are you sure to delete the selected transaction(s)?"
+"Order Status","Order Status"
+"Transaction ID","Transaction ID"
+Type,Type
+"3D Secure Status","3D Secure Status"
+"Customer Id","Customer Id"
+"Customer Email","Customer Email"
+"View transaction","View transaction"
+"SagePay Subscription Profiles","SagePay Subscription Profiles"
+"SagePay Card Management","SagePay Card Management"
+"My Saved Card Identifiers","My Saved Card Identifiers"

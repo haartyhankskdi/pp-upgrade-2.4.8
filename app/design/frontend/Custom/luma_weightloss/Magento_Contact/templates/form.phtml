@@ -1,0 +1,109 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<div class="contact-info-details">
+<div class="contact-info">
+  <div class="contact-details">
+    <h3>Contact Information</h3>
+    <ul>
+      <li class="address-text">4 Progress Business Centre Whittle Parkway Slough SL1 6DQ</li>
+      <li class="tel-no"><a href="tel:0800 978 8956">0800 978 8956</a></li>
+      <li class="email-1"><a href="mailto:headoffice@pharmacyplanet.com">headoffice@pharmacyplanet.com</a></li>
+    </ul>
+  </div>
+</div>
+  <div class="contact-map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9929.878868588277!2d-0.6501936!3d51.522944!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1e1050e891fba3fb!2sPharmacy+Planet!5e0!3m2!1sen!2suk!4v1527758514394" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div>
+ </div>
+<form class="form contact enquiry-panel"
+      action="<?php /* @escapeNotVerified */ echo $block->getFormAction(); ?>"
+      id="contact-form"
+      method="post"
+      data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>"
+      data-mage-init='{"validation":{}}'>
+<div class="contact-form">
+    <fieldset class="fieldset">
+        <h3><?php /*echo _('Drop Us A Message');*/ ?>Enquiry Form</h3>
+		<div class="row contact-row">
+			<div class="field name required col-sm-6 col-xs-12">
+      <div class="control floating-label">
+          <label class="label" for="name"><span><?php /* @escapeNotVerified */ echo __('Name') ?></span> <em>*</em></label>
+					<input name="name" id="name" title="<?php /* @escapeNotVerified */ echo __('Name') ?>" value="<?php echo $block->escapeHtml($this->helper('Magento\Contact\Helper\Data')->getPostValue('name') ?: $this->helper('Magento\Contact\Helper\Data')->getUserName()) ?>" class="validate_alpha_with_space input-text floating-input" type="text" data-validate="{required:true}" placeholder=" ">
+      </div>
+			</div>
+			<div class="field email required col-sm-6 col-xs-12">
+      <div class="control floating-label">
+          <label class="label" for="email"><span><?php /* @escapeNotVerified */ echo __('Email') ?></span> <em>*</em></label>
+					<input name="email" id="email" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" value="<?php echo $block->escapeHtml($this->helper('Magento\Contact\Helper\Data')->getPostValue('email') ?: $this->helper('Magento\Contact\Helper\Data')->getUserEmail()) ?>" class="input-text floating-input" type="email" data-validate="{required:true, 'validate-email':true}" placeholder=" ">
+      </div>
+			</div>
+      <div class="field telephone">
+        <div class="control floating-label">
+              <label class="label" for="telephone"><span><?php /* @escapeNotVerified */ echo __('Phone Number') ?></span> <em>*</em></label>
+                <input name="telephone" id="telephone" title="<?php /* @escapeNotVerified */ echo __('Phone Number') ?>" value="<?php echo $block->escapeHtml($this->helper('Magento\Contact\Helper\Data')->getPostValue('telephone')) ?>" class="input-text floating-input validate-length minimum-length-11 validate-digits maximum-length-11 only_numeric" maxlength="11" type="text" data-validate="{required:true, 'validate-length':true}" placeholder=" ">
+          </div>
+        </div>
+      </div>
+        <div class="field comment required">
+      <div class="control floating-label">
+              <label class="label" for="comment"><span><?php /* @escapeNotVerified */ echo __('Comment') ?></span> <em>*</em></label>
+                <textarea name="comment" id="comment" title="<?php /* @escapeNotVerified */ echo __('Comment') ?>" class="input-text floating-input floating-input" cols="5" rows="3" placeholder=" " data-validate="{required:true}"><?php echo $block->escapeHtml($this->helper('Magento\Contact\Helper\Data')->getPostValue('comment')) ?></textarea>
+  </div>
+        </div>
+        <?php echo $block->getChildHtml('form.additional.info'); ?>
+ <div class="gdpr-reg">
+       <div class="floating-label">
+                      <label>Communication Preference <em>*</em></label>
+                    <select name="communication_preference" id="communication_preference" class="required-entry validate-select floating-select">
+                            <option value="">Select Preference</option>
+                            <option value="phone">Phone</option>
+                            <option value="email">Email</option>
+                            <option value="any">Any</option>
+                    </select>
+          <div class="error validation-advice" id="err_pref"></div>
+                  </div>
+        </div>
+    <div class="fieldset login-info gdpr-1">
+        <input name="terms_and_conditions_approval" id="terms_approval_reg" data-validate="{required:true}" type="checkbox" value="1" >
+        <label for="terms_approval_reg">By ticking this box you confirm you have read, understood and accept our <a href="<?php echo $this->getUrl('privacy-policy')?>" target="_blank" title="Privacy & Policy">Privacy Policy</a> .</label>
+    </div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <input type="hidden" name="hideit" id="hideit" value="" />
+            <button type="submit" title="<?php /* @escapeNotVerified */ echo __('Submit') ?>" class="action submit primary">
+                <span><?php /* @escapeNotVerified */ echo __('Send Enquiry') ?></span>
+            </button>
+        </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  require(['jquery', 'jquery/ui', 'jquery/validate', 'mage/translate'], function($){
+    $(document).ready(function () {
+        $.validator.addMethod(
+            "validate_alpha_with_space",
+            function(value, element) {
+              console.log(value);
+              console.log(/^[a-zA-Z ]+$/.test(value));
+                return /^[a-zA-Z ]+$/.test(value);
+            },
+            $.mage.__("Please enter valid name")
+        );
+
+        $(".only_numeric").on('propertychange input', function(e) {
+            var contact_num = jQuery(this).val();
+            $(this).val(contact_num.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'));
+        });
+
+    });
+});
+</script>

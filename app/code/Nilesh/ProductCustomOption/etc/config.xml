@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<custom_option_section>
+			<custom_option_group>
+				<custom_option_field_enable>1</custom_option_field_enable>
+			</custom_option_group>
+		</custom_option_section>
+	</default>
+</config>

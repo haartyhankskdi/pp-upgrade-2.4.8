@@ -1,0 +1,60 @@
+<?php
+
+/** @var $block \Haartyhanks\CategoryQuest\Block\BlacklistedPopup */
+
+// echo $customerId = $block->getCustomerId();
+$customer = $block->getCustomerData();
+
+// echo $customer->getData('order_flag');
+?>
+
+<?php if ($customer->getData('order_flag') == 1) { ?>
+    <div id="popup-modal">
+        <p>Dear customer your account has been blacklisted. please contact <a href="<?php echo $block->getBaseUrl() . "/contact"; ?>">here</a> to make active your account.</p>
+    </div>
+<?php } ?>
+
+
+
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            let options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                modalClass: 'custom-modal',
+                // buttons: [{
+                //     text: $.mage.__('Continue'),
+                //     class: '',
+                //     click: function() {
+                //         this.closeModal();
+                //     }
+                // }]
+            };
+
+            let $myModal = $('#popup-modal');
+            let popup = modal(options, $myModal);
+
+            //this opens the modal, you can use some click event or whatever you need to trigger the modal here
+            $myModal.modal('openModal');
+        });
+</script>
+
+<style>
+
+    .modal-header button{
+        display: none;
+    }
+
+    .modal-footer button {
+        display: none;
+    }
+</style>

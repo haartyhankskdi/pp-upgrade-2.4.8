@@ -1,0 +1,5 @@
+
+type StoreConfig {
+    
+    custom_option_section_custom_option_group_custom_option_field_enable  : String  @doc(description: "Query by custom_option_section_custom_option_group_custom_option_field_enable.") ,
+}

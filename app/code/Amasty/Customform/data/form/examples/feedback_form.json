@@ -1,0 +1,129 @@
+{
+  "title": "Feedback form",
+  "code": "feedback",
+  "status": 1,
+  "customer_group": 0,
+  "store_id": 0,
+  "send_notification": 0,
+  "submit_button": "Submit",
+  "success_message": "Thanks for contacting us. Your request was saved successfully.",
+  "form_json": [
+    [
+      {
+        "type": "textinput",
+        "name": "name1",
+        "label": "Name",
+        "className": "form-control",
+        "required": true,
+        "validation": ""
+      },
+      {
+        "type": "textinput",
+        "name": "email2",
+        "label": "Email",
+        "className": "form-control",
+        "required": true,
+        "validation": "validate-email"
+      },
+      {
+        "type": "textinput",
+        "name": "organization3",
+        "label": "Organization",
+        "className": "form-control",
+        "validation": ""
+      },
+      {
+        "type": "dropdown",
+        "name": "interested4",
+        "label": "What products are you interested in?",
+        "className": "form-control",
+        "required": true,
+        "values": [
+          {
+            "label": "Product 1",
+            "value": "option-1",
+            "selected": true
+          },
+          {
+            "label": "Product 2",
+            "value": "option-2"
+          },
+          {
+            "label": "Product 3",
+            "value": "option-3"
+          }
+        ],
+        "validation": ""
+      },
+      {
+        "type": "radio",
+        "name": "rate5",
+        "label": "How would you rate our store?",
+        "className": "amform-radio",
+        "required": true,
+        "values": [
+          {
+            "label": "R1",
+            "value": "option-1",
+            "selected": true
+          },
+          {
+            "label": "R2",
+            "value": "option-2"
+          },
+          {
+            "label": "R3",
+            "value": "option-3"
+          },
+          {
+            "label": "R4",
+            "value": "option-4"
+          },
+          {
+            "label": "R5",
+            "value": "option-5"
+          }
+        ],
+        "validation": ""
+      },
+      {
+        "type": "radio",
+        "name": "service6",
+        "label": "How would you rate our service?",
+        "className": "amform-radio",
+        "required": true,
+        "values": [
+          {
+            "label": "l1",
+            "value": "option-1",
+            "selected": true
+          },
+          {
+            "label": "l2",
+            "value": "option-2"
+          },
+          {
+            "label": "l3",
+            "value": "option-3"
+          },
+          {
+            "label": "l4",
+            "value": "option-4"
+          },
+          {
+            "label": "l5",
+            "value": "option-5"
+          }
+        ],
+        "validation": ""
+      },
+      {
+        "type": "textarea",
+        "name": "comments7",
+        "label": "Any other comments?",
+        "className": "form-control",
+        "validation": ""
+      }
+    ]
+  ]
+}

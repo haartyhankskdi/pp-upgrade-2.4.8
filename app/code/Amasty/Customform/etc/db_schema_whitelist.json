@@ -1,0 +1,73 @@
+{
+  "amasty_customform_form": {
+    "column": {
+      "form_id": true,
+      "title": true,
+      "code": true,
+      "success_url": true,
+      "status": true,
+      "created_at": true,
+      "customer_group": true,
+      "store_id": true,
+      "send_notification": true,
+      "send_to": true,
+      "email_template": true,
+      "submit_button": true,
+      "success_message": true,
+      "form_json": true,
+      "email_field": true,
+      "email_field_hide": true,
+      "popup_show": true,
+      "popup_button": true,
+      "form_title": true,
+      "save_referer_url": true,
+      "auto_reply_template": true,
+      "auto_reply_enable": true,
+      "survey_mode_enable": true,
+      "design": true,
+      "allow_edit_answers": true,
+      "notify_when_customer_edits_answer": true,
+      "after_edit_email_template": true,
+      "allow_customer_remove_data": true,
+      "notify_when_customer_removes_answer": true,
+      "after_remove_email_template": true,
+      "form_contains_sensitive_data": true,
+      "is_visible": true,
+      "scheduled_from": true,
+      "scheduled_to": true
+    },
+    "index": {
+      "AM_CUSTOMFORM_FORM_FORM_ID": true,
+      "AMASTY_CUSTOMFORM_FORM_FORM_ID": true
+    },
+    "constraint": {
+      "PRIMARY": true
+    }
+  },
+  "amasty_customform_answer": {
+    "column": {
+      "answer_id": true,
+      "form_id": true,
+      "store_id": true,
+      "created_at": true,
+      "ip": true,
+      "customer_id": true,
+      "response_json": true,
+      "admin_response_email": true,
+      "admin_response_message": true,
+      "admin_response_status": true,
+      "referer_url": true,
+      "updated_at": true,
+      "form_name": true,
+      "form_code": true
+    },
+    "index": {
+      "AM_CUSTOMFORM_ANSWER_FORM_ID": true,
+      "AMASTY_CUSTOMFORM_ANSWER_ANSWER_ID": true,
+      "AMASTY_CUSTOMFORM_CUSTOMER_ID": true
+    },
+    "constraint": {
+      "PRIMARY": true
+    }
+  }
+}

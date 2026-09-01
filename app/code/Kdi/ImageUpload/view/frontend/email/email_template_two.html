@@ -1,0 +1,405 @@
+<!--@subject Submit Photos to Verify Your Weight @-->
+<!--@vars
+{
+    "var customer_name": "Customer Name",
+    "var upload_url": "Image Upload URL"
+}
+@-->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+    .email-container {
+    }
+    .header {
+        color: #000;
+        padding: 20px 0;
+        text-align: left;
+        font-size: 25px;
+        font-weight: bold;
+    }
+    .content {
+        padding: 0px;
+    }
+    .content h2 {
+        color: #00acc1;
+        margin-bottom: 10px;
+    }
+    .content p {
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+    .progress {
+        margin: 0px 0;
+    }
+    .step {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+        padding: 6px 5px;
+        border-radius: 50px;
+        font-family: Arial, sans-serif;
+        position: relative;
+        z-index: 999;
+    }
+    .circle {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: #e0f7fa;
+        border: 2px solid #00acc1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #00acc1;
+        font-size: 50px;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+    .circle.checked {
+        background-color: #fff;
+        color: #0b50fa;
+    }
+    .step-text {
+        font-size: 14px;
+    }
+    .step-text.checked {
+        color: #000;
+        font-weight: 400;
+    }
+    .buttons {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #ff4d4d;
+        border: none;
+        border-radius: 25px;
+        text-align: center;
+        text-decoration: none;
+        margin: 10px 0;
+    }
+    .button:hover {
+        background-color: #e04444;
+    }
+    .footer {
+        padding: 0;
+        text-align: left;
+    }
+    ul {
+        padding: 0;
+        margin: 0 0 0 17px;
+        width: 100%;
+        display: inline-block;
+    }
+    p,
+    ul li {
+        font-size: 14px;
+        font-family: Arial, sans-serif;
+        color: #000000;
+        line-height: 22px;
+        font-weight: 400 !important;
+        padding: 0px;
+        margin: 0;
+    }
+    h3 {
+        font-size: 25px !important;
+        font-family: Arial, sans-serif;
+        color: #000000;
+        line-height: 40px !important;
+        font-weight: 700 !important;
+        padding-bottom: 0;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    h4 {
+        font-size: 20px !important;
+        font-family: Arial, sans-serif;
+        color: #000000;
+        line-height: 32px !important;
+        font-weight: 700 !important;
+        padding-bottom: 0;
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+    .stp1 {
+        background-color: #6ac4d8;
+    }
+    .stp2 {
+        background-color: #74c9cf;
+    }
+    .stp3 {
+        background-color: #83c0f0;
+    }
+    .stp4 {
+        background-color: #9fa9de;
+    }
+    .content .progress.step-left {
+        width: 80%;
+        float: left;
+        margin-top: 20px;
+        position: relative;
+    }
+    .content .progress.step-left:before {
+        content: " " !important;
+        width: 3px;
+        height: 370px;
+        display: inline-block;
+        position: absolute;
+        left: 25px;
+        top: -25px;
+        z-index: 1;
+        background-image: linear-gradient(
+            to bottom,
+            #6ac4d8,
+            #74c9cf,
+            #83c0f0,
+            #9fa9de
+        );
+    }
+    .step-right {
+        width: 92%;
+        float: left;
+        padding-left: 8%;
+        margin-left: 8%;
+        border-left: 1px solid #3333;
+    }
+</style>
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr>
+        <td
+            style="
+                background-color: #fff;
+                padding: 15px 15px 30px 15px;
+                display: inline-block;
+            "
+        >
+            <h1
+                style="
+                    font-size: 34px;
+                    color: #000;
+                    text-align: left;
+                    font-weight: 700;
+                    padding-top: 20px;
+                "
+            >
+                Next Step
+            </h1>
+            <h2
+                style="
+                    font-size: 25px;
+                    color: #000;
+                    text-align: left;
+                    font-weight: 700;
+                    padding-bottom: 20px;
+                "
+            >
+                Book Your Consultation Appointment
+            </h2>
+
+            <div
+                class="content"
+                style="display: inline-block; padding-bottom: 30px"
+            >
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="50%">
+                            <div class="progress step-left">
+                                <div class="step stp1">
+                                    <div class="circle checked">✓</div>
+                                    <div class="step-text checked">
+                                        Order Placed
+                                    </div>
+                                </div>
+                                <div class="step stp2">
+                                    <div class="circle checked">✓</div>
+                                    <div class="step-text checked">
+                                        Book Appointment
+                                    </div>
+                                </div>
+                                <div class="step stp3">
+                                    <div class="circle">&nbsp;</div>
+                                    <div class="step-text">Clinical Review</div>
+                                </div>
+                                <div class="step stp3">
+                                    <div class="circle">&nbsp;</div>
+                                    <div class="step-text">Order Shipped</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td width="50%">
+                            <div class="step-right">
+                                <p
+                                    style="
+                                        margin-bottom: 30px;
+                                        border-bottom: 1px solid #000;
+                                        padding-bottom: 30px;
+                                    "
+                                >
+                                    Our clinical team is ready to review your
+                                    application. The next step is to book a
+                                    quick consultation appointment with one of
+                                    our clinicians. During the appointment,
+                                    we’ll discuss your treatment, answer any
+                                    questions, and complete the final review
+                                    process.
+                                </p>
+
+                                <p>
+                                    <a
+                                        href="https://calendly.com/rajesh-haartyhanks/image-verification"
+                                        ><img
+                                            src="https://magento-1195784-4216081.cloudwaysapps.com/pub/media/bookcandly-btn2.png"
+                                            alt="Book Calendly"
+                                    /></a>
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <p>Dear {{var customer_name}},</p>
+
+            <p>
+                Thank you for your request to join our weight loss programme –
+                we're excited to help you get started.
+            </p>
+
+            <p>
+                As part of our clinical safety measures, we require verification
+                before we can process your treatment request and ship your
+                medication. Please review the guidelines below to ensure your
+                photos meet the required standards and follow the submission
+                procedure.
+            </p>
+
+            <p>
+                To proceed with your request, we kindly require the following:
+            </p>
+            <ul>
+                <li>A full-body image (front and side views).</li>
+                <li>
+                    A valid form of identification for verification purposes.
+                </li>
+            </ul>
+
+            <p>
+                Use the button below to securely upload the required images and
+                documents:
+            </p>
+            <p style="margin-bottom: 20px">
+                <a href="{{var upload_url}}"
+                    ><img
+                        src="https://magento-1195784-4216081.cloudwaysapps.com/pub/media/imageupload-btn-n.png"
+                        alt="Upload Images"
+                /></a>
+            </p>
+
+            <p>
+                Alternatively, you can schedule an appointment with our
+                prescriber via Calendly for a live update and further
+                assistance. Use the button below to book your appointment:
+            </p>
+            <p style="margin-bottom: 40px">
+                <a
+                    href="https://calendly.com/rajesh-haartyhanks/image-verification"
+                    ><img
+                        src="https://magento-1195784-4216081.cloudwaysapps.com/pub/media/bookcandly--btn-n.png"
+                        alt="Book Calendly"
+                /></a>
+            </p>
+
+            <h3><strong>Tips for Taking Photos</strong></h3>
+            <p>You'll need to provide photos from two angles:</p>
+            <ul>
+                <li style="width: 50%; float: left; list-style-type: none">
+                    <span><strong>Side:</strong></span>
+                    <img
+                        src="https://magento-1195784-4216081.cloudwaysapps.com/pub/media/IMG-side_view.png"
+                        alt="Side View"
+                    />
+                </li>
+                <li style="width: 50%; float: left; list-style-type: none">
+                    <span><strong>Front:</strong></span>
+                    <img
+                        src="https://magento-1195784-4216081.cloudwaysapps.com/pub/media/IMG-front_view.png"
+                        alt="Front View"
+                    />
+                </li>
+            </ul>
+
+            <p>
+                Follow these tips to ensure your photos meet the requirements:
+            </p>
+            <ul>
+                <li>
+                    Use a mirror or a timer: Avoid angles or distortions, and
+                    ensure the camera is straight.
+                </li>
+                <li>
+                    Capture from neck to knees: Provide a full-body view for
+                    verification (your face is not required).
+                </li>
+                <li>
+                    Wear fitted clothing: Avoid loose clothing and do not send
+                    nude photos.
+                </li>
+                <li>
+                    Ensure clarity and lighting: Photos should be clear,
+                    well-lit, and not blurry.
+                </li>
+                <li>
+                    No additional subjects: Make sure you're the only person in
+                    the photo.
+                </li>
+            </ul>
+
+            <h3><strong>Why Are Photos Required?</strong></h3>
+            <p>
+                In accordance with our clinical guidelines, your clinician needs
+                to verify your weight and BMI measurements to ensure the
+                treatment is appropriate for you.
+            </p>
+            <p>
+                We understand the sensitivity of providing personal photos.
+                Please rest assured that these images are treated with the
+                utmost respect and confidentiality. They will only be accessed
+                by healthcare professionals directly involved in your care. For
+                more information, please refer to our
+                <a
+                    href="https://www.pharmacyplanet.com/privacy-policy"
+                    style="color: #000"
+                    >Privacy Policy</a
+                >.
+            </p>
+            <p>
+                If you have any questions or need assistance, feel free to
+                contact us at
+                <a
+                    href="mailto:headoffice@pharmacyplanet.com"
+                    style="color: #000"
+                    >headoffice@pharmacyplanet.com</a
+                >.
+            </p>
+            <p>
+                We appreciate your cooperation and look forward to supporting
+                you on your journey.
+            </p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

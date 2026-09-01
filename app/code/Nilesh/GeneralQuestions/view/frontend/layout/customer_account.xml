@@ -1,0 +1,15 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-general-question">
+                <arguments>
+                    <argument name="path" xsi:type="string">customer/general/question</argument>
+                    <argument name="label" xsi:type="string" translate="true">General Health Questions</argument>
+                    <!-- <argument name="sortOrder" xsi:type="number">210</argument> -->
+                </arguments>
+            </block>
+        </referenceBlock>
+        <!-- <move element="customer-account-general-question" destination="customer_account_navigation" after="customer-account-navigation-orders-link" /> -->
+    </body>
+</page>

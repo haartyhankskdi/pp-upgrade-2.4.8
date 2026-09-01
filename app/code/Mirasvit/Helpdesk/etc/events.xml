@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="adminhtml_block_html_before">
+        <observer name="m_helpdesk_observer" instance="\Mirasvit\Helpdesk\Observer\CheckCronStatusObserver"/>
+    </event>
+    <event name="admin_user_load_after">
+        <observer name="m_helpdesk_observer" instance="\Mirasvit\Helpdesk\Observer\LoadUserSignatureObserver"/>
+    </event>
+    <event name="admin_user_save_after">
+        <observer name="m_helpdesk_observer" instance="\Mirasvit\Helpdesk\Observer\SaveUserSignatureObserver"/>
+    </event>
+    <event name="controller_action_predispatch_helpdesk_form_post">
+        <observer name="msp_captcha_contact_us" instance="Mirasvit\Helpdesk\Observer\Frontend\ContactFormObserver" />
+    </event>
+    <event name="controller_action_predispatch_helpdesk_satisfaction_post">
+        <observer name="msp_captcha_satisfaction" instance="Mirasvit\Helpdesk\Observer\Frontend\ContactFormObserver" />
+    </event>
+    <event name="controller_action_predispatch_helpdesk_contact_postmessage">
+        <observer name="msp_captcha_popup" instance="Mirasvit\Helpdesk\Observer\Frontend\ContactFormObserver" />
+    </event>
+    <event name="helpdesk_ticket_save_after">
+        <observer name="ticket_save_after" instance="Mirasvit\Helpdesk\Observer\Ticket\SaveAfterObserver" />
+    </event>
+    <event name="helpdesk_process_email">
+        <observer name="helpdesk_process_email" instance="Mirasvit\Helpdesk\Observer\Email\ProcessObserver" />
+    </event>
+</config>

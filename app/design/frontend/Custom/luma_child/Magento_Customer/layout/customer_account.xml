@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
+    <head>
+        <title>My Account</title>
+    </head>
+    <body>
+    	<attribute name="class" value="account"/>
+
+        <referenceBlock name="customer-account-navigation-account-link" remove="true"/>
+
+        <referenceContainer name="sidebar.main">
+            <block class="Magento\Framework\View\Element\Template" name="sidebar.main.account_nav" template="Magento_Theme::html/collapsible.phtml" before="-">
+                <arguments>
+                    <argument name="block_css" xsi:type="string">account-nav</argument>
+                </arguments>
+                <block class="Magento\Customer\Block\Account\Navigation" name="customer_account_navigation" before="-">
+                    <arguments>
+                        <argument name="css_class" xsi:type="string">nav items</argument>
+                    </arguments>
+                    <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-account-link">
+                        <arguments>
+                            <argument name="label" xsi:type="string" translate="true">My Account</argument>
+                            <argument name="path" xsi:type="string">customer/account</argument>
+                            <argument name="sortOrder" xsi:type="number">250</argument>
+                        </arguments>
+                    </block>
+                    <referenceBlock name="customer-account-navigation-delimiter-1" remove="true"/>
+                    <!-- <block class="Magento\Customer\Block\Account\Delimiter" name="customer-account-navigation-delimiter-1" template="Magento_Customer::account/navigation-delimiter.phtml">
+                        <arguments>
+                            <argument name="sortOrder" xsi:type="number">200</argument>
+                        </arguments>
+                    </block> -->
+                    <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-address-link">
+                        <arguments>
+                            <argument name="label" xsi:type="string" translate="true">Manage Address Details</argument>
+                            <argument name="path" xsi:type="string">customer/address</argument>
+                            <argument name="sortOrder" xsi:type="number">180</argument>
+                            <argument name="attributes" xsi:type="array">
+     						   <item name="class" xsi:type="string">manage-address-details</item>
+     						</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-account-edit-link">
+                        <arguments>
+                            <argument name="label" xsi:type="string" translate="true">Manage Account Details</argument>
+                            <argument name="path" xsi:type="string">customer/account/edit</argument>
+                            <argument name="sortOrder" xsi:type="number">190</argument>
+                            <argument name="attributes" xsi:type="array">
+     						   <item name="class" xsi:type="string">manage-account-details</item>
+     						</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-orders-links">
+                        <arguments>
+                            <argument name="label" xsi:type="string" translate="true">My Orders</argument>
+                            <argument name="path" xsi:type="string">sales/order/history</argument>
+                            <argument name="sortOrder" xsi:type="number">172</argument>
+                            <argument name="attributes" xsi:type="array">
+     						   <item name="class" xsi:type="string">my-orders</item>
+     						</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-general-question">
+                        <arguments>
+                            <argument name="label" xsi:type="string" translate="true">General Health Questions</argument>
+                            <argument name="path" xsi:type="string">customer/general/question</argument>
+                            <argument name="sortOrder" xsi:type="number">173</argument>
+                            <argument name="attributes" xsi:type="array">
+     						   <item name="class" xsi:type="string">general-question</item>
+     						</argument>
+                        </arguments>
+                    </block>
+                    <block class="Mirasvit\Helpdesk\Block\Account\Link" ifconfig="helpdesk/frontend/is_active" name="customer-account-navigation-helpdesk-link">
+                        <arguments>
+                            <argument name="path" xsi:type="string">helpdesk</argument>
+                            <argument name="label" xsi:type="string">Order Query</argument>
+                            <argument name="attributes" xsi:type="array">
+                               <item name="class" xsi:type="string">customer-support-ticket</item>
+                            </argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-newsletter-subscriptions-link">
+                        <arguments>
+                            <argument name="label" xsi:type="string" translate="true">Newsletter Subscriptions</argument>
+                            <argument name="path" xsi:type="string">newsletter/manage</argument>
+                            <argument name="sortOrder" xsi:type="number">170</argument>
+                            <argument name="attributes" xsi:type="array">
+     						   <item name="class" xsi:type="string">newsletter-subscriptions</item>
+     						</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-delete">
+                        <arguments>
+                            <argument name="label" xsi:type="string" translate="true">Delete Account</argument>
+                            <argument name="path" xsi:type="string">customer/delete</argument>
+                            <argument name="sortOrder" xsi:type="number">169</argument>
+                            <argument name="attributes" xsi:type="array">
+                               <item name="class" xsi:type="string">customer-delete</item>
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <referenceBlock name="customer-account-navigation-delimiter-2" remove="true"/>
+                    <!-- <block class="Magento\Customer\Block\Account\Delimiter" name="customer-account-navigation-delimiter-2" template="Magento_Customer::account/navigation-delimiter.phtml">
+                        <arguments>
+                            <argument name="sortOrder" xsi:type="number">130</argument>
+                        </arguments>
+                    </block> -->
+                </block>
+            </block>
+        </referenceContainer>
+
+    </body>
+</page>
+							

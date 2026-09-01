@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="nilesh_prescribernotes_prescribernotes" resource="default" engine="innodb" comment="nilesh_prescribernotes_prescribernotes Table">
+		<column xsi:type="int" name="prescribernotes_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="prescribernotes_id"/>
+		</constraint>
+		<column name="connect_id" nullable="true" xsi:type="int" comment="Relational Id" identity="false" unsigned="true"/>
+		<index referenceId="NILESH_PRESCRIBERNOTES_PRESCRIBERNOTES_ID" indexType="btree">
+			<column name="connect_id"/>
+		</index>
+		<column name="subject" nullable="true" xsi:type="text" comment="subject"/>
+		<column name="note" nullable="true" xsi:type="text" comment="note"/>
+		<column name="customer_name" nullable="true" xsi:type="varchar" comment="customer_name" length="255"/>
+		<column name="prescribernotes_upload" nullable="true" xsi:type="varchar" comment="Prescriber Notes Upload 1" length="255"/>
+		<column name="prescribernotes_upload2" nullable="true" xsi:type="varchar" comment="Prescriber Notes Upload 2" length="255"/>
+		<column name="prescribernotes_upload3" nullable="true" xsi:type="varchar" comment="Prescriber Notes Upload 3" length="255"/>
+		<column name="prescribernotes_upload4" nullable="true" xsi:type="varchar" comment="Prescriber Notes Upload 4" length="255"/>
+		<column name="prescribernotes_upload5" nullable="true" xsi:type="varchar" comment="Prescriber Notes Upload 5" length="255"/>
+		<column name="set_priority" nullable="true" xsi:type="varchar" comment="Set Priority" length="255"/>		
+		<column name="created_by" nullable="true" xsi:type="varchar" comment="created_by" length="255"/>
+<!--		<column name="created_at" nullable="true" xsi:type="timestamp" comment="created_at"/>-->
+        <column name="created_at" nullable="true" xsi:type="timestamp" comment="created_at" default="CURRENT_TIMESTAMP"/>
+	</table>
+</schema>

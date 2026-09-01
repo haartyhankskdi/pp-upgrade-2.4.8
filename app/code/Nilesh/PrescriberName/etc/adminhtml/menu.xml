@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Nilesh_PrescriberName::nilesh_prescribername" title="Prescriber" translate="title" module="Nilesh_PrescriberName" sortOrder="10" parent="Magento_Sales::sales" resource="Magento_Sales::sales" />
+		<add action="nilesh_prescribername/prescribername/index" id="Nilesh_PrescriberName::nilesh_prescribername_prescribername" module="Nilesh_PrescriberName" parent="Nilesh_PrescriberName::nilesh_prescribername" resource="Magento_Sales::sales" sortOrder="9999" title="Prescriber Name"/>
+	</menu>
+</config>

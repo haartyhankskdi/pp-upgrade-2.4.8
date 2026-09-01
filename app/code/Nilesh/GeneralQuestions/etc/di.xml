@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Nilesh\GeneralQuestions\Api\GeneralQuestionsRepositoryInterface" type="Nilesh\GeneralQuestions\Model\GeneralQuestionsRepository"/>
+	<preference for="Nilesh\GeneralQuestions\Api\Data\GeneralQuestionsInterface" type="Nilesh\GeneralQuestions\Model\Data\GeneralQuestions"/>
+	<preference for="Nilesh\GeneralQuestions\Api\Data\GeneralQuestionsSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+</config>

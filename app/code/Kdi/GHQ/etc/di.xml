@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="Amasty\Customform\Controller\Form\Submit">
+		<plugin name="Kdi_GHQ_Plugin_Amasty_Customform_Controller_Form_Submit" type="Kdi\GHQ\Plugin\Amasty\Customform\Controller\Form\Submit" sortOrder="10" disabled="false"/>
+	</type>
+	 <preference for="Amasty\Customform\Model\Submit" type="Kdi\GHQ\Model\Submit" />
+</config>

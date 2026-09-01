@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_PromoBanner
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="Mageplaza\PromoBanner\Block\Banner\Widget" id="mageplaza_promobanner_widget" placeholder_image="Magento_Catalog::images/product_widget_new.png" ttl="86400">
+        <label>Mageplaza Promo Banner</label>
+        <description>Promo Banner Widget</description>
+        <parameters>
+            <parameter name="banner_id" xsi:type="select" required="true" visible="true" source_model="Mageplaza\PromoBanner\Model\Config\Source\Widget">
+                <label>Select Promo Banner</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

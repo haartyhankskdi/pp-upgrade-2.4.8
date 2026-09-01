@@ -1,0 +1,538 @@
+<?php
+
+/** @var $block \Haartyhanks\CategoryQuest\Block\Index */
+$_helperCatalog = $this->helper(Haartyhanks\CategoryQuestWL\Helper\Data::class);
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$session = $objectManager->get(\Magento\Framework\Session\SessionManagerInterface::class);
+$categoryId = [];
+// $productId = $_helperCatalog->getProdValueSession();
+$productId = $session->getData('product_id');
+$categoryId = $_helperCatalog->getCatValueSession();
+// $products = $block->getCategoryProducts($categoryId);
+$products = $_helperCatalog->getProductCollectionByCategories($categoryId);
+$ids = $block->getProductIds($products);
+$productsArr = [];
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$imageHelper = $objectManager->get('Magento\Catalog\Helper\Image');
+
+
+/** @var \Magento\Store\Model\StoreManagerInterface $storeManager */
+$storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+$currentStore = $storeManager->getStore();
+$baseUrl = $currentStore->getBaseUrl();
+
+// check product stock status
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$stockRegistry = $objectManager->get('Magento\CatalogInventory\Api\StockRegistryInterface');
+?>
+
+<?php if ($categoryId) { ?>
+    <div class="content">
+        <div class="selected-product">
+            <div class="select-product"> 
+                <h2><?= __('Select your product') ?></h2>
+                <div class="step-p"><a href="<?= $baseUrl; ?>"><span><?= __('Back') ?></span></a></div>
+                <!--  <p>Please select your treatment. You can choose your strength/size once you select and continue.</p> -->
+                <div class="products-wrapper grid products-grid">
+                    <ul class="products-list product-items custom-row-category">
+                        <?php 
+                            $selectedProduct = null;
+
+                            foreach ($products as $product) {
+                                // Skip the product if its ID matches $productId
+                                if ($product->getId() == $productId) {
+                                    $selectedProduct = $product;
+                                    break;
+                                }
+                            }
+
+                            if ($selectedProduct) { ?>
+                                <li class="product-item custom-col-category selected">
+                                    <div class="outstock-img"></div>
+                                    <div class="product-image">
+                                        <img src="<?= $imageHelper->init($selectedProduct, 'product_page_image_small')->setImageFile($selectedProduct->getSmallImage())->resize(400)->getUrl() ?>" alt="<?= $block->escapeHtml($selectedProduct->getName()) ?>">
+                                    </div>
+                                    <div class="product-info custom-col-wrapper-category">
+                                        <h2 class="product-name"><?= $block->escapeHtml($selectedProduct->getName()) ?></h2>
+                                        <!-- <div class="product-item-desc"><?= $block->escapeHtml($selectedProduct->getShortDescription()); ?></div> -->
+                                        <div class="select-p-list">
+                                            <ul>
+                                                <?php
+                                                $bulletPoints = $selectedProduct->getPrBulletPoints(); // Fetch the bullet points attribute value
+                                                $bulletPointsArray = explode("\n", $bulletPoints); // Split the attribute value by new lines into an array
+                                                foreach ($bulletPointsArray as $bulletPoint): ?>
+                                                    <li><img src="/media/wysiwyg//WLImage/tick.svg" alt="tick"><?= $block->escapeHtml($bulletPoint); ?></li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+
+                                        <div class="select-price">
+                                            <div class="product-price"><?= '<span> Starting From </span> £'.$block->escapeHtml($block->getProductPrice($selectedProduct)) ?></div>
+                                            <!-- <p>£249 every month thereafter</p> -->
+                                        </div>
+                                        
+                                        <div class="select-btn">
+                                            <?php 
+                                                $stockItem = $stockRegistry->getStockItem($selectedProduct->getId()); 
+                                                $inStock = $stockItem->getIsInStock();
+                                                if ($inStock): ?>
+                                                    <div class="product-order-now selected">
+                                                        <span><a href="<?= $selectedProduct->getProductUrl() . '?true'; ?>">
+                                                            <button><?= __("SELECT & CONTINUE") ?></button></a>
+                                                        </span>
+                                                    </div>
+                                                <?php else: ?>
+                                                    <div class="out-of-stock">
+                                                        <span>Out of Stock</span>
+                                                    </div>
+                                                <?php endif; ?>
+                                            <div class="info">
+                                                <img src="/media/wysiwyg//WLImage/info-i.png" alt="Info">
+                                            </div>
+                                            <div class="info-tooltip">
+                                                <?= $block->escapeHtml($selectedProduct->getShortDescription()); ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            <?php }
+
+                            foreach ($products as $product) {
+                                // Skip the product if its ID matches $productId
+                                if ($product->getId() != $productId) { ?>
+                                    <li class="product-item custom-col-category">
+                                        <div class="product-image">
+                                            <img src="<?= $imageHelper->init($product, 'product_page_image_small')->setImageFile($product->getSmallImage())->resize(400)->getUrl() ?>" alt="<?= $block->escapeHtml($product->getName()) ?>">
+                                        </div>
+                                        <!-- <div class="product-item-desc"><?= $block->escapeHtml($product->getShortDescription()); ?></div> -->
+
+                                        <div class="product-info custom-col-wrapper-category">
+                                            <h2 class="product-name"><?= $block->escapeHtml($product->getName()) ?></h2>
+                                            <div class="select-p-list">
+                                                <ul>
+                                                    <?php
+                                                    $bulletPoints = $product->getPrBulletPoints(); // Fetch the bullet points attribute value
+                                                    $bulletPointsArray = explode("\n", $bulletPoints); // Split the attribute value by new lines into an array
+                                                    foreach ($bulletPointsArray as $bulletPoint): ?>
+                                                        <li><img src="/media/wysiwyg//WLImage/tick.svg" alt="tick"><?= $block->escapeHtml($bulletPoint); ?></li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            </div> 
+
+                                            <div class="select-price">
+                                                <div class="product-price"><?= '<span> Starting From </span> £'.$block->escapeHtml($block->getProductPrice($product)) ?></div>
+                                                <!-- <p>£249 every month thereafter</p> -->
+                                            </div>
+
+                                            <div class="select-btn">
+                                                <div class="product-order-now">
+                                                    <?php 
+                                                    $stockItem = $stockRegistry->getStockItem($product->getId()); 
+                                                    $inStock = $stockItem->getIsInStock();
+                                                    if ($inStock): ?>
+                                                        <span><a href="<?= $product->getProductUrl() . '?true'; ?>">
+                                                            <button><?= __("SELECT PRODUCT") ?></button></a>
+                                                        </span>
+                                                    <?php else: ?>
+                                                        <div class="out-of-stock">
+                                                            <span>Out of Stock</span>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </div>
+                                                <div class="info">
+                                                    <img src="/media/wysiwyg//WLImage/info-i.png" alt="Info">
+                                                </div>
+                                                <div class="info-tooltip">
+                                                    <?= $block->escapeHtml($product->getShortDescription()); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                <?php }
+                            }
+                        ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
+
+<div class="weightloss-treatment-comparison reveal1">
+    <div class="container">
+        <h2>Weight loss treatments comparison</h2>
+        <div class="weight-loss-com">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td valign="top" class="weight-d-1">
+                        <table width="100%" border="0">
+                            <tr>
+                                <td class="weight-d-1">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>Active ingredient</td>
+                            </tr>
+                            <tr>
+                                <td>How to take it</td>
+                            </tr>
+                            <tr>
+                                <td>How it works</td>
+                            </tr>
+                            <tr>
+                                <td>Effectiveness</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td valign="top" class="weight-d-2">
+                        <table width="100%" border="0">
+                            <tr>
+                                <td class="weight-d">
+                                    <div class="weight-cont">
+                                        <div class="weight-i">
+                                            <img src="/media/wysiwyg/WLImage/wegovy.png" alt="Info">
+                                        </div>
+                                        <h3>Wegovy Injections</h3>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Semaglutide</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Wegovy Injection</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Reduces/regulates appetite</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space last">Around 85%</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td valign="top" class="weight-d-3">
+                        <table width="100%" border="0" align="left">
+                            <tr>
+                                <td class="weight-d">
+                                    <div class="weight-cont">
+                                        <div class="weight-i">
+                                            <img src="/media/wysiwyg/WLImage/saxenda.png" alt="Info">
+                                        </div>
+                                        <h3>Saxenda</h3>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Liraglutide</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Daily Injection</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Reduces/regulates appetite</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space last">60%</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td valign="top" class="weight-d-3">
+                        <table width="100%" border="0">
+                            <tr>
+                                <td class="weight-d">
+                                    <div class="weight-cont">
+                                        <div class="weight-i">
+                                            <img src="/media/wysiwyg/WLImage/Orlistat.png" alt="Info">
+                                        </div>
+                                        <h3>Orlistat/Xenical</h3>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Orlistat</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Oral Capsule up to three times a day</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Reduces/regulates appetite</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space last">45%</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td valign="top" class="weight-d-3">
+                        <table width="100%" border="0">
+                            <tr>
+                                <td class="weight-d">
+                                    <div class="weight-cont">
+                                        <div class="weight-i">
+                                            <img src="/media/wysiwyg/WLImage/Mysimba.png" alt="Info">
+                                        </div>
+                                        <h3>Mysimba</h3>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Naltrexone & Bupropion</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Up to four daily tablets</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Reduces/regulates appetite</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space last">38%</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- New TDs -->
+                    <td valign="top" class="weight-d-3">
+                        <table width="100%" border="0">
+                            <tr>
+                                <td class="weight-d">
+                                    <div class="weight-cont">
+                                        <div class="weight-i">
+                                            <img src="/media/wysiwyg/WLImage/Mounjaro.png" alt="Info">
+                                        </div>
+                                        <h3>Mounjaro</h3>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Tirzepatide</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Once weekly injection</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Regulates Appetite and boosts insulin</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space last">96%</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td valign="top" class="weight-d-3">
+                        <table width="100%" border="0">
+                            <tr>
+                                <td class="weight-d">
+                                    <div class="weight-cont">
+                                        <div class="weight-i">
+                                            <img src="/media/wysiwyg/WLImage/Zepbound.png" alt="Info">
+                                        </div>
+                                        <h3>Zepbound</h3>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Tirzepatide</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Once weekly injection</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space">Controls hunger and boosts insulin</td>
+                            </tr>
+                            <tr>
+                                <td class="l-space last">96%</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <p>*% of people losing more than 5% of body weight.</p>
+    </div>
+</div>
+
+
+<!-- FAQs -->
+<?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faq.phtml")->toHtml(); ?>
+
+
+
+ <!-- Whats Included -->
+ <?= $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/included.phtml")->toHtml(); ?>
+
+<script>
+    require(['jquery'], function($){
+        $(".sub-cat-desc").each(function () {
+            var text = jQuery(this).text();
+            var href = $(this).parent().find(".sub-cat-url").data("href");
+            if (text.length > 100) {
+                $(this).text(text.substr(0, text.lastIndexOf(' ', 97))).append(` <a href='${href}' title="">...</a>`);
+            }
+        });
+    });
+</script>
+
+<script>
+    function faq(ele)
+    {
+    var x = ele.parentElement.nextElementSibling.style.cssText;
+    if(x=='max-height: 500px;')
+    {    
+    ele.style.cssText='transform: rotate(0deg);';     
+    ele.parentElement.nextElementSibling.style.cssText = "transition:0.3s;max-height:0px;";    
+    }
+    else
+    {
+    ele.style.cssText='transform: rotate(45deg);';   
+    ele.parentElement.nextElementSibling.style.cssText = "max-height:500px;";
+    }
+    }
+ </script>
+
+<style>
+  .info-tooltip {
+    display:none;
+  }
+
+.info:hover + .info-tooltip {
+  display: block;
+}
+</style>
+<style>      
+body {
+/* font-family:monospace;
+background-color:#f2d241; */
+}
+.faq {
+width:70%;
+margin: 0 auto;
+}
+
+.question {
+font-size:18px;
+margin:0px;
+padding: 10px;
+}
+.answer {
+font-size:12px;
+margin:0px;
+padding: 0px 15px;
+line-height:2;
+max-height:0px;
+overflow:hidden;
+transition:2s;
+}
+.opener
+{
+font-size:25px;
+float:right;
+line-height:0.8;
+cursor: pointer;
+}
+</style>
+
+<script>
+    require(['jquery', 'jquery/ui', "mage/mage"], function($) {
+        var products = <?php echo json_encode($productsArr); ?>;
+        console.log(products);
+        $(document).ready(function () {
+            var data = "";
+            $.each(products, function(index, product) {
+                data += '<div class="product-body">';
+                data += '<div class="product-name" onclick="show_para(this)"><span><h3>'+product['product_name']+'</h3></span></div>';
+                data += '<div class="accordian-product" style="display: none;"><div class=" product-image"><span><img src="'+product['image_url']+'" alt="'+product['product_name']+'"></span></div>';
+                data += '<div class="product-price"><span class="price">Prices From</span>'+product['regular_price']+'</div>';
+                data += '<div class="product-order-now"><span><a href="'+product['product_url']+'"><button>SELECT & CONTINUE</button></a></span></div></div>';
+                data += '</div>';
+            });
+            $('#products').html(data);
+        });
+        $('#treatment').on('keyup', function(){
+            var inputData = "";
+            var data = "";
+            var inputKeyword = $('#treatment').val();
+            $.each(products, function(index, product) {
+                let name = product['product_name'].toLowerCase();
+                if(name.includes(inputKeyword)){
+                    data += '<div class="product-body">';
+                    data += '<div class="product-name" onclick="show_para(this)"><span><h3>'+product['product_name']+'</h3></span></div>';
+                    data += '<div class="accordian-product" style="display: none;"><div class=" product-image"><span><img src="'+product['image_url']+'" alt="'+product['product_name']+'"></span></div>';
+                    data += '<div class="product-price"><span class="price">Prices From</span>'+product['regular_price']+'</div>';
+                    data += '<div class="product-order-now"><span><a href="'+product['product_url']+'"><button>SELECT & CONTINUE</button></a></span></div></div>';
+                    data += '</div>';
+                }
+            });
+            $('#products').html(data);
+        });
+    });
+
+    
+</script>
+
+<script>
+// function hide_para() {
+//     var h2 = document.querySelectorAll(".accordian-product");
+//     for (var i = 0; i < h2.length; i++) {
+//         h2[i].style.display = 'none';
+//     }
+// }
+
+// window.onload = hide_para();
+
+function show_para(currElement) {
+    if (currElement.nextElementSibling.style.display == "none") {
+        currElement.nextElementSibling.style.display = "block";
+    } else {
+        currElement.nextElementSibling.style.display = "none";
+    }
+}
+</script>
+
+
+
+<style type="text/css">
+    /*----------04-01-2023--------*/
+
+.select-product .treatment{
+  background-color: #fff;
+    padding: 0 17px;
+    border: 1px solid #b7b7b7;
+    border-radius: 15px;
+    height: 60px !important;
+    position: relative;
+}
+
+@media only screen and (min-width: 768px) {
+    .categoryquestwl-index-index .column.main .content .select-product .custom-col-category h2{
+        line-height: 34px !important;
+        height: 70px;
+    }
+}
+
+.custom-col-wrapper-category .select-btn{
+    padding: 35px 0 !important;
+}
+ 
+</style>
+
+
+
+
+
+<script type="text/javascript">
+  function reveal1() {
+  var reveals1 = document.querySelectorAll(".reveal1");
+
+  for (var i = 0; i < reveals1.length; i++) {
+    var windowHeight = window.innerHeight;
+    var elementTop = reveals1[i].getBoundingClientRect().top;
+    var elementVisible = 150;
+
+    if (elementTop < windowHeight - elementVisible) {
+      reveals1[i].classList.add("active");
+    } else {
+      reveals1[i].classList.remove("active");
+    }
+  }
+}
+
+window.addEventListener("scroll", reveal1);
+
+</script>

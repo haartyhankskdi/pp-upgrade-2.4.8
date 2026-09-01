@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+
+    <!-- this added for column -->
+    <columns name="sales_order_columns">
+        <!-- <column name="prescriber_name" class="Nilesh\PrescriberName\Ui\Component\Listing\Column\PrescriberName">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="label" xsi:type="string" translate="true">Prescriber Name</item>
+                </item>
+            </argument>
+        </column> -->
+        <column name="prescriber_name" class="Nilesh\PrescriberName\Ui\Component\Listing\Column\PrescriberName" sortOrder="10">
+        <!-- <column name="prescriber_name" component="Magento_Ui/js/grid/columns/select" sortOrder="10"> -->
+            <settings>
+                <!-- <addField>true</addField> -->
+                <filter>select</filter>
+                <options class="Nilesh\PrescriberName\Ui\Component\Listing\Column\PrescriberNameOptions"/>
+                <dataType>select</dataType>
+                <sortable>true</sortable>
+                <label translate="true">Prescriber Name</label>
+            </settings>
+        </column>
+        <column name="order_status" class="Nilesh\PrescriberName\Ui\Component\Listing\Column\OrderStatus" sortOrder="10">        
+            <settings>                
+                <filter>select</filter>
+                <options class="Nilesh\PrescriberName\Ui\Component\Listing\Column\OrderStatusOptions"/>
+                <dataType>select</dataType>                              
+                <sortable>true</sortable>
+                <label translate="true">Order Status</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+            </settings>
+        </column>
+    </columns>
+</listing>

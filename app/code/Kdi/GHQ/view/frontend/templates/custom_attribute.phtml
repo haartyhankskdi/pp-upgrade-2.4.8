@@ -1,0 +1,14 @@
+<?php
+$product = $block->getProduct();
+$attributeCode = 'questionnaire_attribute_id'; // Replace with your actual attribute code
+$attributeValue = $block->getCustomAttributeValue($attributeCode);
+
+
+if ($attributeValue){
+    echo $block->getLayout()
+    ->createBlock(\Amasty\Customform\Block\Init::class)
+    ->setFormId($attributeValue)
+    ->toHtml();
+
+} 
+?>

@@ -1,0 +1,32 @@
+<?php
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/
+?>
+<?php
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Amasty\Customform\ViewModel\Answser\Answer\Information $viewModel
+ */
+
+$viewModel = $block->getViewModel();
+?>
+
+<section class="admin__page-section request-view-information">
+    <div class="admin__page-section-title">
+        <span class="title"><?= /* @noEscape */ __('Information') ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <table class="admin__table-secondary request-information-table">
+            <?php foreach ($viewModel->getInformationData() as $data): ?>
+                <tr>
+                    <th><?= $escaper->escapeHtml($data['label']) ?></th>
+                    <td><?= /* @noEscape */ $data['value'] ?></td>
+                </tr>
+            <?php endforeach;?>
+        </table>
+    </div>
+</section>

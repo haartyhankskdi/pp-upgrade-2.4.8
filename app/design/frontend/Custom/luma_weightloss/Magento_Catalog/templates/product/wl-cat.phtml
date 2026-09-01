@@ -1,0 +1,573 @@
+<?php
+echo $this->getLayout()->createBlock('Magento\Framework\View\Element\Template')->setTemplate('Magento_Catalog::product/cat-desc.phtml')->toHtml();
+
+$_helperCatalog = $this->helper(Haartyhanks\CategoryQuestWL\Helper\Data::class);
+$baseUrl  = $_helperCatalog->getCurrentStoreBaseUrl();
+$productId = $_helperCatalog->getCurrentProductId();
+$product = $_helperCatalog->getCurrentWLProduct();
+
+/** @var \Magento\Framework\ObjectManagerInterface $objectManager */
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+// To Open Product Page retieve productID open 
+
+// Get URL Interface
+$urlInterface = $objectManager->get('Magento\Framework\UrlInterface');
+
+// Get the current URL
+$currentUrl = $urlInterface->getCurrentUrl();
+
+// Remove the base URL from the current URL
+$relativeUrl = str_replace($baseUrl, '', $currentUrl);
+
+// Step 1: Create an associative array with URL paths as keys and product IDs as values
+$productUrls = [
+    'buy-wegovy' => 9411,
+    'buy-mounjaro' => 9424,
+    'buy-orlistat-xenical-capsules' => 9426,
+    'buy-mysimba' => 9429,
+    'buy-saxenda' => 9434,
+    'buy-zepbound' => 9436,
+    'buy-nevolat' => 9701,
+    'buy-wegovy-tab' => 9744
+];
+
+// Step 2: Check if $relativeUrl exists in the array and get the corresponding product ID
+$productId = isset($productUrls[$relativeUrl]) ? $productUrls[$relativeUrl] : null;
+
+// To Open Product Page retieve productID close code
+
+/** @var \Magento\Store\Model\StoreManagerInterface $storeManager */
+$storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+$currentStore = $storeManager->getStore();
+$baseUrl = $currentStore->getBaseUrl();
+
+if ($productId) {
+    // Load the product details based on the product ID
+    /** @var \Magento\Catalog\Model\ProductRepository $productRepository */
+    $productRepository = $objectManager->get(\Magento\Catalog\Model\ProductRepository::class);
+    $imageHelper = $objectManager->get(Magento\Catalog\Helper\Image::class);
+
+    $product = $productRepository->getById($productId);
+}
+
+?>
+
+<style>
+/* .new-two-column
+ {
+    display: flex;
+} */
+
+.left-column {
+    flex: 1;
+    padding: 20px;
+}
+
+.right-column {
+    flex: 2;
+    padding: 20px;
+}
+
+.header.content {
+    padding: 0 !important;
+}
+
+</style>
+
+
+<!-- Whats Included -->
+<div class="category-section-2">
+    <div class="container">
+        <div class="subsection-b reveal1">
+            <p class="text-2">No hidden fees</p>
+            <div class="category-s-i">
+                <img src="/media/wysiwyg/WLImage/Group-icon.png" alt="Free Online Consultation">
+            </div>
+        </div>
+
+        <div class="subsection-b reveal1">
+            <p class="text-2">Secure checkout</p>
+            <div class="category-s-i">
+                <img src="/media/wysiwyg/WLImage/secure-icon.png" alt="Continuous Care">
+            </div>
+        </div>
+
+        <div class="subsection-b reveal1">
+            <p class="text-2">UK Regulated online pharmacy</p>
+            <div class="category-s-i">
+                <img src="/media/wysiwyg/WLImage/Mask-icon.png" alt="Discreet & Speedy Delivery">
+            </div>
+        </div>
+
+        <div class="subsection-b last reveal1">
+            <p class="text-2">Trusted by over 100,000+ customers</p>
+            <div class="category-s-i">
+                <img src="/media/wysiwyg/WLImage/star-icon.png" alt="Cancel anytime">
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+// echo $this->getLayout()->createBlock('Magento\Framework\View\Element\Template')->setTemplate('Magento_Catalog::product/pricing.phtml')->toHtml();
+
+
+?>
+
+
+<!-- product info -->
+<div class="product-info-sec reveal1">
+<?php
+// desktop view
+if ($productId == 9426) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('orlistat_product_info')
+    ->toHtml();
+} elseif ($productId == 9434) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('saxenda_product_info')
+    ->toHtml();
+} elseif ($productId == 9411) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('wegovy_product_info')
+    ->toHtml();
+} elseif ($productId == 9424) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('mounjaro_product_info')
+    ->toHtml();
+} elseif ($productId == 9429) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('mysimba_product_info')
+    ->toHtml();
+} elseif ($productId == 9436) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('zepbound_product_info')
+    ->toHtml();
+} 
+elseif ($productId == 9701) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('nevolat_product_info')
+    ->toHtml();
+} 
+elseif ($productId == 9744) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('wegovy_tab_product_info')
+    ->toHtml();
+} 
+// else {
+//     echo $this->getLayout()
+//     ->createBlock('Magento\Cms\Block\Block')
+//     ->setBlockId('wegovy_product_info')
+//     ->toHtml();
+// }
+
+
+// mobile view
+
+if ($productId == 9426) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('orlistat_mob_product_info')
+    ->toHtml();
+} elseif ($productId == 9434) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('saxenda_mob_product_view')
+    ->toHtml();
+} elseif ($productId == 9411) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('wegovy_mob_product_info')
+    ->toHtml();
+} elseif ($productId == 9424) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('mounjaro_mob_product_info')
+    ->toHtml();
+} elseif ($productId == 9429) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('mysimba_mob_product_info')
+    ->toHtml();
+} elseif ($productId == 9436) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('zepbound_mob_product_info')
+    ->toHtml();
+} 
+elseif ($productId == 9701) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('nevolat_mob_product_info')
+    ->toHtml();
+} 
+
+elseif ($productId == 9744) {
+    echo $this->getLayout()
+    ->createBlock('Magento\Cms\Block\Block')
+    ->setBlockId('wegovy_tab_mob_product_info')
+    ->toHtml();
+} 
+
+// else {
+//     echo $this->getLayout()
+//     ->createBlock('Magento\Cms\Block\Block')
+//     ->setBlockId('wegovy_mob_product_info')
+//     ->toHtml();
+// }
+?>
+
+</div>
+
+
+<div class="out-of-stock-product">
+<?php
+// check product stock status
+// $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+// $stockRegistry = $objectManager->get('Magento\CatalogInventory\Api\StockRegistryInterface');
+// $stockItem = $stockRegistry->getStockItem($productId); 
+// $inStock = $stockItem->getIsInStock();
+
+    // if (!$inStock) { 
+    $treatoption = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/stockProd.phtml")->toHtml();
+    echo $treatoption; 
+// }
+?>
+</div>
+
+<!-- What our patients are saying -->
+<?php echo $this->getLayout()->createBlock("Magento\Cms\Block\Widget\Block")->setTemplate("widget/static_block/default.phtml")->setBlockId("151")->toHtml(); ?>
+<?php echo $this->getLayout()->createBlock("Magento\Cms\Block\Widget\Block")->setTemplate("widget/static_block/default.phtml")->setBlockId("150")->toHtml(); ?>
+
+
+<!-- Our results speak for themselves -->
+
+<div class="our-results our-results-2">
+    <div class="container">
+        <h3>Our results speak for themselves</h3>
+
+        <div class="result-list reveal1">
+            <div class="result-number">97%</div>
+            
+                <p><span>Improved confidence</span></p>
+                <p>97% of patients felt more<br> confident after program</p>
+            
+        </div>
+        
+        <div class="result-list result-2 reveal1">
+            <div class="result-number">10-15%</div>
+            
+                <p><span>Body Weight Loss</span></p>
+                <p>Average body weight loss when<br> using GLP1 medication</p>
+        
+        </div>
+
+        
+
+        <div class="result-list last reveal1">
+            <div class="result-number">97%</div>
+            
+                <p><span>Improved overall health</span></p>
+                <p>97% of patients felt the their overall health<br> had improved after the program</p>
+            
+        </div>
+    </div>
+</div>
+
+
+<!-- WLVideo -->
+<!-- <div class="video-section inner">
+<div class="container">
+    <h2>How to take the product</h2>
+    <div class="subsection reveal1">
+          <video width="1020" height="590" controls>
+             <source src="/media/wysiwyg/WLImage/video-s.mp4" type="video/mp4">
+          </video>
+    </div>
+</div>
+</div> -->
+
+
+<!-- How It Works -->
+<div class="how-it-works-section inner">
+<div class="h-title">How It Works</div>
+    <div class="Works-1 reveal1">
+        <img src="/media/wysiwyg/WLImage/work-img-1-11.png" alt="Start Consultation" />
+        <div class="work-c">
+            <div class="h-title-2">Complete our online <br> clinical consultation</div>
+            <!-- <p><strong>Your content for Start Consultation goes here.</strong></p> -->
+            <p>Answer a few questions on your health and your fitness goals.</p>
+        </div>
+    </div>
+   <div class="Works-1 reveal1">
+    <img src="/media/wysiwyg/WLImage/work-img-2-1.png" alt="Setup Coaching" />
+     <div class="work-c">
+        <div class="h-title-2">Clinical <br> assessment</div>
+        
+        <!-- <p><strong>Your content for Setup Coaching goes here.</strong></p> -->
+        <p>Our clinicians will review your clinical questionnaire to make sure treatment is right for you.</p>
+    </div>
+  </div>
+  <div class="Works-1 reveal1">
+      <img src="/media/wysiwyg/WLImage/work-img-3-1.png" alt="Ongoing Support" />
+       <div class="work-c">
+        <div class="h-title-2">Welcome <br> aboard!</div>
+      
+        <!-- <p><strong>Your content for Get Ongoing Support goes here.</strong></p> -->
+        <p>Once approved, you will access our wealth of experience and resources curated by our team and begin your clinical weight loss journey.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Need Help -->
+<div class="need-help-section">
+<div class="container"> 
+<h3>Need Help?</h3>   
+<div class="new-two-column">
+
+    <div class="left-column reveal-l">
+        <img src="/media/wysiwyg/WLImage/need-help.png" alt="question mark"/>
+    </div>
+    
+    <div class="right-column revealr">
+        <div class="content-title">Do you have a question about weight loss treatment?</div>
+        <p>Start your weight loss journey heading in the right direction. Our team are here to help. Whether you’re unsure about which medicine is right for you or need help navigating the world of weight loss drugs, our team are on hand to help you make the right decision. We can put you in touch with one of our experienced weight loss clinicians so you can be sure you’re making the best decision with the most accurate information.</p>
+        <p>To get in touch, contact our Customer Service team on <a href="tel:08009788956">0800 978 8956</a> or email <a href="mailto:headoffice@pharmacyplanet.com">headoffice@pharmacyplanet.com</a>.</p>
+    </div>
+</div>
+
+
+</div>
+</div>
+
+<!-- weightloss journey -->
+<div class="weightloss-journey"> 
+<div class="container">   
+        <h3 class="reveal-l">Start your <strong>weight loss journey</strong></h3>
+        <div class="h-banner-btn revealr"><a href="<?php echo $baseUrl . 'wl-login'; ?>">START MY CONSULTATION</a></div>
+    </div>
+</div>
+<br><br>
+
+<?php
+// Treatment Options 
+$treatoption = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/treatment-option.phtml")->toHtml();
+// echo $treatoption;
+?>
+
+<!-- Meet The Team -->
+<div class="hm-meet-team reveal1">
+<div class="container">
+    <h3>Meet the team</h3>
+    <?php echo $this->getLayout()->createBlock("WeltPixel\OwlCarouselSlider\Block\Slider\Custom")->setSliderId("1")->toHtml(); ?>
+    <div class="h-banner-btn"><a href="/weightloss/meet-the-team">LEARN ABOUT OUR TEAM</a></div>
+</div>
+</div>
+
+
+<!-- meet team section2 -->
+
+<!-- <div class="meet-team-section2 inner">
+<div class="container">
+    <div class="team-2 reveal1">
+        <img src="/media/wysiwyg/WLImage/uk.png" alt="UK Registered pharmacy">
+        <h3>UK Registered pharmacy</h3>
+    </div>
+
+    <div class="team-2 reveal1">
+        <img src="/media/wysiwyg/WLImage/Mhra.png" alt="MHRA authorised">
+        <h3>MHRA authorised medications</h3>
+    </div>
+
+    <div class="team-2 reveal1">
+        <img src="/media/wysiwyg/WLImage/myfitnesspal-svgrepo-com.png" alt="Over 10 years experience">
+        <h3>Over 10 years experience</h3>
+    </div>
+</div>
+</div> -->
+
+<!-- How Does GLP1 work -->
+
+<!-- <div class="included-section glp-work">
+<div class="container">
+    <h2>How does GLP1 work</h2>
+    <div class="subsection reveal1">
+           <h3>Triggering insulin release from your pancreas</h3>
+        <div class="subsection-content">
+         <img src="/media/wysiwyg/WLImage/syringe-svgrepo-com.png" alt="syringe">
+            <p>Insulin is an essential hormone that allows your body to use the food you eat for energy. It lowers the amount of glucose (sugar) in your blood. If you don’t have enough insulin, your blood sugar increases, leading to diabetes.</p>
+        </div>
+    </div>
+
+    <div class="subsection reveal1">
+        <h3>Blocking glucagon secretion</h3>
+        <div class="subsection-content">
+            <img src="/media/wysiwyg/WLImage/blood-drop-svgrepo-com.png" alt="blood-drop-svgrepo-com">
+            <p>Glucagon is a hormone your body uses to raise your blood sugar levels when necessary. So, GLP-1 prevents more glucose from going into your bloodstream.</p>
+        </div>
+    </div>
+
+    <div class="subsection reveal1">
+        <h3>Slowing stomach emptying</h3>
+        <div class="subsection-content last">
+            <img src="/media/wysiwyg/WLImage/Groupst-2739.png" alt="Stomach">
+            <p>Slower digestion means that your body releases less glucose (sugar) from the food you eat into your bloodstream.</p>
+        </div>
+    </div>
+
+    <div class="subsection reveal1">
+         <h3>Increasing how full you feel after eating (satiety)</h3>
+        <div class="subsection-content last">
+            <img src="/media/wysiwyg/WLImage/brain-svgrepo-com.png" alt="Cancel anytime">
+            <p>GLP-1 affects areas of your brain that processes hunger and satiety.</p>
+        </div>
+    </div>
+</div>
+</div> -->
+
+
+<?php
+
+// Faq
+$maounjaro = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/mounjaro_faq.phtml")->toHtml();
+$orlistat = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/orlistat_faq.phtml")->toHtml();
+$wegovy = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/wegovy_faq.phtml")->toHtml();
+$saxenda = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/saxenda_faq.phtml")->toHtml();
+$zepbound = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/zepbound_faq.phtml")->toHtml();
+$mysimba = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/mysimba_faq.phtml")->toHtml();
+$nevolat = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/nevolat_faq.phtml")->toHtml();
+
+
+
+if ($productId == 9426) {
+    echo $orlistat;
+}
+elseif ($productId == 9434) {
+    echo $saxenda;
+} 
+elseif ($productId == 9411) {
+    echo $wegovy;
+} 
+elseif ($productId == 9424) {
+    echo $maounjaro; 
+} 
+elseif ($productId == 9429) {
+    echo $mysimba;
+} 
+elseif ($productId == 9436) {
+    echo $zepbound;
+}
+elseif ($productId == 9701) {
+    echo $nevolat;
+}
+// elseif ($productId == 9386) {
+//     echo $this->getLayout()
+//     ->createBlock('Magento\Cms\Block\Block')
+//     ->setBlockId('retatrutide_product_info')
+//     ->toHtml();
+// } 
+// else {
+//     echo $storiesContent;
+// }
+?>
+
+<div class="mob-consult-btn">
+    <!-- {{block class="Amasty\Customform\Block\Init" template="Amasty_Customform::init.phtml" form_id="54"}}
+    {{block class="Magento\Framework\View\Element\Template" template="Haartyhanks_CategoryQuestWL::category_id_template.phtml"}} -->
+
+    <?= $this->helper("Amasty\Customform\Helper\Data")->renderForm("54") ?>
+    <?= $this->getLayout()->createBlock('Magento\Framework\View\Element\Template')->setTemplate('Haartyhanks_CategoryQuestWL::category_id_template.phtml')->toHtml() ?>
+</div>
+
+
+<?php
+$Blog = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/blogSlider.phtml")->toHtml();
+echo $Blog;
+?>
+
+
+<div class="footer-blog reveal1">
+<?php 
+// echo $this->getLayout()->createBlock("Magefan\Blog\Block\Widget\Recent")
+//     ->setTitle("Our Blogs")
+//     ->setNoRepeatPostsEnable(3)
+//     ->setNumberOfPosts(3)
+//     ->setCategoryId(25)
+//     ->setTagId(0)
+//     ->setAuthorId(0)
+//     ->toHtml(); 
+    ?>
+
+</div>
+
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+
+<script type="text/javascript">
+  function reveal1() {
+  var reveals1 = document.querySelectorAll(".reveal1");
+
+  for (var i = 0; i < reveals1.length; i++) {
+    var windowHeight = window.innerHeight;
+    var elementTop = reveals1[i].getBoundingClientRect().top;
+    var elementVisible = 150;
+
+    if (elementTop < windowHeight - elementVisible) {
+      reveals1[i].classList.add("active");
+    } else {
+      reveals1[i].classList.remove("active");
+    }
+  }
+}
+
+window.addEventListener("scroll", reveal1);
+
+</script>
+
+ 
+<?php
+$MeetInfo = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/meetinfo.phtml")->toHtml();
+echo $MeetInfo;
+?>
+
+<!-- <script type="text/javascript">
+  document.querySelectorAll('.read-more-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const reviewText = button.previousElementSibling;
+      reviewText.classList.toggle('expanded');
+      if (reviewText.classList.contains('expanded')) {
+        button.textContent = 'Read Less';
+      } else {
+        button.textContent = 'Read More';
+      }
+    });
+  });
+</script>  -->
+

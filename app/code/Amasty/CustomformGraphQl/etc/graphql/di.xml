@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Amasty Custom Forms GraphQl for Magento 2 (System)
+*/-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Amasty\Customform\Model\Submit">
+        <plugin name="Amasty_CustomformGraphQl::validateFormKey"
+                type="Amasty\CustomformGraphQl\Plugin\Customform\Model\SubmitPlugin"/>
+    </type>
+</config>

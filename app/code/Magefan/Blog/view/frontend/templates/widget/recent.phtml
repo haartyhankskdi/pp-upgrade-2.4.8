@@ -1,0 +1,98 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog recent posts widget
+ *
+ * @var $block \Magefan\Blog\Block\Widget\Recent
+ */
+?>
+
+<?php
+    $_postCollection = $block->getPostCollection();
+?>
+<?php if ($_postCollection->count()) { ?>
+<div class="post-list-wrapper blog-widget-recent">
+    <h3 class="title"><?= $block->escapeHtml($block->getTitle()) ?></h3>
+    <ul class="post-list clearfix">
+        <?php foreach ($_postCollection as $_post) { ?>
+            <?php
+                $_postUrl = $block->escapeUrl($_post->getPostUrl());
+                $_postName = $block->escapeHtml($_post->getTitle());
+            ?>
+            <li class="post-holder post-holder-<?= (int)$_post->getId() ?>">
+                <div class="post-content">
+                    <div class="post-description clearfix">
+                        <?php $featuredImage = $_post->getFeaturedListImage() ?: $_post->getFeaturedImage(); ?>
+                        <?php if ($featuredImage) { ?>
+                            <?php
+                                $featuredImgAlt = $_post->getData('featured_list_img_alt') ?: $_post->getData('featured_img_alt');
+                            if (!$featuredImgAlt) {
+                                $featuredImgAlt = $_postName;
+                            }
+                            ?>
+                            <?php //str_replace("weightloss/",'',$_postUrl)?>
+                            <div class="post-ftimg-hld"> 
+                                <a href="<?= /*@noEscape*/ str_replace("weightloss/",'',$_postUrl) ?>" title="<?= /*@noEscape*/ $_postName ?>">
+                                    <img src="<?= $block->escapeHtml($featuredImage) ?>"
+                                         alt="<?= $block->escapeHtml($featuredImgAlt) ?>" />
+                                </a>
+                            </div>
+                        <?php } ?>
+
+                        <div class="post-info clear">
+                            <div class="item post-posed-date">
+                                <span class="label"><?= $block->escapeHtml(__('Posted:')) ?></span>
+                                <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                            </div>
+                        </div>
+                          <?php $maxLength = 42;
+                          $post_title = strlen($_postName) > $maxLength ? substr($_postName, 0, $maxLength) . '...' : $_postName;?>
+                        <div class="post-header">
+                            <div class="post-title-holder clearfix">
+                               <div class="post-title">
+                                   <a class="post-item-link" href="<?= /*@noEscape*/ str_replace("weightloss/",'',$_postUrl) ?>">
+                                     <?= /*@noEscape*/ $post_title ?>
+                                   </a>
+                               </div>
+                            </div>
+                        </div>
+
+                        <div class="post-text-hld clearfix">
+                            <?= /*@noEscape*/ $block->getShorContent($_post, "90") ?>
+                        </div>
+                        <a class="post-read-more"
+                           href="<?= /*@noEscape*/ $_postUrl ?>"
+                           title="<?= /*@noEscape*/ $_postName ?>"
+                           >
+                           <?= $block->escapeHtml(__('Read more &#187;')) ?>
+                        </a>
+                    </div>
+                </div>
+                <div class="post-footer">
+
+                </div>
+            </li>
+
+        <?php } ?>
+    </ul>
+</div>
+<?php } ?>
+<style>
+    .post-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limits text to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 3em; /* Adjust based on font size */
+    line-height: 1.5em; /* Adjust for proper spacing */
+}
+
+</style>

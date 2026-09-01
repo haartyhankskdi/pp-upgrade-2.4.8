@@ -1,0 +1,108 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Form\Login $block */
+?>
+<div class="block block-customer-login custom-block-customer-login">
+    <div class="block-title">
+        <h2 id="block-customer-login-heading" role="heading" aria-level="2"><?= $block->escapeHtml(__('Existing Customers')) ?></h2>
+        <fieldset class="small-header">
+            <legend><?= $block->escapeHtml(__('Login below if previously registered')) ?></legend>
+        </fieldset>
+    </div>
+    <div class="block-content" aria-labelledby="block-customer-login-heading">
+        <form class="form form-login custom-form test-form"
+              action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>"
+              method="post"
+              id="login-form"
+              data-mage-init='{"validation":{}}'>
+            <?= $block->getBlockHtml('formkey') ?>
+            <fieldset class="fieldset login" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+                <div class="field email required">
+                    <label style="display:none" class="label" for="email"><span><?= $block->escapeHtml(__('Email Address')) ?></span></label>
+                    <div class="control">
+                        <input name="login[username]" value="<?= $block->escapeHtmlAttr($block->getUsername()) ?>" <?php if ($block->isAutocompleteDisabled()) : ?> autocomplete="off"<?php endif; ?> id="email" type="email" class="input-text" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" data-mage-init='{"mage/trim-input":{}}' data-validate="{required:true, 'validate-email':true}" placeholder="<?= $block->escapeHtml(__('Email Address')); ?>" />
+                    </div>
+                </div>
+                <div class="field password required">
+                    <label  style="display:none" for="pass" class="label"><span><?= $block->escapeHtml(__('Password')) ?></span></label>
+                    <div class="control">
+                        <input name="login[password]" type="password" <?php if ($block->isAutocompleteDisabled()) : ?> autocomplete="off"<?php endif; ?> class="input-text" id="pass" title="<?= $block->escapeHtmlAttr(__('Password')) ?>" data-validate="{required:true}" placeholder="<?= $block->escapeHtml(__('Password')) ?>" />
+                        <button class="btn btn-link" id="showpassword" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                    
+                    </div>
+                </div>
+                <?= $block->getChildHtml('form_additional_info') ?>
+                <div class="actions-toolbar custom-login-actions-toolbar">
+                    <div class="primary"><button type="submit" class="action login primary" name="send" id="send2"><span><?= $block->escapeHtml(__('Sign In')) ?></span></button></div>
+                    <div class="secondary"><a class="action remind forgot-password-link" href="<?= $block->escapeUrl($block->getForgotPasswordUrl()) ?>"><span><?= $block->escapeHtml(__('Forgot Your Password?')) ?></span></a></div>
+                </div>
+            </fieldset>
+        </form>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="register-text">
+                        <p><?php echo __("Don't have an account?"); ?> <a href="<?php echo $block->getBaseUrl(); ?>customer/account/create"><?php echo __("Register here"); ?></a></p>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    require([
+        'jquery',
+        'mage/cookies'
+    ], function ($) {
+        let user_allow = 1;
+        let my_value = '';
+        // if user enter direct link into browser than document.referrer return empty string
+        // use to prevent misuse of cookies
+        <?php
+            $referer = $this->getRequest()->getParam('referer');
+             if(!empty($referer)){
+                ?> 
+                    my_value = "<?php echo base64_decode($referer); ?>";
+                    // alert(my_value);
+                <?php
+             }else{
+                ?>
+                    my_value = document.referrer;
+                <?php
+             }
+        ?>
+        if (my_value.trim()) {
+            my_value = my_value.replace(/\/\s*$/, "")+"/";
+        }else{
+            user_allow = 0;
+        }
+        var date = new Date();
+        var minutes = 10;
+        date.setTime(date.getTime() + (minutes * 60 * 1000));
+        let base_url = "<?= @$block->getBaseUrl(); ?>";
+        // alert(date+"<?= $block->getBaseUrl(); ?>"+document.referrer);
+
+        if(my_value != base_url && user_allow == 1){
+           $.cookie('login_redirect', my_value, { expires: date ,path: '/' }); //Set the cookies
+        }
+
+        // Add hide show password
+        $("#showpassword").click(function (e) { 
+            e.preventDefault();
+            var x = document.getElementById("pass");
+            if (x.type === "password") {
+                x.type = "text";
+                $(this).html(`<i class="fa fa-eye-slash" aria-hidden="true"></i>`);
+            } else {
+                x.type = "password";
+                $(this).html(`<i class="fa fa-eye" aria-hidden="true"></i>`);
+            }
+        });
+    });
+    
+</script>

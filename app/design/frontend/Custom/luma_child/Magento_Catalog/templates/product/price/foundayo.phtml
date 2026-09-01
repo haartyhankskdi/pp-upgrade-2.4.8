@@ -1,0 +1,387 @@
+<?php
+function getProductPriceBySku($sku) {
+  try {
+      // $objectManager is available globally in .phtml files
+      $productRepository = \Magento\Framework\App\ObjectManager::getInstance()->get('\Magento\Catalog\Api\ProductRepositoryInterface');
+      $product = $productRepository->get($sku);
+      return $product->getFinalPrice();
+  } catch (\Exception $e) {
+      // Log the error if needed
+      return null;
+  }
+}
+// ------- DATA (edit prices/options here) -------
+$catalog = [
+  // 0.8mg only appears bundled into Continuation/Starter packs, no standalone 1 Month Pack in the data.
+  '0.8mg' => [
+    ['label' => '2 Month Continuation Pack (0.8mg x 60 tablets)', 'note' => '0.8mg + 0.8mg', 'sku' => getProductPriceBySku('FOU-0.8-2'), 'price' => 180.00, 'per_month' => 90.00],
+    ['label' => '3 Month Continuation Pack (0.8mg x 90 tablets)', 'note' => '0.8mg x3', 'sku' => getProductPriceBySku('FOU-0.8-3'), 'price' => 270.00, 'per_month' => 90.00],
+    [
+      'label' => '2 Month Starter Pack (0.8mg x 30 tablets & 2.5mg x 30 tablets)',
+      'note' => '0.8mg + 2.5mg',
+      'sku' => getProductPriceBySku('FOU-2SP-1'),
+      'price' => 199.00,
+      'per_month' => 99.50,
+    ],
+    [
+      'label' => 'BEST VALUE - 3 Month Starter Pack (0.8mg x 30 tablets & 2.5mg x 30 tablets & 5.5mg x 30 tablets)',
+      'note' => '0.8mg + 2.5mg + 5.5mg',
+      'sku' => getProductPriceBySku('FOU-3SP-1'),
+      'price' => 318.00,
+      'per_month' => 106.00,
+    ],
+  ],
+
+  '2.5mg' => [
+    ['label' => '1 Month Pack (2.5mg x 30 tablets)', 'note' => '2.5mg', 'sku' => getProductPriceBySku('WL-FOU-2.5'), 'price' => 109.00, 'per_month' => 109.00],
+    ['label' => '2 Month Continuation Pack (2.5mg x 60 tablets)', 'note' => '2.5mg + 2.5mg', 'sku' => getProductPriceBySku('FOU-2.5-2'), 'price' => 218.00, 'per_month' => 109.00],
+    ['label' => '3 Month Continuation Pack (2.5mg x 90 tablets)', 'note' => '2.5mg x3', 'sku' => getProductPriceBySku('FOU-2.5-3'), 'price' => 327.00, 'per_month' => 109.00],
+    [
+      'label' => '2 Month Starter Pack (0.8mg x 30 tablets & 2.5mg x 30 tablets)',
+      'note' => '0.8mg + 2.5mg',
+      'sku' => getProductPriceBySku('FOU-2SP-1'),
+      'price' => 199.00,
+      'per_month' => 99.50,
+    ],
+    [
+      'label' => 'BEST VALUE - 3 Month Starter Pack (0.8mg x 30 tablets & 2.5mg x 30 tablets & 5.5mg x 30 tablets)',
+      'note' => '0.8mg + 2.5mg + 5.5mg',
+      'sku' => getProductPriceBySku('FOU-3SP-1'),
+      'price' => 318.00,
+      'per_month' => 106.00,
+    ],
+    [
+      'label' => '2 Month Titration Pack (2.5mg x 30 tablets & 5.5mg x 30 tablets)',
+      'note' => '2.5mg + 5.5mg',
+      'sku' => getProductPriceBySku('FOU-TP-2.5-5.5'),
+      'price' => 228.00,
+      'per_month' => 114.00,
+    ],
+  ],
+
+  '5.5mg' => [
+    ['label' => '1 Month Pack (5.5mg x 30 tablets)', 'note' => '5.5mg', 'sku' => getProductPriceBySku('WL-FOU-5.5'), 'price' => 119.00, 'per_month' => 119.00],
+    ['label' => '2 Month Continuation Pack (5.5mg x 60 tablets)', 'note' => '5.5mg + 5.5mg', 'sku' => getProductPriceBySku('FOU-5.5-2'), 'price' => 238.00, 'per_month' => 119.00],
+    ['label' => '3 Month Continuation Pack (5.5mg x 90 tablets)', 'note' => '5.5mg x3', 'sku' => getProductPriceBySku('FOU-5.5-3'), 'price' => 357.00, 'per_month' => 119.00],
+    [
+      'label' => 'BEST VALUE - 3 Month Starter Pack (0.8mg x 30 tablets & 2.5mg x 30 tablets & 5.5mg x 30 tablets)',
+      'note' => '0.8mg + 2.5mg + 5.5mg',
+      'sku' => getProductPriceBySku('FOU-3SP-1'),
+      'price' => 318.00,
+      'per_month' => 106.00,
+    ],
+    [
+      'label' => '2 Month Titration Pack (2.5mg x 30 tablets & 5.5mg x 30 tablets)',
+      'note' => '2.5mg + 5.5mg',
+      'sku' => getProductPriceBySku('FOU-TP-2.5-5.5'),
+      'price' => 228.00,
+      'per_month' => 114.00,
+    ],
+    [
+      'label' => '2 Month Titration Pack (5.5mg x 30 tablets & 9mg x 30 tablets)',
+      'note' => '5.5mg + 9mg',
+      'sku' => getProductPriceBySku('FOU-TP-5.5-9'),
+      'price' => 258.00,
+      'per_month' => 129.00,
+    ],
+  ],
+
+  '9mg' => [
+    ['label' => '1 Month Pack (9mg x 30 tablets)', 'note' => '9mg', 'sku' => getProductPriceBySku('WL-FOU-9'), 'price' => 139.00, 'per_month' => 139.00],
+    ['label' => '2 Month Continuation Pack (9mg x 60 tablets)', 'note' => '9mg + 9mg', 'sku' => getProductPriceBySku('FOU-9-2'), 'price' => 278.00, 'per_month' => 139.00],
+    ['label' => '3 Month Continuation Pack (9mg x 90 tablets)', 'note' => '9mg x3', 'sku' => getProductPriceBySku('FOU-9-3'), 'price' => 417.00, 'per_month' => 139.00],
+    [
+      'label' => '2 Month Titration Pack (5.5mg x 30 tablets & 9mg x 30 tablets)',
+      'note' => '5.5mg + 9mg',
+      'sku' => getProductPriceBySku('FOU-TP-5.5-9'),
+      'price' => 258.00,
+      'per_month' => 129.00,
+    ],
+    [
+      'label' => '2 Month Titration Pack (9mg x 30 tablets & 14.5mg x 30 tablets)',
+      'note' => '9mg + 14.5mg',
+      'sku' => getProductPriceBySku('FOU-TP-9-14.5'),
+      'price' => 298.00,
+      'per_month' => 149.00,
+    ],
+  ],
+
+  '14.5mg' => [
+    ['label' => '1 Month Pack (14.5mg x 30 tablets)', 'note' => '14.5mg', 'sku' => getProductPriceBySku('WL-FOU-14.5'), 'price' => 159.00, 'per_month' => 159.00],
+    ['label' => '2 Month Continuation Pack (14.5mg x 60 tablets)', 'note' => '14.5mg + 14.5mg', 'sku' => getProductPriceBySku('FOU-14.5-2'), 'price' => 318.00, 'per_month' => 159.00],
+    ['label' => '3 Month Continuation Pack (14.5mg x 90 tablets)', 'note' => '14.5mg x3', 'sku' => getProductPriceBySku('FOU-14.5-3'), 'price' => 477.00, 'per_month' => 159.00],
+    [
+      'label' => '2 Month Titration Pack (9mg x 30 tablets & 14.5mg x 30 tablets)',
+      'note' => '9mg + 14.5mg',
+      'sku' => getProductPriceBySku('FOU-TP-9-14.5'),
+      'price' => 298.00,
+      'per_month' => 149.00,
+    ],
+    [
+      'label' => '2 Month Titration Pack (14.5mg x 30 tablets & 17.2mg x 30 tablets)',
+      'note' => '14.5mg + 17.2mg',
+      'sku' => getProductPriceBySku('FOU-TP-14.5-17.2'),
+      'price' => 328.00,
+      'per_month' => 164.00,
+    ],
+  ],
+
+  '17.2mg' => [
+    ['label' => '1 Month Pack (17.2mg x 30 tablets)', 'note' => '17.2mg', 'sku' => getProductPriceBySku('WL-FOU-17.2'), 'price' => 169.00, 'per_month' => 169.00],
+    ['label' => '2 Month Continuation Pack (17.2mg x 60 tablets)', 'note' => '17.2mg + 17.2mg', 'sku' => getProductPriceBySku('FOU-17.2-2'), 'price' => 338.00, 'per_month' => 169.00],
+    ['label' => '3 Month Continuation Pack (17.2mg x 90 tablets)', 'note' => '17.2mg x3', 'sku' => getProductPriceBySku('FOU-17.2-3'), 'price' => 507.00, 'per_month' => 169.00],
+    [
+      'label' => '2 Month Titration Pack (14.5mg x 30 tablets & 17.2mg x 30 tablets)',
+      'note' => '14.5mg + 17.2mg',
+      'sku' => getProductPriceBySku('FOU-TP-14.5-17.2'),
+      'price' => 328.00,
+      'per_month' => 164.00,
+    ],
+  ],
+];
+$writer = new \Zend_Log_Writer_Stream(BP . '/var/log/custom.log');
+$zendLogger = new \Zend_Log();
+$zendLogger->addWriter($writer);
+$zendLogger->info(" ======================");
+$zendLogger->info(" Mounjaro ");
+
+$zendLogger->info(" Message Log " . print_r($catalog, true));
+
+
+$zendLogger->info(" ======================");
+
+// Selected strength (server-side fallback)
+$default = '0.8mg';
+$strength = isset($_GET['strength'], $catalog[$_GET['strength']]) ? $_GET['strength'] : $default;
+
+// Helper
+$money = fn($n) => '£'.number_format($n, 2);
+?>
+
+<style>
+  :root{ --bg1:#e9f1ff; --bg2:#e9e6f8; --card:#fff; --muted:#65748b; --ok:#10b981; --ring:#e6e8ef; --ink:#0f172a; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;background:#f6f7fb;color:var(--ink)}
+ 
+
+  .price-comparison-sec{
+    background: transparent linear-gradient(129deg, #D4F2FC 0%, #C2DDFB 100%) 0% 0% no-repeat !important;
+    padding: 40px;
+  }
+  .comparison-title{
+    font-size: 35px;
+    color: #000;
+    font-family: 'Roboto', sans-serif;
+    line-height: 45px;
+    padding: 0 0px;
+    font-weight: 400;
+    margin-top: 0 !important;
+    margin-bottom: 10px;
+}
+.price-comparison-sec p{
+    font-size: 14px;
+    color: #000;
+    font-family: 'Roboto', sans-serif;
+    line-height: 22px;
+    padding: 0 0px;
+    font-weight: 400;
+    margin-top: 0 !important;
+}
+
+.select-option-sec{
+  background-color: #fff;
+    display: inline-block;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.select-shell label{
+    font-size: 14px;
+    color: #000;
+    font-family: 'Roboto', sans-serif;
+    line-height: 22px;
+    padding: 0 0 10px 0;
+    font-weight: 400;
+}
+
+.select-shell select{ 
+    width: 100% !important;
+    border: 0;
+    background: url(https://magento-1195784-4216081.cloudwaysapps.com/static/frontend/Custom/luma_child/en_GB/images/select-dropdown-arrow.png) no-repeat right 15px center #F1F7F9 !important;
+    border-radius: 50px;
+    height: 55px;
+    padding: 0 35px 0 20px;
+    font-size: 14px;
+    color: #000;
+    font-family: 'Roboto', sans-serif;
+    line-height: 22px;
+}
+.select-option-sec .card-price-table{
+  width: 100% !important;
+    background-color: #F1F7F9;
+    border: 0;
+    padding: 20px;
+    margin-top: 20px;
+}
+.select-option-sec .cards .card{
+  width: 100%;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  color: #111;
+    font-size: 13px;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 22px;
+    font-weight: 400;
+    padding: 5px 0px;
+}
+.select-option-sec .cards .card .card-title .title,
+.select-option-sec .card-price-table .card-h{
+  width: 80%;
+  float: left;
+}
+.select-option-sec .cards .card .card-title .price,
+.select-option-sec .card-price-table .card-p{
+  width: 20%;
+  float: left;
+  text-align: right;
+  padding-right: 15px;
+}
+.select-option-sec .card-price-table .card-table{
+  width: 100%;
+  display: inline-block;
+}
+
+.select-option-sec .cards{
+  height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 180px; 
+
+}
+
+.select-option-sec .cards::-webkit-scrollbar {
+  width: 7px;
+   background-color: rgba(166, 211, 230, 1);
+}
+.select-option-sec .cards::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  border: 0px solid white;
+  background-color: rgba(88, 127, 143, 1);
+}
+
+
+@media only screen and (max-width: 767px) {
+
+.price-comparison-sec{
+  padding: 30px 20px !important;
+}
+.select-option-sec .cards .card .card-title .title, 
+.select-option-sec .card-price-table .card-h{
+  width: 60% !important;
+}
+.select-option-sec .cards .card .card-title .price, 
+.select-option-sec .card-price-table .card-p{
+  width: 35% !important;
+}
+
+}
+
+</style>
+
+  <div class="wrap">
+    <div class="panel price-comparison-sec">
+      <div class="comparison-title">Price Comparison</div>
+      <p>Select your preferred options and see the best price</p>
+      <!-- Dropdown -->
+      <div class="select-option-sec">
+      <form method="get" class="select-shell" id="strengthForm">
+        <label for="brand">Strength</label>
+        <select name="strength" id="strengthSelect" aria-label="Select strength">
+          <?php foreach(array_keys($catalog) as $s): ?>
+            <option value="<?= htmlspecialchars($s) ?>" <?= $s===$strength?'selected':'' ?>><?= htmlspecialchars($s) ?></option>
+          <?php endforeach; ?>
+        </select>
+        <!-- <svg class="caret" width="18" height="18" viewBox="0 0 20 20" fill="none">
+          <path d="M5 7l5 6 5-6" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg> -->
+        <noscript><button type="submit" style="margin-top:10px">Update</button></noscript>
+      </form>
+
+      <!-- <p class="hint">Prices include next-day delivery and prescription</p> -->
+
+      <!-- Cards: server-side initial render -->
+      <div class="card-price-table">
+      <div class="card-table">
+              <div class="card-h"><strong>Pack</strong></div> 
+              <div class="card-p"><strong>Price (£)</strong></div>
+        </div>
+      <div id="cards" class="cards">
+        
+        <?php foreach ($catalog[$strength] as $o): ?>
+          <div class="card">
+            <div class="card-title">
+              <div class="title"><?= htmlspecialchars($o['label']) ?></div> 
+              <div class="price"><?= $money($o['price']) ?></div>
+            </div>
+            <!-- <div class="sub">= htmlspecialchars($o['note']) ?></div>  -->
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
+      <!-- <p class="hint">Select your treatment after the consultation:</p> -->
+    </div>
+    </div>
+  </div>
+
+  <!-- Safe JSON payload for JS -->
+  <script id="optionsData" type="application/json">
+<?= json_encode($catalog, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES) . "\n" ?>
+  </script>
+
+  <script>
+  (function(){
+    function ready(fn){document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn)}
+    ready(function(){
+      var select = document.getElementById('strengthSelect');
+      var cards  = document.getElementById('cards');
+      var dataEl = document.getElementById('optionsData');
+
+      var OPTIONS = {};
+      try { OPTIONS = JSON.parse((dataEl.textContent||'{}').trim()); } catch(e){ console.error(e); }
+
+      function money(n){ return '£' + Number(n).toFixed(2); }
+
+      function render(strength){
+        var items = OPTIONS[strength] || [];
+        cards.innerHTML = items.map(function(o){
+          return '<div class="card"> <div class="card-title">'
+              +   '<div class="title">'+ o.label +'</div>'
+              
+              +   '<div class="price">'+ money(o.sku) +'</div>'
+               
+              
+              
+              + '</div> </div>';
+        }).join('');
+
+        // keep URL in sync (no reload)
+
+        /**
+          try{
+          var url=new URL(location.href);
+          url.searchParams.set('strength', strength);
+          history.replaceState({},'',url);
+        }catch(_){}
+        */
+      }
+
+      // Initial sync and on-change behavior
+      render(select.value);
+      select.addEventListener('change', function(e){ render(e.target.value); });
+    });
+  })();
+  </script>

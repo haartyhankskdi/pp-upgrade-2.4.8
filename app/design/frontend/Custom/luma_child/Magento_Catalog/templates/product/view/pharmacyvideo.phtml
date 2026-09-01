@@ -1,0 +1,62 @@
+
+<?php 
+$_product = $block->getProduct();
+$mediaDir = $block->getUrl();
+
+// $productName = $block->getProductName();
+$productName = $_product->getName();
+
+$leafletPdfLink = $_product->getData('leaflet_pdf_link');
+
+if ($leafletPdfLink) {
+    if (strpos($leafletPdfLink, 'http') !== 0) {
+        $leafletPdfLink = $mediaDir . 'pub/media/' . ltrim($leafletPdfLink, '/');
+    }
+}
+
+if (!($_product->isSaleable())) {
+?>
+    <div class="out-of-stock"><span>Out of Stock</span></div>
+<?php 
+}
+
+if ($leafletPdfLink) { 
+?>
+<div class="patient-info-leaflet-sec">
+    <div class="patient-info-leaflet">
+        <div class="download-i">
+            <img src="<?php echo $this->getBaseUrl();?>media/wysiwyg/WLImage/Group-3236.svg" alt="Download" />
+        </div>
+        <div class="patient-info-1">
+            <p>Patient Information Leaflet</p>
+            <p class="pdf-b">
+                <span>
+                    <!-- 'https://magento-1195784-4216081.cloudwaysapps.com/pub/media/WE-OZE-2023-12v3.pdf'; -->
+                    <a href="<?php echo $leafletPdfLink; ?>" target="_blank" download>DOWNLOAD LEAFLET - <?php echo htmlspecialchars($productName); ?></a>
+                </span>
+            </p>
+        </div>
+    </div>
+</div>
+<?php 
+} 
+?>
+<div class="patient-info-list">
+    <ul>
+    <li><img src="<?php echo $this->getBaseUrl();?>media/wysiwyg/WLImage/Group-3097.svg" alt=""><p>No hidden fees</p></li>
+    <li><img src="<?php echo $this->getBaseUrl();?>media/wysiwyg/WLImage/secure-svgrepo-com.svg" alt=""><p>Secure checkout</p></li>
+    <li><img src="<?php echo $this->getBaseUrl();?>media/wysiwyg/WLImage/MaskGroup12.png" alt=""><p>UK Regulated online pharmacy</p></li>
+    <li><img src="<?php echo $this->getBaseUrl();?>media/wysiwyg/WLImage/star-svgrepo-com.svg" alt=""><p>Trusted by over 100,000+ customers</p></li>
+    <li>
+            <?php 
+                $product_video = $_product->getData('product_video');
+                if ($product_video) : 
+                ?>
+                <div class="product-yt">
+                    <?= $product_video ?>
+                </div>
+            <?php endif; ?>
+        </li>   
+    </ul>
+
+</div>

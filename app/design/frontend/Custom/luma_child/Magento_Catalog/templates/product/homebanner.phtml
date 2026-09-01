@@ -1,0 +1,220 @@
+<?php
+$helperCust = $this->helper(\Nilesh\Theme\Helper\Customer::class);
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$cart = $objectManager->get('\Magento\Checkout\Model\Cart');
+
+/** @var \Magento\Store\Model\StoreManagerInterface $storeManager */
+$storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+$currentStore = $storeManager->getStore();
+$baseUrl = $currentStore->getBaseUrl();
+$media_url= $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+?>
+
+ <div class="homepage-banner-section category-page">
+    <div class="homepage-banner-new">
+        <div class="container">
+            <div class="h-banner-content-sec">
+                <div class="h-banner-content">
+                    <div class="banner-left-c">
+
+                        <?php if ($block->getRequest()->getFullActionName() != 'cms_index_index'): ?>
+                            <h1 class="heading-b">Clinically Proven Weight Loss Medication</h1>
+                        <?php endif; ?>
+
+                        <p>Start your weight loss journey today supported by our team of healthcare professionals and experts</p>
+                        <br>
+                        <div class="h-banner-btn" data-was-processed="true">
+                            <a href="<?php echo $baseUrl?>weightloss/wl-login">START MY CONSULTATION</a>
+                        </div>
+                    </div>
+                    <div class="banner-right-c">
+                        <ul>
+                            <li>
+                                <div class="banner-icon">
+                                    <img src="<?php echo $media_url?>wysiwyg/WLImage/web-app-i.png" alt="Simple Monthly Plan">
+                                </div>
+                                <p>Simple <br> Monthly Plan </p>
+                            </li>
+                            <li>
+                                <div class="banner-icon">
+                                    <img src="<?php echo $media_url?>wysiwyg/WLImage/cancel-i.png" alt="Cancel Anytime" />
+                                </div>
+                                <p>Cancel <br> Anytime </p>
+                            </li>
+                            <li>
+                                <div class="banner-icon">
+                                    <img src="<?php echo $media_url?>wysiwyg/WLImage/uk-medical-i.png" alt="UK medical professionals​" />
+                                </div>
+                                <p>UK medical <br> professionals​ </p>
+                            </li>
+                            <li>
+                                <div class="banner-icon">
+                                    <img src="<?php echo $media_url?>wysiwyg/WLImage/support-i.png" alt="1:1 coaching and support" />
+                                </div>
+                                <p>1:1 coaching <br> and support </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="review-content">
+                    <a href="https://www.trustpilot.com/review/magento-1584919-6629151.cloudwaysapps.com" target="_blank"><img src="<?php echo $media_url?>wysiwyg/WLImage/Trust-pilot.svg" alt="Trustpilot" /></a>
+                    <a href="https://www.google.com/search?q=pharmacy+planet+uk+google+reviews&rlz=1C1RXQR_enIN1023IN1023&oq=pharmacy+planet+&gs_lcrp=EgZjaHJvbWUqCAgBEEUYJxg7MgYIABBFGDkyCAgBEEUYJxg7Mg4IAhBFGCcYOxiABBiKBTIHCAMQABiABDIHCAQQABiABDIGCAUQRRg8MgYIBhBFGDwyBggHEEUYPNIBCDU3NTFqMGo3qAIIsAIB&sourceid=chrome&ie=UTF-8#lrd=0x487664afe4f00001:0x1e1050e891fba3fb,1,,," target="_blank"><img class="g-review" src="<?php echo $media_url?>wysiwyg/WLImage/google-review.svg" alt="Google Review" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+ 
+<div class="homepage-banner-section home-page">
+    <div class="homepage-banner-new">
+        <div class="container">
+
+<div class="homepage-banner-outer-wrapper"> 
+  <div class="h-banner-wrap s-type-1" role="slider" aria-checked="false">
+    <input type="radio" id="s-1" name="slider-control" checked="checked">
+    <input type="radio" id="s-2" name="slider-control">
+    <input type="radio" id="s-3" name="slider-control">
+    <input type="radio" id="s-4" name="slider-control">
+    <input type="radio" id="s-5" name="slider-control">
+    <ul class="home-banner-content">
+      <li class="s-item s-item-1">
+        <div class="container">
+          <div class="h-banner-content-sec">
+                <div class="h-banner-content">
+                    <!-- <div class="banner-left-c">
+                        <p class="heading-b">Clinically Proven Weight Loss Medication</p>
+                        <p>Start your weight loss journey today supported by our team of healthcare professionals and experts</p>
+                        <br>
+                        <div class="h-banner-btn" data-was-processed="true">
+                            <a href="<?php //echo $baseUrl?>weightloss/wl-login">START MY CONSULTATION</a>
+                        </div>
+                    </div> -->
+
+                    <div class="banner-left-c">
+                        <p class="heading-b">Online<br> UK Pharmacy</p>
+                        <p>Our experienced clinicians ensure safe and suitable prescriptions, with every order reviewed for safety.</p>
+                        <br>
+                        <div class="h-banner-btn" data-was-processed="true">
+                            <a href="/view-all-treatments">VIEW ALL TREATMENTS</a>
+                        </div>
+                    </div>
+                    <div class="banner-right-c">
+                        <ul>
+                            
+                            <li>
+                                <div class="banner-icon">
+                                    <img src="<?php echo $media_url?>wysiwyg/WLImage/web-app-i.png" alt="Simple Monthly Plan">
+                                </div>
+                                <p>Online<br> Assessment</p>
+                            </li>
+                       
+                           
+                            <li>
+                                <div class="banner-icon">
+                                    <img src="<?php echo $media_url?>wysiwyg/WLImage/cancel-i.png" alt="Cancel Anytime" />
+                                </div>
+                                <p>No Hidden<br> Fees</p>
+                            </li>
+                      
+                            <li>
+                                <div class="banner-icon">
+                                    <img src="<?php echo $media_url?>wysiwyg/WLImage/uk-medical-i.png" alt="UK medical professionals​" />
+                                </div>
+                                <p>UK medical<br> professionals​</p>
+                            </li>
+                          
+                            <li>
+                                <div class="banner-icon">
+                                    <img src="<?php echo $media_url?>wysiwyg/WLImage/free-online-consultation.svg" alt="Free Online Consultation" />
+                                </div>
+                                <p>Free Online<br> Consultation</p>
+                            </li>
+                          
+                        </ul>
+                    </div>
+                </div>
+                <div class="review-content">
+                     
+                    <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8807dec7e10d38f59f32" data-businessunit-id="62de404543cebd829464951e" data-style-height="150px" data-style-width="100%">
+                      <a href="https://uk.trustpilot.com/review/magento-1584919-6629151.cloudwaysapps.com" target="_blank" rel="noopener">Trustpilot</a>
+                    </div> 
+
+
+                    <a href="https://www.google.com/search?q=pharmacy+planet+uk+google+reviews&rlz=1C1RXQR_enIN1023IN1023&oq=pharmacy+planet+&gs_lcrp=EgZjaHJvbWUqCAgBEEUYJxg7MgYIABBFGDkyCAgBEEUYJxg7Mg4IAhBFGCcYOxiABBiKBTIHCAMQABiABDIHCAQQABiABDIGCAUQRRg8MgYIBhBFGDwyBggHEEUYPNIBCDU3NTFqMGo3qAIIsAIB&sourceid=chrome&ie=UTF-8#lrd=0x487664afe4f00001:0x1e1050e891fba3fb,1,,," target="_blank"><img class="g-review" src="<?php echo $media_url?>wysiwyg/WLImage/google-review.svg" alt="Google Review" /></a>
+                </div>
+            </div>
+        </div>
+      </li>
+      <!-- <li class="s-item s-item-2">
+        <div class="container">
+          <div class="h-banner-content-sec">
+                <div class="h-banner-content">
+                    <div class="banner-left-c">
+                        <p class="heading-b">Clinically Proven Weight Loss Medication</p>
+                        <p>Start your weight loss journey today supported by our team of healthcare professionals and experts</p>
+                        <br>
+                        <div class="h-banner-btn" data-was-processed="true">
+                            <a href="<?php //echo $baseUrl?>weightloss/wl-login">START MY CONSULTATION</a>
+                        </div>
+                    </div>
+                    <div class="banner-right-c">
+                        <ul>
+                            <li>
+                                <div class="banner-icon">
+                                    <img src="<?php //echo $media_url?>wysiwyg/WLImage/web-app-i.png" alt="Simple Monthly Plan">
+                                </div>
+                                <p>Simple <br> Monthly Plan </p>
+                            </li>
+                            <li>
+                                <div class="banner-icon">
+                                    <img src="<?php //echo $media_url?>wysiwyg/WLImage/cancel-i.png" alt="Cancel Anytime" />
+                                </div>
+                                <p>Cancel <br> Anytime </p>
+                            </li>
+                            <li>
+                                <div class="banner-icon">
+                                    <img src="<?php //echo $media_url?>wysiwyg/WLImage/uk-medical-i.png" alt="UK medical professionals​" />
+                                </div>
+                                <p>UK medical <br> professionals​ </p>
+                            </li>
+                            <li>
+                                <div class="banner-icon">
+                                    <img src="<?php //echo $media_url?>wysiwyg/WLImage/support-i.png" alt="1:1 coaching and support" />
+                                </div>
+                                <p>1:1 coaching <br> and support </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="review-content">
+                     
+                    <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8807dec7e10d38f59f32" data-businessunit-id="62de404543cebd829464951e" data-style-height="150px" data-style-width="100%">
+                      <a href="https://uk.trustpilot.com/review/magento-1584919-6629151.cloudwaysapps.com" target="_blank" rel="noopener">Trustpilot</a>
+                    </div> 
+
+
+                    <a href="https://www.google.com/search?q=pharmacy+planet+uk+google+reviews&rlz=1C1RXQR_enIN1023IN1023&oq=pharmacy+planet+&gs_lcrp=EgZjaHJvbWUqCAgBEEUYJxg7MgYIABBFGDkyCAgBEEUYJxg7Mg4IAhBFGCcYOxiABBiKBTIHCAMQABiABDIHCAQQABiABDIGCAUQRRg8MgYIBhBFGDwyBggHEEUYPNIBCDU3NTFqMGo3qAIIsAIB&sourceid=chrome&ie=UTF-8#lrd=0x487664afe4f00001:0x1e1050e891fba3fb,1,,," target="_blank"><img class="g-review" src="<?php //echo $media_url?>wysiwyg/WLImage/google-review.svg" alt="Google Review" /></a>
+                </div>
+            </div>
+        </div>
+      </li>  -->
+    </ul>
+    <div class="s-control">
+      <label class="s-c-1" for="s-1"></label>
+      <label class="s-c-2" for="s-2"></label> 
+    </div>
+     
+  </div>
+
+   
+</div>
+
+        </div>
+    </div>
+</div>
+
+
+
+ 

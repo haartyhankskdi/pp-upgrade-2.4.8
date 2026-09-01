@@ -1,0 +1,90 @@
+<?php
+
+$allowedTypes = ['simple', 'configurable', 'virtual', 'downloadable','grouped','bundle'];
+$product = $block->getProductId();
+$productModal = $block->getProduct();
+$productId = $product['id'];
+$productType = $product['type'];
+$optionConfigurationOutOfStock = array();
+
+if (in_array($productType, $allowedTypes)) {
+    if ($productType == 'configurable' || $productType == 'grouped' || $productType == 'bundle') {
+        $outOfStockAssociates = $product['oosn_associates'];
+        $outOfStockAssociatesString = implode(",", $outOfStockAssociates);
+        if (!empty($outOfStockAssociatesString)) {
+            if (is_array($outOfStockAssociates) || is_object($outOfStockAssociates)) {
+                foreach ($outOfStockAssociates as $associateId => $assciate) {
+                    $optionConfigurationOutOfStock[] = $block->escapeHtml($associateId);
+                }
+            }
+        }
+        ?>
+            <input type="hidden" id="hidden-productnewId" value="">
+            <script>
+                require([
+                    'jquery',
+                    'underscore'
+                ], function($,_){
+                    var outOfStockArray = <?php echo json_encode($optionConfigurationOutOfStock) ?>;
+                    // console.log(outOfStockArray);
+                    $(window).load(function(){
+                        $( ".product-options-wrapper div" ).click(function() {
+                            var selected_options = {};
+                            $('div.swatch-attribute').each(function(k,v){
+                                var attribute_id    = $(v).attr('data-attribute-id');
+                                var option_selected = $(v).attr('data-option-selected');
+                                //console.log(attribute_id, option_selected);
+                                if(!attribute_id || !option_selected){ return;}
+                                selected_options[attribute_id] = option_selected;
+                            });
+
+                            var product_id_index = $('[data-role=swatch-options]').data('mageSwatchRenderer').options.jsonConfig.index;
+                            var found_ids = [];
+                            $.each(product_id_index, function(product_id,attributes){
+                                var productIsSelected = function(attributes, selected_options){
+                                    return _.isEqual(attributes, selected_options);
+                                }
+                                if(productIsSelected(attributes, selected_options)){
+                                    found_ids.push(product_id);
+                                }
+                            });
+                            console.log(found_ids);
+                            if(found_ids.length > 0){
+                                $.each( found_ids, function( key, value ) {
+                                    if($.inArray( value, outOfStockArray ) != -1){
+                                        $(".info-btn button").attr("disabled", "disabled").text("Out of Stock");
+                                        // $("#product-addtocart-button").attr("disabled", "disabled").text("Out of Stock");
+                                        $(".simple-outofstock").attr("disabled", "disabled").text("Out of Stock");
+                                        $("#wk-notification-container").css("display","block");
+                                        $(".wk-container-new").css("display", "block");
+                                        $("#hidden-productnewId").val(value);
+                                    }else{
+                                        $(".info-btn button").removeAttr("disabled").text("Start Consultation");
+                                        // $("#product-addtocart-button").removeAttr("disabled").text("Start Consultation");
+                                        $(".simple-outofstock").removeAttr("disabled").text("Start Consultation");
+                                        $("#wk-notification-container").css("display", "none");
+                                        $(".wk-container-new").css("display", "none");
+                                        $("#hidden-productnewId").val("");
+                                    }
+                                });
+                            }else{
+                                $(".info-btn button").attr("disabled", "disabled").text("Item not Found");
+                                // $("#product-addtocart-button").attr("disabled", "disabled").text("Item not Found");
+                                $(".simple-outofstock").attr("disabled", "disabled").text("Add to Cart");
+                                $("#wk-notification-container").css("display", "none");
+                                $(".wk-container-new").css("display", "none");
+                                $("#hidden-productnewId").val("");
+                            }
+                        });
+                    });
+                });
+            </script>
+        <?php
+    }
+}
+
+if (!$productModal->isSaleable()){
+    ?>
+        <p class="test-product test-new" onclick="myFunction()">Notify me once available</p>
+    <?php
+}

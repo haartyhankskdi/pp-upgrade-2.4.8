@@ -1,0 +1,245 @@
+<?xml version="1.0" ?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">nilesh_prescribernotes_prescribernotes_form.prescribernotes_form_data_source</item>
+		</item>
+		<item name="label" xsi:type="string" translate="true">General Information</item>
+		<item name="template" xsi:type="string">templates/form/collapsible</item>
+	</argument>
+	<settings>
+		<buttons>
+			<button name="back" class="Nilesh\PrescriberNotes\Block\Adminhtml\PrescriberNotes\Edit\BackButton"/>
+			<button name="delete" class="Nilesh\PrescriberNotes\Block\Adminhtml\PrescriberNotes\Edit\DeleteButton"/>
+			<button name="save" class="Nilesh\PrescriberNotes\Block\Adminhtml\PrescriberNotes\Edit\SaveButton"/>
+			<button name="save_and_continue" class="Nilesh\PrescriberNotes\Block\Adminhtml\PrescriberNotes\Edit\SaveAndContinueButton"/>
+		</buttons>
+		<namespace>nilesh_prescribernotes_prescribernotes_form</namespace>
+		<dataScope>data</dataScope>
+		<deps>
+			<dep>nilesh_prescribernotes_prescribernotes_form.prescribernotes_form_data_source</dep>
+		</deps>
+	</settings>
+	<dataSource name="prescribernotes_form_data_source">
+		<argument name="data" xsi:type="array">
+			<item name="js_config" xsi:type="array">
+				<item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+			</item>
+		</argument>
+		<settings>
+			<submitUrl path="*/*/save"/>
+		</settings>
+		<dataProvider name="prescribernotes_form_data_source" class="Nilesh\PrescriberNotes\Model\PrescriberNotes\DataProvider">
+			<settings>
+				<requestFieldName>prescribernotes_id</requestFieldName>
+				<primaryFieldName>prescribernotes_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<fieldset name="general">
+		<settings>
+			<label>General</label>
+		</settings>
+<!--		<field name="connect_id" formElement="input" sortOrder="10">-->
+<!--			<argument name="data" xsi:type="array">-->
+<!--				<item name="config" xsi:type="array">-->
+<!--					<item name="source" xsi:type="string">PrescriberNotes</item>-->
+<!--				</item>-->
+<!--			</argument>-->
+<!--			<settings>-->
+<!--				<dataType>text</dataType>-->
+<!--				<label translate="true">connect_id</label>-->
+<!--				<dataScope>connect_id</dataScope>-->
+<!--				<validation>-->
+<!--					<rule name="required-entry" xsi:type="boolean">false</rule>-->
+<!--				</validation>-->
+<!--			</settings>-->
+<!--		</field>-->
+		<field name="subject" formElement="textarea" sortOrder="20">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">PrescriberNotes</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Subject</label>
+				<dataScope>subject</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		<!-- <field name="note" formElement="textarea" sortOrder="30">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">PrescriberNotes</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Note</label>
+				<dataScope>note</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field> -->
+		<field name="note" formElement="wysiwyg">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="wysiwygConfigData" xsi:type="array">
+                        <item name="is_pagebuilder_enabled" xsi:type="boolean">false</item>
+                        <item name="height" xsi:type="string">150px</item>
+                        <item name="add_variables" xsi:type="boolean">true</item>
+                        <item name="add_widgets" xsi:type="boolean">true</item>
+                        <item name="add_images" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="source" xsi:type="string">your_entity</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Content</label>
+                <dataScope>note</dataScope>
+            </settings>
+            <formElements>
+                <wysiwyg>
+                    <settings>
+                        <wysiwyg>true</wysiwyg>
+                    </settings>
+                </wysiwyg>
+            </formElements>
+        </field>
+		<field name="set_priority">
+		    <argument name="data" xsi:type="array">
+		        <item name="options" xsi:type="object">Nilesh\PrescriberNotes\Model\Config\Source\Priority</item>
+		        <item name="config" xsi:type="array">                    
+		            <item name="sortOrder" xsi:type="number">40</item>
+		            <item name="dataType" xsi:type="string">text</item>
+		            <item name="formElement" xsi:type="string">radioset</item>
+		            <item name="label" xsi:type="string" translate="true">Priority</item>
+		            <item name="source" xsi:type="string">category</item>
+		            <item name="validation" xsi:type="array">
+		                <item name="required-entry" xsi:type="boolean">true</item>
+		            </item>
+		        </item>
+		    </argument>
+		</field>		
+		<!-- <field name="customer_name" formElement="input" sortOrder="40">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">PrescriberNotes</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Customer Name</label>
+				<dataScope>customer_name</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field> -->
+		<field name="prescribernotes_upload">
+		    <argument name="data" xsi:type="array">
+		        <item name="config" xsi:type="array">
+		            <item name="dataType" xsi:type="string">string</item>
+		            <item name="source" xsi:type="string">PrescriberNotes</item>
+		            <item name="label" xsi:type="string" translate="true">Prescriber Upload 1</item>
+		            <item name="visible" xsi:type="boolean">true</item>
+		            <item name="formElement" xsi:type="string">fileUploader</item>
+		            <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+		            <item name="previewTmpl" xsi:type="string">Nilesh_PrescriberNotes/image-preview</item>
+		            <item name="required" xsi:type="boolean">false</item>
+		            <item name="sortOrder" xsi:type="number">50</item>
+		            <item name="uploaderConfig" xsi:type="array">
+		                <item name="url" xsi:type="url" path="nilesh_prescribernotes/prescribernotes/uploader"/>
+		            </item>
+		            <item name="notice" xsi:type="string" translate="true">Allow image type: jpg, jpeg, gif, png, doc, pdf.</item>
+		        </item>
+		    </argument>
+		</field>
+		<field name="prescribernotes_upload2">
+		    <argument name="data" xsi:type="array">
+		        <item name="config" xsi:type="array">
+		            <item name="dataType" xsi:type="string">string</item>
+		            <item name="source" xsi:type="string">PrescriberNotes</item>
+		            <item name="label" xsi:type="string" translate="true">Prescriber Upload 2</item>
+		            <item name="visible" xsi:type="boolean">true</item>
+		            <item name="formElement" xsi:type="string">fileUploader</item>
+		            <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+		            <item name="previewTmpl" xsi:type="string">Nilesh_PrescriberNotes/image-preview</item>
+		            <item name="required" xsi:type="boolean">false</item>
+		            <item name="sortOrder" xsi:type="number">60</item>
+		            <item name="uploaderConfig" xsi:type="array">
+		                <item name="url" xsi:type="url" path="nilesh_prescribernotes/prescribernotes/uploader"/>
+		            </item>
+		            <item name="notice" xsi:type="string" translate="true">Allow image type: jpg, jpeg, gif, png, doc, pdf.</item>
+		        </item>
+		    </argument>
+		</field>
+		<field name="prescribernotes_upload3">
+		    <argument name="data" xsi:type="array">
+		        <item name="config" xsi:type="array">
+		            <item name="dataType" xsi:type="string">string</item>
+		            <item name="source" xsi:type="string">PrescriberNotes</item>
+		            <item name="label" xsi:type="string" translate="true">Prescriber Upload 3</item>
+		            <item name="visible" xsi:type="boolean">true</item>
+		            <item name="formElement" xsi:type="string">fileUploader</item>
+		            <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+		            <item name="previewTmpl" xsi:type="string">Nilesh_PrescriberNotes/image-preview</item>
+		            <item name="required" xsi:type="boolean">false</item>
+		            <item name="sortOrder" xsi:type="number">70</item>
+		            <item name="uploaderConfig" xsi:type="array">
+		                <item name="url" xsi:type="url" path="nilesh_prescribernotes/prescribernotes/uploader"/>
+		            </item>
+		            <item name="notice" xsi:type="string" translate="true">Allow image type: jpg, jpeg, gif, png, doc, pdf.</item>
+		        </item>
+		    </argument>
+		</field>
+		<field name="prescribernotes_upload4">
+		    <argument name="data" xsi:type="array">
+		        <item name="config" xsi:type="array">
+		            <item name="dataType" xsi:type="string">string</item>
+		            <item name="source" xsi:type="string">PrescriberNotes</item>
+		            <item name="label" xsi:type="string" translate="true">Prescriber Upload 4</item>
+		            <item name="visible" xsi:type="boolean">true</item>
+		            <item name="formElement" xsi:type="string">fileUploader</item>
+		            <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+		            <item name="previewTmpl" xsi:type="string">Nilesh_PrescriberNotes/image-preview</item>
+		            <item name="required" xsi:type="boolean">false</item>
+		            <item name="sortOrder" xsi:type="number">80</item>
+		            <item name="uploaderConfig" xsi:type="array">
+		                <item name="url" xsi:type="url" path="nilesh_prescribernotes/prescribernotes/uploader"/>
+		            </item>
+		            <item name="notice" xsi:type="string" translate="true">Allow image type: jpg, jpeg, gif, png, doc, pdf.</item>
+		        </item>
+		    </argument>
+		</field>
+		<field name="prescribernotes_upload5">
+		    <argument name="data" xsi:type="array">
+		        <item name="config" xsi:type="array">
+		            <item name="dataType" xsi:type="string">string</item>
+		            <item name="source" xsi:type="string">PrescriberNotes</item>
+		            <item name="label" xsi:type="string" translate="true">Prescriber Upload 5</item>
+		            <item name="visible" xsi:type="boolean">true</item>
+		            <item name="formElement" xsi:type="string">fileUploader</item>
+		            <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+		            <item name="previewTmpl" xsi:type="string">Nilesh_PrescriberNotes/image-preview</item>
+		            <item name="required" xsi:type="boolean">false</item>
+		            <item name="sortOrder" xsi:type="number">90</item>
+		            <item name="uploaderConfig" xsi:type="array">
+		                <item name="url" xsi:type="url" path="nilesh_prescribernotes/prescribernotes/uploader"/>
+		            </item>
+		            <item name="notice" xsi:type="string" translate="true">Allow image type: jpg, jpeg, gif, png, doc, pdf.</item>
+		        </item>
+		    </argument>
+		</field>		
+        <field name="connect_id" formElement="hidden">
+            <settings>
+                <dataType>text</dataType>
+            </settings>
+        </field>
+	</fieldset>
+</form>

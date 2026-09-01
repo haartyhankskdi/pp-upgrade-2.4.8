@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<script>
+    require([
+        'uiLayout',
+        'jquery'
+    ], function (layout, $) {
+        $(function () {
+            var paymentMethodData = {
+                method: 'magenest_sagepay_direct'
+            };
+            layout([
+                {
+                    component: 'Magenest_SagePay/js/view/payment/multishipping/sagepay-direct',
+                    name: 'payment_method_magenest_sagepay_direct',
+                    method: paymentMethodData.method,
+                    item: paymentMethodData
+                }
+            ]);
+
+            $('body').trigger('contentUpdated');
+        })
+    })
+</script>
+<!-- ko template: getTemplate() --><!-- /ko -->

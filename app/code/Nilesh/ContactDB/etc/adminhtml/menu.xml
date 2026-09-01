@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add action="nilesh_contactdb/contactdb/index" id="Nilesh_ContactDB::nilesh_contactdb_contactdb" module="Nilesh_ContactDB" parent="Magento_Backend::marketing_communications" resource="Magento_Backend::content" sortOrder="9999" title="Contact Us"/>
+	</menu>
+</config>

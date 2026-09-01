@@ -1,0 +1,573 @@
+<?php
+// Get Object Manager instance
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+// Get the Category Repository
+$categoryRepository = $objectManager->get(\Magento\Catalog\Model\CategoryRepository::class);
+
+// Load the category by ID (replace `YOUR_CATEGORY_ID` with the desired category ID)
+$categoryId = 84;
+$category = $categoryRepository->get($categoryId);
+$imageHelper = $objectManager->get(\Magento\Catalog\Helper\Image::class);
+
+
+
+
+// Get the Blog Post Repository
+$postRepository = $objectManager->get(\Magefan\Blog\Api\PostRepositoryInterface::class);
+
+// Get the Blog Category Repository
+$categoryRepository = $objectManager->get(\Magefan\Blog\Api\CategoryRepositoryInterface::class);
+
+// Load the category by ID (replace `YOUR_CATEGORY_ID` with the desired category ID)
+$categoryId = 25;
+// $category = $categoryRepository->getById($categoryId);
+
+// Fetch posts assigned to the category
+$searchCriteriaBuilder = $objectManager->get(\Magento\Framework\Api\SearchCriteriaBuilder::class);
+$searchCriteria = $searchCriteriaBuilder->addFilter('category_id', $categoryId)->create();
+
+$posts = $postRepository->getList($searchCriteria)->getItems();
+
+
+      // echo "<pre>";
+      // print_r($posts[0]);
+      // exit();
+//     echo " count".count($posts) . PHP_EOL;
+$posts = array_slice($posts, 0, 12);
+
+$chunks = array_chunk($posts, 4);
+
+
+
+
+
+
+// Get the product collection
+$productCollection = $category->getProductCollection()
+    ->addAttributeToSelect('*') // Select all attributes
+    ->addAttributeToFilter('status', \Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED) // Only enabled products
+    ->addAttributeToFilter('visibility', ['neq' => \Magento\Catalog\Model\Product\Visibility::VISIBILITY_NOT_VISIBLE]); // Exclude not visible products
+    $productHelper = $objectManager->get(\Magento\Catalog\Helper\Product::class);
+
+    
+    // echo "<pre>";
+    // print_r($productCollection->getData());
+    // exit();
+
+// foreach ($productCollection as $product) {
+//     echo '<p>' . $product->getName() . '</p>';
+//     echo '<p>Price: ' . $product->getPrice() . '</p>';
+// }
+
+// $block->getModelData();
+
+
+$block->getAllPost();
+
+$productCollection = $block->getProductCollection();
+
+$model = $block->getModelData();
+// print_r($model->getData());
+// print_r($block->getAllPost());
+// exit();
+
+?>
+<?php // $block->escapeHtml(mb_substr($product->getShortDescription(), 0, 50)) ?>
+<?php
+$breadcrumbs = $block->getLayout()->createBlock('Magento\Theme\Block\Html\Breadcrumbs');
+
+if ($breadcrumbs) {
+    $breadcrumbs->addCrumb('home', [
+        'label' => __('Home'),
+        'title' => __('Home'),
+        'link'  => $this->getUrl('')
+    ]);
+
+        
+    $categoryName = $model->getName(); 
+    $breadcrumbs->addCrumb('blog_category_name', [
+        'label' => __($categoryName),
+        'title' => __($categoryName)
+    ]);
+
+    echo $breadcrumbs->toHtml();
+}
+?>
+<div class="advice-post-top">
+    <div class="container">
+        <div class="left-side">
+            <h1><?= $model->getName() ?></h1>
+            <p><?= $model->getDescription() ?></p>
+            <h3>Product We Advice</h3>
+            <!-- Product Cards -->
+            <div class="product-section slick-slider">
+
+                <?php foreach ($productCollection as  $product ) : ?>
+                    <?php  $productImageUrl = $block->getImagePath($product); ?>       
+                    <?php $productUrl = $block->getProductUrl($product); ?>
+                        <div class="product-card item">
+                           <?php  $storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+                      $mediaUrl = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    
+                       $productImagePath = $product->getThumbnail(); 
+                       $productImageUrl = $mediaUrl . 'catalog/product' . $productImagePath;
+                 
+                           ?>
+                    <img src="<?= $productImageUrl ?>" alt="<?= $product->getName(); ?>" class="product-image">
+
+                            <div class="product-title">
+                                <?php echo $product->getName()."<br>"; ?> 
+                                
+                            </div>
+                            <div class="product-description">
+                                
+                            </div>
+                            <button class="view-details-button"> <a href="<?= $productUrl;?>">View More</a> </button>
+                        </div>
+
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <div class="advice-top-right-side right-side">
+
+            <div class="blog-bottom-review-team" data-was-processed="true">
+                <div class="reviewved-by sep-l" data-was-processed="true">
+                    <div class="review-right-img" data-was-processed="true"><img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/HARMY-PROFILE-PIC.jpg" alt="Pharmacist Image" class="mf-loading" data-was-processed="true"></div>
+                    <div class="review-title-box" data-was-processed="true">
+                        <p class="review-title"></p>
+                        <p class="review-text">Authored By</p>
+                        <p class="pharmacist-title name">HARMINDER ‘HARMY’ KAUR</p>
+                        <p class="review-text">BSc(hons) Pharmacy</p>
+                        <p class="gphc-no">GPhC Number: 2061107</p>
+                    </div>
+                </div>
+                <div class="reviewved-by" data-was-processed="true">
+                    <div class="review-right-img" data-was-processed="true"><img src="https://www.pharmacyplanet.com/pub/media/wysiwyg/WLImage/gurdev-sehmi-img.jpg" alt="Pharmacist Image" class="mf-loading" data-was-processed="true"></div>
+                    <div class="review-title-box" data-was-processed="true">
+                        <p class="review-title"></p>
+                        <p class="review-text">Reviewed By</p>
+                        <p class="pharmacist-title name">GURDEV SEHMI</p>
+                        <p class="review-text">BSc Pharm, MRPharmS, Independent Prescriber, Superintendent Pharmacist, Clinical Lead</p>
+                        <p class="gphc-no">GPhC Number: 2050925</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="consultation-service-sec">
+            <!-- <h2>Consultation Services</h2> -->
+            <p>We offer personalized consultation services to help you achieve your weight management goals. Sign up today!</p>
+            <div class="const-ser-btn"><a href="<?= $model->getConsultationUrl() ?>">START MY CONSULTATION</a></div>
+          </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="advice-post-view-sec">
+    <div class="container">
+      <div class="view-post-top-sec">
+        <div class="advice-info-top2">
+      <div class="advice-info-title2">What are you looking for?</div>
+      <div class="advice-info-search">
+          <form class="form" id="blog_search_mini_form"
+              action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
+              method="get">
+            <div class="field search">
+                <div class="control">
+                    <input id="blog_search"
+                           type="text"
+                           name="q"
+                           value="<?= $block->escapeHtml($block->getQuery()) ?>"
+                           placeholder="<?= $block->escapeHtml(__('Let us know what you are looking for')) ?>"
+                           class="input-text"
+                           maxlength="128" role="combobox"
+                           aria-haspopup="false"
+                           aria-autocomplete="both"
+                           autocomplete="off">
+                </div>
+            </div>
+            <div class="actions">
+                <button type="submit"
+                        onclick="return goBlogSearch(this);"
+                        title="<?= $block->escapeHtml(__('Search')) ?>"
+                        class="action">
+                    <span><?= $block->escapeHtml(__('Search')) ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+      </div>
+        <div class="product-section product-post-sec" data-id="<?= $model->getBlogCategoryId() ?>">
+            <?php 
+                echo $this->getLayout()->createBlock("Magefan\Blog\Block\Widget\Recent")
+                ->setNoRepeatPostsEnable(1)
+                ->setNumberOfPosts(4)
+                ->setCategoryId($model->getBlogCategoryId())
+                ->setTagId(0)
+                ->setAuthorId(0)
+                ->toHtml();
+            ?>
+
+            
+        </div>
+        <div class="const-ser-btn"  data-was-processed="true" style="width: 120px;">
+            <a href="<?='/blog/category/view?id='.$model->getBlogCategoryId() ?>">LOAD MORE</a>
+            <!-- <a href="/blog">LOAD MORE</a> -->
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(['jquery', 'jquery/ui', 'slick'], function($) {
+    $(document).ready(function() {
+        if ($('.slick-slider').length) {
+            $('.slick-slider').slick({
+                dots: true,
+                infinite: false,
+                speed: 300,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1,
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        }
+    });
+});
+
+
+</script>
+<!-- 
+<style type="text/css">
+   .product-post-sec .Posts .post_item:last-child{
+    margin-right: 9px !important;
+
+  }
+
+    @media screen and (min-width: 768px){
+    .product-post-sec .Posts .post_item:last-child {
+        margin-right: 9px !important;
+    }
+  }
+
+</style>
+
+
+<style type="text/css">
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    p {
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    
+    .product-section {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+    
+    .product-card {
+      width: calc(33.33% - 20px);
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .product-image {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    
+    .product-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .product-description {
+      margin-bottom: 10px;
+    }
+    
+    .view-details-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .view-details-button:hover {
+      background-color: #0056b3;
+    }
+    
+    .consultation-section {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box- shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+    }
+    
+    .consultation-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .consultation-description {
+      margin-bottom: 15px;
+    }
+    
+    .contact-button {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .contact-button:hover {
+      background-color: #218838;
+    }
+    
+    .post-description{
+        
+    }
+
+
+    .item {
+      float: left;
+    }
+
+*, *::after, *::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #e8e8e8;
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  color: #363636;
+  font-size: 40px;
+}
+.inner-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.card {
+  flex-basis: 33.33333%;
+  padding: 15px;
+}
+.inner-card  {
+  background-color: #fff;
+  padding: 15px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.1)
+}
+.img-wrapper {
+  width: 100%;
+  height: 250px;
+  margin-bottom: 10px;
+}
+.img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.content {
+  margin-bottom: 20px;
+}
+.content h1 {
+  font-weight: 900;
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #444;
+}
+.content p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+}
+.btn-wrapper {
+  display: block;
+  text-align: center;
+}
+.view-btn {
+  width: 70%;
+  height: 40px;
+  border: none;
+  background-color: steelblue;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+.view-btn:hover {
+  box-shadow: 0 3px 6px rgba(0,0,0,.4);
+}
+
+.light-box {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0,0,0,.6);
+  width: 100%;
+  height: 100vh;
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 200ms ease-out;
+}
+.box {
+  width: 600px;
+  height: 400px;
+  background-color: #fff;
+  transform: scale(0);
+  transition: all 200ms ease-in-out;
+  padding: 10px;
+  box-shadow: 0 3px 9px rgba(0,0,0,.1);
+  position: relative;
+}
+.box-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  padding: 15px;
+}
+.box .light-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.box .close-btn {
+  position: absolute;
+  z-index: 100;
+  font-size: 30px;
+  color: #ccc;
+  left: 100%;
+  top: 0;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  display: block;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 35px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: all 200ms linear;
+}
+/* Effect */
+.effect .light-box {
+  opacity: 1;
+  visibility: visible;
+}
+.effect .light-box .box {
+  transform: scale(1);
+}
+
+@media (max-width: 780px) {
+  .card {
+    flex-basis: 50%;
+  }
+  .title {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 500px) {
+  .card {
+    flex-basis: 5100%;
+  }
+  .box .close-btn {
+    margin-left: 0;
+    left: 80%;
+    top: -12%;
+  }
+}
+.credit {
+  font-size: 14px;
+}
+
+</style>
+
+<style>
+    body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .left-side {
+            width: 66%;
+           
+            padding: 20px;
+        }
+
+        .right-side {
+             width: 40%;
+            padding: 20px;
+        }
+</style> -->

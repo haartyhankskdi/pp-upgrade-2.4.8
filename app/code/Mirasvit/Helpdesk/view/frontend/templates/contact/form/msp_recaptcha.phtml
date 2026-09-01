@@ -1,0 +1,17 @@
+<?php
+/** @var $block MSP\ReCaptcha\Block\Frontend\ReCaptcha */
+?>
+<?php
+$scopeId = $block->getData('scope_id') ?: 'msp-recaptcha';
+?>
+<div class="field-recaptcha" id="<?= $scopeId; ?>-container" data-bind="scope:'<?= $scopeId; ?>'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+<script type="text/x-magento-init">
+{
+    "#<?= $scopeId; ?>-container": {
+        "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout();?>
+    }
+}
+</script>

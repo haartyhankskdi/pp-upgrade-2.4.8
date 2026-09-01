@@ -1,0 +1,77 @@
+<?php
+/**
+ * Product view template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View
+ */
+$_product = $block->getProduct();
+$_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+$_helperCatalog = $this->helper(Haartyhanks\CategoryQuest\Helper\Data::class);
+$proCustopt = $_product->getOptions();
+
+$moduleName = $this->getRequest()->getModuleName();
+$prodCategoryIds = $_helperCatalog->getCategoryIds($_product->getId());
+$catUrl = $_helperCatalog->getCatUrlById($prodCategoryIds[0]);
+
+$button = ($moduleName == "checkout") ? "Edit Consultation" : "ORDER ITEM";
+
+$_amastyCustomFormHelper = $this->helper(Amasty\Customform\Helper\Data::class);
+$hasCategoryQuestions = $_product->getAttributeText('has_category_questionnaire');
+$uniqueHash = $_amastyCustomFormHelper->getUniqueHash();
+$isFilledCategory = $_helperCatalog->getIsFilledCategory();
+$categoryIds = $_helperCatalog->getCategoryIds($_product->getId());
+
+$filledCategoryValue = $isFilledCategory ? json_encode($isFilledCategory) : null;
+$_helperCatalog->unsIsFilledCategory();
+
+// Weightloss product IDs
+$weightLossProductsId = [2703, 9221, 9305, 9337, 9338, 8294];
+$currentProduct = $block->getProduct();
+$key = array_search($currentProduct->getId(), $weightLossProductsId);
+?>
+
+<?php
+$allowedProductIds = [9305, 9221, 9338, 9567, 2703, 9395, 9232, 8294, 9405, 9337];
+
+$currentProductId = $_product->getId();
+$text = in_array($currentProductId, $allowedProductIds) 
+    ? "Start your <strong>weight loss journey</strong>" 
+    : "Start your <strong>journey with us</strong>";
+?>
+
+<?php if (!empty($proCustopt) && $_product->isSaleable()) : ?>
+    <?php 
+        $_helperCatalog->setCatValueSession($prodCategoryIds[0]);
+        $_helperCatalog->setProdValueSession($_product->getId());
+    ?>
+
+    <div class="weightloss-journey" data-was-processed="true" style="display:none">
+        <div class="container" data-was-processed="true">
+            <h3 class="reveal-l active"><?= $text; ?></h3>
+            <div class="h-banner-btn revealr" data-was-processed="true">
+                <a href="<?= $catUrl; ?>" class="back-to-start-consultation">
+                    <?= __("Start My Consultation "); ?>
+                </a>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
+<?php 
+$buttonTitle = __('Add to Cart');
+
+if (empty($proCustopt) && $_product->isSaleable()) : ?>
+    <!-- For Config product without custom option/Questionnaire -->
+    <div class="weightloss-journey" data-was-processed="true">
+        <div class="container" data-was-processed="true">
+            <h3 class="reveal-l active"><?= $text; ?></h3>
+            <div class="h-banner-btn revealr" data-was-processed="true">
+                <?php if ($_product->getTypeId() == "simple" || $_product->getTypeId() == "virtual") : ?>
+                    <button type="submit"><?= $block->escapeHtml($buttonTitle) ?></button>
+                <?php else : ?>
+                    <a href="?true" class="back-to-start-consultation"><?= $block->escapeHtml($buttonTitle); ?></a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

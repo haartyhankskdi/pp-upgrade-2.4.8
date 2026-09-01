@@ -1,0 +1,88 @@
+{
+    "mgz_popupbuilder_popup": {
+        "column": {
+            "popup_id": true,
+            "name": true,
+            "content": true,
+            "conditions": true,
+            "display_settings": true,
+            "style_settings": true,
+            "from_date": true,
+            "to_date": true,
+            "is_active": true,
+            "creation_time": true,
+            "update_time": true
+        },
+        "index": {
+            "MGZ_POPUPBUILDER_POPUP_NAME_CONTENT": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mgz_popupbuilder_popup_store": {
+        "column": {
+            "popup_id": true,
+            "store_id": true
+        },
+        "index": {
+            "MGZ_POPUPBUILDER_POPUP_STORE_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_8D8BE0112237DC6967D1E46ADE40340C": true,
+            "MGZ_POPUPBUILDER_POPUP_STORE_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "mgz_popupbuilder_popup_customer_group": {
+        "column": {
+            "popup_id": true,
+            "customer_group_id": true
+        },
+        "index": {
+            "MGZ_POPUPBUILDER_POPUP_CUSTOMER_GROUP_CUSTOMER_GROUP_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_1CF6A75ED730380915FE3B7078B9DCF2": true,
+            "FK_94110C18F3A7FCF0EE3962B087589B06": true
+        }
+    },
+    "mgz_popupbuilder_popup_report": {
+        "column": {
+            "index_id": true,
+            "customer_id": true,
+            "popup_id": true,
+            "type": true,
+            "store_id": true,
+            "added_at": true
+        },
+        "index": {
+            "MGZ_POPUPBUILDER_POPUP_REPORT_STORE_ID_ADDED_AT_POPUP_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_9EDA982C43886B735DD72302CCEEA9CB": true,
+            "MGZ_POPUPBUILDER_POPUP_REPORT_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "mgz_popupbuilder_popup_salesrule": {
+        "column": {
+            "popup_id": true,
+            "rule_id": true
+        },
+        "index": {
+            "MGZ_POPUPBUILDER_POPUP_SALESRULE_RULE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_E78DF2AEB0241206A40DA4127BB42333": true,
+            "MGZ_POPUPBUILDER_POPUP_SALESRULE_RULE_ID_SALESRULE_RULE_ID": true
+        }
+    },
+    "newsletter_subscriber": {
+        "column": {
+            "popup_id": true
+        }
+    }
+}

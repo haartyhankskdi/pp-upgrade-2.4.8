@@ -1,0 +1,100 @@
+<?php 
+// $_helperCatalog = $this->helper(Haartyhanks\Catalog\Helper\Data::class); 
+// $childProducts = $_helperCatalog->getChildProducts();
+// $attributsArray1 = [];
+// $filterOptions1 = [];
+// foreach ($childProducts as $child){
+//     if($child->getStatus() == 1) {
+        
+//         $brand = $_helperCatalog->getLabelById('brand',$child->getBrand());
+
+//         if(!$brand){
+//             $brand = '-';
+//         }
+
+//         if($child->getPmdname()) {
+//             $strength = $_helperCatalog->getLabelById('pmdname',$child->getPmdname());
+//         } else {
+//             $strength = '-';
+//         }
+//         $size = $_helperCatalog->getLabelById('pmdsize',$child->getPmdsize());
+//         $price = number_format($child->getPrice(), 2);
+
+//         $data = array(
+//             "brand"=>$brand,
+//             "strength"=>$strength,
+//             "pmdsize"=>$size,
+//             "price"=>$price);
+//         array_push($attributsArray1, $data); 
+//         array_push($filterOptions1, $brand);        
+//     } 
+// } 
+// $filterOptions1 = array_unique($filterOptions1); 
+?>
+
+<!-- <div class="container">
+    <div class="select-option">
+        <h3>Pricing</h3>
+        <div class="brand-label">
+         <label for="brand">Select Brand :</label>
+        <select name="brand1" id="brand1">
+            <option value="all" selected>All Brands</option>
+            <?php //foreach($filterOptions1 as $option) {?>
+                <option value="<?php // $option ?>"><?php // $option ?></option>
+            <?php // } ?>
+        </select>
+         </div>         
+    </div> -->
+
+    <!-- <table id="selected-data1">
+        <tr>
+            <th>Brand</th>            
+            <th>Medicine Strength</th>
+            <th>Size</th>
+            <th>Price</th>
+        </tr>           
+        <?php //foreach ($attributsArray1 as $key => $value) { ?>
+            <tr>
+               <td><?php // $value['brand'] ?></td>
+               <td><?php // $value['strength'] ?></td>
+               <td><?php // $value['pmdsize'] ?></td>
+               <td><?php // $value['price'] ?></td>
+            </tr>
+        <?php //} ?>                            
+    </table> -->
+</div>
+
+<script>    
+
+//    require(['jquery'], function($){
+
+//    	$('#brand1').on('change', function() {        		
+//         var selectedValueBrand1 = $('#brand1 :selected').val();
+//         var attributsArray1 = <?php //echo json_encode($attributsArray1); ?>;
+//         data1 = "<tr><th>Brand</th><th>Medicine Strength</th><th>Size</th><th>Price</th></tr>";
+//         $.each(attributsArray1, function( index, attribute ) {
+//             data1 += "<tr>";
+//             $.each(attribute, function(key, value){
+//                 if(selectedValueBrand1 == 'all'){                    
+//                     if(key == attribute['price']){
+//                         data1 += "<td>"+"£ "+value+"</td>";
+//                     } else {
+//                         data1 += "<td>"+value+"</td>";
+//                     }
+                    
+//                 } else if(selectedValueBrand1 == attribute['brand'] ){                    
+//                     if(key == attribute['price']){
+//                         data1 += "<td>"+"£ "+value+"</td>";
+//                     } else {
+//                         data1 += "<td>"+value+"</td>";
+//                     }
+//                 }
+//             })
+//             data1 += "</tr>";
+            
+//         });
+//         $('#selected-data1').html(data1);
+//     });
+// });
+
+</script>

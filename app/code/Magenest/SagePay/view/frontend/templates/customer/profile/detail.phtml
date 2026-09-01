@@ -1,0 +1,125 @@
+<?php
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+// @codingStandardsIgnoreFile
+/** @var \Magenest\SagePay\Block\Customer\View $block */
+$profile = $block->getProfile();
+$profileStatus = $profile->getData('status');
+$order = $block->getOrder();
+$product = $block->getProduct();
+
+$nextOrders = explode("-", $profile->getData('sequence_order_ids'));
+$total_cycles = $profile->getData('total_cycles');
+$remaining_cycles = $profile->getData('remaining_cycles');
+$orderUrl = $block->getOrderUrl($order);
+$cancelUrl = $block->getCancelUrl($profile->getId());
+?>
+
+<?php if ($profileStatus == 'Active') { ?>
+    <a href="<?php echo $block->getCancelUrl($profile->getId()); ?>"><?php echo __('Cancel Profile'); ?></a>
+<?php } ?>
+
+<style>
+    td {
+        float: right
+    }
+</style>
+<div class="block block-order-details-view">
+    <div class="block-title">
+        <strong><?php echo __('Profile Information'); ?></strong>
+    </div>
+    <div class="block-content">
+        <div class="box" style="width: 50%; display: inline; float: left">
+            <strong class="box-title">
+                <span><?php echo __('Recurring Detail'); ?></span>
+            </strong>
+            <div class="box-content">
+                <table>
+                    <tr>
+                        <th><?php echo __('Status'); ?></th>
+                        <td><?php echo $profile->getStatus(); ?></td>
+                    </tr>
+                    <tr>
+                        <th><?php echo __('Frequency'); ?></th>
+                        <td><?php echo $profile->getFrequency(); ?></td>
+                    </tr>
+                    <tr>
+                        <th><?php echo __('Total Cycles'); ?></th>
+                        <?php if ($total_cycles == 0) { ?>
+                            <td><?php echo __('Ongoing Subscription'); ?></td>
+                        <?php } else { ?>
+                            <td><?php echo $total_cycles; ?></td>
+                        <?php } ?>
+                    </tr>
+                    <tr>
+                        <th><?php echo __('Remaining Cycles'); ?></th>
+                        <?php if ($remaining_cycles == 0) { ?>
+                            <td><?php echo __('Ongoing'); ?></td>
+                        <?php } else { ?>
+                            <td><?php echo $remaining_cycles; ?></td>
+                        <?php } ?>
+                    </tr>
+                    <tr>
+                        <th><?php echo __('Start Date'); ?></th>
+                        <td><?php echo $profile->getData('start_date'); ?></td>
+                    </tr>
+                    <tr>
+                        <th><?php echo __('Last Billed Date'); ?></th>
+                        <td><?php echo $profile->getData('last_billed'); ?></td>
+                    </tr>
+                    <tr>
+                        <th><?php echo __('Next Billing Date'); ?></th>
+                        <td><?php echo $profile->getData('next_billing'); ?></td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <strong class="box-title">
+                <span><?php echo __('Order Detail'); ?></span>
+            </strong>
+            <div class="box-content">
+                <table>
+                    <tr>
+                        <th><?php echo __('Order ID'); ?></th>
+                        <td><a href="<?php echo $orderUrl ?>"><?php echo $order->getIncrementId(); ?></a></td>
+                    </tr>
+                    <tr>
+                        <th><?php echo __('Grand Total'); ?></th>
+                        <td><?php echo number_format($order->getGrandTotal(), 2); ?></td>
+                    </tr>
+                    <tr>
+                        <th><?php echo __('Product Name'); ?></th>
+                        <td><a href="<?php echo $product->getProductUrl() ?>"><?php echo $product->getName(); ?></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <?php if ($profile->canCancel()) { ?>
+                <strong><span><a href="<?php echo $cancelUrl; ?>"> <?=__('Cancel Subscription')?> </a></span></strong>
+            <?php } ?>
+        </div>
+
+        <div class="box" style="width: 50%; display: inline; float: left">
+            <strong class="box-title">
+                <span><?php echo __('Subsequent Orders'); ?></span>
+            </strong>
+            <div class="box-content">
+                <table>
+                    <?php foreach ($nextOrders as $nextOrder) { ?>
+                        <tr>
+                            <?php if ($nextOrder === '0') { ?>
+                                <th><?php echo __('Failed Payment'); ?>
+                            <?php } else { ?>
+                                <td>
+                                    <a href="<?php echo $block->getOrderUrl($nextOrder) ?>"><?php echo $nextOrder; ?></a>
+                                </td>
+                            <?php } ?>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,469 @@
+//
+//  Top toolbar general styles
+//  ______________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    // General styles for blocks
+    .amreports-field {
+        & {
+            .am-flex(center, center);
+
+            margin: @amrep__indent auto;
+        }
+
+        > .field-row {
+            .am-flex;
+
+            height: 100%;
+        }
+
+        .admin__control-text {
+            padding: 3px 8px;
+        }
+
+        .admin__field-value {
+            padding: 0;
+        }
+    }
+
+    .amreports-toolbar-container {
+        .am-flex(center, none, wrap);
+    }
+
+    .amreports-display-rule {
+        min-width: 170px;
+    }
+
+    .amreports-filter-from,
+    .amreports-filter-to {
+        & {
+            display: inline-block;
+            max-width: 40%;
+        }
+
+        > .field-row {
+            align-items: center;
+            flex-basis: 180px;
+            position: relative;
+        }
+
+        .field-row > .admin__field-label,
+        .field-row > .admin__field-label {
+            min-width: 34px;
+            text-align: right;
+        }
+
+        .admin__control-text.input-text._has-datepicker {
+            border: 1px solid @amrep-input-border__color;
+            border-radius: 1px;
+            height: 100%;
+            margin-left: @amrep__indent;
+            padding: 3px 35px 3px 8px;
+        }
+    }
+
+    .amreports-controls-container .amreports-input {
+        padding: 3px 10px;
+    }
+
+    .amreports-filter-interval {
+        & {
+            margin: @amrep__indent auto;
+            text-align: center;
+        }
+
+        > .field-row {
+            border: 1px solid @amrep-input-border__color;
+            display: inline-flex;
+            height: 26px;
+        }
+
+        .admin__field.admin__field-option {
+            border: 0;
+            margin: 0;
+            min-width: 70px;
+            padding: 0;
+        }
+
+        .admin__field.admin__field-option:not(:last-child) {
+            border-right: 1px solid @amrep-input-border__color;
+        }
+
+        .admin__field-option .admin__field-label {
+            .am-flex(center, center);
+
+            padding: 3px 0;
+            text-align: center;
+            word-break: break-all;
+        }
+
+        .admin__control-radio:checked + .admin__field-label {
+            background: @amrep__button-color__active;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .admin__control-radio + label:before,
+        .toolbar .admin__control-radio:checked + label:after,
+        .admin__control-radio:checked + label:after {
+            display: none;
+        }
+    }
+
+    .amreports-filter-interval.amreports-filter-switcher {
+        & {
+            width: auto;
+        }
+
+        .admin__field-label {
+            min-width: 110px;
+        }
+    }
+
+    .amreports-quantity-component {
+        & {
+            margin-bottom: 15px;
+        }
+
+        > .field-row {
+            border: 1px solid @amrep-input-border__color;
+            max-height: 35px;
+        }
+
+        .admin__field {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-box-align(center);
+
+            justify-content: center;
+            padding: 0;
+            width: 50%;
+        }
+
+        .admin__field:first-child {
+            .lib-css(border-right, 1px solid @amrep-input-border__color);
+        }
+
+        .admin__field-label {
+            padding: 8px 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        .admin__control-radio + label:before,
+        .toolbar .admin__control-radio:checked + label:after,
+        .admin__control-radio:checked + label:after {
+            display: none;
+        }
+
+        .admin__control-radio:checked + .admin__field-label {
+            background: @amrep__tab-color__active;
+            color: #fff;
+            font-weight: 600;
+        }
+    }
+
+    .amreports-chart-type {
+        > .field-row {
+            max-height: 35px;
+        }
+
+        .admin__field {
+            .lib-vendor-prefix-display(flex);
+            .lib-vendor-box-align(center);
+
+            justify-content: center;
+            padding: 0;
+        }
+
+        .admin__control-radio + label:before,
+        .toolbar .admin__control-radio:checked + label:after,
+        .admin__control-radio:checked + label:after {
+            display: none;
+        }
+
+        .admin__field-label {
+            .lib-css(border, 1px solid @amrep-input-border__color);
+
+            border-radius: 3px;
+            font-size: 0;
+            height: 35px;
+            padding: 0;
+            width: 35px;
+        }
+
+        .admin__control-radio:checked + .admin__field-label {
+            background: #ffecab;
+        }
+
+        .admin__field:first-child .admin__field-label {
+            .lib-css(background-image, @amrep-linear-chart__background-image);
+
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 65%;
+            margin-right: 20px;
+        }
+
+        .admin__field:last-child .admin__field-label {
+            .lib-css(background-image, @amrep-column-chart__background-image);
+
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 65%;
+        }
+    }
+
+    .amreports-newrule-container {
+        .amreports-newrule {
+            & {
+                background: #fff;
+                border: 1px solid #007bdb;
+                color: #007bdb;
+                font-weight: 600;
+                padding: 3px 8px;
+            }
+
+            &:hover {
+                background: #007bdb;
+                color: #fff;
+                text-decoration: none;
+            }
+        }
+    }
+
+    // Change position export menu on charts
+    .amreports-overview-container,
+    .amreports-compare-container,
+    .amreports-customers-container {
+        .amcharts-amexport-menu.amcharts-amexport-top {
+            right: 0;
+            top: 50px;
+        }
+    }
+
+    .amreports-orders-container,
+    .amreports-sales-container,
+    .amreports-state-container,
+    .amreports-brands-container,
+    .amreports-coupon-container,
+    .amreports-byproduct-container,
+    .amreports-bestsellers-container,
+    .amreports-attributes-container {
+        .amcharts-amexport-menu.amcharts-amexport-top {
+            right: 0;
+        }
+    }
+
+    .product-group {
+        border-bottom: 1px dotted;
+        padding-bottom: .5em;
+
+        &:last-child {
+            border: none;
+            padding-bottom: 0;
+        }
+    }
+}
+
+//
+//  Mobile
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .amreports-dashboard-container .amreports-filter-from,
+    .amreports-dashboard-container .amreports-filter-to {
+        & {
+            flex-wrap: wrap;
+            max-width: 100%;
+            width: 100%;
+        }
+
+        ._has-datepicker.admin__control-text {
+            &:extend(.amreports-controls-container .amreports-input);
+        }
+    }
+
+    .amreports-dashboard-container .amreports-filter-interval {
+        & {
+            .am-scrollbar();
+
+            flex-grow: 1;
+            justify-content: flex-start;
+            margin: @amrep__indent 0;
+            overflow: auto;
+            width: 100%;
+        }
+
+        > .field-row {
+            flex-grow: 1;
+            height: 35px;
+            width: auto;
+        }
+
+        .admin__field-option {
+            flex-grow: 1;
+        }
+
+        .admin__field-option .admin__field-label {
+            height: 100%;
+        }
+    }
+}
+
+//
+//  Tablet
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    // General styles for blocks
+    .amreports-filter-from,
+    .amreports-filter-to {
+        > .field-row {
+            width: 100%;
+        }
+
+        .admin__control-text.input-text._has-datepicker {
+            width: 100%;
+        }
+    }
+
+    .amreports-status {
+        & {
+            margin: 20px 0;
+            width: 50%;
+        }
+
+        .amreports-select {
+            margin: 0;
+        }
+    }
+
+    .amreports-quantity-component {
+        margin: 20px 0 20px auto;
+        width: 47%;
+    }
+
+    .amreports-newrule-container {
+        margin: 20px 0 20px 45px;
+    }
+
+    .amreports-field {
+        margin: @amrep__indent;
+    }
+}
+
+//
+//  Desktop
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    // General styles for blocks
+    .amreports-filter-from,
+    .amreports-filter-to {
+        & {
+            width: auto;
+        }
+
+        > .field-row {
+            max-height: 27px;
+        }
+
+        .admin__control-text.input-text._has-datepicker {
+            width: 120px;
+        }
+    }
+
+    .amreports-filter-to {
+        margin-right: auto;
+    }
+
+    .amreports-filter-interval + .amreports-field {
+        max-width: 350px;
+        width: 48%;
+    }
+
+    .amreports-quantity-component {
+        & {
+            margin: 0 25px 0 0;
+            max-width: 328px;
+            width: 60%;
+        }
+
+        > .field-row {
+            max-height: 27px;
+        }
+
+        .admin__field-label {
+            padding: 3px 0;
+        }
+    }
+
+    .amreports-chart-type {
+        & {
+            margin: 0;
+            width: auto;
+        }
+
+        .admin__field {
+            max-height: 27px;
+        }
+
+        .admin__field:last-child {
+            margin: 0;
+        }
+
+        .admin__field-label {
+            height: 27px;
+            width: 27px;
+        }
+    }
+
+    .amreports-status {
+        .lib-vendor-prefix-flex-grow(1);
+
+        margin: 0;
+        width: 35%;
+    }
+
+    .amreports-newrule-container {
+        & {
+            margin: 0 0 0 40px;
+        }
+
+        .amreports-newrule {
+            padding: 3px 10px;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    // General styles for blocks
+    .amreports-filter-interval + .amreports-field {
+        max-width: 210px;
+    }
+
+    .amreports-quantity-component {
+        & {
+            margin: 0 auto;
+            max-width: 280px;
+            width: 25%;
+        }
+
+        .admin__field:first-child {
+            align-self: flex-start;
+        }
+
+        .admin__field:last-child {
+            align-self: flex-start;
+            margin: 0;
+        }
+    }
+
+    .amreports-newrule-container {
+        margin: 0 40px;
+    }
+}

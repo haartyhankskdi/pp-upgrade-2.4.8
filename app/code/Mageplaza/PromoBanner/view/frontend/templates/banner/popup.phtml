@@ -1,0 +1,84 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_PromoBanner
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\PromoBanner\Block\Banner\Popup $block */
+$collection = $block->getPromoBannerCollection();
+if ($collection && $collection->getSize()) : ?>
+    <script id="mppromobanner_popup_template" type="text/x-magento-template">
+        <div class="mppromobanner-banner-<%- data.id %> mppromobanner-white-popup
+        mfp-hide mppromobanner-popup-<%- data.responsive %>"
+        id="mppromobanner-banner-<%- data.id %>">
+            <div class="mppromobanner-container">
+                <div class="mppromobanner-popup-image">
+                    <% if (data.url) { %>
+                    <div class="mppromobanner-popup-container">
+                        <a class="mppromobanner-url"
+                           href="<%- data.url %>"
+                            rel="noopener noreferrer">
+                            <img class="mppromobanner-image img-responsive"
+                                 src="<%- data.url_image %>"
+                                 alt="<%- data.image %>">
+                        </a>
+                    </div>
+                    <% } else { %>
+                    <div class="mppromobanner-popup-container">
+                        <img class="mppromobanner-image img-responsive"
+                             src="<%- data.url_image %>"
+                             alt="<%- data.image %>">
+                    </div>
+                    <% } %>
+                </div>
+                <?php if ($block->getConfigPopup('show_popup_checkbox')) : ?>
+                    <label class="mppromobanner-popup-label">
+                        <input type="checkbox" id="mppromobanner-popup-checkbox" value="1">
+                        <?= $block->escapeHtml($block->getConfigPopup('checkbox_label')) ?>
+                    </label>
+                <?php endif; ?>
+            </div>
+        </div>
+    </script>
+    <div id="mppromobanner-popup"></div>
+    <a href="" class="btn open-popup-link"></a>
+    <style type="text/css">
+        .mppromobanner-popup-center {
+            width: auto;
+            max-width: <?= /* @noEscape */ $block->getConfigPopup('popup_width') ?>px;
+            max-height: <?= /* @noEscape */ $block->getConfigPopup('popup_height') ?>px;
+        }
+        .mppromobanner-popup-center .mppromobanner-popup-image img {
+            max-height: <?= /* @noEscape */ $block->getConfigPopup('popup_height') ?>px;
+        }
+    </style>
+
+    <script type="text/x-magento-init">
+    {
+        "#mppromobanner-popup": {
+            "Mageplaza_PromoBanner/js/promobanner": {
+                "type": "<?= /* @noEscape */ \Mageplaza\PromoBanner\Model\Config\Source\Type::POPUP ?>",
+                "media_path": "<?= /* @noEscape */ $block->getImageSrc('') ?>",
+                "isCartPage": "<?= /* @noEscape */ $block->getRequest()->getFullActionName() ?>",
+                "showCloseBtn": "<?= /* @noEscape */ $block->showCloseBtn() ?>",
+                "collection": <?= /* @noEscape */ \Mageplaza\PromoBanner\Helper\Data::jsonEncode($collection) ?>
+            }
+        }
+    }
+    </script>
+<?php endif; ?>

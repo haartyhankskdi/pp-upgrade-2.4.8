@@ -1,0 +1,171 @@
+//
+//  Buttons Component
+//  ____________________________________________
+
+//
+//  Imports
+//  --------------------------------------------
+
+@import '../_mixins';
+
+//
+//  Common
+//  --------------------------------------------
+
+& when (@media-common = true) {
+    .amcform-button:not(.primary) {
+        & {
+            .amcform-transition(.1);
+
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: @amcform__indent;
+            height: 40px;
+            border-radius: 3px;
+            box-shadow: none;
+            font-weight: 400;
+            cursor: pointer;
+            pointer-events: auto;
+            user-select: none;
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+            background: none;
+            box-shadow: none;
+            text-decoration: none;
+        }
+
+        &:before,
+        &:after {
+            .amcform-transition(.1);
+        }
+
+        &.-disabled {
+            & {
+                pointer-events: none;
+            }
+
+            &:focus {
+                pointer-events: none;
+            }
+        }
+    }
+
+    .amcform-button.-clear {
+        & {
+            padding: 0;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        &:active,
+        &:hover,
+        &:focus {
+            border: none;
+            background: transparent;
+            box-shadow: none;
+        }
+    }
+
+    .amcform-button.-default {
+        & {
+            &:extend(.amcform-button.-clear all);
+
+            padding: 10px;
+            min-width: 130px;
+            background-color: @amcform-button__background;
+            color: #fff;
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        &:hover {
+            background-color: @amcform-button__hover__background;
+        }
+
+        &:focus {
+            background-color: @amcform-button__hover__background;
+            box-shadow: 0 0 0 3px hsl(0, 0%, 100%), 0 0 0 4px hsl(0, 0%, 0%);
+        }
+
+        &:active {
+            background-color: @amcform-button__pressed__background;
+        }
+    }
+
+    .amcform-button.-error {
+        & {
+            &:extend(.amcform-button.-default all);
+
+            border: 1px solid @amcform-error__color;
+            background-color: #fff;
+            color: @amcform-error__color;
+        }
+
+        &:hover,
+        &:focus {
+            border: 1px solid #ee2e2e;
+            background-color: #ffc8c8;
+        }
+
+        &:active {
+            border: 1px solid #d21616;
+            background-color: #fff;
+        }
+    }
+
+    .amcform-button.-with-icon {
+        & {
+            &:extend(.amcform-button.-clear all);
+
+            padding: 10px 15px;
+            min-width: auto;
+            background-color: transparent;
+            color: #333;
+        }
+
+        > .amcform-icon {
+            margin-right: 10px;
+            color: #c7c7c7;
+        }
+
+        &:hover {
+            background-color: #eee;
+        }
+
+        &:focus {
+            z-index: 1;
+            box-shadow: 0 0 0 1px hsl(0, 0%, 0%);
+        }
+
+        &:active {
+            color: @amcform__color__primary;
+        }
+
+        &:active > .amcform-icon {
+            color: @amcform__color__primary;
+        }
+
+        &:active > .amcform-icon.-remove,
+        &.-remove:active {
+            color: @amcform-error__color;
+        }
+    }
+
+    .amcform-button.-with-icon.-small {
+        & {
+            padding: 10px;
+            font-size: 0;
+        }
+
+        > .amcform-icon {
+            margin: 0;
+        }
+    }
+}

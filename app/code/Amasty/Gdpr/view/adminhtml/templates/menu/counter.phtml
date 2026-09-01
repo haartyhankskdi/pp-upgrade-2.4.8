@@ -1,0 +1,30 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package GDPR Base for Magento 2
+ */
+/**
+ * @var \Amasty\Gdpr\Block\Adminhtml\Menu\DeleteRequestCounter $block
+ */
+?>
+<script>
+    require(['jquery'], function ($) {
+        var gdpr = $('.item-gdpr'),
+            amastymenu = $('#menu-amasty-gdpr-container'),
+            deleteRequestCount = <?= (int)$block->getDeleteRequestsCount(); ?>;
+        if (gdpr.length) {
+            var requests = gdpr.find('.item-requests');
+            if (requests.length && deleteRequestCount > 0) {
+                requests.find('a').html(requests.find('a').text() + ' <span class="amgdpr-status">' + deleteRequestCount + '</span>');
+            }
+        }
+
+        if (amastymenu.length) {
+            var amastymanage = amastymenu.find('.item-requestsmenu');
+            if (amastymanage.length && deleteRequestCount > 0) {
+                amastymanage.find('a').html(amastymanage.find('a').text() + ' <span class="amgdpr-status">' + deleteRequestCount + '</span>');
+            }
+        }
+    });
+</script>

@@ -1,0 +1,39 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="hhcatalog" translate="label" sortOrder="999999">
+            <label>Haarty Hanks Catalog Attribute</label>
+        </tab>
+        <section id="hhcatalog" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Catalog Attribute HH</label>
+            <tab>hhcatalog</tab>
+            <resource>Haartyhanks_CategoryQuest::configuration</resource>
+            <group id="general" translate="label" type="text" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+        <tab id="haartyhanks" translate="label" sortOrder="999">
+			<label>haartyhanks</label>
+		</tab>
+		<section id="categery" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+			<label>Category Questionnaire</label>
+			<tab>haartyhanks</tab>
+			<resource>Haartyhanks_CategoryQuest::config_haartyhanks_categoryquest</resource>
+			<group id="weightloss" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+				<label>Weightloss Questionnaire</label>
+				<field id="guest" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+					<label>Guest</label>
+					<comment>Category Questionnaire Form Id for Guest</comment>
+				</field>
+				<field id="repeat" type="text" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+					<label>Repeat</label>
+					<comment>Category Questionnaire Form Id for Old Customer</comment>
+				</field>
+			</group>
+		</section>
+    </system>
+</config>

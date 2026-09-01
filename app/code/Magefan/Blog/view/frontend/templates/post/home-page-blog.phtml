@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post list template
+ *
+ * @var $block \Magefan\Blog\Block\Post\PostList
+ */
+?>
+<?php
+$_postCollection = $block->getPostCollection();
+//echo "<pre>";print_r($_postCollection);exit();
+$post_id = array_column($_postCollection->getData(), 'post_id');
+
+array_multisort($post_id, SORT_DESC, $_postCollection->getData());
+//echo "<pre>";print_r($post_id);exit();
+?>
+
+<div class="home_blogs">
+    <div class="container">
+        <div class="main-container">
+            <div class="img-2"><img src="<?php echo $this->getViewFileUrl('images/blog-title-bg.png'); ?>" alt="Blog" /></div>
+                <h2><span>Read our latest blogs</span></h2>
+                    <div class="blog-section">
+                        <?php 
+                    for ($i=0; $i < 3; $i++) { 
+                        foreach ($_postCollection as $_post){
+                               
+                                     if($post_id[$i]==$_post['post_id']){
+
+                                        $date = date('Y-m-d', strtotime($_post['creation_time']));
+                                        $unixTimestamp = strtotime($date);
+                                        $dayOfWeek = date("l", $unixTimestamp);
+
+                        ?>
+               
+                                <div class="blog-1">    
+                                    <h3><?php echo $_post['title']; ?></h3>
+                                    <h5><?php echo $dayOfWeek ." ,".date('F j, Y H:i:s A', strtotime($_post['creation_time'])); ?></h5>
+                                    
+                                    <div class="blog-desc">
+                                    <p><?php echo implode(' ', array_slice(explode(' ', $_post['short_content']), 0, 25))."...\n"; ?></p></div>
+                                    <p><span><a href="blog/post/<?php echo $_post['identifier']; ?>">READ MORE</a></span></p>
+                                </div>
+
+                        <?php
+                                }
+                             }
+                        }
+                        ?>
+            
+           
+                     </div>
+        </div>
+    </div>
+</div>
+
+    

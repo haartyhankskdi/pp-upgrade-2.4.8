@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Payment\Model\CcGenericConfigProvider">
+        <arguments>
+            <argument name="methodCodes" xsi:type="array">
+                <item name="magenest_sagepay" xsi:type="const">Magenest\SagePay\Model\Ui\ConfigProvider::CODE</item>
+                <item name="magenest_sagepay_direct" xsi:type="const">Magenest\SagePay\Model\Ui\ConfigProvider::DIRECT_CODE</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="magenest_sagepay_configprovider" xsi:type="object">Magenest\SagePay\Model\Ui\ConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Data\Form\FormKey\Validator">
+        <plugin name="exclude_validator_path" type="Magenest\SagePay\Plugin\Framework\Data\Form\FormKey\Validator" sortOrder="0"/>
+    </type>
+    <type name="Magenest\SagePay\Plugin\Framework\Data\Form\FormKey\Validator">
+        <arguments>
+            <argument name="handlePath" xsi:type="array">
+                <item name="direct_postback_path" xsi:type="string">sagepay/direct/postBack</item>
+                <item name="pi_postback_path" xsi:type="string">sagepay/checkout/redirectBack</item>
+                <item name="paypal_postback_path" xsi:type="string">sagepay/paypal/postBack</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Sales\Model\Order\Email\Sender\OrderSender">
+        <plugin disabled="false" name="prevent_send_mail_when_pending" type="Magenest\SagePay\Plugin\ConfirmationMail" sortOrder="1" />
+    </type>
+</config>

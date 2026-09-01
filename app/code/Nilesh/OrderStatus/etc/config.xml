@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<sales_email>
+			<custom_approve_status>
+				<enable>0</enable>
+				<identity/>
+				<approve_template/>
+				<copy_to/>
+			</custom_approve_status>
+			<custom_disapprove_status>
+				<enable/>
+				<identity/>
+				<disapprove_template/>
+				<copy_to/>
+			</custom_disapprove_status>
+		</sales_email>
+	</default>
+</config>

@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    require(['jquery'], function ($) {
+        $(document).ready(function () {
+            function removeMessage($message) {
+                setTimeout(function () {
+                    if ($message.is(':visible')) {
+                        $message.fadeOut('slow', function () {
+                            $(this).remove();
+                        });
+                    }
+                }, 5000);
+            }
+
+            function checkExistingMessages() {
+                $('.messages .message:visible').each(function () {
+                    removeMessage($(this));
+                });
+            }
+
+            var observer = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    $(mutation.addedNodes).each(function () {
+                        var $newMessageContainer = $(this).closest('.messages');
+
+                        if ($newMessageContainer.length > 0) {
+                            console.log('New message detected! Removing in 5 sec.');
+
+                            $newMessageContainer.find('.message:visible').each(function () {
+                                removeMessage($(this));
+                            });
+                        }
+                    });
+                });
+            });
+
+            observer.observe(document.body, { childList: true, subtree: true });
+            checkExistingMessages();
+        });
+    });
+</script>

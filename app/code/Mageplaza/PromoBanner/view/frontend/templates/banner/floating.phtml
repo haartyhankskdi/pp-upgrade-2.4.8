@@ -1,0 +1,77 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_PromoBanner
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\PromoBanner\Block\Banner\Floating $block */
+$collection = $block->getPromoBannerCollection();
+if ($collection && $collection->getSize()) : ?>
+<script id="mppromobanner-template-floating-<?= /* @noEscape */ $block->getPosition() ?>" type="text/x-magento-template">
+    <div class="mppromobanner-banner-<%- data.id %> mppromobanner-floating"
+         id="mppromobanner-<?= /** @noEscape */ $block->getPosition() ?>">
+        <?php if ($block->showCloseBtn()) : ?>
+            <div class="mppromobanner-close">
+                <div class="mppromobanner-close-btn" title="<?= /* @noEscape */ __('Close') ?>"></div>
+            </div>
+        <?php endif; ?>
+        <div class="mppromobanner-container">
+            <div class="floating-image">
+                <% if (data.url) { %>
+                <div class="mppromobanner-floating-container">
+                    <a class="mppromobanner-url"
+                       href="<%- data.url %>"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <img class="mppromobanner-image img-responsive"
+                             src="<%- data.url_image %>"
+                             alt="<%- data.image %>">
+                    </a>
+                </div>
+                <% } else { %>
+                <div class="mppromobanner-floating-container">
+                    <img class="mppromobanner-image img-responsive"
+                         src="<%- data.url_image %>"
+                         alt="<%- data.image %>">
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</script>
+<div id="mppromobanner-floating-<?= /** @noEscape */ $block->getPosition() ?>"></div>
+<style type="text/css">
+    .mppromobanner-floating .floating-image img{
+        max-width: <?= /* @noEscape */ $block->getConfigFloating('float_width')  ?>px;
+        max-height: <?= /* @noEscape */ $block->getConfigFloating('float_height')  ?>px;
+    }
+</style>
+
+    <script type="text/x-magento-init">
+    {
+        "#mppromobanner-floating-<?= /* @noEscape */ $block->getPosition() ?>": {
+            "Mageplaza_PromoBanner/js/promobanner": {
+                "type": "<?= /* @noEscape */ \Mageplaza\PromoBanner\Model\Config\Source\Type::FLOATING ?>",
+                "media_path": "<?= /* @noEscape */ $block->getImageSrc('') ?>",
+                "isCartPage": "<?= /* @noEscape */ $block->getRequest()->getFullActionName() ?>",
+                "collection": <?= /* @noEscape */ \Mageplaza\PromoBanner\Helper\Data::jsonEncode($collection) ?>
+            }
+        }
+    }
+    </script>
+<?php endif; ?>

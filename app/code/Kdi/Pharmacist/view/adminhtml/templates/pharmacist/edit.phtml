@@ -1,0 +1,76 @@
+<form action="<?= $block->getFormAction(); ?>" method="post" enctype='multipart/form-data'>
+
+<input type="hidden" name="form_key" value="<?= $block->getFormKey(); ?>" />
+
+    <div class="admin__fieldset">
+        <div class="admin__field field">
+            <label class="label admin__field-label" for="name">
+                <span><?= __('Pharmacist Name') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input type="text" name="name" id="name" class="admin__control-text" required/>
+            </div>
+        </div>
+
+        <div class="admin__field field">
+            <label class="label admin__field-label" for="gphc_no">
+                <span><?= __('GPhC Number') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input type="text" name="gphc_no" id="gphc_no" class="admin__control-text" required/>
+            </div>
+        </div>
+
+        <div class="admin__field field">
+            <label class="label admin__field-label" for="pharmacist_type">
+                <span><?= __('Pharmacist Type') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input type="text" name="pharmacist_type" id="pharmacist_type" class="admin__control-text" required/>
+            </div>
+        </div>
+
+        <div class="admin__field field">
+            <label class="label admin__field-label" for="qualification">
+                <span><?= __('Qualification') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input type="text" name="qualification" id="qualification" class="admin__control-text" required/>
+            </div>
+        </div>
+
+        <div class="admin__field field">
+            <label class="label admin__field-label" for="description">
+                <span><?= __('Description') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <textarea name="description" id="description" class="admin__control-textarea"></textarea>
+            </div>
+        </div>
+
+        <div class="admin__field field">
+            <label class="label admin__field-label" for="profile">
+                <span><?= __('Profile Image') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input type="file" name="profile" id="profile" class="admin__control-text" />
+            </div>
+        </div>
+
+        <div class="admin__field field">
+            <label class="label admin__field-label" for="is_enabled">
+                <span><?= __('Enabled') ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input type="checkbox" name="is_enabled" id="is_enabled" value="1" />
+            </div>
+        </div>
+
+        <div class="admin__form-actions">
+            <button type="submit" class="action-default scalable save primary">
+                <span><?= __('Save Pharmacist') ?></span>
+            </button>
+        </div>
+    </div>
+
+</form>

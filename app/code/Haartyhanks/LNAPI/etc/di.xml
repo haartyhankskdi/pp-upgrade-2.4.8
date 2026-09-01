@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Haartyhanks\LNAPI\Api\EntityRepositoryInterface" type="Haartyhanks\LNAPI\Model\EntityRepository"/>
+	<preference for="Haartyhanks\LNAPI\Api\Data\EntityInterface" type="Haartyhanks\LNAPI\Model\Data\Entity"/>
+	<preference for="Haartyhanks\LNAPI\Api\Data\EntitySearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Haartyhanks\LNAPI\Model\ResourceModel\Entity\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">haartyhanks_lnapi_entity</argument>
+			<argument name="resourceModel" xsi:type="string">Haartyhanks\LNAPI\Model\ResourceModel\Entity\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="haartyhanks_lnapi_entity_listing_data_source" xsi:type="string">Haartyhanks\LNAPI\Model\ResourceModel\Entity\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

@@ -1,0 +1,23 @@
+h2.title {
+    font-weight: bold !important;
+}
+
+div.log-gid .row .label {
+    font-weight: bold;
+}
+
+table.view_details {
+    width: 100%;
+}
+
+table.view_details thead tr,
+table.view_details tbody tr {
+    text-align: center;
+}
+
+table.view_details thead tr th {
+    background: #514943;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-collapse: collapse;
+}

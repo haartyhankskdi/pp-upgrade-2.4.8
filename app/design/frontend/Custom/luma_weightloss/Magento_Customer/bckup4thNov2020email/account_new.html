@@ -1,0 +1,49 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<!--@subject {{trans "Welcome to %store_name" store_name=$store.getFrontendName()}} @-->
+<!--@vars {
+"var this.getUrl($store, 'customer/account/')":"Customer Account URL",
+"var customer.email":"Customer Email",
+"var customer.name":"Customer Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<p align="center"><img src="{{media url='wysiwyg/thankyou-img.jpg'}}" alt="" /></p>
+<h1 style="font-size: 59px; font-weight: 700; text-transform: uppercase; text-align: center; color: #393939; font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: 10px; margin-top: 30px; margin-bottom: 40px;">Thank You!</h1>
+<div style="background-color: #fff; padding: 30px;">
+<p class="greeting">{{trans "%name," name=$customer.name}}</p>
+<p>{{trans "Welcome to %store_name." store_name=$store.getFrontendName()}}</p>
+<p>
+    {{trans
+        'To sign in to our site, use these credentials during checkout or on the <a href="%customer_url">My Account</a> page:'
+
+        customer_url=$this.getUrl($store,'customer/account/',[_nosid:1])
+    |raw}}
+</p>
+<ul style="margin-left: 15px;">
+    <li><strong>{{trans "Email:"}}</strong> {{var customer.email}}</li>
+    <li><strong>{{trans "Password:"}}</strong> <em>{{trans "The Password you set while creating this account"}}</em></li>
+</ul>
+<p>
+    {{trans
+        'Forgot your account password? Click <a href="%reset_url">here</a> to reset it.'
+
+        reset_url="$this.getUrl($store,'customer/account/createPassword/',[_query:[id:$customer.id,token:$customer.rp_token],_nosid:1])"
+    |raw}}
+</p>
+<p>{{trans "When you sign in to your account, you will be able to:"}}</p>
+<ul style="margin-left: 15px;">
+    <li>{{trans "Edit your account information"}}</li>
+    <li>{{trans "Check the status of current orders and view past orders"}}</li>
+    <li>{{trans "Proceed to checkout faster, if you want to reorder a product"}}</li>
+    <li>{{trans "Store alternative addresses(for shipping to multiple family members and friends)"}}</li>
+    <li>{{trans "Update your general questionnaire"}}</li>
+</ul>
+</div>
+
+{{template config_path="design/email/footer_template"}}

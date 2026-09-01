@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="sales_order_grid_data_source" xsi:type="string">Nilesh\PrescriberName\Model\Order\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Nilesh\PrescriberName\Model\Order\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">sales_order_grid</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Sales\Model\ResourceModel\Order</argument>
+        </arguments>
+    </type>
+</config>
+
+<!-- <?xml version="1.0" encoding="utf-8" ?> 
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"> 
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider"> 
+        <arguments> 
+            <argument name="addFieldStrategies" xsi:type="array"> 
+                <item name="prescriber_name" xsi:type="object">Nilesh\PrescriberName\Ui\Component\DataProvider\PrescriberNameField</item> 
+            </argument> 
+            <argument name="addFilterStrategies" xsi:type="array"> 
+                <item name="prescriber_name" xsi:type="object">Nilesh\PrescriberName\Ui\Component\DataProvider\PrescriberNameFilter</item> 
+            </argument> 
+        </arguments> 
+    </type> 
+</config> -->

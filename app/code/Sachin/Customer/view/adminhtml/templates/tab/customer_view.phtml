@@ -1,0 +1,251 @@
+<?php 
+/**
+ * @var $block /Sachin/Customer/Block/Adminhtml/Edit/Tab
+ */
+?>
+<?php //$customer = $block->getAgeverifiedCustomer($block->getCustomerId());
+        //print_r($customer);exit();
+$cust = $block->getDatanew();
+$custaddress = $block->getBillingAddress();
+$helper = $this->helper('Sachin\Customer\Helper\Registerverify');
+//$values = $helper->getCustAttribute($block->getCustomerId());
+$tracesmart_dob = $helper->getTracesmartDob($block->getCustomerId());
+$age_verification = $helper->getAgeverification($block->getCustomerId());
+$electroll_role = $helper->getElectroll($block->getCustomerId());
+$tracesmart_register = $helper->getTracesmartRegister($block->getCustomerId());
+$tracesmart_telephone = $helper->getTracesmartTelephone($block->getCustomerId());
+//echo $helper->getTracesmartDob($block->getCustomerId());exit();
+//getCustAttribute($block->getCustomerId());
+//echo "<pre>";print_r($custaddress);exit();
+
+?>
+<style>
+
+.age-verification-list{
+    width: 410px;
+    float: left;
+    margin:20px 0;
+}
+.age-verification-list ul li{
+    width: 100%;
+    float: left;
+    padding: 5px 10px;
+    margin: 0 0px 5px 0;
+    font-family: 'Ubuntu';
+    font-size: 14px;
+    color: #333;
+    line-height: 24px;
+    font-weight: 400;
+    list-style-type: none;
+}
+.age-verification-list ul li span{float: right; margin-top: 3px;
+    height: 20px;}
+.age-verification-list ul li a{
+     font-family: 'Ubuntu';
+    font-size: 14px;
+    color: #333;
+    line-height: 24px;
+    font-weight: 400;
+    text-decoration: none;
+}
+.age-verification-green{background: #75b157; color: #fff !important;}
+.age-verification-grey{background: #c7c7c7;}
+.age-verify-customer{
+    width: 100%;
+    float: left;
+}
+</style>
+ <div class="fieldset-wrapper customer-information">
+    <div class="fieldset-wrapper-title">
+        <span class="title-ageverification"><?php /* @escapeNotVerified */
+            echo __('Information for new Customer tab') ?></span>
+    </div>
+    <table class="admin__table-secondary">
+        <tbody>
+        <?php echo $block->getChildHtml(); ?>
+                
+        <tr>
+            <th><?php /* @escapeNotVerified */
+                echo __('First Name:') ?></th>
+            <td><?php echo $cust->getFirstname(); ?></td>
+        </tr>
+        <tr>
+            <th><?php /* @escapeNotVerified */
+                echo __('Last Name:') ?></th>
+            <td><?php echo $cust->getLastname(); ?></td>
+        </tr>
+        <tr>
+            <th><?php /* @escapeNotVerified */
+                echo __('Date of Birth:') ?></th>
+            <td><?php echo $cust->getDob(); ?></td>
+        </tr>
+        <tr>
+            <th><?php /* @escapeNotVerified */
+                echo __('Gender:') ?></th>
+            <td><?php 
+            if(!empty($cust->getGender()) && $cust->getGender() == "1"){
+                echo "Male";
+            }
+            if(!empty($cust->getGender()) && $cust->getGender() == "2"){
+                echo "Female";
+            }
+              ?></td>
+        </tr>
+        <tr>
+            <th><?php /* @escapeNotVerified */
+                echo __('Street:') ?></th>
+            <td><?php echo (!empty($custaddress['street'])) ? $custaddress['street'] : ''; ?></td>
+        </tr>
+        <tr>
+            <th><?php /* @escapeNotVerified */
+                echo __('City:') ?></th>
+                <td><?php echo (!empty($custaddress['city'])) ? $custaddress['city'] : ''; ?></td>
+        </tr>
+        <tr>
+            <th><?php /* @escapeNotVerified */
+                echo __('Postcode:') ?></th>
+                <td><?php echo (!empty($custaddress['postcode'])) ? $custaddress['postcode'] : ''; ?></td>
+        </tr>        
+        
+        </tbody>
+    </table>
+</div>
+
+<!--analog code start -->
+<div class="custom-analog-status">
+    <style>
+        .analog-indicator {
+            text-align: center;
+            margin: 15px auto;
+        }
+        .analog-icon {
+            width: 350px;
+            height: auto;
+            float: left;
+        }
+        .analog-text {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+        .analog-indicator.success .analog-text { color: green; }
+        .analog-indicator.failed .analog-text { color: red; }
+        .analog-indicator.default .analog-text { color: #888; float: left;
+    width: 300px;
+    clear: left;}
+        .custom-analog-status{
+            width: 100%;
+            float: left;
+        }
+    </style>
+
+    <?php
+    // Determine status based on logic
+    if ($electroll_role == 1 || $tracesmart_register == 1 || $tracesmart_telephone == 1 || $tracesmart_dob == 1 || $age_verification) {
+        $status = 'success';
+        $image = 'LN-pass-analaog-img.svg';
+        $text = 'Success';
+    } elseif ($electroll_role === 0 && $tracesmart_register === 0 && $tracesmart_telephone === 0 && $tracesmart_dob === 0 && !$age_verification) {
+        $status = 'failed';
+        $image = 'LN-fail-analog-img.svg';
+        $text = 'Failed';
+    } else {
+        $status = 'default';
+        $image = 'LN-refer-analag-img.svg';
+        $text = 'Default';
+    }
+
+    // Build full image path from media folder
+    $imageUrl = $block->getBaseUrl() . 'pub/media/wysiwyg/LN-Image/' . $image;
+    ?>
+
+    <div class="analog-indicator <?= $status ?>">
+        <img src="<?= $imageUrl ?>" alt="<?= $text ?> Analog" class="analog-icon" />
+        <p class="analog-text"><?//= $text ?></p>
+    </div>
+</div>
+<!--analog code end --> 
+
+<div class="age-verification-list">
+<ul>
+    <li class="<?php echo ($electroll_role==1) ? 'age-verification-green' : 'age-verification-grey' ?>">Electoral Roll <span><a href="#"><img src="<?php echo ($electroll_role==1) ? $this->getBaseUrl().'pub/media/tick-icon.png' : $this->getBaseUrl().'pub/media/close-icon-1.png' ?>" alt="" /></span></a></li>
+    <li class="<?php echo ($tracesmart_register==1) ? 'age-verification-green' : 'age-verification-grey' ?>">Tracesmart Register <span><a href="#"><img src="<?php echo ($tracesmart_register==1) ? $this->getBaseUrl().'pub/media/tick-icon.png' : $this->getBaseUrl().'pub/media/close-icon-1.png' ?>" alt="" /></a></span></li>
+    <li class="<?php echo ($tracesmart_telephone==1) ? 'age-verification-green' : 'age-verification-grey' ?>">Telephone Directory <span><a href="#"><img src="<?php echo ($tracesmart_telephone==1) ? $this->getBaseUrl().'pub/media/tick-icon.png' : $this->getBaseUrl().'pub/media/close-icon-1.png' ?>" alt="" /></a></span></li>
+    <li class="<?php echo ($tracesmart_dob==1) ? 'age-verification-green' : 'age-verification-grey' ?>">DOB Verification <span><a href="#"><img src="<?php echo ($tracesmart_dob==1) ? $this->getBaseUrl().'pub/media/tick-icon.png' : $this->getBaseUrl().'pub/media/close-icon-1.png' ?>" alt="" /></a></span></li>
+    <li class="<?php echo ($age_verification==1) ? 'age-verification-green' : 'age-verification-grey' ?>">Age Verification <span><a href="#"><img src="<?php echo ($age_verification==1) ? $this->getBaseUrl().'pub/media/tick-icon.png' : $this->getBaseUrl().'pub/media/close-icon-1.png' ?>" alt="" /></a></span></li>
+</ul>
+</div>
+
+<form class="form contact age-verify-customer" id="contact-form" method="post" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
+
+<input type="hidden" name="customer_id" value="<?php echo $block->getCustomerId(); ?>">
+<input type="hidden" name="firstname" value="<?php echo $cust->getFirstname(); ?>">
+<input type="hidden" name="lastname" value="<?php echo $cust->getLastname(); ?>">
+<input type="hidden" name="dob" value="<?php echo $cust->getDob(); ?>">
+<?php 
+if(!empty($cust->getGender()) && $cust->getGender() == "1"){
+            $gender_tracemart = 'Male';
+        }else{
+            $gender_tracemart = 'Female';
+        }
+?>
+<input type="hidden" name="gender" value="<?php echo $gender_tracemart; ?>">
+<input type="hidden" name="street" value="<?php echo (!empty($custaddress['street'])) ? $custaddress['street'] : ''; ?>">
+<input type="hidden" name="city" value="<?php echo (!empty($custaddress['city'])) ? $custaddress['city'] : ''; ?>">
+<input type="hidden" name="postcode" value="<?php echo (!empty($custaddress['postcode'])) ? $custaddress['postcode'] : ''; ?>">
+<button class="action submit">Click to verify</button>
+</form>
+<div class="note-display"></div>
+<script>
+
+require(['jquery','mage/mage','mage/calendar'], function($){
+    // $(".reverify").click(function (){
+    //     $("#contact-form").toggle();
+    //     $(".note").hide();
+    //     $(".reverify").hide();
+    // });
+    // $('#datetimepicker').datepicker({
+    //     dateFormat: 'yy-mm-dd',
+    //     changeMonth: true,
+    //     changeYear: true,
+    //     maxDate:0,
+    //     required: true,
+    // });
+    var dataForm = $('#contact-form');
+        dataForm.mage('validation', {});
+         $('.note-display').hide();
+        $(document).on('click','.submit',function() {
+             
+            if (dataForm.valid()){
+            event.preventDefault();
+                var param = dataForm.serialize();
+                //alert(param);exit();
+                    $.ajax({
+                        showLoader: true,
+                        url: "<?php echo $block->getUrl('customer/ageverify/save'); ?>",
+                        data: param,
+                        type: "POST"
+                    }).done(function (data) {
+                        //console.log(data);exit();
+                        if(data == true){
+                        $('.note-display').html("You have successfully verified your age.");
+                        //location.replace("<?php //echo $produtUrl; ?>");
+                        //$('#contact-form').hide();
+                        //$('.reverify').show();
+                        }else{
+
+                        $('.note-display').html(data);
+                        $('.note-display').css('color', 'red');
+                        }
+                        location.reload();
+                        // document.getElementById("contact-form").reset();
+                         return true;
+                    });
+                }
+            });
+
+  // https://magento24.hhhosting.co.uk/admin/customer/ageverification/save/key/9f41c7cba4a28f3c824f348a4573f440a497290ad29c2021c6d504244d9c5f0c/
+ });
+
+</script>
+

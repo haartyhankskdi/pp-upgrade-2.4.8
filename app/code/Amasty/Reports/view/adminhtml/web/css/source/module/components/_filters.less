@@ -1,0 +1,172 @@
+//
+//  Filters Styles
+//  ______________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amreports-body-container {
+        .admin__data-grid-actions-wrap {
+            .am-flex(none, none, wrap);
+
+            width: 100%;
+        }
+
+        .admin__data-grid-actions-wrap .admin__action-dropdown-wrap {
+            & {
+                text-align: right;
+                width: 100%;
+            }
+
+            &:after {
+                display: none;
+            }
+        }
+
+        .admin__data-grid-action-bookmarks .admin__action-dropdown-menu {
+            left: auto;
+            right: 0;
+        }
+
+        .admin__action-dropdown-menu-content {
+            max-width: 100%;
+        }
+
+        .admin__data-grid-action-columns {
+            order: 9;
+        }
+
+        .admin__data-grid-header-row {
+            & {
+                width: 100%;
+            }
+
+            .col-xs-9 {
+                float: right;
+            }
+
+            .col-xs-9,
+            .col-xs-3 {
+                width: 100%;
+            }
+        }
+
+        .data-grid-filters-actions-wrap {
+            padding: 0 @amrep__indent 0 0;
+        }
+
+        .admin__data-grid-filters-wrap._show {
+            padding: @amrep__indent;
+        }
+
+        .admin__data-grid-filters-wrap .admin__form-field {
+            padding-left: 1rem;
+            padding-right: 1rem;
+            width: 100%;
+        }
+
+        .admin__data-grid-pager {
+            .am-flex(center);
+
+            padding: @amrep__indent__xl 0 0 0;
+        }
+
+        .admin__data-grid-pager,
+        .admin__data-grid-pager-wrap {
+            margin: 0;
+            width: 100%;
+        }
+
+        .admin__data-grid-filters {
+            margin-left: -1rem;
+            margin-right: -1rem;
+        }
+
+        .admin__data-grid-filters-wrap .admin__form-field .admin__form-field {
+            .admin__form-field-control {
+                margin: 0;
+            }
+
+            .admin__form-field-label {
+                width: 100%;
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  ----------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__s) {
+    .amreports-body-container {
+        .admin__data-grid-actions-wrap {
+            width: auto;
+        }
+
+        .admin__data-grid-actions-wrap .admin__action-dropdown-wrap {
+            & {
+                text-align: left;
+                width: auto;
+            }
+
+            &:after {
+                display: inline-block;
+            }
+        }
+
+        .admin__data-grid-pager-wrap .admin__control-support-text {
+            margin-right: @amrep__indent__xl;
+        }
+
+        .admin__data-grid-pager {
+            display: inline-block;
+            padding: 0;
+        }
+
+        .admin__data-grid-pager,
+        .admin__data-grid-pager-wrap {
+            width: auto;
+        }
+    }
+}
+
+//
+//  Tablet
+//  ----------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .amreports-body-container {
+        .admin__data-grid-filters-wrap .admin__fieldset > .admin__form-field {
+            width: calc(~'25% - 4px');
+        }
+
+        .admin__data-grid-pager {
+            width: auto;
+        }
+    }
+}
+
+//
+//  Desktop
+//  ----------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+    .amreports-body-container {
+        .admin__data-grid-header-row .col-xs-3 {
+            width: auto;
+        }
+
+        .admin__data-grid-filters-wrap .admin__form-field .admin__form-field {
+            .admin__form-field-control {
+                margin-left: 25%;
+            }
+
+            .admin__form-field-label {
+                width: 25%;
+            }
+        }
+    }
+}

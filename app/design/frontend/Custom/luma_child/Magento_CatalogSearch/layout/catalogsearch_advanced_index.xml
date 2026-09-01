@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <!-- <meta name="robots" content="NOINDEX,NOFOLLOW"/> -->
+        <title>Search Medicines  Health Products Online – Pharmacy Planet</title>
+        <meta name="description" content="Use Pharmacy Planet’s Advanced Search to quickly find prescription medicines, health products, and treatments. Fast UK delivery. Search and order online today." />
+    </head>
+    <update handle="page_calendar"/>
+    <body>
+         <referenceBlock name="page.main.title">
+        <arguments>
+            <argument name="title" xsi:type="string">Advanced Search</argument>
+        </arguments>
+    </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Magento\CatalogSearch\Block\Advanced\Form" name="catalogsearch_advanced_form" template="Magento_CatalogSearch::advanced/form.phtml"/>
+            <block class="Magento\Framework\View\Element\Html\Calendar" name="html_calendar" as="html_calendar" template="Magento_Theme::js/calendar.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

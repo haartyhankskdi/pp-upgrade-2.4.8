@@ -1,0 +1,24 @@
+<?php
+/**
+ * @var \Amasty\Reports\Block\Adminhtml\Report\Toolbar $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<div class="toolbar amreports-toolbar"
+     data-role="<?= $escaper->escapeHtmlAttr($block->getDataRole()) ?>"
+     id="<?= $escaper->escapeHtmlAttr($block->getDataRole()) ?>">
+    <?= /* @noEscape */ $block->getFormHtml() ?>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "#amreports-toolbar": {
+             "amreports_toolbar": {}
+        },
+
+        "#amreports-toolbar_on_button #submit": {
+             "amreports_toolbar": {}
+        }
+    }
+</script>

@@ -1,0 +1,131 @@
+<?php
+$_helperCatalog = $this->helper(Haartyhanks\CategoryQuestWL\Helper\Data::class);
+$baseUrl  = $_helperCatalog->getCurrentStoreBaseUrl();
+$productId = $_helperCatalog->getCurrentProductId();
+$product = $_helperCatalog->getCurrentWLProduct();
+$childProducts = [];
+
+// To Open Product Page retieve productID open 
+/** @var \Magento\Framework\ObjectManagerInterface $objectManager */
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+// Get URL Interface
+$urlInterface = $objectManager->get('Magento\Framework\UrlInterface');
+
+// Get the current URL
+$currentUrl = $urlInterface->getCurrentUrl();
+
+// Remove the base URL from the current URL
+$relativeUrl = str_replace($baseUrl, '', $currentUrl);
+
+// Step 1: Create an associative array with URL paths as keys and product IDs as values
+$productUrls = [
+    'buy-wegovy' => 9411,
+    'buy-mounjaro' => 9424,
+    'buy-orlistat-xenical-capsules' => 9426,
+    'buy-mysimba' => 9429,
+    'buy-saxenda' => 9434,
+    'buy-zepbound' => 9436
+];
+
+// Step 2: Check if $relativeUrl exists in the array and get the corresponding product ID
+$productId = isset($productUrls[$relativeUrl]) ? $productUrls[$relativeUrl] : null;
+
+// Check if a valid product ID is provided
+if ($productId) {
+    // Load the product details based on the product ID
+    /** @var \Magento\Catalog\Model\ProductRepository $productRepository */
+    $productRepository = $objectManager->get(\Magento\Catalog\Model\ProductRepository::class);
+   
+    $product = $productRepository->getById($productId);
+}
+
+// To Open Product Page retieve productID close code
+
+$_helperCatalog = $this->helper(Haartyhanks\CategoryQuest\Helper\Data::class);
+if ($product->getTypeId() == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE) {
+    // Get child products of the configurable product
+    $childProducts = $product->getTypeInstance()->getUsedProducts($product);
+}
+// $childProducts = $_helperCatalog->getChildProducts();
+$attributsArray = [];
+$filterOptions = [];
+$filterOptionStren = [];
+foreach ($childProducts as $child) {
+    if ($child->getStatus() == 1) {
+
+        $brand = $_helperCatalog->getLabelById('brand', $child->getBrand());
+
+        if (!$brand) {
+            $brand = '-';
+        }
+
+        if ($child->getPmdname()) {
+            $strength = $_helperCatalog->getLabelById('pmdname', $child->getPmdname());
+        } else {
+            $strength = '-';
+        }
+        $size = $_helperCatalog->getLabelById('pmdsize', $child->getPmdsize());
+        $price = number_format($child->getPrice(), 2);
+
+        $data = array(
+            "brand" => $brand,
+            "strength" => $strength,
+            "pmdsize" => $size,
+            "price" => $price
+        );
+        array_push($attributsArray, $data);
+        array_push($filterOptions, $brand);
+        array_push($filterOptionStren, $strength);
+    }
+}
+$filterOptions = array_unique($filterOptions);
+$filterOptionStren = array_unique($filterOptionStren);
+?>
+
+<div id="popup-modal" class="popup-container">
+<div class="container">
+    <div class="select-option">
+        <h3>Please find below product pricing:</h3>
+        <div class="brand-label">
+            <label for="brand">Select Brand :</label>
+            <select name="brand" id="brand">
+                <option value="all" selected>All Brands</option>
+                <?php foreach ($filterOptions as $option) { ?>
+                    <option value="<?= $option ?>"><?= $option ?></option>
+                <?php } ?>
+            </select>
+        </div>
+        <div class="medistren-label">
+            <label for="medistren">Medical Strength :</label>
+            <select name="medistren" id="medistren">
+                <option value="all" selected>All Strength</option>
+                <?php foreach ($filterOptionStren as $option) { ?>
+                    <option value="<?= $option ?>"><?= $option ?></option>
+                <?php } ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="select-option-data">
+        <table id="selected-data">
+            <tr>
+                <th>Brand</th>
+                <th>Medicine Strength</th>
+                <th>Size</th>
+                <th>Price</th>
+            </tr>
+            <?php foreach ($attributsArray as $key => $value) { //echo "<pre>";print_r($value); 
+            ?>
+                <tr>
+                    <td><?= $value['brand'] ?></td>
+                    <td><?= $value['strength'] ?></td>
+                    <td><?= $value['pmdsize'] ?></td>
+                    <td><?= $value['price'] ?></td>
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
+</div>
+<!-- <div class="fill-cat-question"><p>You didn't filled consultation quesions. Please <a href="<?php //echo $catUrl; ?>">Click Here</a> to fill.</p></div> -->
+</div>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="layout_load_before">
+        <observer name="sagepay_layout_load" instance="Magenest\SagePay\Observer\Layout\Load"/>
+    </event>
+
+    <event name="catalog_product_load_after">
+        <observer name="sagepay_product_load_after" instance="Magenest\SagePay\Observer\Layout\Add"/>
+    </event>
+
+    <event name="checkout_cart_product_add_after">
+        <observer name="sagepay_product_add_after" instance="Magenest\SagePay\Observer\Layout\Cart" />
+    </event>
+    
+</config>

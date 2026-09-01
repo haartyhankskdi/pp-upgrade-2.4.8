@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<carriers>
+			<international>
+				<model>Sachin\ShippingMethod\Model\Carrier\International</model>
+				<active>0</active>
+				<title>International</title>
+				<name>International</name>
+				<price>0.00</price>
+				<specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+				<sallowspecific>0</sallowspecific>
+			</international>
+			<ukdelivery>
+				<model>Sachin\ShippingMethod\Model\Carrier\Ukdelivery</model>
+				<active>0</active>
+				<title>Ukdelivery</title>
+				<name>Ukdelivery</name>
+				<price>0.00</price>
+				<specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+				<sallowspecific>0</sallowspecific>
+			</ukdelivery>
+		</carriers>
+	</default>
+</config>

@@ -1,0 +1,31 @@
+ID,ID
+Identifier,Identifier
+Page,Page
+Categories,Categories
+"Anchor Categories","Anchor Categories"
+"Non-Anchor Categories","Non-Anchor Categories"
+"Entire Site","Entire Site"
+"Page Layouts","Page Layouts"
+"Customer Dashboard","Customer Dashboard"
+"Checkout Page","Checkout Page"
+"Cart Page","Cart Page"
+"Home Page","Home Page"
+"CMS Pages","CMS Pages"
+"All Pages","All Pages"
+"Specific Pages","Specific Pages"
+Products,Products
+"All Product Types","All Product Types"
+"Simple Product","Simple Product"
+"Virtual Product","Virtual Product"
+"Bundle Product","Bundle Product"
+"Downloadable Product","Downloadable Product"
+"Configurable Product","Configurable Product"
+"Grouped Product","Grouped Product"
+"Add Condition","Add Condition"
+"New Condition","New Condition"
+"-- Please Select --","-- Please Select --"
+Include,Include
+Exclude,Exclude
+All,All
+Specific,Specific
+Conditions,Conditions

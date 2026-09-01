@@ -1,0 +1,68 @@
+
+<div class="product-faq-section">
+   <div class="container reveal1">
+      <div class="h-title">Frequently asked questions</div>
+      <div class="faq-list">
+         <input type="checkbox" id="title1" />
+         <label for="title1">How is Orforglipron different from other weight loss medications?</label>
+         <div class="panel-p">
+            <p>Orforglipron is unique because it is a GLP-1 receptor agonist in oral form, whereas other similar medications are often injectable. This makes it a more convenient option for those who prefer not to use injections.</p>
+         </div>
+      </div>
+      <div class="faq-list">
+         <input type="checkbox" id="title2" />
+         <label for="title2">How long does it take to see results with Orforglipron?</label>
+         <div class="panel-p">
+            <p>Results can vary, but early results suggest that many patients begin to notice reduced appetite and some weight loss within a few weeks. Significant weight reduction typically occurs over a period of months when combined with lifestyle changes.</p>
+         </div>
+      </div>
+      <div class="faq-list">
+         <input type="checkbox" id="title3" />
+         <label for="title3">Are there any side effects associated with Orforglipron?</label>
+         <div class="panel-p">
+            <p>Like all medications, Orforglipron can have side effects, although not everyone will experience them. The drug is still in the testing stage however the most common side effects reported in the literature so far include nausea, diarrhoea, and constipation, but these symptoms usually subside as your body adjusts to the medication. Your clinician will discuss potential side effects with you during your consultation.</p>
+         </div>
+      </div>
+      <div class="faq-list">
+         <input type="checkbox" id="title4" />
+         <label for="title4">Is Orforglipron suitable for patients with diabetes?</label>
+         <div class="panel-p">
+            <p>The jury is still out on exactly which conditions Orforglipron will be used to treat. However, early indications suggest that yes, Orforglipron could likely be prescribed to individuals with type 2 diabetes to help manage weight and improve blood sugar levels. It may also helpful for patients with insulin resistance or pre-diabetes.</p>
+         </div>
+      </div>
+      <div class="faq-list">
+         <input type="checkbox" id="title5" />
+         <label for="title5">Can Orforglipron be used with other medications?</label>
+         <div class="panel-p">
+            <p>Orforglipron may be approved for use alongside other medications, but it is important to remember that it is still very early days for this up and coming treatment. As always it is essential to inform your healthcare provider about all the medications and supplements you are taking to avoid interactions. During your consultation, we’ll review your current treatments to ensure Orforglipron is appropriate for you.</p>
+         </div>
+      </div>
+      <div class="faq-list">
+         <input type="checkbox" id="title6" />
+         <label for="title6">How long will I need to take Orforglipron?</label>
+         <div class="panel-p">
+            <p>The length of treatment with Orforglipron is likely to depend on your weight loss goals and how your body responds to the medication. Many patients use Orforglipron as part of a long-term weight management plan, but your healthcare provider will be able to guide you on the best approach.</p>
+         </div>
+      </div>
+      <div class="faq-list">
+         <input type="checkbox" id="title7" />
+         <label for="title7">Is Orforglipron covered by the NHS?</label>
+         <div class="panel-p">
+            <p>Orforglipron is yet to be introduced in the UK. Like similar drugs in this category of medicines its availability on the NHS is likely to be limited. We recommend speaking to your GP or consulting with us at Pharmacy Planet for more information regarding the availability of this medicine.</p>
+         </div>
+      </div>
+   </div>
+</div>
+<script>
+   document.querySelectorAll('.product-faq-section .faq-list input[type="checkbox"]').forEach(checkbox => {
+       checkbox.addEventListener('change', function () {
+           if (this.checked) {
+               document.querySelectorAll('.product-faq-section .faq-list input[type="checkbox"]').forEach(otherCheckbox => {
+                   if (otherCheckbox !== this) {
+                       otherCheckbox.checked = false;
+                   }
+               });
+           }
+       });
+   });
+</script>

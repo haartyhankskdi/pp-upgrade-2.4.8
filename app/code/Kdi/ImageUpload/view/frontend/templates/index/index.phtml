@@ -1,0 +1,426 @@
+<style>
+        .preview {
+            margin-top: 20px;
+            max-width: 300px;
+            max-height: 300px;
+            /*display: none;*/
+        }
+
+/*------------------image upload--------------------*/
+
+.image-upload-top{
+  margin-top: 25px;
+  text-align: center;
+}
+.image-upload-sec{
+  width: 340px;
+  margin: 75px 0;
+  float: left;
+  border: 1px solid #CBCBCB;
+  padding: 30px;
+}
+
+.image-upload-sec .image-upload-list{
+  width: 100%;
+  float: left;
+  padding: 0 0 30px 0;
+  margin: 0 0 30px 0;
+  border-bottom: 1px solid #CBCBCB;
+}
+.image-upload-left{
+  width: 230px;
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+
+.image-upload-right{
+  width: 90px;
+  float: right;
+  padding:0;
+  margin: 0;
+  background-color: #f7fcfe;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center
+}
+.image-upload-right img{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+.image-upload-sec .image-upload-list label{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 15px 0;
+  font-size: 20px;
+    color: #000;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 30px;
+    font-weight: 400;
+}
+.image-upload-left input[type=file]{
+  background: transparent !important;
+    width: auto;
+    border: 0;
+    padding: 0;
+    text-indent: -20px;
+    padding-left: 0px;
+    cursor: pointer; 
+    font-size: 0;
+    margin: 0;
+    height: 48px;
+}
+.image-upload-left input[type=file]:before{
+  content: 'UPLOAD PHOTO';
+  background: #96D8F0;
+    position: absolute;
+    padding: 0px 30px;
+    border-radius: 5px;  
+    margin-top: 0px; 
+    color: #000;
+    text-indent: 0;
+    margin-left: 20px;
+    font-size: 13px; 
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 48px;
+    font-weight: 400;
+}
+
+.image-upload-btn button{
+  background: #ED3237;
+    font-size: 13px;
+    color: #fff;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 52px;
+    border: 0;
+    padding: 0 0px;
+    font-weight: 400;
+    letter-spacing: 0.26px;
+    box-shadow: inset 0 0px 0 0 #ffffff, inset 0 0 0 0 rgba(204, 204, 204, 0);
+    border-radius: 30px;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    -o-transition: all 0.1s;
+    transition: all 0.1s;
+    width: 145px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.image-upload-btn button:hover{
+  background:#53CAF5;
+}
+
+
+
+
+
+.image-upload-right-sec{
+  width: 540px;
+  float: right;
+  padding: 40px 40px 100px 40px;
+  margin:75px 0 0 0;
+  background-color: #E7F2F4;
+}
+
+.image-upload-right-sec h3{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: 22px;
+  color: #000;
+  font-family:Arial,sans-serif;
+  line-height: 32px;
+  font-weight: 700;
+}
+.image-upload-right-sec p{
+  width: 100%;
+  float: left;
+  padding: 0;
+  margin: 0 0 10px 0;
+  font-size: 12px;
+  color: #000;
+  font-family:Arial,sans-serif;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.image-upload-right-n{
+  width: 150px;
+  float: left;
+  padding: 0;
+  margin: 0 5px 0 0;
+  background-color: #fff;
+  text-align: center;
+}
+
+.image-upload-right-n p{
+  width: 100%;
+  float: left;
+  padding: 10px 0;
+  margin: 0 0 0px 0;
+  font-size: 12px;
+  color: #000;
+  font-family:Arial,sans-serif;
+  line-height: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.image-upload-right2{
+  width: 100%;
+  float: left;
+    padding: 0 0 20px 0;
+    margin: 0 0 30px 0;
+    border-bottom: 2px solid #ddd;
+}
+.image-upload-right2 .image-upload-right-img1{
+  width: 320px;
+  float: left;
+  padding: 0;
+  margin:15px 0 0 0;
+}
+
+.image-upload-right-cont{
+  width: 210px;
+    float: right;
+    margin: 15px 0 0 0;
+}
+.image-upload-btn{
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+
+@media (min-width: 768px) {
+
+  .image-upload-main{
+    width: 1070px;
+    float: none;
+    margin: 0 auto;
+  }
+  .image-upload-main .image-upload-sec{
+    float: none;
+    padding: 30px;
+    width: 340px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .image-upload-sec .image-upload-list .image-upload-left{
+    width: 100%;
+  }
+
+}
+
+
+@media only screen and (max-width: 767px) {
+
+  .image-upload-main{
+    width: 94%;
+    margin: 0 auto;
+  }
+  .image-upload-main .image-upload-sec{
+    width: 100% !important;
+    margin-bottom: 50px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-top: 45px !important;
+  }
+  .image-upload-right-sec {
+    width: 92% !important;
+    float: left !important;
+    margin-top: 0 !important;
+    padding: 40px 15px 30px 15px !important;
+  }
+  .image-upload-right-sec .image-upload-right-cont {
+    width: 100%;
+    float: left;
+    margin: 25px 0 0 0;
+  }
+  .image-upload-right-n{
+    margin-right: 10px !important;
+  }
+
+  .image-upload-sec-container{
+    margin: 0 15px;
+  } 
+  .image-upload-left{
+    width: 100%;
+  }
+
+}
+
+
+    
+<?php $customerId = $block->getCustomerId();
+
+
+$session = $block->getOrderIdFromSession();
+$orderId = $block->getOrderId();
+$entityId = $block->getEntityId();
+
+ ?>
+
+
+ 
+</style>
+
+
+
+
+
+<div class="image-upload-main">
+  <div class="image-upload-top">
+    <img src="https://magento-1195784-4216081.cloudwaysapps.com/pub/media/upload.png" alt="upload Icon" height="150px" width="150px" >
+
+<h1>Upload Images</h1>
+  </div>
+<div class="image-upload-sec">
+    <div class="image-upload-sec-container">
+    <form id="imageForm" action="/image_upload/index/upload" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="customer_id" value="<?= $customerId ?>" readonly="true">
+                <input type="hidden" name="order_id" value="<?= $orderId ?>" readonly="true">
+                <input type="hidden" name="entity_id" value="<?= $entityId ?>" readonly="true">
+        <div class="image-upload-list">
+            <div class="image-upload-left">
+                <label for="imageInput1">Upload your Side view of body</label>
+                <p>Upload a clear side profile image showing your entire body from head to toe. Ensure that your posture is upright, and your body is facing view</p>
+                <div class="image-upload-img"><img id="preview1" class="preview" src="https://magento-1195784-4216081.cloudwaysapps.com/media/wysiwyg/no-img.png" alt="Image Preview 1"></div>
+                <div class="image-upload-btn-2"><input type="file" id="imageInput1" accept="image/*" name="image1" required></div>
+            </div>
+             
+            <!-- <div class="image-upload-right"><img id="preview1" class="preview" src="https://magento-1195784-4216081.cloudwaysapps.com/media/wysiwyg/no-img.png" alt="Image Preview 1"></div> -->
+        </div>
+         
+        <div class="image-upload-list">
+            <div class="image-upload-left">
+                <label for="imageInput2">Upload your front view of body</label>
+                <p>Upload a full-body Image showing your front profile, from head to toe, with the camera positioned at eye level. Stand straight and ensure the entire body is visible without any shadows or blockages.</p>
+                <div class="image-upload-img"><img id="preview2" class="preview" src="https://magento-1195784-4216081.cloudwaysapps.com/media/wysiwyg/no-img.png" alt="Image Preview 2"></div>
+                <div class="image-upload-btn-2"><input type="file" id="imageInput2" accept="image/*" name="image2" required></div>
+            </div>
+             
+            <!-- <div class="image-upload-right"><img id="preview2" class="preview" src="https://magento-1195784-4216081.cloudwaysapps.com/media/wysiwyg/no-img.png" alt="Image Preview 2"></div> -->
+        </div>
+        
+        <div class="image-upload-list last">
+            <div class="image-upload-left">
+                <label for="imageInput3">Upload your Id for Verification</label>
+                <p>Upload a clear photo of a valid government-issued ID (eg. passport, driver's license, or national ID card). Ensure the 10 is readabile and not obscured by glare or shadows.</p>
+                <div class="image-upload-img"><img id="preview3" class="preview" src="https://magento-1195784-4216081.cloudwaysapps.com/media/wysiwyg/no-img.png" alt="Image Preview 3"></div>
+                <div class="image-upload-btn-2"><input type="file" id="imageInput3" accept="image/*" name="image3" required></div>
+            </div>
+             
+            <!-- <div class="image-upload-right"><img id="preview3" class="preview" src="https://magento-1195784-4216081.cloudwaysapps.com/media/wysiwyg/no-img.png" alt="Image Preview 3"></div> -->
+        </div>
+         
+
+        <div class="image-upload-btn"><button type="submit">SUBMIT NOW</button></div>
+    </form>
+
+  <div class="image-upload-need-help">
+    <h3>Need Help</h3>
+    <p> If you have any urgent Inquiries about your order, you can reach us at 0800 878 8956. For any other questions, please feel free to contact our Customer Care team by emaliing mailto:neadoffice@pharmacyplanet.com.</p>
+  </div>
+  </div>
+
+</div>
+
+
+<!-- <div class="image-upload-right-sec">
+  <h3>Tips for taking photos</h3>
+  <p>You’ll need to upload photos from two angles:</p>
+
+  <div class="image-upload-right2">
+    <div class="image-upload-right-img1">
+      <div class="image-upload-right-n"><img src="https://magento-1195784-4216081.cloudwaysapps.com/pub/media/wysiwyg/imag-upload1.png">
+        <p>SIDE</p>
+      </div>
+      <div class="image-upload-right-n"><img src="https://magento-1195784-4216081.cloudwaysapps.com/pub/media/wysiwyg/imag-upload2.png">
+      <p>FRONT</p></div>
+    </div>
+
+    <div class="image-upload-right-cont">
+      <p><strong>1. Use a mirror or a timer</strong><br>
+      Avoid angles to prevent distortions. Make sure the camera is straight.</p>
+      <p><strong>2. From neck to knees</strong><br>
+      A full-body view is required for verification. No need to include your face.</p>
+      <p><strong>3. Wear clothes that outline your shape</strong><br>
+      Avoid loose clothing. No naked pictures.</p>
+      <p><strong>4. Ensure it’s not blurry or dark</strong><br>
+      Photos should be clear and well-illuminated.</p>
+      <p><strong>5. Only you in it</strong><br>
+      Make sure you’re the only one in the picture.</p>
+    </div>
+  </div>
+
+
+  <h3>We’re here to help</h3>
+  <p>If you have any urgent enquiries about your order, you can call us on 0800 978 8956. For anything else, please don't hesitate to get in touch with our Customer Care team via the button below.</p>
+  
+</div>
+ -->
+</div>
+
+    <script>
+        const imageInput1 = document.getElementById('imageInput1');
+        const preview1 = document.getElementById('preview1');
+        preview1.style.display = 'none';
+        const imageInput2 = document.getElementById('imageInput2');
+        const preview2 = document.getElementById('preview2');
+        preview2.style.display = 'none';
+        const imageInput3 = document.getElementById('imageInput3');
+        const preview3 = document.getElementById('preview3');
+        preview3.style.display = 'none';
+
+
+
+        imageInput1.addEventListener('change', function() {1
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    preview1.src = event.target.result;
+                    preview1.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview1.style.display = 'none';
+            }
+        });
+
+        imageInput2.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    preview2.src = event.target.result;
+                    preview2.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview2.style.display = 'none';
+            }
+        });
+
+        imageInput3.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    preview3.src = event.target.result;
+                    preview3.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                preview3.style.display = 'none';
+            }
+        });
+    </script>

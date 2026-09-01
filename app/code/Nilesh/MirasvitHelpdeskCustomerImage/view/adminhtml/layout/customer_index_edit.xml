@@ -1,0 +1,28 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_form">
+            <block class="Nilesh\MirasvitHelpdeskCustomerImage\Block\Adminhtml\HelpdeskImageTab"
+                   name="customer_helpdesk_image_tab_tab">
+                <arguments>
+                    <argument name="tab_label" xsi:type="string" translate="true">General Question</argument>
+                    <argument name="sort_order" xsi:type="number">9900</argument>
+                </arguments>
+            </block>
+            <!-- <block class="Nilesh\MirasvitHelpdeskCustomerImage\Block\Adminhtml\ProductUploadsTab"
+                   name="product_uploads_tab">
+                <arguments>
+                    <argument name="tab_label" xsi:type="string" translate="true">Product Question Upload</argument>
+                    <argument name="sort_order" xsi:type="number">9898</argument>
+                </arguments>
+            </block> -->
+            <block class="Nilesh\MirasvitHelpdeskCustomerImage\Block\Adminhtml\CategoryUploadsTab"
+                   name="category_uploads_tab">
+                <arguments>
+                    <argument name="tab_label" xsi:type="string" translate="true">Category Question Upload</argument>
+                    <argument name="sort_order" xsi:type="number">9899</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,123 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_GoogleTagManager
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+use Mageplaza\GoogleTagManager\Block\Adminhtml\System\Config\Dimensions;
+
+/** @var $block Dimensions */
+$element    = $block->getElement();
+$attributes = $block->getProductAndCustomerAttributes();
+?>
+<tr id="row_mageplaza_gtm_dimensions">
+    <td class="label">
+        <label for="row_mageplaza_gtm_dimensions">
+            <?= $block->getLabelHtml($element->getScopeLabel()) ?>
+        </label>
+    </td>
+    <td class="value">
+        <div id="dimensions-manage-options-panel" data-index="attribute_options_select_container">
+            <table class="admin__control-table" data-index="attribute_options_select">
+                <thead>
+                <tr id="dimensions-attribute-options-table">
+                    <th class="col-default control-table-actions-th"><span><?= $block->escapeHtml(__('Name')) ?></span>
+                    </th>
+                    <th class="col-default control-table-actions-th"><?= $block->escapeHtml(__('Track Custom Attribute')) ?></th>
+                    <th class="col-default control-table-actions-th"><?= $block->escapeHtml(__('Index')) ?></th>
+                    <th class="col-delete"><?= $block->escapeHtml(__('Action')) ?></th>
+                </tr>
+                </thead>
+                <tbody data-role="dimensions-options-container" class="ignore-validate"></tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="4" class="col-actions-add">
+                        <button id="dimensions-add_new_option_button" data-action="add_new_row"
+                                title="<?= $block->escapeHtmlAttr(__('Add')) ?>"
+                                type="button" class="action- scalable add">
+                            <span><?= $block->escapeHtml(__('Add')) ?></span>
+                        </button>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+        <p class="note">
+            <span><?= $block->escapeHtml(__('Custom Dimensions to collect and analyze attributes from your store that are not automatically tracked by Google Analytics.')) ?></span>
+        </p>
+        <script id="dimensions-row-template" type="text/x-magento-template">
+            <tr>
+                <td class="col-default-custom-dimensions mp-custom-name">
+                    <input class="col-default" type="text"
+                           name="groups[analyticstag][fields][custom_dimensions][value][option][value][<%- data.id %>][name]"
+                           value="<%- data.name %>"/>
+                </td>
+                <td class="col-default-custom-dimensions mp-custom-value">
+                    <select name="groups[analyticstag][fields][custom_dimensions][value][option][value][<%- data.id %>][value]">
+                        <?php foreach ($attributes as $key => $attribute) : ?>
+                            <optgroup label="<?= $key === 'product' ? $block->escapeHtmlAttr(__('Product Attributes')) : $block->escapeHtmlAttr(__('Customer Attributes')) ?>">
+                                <?php foreach ($attribute as $attr) : ?>
+                                    <option value="<?= $block->escapeHtmlAttr($attr['value']) ?>"><?= $block->escapeHtml($attr['label']) ?></option>
+                                <?php endforeach; ?>
+                            </optgroup>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
+                <td class="col-default-custom-dimensions mp-custom-index">
+                    <select name="groups[analyticstag][fields][custom_dimensions][value][option][value][<%- data.id %>][index]">
+                        <?php for ($i = 1; $i <= 20; $i++) : ?>
+                            <option value="<?= $block->escapeHtmlAttr($i) ?>" >
+                                <?= $block->escapeHtml($i) ?>
+                            </option>
+                        <?php endfor; ?>
+                    </select>
+                </td>
+                <td id="dimensions-delete_button_container_<%- data.id %>" class="col-delete">
+                    <input type="hidden" class="delete-flag"
+                           name="groups[analyticstag][fields][custom_dimensions][value][option][delete][<%- data.id %>]"
+                           value=""/>
+                    <button id="delete_button_<%- data.id %>"
+                            title="<?= $block->escapeHtml(__('Delete')) ?>"
+                            type="button"
+                            class="action- scalable delete delete-option action-delete">
+                        <span><?= $block->escapeHtml(__('Delete')) ?></span>
+                    </button>
+                </td>
+            </tr>
+        </script>
+        <?php
+        $values = [];
+        foreach ($block->getOptionValues() as $value) {
+            $value    = $value->getData();
+            $values[] = is_array($value) ? array_map('htmlspecialchars_decode', $value) : $value;
+        }
+        ?>
+        <script type="text/x-magento-init">
+        {
+            "*": {
+                "Mageplaza_GoogleTagManager/js/dimensions-metrics": {
+                    "attributesData": <?= /** noEscape */ json_encode($values, JSON_HEX_QUOT) ?>,
+                    "element": "dimensions",
+                    "table": "#dimensions-attribute-options-table",
+                    "template": "#dimensions-row-template"
+                }
+            }
+        }
+        </script>
+    </td>
+</tr>

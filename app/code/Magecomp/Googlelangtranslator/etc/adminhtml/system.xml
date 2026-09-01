@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magecomp" translate="label" sortOrder="100" class="magecomp-logo">
+            <label><![CDATA[]]></label>
+        </tab>
+        <section id="googlelangtranslator" translate="label" type="text" sortOrder="1" showInDefault="1"
+                 showInWebsite="1" showInStore="1">
+            <label>Google Language Translate</label>
+            <tab>magecomp</tab>
+            <resource>Magecomp_Googlelangtranslator::googlelangtranslatorconfig</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Configuration</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="googlelanguage" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Select Language</label>
+                    <source_model>Magecomp\Googlelangtranslator\Model\Language</source_model>
+                    <comment><![CDATA[Allow languages for google translation.]]></comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="enablecustomcode">0</field>
+                    </depends>
+                </field>
+                <field id="customlayout" translate="label" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Google Translator Layout</label>
+                    <source_model>Magecomp\Googlelangtranslator\Model\Layout</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="enablecustomcode">0</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

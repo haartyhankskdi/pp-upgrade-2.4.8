@@ -1,0 +1,114 @@
+<?php $_product = $block->getProduct();
+
+if(!($_product->isSaleable())){
+?>
+<div class="out-of-stock"><span>Out of Stock</span></div>
+
+<?php } ?> 
+<div class="info-how-itwork">
+<div class="header-search-panel">
+<ul>
+        <li>No prescription required</li>
+        <li>Online assessment</li>
+        <li>No hidden fees</li>
+    </ul>
+</div>
+
+<div class="img-1"> 
+    <a href="https://medicine-seller-register.mhra.gov.uk/search-registry/386" target="_blank"><img src="/pub/static/frontend/Custom/luma_child/en_GB/Magefan_LazyLoad/images/pixel.jpg" data-original="<?php echo $this->getViewFileUrl('images/mhra-logo.jpg'); ?>" alt="MHRA" /></a>
+    <a href="https://www.pharmacyregulation.org/registers/pharmacy/registrationnumber/1035466" target="_blank"><img src="/pub/static/frontend/Custom/luma_child/en_GB/Magefan_LazyLoad/images/pixel.jpg" data-original="<?php echo $this->getViewFileUrl('images/pharmacy-img.jpg'); ?>" alt="Pharmacy logo" /></a>
+</div>
+<div class="img-2 ">  
+    <img class="how-it-work-img-product" src="/pub/static/frontend/Custom/luma_child/en_GB/Magefan_LazyLoad/images/pixel.jpg" data-original="<?php echo $this->getViewFileUrl('images/info-video.jpg'); ?>" />
+</div>
+
+</div>
+
+
+<div class="product-question-right">
+  <p>Don’t forget, only our qualified prescribers see the answers you provide.</p>
+  <div class="img-1"> 
+    <a href="https://medicine-seller-register.mhra.gov.uk/search-registry/386" target="_blank"><img src="/pub/static/frontend/Custom/luma_child/en_GB/Magefan_LazyLoad/images/pixel.jpg" data-original="<?php echo $this->getViewFileUrl('images/mhra-logo.jpg'); ?>" alt="MHRA" /></a>
+    <a href="https://www.pharmacyregulation.org/registers/pharmacy/registrationnumber/1035466" target="_blank"><img src="/pub/static/frontend/Custom/luma_child/en_GB/Magefan_LazyLoad/images/pixel.jpg" data-original="<?php echo $this->getViewFileUrl('images/pharmacy-img.jpg'); ?>" alt="Pharmacy logo" /></a>
+     
+</div>
+<div class="img-1"> 
+     
+    <!-- TrustBox script -->
+<!-- <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script> -->
+<!-- End TrustBox script -->
+<!-- TrustBox widget - Micro Combo -->
+<div class="trustpilot-widget" data-locale="en-GB" data-template-id="5419b6ffb0d04a076446a9af" data-businessunit-id="5b55f778afee7a0001b505dc" data-style-height="20px" data-style-width="100%" data-theme="light">
+  <a href="https://uk.trustpilot.com/review/pharmacyplanet.co.uk" target="_blank" rel="noopener">Trustpilot</a>
+</div>
+<!-- End TrustBox widget -->
+</div>
+</div>
+
+ <!-- For displaying embedded video -->
+<div id="popup-youtube-video-section" style="display:none;">
+    <div class="popup-youtube-video-wrapper">
+        <video width="100%" height="100%" preload playsinline controls>
+            <source src="/pub/static/frontend/Custom/luma_child/en_GB/Magefan_LazyLoad/images/pixel.jpg" data-original="<?php echo $this->helper('\Magento\Cms\Helper\Wysiwyg\Images')->getBaseUrl().'video/how-it-works.mp4'; ?>" type="video/mp4">
+        </video>
+        <!-- <iframe id="popup-youtube-video" src="https://www.youtube.com/embed/9WC8W26L0Dc?autoplay=1&mute=1" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe> -->
+    </div>
+</div>
+
+
+
+<!-- JS to show video on homepage for How It Works section -->
+<script>
+    // require(['jquery','Magento_Ui/js/modal/modal'],function($,modal) {var options = {type: 'popup',responsive: true,innerScroll: true,title: 'How It Works',buttons: [],modalClass: 'popup-youtube-video-modal'};var popup = modal(options, $('#popup-youtube-video-section'));$(".how-it-work-img-product").on('click',function(){ $(".popup-youtube-video-wrapper").html('<iframe id="ytplayer" type="text/html" src="https://www.youtube.com/embed/9WC8W26L0Dc?autoplay=1&color=white&mute=1" frameborder="0" allowfullscreen>');$("#popup-youtube-video-section").modal("openModal");});$('.action-close').on('click', function() {$(".popup-youtube-video-wrapper").innerHTML = '';});$('.close-modal').on('click', function() {$(".popup-youtube-video-wrapper").innerHTML = '';});});
+</script>
+
+<script>
+
+require([
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'How It Works',
+                buttons: [],
+                modalClass: 'popup-youtube-video-modal'
+            };
+
+            var videoEl = document.querySelector(".popup-youtube-video-wrapper video");
+            var popup = modal(options, $('#popup-youtube-video-section'));
+
+            // play when clicked
+            $(".how-it-work-img-product").on('click',function(){ 
+                $("#popup-youtube-video-section").modal("openModal");
+                videoEl.querySelector('source').setAttribute("src", videoEl.querySelector('source').dataset.original);
+                videoEl.load();
+                videoEl.play();
+            });
+
+            // stop when popup is closed, there is no stop() function so set time to 0, incase to watch again
+            $('.action-close').on('click', function() {
+                videoEl.pause();
+                videoEl.currentTime = 0;
+            });
+
+            // stop when popup is closed, there is no stop() function so set time to 0, incase to watch again
+            $('.close-modal').on('click', function() {
+                videoEl.pause();
+                videoEl.currentTime = 0;
+            });
+
+            // close popup when video ends
+            videoEl.onended = function() {
+                $("#popup-youtube-video-section").modal("closeModal");
+            }
+        }
+    );
+</script>
+

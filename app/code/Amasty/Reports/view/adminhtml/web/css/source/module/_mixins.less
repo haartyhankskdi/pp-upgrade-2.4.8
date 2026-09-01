@@ -1,0 +1,89 @@
+//
+//  Mixins
+//  ______________________________________________
+
+.transition(@del: .3) {
+    transition: ~'@{del}s all ease-in';
+}
+
+.mage-icon(@icon-content) {
+    & {
+        .am-flex(center, center);
+
+        position: relative;
+    }
+
+    &:after {
+        .transition(.1);
+
+        content: @icon-content;
+        display: block;
+        font-family: @icons-admin__font-name;
+    }
+}
+
+.am-flex(@horiz-pos: none,
+         @vert-pos: none,
+         @wrap: none
+) {
+    & {
+        display: flex;
+    }
+
+    & when not (@horiz-pos = none) {
+        justify-content: @horiz-pos;
+    }
+
+    & when not (@vert-pos = none) {
+        align-items: @vert-pos;
+    }
+
+    & when not (@wrap = none) {
+        flex-wrap: @wrap;
+    }
+}
+
+.am-scrollbar(
+    @color: #ccc,
+    @second-color: #fff
+) {
+    & {
+        overflow: auto;
+        scrollbar-color: @color @second-color;
+        scrollbar-face-color: @color;
+        scrollbar-highlight-color: @color;
+        scrollbar-shadow-color: @color;
+        scrollbar-track-color: @second-color;
+        scrollbar-width: thin;
+    }
+
+    &::-webkit-scrollbar {
+        height: 4px;
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+        box-shadow: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: @color;
+        border-radius: 12px;
+    }
+
+    > * {
+        max-width: none;
+    }
+}
+
+.am-word-break {
+    & {
+        word-break: break-word;
+        word-wrap: break-word;
+    }
+
+    .ie11 & {
+        word-break: break-all;
+    }
+}

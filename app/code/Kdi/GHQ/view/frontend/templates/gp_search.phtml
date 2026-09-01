@@ -1,0 +1,1034 @@
+<?php 
+    /**
+     * This Phtml is use as widget and act as widget
+     * 
+     * @result array
+     */
+    $gq = $block->getGq();
+    //echo "<pre>";print_r($gq);exit();
+?>
+
+
+<!-- Question =0 Gender -->
+
+<div id="gp_search_form" style="display:none" >
+    <div class="fieldset">
+        <div class="fields">
+
+            <!-- Question: Registered with GP -->
+            <div class="field registered_gp_fieldset fb-radio form-group">
+                <label class="fb-radio-group-label label">
+                    <span><?php echo __('Are you registered with a GP in the UK?') ?></span>
+                </label>
+
+                <div class="control">
+                    <div class="radio-group">
+
+                        <div class="field-1 amform-groupv2">
+                            <input type="radio"
+                                name="registered_gp"
+                                id="registered_gp-yes"
+                                value="1"
+                                class="input-text registered_gp"
+                                <?php echo (isset($gq['registered_gp']) && $gq['registered_gp'] == 1) ? 'checked' : ''; ?>>
+
+                            <label class="registered_gp radio-btn-lable amform-versiontwo-label"
+                                for="registered_gp-yes">
+                                <span>Yes</span>
+                            </label>
+                        </div>
+
+                        <div class="field-1 amform-groupv2">
+                            <input type="radio"
+                                name="registered_gp"
+                                id="registered_gp-no"
+                                value="0"
+                                class="input-text registered_gp"
+                                <?php echo (isset($gq['registered_gp']) && $gq['registered_gp'] == 0) ? 'checked' : ''; ?>>
+
+                            <label class="registered_gp radio-btn-lable amform-versiontwo-label"
+                                for="registered_gp-no">
+                                <span>No</span>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question: Permission to inform GP -->
+            <div class="field  registered_gp_permission_fieldset fb-radio form-group"
+                <?php echo (isset($gq['registered_gp']) && $gq['registered_gp'] == 1) ? '' : 'style="display:none"'; ?>>
+
+                <label class="fb-radio-group-label label">
+                    <span><?php echo __('If yes, do you give permission for Pharmacy Planet to inform your GP of this supply?') ?></span>
+                </label>
+
+                <div class="control">
+                    <div class="radio-group">
+
+                        <div class="field-1 amform-groupv2">
+                            <input type="radio"
+                                name="registered_gp_permission"
+                                id="registered_gp_permission-yes"
+                                value="1"
+                                class="input-text registered_gp_permission"
+                                <?php echo (isset($gq['registered_gp_permission']) && $gq['registered_gp_permission'] == 1) ? 'checked' : ''; ?>>
+
+                            <label class="registered_gp_permission radio-btn-lable amform-versiontwo-label"
+                                for="registered_gp_permission-yes">
+                                <span>Yes</span>
+                            </label>
+                        </div>
+
+                        <div class="field-1 amform-groupv2">
+                            <input type="radio"
+                                name="registered_gp_permission"
+                                id="registered_gp_permission-no"
+                                value="0"
+                                class="input-text registered_gp_permission"
+                                
+                                <?php echo (isset($gq['registered_gp_permission']) && $gq['registered_gp_permission'] == 0) ? 'checked' : ''; ?>>
+
+                            <label class="registered_gp_permission radio-btn-lable amform-versiontwo-label"
+                                for="registered_gp_permission-no">
+                                <span>No</span>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- GP Surgery Selection -->
+                <div class="field  registered_gp_surgery_fieldset fb-radio form-group"
+                    <?php echo (isset($gq['registered_gp_permission']) && $gq['registered_gp_permission'] == 1) ? '' : 'style="display:none"'; ?>>
+
+                    <label class="fb-radio-group-label label">
+                        <span><?php echo __('If yes, please select your GP surgery from the list') ?></span>
+                    </label>
+
+                    <div class="control">
+                        <div class="radio-group">
+
+                            <div id="surgery__display"
+                                <?php echo (!empty($gq['registered_gp_surgery'])) ? '' : 'style="display:none"'; ?>></div>
+
+                            <button id="btn__surgery__close"
+                                    type="button"
+                                    class="btn btn__surgery"
+                                    <?php echo (!empty($gq['registered_gp_surgery'])) ? '' : 'style="display:none"'; ?>>
+                                <i class="fa fa-close"></i>
+                            </button>
+
+                            <input type="text"
+                                class="search_surgery"
+                                id="search_surgery"
+                                placeholder="Search for surgery"
+                                autocomplete="off"
+                                <?php echo (!empty($gq['registered_gp_surgery'])) ? 'style="display:none"' : ''; ?>>
+
+                            <div id="clear_gp_search">X</div>
+
+                            <div id="custom_gp_search_yes">
+                                <label>
+                                    <input type="radio" name="custom_gp_search" value="1" class="custom_gp_search">
+                                    Enter GP address manually
+                                </label>
+                            </div>
+
+                            <!-- Manual fields -->
+                            <div class="field fb-text form-group surgery_name amform-layout-one" style="display:none">
+                                <label>Surgery Name <span class="">*</span></label>
+                                <div class="control">
+                                    <input type="text" name="surgery_name" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="field fb-text form-group surgery_address amform-layout-one" style="display:none">
+                                <label>Surgery Address <span class="">*</span></label>
+                                <div class="control">
+                                    <input type="text" name="surgery_address" class="form-control ">
+                                </div>
+                            </div>
+
+                            <div class="field fb-text form-group surgery_postel_code amform-layout-one" style="display:none">
+                                <label>Postal Code <span class="">*</span></label>
+                                <div class="control">
+                                    <input type="text" name="surgery_postel_code" class="form-control">
+                                </div>
+                            </div>
+
+                            <div id="custom_gp_search_no" style="display:none;">
+                                <label>
+                                    <input type="radio" name="custom_gp_search" value="0" class="custom_gp_search">
+                                    Search by GP name or address
+                                </label>
+                            </div>
+
+                            <div class="spinner-loader" style="display:none">
+                                <span><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></span>
+                            </div>
+
+                            <!-- Selected GP details -->
+                            <div id="search_surgery_div"
+                                <?php echo (!empty($gq['registered_gp_surgery'])) ? '' : 'style="display:none"'; ?>>
+
+                                <?php if (!empty($gq['registered_gp_surgery'])):
+                                    $gpSurg = json_decode($gq['registered_gp_surgery']); ?>
+
+                                    <span class="name_of_practice">
+                                        <span class="highlight">Practice Name: </span>
+                                        <?php echo $gpSurg->name_of_practice; ?>
+                                    </span>
+
+                                    <span class="name_of_practice">
+                                        <span class="highlight">Address: </span>
+                                        <?php echo "$gpSurg->address_line_one, $gpSurg->address_line_two, $gpSurg->city, $gpSurg->county, $gpSurg->postcode"; ?>
+                                    </span>
+
+                                <?php endif; ?>
+                            </div>
+
+                            <!-- Hidden GP JSON -->
+                            <textarea name="registered_gp_surgery"
+                                    id="registered_gp_surgery"
+                                    class="hidden_field"
+                                    rows="4"
+                                    >
+                                <?php echo $gq['registered_gp_surgery'] ?? ''; ?>
+                            </textarea>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+        
+    /*-------------------multidoc upload css-----------------*/
+
+
+     
+    .customer-general-question.file-loader .column.main::before{
+        content: ' ';
+        background-color: rgb(255, 255, 255, 1);
+        background-image: url('../images/loading-img.gif');
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 999;
+        position: absolute;
+        top: 0; 
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink{
+      width: 100%;
+      float: left;
+      padding: 0;
+      margin: 0 0 40px 0;
+    }
+    .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive a .fa.fa-file-o{
+           margin-top: 0px;
+           font-size: 25px;
+        }
+
+    .upload_documents_prescriber_yes_fieldset .files_download{
+       /* background: url('../images/upload-file.png') center no-repeat #fff;*/
+        width: 60px;
+        height: 60px;
+        float: left; 
+        border-radius: 50px;
+        border: 2px solid #75c4f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+     
+
+    .upload_documents_prescriber_yes_fieldset .delete_file{
+      width: 30px;
+        height: 30px;
+        background: #feefef;
+        border-radius: 50px;
+        text-align: center;
+        padding: 0;
+        position: absolute;
+        top: -25px;
+        left: 35px;
+        color: #da1414;
+        border: 0;
+    }
+
+    .upload_documents_prescriber_yes_fieldset label[for=upload_documents_prescriber_yes]{
+      margin-bottom: 20px;
+        display: inline-block;
+        width: 100%;
+    } 
+
+
+    .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive a .fa.fa-file-pdf-o{
+           margin-top: 0px;
+           font-size: 25px;
+        }
+
+
+    @media only screen and (max-width: 767px) {
+
+
+      .customer-general-question.page-layout-2columns-left .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink{
+        position: relative !important;
+      }
+       .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink{
+        height: auto !important;
+      } 
+
+      .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset input[type=file]{
+          padding-left: 32px !important;
+        }
+      .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question input[type=file]{
+        text-indent: -10px !important;
+        padding-left: 32px !important;
+      } 
+      .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question input[type=file]{
+        text-indent: -10px !important;
+      } 
+
+      .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink .fileuplod_custom input[type=file]:before{
+        margin-left: -23px !important;
+      }
+      .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question input[type=file]:before{
+        margin-left: -23px !important;
+      }
+      .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink{
+        width: 100%;
+        float: left;
+        position: relative;
+        margin-bottom: 20px !important;
+        height: auto;
+      }
+      .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive{
+        width: 100% !important;
+        float: left;
+      }
+      .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive img.uf_image{
+        margin-left: 13px;
+      }
+      .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive a .fa.fa-file-o{
+           margin-left: 0px;
+           margin-top: 0;
+        }
+
+        .customer-general-question.file-loader .column.main::before{
+       
+        background-position: center 80% !important; 
+      }
+
+      .upload_documents_prescriber_yes_fieldset .files_download{
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .upload_documents_prescriber_yes_fieldset .delete_file{
+        top: -5px;
+        left: 50px;
+      }
+      .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive img.uf_image{
+        margin-left: 0px;
+        margin-top: 0 !important;
+        width: 70% !important;
+        height: 70% !important;
+      }
+      .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset .upload_documents_prescriber_yes_fieldset .control .files_download span{
+        top: 20px !important;
+        left: 90px !important;
+      }
+      .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset .upload_documents_prescriber_yes_fieldset .control .files_download span{
+        width: 65%;
+        word-break: break-word;
+        top: 0px !important;
+        height: 70px;
+        align-items: center;
+        justify-content: left;
+        display: flex !important;
+      }
+
+    }
+
+    @media only screen and (min-width: 1025px) {
+
+        .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset input[type=file]{
+          padding-left: 20px !important;
+        }
+      .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive{
+        width: 40% !important;
+        float: left;
+      }
+      .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink{
+        width: 40% !important;
+        float: left;
+      } 
+      .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset .upload_documents_prescriber_yes_fieldset .control .files_download span{
+        width: 65%;
+        word-break: break-word;
+        top: -5px !important;
+        height: 55px;
+        align-items: center;
+        justify-content: left;
+        display: flex !important;
+      }
+
+    }
+
+
+      @media only screen and (min-width: 768px) and (max-width: 977px) {
+
+
+        .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset input[type=file]{
+          padding-left: 20px !important;
+        }
+        .myaccount-general-question.page-layout-2columns-left .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive{
+          width: 50% !important;
+        }
+          .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset .upload_documents_prescriber_yes_fieldset .control .files_download span{
+          width: 65%;
+          word-break: break-word;
+          top: -5px !important;
+          height: 55px;
+          align-items: center;
+          justify-content: left;
+          display: flex !important;
+        }
+
+      }
+
+        @media only screen and (min-width: 978px) and (max-width: 1024px) {
+
+          .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset input[type=file]{
+          padding-left: 20px !important;
+        }
+        .myaccount-general-question.page-layout-2columns-left .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive{
+          width: 100% !important;
+        }
+          .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset .upload_documents_prescriber_yes_fieldset .control .files_download span{
+          width: 65%;
+          word-break: break-word;
+          top: -5px !important;
+          height: 55px;
+          align-items: center;
+          justify-content: left;
+          display: flex !important;
+        }
+
+      }
+
+    .myaccount-general-question .upload_documents_prescriber_yes_fieldset .filelink.uploadfileactive img.uf_image{
+        margin-top: 0px;
+        width: 70%;
+        height: 70%;
+        border-radius: 50px;
+    }
+
+    .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset .upload_documents_prescriber_yes_fieldset .control .files_download span{
+        padding: 0;
+        display: block;
+        top: 10px;
+        left: 80px;
+        background: transparent;
+        color: #000;
+        text-align: left;
+    }
+
+
+    .catalog-category-view .page-bottom .before-footer .discretion-section,
+    .checkout-cart-index .page-bottom .before-footer .discretion-section{
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: 0;
+    }
+
+
+
+
+    #bss-cookie-notice{
+      z-index: 9999;
+      max-width: 100% !important;
+    }
+
+
+
+
+    @-moz-document url-prefix() {
+     .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question input[type="file"] {
+        text-indent: 0px !important;
+        padding-left: 1px !important;
+    }
+    .account.page-layout-2columns-left .column.main .form .fieldset.myaccount-general-question .upload_documents_prescriber_fieldset input[type="file"] {
+        padding-left: 1px !important;
+    }
+
+
+    }
+</style>
+
+
+<script>
+    require(['jquery'], function ($) {
+
+        $(document).ready(function(){
+            // $('label[for="surgery_address"]', 'label[for="surgery_address"]' , 'label[for="surgery_address"]' , '#surgery_name', '#surgery_address', 
+            //     '#surgery_postel_code').hide();
+
+            // $('div.surgery_name').hide();
+            // $('div.surgery_address').hide();
+            // $('div.surgery_postel_code').hide();
+
+
+        })
+
+       $('#clear_gp_search').on('click', function(){
+            $('#search_surgery').val('');
+            $('#search_surgery').show();
+            $('#surgery__display').hide();
+        })
+ 
+
+       $('input.custom_gp_search[type="radio"]').on('change', function () {
+        console.log('clicked');
+        if ($(this).val() === '1') {
+            $('#search_surgery').val('');
+            $('#surgery__display').hide();
+            $('div.surgery_name').show();
+            $('div.surgery_address').show();
+            $('div.surgery_postel_code').show();
+            $('input#search_surgery').hide();
+            $('#custom_gp_search_yes').hide();
+            $('#custom_gp_search_no').show();
+            $('#clear_gp_search').hide();
+
+        } else if ($(this).val() === '0') {
+            $('div.surgery_name').hide();
+            $('div.surgery_address').hide();
+            $('div.surgery_postel_code').hide();
+            $('input#search_surgery').show();
+            $('#custom_gp_search_yes').show();
+            $('#custom_gp_search_no').hide();
+            $('#clear_gp_search').show();
+        }
+    });
+        
+  
+    
+        // Suffer Diagnosed
+        $(".suffer_diagnosed").change(function (e) {
+            // e.preventDefault();
+            var self = $("input[name='suffer_diagnosed']:checked");
+            if(self.val() == 1){
+                self.parent().addClass('active');
+                $('.suffer_diagnosed_yes_fieldset').show();
+            }else{
+                self.parent().removeClass('active');
+                $('.suffer_diagnosed_yes_fieldset').hide();
+            }
+        });
+
+        // other medication
+        $(".other_medication").change(function (e) {
+            // e.preventDefault();
+            var self = $("input[name='other_medication']:checked");
+            if(self.val() == 1){
+                self.parent().addClass('active');
+                $('.other_medication_yes_fieldset').show();
+            }else{
+                self.parent().removeClass('active');
+                $('.other_medication_yes_fieldset').hide();
+            }
+        });
+
+        // have allergies
+        $(".have_allergies").change(function (e) {
+            // e.preventDefault();
+            var self = $("input[name='have_allergies']:checked");
+            if(self.val() == 1){
+                self.parent().addClass('active');
+                $('.have_allergies_yes_fieldset').show();
+            }else{
+                self.parent().removeClass('active');
+                $('.have_allergies_yes_fieldset').hide();
+            }
+        });
+
+        // GP
+        $(".registered_gp").change(function (e) {
+            // e.preventDefault();
+            var self = $("input[name='registered_gp']:checked");
+            if(self.val() == 1){
+                self.parent().addClass('active');
+                $('.registered_gp_permission_fieldset').show();
+            }else{
+                self.parent().removeClass('active');
+                $('.registered_gp_permission_fieldset').hide();
+            }
+        });
+
+        // GP permission
+        $(".registered_gp_permission").change(function (e) {
+            // e.preventDefault();
+            var self = $("input[name='registered_gp_permission']:checked");
+            if(self.val() == 1){
+                self.parent().addClass('active');
+                $('.registered_gp_surgery_fieldset').show();
+            }else{
+                self.parent().removeClass('active');
+                $('.registered_gp_surgery_fieldset').hide();
+            }
+        });
+
+
+        // GP permission
+        $(".upload_documents_prescriber").change(function (e) {
+            // e.preventDefault();
+            var self = $("input[name='upload_documents_prescriber']:checked");
+            if(self.val() == 1){
+                self.parent().addClass('active');
+                $('.upload_documents_prescriber_yes_fieldset').show();
+            }else{
+                self.parent().removeClass('active');
+                $('.upload_documents_prescriber_yes_fieldset').hide();
+            }
+        });
+
+        // prescriber to know
+        $(".prescriber_to_know").change(function (e) {
+            // e.preventDefault();
+            var self = $("input[name='prescriber_to_know']:checked");
+            // alert(self.val());
+            if(self.val() == 1){
+                self.parent().addClass('active');
+                $('.prescriber_to_know_yes_fieldset').show();
+            }else{
+                self.parent().removeClass('active');
+                $('.prescriber_to_know_yes_fieldset').hide();
+            }
+        });
+
+        $(".info-icon").hover(function () {
+            // over
+                $(".info-icon-message").show();
+            }, function () {
+                // out
+                $(".info-icon-message").hide();
+            }
+            );
+
+            function stringEncrypter(str) {
+                var buf = [];
+                for (var i=str.length-1;i>=0;i--) {
+                    buf.unshift(['&#', str[i].charCodeAt(), ';'].join(''));
+                }
+                return buf.join('');
+            }
+
+            /* TODO surgery select box */
+            // $("#registered_gp_surgery").select2();
+            //
+            //
+
+            var search_surgery_div = $("#search_surgery_div"), spinnerLoader = $(".spinner-loader");
+            $("#search_surgery").keyup(function (e) {
+                var self = $(this);
+                search_surgery_div.html('');
+                //  * Check input lenght is greater then 2 or not
+                if(self.val().length >= 2){
+                    //  *Show Loader here
+                    spinnerLoader.show();
+                    search_surgery_div.show();
+                    $.post("<?php echo $block->getBaseUrl(); ?>gpapi", {
+                        q : self.val()
+                    },
+                    function (data) {
+                            // console.log(data);
+                            if(data.length > 0){
+                                if(search_surgery_div.html('')){
+                                    $.map(data, function (element,Key) {
+                                        search_surgery_div.append(`
+                                        <div class="clickable__search" data-val='{"gpmanagement_id": "${stringEncrypter(element.gpmanagement_id)}","practice_code": "${stringEncrypter(element.practice_code)}","name_of_practice": "${stringEncrypter(element.name_of_practice)}","email": "${stringEncrypter(element.email)}","telephone": "${stringEncrypter(element.telephone)}","address_line_one": "${stringEncrypter(element.address_line_one)}","address_line_two": "${stringEncrypter(element.address_line_two)}","city": "${stringEncrypter(element.city)}","county": "${stringEncrypter(element.county)}","postcode": "${stringEncrypter(element.postcode)}"}'>
+                                        ${stringEncrypter(element.name_of_practice)}
+                                        <span class="small">${stringEncrypter(element.address_line_one)}, ${stringEncrypter(element.address_line_two)},${stringEncrypter(element.city)},${stringEncrypter(element.county)} ${stringEncrypter(element.postcode)}</span>
+                                        </div>
+                                        `);
+                                    });
+                                }
+                            }else{
+                                if(search_surgery_div.html('')){
+                                    search_surgery_div.append(`
+                                        <div class="no__search">No surgery found</div>
+                                    `);
+                                }
+                            }
+                            spinnerLoader.hide();
+                        },
+                        "json"
+                    );
+                }else{
+                    search_surgery_div.hide();
+                }
+            });
+
+            search_surgery_div.on('click', '.clickable__search' , function () {
+                var data = $(this).data('val');
+                $("#surgery__display").html(`
+                    <span class="name_of_practice"><span class="highlight">Practice Name: </span>${data.name_of_practice}</span>
+                    <span class="name_of_practice"><span class="highlight">Address: </span>${data.address_line_one}, ${data.address_line_two},${data.city},${data.county} ${data.postcode}</span>
+                `);
+                $("#registered_gp_surgery").val(JSON.stringify(data));
+                search_surgery_div.hide();
+                $("#search_surgery").hide();
+                $("#btn__surgery__close").show();
+                $("#surgery__display").show();
+                $("#registered_gp_surgery-error").hide();
+            });
+
+            $("#btn__surgery__close").click(function (e) {
+                e.preventDefault();
+                $("#btn__surgery__close").hide();
+                $("#surgery__display").hide();
+                $("#search_surgery").show();
+                $("#search_surgery").val('');
+                $("#registered_gp_surgery").val('');
+                search_surgery_div.hide();
+            });
+
+            /* =================================
+
+                * AJAX UPLOAD system 
+
+             =================================== */
+            var mediaUrl = "<?php echo $this->helper('\Magento\Cms\Helper\Wysiwyg\Images')->getBaseUrl(); ?>";
+            $('.filesLoader').change(function(){
+                //on change event
+                var self = $(this);
+                // Activate Page loader here
+                $("body").addClass("file-loader");
+                formData = new FormData();
+                if(self.prop('files').length > 0)
+                {
+                    file = self.prop('files')[0];
+                    formData.append("files", file);
+
+                    var fileExtension = file.name.substr( (file.name.lastIndexOf('.') +1) );
+                    fileExtension = fileExtension.toLowerCase();
+                    if(fileExtension == "jpg" || fileExtension == "png" || fileExtension == "jpeg" || fileExtension == "pdf" || fileExtension == "doc" || fileExtension == "bmp"){
+                        jQuery.ajax({
+                            url: '<?php echo $block->getBaseUrl(); ?>customer/general/ajax',
+                            type: "POST",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            dataType: "json",
+                            success: function (result) {
+                                console.log(result);
+                                if(result.status == true){
+                                    self.closest("div.filelink").find(".files_download").find('span').text(result.message);
+                                    self.closest("div.filelink").find(".files_download").attr('href', (mediaUrl+result.target+result.message)).data("title", result.message).show();
+                                    self.closest("div.filelink").find(".delete_file").data('file', result.message).show();
+                                    self.closest("div.filelink").find("div.fileuplod_custom").hide();
+                                    self.closest("div.filelink").addClass("uploadfileactive");
+                                    var updateStatusVal = $("#upload_documents_prescriber_yes");
+                                    if(updateStatusVal.val() == ''){
+                                        updateStatusVal.val(result.message);
+                                    }else{
+                                        updateStatusVal.val(updateStatusVal.val() + ',' + result.message);
+                                    }
+                                }else{
+                                    alert(result.message);
+                                }
+                                // run beatify
+                                self.val('');
+                                file_beautify();
+                                // Activate Page loader here
+                                $("body").removeClass("file-loader");
+                            }
+                        });
+                    }else{
+                        self.val('');
+                        alert("We only allow the following extensions ( jpeg, jpg, doc, pdf, png and bmp files)");
+                    }
+                }
+            });
+
+            $(".delete_file").click(function (e) {
+                e.preventDefault();
+                var self = $(this);
+                var updateStatusVal = $("#upload_documents_prescriber_yes");
+                var returnVal = updateStatusVal.val();
+                var fileName = self.data('file');
+                updateStatusVal.val(returnVal.replace(fileName, '').replace(',,', ',').replace(/,\s*$/, ""));
+                self.closest("div.filelink").find(".files_download").find('span').text('');
+                self.closest("div.filelink").find(".files_download").attr('href', '').hide();
+                self.closest("div.filelink").find(".delete_file").data('file', '').hide();
+                self.closest("div.filelink").find("div.fileuplod_custom").show();
+                self.closest("div.filelink").removeClass("uploadfileactive");
+                file_beautify()
+            });
+
+            function file_beautify(){
+                var eleCount = 0;
+                $(".upload_documents_prescriber_yes_fieldset .filelink").each(function (index, element) {
+                    var ele = $(element);
+                    ele.removeClass("uploadfileactive");
+                    var fileExtension = ele.find("a").attr("href").substr( (ele.find("a").attr("href").lastIndexOf('.') +1) );
+                    fileExtension = fileExtension.toLowerCase();
+                    if(ele.find("a").attr("href").length <= 0){
+                        eleCount++;
+                        console.log(eleCount);
+                        if(eleCount == 4){
+                            $(".upload_documents_prescriber_yes_fieldset .required_upload_field").addClass("required");
+                        }else{
+                            $(".upload_documents_prescriber_yes_fieldset .required_upload_field").removeClass("required");
+                        }
+                        return;
+                    } else if( fileExtension == "jpg" || fileExtension == "png" || fileExtension == "jpeg" ){
+                        ele.addClass("uploadfileactive");
+                        ele.find("a").removeAttr("download");
+                        ele.find("a").attr("target", "_blank");
+                        ele.find("a").html(`<img src="${ele.find("a").attr("href")}" class="uf_image">`);
+                        return;
+                    } else if(fileExtension == "pdf"){
+                        ele.addClass("uploadfileactive");
+                        ele.find("a").attr("target", "_blank");
+                        ele.find("a").removeAttr("download");
+                        ele.find("a").html(`<i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span>${ele.find("a").data("title")}</span>`);
+                        return;
+                    }else{
+                        ele.addClass("uploadfileactive");
+                        ele.find("a").removeAttr("target");
+                        ele.find("a").attr("download", "download");
+                        ele.find("a").html(`<i class="fa fa-file-o" aria-hidden="true"></i> <span>${ele.find("a").data("title")}</span>`);
+                        return;
+                    }
+                });
+            }
+
+            $(document).ready(function () {
+                file_beautify();
+            });
+
+        }); // require end here
+    </script>
+
+<style>
+    
+    .rendered-form .fieldset .fields .field.form-group input[type="radio"]{ 
+  opacity: 0;
+    position: absolute;
+    border: 0;
+    padding: 0 15px;
+}
+
+.rendered-form .fieldset .fields .field.form-group .fb-textarea-label{
+  color: #313131;
+    font-size: 13px;
+    line-height: 20px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.rendered-form .fieldset .fields .field.form-group label.amform-versiontwo-label{
+  background: #F1F7F9;
+  border-radius: 30px;
+    margin-right: 0px;
+    display: inline-block; 
+    height: auto;
+    position: relative;
+    background: #F1F7F9;
+    border: 0px solid #5A5A5A;
+    float: left;
+    color: #313131;
+    font-size: 13px;
+    line-height: 20px;
+    text-align: center;
+    border-right: 1px solid #eeeded;
+    width: auto;
+    padding: 15px;
+    min-width: 105px;
+    max-width: 300px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.rendered-form .fieldset .fields .field.form-group .amform-groupv2{
+  margin-right: 10px;
+}
+
+.rendered-form .fieldset .fields .field.form-group input[type="radio"]:checked + label{
+  background: #53CAF5;
+  color: #fff;
+}
+
+
+
+.registered_gp_surgery_fieldset .control .radio-group{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+#clear_gp_search{ 
+    background-color: #EC3237;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+    text-align: center;
+    border-radius: 50px;
+    line-height: 25px;
+    font-size: 13px;
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+.rendered-form .fieldset .fields .field.form-group input#search_surgery{
+    width: 95%;
+}
+#custom_gp_search_yes label{
+    background: #53CAF5;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 15px;
+    cursor: pointer;
+}
+#custom_gp_search_no label{
+    background: #EC3237;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+#surgery__display{
+    display: inline-block;
+    background-color: #eef8fb;
+    padding: 10px 15px;
+    border-radius: 10px;
+    width: 95%;
+}
+
+.rendered-form .fieldset .fields .registered_gp_surgery_fieldset .field.form-group.surgery_name label,
+.rendered-form .fieldset .fields .registered_gp_surgery_fieldset .field.form-group.surgery_address label,
+.rendered-form .fieldset .fields .registered_gp_surgery_fieldset .field.form-group.surgery_postel_code label{
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-top: 15px !important;
+}
+
+.fieldset.ghq-sec,
+.amform-form-fieldset.fieldset{
+    box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(0, 0, 0, 0.19);
+    display: inline-block;
+    width: 100%; 
+    padding: 35px;
+}
+.fieldset.ghq-sec{
+    margin-top: 80px;
+}
+
+.rendered-form .fieldset.ghq-sec .fields .field.form-group{
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 25px;
+    margin-bottom: 15px;
+}
+
+.rendered-form .fieldset.ghq-sec .fields .field.form-group label.fb-radio-group-label{
+    border-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+.rendered-form .fieldset .insert-container.fields .field.form-group.fb-h2 h2{
+    margin: 0;
+}
+
+.rendered-form .fieldset .insert-container.fields ul{
+    padding: 0;
+    margin: 0 0 0 17px;
+}
+
+@media only screen and (min-width: 768px) {
+    .rendered-form .fieldset .fields .registered_gp_surgery_fieldset .radio-group .field.form-group.surgery_name,
+    .rendered-form .fieldset .fields .registered_gp_surgery_fieldset .radio-group .field.form-group.surgery_address,
+    .rendered-form .fieldset .fields .registered_gp_surgery_fieldset .radio-group .field.form-group.surgery_postel_code{
+        width: 32%;
+        margin-right: 12px;
+    }
+    .rendered-form .fieldset .fields .registered_gp_surgery_fieldset .radio-group .field.form-group.surgery_postel_code{
+        margin-right: 0 !important;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+    #surgery__display,
+    .rendered-form .fieldset .fields .field.form-group input#search_surgery{
+        width: 90% !important;
+    }
+    
+}
+
+@media only screen and (min-width: 1600px) {
+    .amform-poup-opened .amcform-popup-block .amform-form{
+        max-width: 75%;
+    }
+}
+
+
+
+
+@media only screen and (min-width: 768px) {
+    .amform-poup-opened .amcform-popup-block .amform-form{
+        max-width: 780px !important;
+    }
+    .amform-poup-opened .amcform-popup-block .amcform-button.-close-popup{
+        right: 70px;
+    }
+    .amform-form-fieldset.fieldset.wl-question-sec{
+        padding-top: 0 !important;
+    }
+}
+.amform-groupv2.gp-search-group{
+    width: 100%;
+}
+.wl-question-sec .field.required.control.amcform-gdpr{
+    width: 100%;
+    margin-top: 25px; 
+}
+
+.wl-question-sec .field.required.control.amcform-gdpr label{
+    font-weight: 400;
+    font-size: 14px;
+    margin-top: 25px;
+}
+.wl-question-sec .field.required.control.amcform-gdpr label .amform-checkbox{
+    margin-right: 5px;
+}
+
+@media only screen and (max-width: 767px) {
+    .amform-form-fieldset.fieldset.wl-question-sec{
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin-top: 20px;
+    }
+
+}
+
+
+</style>

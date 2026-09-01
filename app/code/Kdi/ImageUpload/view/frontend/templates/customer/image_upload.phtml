@@ -1,0 +1,82 @@
+<?php
+$collection = $block->getCollection();
+$data = $block->getImageData()->getData();
+
+
+
+
+if (count($collection) > 0) :
+    function getDateOnly($timestamp)
+    {
+        return date('Y-m-d', strtotime($timestamp));
+    }
+    ?>
+
+    <div class="image-upload-account-sec">
+        <h1>Body Verification</h1>
+        <?php foreach ($collection as $dataArray) : ?>
+            <?php 
+            // Ensure necessary keys exist in $dataArray
+            $orderId = $dataArray['order_id'] ?? null;
+            $createdAt = $dataArray['created_at'] ?? null;
+
+            if ($orderId && $createdAt) {
+                $order = $block->getProductDetailsByOrderIncrementId($orderId);
+                $order = $order[0] ?? [];
+                $dateOnly = getDateOnly($createdAt);
+
+               
+            ?>
+
+                <?php  $reuploadUrl = '/image_upload?order_id='. $dataArray['order_id'] . '&id='. $dataArray['entity_id']; ?>
+                <div class="image-upload-account-list">
+                    <div class="image-upload-text">
+                        <p class="image-upload-date"><?= htmlspecialchars($dateOnly) ?></p>
+                       
+                            <!-- <p class="image-upload-name order-id"><?//= $dataArray['order_id'] ?></p> -->
+                         <p class="image-upload-name"><?= htmlspecialchars($order['name'] ?? 'Unknown Name') ?></p>
+                        
+                    </div>
+                    <div class="image-upload-account-right">
+                        <?php if (!empty($dataArray['full_image'])) : ?>
+                            <div class="upload-img1 accept">
+                                <img src="<?= htmlspecialchars('https://magento-1195784-4216081.cloudwaysapps.com/' . $dataArray['full_image']) ?>" class="Image" alt="Body Verification Image">
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!empty($dataArray['full_image2'])) : ?>
+                            <div class="upload-img1 accept">
+                                <img src="<?= htmlspecialchars('https://magento-1195784-4216081.cloudwaysapps.com/' . $dataArray['full_image2']) ?>" class="Image" alt="Body Verification Image">
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!empty($dataArray['identity_image'])) : ?>
+                            <div class="upload-img1 accept">
+                                <img src="<?= htmlspecialchars('https://magento-1195784-4216081.cloudwaysapps.com/' . $dataArray['identity_image']) ?>" class="Image" alt="Body Verification Image">
+                            </div>
+                        <?php endif; ?>
+
+
+                    </div>
+                    <!-- <div class="upload-button">
+                        <button class="btn"> 
+                            <a href="<? //= $reuploadUrl ?>">Reupload</a>
+                        </button>
+                    </div> -->
+                </div>
+            <?php } ?>
+        <?php endforeach; ?>
+    </div>
+
+<?php else : ?>
+
+    <div class="image-upload-account-sec">
+        <h1>Body Verification Details are not Available</h1>
+    </div>
+
+<?php endif; ?>
+
+<style type="text/css">
+    .Image {
+        height: 300px;
+        width: 300px;
+    }
+</style>

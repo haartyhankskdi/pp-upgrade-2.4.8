@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Nilesh\PrescriberNotes\Api\PrescriberNotesRepositoryInterface" type="Nilesh\PrescriberNotes\Model\PrescriberNotesRepository"/>
+	<preference for="Nilesh\PrescriberNotes\Api\Data\PrescriberNotesInterface" type="Nilesh\PrescriberNotes\Model\PrescriberNotes"/>
+	<preference for="Nilesh\PrescriberNotes\Api\Data\PrescriberNotesSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+<!--	<virtualType name="Nilesh\PrescriberNotes\Model\ResourceModel\PrescriberNotes\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">-->
+<!--		<arguments>-->
+<!--			<argument name="mainTable" xsi:type="string">nilesh_prescribernotes_prescribernotes</argument>-->
+<!--			<argument name="resourceModel" xsi:type="string">Nilesh\PrescriberNotes\Model\ResourceModel\PrescriberNotes\Collection</argument>-->
+<!--		</arguments>-->
+<!--	</virtualType>-->
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="nilesh_prescribernotes_prescribernotes_listing_data_source" xsi:type="string">Nilesh\PrescriberNotes\Model\ResourceModel\PrescriberNotes\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<!-- Image Uploader -->
+	<virtualType name="Nilesh\PrescriberNotes\ImageUpload" type="Nilesh\PrescriberNotes\Model\ImageUploader">
+	   <arguments>
+	      <argument name="baseTmpPath" xsi:type="string">nilesh_prescribernotes/tmp</argument>
+	      <argument name="basePath" xsi:type="string">nilesh_prescribernotes</argument>
+	      <argument name="allowedExtensions" xsi:type="array">
+	         <item name="jpg" xsi:type="string">jpg</item>
+	         <item name="jpeg" xsi:type="string">jpeg</item>
+	         <item name="gif" xsi:type="string">gif</item>
+	         <item name="png" xsi:type="string">png</item>
+	         <item name="doc" xsi:type="string">doc</item>
+	         <item name="pdf" xsi:type="string">pdf</item>
+	      </argument>
+	   </arguments>
+	</virtualType>
+	<type name="Nilesh\PrescriberNotes\Controller\Adminhtml\PrescriberNotes\Uploader">
+	   <arguments>
+	      <argument name="imageUploader" xsi:type="object">Nilesh\PrescriberNotes\ImageUpload</argument>
+	   </arguments>
+	</type>
+	<!-- End Image Uploader -->
+</config>

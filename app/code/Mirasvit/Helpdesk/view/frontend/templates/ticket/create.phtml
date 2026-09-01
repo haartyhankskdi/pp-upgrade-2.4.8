@@ -1,0 +1,165 @@
+<?php
+/** @var \Mirasvit\Helpdesk\Block\Ticket\Create $block */
+?>
+<?php
+$showOrders = $block->getFrontendIsAllowOrder() && $block->getOrderCollection()->count();
+?>
+<form action="<?= $block->getSubmitUrl() ?>" method="POST" enctype="multipart/form-data"
+      data-mage-init='{"validation":{}}' class="hdmx__ticket-new">
+    <fieldset class="fieldset" data-mage-init='{"helpdeskCustomerAccount":{}}'>
+        <legend class="legend">
+            <span><?= __('Create New Ticket') ?></span>
+        </legend>
+
+        <div class="fields group">
+            <div class="field required subject">
+                <label class="label" for="subject">
+                    <span><?= __('Subject') ?></span>
+                </label>
+
+                <div class="control">
+                    <input type="text" name="subject" data-id="subject" class="subject input-text required-entry">
+                </div>
+            </div>
+
+            <?php if ($block->getFrontendIsAllowPriority()): ?>
+                <div class="field required priority">
+                    <label class="label" for="priority_id">
+                        <span><?= __('Priority') ?></span>
+                    </label>
+
+                    <div class="control">
+                        <select name="priority_id" data-id="priority_id" class="priority_id">
+                            <?php foreach ($block->getPriorityCollection() as $priority): ?>
+                                <option value="<?= $priority->getId() ?>">
+                                    <?= $priority->getName() ?>
+                                </option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                </div>
+            <?php endif ?>
+
+            <?php if ($block->getFrontendIsAllowDepartment()): ?>
+                <div class="field required department">
+                    <label class="label" for="department_id">
+                        <span><?= __('Department') ?></span>
+                    </label>
+
+                    <div class="control">
+                        <select name="department_id" class="department_id" data-id="department_id">
+                            <?php foreach ($block->getDepartmentCollection() as $department): ?>
+                                <option value="<?= $department->getId() ?>">
+                                    <?= $department->getName() ?>
+                                </option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                </div>
+            <?php endif ?>
+        </div>
+
+        <div class="fields group">
+            <div class="field required message">
+                <label class="label" for="message">
+                    <span><?= __('Message') ?></span>
+                </label>
+
+                <div class="control">
+                    <textarea name="message" data-id="message" class="message input-text required-entry"
+                              rows="5"></textarea>
+                </div>
+            </div>
+            <div class="field required"></div>
+        </div>
+
+        <?php if($block->isAttachmentEnabled()): ?>
+        <div class="fields group">
+            <div class="field">
+                <label class="label" for="attachment">
+                    <span><?= __('Attachments') ?></span>
+                    <p class="max-attachment-size"><?= __('Max file size: %1 Mb', $block->getAttachmentSize()) ?></p>
+                </label>
+
+                <div class="control">
+                    <input type="file" class="multi attachment" name="attachment[]" data-id="attachment"/>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <div class="fields group">
+            <?php if ($showOrders): ?>
+                <div class="field order">
+                    <label class="label" for="order_id">
+                        <span><?= __('Order') ?></span>
+                    </label>
+
+                    <div class="control">
+                        <div class="orderLoading" style="display: block;"><?= __("Loading...") ?></div>
+                        <select name="order_id" data-id="order_id" class="order_id orderContainer" style="display: none;">
+                            <option value=""><?= __('-- Select an Order --') ?></option>
+                        </select>
+                    </div>
+                </div>
+            <?php endif ?>
+
+            <?php foreach ($block->getCustomFields() as $field): ?>
+                <div class="field custom">
+                    <label class="label" for="<?= $field->getCode() ?>">
+                        <span><?= $field->getName(); ?></span>
+                    </label>
+                    <div class="control">
+                        <?= $block->getInputHtml($field) ?>
+                    </div>
+                    <p class="note"><?= $field->getDescription() ?></p>
+                </div>
+            <?php endforeach ?>
+        </div>
+    </fieldset>
+
+    <div class="actions-toolbar">
+        <button type="submit" class="action primary" title="<?= __('Submit Ticket') ?>">
+            <span><?= __('Submit Ticket') ?></span>
+        </button>
+    </div>
+</form>
+
+<script type="text/javascript">
+    require([
+        "jquery",
+        'mage/validation'
+    ], function ($) {
+        var ordersUrl = "<?= $block->getOrdersUrl() ?>";
+        var showOrders = <?= $showOrders ?>;
+        var submitBtn = $('.hdmx__ticket-new .action.primary');
+        $('form').on('invalid-form.validate', function(event, validation) {
+            $(submitBtn).show();
+        });
+        $(submitBtn).click(function() {
+            $(submitBtn).hide();
+        });
+
+        $(document).ready(function() {
+            if (!showOrders) {
+                return;
+            }
+            $.ajax(ordersUrl, {
+                method : "get",
+                dataType: 'json',
+                success : function(response) {
+                    if (typeof response.error != 'undefined') {
+                        console.log(response.error);
+                        return;
+                    }
+                    for (var i in response) {
+                        var option = '<option value="' + response[i]['id'] + '">' + response[i]['name'] + '</option>';
+                        $('select.order_id.orderContainer').append(option);
+                    }
+                    $('.field.order .orderLoading').hide();
+                    $('.field.order .orderContainer').show();
+                },
+            });
+        });
+    });
+</script>

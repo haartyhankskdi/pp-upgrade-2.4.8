@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+
+        <tab id="kdi" translate="label" sortOrder="999">
+            <label>KDI</label>
+        </tab>
+
+        <section id="image_upload" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Image Upload</label>
+            <tab>kdi</tab>
+            <resource>Kdi_ImageUpload::config_kdi_imageupload</resource>
+
+            <!-- ======================================================
+                             GROUP 1: General Settings
+                        ======================================================= -->
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+
+                <field id="status" type="select" translate="label comment" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Module</label>
+                    <comment>Enable or disable the Image Upload module globally.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+            </group>
+
+            <!-- ======================================================
+                             GROUP 2: Image Upload Settings
+                        ======================================================= -->
+            <group id="image_upload_settings" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Image Upload Settings</label>
+
+                <depends>
+                    <field id="image_upload/general/status">1</field>
+                </depends>
+
+                <field id="image_upload_status" type="select" translate="label comment" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Image Upload</label>
+                    <comment>Allow customers to upload verification images.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="submit_photos_email_template" type="select" translate="label comment" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Submit Photos Email Template</label>
+                    <comment>Email sent to customer requesting photo verification after order placement.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+
+                <field id="submit_photos_email_sender" type="select" translate="label comment" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Submit Photos Email Sender</label>
+                    <comment>Store email identity used to send the photo submission email.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+
+            </group>
+
+            <!-- ======================================================
+                             GROUP 3: Appointment Booking Settings
+                        ======================================================= -->
+            <group id="appointment_booking" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Appointment Booking Settings</label>
+
+                <depends>
+                    <field id="image_upload/general/status">1</field>
+                </depends>
+
+                <field id="appointment_book_status" type="select" translate="label comment" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Appointment Booking</label>
+                    <comment>Show the Calendly appointment booking option in emails and on the upload page.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="appointment_book_url" type="text" translate="label comment" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Calendly Booking URL</label>
+                    <comment>Full URL for the Calendly appointment booking page (e.g. https://calendly.com/your-link).</comment>
+                    <validate>validate-url</validate>
+                    <depends>
+                        <field id="image_upload/appointment_booking/appointment_book_status">1</field>
+                    </depends>
+                </field>
+
+                <field id="appointment_book_template" type="select" translate="label comment" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Appointment Confirmation Email Template</label>
+                    <comment>Email sent to customer after an appointment is booked.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="image_upload/appointment_booking/appointment_book_status">1</field>
+                    </depends>
+                </field>
+
+                <field id="appointment_book_email_sender" type="select" translate="label comment" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Appointment Email Sender</label>
+                    <comment>Store email identity used to send the appointment confirmation email.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <depends>
+                        <field id="image_upload/appointment_booking/appointment_book_status">1</field>
+                    </depends>
+                </field>
+
+            </group>
+
+        </section>
+    </system>
+</config>

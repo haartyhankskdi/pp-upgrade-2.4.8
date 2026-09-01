@@ -1,0 +1,566 @@
+<?php
+/**
+ * Product view template
+ *
+ * @var $block \Magento\Catalog\Block\Product\View
+ */
+$_product = $block->getProduct();
+$_helper = $this->helper(Magento\Catalog\Helper\Output::class);
+$_helperCatalog = $this->helper(Haartyhanks\CategoryQuest\Helper\Data::class);
+$_helperCatalogWL = $this->helper(Haartyhanks\CategoryQuestWL\Helper\Data::class);
+
+$proCustopt = $_product->getOptions();
+$moduleName = $this->getRequest()->getModuleName();
+$prodCategoryIds = $_helperCatalog->getCategoryIds($_product->getId());
+$storeId = $_helperCatalogWL->getCurrentStoreId();
+
+if ($storeId == 2) {
+    $catUrl = $_helperCatalog->getCatUrlById(183);
+} else {
+    $catUrl = $_helperCatalog->getCatUrlById($prodCategoryIds[1]);
+}
+
+if ($moduleName == "checkout") {
+    $button = "Edit Consultation";
+} else {
+    $button = "ORDER ITEM";
+}
+
+$_amastyCustomFormHelper = $this->helper(Amasty\Customform\Helper\Data::class);
+$hasCategoryQuestions = $_product->getAttributeText('has_category_questionnaire');
+$uniqueHash = $_amastyCustomFormHelper->getUniqueHash();
+$isFilledCategory = $_helperCatalog->getIsFilledCategory();
+$categoryIds = $_helperCatalog->getCategoryIds($_product->getId());
+// echo "is filled :";
+if($isFilledCategory){
+    $filledCategoryValue = json_encode($isFilledCategory);
+} else {
+    $filledCategoryValue = null;
+}
+// print_r($isFilledCategory);
+// print_r($categoryIds['0']);
+// echo "<br>".'Category Questions :'.$hasCategoryQuestions;
+$_helperCatalog->unsIsFilledCategory();
+?>
+
+<div class="product-add-form">
+    <form data-product-sku="<?= $block->escapeHtmlAttr($_product->getSku()) ?>" action="<?= $block->escapeUrl($block->getSubmitUrl($_product)) ?>" method="post" id="product_addtocart_form" <?php if ($_product->getOptions()) : ?> enctype="multipart/form-data" <?php endif; ?>>
+
+        <input type="hidden" name="product" value="<?= (int)$_product->getId() ?>" />
+        <input type="hidden" name="selected_configurable_option" value="" />
+        <input type="hidden" name="related_product" id="related-products-field" value="" />
+        <input type="hidden" name="item" value="<?= (int)$block->getRequest()->getParam('id') ?>" />
+        <?= $block->getBlockHtml('formkey') ?>
+        <?= $block->getChildHtml('form_top') ?>
+
+        <?php if (!$block->hasOptions()) : ?>
+            <?= $block->getChildHtml('product_info_form_content') ?>
+        <?php else : ?>
+
+            <?php if ($_product->isSaleable() && $block->getOptionsContainer() == 'container1') : ?>
+                <?= $block->getChildChildHtml('options_container') ?>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <?php if ($_product->isSaleable() && $block->hasOptions() && $block->getOptionsContainer() == 'container2') : ?>
+            <?= $block->getChildChildHtml('options_container') ?>
+        <?php endif; ?>
+        <?= $block->getChildHtml('form_bottom') ?>
+
+        <div class="info-btn">
+            <?php if (!empty($proCustopt) && $_product->isSaleable()) {
+
+                // $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                // $current_category = $_helperCatalog->getCurrentCategory(); 
+                // $current_category = $_helperCatalog->getCategory(); 
+                // $current_category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+                // $curCatId = '';
+                // $curCat = "";
+                // if ($current_category) {
+                //     $curCat = $current_category->getPath();
+                //     $curCatId = $current_category->getId();
+                // }
+                
+                // file_put_contents('/home/devanna/Desktop/text.txt', $_product->getId());
+                $_helperCatalog->setCatValueSession($prodCategoryIds[0]);
+                $_helperCatalog->setProdValueSession($_product->getId());
+
+            ?>
+                <!-- For Config product with custom option/Questionaire -->
+                <button type="button" class="start-consultation"><?php echo $button; ?></button>
+                <!-- <div class="view-price-btn"><button type="button" class="view-pricing" id="click-me"><?php //echo __("View Pricing"); ?></button></div> -->
+                <!-- <a href="#selected-data1" class="viewpricing"><?php //echo __("View Pricing"); ?></a> -->
+                <!-- <button type="button" class="go-to-start-consultation"><?php //echo __("Start Consultation"); ?></button> -->
+                <a href="<?= $catUrl.'?product_id='.$_product->getId(); ?>" class="back-to-start-consultation"><button type="button"><?php echo __("Back To Start Consultation"); ?></button></a>
+                <!-- <?= $this->helper("Amasty\Customform\Helper\Data")->renderForm("54") ?>
+                <?php echo $block->getLayout()->createBlock('Magento\Framework\View\Element\Template')->setTemplate('Haartyhanks_CategoryQuestWL::category_id_template.phtml')->toHtml(); ?>
+                 -->
+            <?php }
+            $buttonTitle = __('Add to Cart');
+            if (empty($proCustopt) && $_product->isSaleable()) {  ?>
+                <!-- For Config product without custom option/Questionaire -->
+                <?php if ($_product->getTypeId() == "simple" || $_product->getTypeId() == "virtual") : ?>
+                    <button type="submit" class=""><?= $block->escapeHtml($buttonTitle) ?></button>
+                    <!-- <div class="fill-cat-question"><p>You didn't filled consultation quesions. Please <a href="<?php //echo $catUrl; ?>">Click Here</a> to fill.</p></div> -->
+                <?php else : ?>
+                    <!-- <a href="?true" class="back-to-start-consultation"><button type="button"><?//= $block->escapeHtml($buttonTitle); ?></button></a> -->
+
+                    <!-- REDIRECT TO WL HOMEPAGE -->
+                    <a href="/weightloss" class="back-to-start-consultation"><button type="button">START MY CONSULTATION</button></a>
+
+                    <!-- <div class="view-price-btn"><button type="button" class="view-pricing" id="click-me"><?php //echo __("View Pricing"); ?></button></div> -->
+                    <!-- <a href="#selected-data1" class="viewpricing"><?php //echo __("View Pricing"); ?></a> -->
+                    <!-- <button type="button" class="start-consultation"><?php //echo __("Continue"); ?></button> -->
+                <?php endif; ?>
+            <?php }
+
+            ?>
+
+        </div>
+    </form>
+</div>
+
+<?php
+$childProducts = $_helperCatalog->getChildProducts();
+$attributsArray = [];
+$filterOptions = [];
+$filterOptionStren = [];
+foreach ($childProducts as $child) {
+    if ($child->getStatus() == 1) {
+
+        $brand = $_helperCatalog->getLabelById('brand', $child->getBrand());
+
+        if (!$brand) {
+            $brand = '-';
+        }
+
+        if ($child->getPmdname()) {
+            $strength = $_helperCatalog->getLabelById('pmdname', $child->getPmdname());
+        } else {
+            $strength = '-';
+        }
+        $size = $_helperCatalog->getLabelById('pmdsize', $child->getPmdsize());
+        $price = number_format($child->getPrice(), 2);
+
+        $data = array(
+            "brand" => $brand,
+            "strength" => $strength,
+            "pmdsize" => $size,
+            "price" => $price
+        );
+        array_push($attributsArray, $data);
+        array_push($filterOptions, $brand);
+        array_push($filterOptionStren, $strength);
+    }
+}
+$filterOptions = array_unique($filterOptions);
+$filterOptionStren = array_unique($filterOptionStren);
+?>
+
+<!-- <div id="popup-modal" style="display:none;" class="popup-container"> -->
+<!-- <div class="container">
+    <div class="select-option">
+        <h3>Please find below product pricing:</h3>
+        <div class="brand-label">
+            <label for="brand">Select Brand :</label>
+            <select name="brand" id="brand">
+                <option value="all" selected>All Brands</option>
+                <?php foreach ($filterOptions as $option) { ?>
+                    <option value="<?= $option ?>"><?= $option ?></option>
+                <?php } ?>
+            </select>
+        </div>
+        <div class="medistren-label">
+            <label for="medistren">Medical Strength :</label>
+            <select name="medistren" id="medistren">
+                <option value="all" selected>All Strength</option>
+                <?php foreach ($filterOptionStren as $option) { ?>
+                    <option value="<?= $option ?>"><?= $option ?></option>
+                <?php } ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="select-option-data">
+        <table id="selected-data">
+            <tr>
+                <th>Brand</th>
+                <th>Medicine Strength</th>
+                <th>Size</th>
+                <th>Price</th>
+            </tr>
+            <?php foreach ($attributsArray as $key => $value) { //echo "<pre>";print_r($value); 
+            ?>
+                <tr>
+                    <td><?= $value['brand'] ?></td>
+                    <td><?= $value['strength'] ?></td>
+                    <td><?= $value['pmdsize'] ?></td>
+                    <td><?= $value['price'] ?></td>
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
+</div>
+<div class="fill-cat-question"><p>You didn't filled consultation quesions. Please <a href="<?php echo $catUrl; ?>">Click Here</a> to fill.</p></div> -->
+<!-- </div> -->
+
+
+
+<script type="text/x-magento-init">
+    {
+        "[data-role=priceBox][data-price-box=product-id-<?= $block->escapeHtml($_product->getId()) ?>]": {
+            "priceBox": {
+                "priceConfig": <?= /* @noEscape */ $block->getJsonConfig() ?>
+            }
+        }
+    }
+</script>
+
+<!-- <script>
+    var stopTrigger = 0;
+
+    require(['jquery', 'jquery/ui', "mage/mage"], function($) {
+
+        var dataForm = $('#product_addtocart_form');
+        dataForm.mage('validation', {
+            ignore: ':hidden'
+        });
+        $(document).ready(function() {
+            $("body").attr("onhashchange", "myHashChange()");
+        });
+
+        $('.datetime-picker').datepicker("option", "maxDate", "+0d");
+
+        $(document).on('click', 'body .action.primary.continue', function() {
+            if ($('._required._error:visible:first').offset() !== undefined) {
+                $('html, body').animate({
+                    scrollTop: $('._required._error:visible:first').offset().top
+                }, 500);
+            }
+        });
+        $('.fill-cat-question').insertAfter('#product-addtocart-button');
+        $("backtoconsultation").show();
+        $("#product-updatecart-button").hide();
+        $(".price-box.price-final_price").hide();
+        $(".consultation-section.consultation-image").hide();
+        $("#product-addtocart-button").hide();
+        $("#itoris_dynamicproductoptions").hide();
+        $(".start-consultation").hide();
+        $(".nearly-there").hide()
+        $(".fill-cat-question").hide();
+        <?php if (empty($proCustopt) && $_product->getTypeId() != "simple" && $_product->getTypeId() != "virtual") : ?>
+            $(".start-consultation").show();
+        <?php endif; ?>
+
+        $(".clinical-consultation").hide();
+
+
+        $(".swatch-opt").hide();
+
+        $(".steps-questionaire").hide();
+        $(".product-det").hide();
+        $(".configurable").hide();
+        $(function(){
+        // $(".go-to-start-consultation").click(function(event) {
+            // Go to second page
+            if(window.location.href.indexOf("?true") > -1) {
+                // location.hash = "continue_page";
+                // console.log("Hello nilesh")
+                stopTrigger = 1;
+                $("body").addClass('start_consultation');
+                //event.preventDefault();
+                window.scrollTo(0, 0);
+                $(this).hide();
+                $(".fill-cat-question").hide();
+                $("#product-addtocart-button").hide();
+                $("#product-updatecart-button").hide();
+                $("#click-me").hide();
+                $(".start-consultation").show();
+                $(".field.qty").hide();
+                // $(".question-text").hide();
+                $("#itoris_dynamicproductoptions").show();
+                $(".swatch-opt").show();
+                $(".gallery-placeholder").hide();
+                $(".question-text").show();
+                $(".clinical-consultation").show();
+                $(".pre-consultation").hide();
+                $(".please-make-a-selection").hide();
+
+                $(".consultation-section.consultation-image").hide();
+
+                $(".attribute.overview").hide();
+                $(".pharmacyvideo").hide();
+                $(".prod-desprection").show();
+                $("#short-desc").hide();
+                $("#product-view-dots").css("display", "inline");
+                $("#product-view-full-desc").hide();
+                $("#product-view-desc-hh").hide();
+                $(".description").hide();
+                $(".new-additional-info").hide();
+                $(".price-box.price-final_price").show();
+                $(".page-title").hide();
+                $(".backtoconsultation").hide();
+                $(".viewpricing").hide();
+                $(".container").hide();
+                $(".steps-questionaire").hide();
+                $(".consultation-section.question-text").hide();
+                $(".back-to-start-consultation").hide();
+                $(".start-consultation").hide();
+                $(".product-det").show();
+                $(".configurable").show();
+                $(".nearly-there").show()
+
+                var filledCategoryValue = '<?php echo $filledCategoryValue; ?>';
+                console.log(filledCategoryValue);
+                var filledArr = $.parseJSON(filledCategoryValue);
+                console.log(filledArr);
+                if(filledArr){
+                    var filledCategory = filledArr.category_questions_filled;
+                    var filledCategoryId = filledArr.category_id;
+                }
+                // console.log(filledCategory);
+                // console.log(filledCategoryId);
+                
+                var hasCategoryQuestions = '<?php echo $hasCategoryQuestions; ?>';
+                var categoryId = '<?php echo $categoryIds['0']; ?>';
+                if(hasCategoryQuestions=='Yes'){
+                    if(filledCategory == true && filledCategoryId == categoryId){
+                        // console.log("uniquehash available");
+                        // console.log(filledCategoryValue);
+                        // console.log(hasCategoryQuestions);
+                        $(".fill-cat-question").hide();
+                        $("#product-addtocart-button").show();
+                    } else {
+                        // console.log(filledCategoryValue);
+                        // console.log("uniquehash unavailable");
+                        $("#product-addtocart-button").hide();
+                        $('.fill-cat-question').show();
+                    }
+                } else if(hasCategoryQuestions=='No'){
+                    // console.log(hasCategoryQuestions);
+                    $(".fill-cat-question").hide();
+                    $("#product-addtocart-button").show();
+                }
+                else {
+                    // console.log("uniquehash unavailable and doesn't have category questions");
+                    $("#product-addtocart-button").hide();
+                    $('.fill-cat-question').show();
+                }
+            }
+        });
+
+        $(".before-start-consultation").click(function(event) {
+            // Start button or continue - first page
+            location.hash = "";
+            $("body").removeClass('start_consultation');
+            $("body").removeClass('swatches_body');
+            $("#product-addtocart-button").hide();
+            $("#product-updatecart-button").hide();
+            $("#itoris_dynamicproductoptions").hide();
+            $(".price-box.price-final_price").hide();
+            $(".start-consultation").hide();
+            $(".pre-consultation").hide();
+            $(".field.qty").hide();
+            $(".question-text").hide();
+            $(".swatch-opt").hide();
+            $(".gallery-placeholder").show();
+
+
+            $(".attribute.overview").show();
+            $(".pharmacyvideo").show();
+            $(".description").show();
+            $(".new-additional-info").show();
+            $(".page-title").show();
+
+            $(".prod-desprection").show();
+            $("#short-desc").show();
+            $("#product-view-dots").css("display", "inline");
+            $("#product-view-full-desc").hide();
+            $("#product-view-desc-hh").show().text("Read more");
+
+            $(".go-to-start-consultation").show();
+            $("#click-me").show();
+
+            $(".backtoconsultation").show();
+            $(".viewpricing").show();
+            $(".container").show();
+            $(".steps-questionaire").hide();
+
+            <?php if (empty($proCustopt) && $_product->getTypeId() != "simple" && $_product->getTypeId() != "virtual") : ?>
+                $(".start-consultation").show();
+            <?php endif; ?>
+        });
+
+        $(".start-consultation").click(function(event) {
+            if (dataForm.validation('isValid')) {
+                location.hash = "consultation";
+                stopTrigger = 1;
+                $("body").addClass('start_consultation');
+                $("body").addClass('swatches_body');
+                event.preventDefault();
+                window.scrollTo(0, 0);
+                $(".pre-consultation").show();
+                // Display
+                $(".before-start-consultation").hide();
+                $(".gallery-placeholder").hide();
+                $(".clinical-consultation").hide();
+                $(".consultation-section.consultation-image").show();
+                $(".page-title").hide();
+                $(".prod-desprection").hide();
+                $(".field.qty").show();
+                $(".please-make-a-selection").show();
+                //$(".question-text").hide();
+                $(".start-consultation").hide();
+                $("#itoris_dynamicproductoptions").hide();
+                $(".swatch-opt").hide();
+                $(".price-box.price-final_price").hide();
+                $("#product-addtocart-button").show();
+                $("#product-updatecart-button").show(); //show update cart
+
+                <?php if (empty($proCustopt) && $_product->getTypeId() != "simple" && $_product->getTypeId() != "virtual") : ?>
+                    $(".before-start-consultation").addClass("no_custom_option").show();
+                    $(".pre-consultation").hide();
+                <?php endif; ?>
+
+            } else {
+                console.log("Validation not done");
+            }
+        });
+
+        $(".pre-consultation").click(function(event) {
+            event.preventDefault();
+            location.hash = "continue_page";
+            $("body").removeClass('swatches_body');
+            $("#product-addtocart-button").hide();
+            $("#product-updatecart-button").hide(); //hide update cart
+            $(".before-start-consultation").show();
+            $(".steps-questionaire").hide();
+            $(".clinical-consultation").show();
+            $(".gallery-placeholder").hide();
+            $(".page-title").hide();
+            $(".prod-desprection").show();
+            $("#short-desc").hide();
+            $("#product-view-dots").css("display", "inline");
+            $("#product-view-full-desc").hide();
+            $("#product-view-desc-hh").hide().text("Read more");
+            $(".price-box.price-final_price").hide();
+            $(".start-consultation").show();
+            $(".field.qty").hide();
+            $(".question-text").show();
+            $("#itoris_dynamicproductoptions").show();
+            $(".swatch-opt").hide();
+            $(".please-make-a-selection").hide();
+            $(".consultation-section.consultation-image").hide();
+            $(".backtoconsultation").show();
+            $(".viewpricing").show();
+            $(".steps-questionaire").hide();
+            //Header Footer Show
+            $(this).hide();
+        });
+
+        $('#brand').on('change', function() {
+            var selectedValueStrength = $('#medistren :selected').val();
+            var selectedValueBrand = $('#brand :selected').val();
+            var attributsArray = <?php echo json_encode($attributsArray); ?>;
+            data = "<tr><th>Brand</th><th>Medicine Strength</th><th>Size</th><th>Price</th></tr>";
+            $.each(attributsArray, function(index, attribute) {
+                data += "<tr>";
+                $.each(attribute, function(key, value) {
+                    if (selectedValueStrength == 'all' && selectedValueBrand == 'all') {
+                        if (key == attribute['price']) {
+                            data += "<td>" + "£ " + value + "</td>";
+                        } else {
+                            data += "<td>" + value + "</td>";
+                        }
+
+                    } else if (selectedValueStrength == 'all' && selectedValueBrand == attribute['brand']) {
+                        if (key == attribute['price']) {
+                            data += "<td>" + "£ " + value + "</td>";
+                        } else {
+                            data += "<td>" + value + "</td>";
+                        }
+                    } else if (selectedValueStrength == attribute['strength'] && selectedValueBrand == 'all') {
+                        if (key == attribute['price']) {
+                            data += "<td>" + "£ " + value + "</td>";
+                        } else {
+                            data += "<td>" + value + "</td>";
+                        }
+                    } else if (selectedValueStrength == attribute['strength'] && selectedValueBrand == attribute['brand']) {
+                        if (key == attribute['price']) {
+                            data += "<td>" + "£ " + value + "</td>";
+                        } else {
+                            data += "<td>" + value + "</td>";
+                        }
+                    }
+                })
+                data += "</tr>";
+
+            });
+            $('#selected-data').html(data);
+        });
+
+        $('#medistren').on('change', function() {
+            var selectedValueStrength = $('#medistren :selected').val();
+            var selectedValueBrand = $('#brand :selected').val();
+            var attributsArray = <?php echo json_encode($attributsArray); ?>;
+            data = "<tr><th>Brand</th><th>Medicine Strength</th><th>Size</th><th>Price</th></tr>";
+            $.each(attributsArray, function(index, attribute) {
+                data += "<tr>";
+                $.each(attribute, function(key, value) {
+                    if (selectedValueStrength == 'all' && selectedValueBrand == 'all') {
+                        if (key == attribute['price']) {
+                            data += "<td>" + "£ " + value + "</td>";
+                        } else {
+                            data += "<td>" + value + "</td>";
+                        }
+
+                    } else if (selectedValueStrength == 'all' && selectedValueBrand == attribute['brand']) {
+                        if (key == attribute['price']) {
+                            data += "<td>" + "£ " + value + "</td>";
+                        } else {
+                            data += "<td>" + value + "</td>";
+                        }
+                    } else if (selectedValueStrength == attribute['strength'] && selectedValueBrand == 'all') {
+                        if (key == attribute['price']) {
+                            data += "<td>" + "£ " + value + "</td>";
+                        } else {
+                            data += "<td>" + value + "</td>";
+                        }
+                    } else if (selectedValueStrength == attribute['strength'] && selectedValueBrand == attribute['brand']) {
+                        if (key == attribute['price']) {
+                            data += "<td>" + "£ " + value + "</td>";
+                        } else {
+                            data += "<td>" + value + "</td>";
+                        }
+                    }
+                })
+                data += "</tr>";
+
+            });
+            $('#selected-data').html(data);
+        });
+
+    });
+
+    function myHashChange() {
+        require(['jquery'], function($) {
+            let x = location.hash;
+            let bodyElement = $("body");
+            if (x === "#consultation") {
+                history.pushState(null, document.title, location.href);
+                if (!bodyElement.hasClass("start_consultation")) {
+                    $(".start-consultation").trigger('click');
+                }
+            } else if (x === "#continue_page") {
+                history.pushState(null, document.title, location.href);
+                if (!bodyElement.hasClass("swatches_body")) {
+                    $(".go-to-start-consultation").trigger('click');
+                }
+            } else if (x === "" || x === "#") {
+                history.pushState(null, document.title, location.href);
+                $(".before-start-consultation").trigger('click');
+            }
+        });
+    }
+</script> -->
+

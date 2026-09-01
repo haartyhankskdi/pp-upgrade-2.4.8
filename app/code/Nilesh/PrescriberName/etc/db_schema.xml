@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="sales_order">
+		<column comment="Prescriber Name" length="255" name="prescriber_name" nullable="true" xsi:type="varchar"/>
+		<column comment="Order Status" length="255" name="order_status" nullable="true" xsi:type="varchar"/>
+	</table>
+	<!-- <table name="sales_order_grid">
+		<column comment="Prescriber Name" length="255" name="prescriber_name" nullable="true" xsi:type="varchar"/>
+	</table> -->
+	<table comment="nilesh_prescribername_prescribername Table" engine="innodb" name="nilesh_prescribername_prescribername" resource="default">
+		<column comment="Entity Id" identity="true" name="prescribername_id" nullable="false" padding="6" unsigned="true" xsi:type="smallint"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="prescribername_id"/>
+		</constraint>
+		<column length="255" name="name" nullable="true" xsi:type="varchar"/>
+		<column default="0" length="255" name="status" nullable="true" xsi:type="varchar"/>
+		<column name="Comment" nullable="true" xsi:type="text"/>
+	</table>
+</schema>

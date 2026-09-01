@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+	<group id="default">
+		<!-- <job name="haartyhanks_lnapi_mail" instance="Haartyhanks\LNAPI\Cron\Mail" method="execute">
+			<schedule>*/1 * * * *</schedule>
+		</job> -->
+		 <!-- <job name="haartyhanks_lnapi_failed" instance="Haartyhanks\LNAPI\Cron\Failed" method="execute">
+            <schedule>*/1 * * * *</schedule>
+        </job> -->
+	</group>
+</config>

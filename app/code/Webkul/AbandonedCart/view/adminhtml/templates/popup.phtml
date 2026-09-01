@@ -1,0 +1,135 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_AbandonedCart
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php
+    $adminName = strip_tags($block->getAdminNameFromConfig());
+    $adminEmail = strip_tags($block->getEmailFromConfig());
+?>
+<div class="popup_background" id="popup_background" style="display:none">
+    <form method="POST" onsubmit="return validate()" 
+    action="<?= /* @noEscape */ $block->getUrl('abandonedcart/customemail/send');?>">
+        <div class="admin__field _required">
+            <input type="hidden" name="cartId" id="customerId" value=<?= /* @noEscape */ $block->getcartId();?>>
+            <input name="form_key" type="hidden" value="<?= /* @noEscape */ $block->getFormKey() ?>" />
+            <label class="admin__field-label">
+                <span><?= /* @noEscape */ __('Admin Name in Email'); ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input id="adminName" value="<?= /* @noEscape */ $adminName;?>"
+                class="admin__control-text" type="text" name="adminName" maxlength="255" required>
+            </div>
+        </div>
+        <div class="admin__field _required">
+            <label class="admin__field-label">
+                <span ><?= /* @noEscape */ __('Admin Email Id'); ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input id="adminEmail" value="<?= /* @noEscape */$adminEmail;?>"
+                class="admin__control-text" type="email" name="adminEmail" maxlength="255" required>
+            </div>
+        </div>
+        <div class="admin__field _required">
+            <label class="admin__field-label">
+                <span><?= /* @noEscape */ __("Mail body");?></span>
+            </label>
+            <div class="admin__field-control">
+                <textarea name="mailBody" id="mailBody">
+                </textarea>
+            </div>
+            <p style="display:none; color:red; float:left" class="wk-required-warning">
+            <?= /* @noEscape */ __('This is a required field');?>
+        </div>
+        <button type="submit" class="primary" id="submit_mail"><?= /* @noEscape */ __('Send Mail'); ?></button>
+        <button type="default" class="primary" id="reset_popup" style="margin-right:10px">
+            <?= /* @noEscape */ __('Reset'); ?>
+        </button>
+    </form>
+</div>
+<script>
+    function validate() {
+        var mailBody = document.querySelector("#mceu_13");
+        var length = document.querySelector("#mailBody").value.trim().length;
+        if (!length) {
+            mailBody.style.border = "1px solid red";
+            document.querySelector(".wk-required-warning").style.display = "inline-block";
+            return false;
+        }
+        require([
+        'jquery'
+        ], function($){
+            $('body').trigger('processStart');
+        });
+    };
+
+    require([
+    "jquery",
+    "mage/translate",
+    "mage/adminhtml/events",
+    "mage/adminhtml/wysiwyg/tiny_mce/setup"
+    ], function(jQuery){
+        wysiwygDescription = new wysiwygSetup("mailBody", {
+            "width":"100%",
+            "height":"200px",
+            "plugins":[{"name":"image"}],
+            "tinymce4":{
+                "toolbar":"formatselect | bold italic underline | alignleft aligncenter alignright | "
+                +"bullist numlist | link table charmap",
+                "plugins":"advlist autolink lists link charmap media noneditable table"+
+                " contextmenu paste code help table",
+            }
+        });
+        wysiwygDescription.setup("exact");
+    });
+</script>
+<script>
+require([
+    'jquery',
+    'Magento_Ui/js/modal/modal'
+    ],
+    function($,modal) {
+        var options = {
+            type: 'popup',
+            responsive: true,
+            innerScroll: true,
+            title: '<?= /* @noEscape */ __('Send Custom Mail'); ?>',
+            required: true
+        };
+        var popup = modal(options, $('#popup_background'));
+        $('#abandonedCartMail').click(function () {
+            $('#popup_background').modal('openModal');
+            $("#popup_background").show();
+        });
+
+        var adminName = "<?= /* @noEscape */ $adminName?>";
+        var adminEmail = "<?= /* @noEscape */ $adminEmail?>";
+        $('#reset_popup').click(function (e) {
+            e.preventDefault();
+            $('#adminName').val('');
+            $('#adminEmail').val('');
+        });
+    }
+);
+</script>
+<style>
+#mailBody_tbl{
+    width:100% !important;
+}
+.required > .admin__field-label > span:after, ._required > .admin__field-label > span:after {
+    position:inherit !important;
+}
+.modal-footer{
+    display:none
+}
+.primary{
+    margin-top:10px;
+    float: right;
+}
+</style>

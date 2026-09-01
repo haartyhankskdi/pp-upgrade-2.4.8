@@ -1,0 +1,185 @@
+<?php
+
+$gQArray = $block->getCustomerData();
+$gq = @$gQArray[0];
+
+?>
+<div id="custom-popup-modal" style="display:none">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="general-question-top">
+                <h2>General Medical Health Questions</h2>
+                <p>Please help us know if there have been any recent changes to your general health. Update the questionnaire with any new information by clicking 'Edit below details' button or simply save the scurrent information and proceed.</p>
+                <div class="actions-toolbar">
+                    <div class="primary save-proceed-btn">
+                        <button type="submit" id="custom-form-btn" class="action submit primary" title="<?php echo __('Save & Proceed') ?>"><span><?php echo __('Save & Proceed') ?></span></button>
+                    </div>
+                    <div class="edit-details">
+                        <button class="edit-below-details" id="edit"><?= __('Edit below details') ?></button>
+                    </div>
+                </div>
+
+                <div class="trustpoilet-section">
+                    <div class="dialog"></div>
+                    <div class="trustpoilet">
+                        <div class="block-2">
+                            <!-- TrustBox script -->
+                            <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+                            <!-- End TrustBox script -->
+                            <!-- TrustBox widget - Mini -->
+                            <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8807dec7e10d38f59f32" data-businessunit-id="5b55f778afee7a0001b505dc" data-style-height="150px" data-style-width="100%" data-theme="light">
+                                <a href="https://uk.trustpilot.com/review/pharmacyplanet.co.uk" target="_blank" rel="noopener">Trustpilot</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="formsection">
+                <form action="<?php echo $block->getBaseUrl(); ?>customer/general/post" class="form" id="custom-form" method="post" autocomplete="off" enctype="multipart/form-data">
+                    <input type="hidden" name="gq_page" value="osc">
+                    <input type="hidden" name="gq_id" value="<?php echo @$gq['generalquestions_id'];  ?>">
+                    <input type="hidden" name="referer" value="<?php echo $block->getReferalUrl(); ?>">
+                    <!-- <fieldset class="fieldset myaccount-general-question grey-field" id="fieldset-first"> -->
+                    <fieldset class="fieldset myaccount-general-question grey-field" style="pointer-events: none;" id="fieldset-first">
+                        <?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setGq($gq)->setTemplate("Nilesh_GeneralQuestions::general/fields.phtml")->toHtml() ?>
+                    </fieldset>
+                    <div class="actions-toolbar">
+                        <div class="primary save-proceed-btn">
+                            <button type="submit" id="custom-form-btn" class="action submit primary" title="<?php echo __('Save & Proceed') ?>"><span><?php echo __('Save & Proceed') ?></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/modal',
+        'mage/mage'
+    ], function($, modal) {
+
+        var dataForm = $('#custom-form');
+        dataForm.mage('validation', {
+            ignore: ':hidden'
+        });
+
+        dataForm.submit(function(e) {
+            if (!dataForm.validation('isValid')) {
+                e.preventDefault();
+                // alert("Validate"); 
+            }
+        });
+
+        <?php if ($block->comingFromRegister()) : ?>
+            $("body").addClass("woolaa");
+        <?php endif; ?>
+
+        var options = {
+            type: 'popup',
+            responsive: true,
+            innerScroll: true,
+            modalClass: 'custom-popup-modal',
+            buttons: []
+        };
+        var popup = modal(options, $('#custom-popup-modal'));
+
+        $(document).ready(function() {
+            //$('#custom-popup-modal').modal('openModal');
+
+            var isCheckedYes = $('#suffer_diagnosed-yes').is(':checked');
+            var isCheckedNo = $('#suffer_diagnosed-no').is(':checked');
+            if (isCheckedYes == false && isCheckedNo == false) {
+                $('#edit').hide();
+                $('.myaccount-general-question').css('pointer-events', 'auto');
+            };
+
+        });
+        $("#edit").click(function(event) {
+            $('.myaccount-general-question').css('pointer-events', 'auto'); // Element(s) are now enabled.
+            $('.edit-below-details').css('background', '#C5C5C5');
+            // $('fieldset:first').addClass('grey-field')
+            $('#fieldset-first').removeClass('grey-field');
+
+        });
+
+
+
+        $(document).on('click', '#custom-form-btn', function(e) {
+            var ajxurl = $('#custom-form').attr('action');
+            var formdata = new FormData(jQuery('#custom-form')[0]);
+            $.ajax({
+                url: ajxurl,
+                type: "POST",
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formdata,
+                showLoader: true,
+                success: function(data) {
+                    // location.reload();
+                    // alert("Save");
+                    console.log("success");
+                    $('#custom-popup-modal').modal('closeModal');
+                }
+            });
+            e.preventDefault();
+        });
+    });
+</script>
+
+<!-- 
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/modal',
+        'mage/mage'
+    ], function($, modal) {
+        
+
+    let arr = 
+            [
+                  {
+                    default: 'http://magento-1584919-6629151.cloudwaysapps.com/mounjaro.html',
+                    weightloss: 'http://magento-1584919-6629151.cloudwaysapps.com/weightloss/buy-mounjaro.html'
+                  },
+                  {
+                    default: 'http://magento-1584919-6629151.cloudwaysapps.com/orlistat-xenical-capsules.html',
+                    weightloss: 'http://magento-1584919-6629151.cloudwaysapps.com/weightloss/buy-orlistat-xenical-capsules.html'
+                  },
+                  {
+                    default: 'http://magento-1584919-6629151.cloudwaysapps.com/wegovy.html',
+                    weightloss: 'http://magento-1584919-6629151.cloudwaysapps.com/weightloss/buy-wegovy.html'
+                  },
+                  {
+                    default: 'http://magento-1584919-6629151.cloudwaysapps.com/mysimba.html',
+                    weightloss: 'http://magento-1584919-6629151.cloudwaysapps.com/weightloss/buy-mysimba.html'
+                  }
+            ];
+
+    $(document).ready(function() {
+        function updateUrl(){
+                $('.product-item-name-block a').each(function() {
+                let $link = $(this);
+                let href = $link.attr('href');
+
+                arr.forEach(function(item) {
+                    if (href === item.weightloss) {
+                        $link.attr('href', item.default);
+                        console.log(`🔗 Updated: ${href} → ${item.default}`);
+                    }
+                });
+            });
+
+        }
+
+    setInterval(updateUrl, 5000);        
+    });
+
+
+
+    })
+
+</script> -->

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-right" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Contact Our UK Pharmacy Team – Help, Orders and Enquiries</title>
+        <meta name="description" content=" Contact Pharmacy Planet for help with your order, product enquiries, or prescription support. Fast response from our trusted UK pharmacy. Get in touch today." />
+    </head>
+    <body>
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Home</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Home</item>
+                    <item name="label" xsi:type="string">Home</item>
+                    <item name="link" xsi:type="string">/</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Contact Us</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Contact Us</item>
+                    <item name="label" xsi:type="string">Contact Us</item>
+                </argument>
+            </action>
+        </referenceBlock>
+
+        <referenceContainer name="page.wrapper">
+            <!--<block class="Magento\Cms\Block\Block" name="contact-us" before="header.container">
+               <arguments>
+                    <argument name="block_id" xsi:type="string">contact-us</argument>
+               </arguments>
+            </block> -->
+             <block class="Magento\Cms\Block\Block" name="maps" before="page_bottom_container">
+                 <arguments>
+                      <argument name="block_id" xsi:type="string">maps</argument>
+                 </arguments>
+             </block>
+        </referenceContainer>      
+        <referenceContainer name="col.right.sidebar">
+            <block class="Magento\Contact\Block\ContactForm" name="contactForm" template="Magento_Contact::form.phtml">
+                <container name="form.additional.info" label="Form Additional Info"/>
+            </block>            
+        </referenceContainer>
+        <referenceContainer name="content">
+            <container name="contact.info" as="contact_info" htmlTag="div" htmlClass="contact-info">
+                <block class="Magento\Cms\Block\Block" name="contact-info">
+                   <arguments>
+                        <argument name="block_id" xsi:type="string">contact-info</argument>
+                   </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

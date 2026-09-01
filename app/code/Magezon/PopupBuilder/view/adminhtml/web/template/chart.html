@@ -1,0 +1,26 @@
+<div class="mgzreport-chart-wrapper" visible="visible">
+	<div data-role="spinner" class="admin__data-grid-loading-mask" visible="source&&source.loading()">
+		<div class="spinner">
+			<span/><span/><span/><span/><span/><span/><span/><span/>
+		</div>
+	</div>
+	<div class="mgzreport-chart-header">
+		<div class="mgzreport-views">
+			<span class="one" text="totalViews"></span>
+			<span class="two" data-bind="i18n: 'views'"></span>
+		</div>
+		<div class="mgzreport-clicks">
+			<span class="one" text="totalClicks"></span>
+			<span class="two" data-bind="i18n: 'clicks'"></span>
+		</div>
+		<div class="mgzreport-closes">
+			<span class="one" text="totalCloses"></span>
+			<span class="two" data-bind="i18n: 'closes'"></span>
+		</div>
+		<div class="mgzreport-conversion">
+			<span class="one" text="conversion"></span>
+			<span class="two" data-bind="i18n: 'conversion'"></span>
+		</div>
+	</div>
+	<canvas id="mgzreport-chart"></canvas>
+</div>

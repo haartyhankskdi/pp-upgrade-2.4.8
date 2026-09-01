@@ -1,0 +1,172 @@
+<?php
+
+/**
+ * Copyright © no All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ * @var \Magento\Backend\Block\Template $block
+ * @var \Magento\Framework\App\Request\Http $request
+ */
+
+use Magento\Framework\App\ObjectManager;
+
+$objectManager = ObjectManager::getInstance();
+$request       = $objectManager->get(\Magento\Framework\App\Request\Http::class);
+
+// ── Load Order ──────────────────────────────────────────────────────────────
+$orderId = (int) $request->getParam('order_id');
+
+try {
+    /** @var \Magento\Sales\Api\Data\OrderInterface $order */
+    $order = $objectManager->create(\Magento\Sales\Api\OrderRepositoryInterface::class)->get($orderId);
+    $incrementId = $order->getIncrementId();
+} catch (\Exception $e) {
+    echo '<p style="color:red;">Error loading order: ' . $block->escapeHtml($e->getMessage()) . '</p>';
+    return;
+}
+
+// ── Load Body Verification Model ────────────────────────────────────────────
+/** @var \Kdi\ImageUpload\Model\Entity $verificationModel */
+$verificationModel = $objectManager->create(\Kdi\ImageUpload\Model\Entity::class)
+    ->load($incrementId, 'order_id');
+
+// ── Build Email Controller URL (passes only order_id — controller loads the rest) ──
+
+
+$emailUrl = $block->getUrl(
+    'kdi_imageupload/send/mail',
+    [
+        '_query' => [
+            'order_id' => $order->getEntityId(),
+            'form_key' => $request->getParam('key')
+        ]
+    ]
+);
+
+// ── Media base URL ───────────────────────────────────────────────────────────
+$mediaBaseUrl = $block->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+?>
+
+<style>
+    #modal-promo,
+    #modal-promo-opener {
+        display: none;
+    }
+
+    #modal-promo {
+        width: 400px;
+    }
+
+    .kdi-btn {
+        background-color: #e3e3e3;
+        padding: 7px 20px;
+        display: inline-block;
+        margin-top: 10px;
+        color: green;
+        border: 1px solid #adadad;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .kdi-btn:hover {
+        background-color: #d0d0d0;
+    }
+
+    .outer_shell {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .Image {
+        padding: 25px;
+    }
+
+    .Image img {
+        height: 300px;
+        width: 400px;
+        object-fit: cover;
+    }
+</style>
+
+<?php if ($verificationModel->getId()) : ?>
+    <!-- Image Verification Modal Opener -->
+    <a href="#" id="modal-promo-opener" class="kdi-btn">
+        <?= $block->escapeHtml(__('Click for Image Verification')) ?>
+    </a>
+<?php endif; ?>
+
+<!-- Send Email Button — calls controller with order_id only -->
+<a href="<?= $block->escapeUrl($emailUrl) ?>" class="kdi-btn" id="kdi-send-email-btn">
+    <?= $block->escapeHtml(__('Send Calendly Booking Appointment Email')) ?>
+</a>
+
+<?php if ($verificationModel->getId()) : ?>
+    <!-- Modal Content -->
+    <div id="modal-promo">
+        <div class="modal-wrapper">
+            <h2><?= $block->escapeHtml(__('Image Verification')) ?></h2>
+
+            <div class="outer_shell">
+
+                <?php if ($verificationModel->getFullImage()) : ?>
+                    <div class="Image">
+                        <h3><?= $block->escapeHtml(__('Image 1 — Side View')) ?></h3>
+                        <a href="<?= $block->escapeUrl($mediaBaseUrl . $verificationModel->getFullImage()) ?>" target="_blank">
+                            <img src="<?= $block->escapeUrl($mediaBaseUrl . $verificationModel->getFullImage()) ?>"
+                                alt="<?= $block->escapeHtmlAttr(__('Side view of body')) ?>">
+                        </a>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($verificationModel->getFullImage2()) : ?>
+                    <div class="Image">
+                        <h3><?= $block->escapeHtml(__('Image 2 — Front View')) ?></h3>
+                        <a href="<?= $block->escapeUrl($mediaBaseUrl . $verificationModel->getFullImage2()) ?>" target="_blank">
+                            <img src="<?= $block->escapeUrl($mediaBaseUrl . $verificationModel->getFullImage2()) ?>"
+                                alt="<?= $block->escapeHtmlAttr(__('Front view of body')) ?>">
+                        </a>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($verificationModel->getIdentityImage()) : ?>
+                    <div class="Image">
+                        <h3><?= $block->escapeHtml(__('Image 3 — ID Card')) ?></h3>
+                        <a href="<?= $block->escapeUrl($mediaBaseUrl . $verificationModel->getIdentityImage()) ?>" target="_blank">
+                            <img src="<?= $block->escapeUrl($mediaBaseUrl . $verificationModel->getIdentityImage()) ?>"
+                                alt="<?= $block->escapeHtmlAttr(__('ID Card')) ?>">
+                        </a>
+                    </div>
+                <?php endif; ?>
+
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
+<script type="text/javascript">
+    require(['jquery', 'Magento_Ui/js/modal/modal'], function($, modal) {
+
+        var $modal = $('#modal-promo');
+        var $opener = $('#modal-promo-opener');
+
+        if ($modal.length && $opener.length) {
+            modal({
+                type: 'popup',
+                responsive: true,
+                buttons: []
+            }, $modal);
+
+            $opener.show().on('click', function(e) {
+                e.preventDefault();
+                $modal.modal('openModal');
+            });
+        }
+
+        // Confirm before sending email
+        $('#kdi-send-email-btn').on('click', function(e) {
+            if (!confirm('<?= $block->escapeJs(__('Send Booking Appointment email to the customer?')) ?>')) {
+                e.preventDefault();
+            }
+        });
+    });
+</script>

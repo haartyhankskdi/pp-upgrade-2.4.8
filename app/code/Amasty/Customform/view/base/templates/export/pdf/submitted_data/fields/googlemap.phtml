@@ -1,0 +1,35 @@
+<?php
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Custom Form Base for Magento 2
+*/
+?>
+<?php
+/**
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var Googlemap $viewModel
+ */
+
+use Amasty\Customform\ViewModel\Export\Pdf\SubmittedData\Fields\Googlemap;
+
+$viewModel = $block->getViewModel();
+$googleMapData = $viewModel->getFieldValue();
+?>
+
+<div class="amform-google-map">
+    <?php if (!empty($googleMapData[Googlemap::ADDRESS])): ?>
+        <p class="amform-text"><?= $escaper->escapeHtml($googleMapData[Googlemap::ADDRESS]) ?></p>
+    <?php endif; ?>
+    <?php if (!empty($googleMapData[Googlemap::ADDRESS]) && !empty($googleMapData[Googlemap::IMAGE])): ?>
+        <br/>
+    <?php endif; ?>
+    <?php if (!empty($googleMapData[Googlemap::IMAGE])): ?>
+        <div class="amform-image-wrap">
+            <img class="amform-image"
+                 src="<?= $escaper->escapeHtmlAttr($googleMapData[Googlemap::IMAGE])?>"
+                 alt="<?= $escaper->escapeHtmlAttr(__('Google map')) ?>">
+        </div>
+    <?php endif; ?>
+</div>

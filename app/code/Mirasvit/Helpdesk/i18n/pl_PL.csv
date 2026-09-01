@@ -1,0 +1,719 @@
+Help Desk Tickets (%1),Zgłoszeń Helpdesk (%1)
+Departments,Działy
+Add New Department,Dodaj Nowy Dział
+Custom Fields,Pola Niestandardowe
+Add New Field,Dodaj Nowe Pole
+Gateways,Bramki
+Add New Gateway,Dodaj Nową Bramkę
+Tickets,Zgłoszenia
+Priorities,Priorytety
+Statuses,Statusy
+Quick Responses,Szybkie Odpowiedzi
+SPAM patterns,Wzorce SPAM
+Permissions,Uprawnienia
+Workflow Rules,Automatyzacja Procesów
+Satisfaction Survey Results,Wyniki Badania Zadowolenia
+Working Hours,Godziny Pracy
+Reports,Raporty
+Refresh Statistics,Odśwież Statystyki
+Settings,Ustawienia
+Spam Filter Patterns,Wzorce Filtra Antyspamowego
+Add New Pattern,Dodaj Nowy Szablon
+Add New Permission,Dodaj Nowe Uprawnienia
+Add New Priority,Dodaj Nowy Priorytet
+Add New Rule,Dodaj Nową Regułę
+Apply the rule only if the following conditions are met:,Zastosuj regułę jeżeli spełnione zostały następujące warunki:
+Help Desk Tickets,Zgłoszenia Helpdesk
+Create a ticket for this order,Utwórz zgłoszenie dla tego zamówienia
+Satisfaction Survey,Badanie Zadowolenia
+Schedule,Harmonogram
+Add New Schedule,Dodaj Nowy Harmonogram
+General Information,Ogólne Informacje
+Working days/hours,Dni/godziny robocze
+Spam Folder,Folder Spam
+Add New Status,Dodaj Nowy Status
+Add New Template,Dodaj Nowy Szablon
+Create New Ticket,Utwórz Nowe Zgłoszenie
+Previous Ticket,Poprzednie Zgłoszenie
+Next Ticket,Następne Zgłoszenie
+Convert to RMA,Konwertuj na RMA
+Save,Zapisz
+Save & Edit,Zapisz i edytuj
+To Archive,Do Archiwum
+To Spam,Do Spamu
+Delete,Usuń
+Are you sure you want to do this?,Czy na pewno chcesz wykonać tę czynność?
+To Inbox,Do skrzynki odbiorczej
+Additional Information,Dodatkowe Informacje
+Subject,Temat
+Store View,Widok Sklepu
+Channel,Kanał
+open page,otwórz stronę
+External Link,Zewnętrzne łącze
+Tags,Tagi
+comma-separated list,wartości oddzielone przecinkami
+Customer Note,Uwaga Klienta
+This field is shared for all of this customer's tickets.,To pole jest wspólne we wszystkich zgłoszeniach klienta.
+Follow Up,Przypomnienia
+Period,Okres
+Period Value,Wartość okresu
+Execute At,Wykonaj w
+Send Reminder,Wyślij przypomnienie
+Set Status To,Ustaw status na
+Set Priority To,Ustaw priorytet na
+Set Owner To,Przydziel do
+Unassigned,Nieprzypisany
+Template,Szablon
+Loading...,Ładowanie...
+"%1, %2","%1, %2"
+Select a store,Wybierz sklep
+Store,Sklep
+General,Główny
+Additional,Dodatkowy
+Other Tickets (%1),Pozostałe zgłoszenia (%1)
+ID,ID
+Customer Name,Nazwa/Imię klienta
+Last Replier,Ostatni odpowiadający
+Owner,Właściciel
+Department,Dział
+Status,Status
+Priority,Priorytet
+Replies,Odpowiedzi
+Email was sent,E-mail został wysłany
+Created At,Utworzono o
+Updated At,Zaktualizowano o
+Last Reply At,Ostatnia odpowiedź o
+Last Activity,Ostatnia aktywność o
+Action,Czynność
+View,Widok
+Change Status,Zmień status
+Change Owner,Zmień właściciela
+Merge,Połącz
+Are you sure you want to proceed? This action is not reversible.,Na pewno chcesz kontynować? Ta czynność jest nieodwracalna.
+Archive,Archiwum
+Are you sure?,Czy jesteś pewny?
+Mark as spam,Oznacz jako spam
+Add Ticket to the Customer,Przypisz zgłoszenie do klienta
+Add Ticket to the Order,Przypisz zgłoszenie do zamówienia
+Help Desk,Helpdesk
+Help Desk Settings,Ustawienia Helpdesku
+Signature for Emails,Podpis wiadomości e-mail
+Thank you,Dziękujemy
+Processing Rate,Przetwarzanie oceny
+Create Ticket,Utwórz Zgłoszenie
+'[' . . '] ' .,'[' . . '] ' .
+--/--/--,--/--/--
+unlocked,odblokowany
+locked,zablokowany
+New Department,Nowy dział
+Department  Manager,Menadżer działu
+Department Manager,Menadżer działu
+Add Department ,Dodaj dział
+Add Department,Dodaj dział
+Department was successfully deleted,Dział został pomyślnie usunięty
+Edit Department '%1',Edytuj dział '%1'
+Edit Department ,Edytuj dział
+The Department does not exist.,Dział nie istnieje
+Department was successfully saved,Dział został pomyślnie zapisany
+Unable to find Department to save,Dział nie może być zapisany. Nie mozna znaleźć dzialu.
+Wrong request.,Błędne żądanie
+This ticket does not exist anymore.,Zgłoszenie już nie istnieje
+New Field,Nowe pole
+Field  Manager,Menadżer pola
+Field Manager,Menadżer pola
+Add Field ,Dodaj pole
+Add Field,Dodaj pole
+Field was successfully deleted,Pole zostało pomyślnie usunięte
+Edit Field '%1',Edytuj pole '%1'
+Edit Field ,Edytuj pole
+The Field does not exist.,Pole nie istnieje
+Field with the same code already exists,Pole o takim kodzie już istnieje
+Field was successfully saved,Pole zostało pomyślnie zapisane
+Unable to find Field to save,Pole nie może być zapisane. Nie mozna znaleźć Pola.
+"Please, ask your hosting provider to enable the IMAP extension in PHP configuration of your server. Otherwise, helpdesk will not be able to fetch emails.",Poproś swojego dostawcę usług hostingowych o włączenie rozszerzenia IMAP w konfiguracji PHP serwera. W przeciwnym razie helpdesk nie będzie mógł pobierać wiadomości e-mail.
+New Gateway,Nowa bramka
+Gateway  Manager,Menadżer bramki
+Gateway Manager,Menadżer bramki
+Add Gateway ,Dodaj bramkę
+Add Gateway,Dodaj bramkę
+done,zrobione
+Gateway was successfully deleted,Bramka została pomyślnie usunięta
+Edit Gateway '%1',Edytuj bramkę '%1'
+Edit Gateway ,Edytuj bramkę
+The Gateway does not exist.,Bramka nie isnieje
+Gateway was successfully saved. Connection has been established.,Bramka została pomyślnie zapisana. Połączenie zostało nawiązane
+Unable to find Gateway to save,Bramka nie może być zapisana. Nie mozna znaleźć Bramki.
+A total of %1 record(s) have been updated.,Łącznie %1 wpisów zostało zaktualizowanych
+A total of %1 record(s) have been deleted.,Łącznie %1 wpisów zostało usuniętych
+New Pattern,Nowy wzorzec
+Pattern  Manager,Menadżer wzorców
+Pattern Manager,Menadżer wzorców
+Add Pattern ,Dodaj wzorzec
+Add Pattern,Dodaj wzorzec
+Pattern was successfully deleted,Wzorzec został pomyślnie usunięty
+Edit Pattern '%1',Edytuj wzorzec '%1'
+Edit Pattern ,Edytuj wzorzec
+The Pattern does not exist.,Wzorzec nie istnieje
+Pattern was successfully saved,Wzorzec został pomyślnie zapisany
+You have written an incorrect pattern,Został wprowadzony nieprawidłowy wzorzec
+Unable to find Pattern to save,Wzorzec nie może być zapisany. Nie mozna znaleźć wzorca.
+New Permission,Nowe uprawnienie
+Permission  Manager,Menadżer uprawnień
+Permission Manager,Menadżer uprawnień
+Add Permission ,Dodaj uprawnienie
+Add Permission,Dodaj uprawnienie
+Permission was successfully deleted,Uprawnienie zostało pomyślnie usunięte
+Edit Permission,Edytuj uprawnienie
+Edit Permission ,Edytuj uprawnienie
+Permission does not exist.,Uprawnienie nie isnieje
+Permission was successfully saved,Uprawnienie zostało pomyślnie zapisane
+Unable to find Permission to save,Uprawnienie nie może być zapisane. Nie mozna znaleźć uprawnienia.
+New Priority,Nowy priorytet
+Priority  Manager,Menadżer priorytetów
+Priority Manager,Menadżer priorytetów
+Add Priority ,Dodaj priorytet
+Add Priority,Dodaj priorytet
+Priority was successfully deleted,Priorytet został pomyślnie usunięty
+Edit Priority '%1',Edytuj priorytet  '%1'
+Edit Priority ,Edytuj priorytet
+The Priority does not exist.,Priorytet nie istnieje
+Priority was successfully saved,Priorytet został pomyślnie zapisany
+Unable to find Priority to save,Priorytet nie może być zapisany. Nie mozna znaleźć priorytetu.
+Statistics was successfully updated,Statystyki zostały pomyślnie zaktualizowane
+Helpdesk,Helpdesk
+New Rule,Nowa reguła
+Rule  Manager,Menadżer reguł
+Rule Manager,Menadżer reguł
+Add Rule ,Dodaj regułę
+Add Rule,Dodaj regułę
+Rule was successfully deleted,Reguła została pomyślnie usunięta
+Edit Rule '%1',Edytuj regułę '%1'
+Edit Rule ,Edytuj regułę
+The Rule does not exist.,Reguła nie istnieje
+Rule was successfully saved,Reguła została pomyślnie zapisana
+Unable to find Rule to save,Reguła nie może być zapisana. Nie mozna znaleźć reguły.
+New Satisfaction,Nowa ocena
+Satisfaction  Manager,Menadżer ocen
+Satisfaction Manager,Menadżer ocen
+Add Satisfaction ,Dodaj ocenę
+Add Satisfaction,Dodaj ocenę
+Satisfaction was successfully deleted,Ocena została pomyśłnie usunięta
+Edit Satisfaction '%1',Edytuj ocenę '%1'
+Edit Satisfaction ,Edytuj ocenę
+The Satisfaction does not exist.,Ocena nie istnieje
+Satisfaction was successfully saved,Ocena została pomyśłnie zapisana
+Unable to find Satisfaction to save,Ocena nie może być zapisana. Nie mozna znaleźć oceny.
+New Schedule,Nowy harmonogram
+Schedule Manager,Menadżer harmonogramu
+Add Schedule ,Dodaj harmonogram
+Add Schedule,Dodaj harmonogram
+"You can not delete this schedule, because there are gateways using it.
+                         Please, change gateways settings",Nie możesz usunąć tego harmonogramu ponieważ używają go bramki. Proszę zmienić ustawienia bramek.
+Schedule was successfully deleted,Harmonogram został pomyślnie usunięty
+Edit Schedule '%1',Edytuj harmonogram '%1'
+Edit Schedule ,Edytuj harmonogram
+The Schedule does not exist.,Harmonogram nie istnieje.
+Schedules,Harmonogramy
+Working days/hours is a required field.,Dni/godziny robocze to pole wymagane
+Schedule was successfully saved,Harmonogram został pomyślnie zapisany
+Unable to find a Schedule to save,Harmonogram nie może być zapisany. Nie mozna znaleźć harmonogramu.
+Ticket was successfully moved to the Tickets folder,Zgłoszenie zostało pomyślnie przeniesione do folderu Zgłoszenia
+Edit Spam '%1',Edytuj spam '%1'
+Edit Spam ,Edytuj spam
+The spam does not exist.,Spam nie istnieje
+Please select spam(s),Proszę wybrać spam(y)
+Total of %1 record(s) were successfully moved to the Tickets folder,Łącznie %1 zgłoszeń zostało przeniesionych do folderu Zgłoszenia
+Total of %1 record(s) were successfully deleted,Łącznie %1 zgłoszeń zostało usunięte
+New Status,Nowy status
+Status  Manager,Menadżer Statusu
+Status Manager,Menadżer Statusu
+Add Status ,Dodaj status
+Add Status,Dodaj status
+Status was successfully deleted,Status został pomyślnie usunięty
+Edit Status '%1',Edytuj status '%1'
+Edit Status ,Edytuj status
+The Status does not exist.,Status nie istnieje
+Status was successfully saved,Status został pomyślnie zapisany
+Unable to find a Status to save,Status nie może być zapisany. Nie mozna znaleźć Statusu.
+New Template,Nowy szablon
+Template  Manager,Menadżer szablonów
+Template Manager,Menadżer szablonów
+Add Template ,Dodaj szablon
+Add Template,Dodaj szablon
+Template was successfully deleted,Szablon został pomyślnie usunięty
+Edit Template '%1',Edytuj szablon '%1'
+Edit Template ,Edytuj szablon
+The Template does not exist.,Szablon nie istnieje
+Template was successfully saved,Szablon został pomyślnie zapisany
+Unable to find a Template to save,Szablon nie może być zapisany. Nie mozna znaleźć szablonu.
+New Ticket,Nowe zgloszenie
+Ticket Manager,Menadżer zgłoszeń
+Add Ticket ,Dodaj zgłoszenie
+Add Ticket,Dodaj zgłoszenie
+Ticket was moved to Archive,Zgłoszenie zostało zarchiwizowane
+The file does not exist or has been deleted.,Plik nie istnieje lub został usunięty
+Ticket was successfully deleted,Zgłoszenie zostało pomyślnie usunięte
+Edit Ticket ,Edytuj zgłoszenie
+The ticket does not exist.,Zgłoszenie nie istnieje
+Total of %1 record(s) were moved to Archive.,Łącznie %1 wpisów zostało pomyślnie zarchiwizowanych
+Please select ticket(s),Proszę wybrać Zgłoszenie(-a)
+Total of %1 record(s) were moved to the Spam folder,Łącznie %1 wpisów zostało przeniesionych do folderu Spam
+Total of %1 record(s) were successfully updated,Łącznie %1 wpisów zostało pomyślnie zaktualizowanych
+Total of %1 record(s) Assignee was changed.,Łącznie %1 odbiorców wpisów zostało zmienionych
+You don't have permission for this operation.,Nie masz uprawnień do tej operacji
+Total of %1 record(s) were moved to the Inbox folder.,Łącznie %1 wpisów zostało przeniesionych do skrzynki odbiorczej
+Please select 2 or more tickets,Proszę wybrać 2 lub więcej zgłoszeń
+Total of %1 record(s) were successfully merged,Łącznie %1 wpisów zostało pomyślnie połączonych
+Total of %1 record(s) were moved to the Spam folder.,Łącznie %1 wpisów zostało przeniesionych do folderu Spam
+Ticket was moved to the Inbox,Zgłoszenie zostało przeniesione do skrzynki odbiorczej
+Message was successfully sent,Wiadomość została pomyślnie wysłana
+Ticket was successfully updated,Zgłoszenie zostało pomyślnie zaktualizowane
+Something went wrong while saving the ticket.,Coś poszło nie tak podczas zapisywania zgłoszenia
+Unable to find ticket to save,Zgłoszenie nie może być zapisane. Nie mozna znaleźć zgłoszenia.
+Ticket was moved to the Spam folder,Zgłoszenie zostało przeniesione do folderu Spam
+Your request was successfully submitted. You should receive a confirmation email shortly.,Twoja prośba została pomyślnie przesłana. Wkrótce powinieneś otrzymać e-mail z potwierdzeniem.
+"Field ""Name"" is required","Pole ""Nazwa/Imię"" jest wymagane"
+"Field ""Comment"" is required","Pole ""Komentarz"" jest wymagane"
+Incorrect email format.,Nieprawidłowy format e-mail.
+Something went wrong,Coś poszło nie tak
+Telephone,Telefon
+Your inquiry was submitted and will be responded to as soon as possible. Thank you for contacting us.,"Twoje zapytanie zostało przesłane i odpowiemy na nie tak szybko, jak to możliwe. Dziękujemy za skontaktowanie się z nami."
+"Sorry, for technical reasons you can't submit your query from this browser. Please try using a different browser or computer.","Przepraszamy, z powodów technicznych nie możesz przesłać zapytania z tej przeglądarki. Spróbuj użyć innej przeglądarki lub komputera."
+"Unable to submit your request. Please, try again later",Nie można przesłać Twojej prośby. Spróbuj ponownie później
+Page not found.,Strona nie znaleziona.
+Your message was successfuly posted,Twoja wiadomość została pomyślnie wysłana
+Your ticket was successfuly posted,Twoje zgłoszenie zostało pomyślnie wysłane
+Ticket was successfuly closed,Zgłoszenie zostało pomyślnie zamknięte
+Can't upload file %1 . Max allowed upload size is %2 MB.,Nie można przesłać pliku  %1 . Maksymalny dopuszczalny rozmiar wynosi %2 MB.
+Allows only this file types: %1,Dopuszczalne są tylko następujące rozszerzenia plików: %1
+%1 Help Desk,%1 Helpdesk
+You have %1 unread notifications.,Masz %1 nieodczytanych powiadomień
+"Ticket ""%1"" was created.","Zgłoszenie ""%1"" zostało utworzone"
+"New message was added to the ticket ""%1""","Nowa wiadomość została dodana do zgłoszenia ""%1"""
+"Ticket ""%1"" was assigned to you.","Zgłoszenie ""%1"" zostało do Ciebie przypisane"
+%1 is editing now,%1 teraz edytuje
+%1 has opened this ticket %2,%1 otworzył to zgłoszenie %2
+%1 have opened this ticket %2,%1 otworzyli to zgłoszenie %2
+please type your reply above this line,proszę wpisać odpowiedź powyżej tej linii
+"Can't fetch.
+                Please, ask your hosting provider to enable the IMAP extension in PHP configuration of your server.","Nie można pobrać.
+                Poproś swojego dostawcę usług hostingowych o włączenie rozszerzenia IMAP w konfiguracji PHP serwera."
+Yes,Tak
+No,Nie
+Unable to define email sender,Nie można zidentyfikować nadawcy e-mail
+Rule '%1',Reguła '%1'
+Follow Up actions,Przypomnienie
+%1: %2 => %3,%1: %2 => %3
+%1: %2,%1: %2
+Ticket was merged to: %1,Zgłoszenie zostało dołączone do: %1
+Ticket was merged with: %1,Zgłoszenie zostało połączone z: %1
+Message added,Dodano wiadomość
+Internal note added,Dodano notatkę wewnętrzną
+Third party message added,Dodano wiadomość od osoby trzeciej
+Private third party message added,Dodano prywatną wiadomość od osoby trzeciej
+Folder,Folder
+Order,Zamówienie
+User,Użytkownik
+Customer,Klient
+Customer Email,E-mail klienta
+Cc,DW
+Bcc,UDW
+-- Please Select --,- Proszę wybrać -
+Inbox,Skrzynka odbiorcza
+Spam,spam
+Email,E-mail
+Backend,Backend - zaplecze techniczne
+Contact Tab,Karta kontaktowa
+Contact Form,Formularz kontaktowy
+Customer Account,Konto klienta
+Public Reply,Odpowiedz publiczna
+Internal Note,Uwaga wewnętrzna
+Message to Third Party,Wiadomość do strony trzeciej
+Internal Note to Third Party,Uwaga wewnętrzna dla strony trzeciej
+ at %1 (%2) - %3,przy %1 (%2)  - %3
+"You don't have permissions to read this ticket. Please, contact your administrator.","Nie masz uprawnień, aby odczytać to zgłoszenie. Skontaktuj się z administratorem."
+Submitted from the page: ,Przesłane ze strony:
+Invalid Customer Email,Nieprawidłowy adres e-mail klienta
+Ticket was merged to %1,Zgłoszenie zostało dołączone do %1
+Pattern,Wzór
+Attribute Value,Wartość atrybutu
+Default,Domyślnie
+Integer,Liczba całkowita
+Price,Cena
+Strip Tags,Paski znaczników
+Ticket Attributes,Atrybuty zgłoszenia
+Wrong URL,Błędny URL
+Unknown time,Nieznany czas
+ago,temu
+from now,od teraz
+1 sec ago,1 sekundę temu
+Open Ticket,Otwarte zgłoszenie
+Open Tickets,Otwarte zgłoszenia
+! Blocked file - ,! Zablokowany plik -
+Disabled,Wyłączony
+AW Helpdesk,AW Helpdesk
+MW Helpdesk,MW Helpdesk
+File System,System plików
+Database,Baza danych
+Aqua,Cyjan
+Grey,Szary
+Navy,Granatowy
+Silver,Srebrny
+Black,Czarny
+Green,Zielony
+Olive,Oliwkowy
+Teal,Morski
+Blue,Niebieski
+Lime,Limonkowy
+Purple,Fioletowy
+Fuchsia,Fuksja
+Maroon,Bordowy
+Red,Czerwony
+Orange,Pomarańczowy
+Yellow,Żólty
+NONE,ŻADEN
+SSL,SSL
+Text,Tekst
+Multi-line text,Tekst wielowierszowy
+Date,Data
+Checkbox,Pole wyboru
+Drop-down list,Lista rozwijana
+In minutes...,W minutach ...
+In hours...,W godzinach ...
+In days...,W dniach ...
+In weeks...,Za tygodnie ...
+In months...,W ciągu miesięcy ...
+Custom,Spersonalizowany
+Move to Archive,Przenieś do archiwum
+Move from Archive,Przenieś z archiwum
+All users,Wszyscy użytkownicy
+Left,Lewo
+Right,Prawo
+POP,POP
+IMAP,IMAP
+Great!,Świetnie!
+OK,OK
+Bad,Słabo
+--Please Select--,- Proszę wybrać -
+New ticket created,Utworzono nowe zgłoszenie
+New reply from customer,Nowa odpowiedź od klienta
+New reply from staff,Nowa odpowiedź od obsługi
+New reply from third party,Nowa odpowiedź od osoby trzeciej
+Ticket assigned to staff,Zgłoszenie przydzielone obsłudze
+Ticket was changed,Zgłoszenie zostało zmienione
+Ticket was converted to RMA,Zgłoszenie konwertowane na RMA
+Check every hour,Sprawdzaj co godzinę
+Headers,Nagłówki
+Body,Zawartość
+Using Department Name (e.g. Sales),Używaj nazwy działu (np. Sprzedaż)
+Using Staff Name (e.g. John Doe),Używaj nazwiska obsługi (np. Jan Kowalski)
+Last Reply,Ostatnia odpowiedź
+View link,Wyświetl link
+Process is locked,Proces jest zablokowany
+Locked,Zablokowany
+Success,Sukces
+Pattern is invalid,Wzorzec jest nieprawidłowy
+"""%1"" department is using as default department in next gateway(s) with id: %2.
+                Please change it first.","Dział ""%1"" jest używany jako dział domyślny w następnej bramce(-ach) o identyfikatorze: %2. Zmień je najpierw."""
+"""%1"" department is used as the default department in the option ""Feedback Tab > Assign to Department"".
+                Please change this option first.","Dział ""%1"" jest używany jako dział domyślny w opcji ""Zakładka Opinie> Przypisz do działu"". Zmień najpierw tę opcję."
+Update the Ticket,Zaktualizuj Zgłoszenie
+Conditions Combination,Połączenie warunków
+Ticket Attribute,Atrybut zgłoszenia
+Last 7-days Clicks,Kliknięcia z ostatnich 7 dni
+Last 7-days Orders,Zamówienia z ostatnich 7 dni
+Last 7-days Revenue,Przychody z ostatnich 7 dni
+Last 7-days Conversation Rate (%),Współczynnik konwersacji z ostatnich 7 dni (%)
+Last message body,Treść ostatniej wiadomości
+Priority (before change),Priorytet (przed zmianą)
+Status (before change),Status (przed zmianą)
+Department (before change),Dział (przed zmianą)
+Owner (before change),Właściciel (przed zmianą)
+Folder (before change),Folder (przed zmianą)
+Last Reply By,Ostatnia odpowiedź od
+Last Reply Type,Typ ostatniej odpowiedzi
+Hours since Created,Godzin od utworzenia
+Hours since Updated,Godzin od aktualizacji
+Hours since Last reply,Godzin od ostatniej odpowiedzi
+Ticket Source (Channel),Źródło zgłoszenia (kanał)
+%1 (before change),%1 (przed zmianą)
+Staff,Obsługa
+Third party,Strona trzecia
+Closed,Zamknięte
+Opened 24hr,Otwarte całą dobę
+Searchable attributes not defined,Nie zdefiniowano przeszukiwalnych atrybutów
+- Disable these emails -,- Wyłącz te e-maile -
+"The Help Desk can't fetch new emails.
+                Please, try to run bin/magento mirasvit:helpdesk:run to determine the source of this problem.","Helpdesk nie może pobierać nowych e-maili.
+                Spróbuj uruchomić bin/magento mirasvit:helpdesk:run, aby ustalić źródło tego problemu. "
+Help desk can't fetch emails. ,Helpdesk nie może pobierać wiadomości e-mail.
+"<br> To temporarily hide this message, disable all <a href=""%1"">help desk gateways</a>.","<br> Tymczasowo ukryj ten komunikat, wyłączając wszystkie <a href=""%1"">bramki helpdesk</a>."
+"Help Desk can't fetch new emails.
+                 Please, check that you are running cron for bin/magento mirasvit:helpdesk:run.","Helpdesk nie może pobierać nowych wiadomości e-mail. Proszę sprawdzić, czy używasz crona dla bin/magento mirasvit:helpdesk:run."
+Helpdesk Tickets,Zgłoszenia Helpdesk
+Cannot delete ticket with id %1,Nie można usunąć zgłoszenia o identyfikatorze %1
+Edit,Edytuj
+All Departments,Wszystkie działy
+All Roles,Wszystkie role
+Back,Wstecz
+Reset,Zresetuj
+Save and Continue Edit,Zapisz i kontynuuj edycję
+Debug,Debuguj
+24 hrs x 7 days,24 godziny x 7 dni
+Select working days/hours,Wybierz dni/godziny pracujące
+Satisfaction survey,Badanie zadowolenia
+show source,pokaż źródło
+to %1 (third party),do %1 (strona trzecia)
+%1 (third party),%1 (firma zewnętrzna)
+added %1 (%2),dodano %1 (%2)
+Ticket Summary,Podsumowanie zgłoszeń
+Ticket ID,Identyfikator zgłoszenia
+Assignee,Przydzielone do
+Additional Info,Dodatkowe informacje
+Ticket History,Historia Zgłoszenia
+Done by,Sporządzono przez
+Changes,Zmiany
+See All Tickets,Zobacz wszystkie zgłoszenia
+Name,Nazwa/Imię
+Attach files,Dołącz pliki
+Submit,Zatwierdź
+Submit Ticket,Wyślij Zgłoszenie
+What is your question?,W czym możemy pomóc?
+We found the following topics that might be helpful:,"Znaleźliśmy następujące tematy, które mogą być pomocne:"
+None of these are helpful - contact us,Żaden z nich nie jest pomocny - skontaktuj się z nami
+We have not found any helpful topics.,Nie znaleźliśmy żadnych pokrewnych tematów.
+Contact Information,Informacje kontaktowe
+Comment,Komentarz
+We are open 24 x 7,Jesteśmy otwarci przez całą dobę
+We are closed,Jesteśmy zamknięci
+Timezone: %1,Strefa czasowa: %1
+Please take a second to rate my reply...,"Proszę poświęć chwilę, aby ocenić moją odpowiedź"
+Great,Świetnie!
+Awesome,Wspaniale!
+"Fast, friendly, helpful, pleasant. Great job!","Szybki, przyjazny, pomocny, przyjemny. Dobra robota!"
+Just Okay,Po prostu ok
+"Fine, but definitely could have been better.","Dobrze, ale zdecydowanie mogło być lepiej."
+Not good,Niedobrze
+"Unfortunately, I wasn't happy with it at all.",Niestety nie byłem zadowolony
+Satisfactory level of customer service in real time,Zadowalający poziom obsługi klienta w czasie rzeczywistym
+%1% said great!,"%1% powiedział, że świetnie!"
+last updated %1,ostatnia aktualizacja %1
+Thank you for participating in our survey!,Dziękujemy za udział w naszej ankiecie!
+"If you would like to provide additional comments, please do so below:","Jeśli chcesz przekazać dodatkowe uwagi, zrób to poniżej:"
+Message,Wiadomość
+Submit Message,Prześlij wiadomość
+Thank you for your feedback!,Dziękujemy za Twoją opinię!
+"If the processing doesn't start automatically in a few seconds, please click the button below","Jeśli przetwarzanie nie rozpocznie się automatycznie w ciągu kilku sekund, kliknij przycisk poniżej"
+Process Rate,Przetwarzanie oceny
+Attachments,Załączniki
+-- Select an Order --,- Wybierz zamówienie -
+Create ticket,Utwórz zgłoszenie
+You don't have open tickets,Nie masz otwartych zgłoszeń
+Post a Reply,Prześlij odpowiedź
+Reopen Ticket,Otwórz ponownie zgłoszenie
+Close Ticket,Zamknij zgłoszenie
+History,Historia
+Back to My Tickets,Powrót do moich zgłoszeń
+To,Do
+Customer Summary,Podsumowanie klienta
+Assigned To Customer,Przypisany do klienta
+Assigned To Order,Przypisany do zamówienia
+Customer does not have any orders.,Klient nie ma żadnych zamówień.
+RMA,RMA
+You can check the status of reply to this ticket online at:,Status odpowiedzi na to zgłoszenie możesz sprawdzić online pod adresem:
+"Dear %name,","Drogi %name,"
+Thank you for contacting us!,Dziękujemy za skontaktowanie się z nami!
+This is an automated response confirming the receipt of your ticket. One of our agents will get back to you as soon as possible.,"To jest automatyczna odpowiedź potwierdzająca przyjęcie Twojego zgłoszenia. Jeden z naszych pracowników skontaktuje się z Tobą tak szybko, jak to możliwe."
+Details,Szczegóły
+"Please, answer the following ticket:",Proszę odpowiedzieć na poniższe zgłoszenie:
+Ticket ID:,Identyfikator zgłoszenia:
+Name:,Nazwa/Imię:
+Email address:,Adres e-mail:
+Store:,Sklep:
+Department:,Dział:
+Staff (Owner): -- Unassigned --,Obsługa (właściciel): - nieprzypisany -
+Status:,Status:
+Priority:,Priorytet:
+Created:,Utworzony:
+Staff (Owner):,Obsługa (właściciel):
+Updated:,Zaktualizowano:
+"Dear <strong>%user_firstname %user_lastname</strong>, <br><br>
+    %ticket_customer_name rated your help with smile","„Drogi <strong>%user_firstname%user_lastname</strong>,<br> <br>%ticket_customer_name ocenił Twoją pomoc pozytywnie"
+Customer email:,Email klienta:
+Your message will be emailed to the customer,Twoja wiadomość zostanie wysłana do klienta
+Your message will be emailed to the third party. Customer will see it in the ticket history.,Twoja wiadomość zostanie wysłana za pośrednictwem e-maila do strony trzeciej. Klient zobaczy to w historii zgłoszenia.
+Internal Message to Third Party,Wiadomość wewnętrzna do strony trzeciej
+Your message will be emailed to the third party. The customer will not see it.,Twoja wiadomość zostanie wysłana e-mailem do strony trzeciej. Klient tego nie zobaczy.
+Session has expired. Please copy all unsaved data and reload the page.,Sesja wygasła. Skopiuj wszystkie niezapisane dane i odśwież stronę.
+Help Desk MX,Helpdesk MX
+Helpdesk title in the customer account,Nazwa Helpdesk na koncie klienta
+Priority for new tickets,Priorytet dla nowych zgłoszeń
+Status for new tickets,Status nowych zgłoszeń
+Sign staff replies,Podpisuj odpowiedzi
+Move Ticket to Archive if it has one of following statuses:,"Przenieś zgłoszenie do archiwum, jeśli posiada jeden z następujących statusów:"
+Create Tickets from Contact Us form,Twórz zgłoszenia przez formularz kontaktowy
+Send blind carbon copy (BCC) of all emails to,Wyślij ukrytą kopię (UDW) do
+Use WYSIWYG Editor in backend,Użyj edytora WYSIWYG w backendzie
+Show previous/next button in backend ticket edit page,Pokaż przyciski poprzedni / następny stronie edycji zgłoszenia (backend)
+Use default Magento cron,Użyj domyślnego Magento cron
+Allow customer to open ticket by unique URL (without additional authentication),Pozwala klientowi otworzyć zgłoszenie za pomocą unikalnego adresu URL (bez dodatkowego uwierzytelniania)
+Store attachments in,Zachowaj załączniki w
+Only allow upload of attachments with extensions,Zezwala na przesyłanie wyłącznie załączników z rozszerzeniami
+"Tickets autosave period, sec","Czas automatycznego zapisywania zgłoszeń, sek"
+Show Help Desk link in customer menu,Wyświetl łącze Helpdesk w menu klienta
+Enable Feedback Tab,Aktywuj kartę opinii
+Assign to Department,Przypisz do działu
+Tab Color,Kolor karty
+Tab Title,Tytuł karty
+Tab Position,Pozycja karty
+Form Title,Tytuł formularza
+Subject Title,Tytuł treści
+Subject Placeholder,Treść zastępcza
+Description Title,Tytuł opisu
+Description Placeholder,Opis zastępczy
+Allow customer to attach files,Zezwól klientowi na załączanie plików
+Allow customers to select Priority,Pozwól klientom wybrać priorytet
+Allow customer to select Department,Pozwól klientowi wybrać dział
+Search Knowledge Base Topics first,Przeszukaj najpierw zawartość bazy wiedzy
+Show Ticket ID in the email title,Pokaż identyfikator zgłoszenia w tytule wiadomości e-mail
+Number of last replies to be shown in the ticket history,Liczba ostatnich odpowiedzi do wyświetlenia w historii zgłoszeń
+Template of New Ticket Email for Customer,Szablon nowego e-maila ze zgłoszeniem dla klienta
+Template of New Ticket Email for Staff,Szablon nowego e-maila ze zgłoszeniem dla obsługi
+Template of Ticket Email Assigned to Staff,Szablon e-maila ze zgłoszeniem przypisanym do obsługi
+Template of New Message Email for Customer,Szablon nowej wiadomości e-mail dla klienta
+Template of New Message Email for Staff,Szablon nowej wiadomości e-mail dla obsługi
+Template of New Message Email for Third Party,Szablon nowej wiadomości e-mail dla strony trzeciej
+Template of Ticket Reminder,Szablon przypomnienia o zgłoszeniu
+Template of Rule Notification,Szablon powiadomienia o regułach
+Template of Survey Satisfaction Result,Szablon wyniku ankiety zadowolenia
+Include a satisfaction survey in the reply email from staff members,Dołącz ankietę zadowolenia w odpowiedziach od obsługi
+Show survey results in the backend ticket history,Pokaż wyniki ankiety w historii zgłoszeń
+Send survey results to the ticket owner,Wyślij wyniki ankiety do właściciela zgłoszenia
+Send survey results to emails,Wyślij wyniki ankiety na e-maile
+Show the Help Desk section in the Customer Account,Pokaż sekcję Helpdesk na koncie klienta
+Allow customer to select Order,Zezwalaj klientowi na wybrór Zamówienie
+Activate Sandbox,Aktywuj piaskownicę (Sandbox)
+Send All Outgoing emails to Email,Wyślij wszystkie wychodzące wiadomości na e-mail
+Force store's theme to apply styles,Wymuś zastosowanie stylów w motywie sklepu
+Log ticket deletion,Monitoruj usuwanie zgłoszeń
+Solved Statuses,Rozwiązane statusy
+"Notifications check period, sec","Czas sprawdzania powiadomień, sek"
+Show notification about arrival of new tickets for,Pokaż powiadomienie o nadejściu nowych zgłoszeń dla
+Enable notification about arrival of new messages in tickets assigned for user,Włącz powiadomienia o nadejściu nowych wiadomości w zgłoszeniach przypisanych do użytkownika
+Enable notification about assigning a ticket to the user,Włącz powiadomienia o przypisaniu zgłoszenia do użytkownika
+Show online/offline status on the Contact Us page,Pokaż status online/offline na stronie Skontaktuj się z nami
+Show online/offline status in the Feedback popup,Pokaż stan online/offline w wyskakującym okienku opinii
+Show online/offline status in the Customer Account > My Tickets,Pokaż status online/offline na koncie klienta > Moje zgłoszenia
+Default message when we are open,Domyślna wiadomość w godzinach pracy
+Default message when we are closed,Domyślna wiadomość przy zakończeniu pracy
+Show working hours on the Contact Us page,Pokaż godziny pracy na stronie Skontaktuj się z nami
+Show holiday schedule in X days before activation,Pokaż harmonogram urlopów X dni wcześniej
+Working schedule title,Tytuł harmonogramu pracy
+Upcoming working schedule title,Tytuł nadchodzącego harmonogramu pracy
+Help Text,Tekst pomocy
+Show customer the local time in backend,Pokaż czas lokalny klienta w backend
+Path to GeoLite2 City database,Ścieżka do bazy danych GeoLite2 City
+Enable Google reCaptcha,Włącz Google reCaptcha
+Helpdesk Contact Form,Formularz kontaktowy Helpdesku
+Helpdesk Satisfaction Block,Blok zadowolenia z obsługi zgłoszeń
+Satisfaction List Url,Adres URL do listy zadowolenia
+Helpdesk Satisfaction List,Lista zadowolenia z obsługi zgłoszeń
+All Store Views,Wszystkie widoki Sklepu
+Purchased From,Zakupiony od
+Replies #,Odpowiedzi #
+Mail was sent,Wiadomość została wysłana
+Created,Utworzony
+Modified,Zmodyfikowano
+Status Sort Order,Kolejność sortowania
+Title,Tytuł
+Active,Aktywny
+Is Shown on Frontend,Jest widoczny dla klienta
+Sort Order,Kolejność sortowania
+Sender Email,Email nadawcy
+"If ticket is unassigned, send notifications to all department members","Jeśli zgłoszenie nie jest przypisane, wyślij powiadomienia do wszystkich członków działu"
+"If ticket is unassigned, send notifications to email","Jeśli zgłoszenie nie jest przypisane, wyślij powiadomienia na e-mail"
+Code,Kod
+Type,Typ
+Description,Opis
+Options list,Lista opcji
+Show value in customer account,Pokaż wartość na koncie klienta
+Show in create ticket form,Pokaż w formularzu tworzenia zgłoszenia
+Show in contact us form,Pokaż w formularzu kontaktowym
+Required for customers,Wymagane dla klientów
+Required for staff,Wymagane dla obsługi
+Login,Login
+Password,Hasło
+Host,Host
+Port,Port
+Fetch Frequency (minutes),Częstotliwość pobierania (minuty)
+Fetch Max,Pobieraj maksymalnie
+Fetch Only X Last Emails,Pobierz tylko x ostatnich e-maili
+Auto-assign tickets to Store View,Automatyczne przypisywanie zgłoszeń do widoku sklepu
+Auto-assign tickets to department,Automatyczne przypisywanie zgłoszeń do działu
+Notes,Uwagi
+Create New Department,Utwórz nowy dział
+Change status,Zmień status
+Inactive,Nieaktywny
+Delete items,Usuń elementy
+Are you sure you want to delete selected items?,Czy na pewno chcesz usunąć wybrane elementy?
+Is Active,Jest aktywny
+Create New Field,Utwórz nowe pole
+Create New Gateway,Utwórz nową bramkę
+Last Fetched At,Ostatnio pobrano o
+Last Fetch Result,Wynik ostatniego pobrania
+Create New Pattern,Utwórz nowy wzór
+Create New Permission,Utwórz nowe uprawnienie
+Role,Rola
+Has Access to Tickets of Departments,Ma dostęp do zgłoszeń oddziałów
+Can Remove Tickets,Może usuwać zgłoszenia
+Create New Priority,Utwórz nowy priorytet
+Color,Kolor
+Create New Rule,Utwórz nową regułę
+Stop Processing,Zatrzymaj przetwarzanie
+Rate,Ocena
+View Ticket,Wyświetl zgłoszenie
+Create New Schedule,Utwórz nowy harmonogram
+Holiday,Urlop
+Active From,Aktywny od
+Active To,Aktywny do
+Create New Status,Utwórz nowy status
+Create New Template,Utwórz nowy szablon
+Select...,Wybierz ...
+Mark as Spam,Oznacz jako spam
+Mark as Archive,Oznacz jako archiwum
+Merge tickets,Połącz zgłoszenia
+Mark as Inbox,Oznacz jako skrzynkę odbiorczą
+Change Assignee,Przypisz do
+Requester,Stworzone przez
+Requester Email,E-mail autora
+Can Delete Tickets,Może usuwać bilety
+Rule Name,Nazwa reguły
+Stop Further Rules Processing,Zatrzymaj dalsze przetwarzanie reguł
+Event,Wydarzenie
+Set Status,Ustaw status
+Set Priority,Ustaw priorytet
+Set Department,Ustaw dział
+Set Owner,Przydziel do
+Add Tags,Dodaj tagi
+Remove Tags,Usuń tagi
+Send email to ticket owner,Wyślij e-mail do zarządzającego zgłoszeniem
+Send email to all department users,Wyślij e-mail do wszystkich użytkowników działu
+Send email to customer,Wyślij e-mail do klienta
+Send email to other email addresses,Wyślij wiadomość na inne adresy e-mail
+Email subject,Temat wiadomości e-mail
+Email Body,Treść wiadomości e-mail
+Attach files previously attached to the last message,Załącz pliki dołączone wcześniej do ostatniej wiadomości
+Stores,Sklepy
+Is Holiday,Oznacz jako urlop
+Timezone,Strefa czasowa
+Open message,Wiadomość w godzinach pracy
+Closed message,Wiadomość po godzinach pracy
+Internal Title,Tytuł wewnętrzny
+Request ID,ID
+The file does not exist or was deleted.,Plik nie istnieje lub został usunięty.
+Submitted from the page: ,Przesłane ze strony:
+Max. file size: %1,Maks. rozmiar pliku: %1
+"not set","nie ustawiony"
+"Contact Us","Skontaktuj się z nami"
+Open,Otwarty
+"Max file size: %1 Mb","Maksymalny rozmiar pliku: %1 Mb"

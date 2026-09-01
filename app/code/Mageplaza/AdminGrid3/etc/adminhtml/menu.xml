@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mageplaza_AdminGrid3::helloworld" title="Jumio Verification" module="Mageplaza_AdminGrid3" sortOrder="30" resource="Mageplaza_AdminGrid3::helloworld"/>
+        <add id="Mageplaza_AdminGrid3::post" title="Jumio Verification Data" module="Mageplaza_AdminGrid3" sortOrder="10" action="mageplaza_admingrid/post/index" resource="Mageplaza_AdminGrid3::post" parent="Mageplaza_AdminGrid3::helloworld"/>
+    </menu>
+</config>
+

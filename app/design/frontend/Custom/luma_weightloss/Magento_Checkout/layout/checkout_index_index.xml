@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+  xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+  <body>
+    <move element="logo" destination="header-wrapper" before="-" />
+    <referenceBlock name="minicart" remove="false" />
+    <referenceContainer name="header.panel" remove="false" />
+    <referenceBlock name="top.search" remove="false" />
+    <referenceBlock name="catalog.compare.link" remove="false" />
+    <referenceBlock name="catalog.topnav" remove="false" />
+    <referenceContainer name="footer-container" remove="false" />
+    <referenceContainer name="content">
+
+      <block class="Magento\Framework\View\Element\Template" name="before-footer-link-block"
+        after="osc.static-block.success" template="Magento_Theme::html/above_footer.phtml" />
+      <block class="Nilesh\GeneralQuestions\Block\General\Question" name="ghq-pop-up-form" template="Nilesh_GeneralQuestions::general/ghqQuestionModelOSC.phtml" />
+
+    </referenceContainer>
+
+  </body>
+</page>

@@ -1,0 +1,21 @@
+{
+    "name": "amasty/module-advanced-reports",
+    "description": "Advanced Reports by Amasty",
+    "require": {
+        "php": ">=7.3",
+        "amasty/base": ">=1.13.2"
+    },
+    "type": "magento2-module",
+    "version": "1.8.7",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\Reports\\": ""
+        }
+    }
+}

@@ -1,0 +1,140 @@
+Replace,Replace
+Search,Search
+"Replace First","Replace First"
+Slice,Slice
+From,From
+To,To
+Truncate,Truncate
+Count,Count
+"Append Last","Append Last"
+"Truncate Words","Truncate Words"
+Words,Words
+Lowercase,Lowercase
+Ceil,Ceil
+Uppercase,Uppercase
+Capitalize,Capitalize
+"Uppercase first character of each word ","Uppercase first character of each word "
+Append,Append
+Prepend,Prepend
+"At Least","At Least"
+"At Most","At Most"
+Date,Date
+"Date Format","Date Format"
+Default,Default
+"Divided By","Divided By"
+Plus,Plus
+Remove,Remove
+Join,Join
+"Join By","Join By"
+Minus,Minus
+Modulo,Modulo
+Times,Times
+Abs,Abs
+"Down Case","Down Case"
+Escape,Escape
+"Escape once","Escape once"
+Floor,Floor
+"Left Trim","Left Trim"
+"Replace new line to <br","Replace new line to <br"
+"Reverse Array","Reverse Array"
+"Right Trim","Right Trim"
+"Array Size","Array Size"
+"Array Sort","Array Sort"
+"Trim Text","Trim Text"
+"Strip Html Tags","Strip Html Tags"
+"Strip New Line","Strip New Line"
+"Unique Id Of Array","Unique Id Of Array"
+"Decode Url","Decode Url"
+"Encode Url","Encode Url"
+Price,Price
+"If Empty","If Empty"
+"Format Date","Format Date"
+"Custom Dimensions","Custom Dimensions"
+"Custom Metrics","Custom Metrics"
+"Please enable module","Please enable module"
+"No information to export","No information to export"
+"Something wrong when export file","Something wrong when export file"
+"The module is disabled","The module is disabled"
+"Google Tag Manager is disabled","Google Tag Manager is disabled"
+"Google Analytics is disabled","Google Analytics is disabled"
+"Facebook Pixed is disabled","Facebook Pixed is disabled"
+"The type is incorrect!","The type is incorrect!"
+"The action is incorrect!","The action is incorrect!"
+"Not a valid URL.","Not a valid URL."
+"-- Please select --","-- Please select --"
+"Related Product","Related Product"
+"Up-sell Product","Up-sell Product"
+"Cross-sell Product","Cross-sell Product"
+"Search Result Page","Search Result Page"
+ID,ID
+SKU,SKU
+"currentPage value %1 specified is greater than the %2 page(s) available.","currentPage value %1 specified is greater than the %2 page(s) available."
+"""model"" value should be specified","""model"" value should be specified"
+"Send to Google Analytics Success","Send to Google Analytics Success"
+"Cannot connect to server. Please try again later.","Cannot connect to server. Please try again later."
+Name,Name
+"Track Custom Attribute","Track Custom Attribute"
+Index,Index
+Action,Action
+Add,Add
+"Custom Dimensions to collect and analyze attributes from your store that are not automatically tracked by Google Analytics.","Custom Dimensions to collect and analyze attributes from your store that are not automatically tracked by Google Analytics."
+"Product Attributes","Product Attributes"
+"Customer Attributes","Customer Attributes"
+Delete,Delete
+Guide,Guide
+"How to Configure Adwords Conversion Tracking","How to Configure Adwords Conversion Tracking"
+"Custom Metrics to collect and analyze attributes from your store that are not automatically tracked by Google Analytics.","Custom Metrics to collect and analyze attributes from your store that are not automatically tracked by Google Analytics."
+"Please enter a valid measurement ID","Please enter a valid measurement ID"
+"Google Tag Manager","Google Tag Manager"
+General,General
+Enable,Enable
+"Select <b>Yes</b> to enable this module.","Select <b>Yes</b> to enable this module."
+"Deduct Tax From Transaction","Deduct Tax From Transaction"
+"Enable Brand","Enable Brand"
+"Compatible with Shop by brand by Mageplaza.","Compatible with Shop by brand by Mageplaza."
+"Brand Attribute","Brand Attribute"
+"Enable Variant","Enable Variant"
+"Deduct Shipping From Transaction","Deduct Shipping From Transaction"
+"Tax Deduction On Shipping","Tax Deduction On Shipping"
+"Ignore Orders with value 0","Ignore Orders with value 0"
+"Select <b>Yes</b> to enable Google Tag Manager.","Select <b>Yes</b> to enable Google Tag Manager."
+"ID Variable Base On","ID Variable Base On"
+"Select to specify that ID variable of product is replaced for Product ID or Product SKU","Select to specify that ID variable of product is replaced for Product ID or Product SKU"
+"Google Tag ID","Google Tag ID"
+"To get Google Tag ID, register <a href=""https://tagmanager.google.com"" target='_blank'>here</a>. E.g: GTM-XXXXXX","To get Google Tag ID, register <a href=""https://tagmanager.google.com"" target='_blank'>here</a>. E.g: GTM-XXXXXX"
+"Google Analytics 4","Google Analytics 4"
+"Select <b>Yes</b> to add the items of Google Analytics 4 to Google Tag Manager.","Select <b>Yes</b> to add the items of Google Analytics 4 to Google Tag Manager."
+"Google Analytics eCommerce","Google Analytics eCommerce"
+"Select <b>Yes</b> to enable Google Analytics eCommerce.","Select <b>Yes</b> to enable Google Analytics eCommerce."
+"Google Analytics Tracking ID","Google Analytics Tracking ID"
+"To get Google Analytics Tracking ID, register <a href=""https://analytics.google.com/analytics/web/"" target='_blank'>here</a>. E.g: UA-12345-6789","To get Google Analytics Tracking ID, register <a href=""https://analytics.google.com/analytics/web/"" target='_blank'>here</a>. E.g: UA-12345-6789"
+"Second Tracking ID","Second Tracking ID"
+"Add another property ID for the store site. Leave empty if you do not want to use.","Add another property ID for the store site. Leave empty if you do not want to use."
+"Enable Enhanced Link Attribution","Enable Enhanced Link Attribution"
+"Enhanced link attribution improves click reports by automatically differentiating between multiple link clicks that have the same URL on a given page.","Enhanced link attribution improves click reports by automatically differentiating between multiple link clicks that have the same URL on a given page."
+"Enable Linker","Enable Linker"
+"If Yes, Google Analytics allows you to merge sessions from two related sites (such as an ecommerce site and a separate shopping cart site) as a single session. <br><a href='https://support.google.com/analytics/answer/1033876' target='_blank'>More Details</a>","If Yes, Google Analytics allows you to merge sessions from two related sites (such as an ecommerce site and a separate shopping cart site) as a single session. <br><a href='https://support.google.com/analytics/answer/1033876' target='_blank'>More Details</a>"
+"Linker Domain(s)","Linker Domain(s)"
+"Seperated by comma(,).","Seperated by comma(,)."
+"Enable Display Ads (Remarketing)","Enable Display Ads (Remarketing)"
+"Google Analytics advertising features (including Remarketing Lists for Search Ads) can be enabled in Google Analytics from Property Settings > Data Collection.<br><a href='https://support.google.com/analytics/answer/2444872' target='_blank'>More Details</a>","Google Analytics advertising features (including Remarketing Lists for Search Ads) can be enabled in Google Analytics from Property Settings > Data Collection.<br><a href='https://support.google.com/analytics/answer/2444872' target='_blank'>More Details</a>"
+"Enable IP Anonymization","Enable IP Anonymization"
+"If Yes, Analytics anonymizes the address as soon as technically feasible at the earliest possible stage of the collection network.<br><a href='https://support.google.com/analytics/answer/2763052' target='_blank'>More Details</a>","If Yes, Analytics anonymizes the address as soon as technically feasible at the earliest possible stage of the collection network.<br><a href='https://support.google.com/analytics/answer/2763052' target='_blank'>More Details</a>"
+"Enable Google Analytics Opt Out","Enable Google Analytics Opt Out"
+"If yes, when customers visit a GDPR compliant website, their data will be protected and synced to Google Analytics. Compatible with Mageplaza <a href='https://www.mageplaza.com/magento-2-gdpr-extension/' target='_blank'>GDPR Professional</a>.","If yes, when customers visit a GDPR compliant website, their data will be protected and synced to Google Analytics. Compatible with Mageplaza <a href='https://www.mageplaza.com/magento-2-gdpr-extension/' target='_blank'>GDPR Professional</a>."
+"Track Impressions and Clicks By Position","Track Impressions and Clicks By Position"
+"Choose where to track product impressions and clicks.","Choose where to track product impressions and clicks."
+"Facebook Pixel","Facebook Pixel"
+Enabled,Enabled
+"Select <b>Yes</b> to enable Facebook Pixel.","Select <b>Yes</b> to enable Facebook Pixel."
+"Facebook Pixel ID","Facebook Pixel ID"
+"To get Facebook Pixel ID, register <a href=""https://www.facebook.com/events_manager2"" target='_blank'>here</a>. E.g: 195027827612345","To get Facebook Pixel ID, register <a href=""https://www.facebook.com/events_manager2"" target='_blank'>here</a>. E.g: 195027827612345"
+"Enable Advanced Matching","Enable Advanced Matching"
+"Google Adwords Conversion Tracking","Google Adwords Conversion Tracking"
+"Create Tags, Triggers, Variables","Create Tags, Triggers, Variables"
+"Measurement ID","Measurement ID"
+"View <a href=""https://support.google.com/analytics/answer/9539598"">this instruction</a> to get the field value","View <a href=""https://support.google.com/analytics/answer/9539598"">this instruction</a> to get the field value"
+"Google Ads Conversion Tracking","Google Ads Conversion Tracking"
+"Conversion ID","Conversion ID"
+"Conversion Label","Conversion Label"
+"Google Ads Remarketing","Google Ads Remarketing"

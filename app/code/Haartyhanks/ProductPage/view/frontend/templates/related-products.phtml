@@ -1,0 +1,289 @@
+<?php
+$relatedProducts = $block->getRelatedProducts();
+$maxItems = 20; // Max products to show in slider
+
+if ($relatedProducts && $relatedProducts->getSize() > 0): 
+    $relatedProducts = $relatedProducts->setPageSize($maxItems)->load(); // Load max 10 products
+?>
+<div class="products-grid treatment-products">
+    <div class="container">
+        <div class="related-products">
+            <h3>Treatment options</h3>
+            <div class="custom-carousel">
+                <!-- <button class="prev-button">&lt;</button> -->
+                <div class="carousel-wrapper">
+                    <div class="carousel-items">
+                        <?php foreach ($relatedProducts as $product): ?>
+                            <div class="carousel-item">
+                                <div class="carousel-item-details">
+                                <div class="product-image">
+                                    <a href="<?= $product->getProductUrl() ?>">
+                                        <img src="<?= $block->getProductImageUrl($product) ?>" 
+                                            alt="<?= $block->escapeHtml($product->getName()) ?>">
+                                    </a>
+                                </div>
+                                <div class="product-name">
+                                    <a href="<?= $product->getProductUrl() ?>">
+                                        <?= $block->escapeHtml($product->getName()) ?>
+                                    </a>
+                                </div>
+                                <div class="product-short-description">
+                                     <?= $block->escapeHtml(mb_substr(strip_tags($product->getShortDescription()), 0, 75)) ?>
+                                    <?php if (mb_strlen(strip_tags($product->getShortDescription())) > 75): ?>
+                                        ...
+                                    <?php endif; ?>
+                                </div>
+                                <div class="view-details">
+                                    <a href="<?= $product->getProductUrl() ?>" class="view-details-button">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="prev-button-btn">
+                <button class="prev-button">&lt;</button>
+                <button class="next-button">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .custom-carousel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+    }
+    .carousel-wrapper {
+        overflow: hidden;
+        width: 100%;
+    }
+    .carousel-items {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        white-space: nowrap;
+    }
+    .carousel-item {
+        flex: 0 0 auto;
+        width: calc(100% / 3);
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    @media (max-width: 767px) {
+        .carousel-item {
+            width: 100%;
+        }
+    }
+    .prev-button, .next-button {
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .catalog-product-view .related-products .custom-carousel .carousel-item .carousel-item-details{
+    float: none;
+    display: inline-block;
+    margin: 0 0px;
+    border-radius: 8px;
+    vertical-align: top;
+    background: #fff; 
+    padding: 40px 25px;
+}
+ 
+
+.catalog-product-view .related-products .custom-carousel .carousel-item .product-image{
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  padding: 0;
+  margin: 0 0 10px 0;
+  height: 240px;
+  overflow: hidden;
+}
+.catalog-product-view .related-products .custom-carousel .carousel-item .product-name{
+  width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px;
+    font-weight: 900;
+    text-align: left;
+    text-decoration: none;
+}
+.catalog-product-view .related-products .custom-carousel .carousel-item .product-name a{
+  font-size: 20px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 30px;
+    font-weight: 900;
+}
+.catalog-product-view .related-products .custom-carousel .carousel-item .product-short-description,
+.catalog-product-view .related-products .custom-carousel .carousel-item .product-short-description p{
+  width: 100%;
+    float: left;
+  padding: 0;
+    margin: 0 0 20px 0;
+    list-style-type: none;
+    font-size: 14px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 24px;
+    font-weight: 400;
+    text-align: left;
+}
+ 
+
+.catalog-product-view .related-products .custom-carousel .carousel-item .view-details a{
+  width: 145px;
+  display: inline-block;
+  text-align: center;
+  background: #EC3237;
+    font-size: 14px;
+    color: #fff;
+   font-family: 'Roboto', sans-serif;
+    line-height: 50px; 
+    padding: 0 0px;
+    font-weight: 400;
+    border-radius: 35px;
+    letter-spacing: 0.28px;
+    height: auto;
+    text-transform: uppercase;
+     
+}
+.catalog-product-view .related-products .custom-carousel .carousel-items{
+  white-space: normal; 
+}
+
+.catalog-product-view .related-products .custom-carousel .prev-button, 
+.catalog-product-view .related-products .custom-carousel .next-button {
+    background-color: #53CAF5;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    box-shadow: none !important; 
+    font-size: 0;
+    margin: 0 10px;
+}
+.catalog-product-view .related-products .custom-carousel .prev-button:hover, 
+.catalog-product-view .related-products .custom-carousel .next-button:hover{
+  background-color: #EC3237 !important;
+}
+.catalog-product-view .related-products .custom-carousel .next-button:before {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    line-height: inherit;
+    color: #fff;
+    content: '\e608';
+    font-family: 'luma-icons';
+    margin: 0;
+    vertical-align: top;
+    display: inline-block;
+    font-weight: normal;
+    overflow: hidden;
+    speak: none;
+    text-align: center;
+}
+
+.catalog-product-view .related-products .custom-carousel .prev-button:before {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    line-height: inherit;
+    color: #fff;
+    content: '\e617';
+    font-family: 'luma-icons';
+    margin: 0;
+    vertical-align: top;
+    display: inline-block;
+    font-weight: normal;
+    overflow: hidden;
+    speak: none;
+    text-align: center;
+}
+.catalog-product-view .related-products .custom-carousel{
+      padding-bottom: 70px;
+    }
+    .catalog-product-view .related-products .custom-carousel .prev-button-btn{
+      width: 100%;
+      float: left;
+      position: absolute;
+      bottom: 0;
+      text-align: center;
+    }
+@media screen and (min-width: 768px) {
+    .catalog-product-view .related-products .custom-carousel .carousel-item .product-name {
+        height: auto;
+    }
+    
+
+}
+
+@media screen and (max-width: 767px) {
+  .catalog-product-view .carousel-item {
+      width: 100% !important;
+  }
+  .catalog-product-view .related-products {
+    position: relative;
+  }
+   
+}
+</style>
+
+<script>
+    require(['jquery'], function($) {
+        $(document).ready(function() {
+            var $carousel = $('.carousel-items');
+            var totalItems = $('.carousel-item').length;
+            var itemsPerSlide = $(window).width() >= 768 ? 3 : 1;
+            var index = 0;
+
+            function updateCarousel() {
+                var itemWidth = $('.carousel-item').outerWidth(true);
+                var moveAmount = index * itemWidth;
+                $carousel.css({
+                    'transform': 'translateX(-' + moveAmount + 'px)',
+                    'transition': 'transform 0.5s ease-in-out'
+                });
+            }
+
+            $('.next-button').click(function() {
+                if (index < totalItems - itemsPerSlide) {
+                    index++;
+                    updateCarousel();
+                }
+            });
+
+            $('.prev-button').click(function() {
+                if (index > 0) {
+                    index--;
+                    updateCarousel();
+                }
+            });
+
+            $(window).resize(function() {
+                itemsPerSlide = $(window).width() >= 768 ? 3 : 1;
+                index = 0;
+                updateCarousel();
+            });
+        });
+    });
+</script>
+
+<?php endif; ?>

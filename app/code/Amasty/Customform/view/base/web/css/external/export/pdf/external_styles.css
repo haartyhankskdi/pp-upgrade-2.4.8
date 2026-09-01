@@ -1,0 +1,85 @@
+@page {
+    margin: 100px 25px;
+}
+
+html {
+    margin: 50px
+}
+
+body {
+    color: #171737;
+    font-size: 16px;
+    font-family: Roboto, sans-serif;
+}
+
+.amform-pdf-header {
+    margin-bottom: 30px;
+}
+
+.amform-header-title {
+    margin-top: 45px;
+}
+
+.amform-header-title .amform-title {
+    margin: 0;
+    color: #ff4f00;
+    text-transform: capitalize;
+    letter-spacing: .02em;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 1.2;
+}
+
+.amform-header-title .amform-separator {
+    margin-top: 10px;
+    width: 80px;
+    height: 6px;
+    background: #ff4f00;
+}
+
+.amform-pdf-title {
+    margin: 0 0 10px;
+    color: #171737;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.4;
+}
+
+.amform-pdf-table {
+    margin: 0 0 30px;
+    padding: 0;
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+}
+
+.amform-pdf-table .amform-tr {
+    border: none;
+}
+
+.amform-pdf-table .amform-tr:nth-of-type(2n) {
+    background: #f6f7fa;
+}
+
+.amform-pdf-table .amform-th,
+.amform-pdf-table .amform-td {
+    padding: 7px 12px;
+    border: none;
+    vertical-align: top;
+    text-align: left;
+}
+
+.amform-pdf-table .amform-link {
+    color: #171737;
+    text-decoration: none;
+}
+
+.amform-pdf-table .amform-th {
+    width: 25%;
+    font-weight: 700;
+}
+
+.amform-google-map .amform-text {
+    margin: 0;
+}
+

@@ -1,0 +1,60 @@
+<?php
+/* @var Escaper $escaper */
+
+use Magento\Framework\Escaper;
+
+$product = $block->getProduct();
+?>
+
+<div class="amreports-amchart-wrapper">
+    <?php if ($product->getError()): ?>
+        <div class="amreports-error-sku"><?= $escaper->escapeHtml($product->getError()) ?></div>
+    <?php else: ?>
+        <div class="amreports-perfomance-content" data-role="amreports-content">
+        <?php if ($product->getSku()): ?>
+            <div class="amreports-info -hidden" data-amreports-js="perfomance-info">
+                <div class="amreports-information">
+                    <div class="amreports-image">
+                        <img alt="<?= $escaper->escapeHtml($product->getName()); ?>"
+                             src="<?= $escaper->escapeUrl($product->getThumbnail()); ?>"
+                             width="75"
+                             height="75">
+                    </div>
+                    <div class="amreports-facts">
+                        <div class="amreports-name">
+                            <?= $escaper->escapeHtml($product->getName()); ?>
+                        </div>
+                        <div class="amreports-bottom">
+                            <div class="amreports-price">
+                                <?= $escaper->escapeHtml($product->getPrice()); ?>
+                            </div>
+                            <div class="amreports-sku">
+                                <?= $escaper->escapeHtml($product->getSku()); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="amreports-statistic">
+                    <div class="amreports-item">
+                        <span><?= $escaper->escapeHtml($product->getQty()); ?></span>
+                        <span class="amreports-option"><?= $escaper->escapeHtml(__('Orders')); ?></span>
+                    </div>
+                    <div class="amreports-item">
+                        <span><?= $escaper->escapeHtml($product->getViews()); ?></span>
+                        <span class="amreports-option"><?= $escaper->escapeHtml(__('Views')); ?></span>
+                    </div>
+                    <div class="amreports-item">
+                        <span><?= $escaper->escapeHtml($product->getRevenue()); ?></span>
+                        <span class="amreports-option"><?= $escaper->escapeHtml(__('Revenue')); ?></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="listing">
+                <?= $block->getChildHtml() ?>
+            </div>
+        <?php endif; ?>
+        </div>
+    <?php endif; ?>
+</div>

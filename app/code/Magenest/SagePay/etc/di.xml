@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2019 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="TransactionGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="PostGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magenest\SagePay\Model\ResourceModel\Transaction\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">TransactionGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="ProfileGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ProfileGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magenest\SagePay\Model\ResourceModel\Profile\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">ProfileGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magenest\SagePay\Model\ResourceModel\Profile\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_sagepay_subscription_profile</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\SagePay\Model\ResourceModel\Profile</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="sagepay_transaction_listing_data_source" xsi:type="string">Magenest\SagePay\Model\ResourceModel\Transaction\Grid\Collection</item>
+                <item name="sagepay_profile_listing_data_source" xsi:type="string">Magenest\SagePay\Model\ResourceModel\Profile\Grid\Collection</item>
+                <item name="sagepay_card_listing_data_source" xsi:type="string">Magenest\SagePay\Model\ResourceModel\Card\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="CardGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <preference for="Magenest\SagePay\Api\Data\GridInterface" type="Magenest\SagePay\Model\Card" />
+    <preference for="Magenest\SagePay\Api\ThreeDInfoInterface" type="Magenest\SagePay\Model\ThreeDSecure" />
+    <preference for="Magenest\SagePay\Api\BuildFormInterface" type="Magenest\SagePay\Model\Api\BuildForm" />
+    <virtualType name="GridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magenest\SagePay\Model\Resource\Card\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">CardGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magenest\SagePay\Model\ResourceModel\Card\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_sagepay_saved_card</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\SagePay\Model\ResourceModel\Card</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magenest\SagePay\Helper\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+
+    <type name="Magenest\SagePay\Helper\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">SageLogger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Magenest\SagePay\Helper\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\App\Request\CsrfValidator">
+        <plugin name="csrf_by_pass" type="Magenest\SagePay\Plugin\Framework\App\Request\CsrfByPass" sortOrder="0"/>
+    </type>
+
+    <type name="Magento\Sales\Model\Order\Email\Sender\OrderSender">
+        <plugin disabled="false" name="prevent_send_mail_when_pending" type="Magenest\SagePay\Plugin\ConfirmationMail" sortOrder="1" />
+    </type>
+
+    <type name="Magento\Framework\Session\SessionStartChecker">
+        <plugin name="magenest_session_checker" type="Magenest\SagePay\Plugin\TransparentSessionChecker"/>
+    </type>
+
+    <type name="Magenest\SagePay\Model\ResourceModel\Transaction\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_sagepay_transaction</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\SagePay\Model\ResourceModel\Transaction</argument>
+        </arguments>
+    </type>
+
+    <type name="Magenest\SagePay\Model\Plan">
+        <arguments>
+            <argument name="resource" xsi:type="object">Magenest\SagePay\Model\ResourceModel\Plan</argument>
+            <argument name="resourceCollection" xsi:type="object">Magenest\SagePay\Model\ResourceModel\Plan\Collection</argument>
+        </arguments>
+    </type>
+    <type name="Magenest\SagePay\Model\Card">
+        <arguments>
+            <argument name="resource" xsi:type="object">Magenest\SagePay\Model\ResourceModel\Card</argument>
+            <argument name="resourceCollection" xsi:type="object">Magenest\SagePay\Model\ResourceModel\Card\Collection</argument>
+        </arguments>
+    </type>
+    <type name="Magenest\SagePay\Model\Transaction">
+        <arguments>
+            <argument name="resource" xsi:type="object">Magenest\SagePay\Model\ResourceModel\Transaction</argument>
+            <argument name="resourceCollection" xsi:type="object">Magenest\SagePay\Model\ResourceModel\Transaction\Collection</argument>
+        </arguments>
+    </type>
+</config>

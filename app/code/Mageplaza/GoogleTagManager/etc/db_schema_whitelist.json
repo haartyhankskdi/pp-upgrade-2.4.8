@@ -1,0 +1,12 @@
+{
+    "mageplaza_gtm_export_template": {
+        "column": {
+            "id": true,
+            "name": true,
+            "template": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

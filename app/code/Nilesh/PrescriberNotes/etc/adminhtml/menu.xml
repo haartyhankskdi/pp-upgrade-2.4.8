@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+		<!-- <add 
+			id="Nilesh_PrescriberNotes::menu" 
+			title="Prescriber Notes" 
+			module="Nilesh_PrescriberNotes"
+			sortOrder="500"
+			resource="Nilesh_PrescriberNotes::menu" 
+		/>
+
+		<add 
+			id="Nilesh_PrescriberNotes::create" 
+			title="Add New Prescriber Notes" 
+			module="Nilesh_PrescriberNotes" 
+			sortOrder="10"
+			parent="Nilesh_PrescriberNotes::menu" 
+			action="nilesh_prescribernotes/prescribernotes/new" 
+			resource="Nilesh_PrescriberNotes::create"
+		/>
+
+		<add 
+			id="Nilesh_PrescriberNotes::view" 
+			title="Prescriber Notes" 
+			module="Nilesh_PrescriberNotes" 
+			sortOrder="20"
+			parent="Nilesh_PrescriberNotes::menu" 
+			action="nilesh_prescribernotes/prescribernotes/index" 
+			resource="Nilesh_PrescriberNotes::view"
+		/> -->
+	</menu>
+</config>
+<!-- action="nilesh_prescribernotes/prescribernotes/index" -->

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_PromoBanner
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mppromobanner>
+            <general>
+                <enabled>1</enabled>
+                <show_close_btn>1</show_close_btn>
+                <auto_close_time>never</auto_close_time>
+                <auto_reopen_time>infinite</auto_reopen_time>
+            </general>
+            <slider_setting>
+                <show_buttons>1</show_buttons>
+                <change_time>5000</change_time>
+            </slider_setting>
+            <popup_setting>
+                <popup_responsive>center</popup_responsive>
+                <popup_width>800</popup_width>
+                <popup_height>320</popup_height>
+                <show_popup_checkbox>1</show_popup_checkbox>
+                <checkbox_label>Do Not Show Popup Next Time</checkbox_label>
+            </popup_setting>
+            <floating_setting>
+                <float_width>300</float_width>
+                <float_height>280</float_height>
+            </floating_setting>
+        </mppromobanner>
+    </default>
+</config>

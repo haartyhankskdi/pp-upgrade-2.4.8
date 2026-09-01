@@ -1,0 +1,95 @@
+<?php
+
+use Magento\Framework\App\ObjectManager;
+
+$objectManager = ObjectManager::getInstance();
+
+$postCollection = $objectManager
+    ->create(\Magefan\Blog\Model\ResourceModel\Post\CollectionFactory::class)
+    ->create()
+    ->addFieldToFilter('identifier', 'how-your-relationship-with-food-affects-your-children-podcast')
+    ->setPageSize(1);
+
+$post = $postCollection->getFirstItem();
+
+if ($post->getId()) {
+    // echo $post->getTitle();
+}
+//
+// print_r($post->getData());
+
+?>
+
+
+<?php
+$viewModel = $block->getViewModel();
+$data = $viewModel->GetPost();
+
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
+
+
+
+
+$review_Name = 'Gurudev Sahmi';
+$review_Title = 'BSc Pharm, MRPharmS, Independent Prescriber, Superintendent Pharmacist, Clinical Lead';
+$review_gphc = '2050925';
+$review_Image = 'https://magento-1195784-4216081.cloudwaysapps.com/pub/media/gurdev-sehmi-img.webp';
+
+$author_Name = 'HARMINDER ‘HARMY’ KAUR';
+$author_Title = 'BSc(hons) Pharmacy';
+$author_gphc = '2061107';
+$author_Image = 'https://www.pharmacyplanet.com/pub/media/wysiwyg/HARMY-PROFILE-PIC.jpg';
+
+if (!empty($data) && isset($data['status']) && $data['status']) {
+
+    if (!empty($data['review'])) {
+        $review = $viewModel->getTeamInfo($data['review']);
+        if ($review) {
+            $review_Name  = $review->getData('name') ?: $review_Name;
+            $review_Title = $review->getData('specialist') ?: $review_Title;
+            $review_gphc  = $review->getData('registration_number') ?: $review_gphc;
+            $review_Image = $review->getData('photo') ?: $review_Image;
+        }
+    }
+
+    if (!empty($data['author'])) {
+        $author = $viewModel->getTeamInfo($data['author']);
+        if ($author) {
+            $author_Name  = $author->getData('name') ?: $author_Name;
+            $author_Title = $author->getData('specialist') ?: $author_Title;
+            $author_gphc  = $author->getData('registration_number') ?: $author_gphc;
+            $author_Image = $author->getData('photo') ?: $author_Image;
+        }
+    }
+}
+?>
+
+<div class="advice-post-sec">
+    <div class="blog-bottom-review-team">
+        <div class="reviewved-by sep-l">
+            <div class="review-right-img">
+                <img src="<?= $escaper->escapeUrl($author_Image) ?>" alt="Profile Image" />
+            </div>
+            <div class="review-title-box">
+                <p class="review-text">Authored By</p>
+                <p class="pharmacist-title name"><?= $escaper->escapeHtml($author_Name) ?></p>
+                <p class="review-text"><?= $escaper->escapeHtml($author_Title) ?></p>
+                <p class="gphc-no"><?= $escaper->escapeHtml('GPhC Number: ' . $author_gphc) ?></p>
+            </div>
+        </div>
+
+        <div class="reviewved-by">
+            <div class="review-right-img">
+                <img src="<?= $escaper->escapeUrl($review_Image) ?>" alt="Pharmacist Image" />
+            </div>
+            <div class="review-title-box">
+                <p class="review-text">Reviewed By</p>
+                <p class="pharmacist-title name"><?= $escaper->escapeHtml($review_Name) ?></p>
+                <p class="review-text"><?= $escaper->escapeHtml($review_Title) ?></p>
+                <p class="gphc-no"><?= $escaper->escapeHtml('GPhC Number: ' . $review_gphc) ?></p>
+            </div>
+        </div>
+    </div>
+</div>

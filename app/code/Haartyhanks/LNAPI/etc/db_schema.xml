@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="haartyhanks_lnapi_entity" resource="default" engine="innodb" comment="Customer KYC Verification Records">
+        
+        <!-- Primary Key -->
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Primary Key: Unique Entity ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+
+        <!-- Customer Reference -->
+        <column name="customer_id" xsi:type="int" nullable="false" comment="Reference to Magento Customer Entity"/>
+
+        <!-- Verification Links -->
+        <column name="verification_link" xsi:type="varchar" length="255" nullable="true" comment="Latest Active Verification Link"/>
+        <column name="used_verification_link" xsi:type="varchar" length="255" nullable="true" comment="Verification Link Used by Customer"/>
+        
+        <!-- Customer Metadata -->
+        <column name="customer_ip" xsi:type="varchar" length="255" nullable="true" comment="Customer IP Address During Verification"/>
+        
+        <!-- Remote Check Integration -->
+        <column name="remote_check_id" xsi:type="varchar" length="255" nullable="true" comment="Remote Verification Check ID"/>
+        <column name="remote_check_key" xsi:type="varchar" length="255" nullable="true" comment="Remote Verification Check Key"/>
+        <column name="remote_check_profile_url" xsi:type="varchar" length="255" nullable="true" comment="Remote Verification Profile URL"/>
+
+        <!-- Expiry Information -->
+        <column name="current_link_expiry_at" xsi:type="datetime" nullable="true" comment="Expiration Timestamp of Current Verification Link"/>
+
+        <!-- Verification Status -->
+        <column name="status" xsi:type="varchar" length="50" nullable="true" comment="Verification Status (pending, verified, failed, expired)"/>
+        <column name="is_verified" xsi:type="boolean" nullable="true" comment="Flag: Customer Successfully Verified"/>
+        <column name="is_failed" xsi:type="boolean" nullable="true" comment="Flag: Verification Failed"/>
+
+        <!-- Activity Tracking -->
+        <column name="attempts" xsi:type="int" nullable="true" default="0" comment="Total Verification Attempts"/>
+        <column name="link_generated_count" xsi:type="int" nullable="true" default="0" comment="Total Number of Links Generated"/>
+        <column name="reminder_sent_count" xsi:type="int" nullable="true" default="0" comment="Total Number of Verification Reminders Sent"/>
+        <column name="first_link_generated_at" xsi:type="datetime" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Timestamp When First Verification Link Was Generated"/>
+
+        <!-- Record Timestamps -->
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Record Creation Timestamp"/>
+        <column name="updated_at" xsi:type="datetime" nullable="true" on_update="true" comment="Record Last Updated Timestamp"/>
+
+    </table>
+</schema>

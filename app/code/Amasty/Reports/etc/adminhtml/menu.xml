@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Amasty_Reports::reports" title="Advanced Reports" module="Amasty_Reports" sortOrder="100" parent="Magento_Reports::report" resource="Amasty_Reports::reports"/>
+        <add id="Amasty_Reports::index" title="Advanced Reports" module="Amasty_Reports" sortOrder="10" parent="Amasty_Reports::reports" action="amasty_reports/report" resource="Amasty_Reports::reports"/>
+        <add id="Amasty_Reports::rule" title="Advanced Reports Rules" module="Amasty_Reports" sortOrder="20" parent="Amasty_Reports::reports" action="amasty_reports/rule" resource="Amasty_Reports::rule"/>
+        <add id="Amasty_Reports::notification" title="Schedule Report Notifications" module="Amasty_Reports" sortOrder="30" parent="Amasty_Reports::reports" action="amasty_reports/notification" resource="Amasty_Reports::notification"/>
+    </menu>
+</config>

@@ -1,0 +1,300 @@
+<?php $collection = $block->getCollection() ?>
+
+
+
+
+
+<div class="advice-center-info-sec counter-sec">
+<div class="container"> 
+        <div class="advice-info-top-left">
+            <h1>Advice Center</h1>
+            <p>At Pharmacy Planet, we're here to provide you with the advice and resources you need to take control of your health. Whether you're looking to manage a condition or explore ways to improve your well-being, our expert team is ready to support you with reliable, up-to-date information.</p>
+        </div>
+        <div class="advice-info-top-right">
+            <div class="advice-info-cont">
+                <div class="join-cont-img"><img src="/media/wysiwyg/join-cont-img.svg" alt="join-cont-img"></div>
+                <div class="advice-info-title"> <h3> Join the Conversation! </h3></div>
+                <p>Grab a chance to feature your article with us and showcase your insights.</p>
+                <p><span>Mail us <a href="mailto:article@pharmacyplanet.com">headoffice@pharmacyplanet.com</a></span></p>
+            </div>
+        </div> 
+
+    </div>
+</div>
+
+
+<div class="advice-center-info-sec2">
+    <div class="container">
+        <div class="advice-info-top2">
+            <div class="advice-info-title2"> <h2> What are you looking for? </h2></div>
+            <div class="advice-info-search">
+            <div class="widget block blog-search" data-bind="scope: 'blog-search'">
+    <div class="block-content">
+        <form class="form" id="blog_search_mini_form"
+              action="<?= $block->escapeUrl($block->getFormUrl()) ?>"
+              method="get">
+            <div class="field search">
+                <label class="label" for="blog_search">
+                    <span><?= $block->escapeHtml(__('Search')) ?></span>
+                </label>
+                <div class="control">
+                    <input id="blog_search"
+                           type="text"
+                           name="q"
+                           value="<?= $block->escapeHtml($block->getQuery()) ?>"
+                           placeholder="<?= $block->escapeHtml(__('Let us know what you are looking for')) ?>"
+                           class="input-text"
+                           maxlength="128" role="combobox"
+                           aria-haspopup="false"
+                           aria-autocomplete="both"
+                           autocomplete="off">
+                </div>
+            </div>
+            <div class="actions">
+                <button type="submit"
+                        onclick="return goBlogSearch(this);"
+                        title="<?= $block->escapeHtml(__('Search')) ?>"
+                        class="action">
+                    <span><?= $block->escapeHtml(__('Search')) ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+        </div>
+
+        <div class="advice-info-list">
+            
+             <div class="advice-info-block">
+                <a href="/blog/category/weight-loss-treatment">
+                <img src="/media/wysiwyg/Weight-loss-advice.jpg" alt="Weight Loss">
+                <p>Weight<br> Loss</p>
+                </a>
+            </div>
+            
+            
+           
+                <div class="advice-info-block">
+                    <a href="/blog/category/erectile-dysfunction">
+                        <img src="/media/wysiwyg/ED.jpg" alt="Erectile Dysfunction">
+                        <p>Erectile Dysfunction</p>
+                    </a>        
+                </div>
+            
+            
+                <div class="advice-info-block">
+                    <a href="/blog/category/asthma">
+                    <img src="/media/wysiwyg/Asthama_advice.jpg" alt="Asthma">
+                    <p>Asthma</p>
+                    </a>
+                </div>
+        </div>
+
+
+    <?php $categories = $block->getBlogCategory();?>
+        <div class="advice-info-list-sec">
+          <?php
+     $categories = [
+    ["label" => "Weight Loss", "slug" => "weight-loss-treatment"],
+    ["label" => "High Blood Pressure", "slug" => "high-blood-pressure"],
+    ["label" => "Diabetes", "slug" => "diabetes"],
+    ["label" => "Hair Loss", "slug" => "hair-loss"],
+    ["label" => "Erectile Dysfunction", "slug" => "erectile-dysfunction"],
+    ["label" => "Acne/Rosacea", "slug" => "acne-rosacea"],
+    ["label" => "Contraceptive", "slug" => "oral-contraceptive"],
+    ["label" => "Hormone Replacement Therapy", "slug" => "hrt"],
+    ["label" => "Asthma/COPD", "slug" => "asthma"],
+    ["label" => "Diabetes Tablets", "slug" => "diabetes-tablets"],
+    ["label" => "Migraine Treatment", "slug" => "migraine"],
+    ["label" => "Psoriasis and Eczema", "slug" => "psoriasis-and-eczema"],
+    ["label" => "Allergy", "slug" => "allergy"],
+    ["label" => "Haemorrhoids", "slug" => "haemorrhoids"],
+    ["label" => "Period Delay", "slug" => "period-delay"],
+    ["label" => "Diabetes Injections", "slug" => "diabetes-injections"],
+    ["label" => "Anti-Malarial", "slug" => "anti-malarial"],
+    ["label" => "Anti-inflammatories", "slug" => "anti-inflammatory"],
+    ["label" => "Acid Reflux", "slug" => "acid-reflux"],
+    ["label" => "Bacterial Vaginosis BV", "slug" => "bacterial-vaginosis-bv"],
+    ["label" => "High Cholesterol", "slug" => "cholesterol"],
+    ["label" => "Cystitis", "slug" => "cystitis"],
+    ["label" => "Quit Smoking", "slug" => "quit-smoking"],
+    ["label" => "Genital Warts", "slug" => "genital-warts"],
+    ["label" => "Morning After Pill", "slug" => "morning-after-pills"],
+    ["label" => "Vitamins", "slug" => "vitamin"],
+    ["label" => "Underactive Thyroid", "slug" => "underactive-thyroid-treatment"],
+    ["label" => "Blood Glucose Test Strips", "slug" => "blood-glucose-testing-strips"],
+    ["label" => "Prescription Medicines", "slug" => "prescription-medicines"],
+    ["label" => "Hirsutism", "slug" => "hirsutism"],
+    ["label" => "Wound Dressing", "slug" => "wound-dressing"],
+    ["label" => "Osteoporosis", "slug" => "osteoporosis-treatment"],
+    ["label" => "Eye/Ear/Nose", "slug" => "eyeearnose-treatment"],
+    ["label" => "Thrush", "slug" => "thrush"],
+    ["label" => "Gout", "slug" => "gout-treatment"],
+    ["label" => "Flu", "slug" => "flu"],
+    ["label" => "Jet lag", "slug" => "jet-lag"],
+    ["label" => "Heart Attack", "slug" => "heart-attack"],
+    ["label" => "General Healths", "slug" => "general-healths"],
+    ["label" => "Covid-19", "slug" => "covid-19"] 
+];
+?>
+            <ul>
+                <?php  foreach ($categories as $item) : ?>
+                   <li> 
+                     <a href="<?= $block->getBaseUrl() . 'blog/category/' . urlencode($item['slug']) ?>">
+              <?= htmlspecialchars($item['label']) ?>
+              </a>
+                </li>
+                <?php endforeach ;?>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<div class="trustpilot-review-slider">
+
+<?php
+echo $this->getLayout()
+          ->createBlock('Magento\Cms\Block\Block')
+          ->setBlockId(169)
+          ->toHtml();
+
+// echo $this->getLayout()
+//           ->createBlock('Magento\Cms\Block\Block')
+//           ->setBlockId('google review mobile slider')
+//           ->toHtml();
+
+?>
+
+
+</div>
+
+<div class="product-section product-post-sec">
+    <div class="container">
+        <h2>Recent Blogs</h2>
+            <?php 
+                echo $this->getLayout()->createBlock("Magefan\Blog\Block\Widget\Recent")
+                ->setData([
+                    'no_repeat_posts_enable' => "0",
+                    'number_of_posts' => "4",
+                    'tag_id' => "0",
+                    'author_id' => "0"
+                ])->toHtml();
+            
+            ?>
+    </div>            
+        </div>
+
+<script type="text/javascript">
+        require(['jquery', 'jquery/ui', 'slick'], function($){
+    $(document).ready(function() {
+        $('.slick-slider').slick({
+            dots: true,
+            infinite: false,
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            autoplay: false
+        });
+    });
+});
+    </script>
+
+    <script type="text/javascript">
+    function goBlogSearch(e)
+    {
+        var value = document.getElementById('blog_search').value;
+        if (value) {
+            var a = e.form.action;
+            window.location = a + ( ('/' != a.charAt(a.length - 1)) ? '/' : '' ) + encodeURI(value) + '/';
+        }
+        return false;
+    }
+</script>
+<style>
+      .advice-info-list .advice-info-block a{
+       position: relative;
+       display: inline-block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .advice-info-list .advice-info-block a:before{
+      content: " " !important;
+      background-color: rgba(0, 0, 0, 0.3) !important;
+      display: inline-block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 99;
+        top: 0;
+        left: 0;
+    }
+
+     
+    .advice-info-list .advice-info-block p{
+       z-index: 999999 !important;
+    }
+</style> 
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph":[
+
+{
+ "@type":"Organization",
+ "@id":"https://www.pharmacyplanet.com/#organization",
+ "name":"Pharmacy Planet",
+ "url":"https://www.pharmacyplanet.com/",
+ "logo":"https://www.pharmacyplanet.com/static/frontend/Custom/luma_child/en_GB/images/phramacy_planet.svg",
+ "image":"https://www.pharmacyplanet.com/static/frontend/Custom/luma_child/en_GB/images/phramacy_planet.svg",
+ "description":"Explore expert health tips, pharmacy guides, and skincare advice on the Pharmacy Planet blog. Stay informed and shop trusted healthcare products online.",
+ "telephone":"+0800 978 8956",
+ "email":"headoffice@pharmacyplanet.com",
+ "sameAs":[
+   "https://www.facebook.com/pharmacyplanet/",
+   "https://www.instagram.com/pharmacyplanetuk/",
+   "https://twitter.com/pharmacy_planet",
+   "https://www.youtube.com/channel/UCiAuTkRyzKHy5KlH7FHXdDg",
+   "https://uk.trustpilot.com/review/magento-1584919-6629151.cloudwaysapps.com"
+ ]
+},
+
+{
+ "@type":"Pharmacy",
+ "@id":"https://www.pharmacyplanet.com/#localbusiness",
+ "name":"Pharmacy Planet",
+ "url":"https://www.pharmacyplanet.com/",
+ "priceRange":"££",
+ "telephone":"+0800 978 8956",
+ "email":"headoffice@pharmacyplanet.com",
+ "image":"https://www.pharmacyplanet.com/static/frontend/Custom/luma_child/en_GB/images/phramacy_planet.svg",
+
+ "address":{
+   "@type":"PostalAddress",
+   "streetAddress":"4 Progress Business Centre",
+   "addressLocality":"Slough",
+   "addressRegion":"Berkshire",
+   "postalCode":"SL1 6DQ",
+   "addressCountry":"GB"
+ },
+
+ "contactPoint":{
+   "@type":"ContactPoint",
+   "telephone":"+0800 978 8956",
+   "contactType":"Customer Service",
+   "email":"headoffice@pharmacyplanet.com"
+ },
+
+ "aggregateRating":{
+   "@type":"AggregateRating",
+   "ratingValue":"4.5",
+   "reviewCount":"3654"
+ }
+
+}
+
+]
+}
+</script>

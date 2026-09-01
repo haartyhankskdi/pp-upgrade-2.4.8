@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_PromoBanner
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Mageplaza_Core::css/owl.carousel.css"/>
+        <css src="Mageplaza_Core::css/owl.theme.css"/>
+        <css src="Mageplaza_Core::css/magnific-popup.css"/>
+    </head>
+    <body>
+        <referenceContainer name="page.wrapper">
+            <block class="Mageplaza\PromoBanner\Block\PromoBanner" name="mppromobanner.after.body.start" template="Mageplaza_PromoBanner::promobanner.phtml" ifconfig="mppromobanner/general/enabled" before="-">
+                <arguments>
+                    <argument name="position" xsi:type="string">page-top</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content.top">
+            <block class="Mageplaza\PromoBanner\Block\PromoBanner" name="mppromobanner.top.container" template="Mageplaza_PromoBanner::promobanner.phtml" ifconfig="mppromobanner/general/enabled">
+                <arguments>
+                    <argument name="position" xsi:type="string">content-top</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="sidebar.main">
+            <block class="Mageplaza\PromoBanner\Block\PromoBanner" name="mppromobanner.sidebar.main" template="Mageplaza_PromoBanner::promobanner.phtml" ifconfig="mppromobanner/general/enabled">
+                <arguments>
+                    <argument name="position" xsi:type="string">sidebar-main</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="sidebar.additional">
+            <block class="Mageplaza\PromoBanner\Block\PromoBanner" name="mppromobanner.sidebar.additional" template="Mageplaza_PromoBanner::promobanner.phtml" ifconfig="mppromobanner/general/enabled">
+                <arguments>
+                    <argument name="position" xsi:type="string">sidebar-additional</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Mageplaza\PromoBanner\Block\Banner\Popup" name="mppromobanner.container.popup" template="Mageplaza_PromoBanner::banner/popup.phtml" ifconfig="mppromobanner/general/enabled">
+                <arguments>
+                    <argument name="position" xsi:type="string">popup</argument>
+                </arguments>
+            </block>
+            <block class="Mageplaza\PromoBanner\Block\Banner\Floating" name="mppromobanner.container.left.floating" template="Mageplaza_PromoBanner::banner/floating.phtml" ifconfig="mppromobanner/general/enabled">
+                <arguments>
+                    <argument name="position" xsi:type="string">left-floating</argument>
+                </arguments>
+            </block>
+            <block class="Mageplaza\PromoBanner\Block\Banner\Floating" name="mppromobanner.container.right.floating" template="Mageplaza_PromoBanner::banner/floating.phtml" ifconfig="mppromobanner/general/enabled">
+                <arguments>
+                    <argument name="position" xsi:type="string">right-floating</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template" name="mppromobanner.default.reload.cart" template="Mageplaza_PromoBanner::default.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

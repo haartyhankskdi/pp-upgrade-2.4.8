@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Magento\Sales\Model\Order\Pdf\Items\Invoice\DefaultInvoice" type="Nilesh\Theme\Rewrite\Magento\Sales\Model\Order\Pdf\Items\Invoice\DefaultInvoice"/>
+	<preference for="Magento\Newsletter\Controller\Subscriber\NewAction" type="Nilesh\Theme\Rewrite\Magento\Newsletter\Controller\Subscriber\NewAction"/>
+	<preference for="Magento\Contact\Controller\Index\Post" type="Nilesh\Theme\Rewrite\Magento\Contact\Controller\Index\Post" />
+	<preference for="Magento\Customer\Controller\Account\LoginPost" type="Nilesh\Theme\Rewrite\Magento\Login\LoginPost" />
+</config>

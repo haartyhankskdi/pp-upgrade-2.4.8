@@ -1,0 +1,9 @@
+<?php
+
+/** @var Magento\Framework\View\Element\Template $block */
+$vm = $block->getViewModel();
+?>
+
+<script nonce="<?= $escaper->escapeHtmlAttr($vm->getNonce()); ?>">
+  var c2a_config = JSON.parse("<?= $escaper->escapeJs($vm->getFrontendCfg()); ?>");
+</script>

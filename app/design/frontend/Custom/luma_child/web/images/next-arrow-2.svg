@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="204" height="187" viewBox="0 0 204 187">
+  <defs>
+    <pattern id="pattern" preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 319 292">
+      <image width="319" height="292" xlink:href="next-arrow-image.png"/>
+    </pattern>
+  </defs>
+  <rect id="next-arrow" width="204" height="187" fill="url(#pattern)"/>
+</svg>
