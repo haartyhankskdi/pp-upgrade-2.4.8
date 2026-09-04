@@ -175,7 +175,7 @@ class LoginPost extends \Magento\Customer\Controller\Account\LoginPost
            if (!empty($login['username']) && !empty($login['password'])) {
                try {
                    if (array_key_exists('rememberme',$login)) {
-                       $logindetails = array('username' => $login['username'], 'password' => $login['password'], 'remchkbox' => 1);
+                       $logindetails = array('username' => $login['username'], 'remchkbox' => 1);
                        $logindetails = json_encode($logindetails);
                        $this->getCookiedata->set($logindetails, $this->getCookiedata->getCookielifetime());
                    } else {

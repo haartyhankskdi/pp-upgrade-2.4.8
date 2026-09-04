@@ -202,9 +202,6 @@ if (!empty($params['bmi_result'])) {
 }
 
 
-// print_r($data);
-
-// exit();
 
 
     return $data; // Assuming you want to use the structured data elsewhere
@@ -265,11 +262,6 @@ if (!empty($params['bmi_result'])) {
     {
 
         return true;
-        // echo "<pre>";
-        // echo "formKeyValidator get Class method is called";
-        // print_r(get_class_methods($this->formKeyValidator));
-        // exit();
-
         return $this->formKeyValidator->validate($this->request->getParam('form_key'));
     }
 

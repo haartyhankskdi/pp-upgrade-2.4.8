@@ -151,13 +151,13 @@ class ConvertToCsv extends \Magento\Ui\Model\Export\ConvertToCsv
 
                         foreach ($options['attributes_info'] as $option) {      
 
-                            if(strtolower($option['label']) == 'size'){                                
+                            if(strtolower($option['label'] ?? '') == 'size'){                                
                                 $item['size'] = $option['value'];
                             }
-                            if(strtolower($option['label']) == 'brand'){                                
+                            if(strtolower($option['label']?? '' ) == 'brand'){                                
                                 $item['brand'] = $option['value'];
                             }
-                            if(strtolower($option['label']) == 'medicine strength'){                                
+                            if(strtolower($option['label']?? '') == 'medicine strength'){                                
                                 $item['medicine strength'] = $option['value'];
                             }
                         }
@@ -264,9 +264,10 @@ class ConvertToCsv extends \Magento\Ui\Model\Export\ConvertToCsv
                         $item['registered_gp_surgery'] = 'No';
 
                     }else{                    
-                        $registeredGPOptions = json_decode($item['registered_gp_surgery'], TRUE);
+                        $registeredGPOptions = is_string($item['registered_gp_surgery'])
+                        ? json_decode($item['registered_gp_surgery'], TRUE)
+                        : null;
                         if(!empty($registeredGPOptions['name_of_practice']) && !empty($registeredGPOptions['address_line_one']) && !empty($registeredGPOptions['address_line_two']) && !empty($registeredGPOptions['city']) && !empty($registeredGPOptions['county']) && !empty($registeredGPOptions['postcode'])) {
-
                                 $item['registered_gp_surgery'] = 'Practice Name: '.$registeredGPOptions['name_of_practice'].' '.'Address: '.$registeredGPOptions['address_line_one'].','.$registeredGPOptions['address_line_two'].','.$registeredGPOptions['city'].','.$registeredGPOptions['county'].','.$registeredGPOptions['postcode'];
                         }else{
                             $item['registered_gp_surgery'] = 'No';

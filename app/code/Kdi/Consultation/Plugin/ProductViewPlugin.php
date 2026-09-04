@@ -39,17 +39,7 @@ class ProductViewPlugin
     public function beforeExecute(\Magento\Catalog\Controller\Product\View $subject)
     {
         $productId = (int)$this->request->getParam('id');
-
-        $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/products.log');
-        $zendLogger = new \Zend_Log();
-        $zendLogger->addWriter($writer);
-        $zendLogger->info(" ------------ params ---------- " . print_r($this->request->getParams(), true));
-
         $category = $this->getProductCategories($productId);
-
-        $zendLogger->info(" ------------ category ---------- " . print_r( $category , true));
-
-
        $isFilled = array(
             'category_questions_filled' => true,
             'category_id' => $category
@@ -75,15 +65,11 @@ class ProductViewPlugin
             
             $categories = [];
             foreach ($categoryIds as $categoryId) {
-                // You can load the category object if you need more details like name, URL etc.
-                // $category = $this->_categoryRepository->get($categoryId);
-                // $categories[] = $category;
                 $categories[] = $categoryId; // For just category IDs
             }
             return $categories[0];
 
         } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
-            // Handle case where product is not found
             return [];
         }
     }

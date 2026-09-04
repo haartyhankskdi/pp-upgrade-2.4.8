@@ -75,13 +75,15 @@ class RememberMe extends AbstractHelper
     */
    public function set($value, $duration = 604800)
    {
-       $metadata = $this->cookieMetadataFactory
-           ->createPublicCookieMetadata()
-           ->setDuration($duration)
-           ->setPath($this->sessionManager->getCookiePath())
-           ->setDomain($this->sessionManager->getCookieDomain());
+    $metadata = $this->cookieMetadataFactory
+    ->createPublicCookieMetadata()
+    ->setDuration($duration)
+    ->setPath($this->sessionManager->getCookiePath())
+    ->setDomain($this->sessionManager->getCookieDomain())
+    ->setSecure(true)
+    ->setHttpOnly(true);
 
-       $this->cookieManager->setPublicCookie(self::COOKIE_NAME, $value, $metadata);
+$this->cookieManager->setPublicCookie(self::COOKIE_NAME, $value, $metadata);
 
    }
 
@@ -114,12 +116,12 @@ class RememberMe extends AbstractHelper
    /**
     * @return Nilesh\RememberMe\Helper
     */
-   public function getCookieloginPwd()
-   {
-       $pwd = json_decode($this->get(self::COOKIE_NAME));
-       if($pwd)
-       return $pwd->password ? $pwd->password : '';
-   }
+//    public function getCookieloginPwd()
+//    {
+//        $pwd = json_decode($this->get(self::COOKIE_NAME));
+//        if($pwd)
+//        return $pwd->password ? $pwd->password : '';
+//    }
 
    /**
     * @return Nilesh\RememberMe\Helper

@@ -218,7 +218,7 @@ class Login extends \Magento\Framework\App\Action\Action implements HttpPostActi
         }
 
         if (array_key_exists('rememberme',$credentials)) {
-            $logindetails = array('username' => $credentials['username'], 'password' => $credentials['password'], 'remchkbox' => 1);
+            $logindetails = array('username' => $credentials['username'], 'remchkbox' => 1);
             $logindetails = json_encode($logindetails);
             $this->getCookiedata->set($logindetails, $this->getCookiedata->getCookielifetime());
         } else {
