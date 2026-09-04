@@ -56,64 +56,53 @@ class Submit extends AmastySubmit
 
         }
 
-     public function execute()
-     {
+        public function execute()
+        {
+            $url = Data::REDIRECT_PREVIOUS_PAGE;
+            $productId = $this->customSession->get('hh_product_id');
         
-
-        $url = Data::REDIRECT_PREVIOUS_PAGE;
-        $productId = $this->customSession->get('hh_product_id');
-
-        $url = $this->submit->process($this->getRequest()->getParams());
-                $this->_eventManager->dispatch(
-                    'custom_checkbox_confirm_log',
-                    ['customer' => $this->sessionFactory->create()->getCustomer()]
-                );
-                $type = self::SUCCESS_RESULT;
-                $this->helper->setFormValue(1);
-                $this->session->setData(SessionData::AM_CUSTOM_FORM_SESSION_DATA . $this->getFormId(), []);
-        
-        if ($this->getRequest()->isPost()) {
-            try {
-
-                $url = $this->submit->process($this->getRequest()->getParams());
-                $this->_eventManager->dispatch(
-                    'custom_checkbox_confirm_log',
-                    ['customer' => $this->sessionFactory->create()->getCustomer()]
-                );
-                $type = self::SUCCESS_RESULT;
-                $this->helper->setFormValue(1);
-                $this->session->setData(SessionData::AM_CUSTOM_FORM_SESSION_DATA . $this->getFormId(), []);
-            } catch (ValidatorException $e) {
-                $this->processError($e, $this->getValidatorExceptionMessage());
-            } catch (LocalizedException $e) {
-                $this->processError($e, $e->getMessage());
-            } catch (\Exception $e) {
-                $this->processError($e, $this->getExceptionMessage());
+            if ($this->getRequest()->isPost()) {
+                try {
+                    $url = $this->submit->process($this->getRequest()->getParams());
+                    $this->_eventManager->dispatch(
+                        'custom_checkbox_confirm_log',
+                        ['customer' => $this->sessionFactory->create()->getCustomer()]
+                    );
+                    $type = self::SUCCESS_RESULT;
+                    $this->helper->setFormValue(1);
+                    $this->session->setData(SessionData::AM_CUSTOM_FORM_SESSION_DATA . $this->getFormId(), []);
+                } catch (ValidatorException $e) {
+                    $this->processError($e, $this->getValidatorExceptionMessage());
+                } catch (LocalizedException $e) {
+                    $this->processError($e, $e->getMessage());
+                } catch (\Exception $e) {
+                    $this->processError($e, $this->getExceptionMessage());
+                }
             }
-        }
 
-        if ($this->getRequest()->isAjax()) {
-            $response = $this->getResponse()->representJson(
-                $this->helper->encode(['result' => $type ?? self::ERROR_RESULT])
-            );
-        } else {
-            /** @var Redirect $resultRedirect */
-            $resultRedirect = $this->resultRedirectFactory->create();
-            if ($url === Data::REDIRECT_PREVIOUS_PAGE) {
-                $resultRedirect->setRefererUrl();
-            } 
-            $productUrl = $this->getProductUrl($productId). "?true";
-            $storeId = $this->storeManager->getStore()->getId();
+            if ($this->getRequest()->isAjax()) {
+                $response = $this->getResponse()->representJson(
+                    $this->helper->encode([
+                        'result' => $type ?? self::ERROR_RESULT
+                    ])
+                );
+            } else {
+                $productUrl = $this->getProductUrl($productId) . '?true';
+                $storeId = $this->storeManager->getStore()->getId();
             
-
-            if ($storeId==2){
-            return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath($url);
+                if ($storeId == 2) {
+                    return $this->resultFactory
+                        ->create(ResultFactory::TYPE_REDIRECT)
+                        ->setPath($url);
+                }
+            
+                return $this->resultFactory
+                    ->create(ResultFactory::TYPE_REDIRECT)
+                    ->setPath($productUrl);
             }
-            return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath($productUrl);
+            
+            return $response;
         }
-
-        return $response;
-    }
 
     private function processError(\Exception $e, $message)
     {

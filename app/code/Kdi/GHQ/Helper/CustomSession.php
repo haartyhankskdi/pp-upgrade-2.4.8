@@ -87,10 +87,13 @@ class CustomSession extends MagentoAbstractHelper
     public function set($value, $duration = null)
     {
         $metadata = $this->cookieMetadataFactory
-            ->createPublicCookieMetadata()
-            ->setDuration($duration ? $duration : static::DEFAULT_COOKIE_LIFETIME)
-            ->setPath($this->sessionManager->getCookiePath())
-            ->setDomain($this->sessionManager->getCookieDomain());
+        ->createPublicCookieMetadata()
+        ->setDuration($duration ?: static::DEFAULT_COOKIE_LIFETIME)
+        ->setPath($this->sessionManager->getCookiePath())
+        ->setDomain($this->sessionManager->getCookieDomain())
+        ->setSecure(true)
+        ->setHttpOnly(true);
+
         if (is_array($value)) {
             $value = json_encode($value);
         }

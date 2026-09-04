@@ -33,7 +33,7 @@ $_rememberMeHelper = $this->helper('Nilesh\Theme\Helper\RememberMe');
                 <div class="field password required">
                     <label  style="display:none" for="pass" class="label"><span><?= $block->escapeHtml(__('Password')) ?></span></label>
                     <div class="control">
-                        <input name="login[password]" type="password" <?php if ($block->isAutocompleteDisabled()) : ?> autocomplete="off"<?php endif; ?> class="input-text" id="pass" title="<?= $block->escapeHtmlAttr(__('Password')) ?>" data-validate="{required:true}" placeholder="<?= $block->escapeHtml(__('Password')) ?>" value="<?php echo $block->escapeHtml($_rememberMeHelper->getCookieloginPwd()) ?>" />
+                        <input name="login[password]" type="password" <?php if ($block->isAutocompleteDisabled()) : ?> autocomplete="off"<?php endif; ?> class="input-text" id="pass" title="<?= $block->escapeHtmlAttr(__('Password')) ?>" data-validate="{required:true}" placeholder="<?= $block->escapeHtml(__('Password')) ?>"  />
                         <button class="btn btn-link" id="showpassword" type="button"><i class="fa fa-eye" aria-hidden="true"></i></button>
                     </div>
                 </div>
