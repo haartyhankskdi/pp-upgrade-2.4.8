@@ -29,6 +29,7 @@ use Magento\Framework\Event\ObserverInterface;
 
 class OrderImages implements ObserverInterface
 {
+    protected $_backendConfig;
     protected $isEnabledFlag = false;
     /**
      * @var \Magento\Framework\ObjectManagerInterface|null

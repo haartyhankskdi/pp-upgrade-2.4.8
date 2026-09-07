@@ -14,8 +14,8 @@ interface ManagementInterface
      * Create new item.
      *
      * @api
-     * @param string $data.
-     * @return string.
+     * @param string $data
+     * @return string
      */
     public function create($data);
 
@@ -23,9 +23,9 @@ interface ManagementInterface
      * Update item by id.
      *
      * @api
-     * @param int $id.
-     * @param string $data.
-     * @return string.
+     * @param int $id
+     * @param string $data
+     * @return string
      */
     public function update($id, $data);
 
@@ -33,8 +33,8 @@ interface ManagementInterface
      * Remove item by id.
      *
      * @api
-     * @param int $id.
-     * @return bool.
+     * @param int $id
+     * @return bool
      */
     public function delete($id);
 
@@ -42,10 +42,11 @@ interface ManagementInterface
      * Get item by id.
      *
      * @api
-     * @param int $id.
-     * @return bool.
+     * @param int $id
+     * @param int|null $storeId
+     * @return bool
      */
-    public function get($id);
+    public function get($id, $storeId = null);
 
     /**
      * Get item by id and store id, only if item published
@@ -53,7 +54,7 @@ interface ManagementInterface
      * @api
      * @param int $id
      * @param  int $storeId
-     * @return bool.
+     * @return bool
      */
     public function view($id, $storeId);
 

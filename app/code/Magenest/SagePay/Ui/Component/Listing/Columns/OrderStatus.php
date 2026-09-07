@@ -13,6 +13,7 @@ use Magento\Framework\View\Element\UiComponent\ContextInterface;
 
 class OrderStatus extends \Magento\Ui\Component\Listing\Columns\Column
 {
+    protected $storeManager;
     protected $localeCurrency;
     protected $orderRepository;
 

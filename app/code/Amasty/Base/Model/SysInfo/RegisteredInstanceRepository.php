@@ -57,10 +57,10 @@ class RegisteredInstanceRepository
     private $url;
 
     public function __construct(
-        FlagRepository $flagRepository = null, //@deprecated
         SerializerInterface $serializer,
         DataObjectHelper $dataObjectHelper,
         RegisteredInstanceFactory $registeredInstanceFactory,
+        FlagRepository $flagRepository = null, //@deprecated
         Repository $instanceDataRepository = null,
         InstanceDataFactory $instanceDataFactory = null,
         UrlInterface $url = null

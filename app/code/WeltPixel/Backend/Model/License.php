@@ -590,9 +590,16 @@ class License extends \Magento\Framework\Model\AbstractModel
 
             curl_setopt($curl, CURLOPT_HEADER, 0);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 2);
+            curl_setopt($curl, CURLOPT_TIMEOUT, 2);
             try {
                 $response = curl_exec($curl);
-                $modulesList = json_decode($response, true);
+                $modulesList = $response !== false ? json_decode($response, true) : null;
+
+                if (!is_array($modulesList) || !isset($modulesList['modules']) || !is_array($modulesList['modules'])) {
+                    throw new \RuntimeException('WeltPixel module list feed returned an invalid response');
+                }
+
                 $this->modulesList = array_keys($modulesList['modules']);
 
                 foreach ($this->modulesList as $module) {
@@ -604,10 +611,12 @@ class License extends \Magento\Framework\Model\AbstractModel
                 $this->backendSession->setWeltPixelExtensions($this->modulesList);
                 $this->backendSession->setWeltPixelExtensionsUserFriendlyNames($this->modulesUserFriendlyNames);
 
-            } catch (\Exception $ex) {
+            } catch (\Throwable $ex) {
                 $this->_attempt += 1;
                 $this->modulesList = [];
                 $this->modulesUserFriendlyNames = [];
+            } finally {
+                curl_close($curl);
             }
 
         }

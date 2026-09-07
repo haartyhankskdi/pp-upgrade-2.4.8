@@ -18,6 +18,9 @@ use Magento\CatalogInventory\Api\StockRegistryInterface;
  */
 class OutOfStockProduct extends \Magento\Framework\View\Element\Template
 {
+    protected $customer;
+    protected $helperFactory;
+    protected $productFactory;
     /**
      * Magento Registry
      * @var \Magento\Framework\Registry

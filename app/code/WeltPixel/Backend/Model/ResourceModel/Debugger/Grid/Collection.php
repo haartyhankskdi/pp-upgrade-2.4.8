@@ -10,6 +10,8 @@ use Magento\Framework\Search\AggregationInterface;
  */
 class Collection extends \Magento\Framework\Data\Collection implements SearchResultInterface
 {
+    protected $_eventObject;
+    protected $_eventPrefix;
     /**
      * @var AggregationInterface
      */

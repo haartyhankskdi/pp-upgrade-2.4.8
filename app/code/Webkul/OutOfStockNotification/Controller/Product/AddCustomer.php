@@ -20,6 +20,8 @@ use Webkul\OutOfStockNotification\Helper\Data;
  */
 class AddCustomer extends \Magento\Framework\App\Action\Action
 {
+    protected $_helper;
+    protected $_storeManager;
     /**
      * @var \Webkul\OutOfStockNotification\Model\ProductFactory
      */

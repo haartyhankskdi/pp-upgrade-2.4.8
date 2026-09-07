@@ -25,6 +25,20 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class Submit extends AmastySubmit
 {
+    protected $answerFactory;
+    protected $answerRepository;
+    protected $canProcessSubmitFilesByAjax;
+    protected $escaper;
+    protected $eventManager;
+    protected $formKeyValidator;
+    protected $formProvider;
+    protected $helper;
+    protected $params;
+    protected $redirect;
+    protected $request;
+    protected $session;
+    protected $storeManager;
+    protected $timezone;
 
     protected $messageManager;
 

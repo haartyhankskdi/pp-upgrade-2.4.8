@@ -9,7 +9,10 @@
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Model\Url;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\ScopeInterface;
+use Magefan\Blog\Api\ShortContentExtractorInterface;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 
 /**
  * Post model
@@ -145,22 +148,43 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     protected $controllerName;
 
     /**
-     * Initialize dependencies.
-     *
+     * @var ShortContentExtractorInterface
+     */
+    protected $shortContentExtractor;
+
+    /**
+     * @var \Magefan\Blog\Api\AuthorRepositoryInterface|mixed
+     */
+    protected $authorRepository;
+
+    /**
+     * @var \Magefan\Blog\Api\CategoryRepositoryInterface|mixed
+     */
+    protected $categoryRepository;
+
+    /**
+     * @var TimezoneInterface|mixed
+     */
+    protected $timezone;
+
+    /**
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Framework\Math\Random $random
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magefan\Blog\Model\Url $url
+     * @param ImageFactory $imageFactory
      * @param \Magefan\Blog\Api\AuthorInterfaceFactory $authorFactory
-     * @param \Magefan\Blog\Model\ResourceModel\Category\CollectionFactory $categoryCollectionFactory
-     * @param \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory
-     * @param \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $commentCollectionFactory
+     * @param ResourceModel\Category\CollectionFactory $categoryCollectionFactory
+     * @param ResourceModel\Tag\CollectionFactory $tagCollectionFactory
+     * @param ResourceModel\Comment\CollectionFactory $commentCollectionFactory
      * @param \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
-     * @param \Magento\Framework\Model\ResourceModel\AbstractResource $resource
-     * @param \Magento\Framework\Data\Collection\AbstractDb $resourceCollection
+     * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
+     * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
      * @param array $data
+     * @param \Magefan\Blog\Api\AuthorRepositoryInterface|null $authorRepository
+     * @param \Magefan\Blog\Api\CategoryRepositoryInterface|null $categoryRepository
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -175,9 +199,12 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         \Magefan\Blog\Model\ResourceModel\Tag\CollectionFactory $tagCollectionFactory,
         \Magefan\Blog\Model\ResourceModel\Comment\CollectionFactory $commentCollectionFactory,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
-        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
-        array $data = []
+        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        array $data = [],
+        ?\Magefan\Blog\Api\AuthorRepositoryInterface $authorRepository = null,
+        ?\Magefan\Blog\Api\CategoryRepositoryInterface $categoryRepository = null,
+        ?\Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone = null
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
 
@@ -192,6 +219,15 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         $this->_commentCollectionFactory = $commentCollectionFactory;
         $this->_productCollectionFactory = $productCollectionFactory;
         $this->_relatedPostsCollection = clone($this->getCollection());
+        $this->authorRepository = $authorRepository ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magefan\Blog\Api\AuthorRepositoryInterface::class
+        );
+        $this->categoryRepository = $categoryRepository ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magefan\Blog\Api\CategoryRepositoryInterface::class
+        );
+        $this->timezone = $timezone ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magento\Framework\Stdlib\DateTime\TimezoneInterface::class
+        );
     }
 
     /**
@@ -214,6 +250,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     {
         $identities = [];
 
+        $allIdentitiesFlag = (bool)$this->getAllIdentifiersFlag();
+
         if ($this->getId()) {
             $identities[] = self::CACHE_TAG . '_' . $this->getId();
         }
@@ -228,13 +266,15 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $newCategories = [];
         }
 
-        if ($this->getData('is_active') && $this->getData('is_active') != $this->getOrigData('is_active')) {
+        if ($allIdentitiesFlag
+            || ($this->getData('is_active') && $this->getData('is_active') != $this->getOrigData('is_active'))
+        ) {
             $identities[] = self::CACHE_TAG . '_' . 0;
         }
 
         $isChangedCategories = count(array_diff($oldCategories, $newCategories));
 
-        if ($isChangedCategories) {
+        if ($allIdentitiesFlag || $isChangedCategories) {
             $changedCategories = array_unique(
                 array_merge($oldCategories, $newCategories)
             );
@@ -386,7 +426,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Set media gallery images url
      *
      * @param array $images
-     * @return this
+     * @return $this
      */
     public function setGalleryImages(array $images)
     {
@@ -445,7 +485,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             if (!$image) {
                 $content = $this->getFilteredContent();
                 $match = null;
-                preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $content, $match);
+                preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', (string)$content, $match);
                 if (!empty($match['src'])) {
                     $image = $match['src'];
                 }
@@ -476,150 +516,44 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     /**
      * Retrieve short filtered content
      * @param  mixed $len
-     * @param  mixed $endСharacters
+     * @param  mixed $endCharacters
      * @return string
      */
-    public function getShortFilteredContent($len = null, $endСharacters = null)
+    public function getShortFilteredContent($len = null, $endCharacters = null)
     {
         /* Fix for custom themes that send wrong parameters to this function, and that brings the error */
         if (is_object($len)) {
-             $len = null;
+            $len = null;
         }
         /* End fix */
-        
+
         $key = 'short_filtered_content' . $len;
         if (!$this->hasData($key)) {
 
-            $isPagebreakDefined = false;
-
             if ($this->getShortContent()) {
-                $content = $this->filterProvider->getPageFilter()->filter(
-                    (string) $this->getShortContent() ?: ''
-                );
+                $content = (string)$this->getShortContent() ?: '';
             } else {
-                $content = $this->getFilteredContent();
-
-                if (!$len) {
-                    $pageBraker = '<!-- pagebreak -->';
-                    $len = mb_strpos($content, $pageBraker);
-                    if ($len) {
-                        $isPagebreakDefined = true;
-                    } else {
-                        $len = (int)$this->scopeConfig->getValue(
-                            'mfblog/post_list/shortcotent_length',
-                            ScopeInterface::SCOPE_STORE
-                        );
-                    }
-                }
+                //$content = $this->getFilteredContent();
+                $content = (string)$this->getContent() ?: '';
             }
 
-            if ($len) {
-
-                if (!$isPagebreakDefined) {
-
-                    $oLen = $len;
-                    /* Skip <style> tags at the begining of string in calculations */
-                    $sp1 = mb_strpos($content, '<style>');
-                    if (false !== $sp1) {
-                        $stylePattern = "~\<style(.*)\>(.*)\<\/style\>~";
-                        $cc = preg_replace($stylePattern, '', $content); /* remove style tag */
-                        $sp2 = mb_strpos($content, '</style>');
-
-                        while (false !== $sp1 && false !== $sp2 && $sp1 < $sp2 && $sp2 > $len && $sp1 < $len) {
-                            $len = $oLen + $sp2 + 8;
-                            $sp1 = mb_strpos($content, '<style>', $sp2 + 1);
-                            $sp2 = mb_strpos($content, '</style>', $sp2 + 1);
-                        }
-
-                        $l = mb_strlen($content);
-                        if ($len < $l) {
-                            $sp2 = mb_strrpos($content, '</style>', $len - $l);
-                            if ($len < $oLen + $sp2 + 8) {
-                                $len = $oLen + $sp2 + 8;
-                            }
-                        }
-
-                    } else {
-                        $cc = $content;
-                    }
-
-                    /* Skip long HTML */
-                    $stcc = trim(strip_tags($cc));
-                    //if ($stcc && strlen($stcc) < strlen($cc) / 3) {
-                    if ($stcc && $len < mb_strlen($content)) {
-                        $str = '';
-                        $start = false;
-                        foreach (explode(' ', $stcc) as $s) {
-                            $str .= ($str ? ' ' : '') . $s;
-
-                            $pos = mb_strpos($content, $str);
-                            if (false !== $pos) {
-                                $start = $pos;
-                            } else {
-                                break;
-                            }
-                        }
-
-                        if (false !== $start) {
-                            if ($len < $start + $oLen) {
-                                $len = $start + $oLen;
-                            }
-                        }
-                    }
-                }
-
-                /* Do not cut words */
-                while ($len < strlen($content)
-                    && !in_array($content[$len], [' ', '<', "\t", "\r", "\n"])) {
-                    $len++;
-                }
-
-                $content = mb_substr($content, 0, $len);
-                try {
-                    $previousLoaderState = libxml_disable_entity_loader(true);
-                    $previousErrorState = libxml_use_internal_errors(true);
-                    $dom = new \DOMDocument();
-                    $dom->loadHTML('<?xml encoding="UTF-8">' . $content);
-                    libxml_disable_entity_loader($previousLoaderState);
-                    libxml_use_internal_errors($previousErrorState);
-
-                    $body = $dom->getElementsByTagName('body');
-                    if ($body && $body->length > 0) {
-                        $body = $body->item(0);
-                        $_content = new \DOMDocument;
-                        foreach ($body->childNodes as $child) {
-                            $_content->appendChild($_content->importNode($child, true));
-                        }
-                        $content = $_content->saveHTML();
-                    }
-                } catch (\Exception $e) {
-                    /* Do nothing, it's OK */
-                }
-            }
-
-            if ($endСharacters === null) {
-                $endСharacters = $this->scopeConfig->getValue(
-                    'mfblog/post_list/end_characters',
-                    ScopeInterface::SCOPE_STORE
-                );
-            }
-
-            if ($len && $endСharacters) {
-                $trimMask = " \t\n\r\0\x0B,.!?";
-                if ($p = strrpos($content, '</')) {
-                    $content = trim(substr($content, 0, $p), $trimMask)
-                        . $endСharacters
-                        . substr($content, $p);
-                } else {
-                    $content = trim($content, $trimMask)
-                        . $endСharacters;
-                }
-            }
+            $content = $this->getShortContentExtractor()->execute($content, $len, $endCharacters);
 
             $this->setData($key, $content);
         }
 
         return $this->getData($key);
+    }
+
+    /**
+     * Retrieve short filtered content,escaping imgs
+     * @param  mixed $len
+     * @param  mixed $endCharacters
+     * @return string
+     */
+    public function getShortFilteredContentWithoutImages($len = null, $endCharacters = null)
+    {
+        return preg_replace('<img([\w\W]+?)/>', '', $this->getShortFilteredContent($len, $endCharacters));
     }
 
     /**
@@ -633,7 +567,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $title = $this->getData('title');
         }
 
-        return trim($title);
+        return trim($title ?: '');
     }
 
     /**
@@ -642,17 +576,32 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getMetaDescription()
     {
-        $desc = $this->getData('meta_description');
-        if (!$desc) {
-            $desc = $this->getData('content');
+
+        $key = 'filtered_meta_description';
+        if (!$this->hasData($key)) {
+            $desc = $this->getData('meta_description');
+            if (!$desc) {
+                $desc = $this->getShortFilteredContent(500);
+            }
+
+            $stylePattern = "~<style\b[^>]*>.*?</style>~is";
+            $desc = preg_replace($stylePattern, '', $desc);
+            $desc = trim(strip_tags((string)$desc));
+            $desc = str_replace(["\r\n", "\n\r", "\r", "\n"], ' ', $desc);
+
+            if (mb_strlen($desc) > 160) {
+                $desc = mb_substr($desc, 0, 160);
+                $lastSpace = mb_strrpos($desc, ' ');
+                if ($lastSpace !== false) {
+                    $desc = mb_substr($desc, 0, $lastSpace) . '...';
+                }
+            }
+
+            $desc = trim($desc);
+            $this->setData($key, $desc);
         }
 
-        $desc = strip_tags($desc);
-        if (mb_strlen($desc) > 300) {
-            $desc = mb_substr($desc, 0, 300);
-        }
-
-        return trim($desc);
+        return $this->getData($key);
     }
 
     /**
@@ -680,8 +629,8 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $desc = $this->getMetaDescription();
         } else {
             $desc = strip_tags($desc);
-            if (mb_strlen($desc) > 160) {
-                $desc = mb_substr($desc, 0, 160);
+            if (mb_strlen($desc) > 300) {
+                $desc = mb_substr($desc, 0, 300);
             }
         }
 
@@ -722,19 +671,39 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
 
     /**
      * Retrieve post parent categories
-     * @return \Magefan\Blog\Model\ResourceModel\Category\Collection
+     * @return array
      */
     public function getParentCategories()
     {
         if (null === $this->_parentCategories) {
-            $this->_parentCategories = $this->_categoryCollectionFactory->create()
-                ->addFieldToFilter('category_id', ['in' => $this->getCategories()])
-                ->addStoreFilter($this->getStoreId())
-                ->addActiveFilter()
-                ->setOrder('position');
+            $this->_parentCategories = [];
+            if ($this->getCategories()) {
+                foreach ($this->getCategories() as $categoryId) {
+                    try {
+                        $category = $this->categoryRepository->getById($categoryId);
+                        if ($category->getId() && $category->isVisibleOnStore($this->getStoreId())) {
+                            $this->_parentCategories[$categoryId] = $category;
+                        }
+                    } catch (NoSuchEntityException $e) {
+
+                    }
+                }
+                uasort($this->_parentCategories, [$this, 'sortByPositionDesc']);
+            }
         }
 
         return $this->_parentCategories;
+    }
+
+    /**
+     * Sort by position param
+     * @param $a
+     * @param $b
+     * @return int
+     */
+    public function sortByPositionDesc($a, $b)
+    {
+        return strcmp($b->getPosition(), $a->getPosition());
     }
 
     /**
@@ -781,6 +750,15 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         }
 
         return $this->_relatedTags;
+    }
+
+    /**
+     * Retrieve post tags
+     * @return \Magefan\Blog\Model\ResourceModel\Tag\Collection
+     */
+    public function getRelatedCoauthors()
+    {
+        return [];
     }
 
     /**
@@ -890,10 +868,14 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         if (!$this->hasData('author')) {
             $author = false;
             if ($authorId = $this->getData('author_id')) {
-                $_author = $this->_authorFactory->create();
-                $_author->load($authorId);
-                if ($_author->getId()) {
-                    $author = $_author;
+
+                try {
+                    $_author = $this->authorRepository->getById($authorId);
+                    if ($_author->getId() && $_author->isVisibleOnStore($this->getStoreId())) {
+                        $author = $_author;
+                    }
+                } catch (NoSuchEntityException $e) {
+
                 }
             }
             $this->setData('author', $author);
@@ -939,9 +921,12 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             }
         }
 
+        $gmtTime = $this->getData('publish_time');
+        $localTime = $this->timezone->date(new \DateTime($gmtTime))->format('Y-m-d H:i:s');
+
         return \Magefan\Blog\Helper\Data::getTranslatedDate(
             $format,
-            $this->getData('publish_time')
+            $localTime
         );
     }
 
@@ -1057,7 +1042,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $tags = [];
             foreach ($this->getRelatedTags() as $tag) {
                 $tags[] = $tag->getDynamicData(
-                    // isset($fields['tags']) ? $fields['tags'] : null
+                // isset($fields['tags']) ? $fields['tags'] : null
                 );
             }
             $data['tags'] = $tags;
@@ -1097,7 +1082,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
         if (null === $fields || array_key_exists('author', $fields)) {
             if ($author = $this->getAuthor()) {
                 $data['author'] = $author->getDynamicData(
-                    //isset($fields['author']) ? $fields['author'] : null
+                //isset($fields['author']) ? $fields['author'] : null
                 );
             }
         }
@@ -1160,5 +1145,44 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     public function getUpdatedAt()
     {
         return $this->getData('update_time');
+    }
+
+    /**
+     * @return ShortContentExtractorInterface
+     */
+    public function getShortContentExtractor()
+    {
+        if (null === $this->shortContentExtractor) {
+            $this->shortContentExtractor = \Magento\Framework\App\ObjectManager::getInstance()
+                ->get(ShortContentExtractorInterface::class);
+        }
+
+        return $this->shortContentExtractor;
+    }
+
+    /**
+     * Retrieve reading time
+     * @return int
+     */
+    public function getReadingTime()
+    {
+        if (!$this->getData('reading_time')) {
+            $wpm = 250;
+            $contentHtml = $this->getFilteredContent();
+            $numberOfImages = substr_count(strtolower($contentHtml), '<img ');
+            $additionalWordsForImages = (int)($numberOfImages * 12) / $wpm;
+            $wordCount = count(preg_split('/\s+/', strip_tags($contentHtml)));
+
+            $readingTime = 1;
+
+            if (!$wordCount && !$additionalWordsForImages) {
+                return $readingTime;
+            }
+            $readingTime = ceil(($wordCount + $additionalWordsForImages) / $wpm);
+
+            $this->setData('reading_time', $readingTime);
+        }
+
+        return (int)$this->getData('reading_time');
     }
 }

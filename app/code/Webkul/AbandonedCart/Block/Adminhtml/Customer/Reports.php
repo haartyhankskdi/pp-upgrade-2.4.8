@@ -12,6 +12,9 @@ namespace Webkul\AbandonedCart\Block\Adminhtml\Customer;
 
 class Reports extends \Magento\Backend\Block\Widget\Form\Container
 {
+    protected $_mailsLog;
+    protected $_messageManager;
+    protected $_quoteModel;
     /**
      * Core registry
      *

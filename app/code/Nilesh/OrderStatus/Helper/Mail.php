@@ -14,6 +14,7 @@ use Magento\Framework\Mail\Template\SenderResolverInterface;
 
 class Mail extends AbstractHelper
 {
+    protected $senderResolver;
 
     const XML_SENDER_EMAIL_APPROVE          = 'sales_email/custom_approve_status/identity';
     const XML_SENDER_EMAIL_APPROVE_CC       = 'sales_email/custom_approve_status/copy_to';
@@ -53,7 +54,7 @@ class Mail extends AbstractHelper
     protected function sendEmailTemplate(
         $template,
         $fromArray = [],
-        $to,
+        $to = [],
         $add_cc = [],
         $templateParams = [],
         $storeId = null

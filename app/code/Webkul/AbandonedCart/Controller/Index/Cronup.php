@@ -9,6 +9,7 @@ namespace Webkul\AbandonedCart\Controller\Index;
 
 class Cronup extends \Magento\Framework\App\Action\Action
 {
+    protected $cron;
 
     protected $resultPageFactory;
 

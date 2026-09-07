@@ -12,6 +12,7 @@ use Magento\Framework\App\Helper\AbstractHelper;
 
 class Path extends AbstractHelper
 {
+    protected $directory_list;
     protected $_filesystem;
 
     /**

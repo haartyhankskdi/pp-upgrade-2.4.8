@@ -18,6 +18,7 @@ use Magento\Ui\Component\Form\Fieldset;
 
 class Styling extends \Magezon\UiBuilder\Ui\DataProvider\Form\AbstractModifier
 {
+    protected $meta;
     const GROUP_STYLING_NAME               = 'styling';
     const GROUP_STYLING_DEFAULT_SORT_ORDER = 300;
     const FIELD_CUSTOM_CLASS               = 'custom_class';

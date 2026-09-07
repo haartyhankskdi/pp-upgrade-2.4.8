@@ -15,6 +15,7 @@ use Magento\Framework\Controller\ResultFactory;
 use Kdi\ImageUpload\Helper\CustomCookie;
 class Account implements HttpGetActionInterface
 {
+    protected $resultFactory;
 
     /**
      * @var PageFactory

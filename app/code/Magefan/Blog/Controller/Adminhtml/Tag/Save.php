@@ -35,7 +35,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Tag
             }
         }
 
-        $inputFilter = new \Zend_Filter_Input(
+        $inputFilter = $this->getFilterInput(
             $filterRules,
             [],
             $data
@@ -44,5 +44,16 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Tag
         $data = $inputFilter->getUnescaped();
 
         return $data;
+    }
+
+    /**
+     * @param $model
+     * @param $request
+     * @return void
+     */
+    protected function _beforeSave($model, $request)
+    {
+        /* Prepare images */
+        $this->prepareImagesBeforeSave($model, ['tag_img']);
     }
 }

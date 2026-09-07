@@ -73,10 +73,14 @@ abstract class DeliveryInformation extends Template
         if ($order = $this->getOrder()) {
             $deliveryInformation = $order->getMpDeliveryInformation();
 
-            if (is_array(json_decode($deliveryInformation, true))) {
-                $result = json_decode($deliveryInformation, true);
+            $decodedDeliveryInformation = $deliveryInformation !== null
+                ? json_decode($deliveryInformation, true)
+                : null;
+
+            if (is_array($decodedDeliveryInformation)) {
+                $result = $decodedDeliveryInformation;
             } else {
-                $values = explode(' ', $deliveryInformation);
+                $values = explode(' ', (string) $deliveryInformation);
                 if (sizeof($values) > 1) {
                     $result['deliveryDate'] = $values[0];
                     $result['deliveryTime'] = $values[1];

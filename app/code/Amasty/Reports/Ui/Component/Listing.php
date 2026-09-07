@@ -31,11 +31,13 @@ class Listing extends \Magento\Ui\Component\Listing
     }
 
     /**
+     * @param string $contentType
+     *
      * @return string
      */
-    public function render()
+    public function render(string $contentType = '')
     {
-        $result = parent::render();
+        $result = parent::render($contentType);
         if (is_string($result)) {
             $result = $this->decoder->decode($result);
             $result = $this->castToColumnFormats($result);

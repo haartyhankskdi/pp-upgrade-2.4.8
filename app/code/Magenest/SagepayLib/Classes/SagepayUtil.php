@@ -268,7 +268,7 @@ class SagepayUtil
         return $queryArray;
     }
 
-   static public function queryStringToArrayRemovingSensitiveData($data, $delimeter = "&", $nonSensitiveDataKey)
+   static public function queryStringToArrayRemovingSensitiveData($data, $delimeter = "&", $nonSensitiveDataKey = [])
     {  
         // Explode query by delimiter
         $pairs = explode($delimeter, $data);

@@ -5,6 +5,8 @@ namespace Haartyhanks\EcommerceAnalytics\Block;
 
 class Ecommerce extends \Magento\Framework\View\Element\Template
 {
+    protected $_orderFactory;
+    protected $scopeConfig;
 
     protected $orderFactory;
     protected $transactions;

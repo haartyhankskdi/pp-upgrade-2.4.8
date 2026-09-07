@@ -32,6 +32,7 @@ use Magento\Ui\Component\Container;
 
 class CustomOptions extends \Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\CustomOptions
 {
+    protected $_objectManager;
     protected function createCustomOptionsPanel()
     {
         $this->_objectManager = \Magento\Framework\App\ObjectManager::getInstance();

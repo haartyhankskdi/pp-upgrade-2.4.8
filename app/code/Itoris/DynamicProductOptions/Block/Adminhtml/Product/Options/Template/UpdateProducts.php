@@ -28,7 +28,10 @@ namespace Itoris\DynamicProductOptions\Block\Adminhtml\Product\Options\Template;
 use Magento\Framework\App\ResourceConnection;
 
 class UpdateProducts extends \Magento\Backend\Block\Widget\Container
-{	
+{
+    protected $_objectManager;
+    protected $session;
+    protected $updateProductData;	
 	protected $_template = 'Itoris_DynamicProductOptions::catalog/template/products_update.phtml';
     
     public function needsProductUpdate(){

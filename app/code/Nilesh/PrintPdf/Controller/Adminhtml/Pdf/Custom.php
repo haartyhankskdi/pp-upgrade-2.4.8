@@ -12,6 +12,9 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 
 class Custom extends \Magento\Backend\App\Action
 {
+    protected $_pageTopalign;
+    protected $logger;
+    protected $y;
 
     protected $resultPageFactory;
     protected $jsonHelper;

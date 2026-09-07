@@ -160,12 +160,16 @@ class BuilderPlugin
         if (null === $this->configSections) {
             $sections = [];
             $this->configSections = [];
-            $tabs = $this->structure->getTabs();
+
+            try {
+                $tabs = $this->structure->getTabs();
+            } catch (\Exception $e) {
+                $tabs = [];
+            }
 
             foreach ($tabs as $tab) {
-                if ($tab->getId() == 'magefan') {
-                    $sections = $tab->getData()['children'];
-                    break;
+                if (in_array($tab->getId(), ['magefan', 'mf_extensions_list'])) {
+                    $sections = array_merge($sections, $tab->getData()['children']);
                 }
             }
 
@@ -270,7 +274,10 @@ class BuilderPlugin
                 }
             }
             unset($this->configSections[$moduleName]);
-            unset($this->magefanModules[array_search($moduleName, $this->magefanModules)]);
+            $index = array_search($moduleName, $this->magefanModules);
+            if (false !== $index) {
+                unset($this->magefanModules[$index]);
+            }
         }
     }
 
@@ -283,7 +290,7 @@ class BuilderPlugin
         $subItems = [];
         if (!empty($items)) {
             foreach ($items as $item) {
-                if (isset($item['module']) &&  0 === strpos($item['module'], 'Magefan_')
+                if (isset($item['module']) && 0 === strpos($item['module'], 'Magefan_')
                     || !isset($item['module']) && isset($item['id']) && 0 === strpos($item['id'], 'Magefan_')
                 ) {
                     if ('Magefan_Community::elements' != $item['id']) {

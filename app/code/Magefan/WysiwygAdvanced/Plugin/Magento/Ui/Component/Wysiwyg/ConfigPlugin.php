@@ -37,8 +37,8 @@ class ConfigPlugin
      */
     public function __construct(
         $activeEditor = null,
-        RequestInterface $request = null,
-        ScopeConfigInterface $scopeConfig = null
+        ?RequestInterface $request = null,
+        ?ScopeConfigInterface $scopeConfig = null
     ) {
         try {
             /* Fix for Magento 2.1.x & 2.2.x that does not have this class and plugin should not work there */
@@ -94,8 +94,8 @@ class ConfigPlugin
         // Get current wysiwyg adapter's path
         $editor = $this->activeEditor->getWysiwygAdapterPath();
 
-        // Is the current wysiwyg tinymce v4?
-        if (strpos($editor, 'tinymce4Adapter')) {
+        // Is the current wysiwyg tinymce v4 or v5 or v7?
+        if (strpos($editor, 'tinymce4Adapter') || strpos($editor, 'tinymce5Adapter') || strpos($editor, 'tinymceAdapter')) {
 
             if (($result->getDataByPath('settings/menubar')) || ($result->getDataByPath('settings/toolbar')) || ($result->getDataByPath('settings/plugins'))) {
                 // do not override ui_element config (unsure if this is needed)
@@ -112,11 +112,16 @@ class ConfigPlugin
             $settings['menubar'] = true;
             $settings['image_advtab'] = true;
 
-            $settings['plugins'] = 'advlist autolink code colorpicker directionality hr imagetools link media noneditable paste print table textcolor toc visualchars anchor charmap codesample contextmenu help image insertdatetime lists nonbreaking pagebreak preview searchreplace template textpattern visualblocks wordcount magentovariable magentowidget';
+            if (strpos($editor, 'tinymceAdapter')) {
+                $settings['plugins'] = 'advlist autolink code directionality link media table visualchars anchor charmap codesample help image insertdatetime lists nonbreaking pagebreak preview searchreplace visualblocks wordcount magentovariable magentowidget emoticons';
+                $settings['toolbar1'] = 'magentovariable magentowidget | blocks | styles | fontfamily | fontsizeinput | lineheight | forecolor backcolor | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent';
+            } else {
+                $settings['plugins'] = 'advlist autolink code colorpicker directionality hr imagetools link media noneditable paste print table textcolor toc visualchars anchor charmap codesample contextmenu help image insertdatetime lists nonbreaking pagebreak preview searchreplace template textpattern visualblocks wordcount magentovariable magentowidget emoticons';
+                $settings['toolbar1'] = 'magentovariable magentowidget | formatselect | styleselect | fontselect | fontsizeselect | lineheight | forecolor backcolor | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent';
+                $settings['force_p_newlines'] = false;
+            }
 
-            $settings['toolbar1'] = 'magentovariable magentowidget | formatselect | styleselect | fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent';
-            $settings['toolbar2'] = ' undo redo  | link anchor table charmap | image media insertdatetime | widget | searchreplace visualblocks  help | hr pagebreak';
-            $settings['force_p_newlines'] = false;
+            $settings['toolbar2'] = ' undo redo  | link anchor table charmap | image media insertdatetime | widget | searchreplace visualblocks  help | hr pagebreak | emoticons';
 
             $settings['valid_children'] = '+body[style]';
 
@@ -126,6 +131,8 @@ class ConfigPlugin
             if (in_array($this->request->getModuleName(), ['cms', 'catalog'])) {
                 $type = $this->request->getModuleName() . '_' . $this->request->getControllerName();
             } elseif ('blog' == $this->request->getModuleName()) {
+                $type = $this->request->getModuleName();
+            } elseif ('mfproducttabs' == $this->request->getModuleName()) {
                 $type = $this->request->getModuleName();
             }
 

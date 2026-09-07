@@ -22,6 +22,7 @@
 namespace Mageplaza\Core\Helper;
 
 use Exception;
+use Laminas\Serializer\Adapter\PhpSerialize;
 use Magento\Backend\App\Config;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -324,6 +325,6 @@ class AbstractData extends AbstractHelper
      */
     protected function getSerializeClass()
     {
-        return $this->objectManager->get('Zend_Serializer_Adapter_PhpSerialize');
+        return $this->objectManager->get(PhpSerialize::class);
     }
 }

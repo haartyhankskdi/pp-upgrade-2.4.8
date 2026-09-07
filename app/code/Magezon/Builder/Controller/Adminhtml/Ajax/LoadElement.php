@@ -16,6 +16,7 @@ namespace Magezon\Builder\Controller\Adminhtml\Ajax;
 
 class LoadElement extends \Magento\Backend\App\Action
 {
+    protected $coreHelper;
     /**
      * @var \Magento\Backend\App\Action\Context
      */

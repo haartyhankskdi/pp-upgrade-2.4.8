@@ -9,6 +9,9 @@ namespace MY\BlacklistRepeat\Observer;
  */
 class BlacklistRepeatOrder implements \Magento\Framework\Event\ObserverInterface
 {
+    protected $_resource;
+    protected $logger;
+    protected $orderCollectionFactory;
     /**
      * @var \Magento\Catalog\Model\ProductRepository
      */

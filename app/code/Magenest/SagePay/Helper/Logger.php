@@ -42,32 +42,30 @@ class Logger extends \Monolog\Logger
     }
 
     /**
-     * @param string $message
+     * @param string|\Stringable $message
      * @param array $context
-     * @return bool
      */
     public function debug(
-        $message,
+        string|\Stringable $message,
         array $context = []
-    ) {
+    ): void {
         if (!$this->isEnabledLogging) {
-            return true;
+            return;
         }
-        return parent::debug($message, $context);
+        parent::debug($message, $context);
     }
 
     /**
-     * @param string $message
+     * @param string|\Stringable $message
      * @param array $context
-     * @return bool
      */
     public function critical(
-        $message,
+        string|\Stringable $message,
         array $context = []
-    ) {
+    ): void {
         if (!$this->isEnabledLogging) {
-            return true;
+            return;
         }
-        return parent::critical($message, $context);
+        parent::critical($message, $context);
     }
 }

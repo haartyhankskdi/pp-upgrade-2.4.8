@@ -54,13 +54,18 @@ class CustomCheckboxProvider implements ObserverInterface
             $result = $observer->getData('result');
             $result->setData('checkboxes', $this->checkboxProvider->getData($scope));
 
+            $blockName = 'amasty_gdpr_' . $scope;
+
             /** @var Checkbox $checkboxBlock */
-            $checkboxBlock = $this->layout->createBlock(
-                Checkbox::class,
-                'amasty_gdpr_' . $scope,
-                ['scope' => $scope]
-            );
-            $checkboxBlock->setTemplate('Amasty_Gdpr::checkbox.phtml');
+            $checkboxBlock = $this->layout->getBlock($blockName);
+            if (!$checkboxBlock) {
+                $checkboxBlock = $this->layout->createBlock(
+                    Checkbox::class,
+                    $blockName,
+                    ['scope' => $scope]
+                );
+                $checkboxBlock->setTemplate('Amasty_Gdpr::checkbox.phtml');
+            }
             $result->setData('html', $checkboxBlock->toHtml());
         } catch (LocalizedException $e) {
             $this->logger->critical($e);

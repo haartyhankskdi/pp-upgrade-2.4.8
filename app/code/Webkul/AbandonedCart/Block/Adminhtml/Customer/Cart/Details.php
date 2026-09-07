@@ -12,6 +12,7 @@ namespace Webkul\AbandonedCart\Block\Adminhtml\Customer\Cart;
 
 class Details extends \Magento\Backend\Block\Widget\Form\Container
 {
+    protected $scopeConfig;
     /**
      * Core registry
      *

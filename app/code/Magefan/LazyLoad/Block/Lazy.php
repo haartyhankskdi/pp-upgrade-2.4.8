@@ -6,15 +6,34 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
+declare(strict_types=1);
+
 namespace Magefan\LazyLoad\Block;
 
-use Magento\Store\Model\ScopeInterface;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template\Context;
+use Magefan\LazyLoad\Model\Config;
 
 /**
  * Init lazy load
  */
-class Lazy extends \Magento\Framework\View\Element\Template
+class Lazy extends Template
 {
+    protected $config;
+    /**
+     * @param Context $context
+     * @param Config $config
+     * @param array $data
+     */
+    public function __construct(
+        Context $context,
+        Config $config,
+        array $data = []
+    ) {
+        parent::__construct($context, $data);
+        $this->config = $config;
+    }
+
     /**
      * Retrieve block html
      *
@@ -22,10 +41,7 @@ class Lazy extends \Magento\Framework\View\Element\Template
      */
     protected function _toHtml()
     {
-        if ($this->_scopeConfig->getValue(
-            'mflazyzoad/general/enabled',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        )) {
+        if ($this->config->getEnabled()) {
             return parent::_toHtml();
         }
 
@@ -33,11 +49,27 @@ class Lazy extends \Magento\Framework\View\Element\Template
     }
 
     /**
+     * @return bool
+     */
+    public function isNoScriptEnabled(): bool
+    {
+        return (bool)$this->config->isNoScriptEnabled();
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsJavascriptLazyLoadMethod(): bool
+    {
+        return $this->config->getIsJavascriptLazyLoadMethod();
+    }
+
+    /**
      * Retrieve lazy load config json string
      *
      * @return string
      */
-    public function getLazyLoadConfig()
+    public function getLazyLoadConfig(): string
     {
         $config = $this->getData('lazy_load_config');
 

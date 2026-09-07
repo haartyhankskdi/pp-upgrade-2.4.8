@@ -20,6 +20,7 @@ use Webkul\AbandonedCart\Model\ResourceModel\MailsLog\Collection as MailsLogColl
 
 class Collection extends MailsLogCollection implements SearchResultInterface
 {
+    protected $_objectManager;
     /**
      * @var AggregationInterface
      */

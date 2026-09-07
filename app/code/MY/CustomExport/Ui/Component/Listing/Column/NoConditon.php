@@ -15,6 +15,7 @@ use \Magento\Framework\Api\SearchCriteriaBuilder;
  */
 class NoConditon extends Column 
 {
+    protected $_searchCriteria;
 
     /**
      * Constructor

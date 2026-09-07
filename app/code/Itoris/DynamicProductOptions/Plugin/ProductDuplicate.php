@@ -26,6 +26,7 @@
 namespace Itoris\DynamicProductOptions\Plugin;
 
 class ProductDuplicate {
+    protected $_objectManager;
     
     public function afterCopy($subject, $result) {
         $this->_objectManager = \Magento\Framework\App\ObjectManager::getInstance();

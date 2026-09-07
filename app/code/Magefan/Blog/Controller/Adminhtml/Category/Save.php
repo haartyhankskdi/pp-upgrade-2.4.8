@@ -34,6 +34,12 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
         );
     }
 
+    protected function _beforeSave($model, $request)
+    {
+        /* Prepare images */
+        $this->prepareImagesBeforeSave($model, ['category_img']);
+    }
+
     /**
      * Filter request params
      * @param  array $data
@@ -51,7 +57,7 @@ class Save extends \Magefan\Blog\Controller\Adminhtml\Category
             }
         }
 
-        $inputFilter = new \Zend_Filter_Input(
+        $inputFilter = $this->getFilterInput(
             $filterRules,
             [],
             $data

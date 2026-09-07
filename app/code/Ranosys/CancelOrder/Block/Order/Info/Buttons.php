@@ -14,6 +14,7 @@ use Magento\Customer\Model\Context;
  */
 class Buttons extends \Magento\Sales\Block\Order\Info\Buttons
 {
+    protected $helper;
 
     /**
      * @param \Magento\Framework\View\Element\Template\Context $context

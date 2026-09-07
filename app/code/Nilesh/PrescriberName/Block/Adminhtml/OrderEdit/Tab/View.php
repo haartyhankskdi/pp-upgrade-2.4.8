@@ -7,6 +7,8 @@ namespace Nilesh\PrescriberName\Block\Adminhtml\OrderEdit\Tab;
  */
 class View extends \Magento\Backend\Block\Template implements \Magento\Backend\Block\Widget\Tab\TabInterface
 {
+    protected $_coreRegistry;
+    protected $_prescriberNameFactory;
     protected $_template = 'tab/view/pre_order_info.phtml';
 
     protected $_prescriberName;

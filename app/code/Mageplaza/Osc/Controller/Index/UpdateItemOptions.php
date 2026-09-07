@@ -32,10 +32,10 @@ use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Data\Form\FormKey\Validator;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Filter\LocalizedToNormalized;
 use Magento\Framework\Locale\ResolverInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
-use Zend_Filter_LocalizedToNormalized;
 
 /**
  * Class UpdateItemOptions
@@ -108,7 +108,7 @@ class UpdateItemOptions extends Cart
 
         try {
             if (isset($params['qty'])) {
-                $filter = new Zend_Filter_LocalizedToNormalized([
+                $filter = new LocalizedToNormalized([
                     'locale' => $this->resolver->getLocale()
                 ]);
                 $params['qty'] = $filter->filter($params['qty']);

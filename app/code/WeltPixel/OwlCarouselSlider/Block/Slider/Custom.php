@@ -3,6 +3,7 @@ namespace WeltPixel\OwlCarouselSlider\Block\Slider;
 
 class Custom extends \Magento\Framework\View\Element\Template implements \Magento\Widget\Block\BlockInterface
 {
+    protected $_coreRegistry;
     protected $_sliderId;
     protected $_sliderConfiguration;
     protected $_helperCustom;

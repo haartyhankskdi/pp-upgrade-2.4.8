@@ -35,6 +35,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //          this is not (yet) in helper functions.
 
 class HTML5_TreeBuilder {
+    protected $pendingTableCharactersNull;
     public $stack = [];
     public $content_model;
 

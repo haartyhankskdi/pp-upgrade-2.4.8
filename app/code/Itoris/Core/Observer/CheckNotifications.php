@@ -28,6 +28,9 @@ use Magento\Framework\Event\ObserverInterface;
 
 class CheckNotifications implements ObserverInterface
 {
+    protected $_backendAuthSession;
+    protected $_objectManager;
+    protected $messageManager;
     public function __construct(
         \Magento\Backend\Model\Auth\Session $backendAuthSession,
 		\Magento\Framework\ObjectManagerInterface $objectManager,

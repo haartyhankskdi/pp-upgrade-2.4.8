@@ -20,6 +20,10 @@ use Webkul\OutOfStockNotification\Logger\Logger;
  */
 class Data extends AbstractHelper
 {
+    protected $_bundleSelection;
+    protected $_template;
+    protected $grouped;
+    protected $logger;
     const XML_PATH_ADMIN_NOTIFICATION_MAIL = 'notificationsettings/emailsettings/admin_notification';
     const XML_PATH_PRODUCT_INSTOCK_REGISTRATION = 'notificationsettings/emailsettings/product_instock_registration';
     const XML_PATH_PRODUCT_INSTOCK_NOTIFICATION = 'notificationsettings/emailsettings/product_instock_notification';

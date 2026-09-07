@@ -21,6 +21,10 @@ use Magento\Framework\Mail\Template\TransportBuilder;
  */
 class Email extends \Magento\Framework\App\Helper\AbstractHelper
 {
+    protected $_inlineTranslation;
+    protected $_logMails;
+    protected $_storeManager;
+    protected $_transportBuilder;
     /**
      * @param Magento\Framework\App\Helper\Context $context
      * @param \Webkul\AbandonedCart\Model\MailsLog $logMails,

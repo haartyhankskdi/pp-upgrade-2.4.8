@@ -35,8 +35,10 @@ class Collection extends OriginalCollection
 
     protected function _renderFiltersBefore()
     {
-        $joinTable = $this->getTable('sales_order');
-        $this->getSelect()->joinLeft($joinTable, 'main_table.entity_id=sales_order.entity_id', ['prescriber_name','order_status']);
+        if (!array_key_exists('sales_order', $this->getSelect()->getPart('from'))) {
+            $joinTable = $this->getTable('sales_order');
+            $this->getSelect()->joinLeft($joinTable, 'main_table.entity_id=sales_order.entity_id', ['prescriber_name','order_status']);
+        }
     //     parent::_renderFiltersBefore();
     }
 }

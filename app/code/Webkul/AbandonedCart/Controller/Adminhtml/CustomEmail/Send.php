@@ -16,6 +16,7 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Send extends Action
 {
+    protected $_filterProvider;
     /**
      * @var \Webkul\AbandonedCart\Helper\Email
      **/

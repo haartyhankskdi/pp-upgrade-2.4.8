@@ -14,6 +14,7 @@ namespace Magenest\SagepayLib\Classes;
  */
 abstract class SagepayAbstractApi
 {
+    protected $txType;
 
     /**
      * Settings of Sagepay library

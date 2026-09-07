@@ -3,6 +3,7 @@
 namespace Nilesh\PrescriberNotes\Ui\Component\Listing\Column;
 
 class Attachment extends \Magento\Ui\Component\Listing\Columns\Column {
+    protected $_storeManager;
 
     public function __construct(
         \Magento\Framework\View\Element\UiComponent\ContextInterface $context,

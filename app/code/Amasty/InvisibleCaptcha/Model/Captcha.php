@@ -11,6 +11,7 @@ namespace Amasty\InvisibleCaptcha\Model;
 
 use Amasty\Base\Model\GetCustomerIp;
 use Amasty\InvisibleCaptcha\Model\Config\Source\CaptchaVersion;
+use Laminas\Http\Response;
 use Magento\Customer\Model\Group;
 use Magento\Customer\Model\Session;
 use Magento\Framework\HTTP\Adapter\Curl;
@@ -95,15 +96,15 @@ class Captcha
 
             try {
                 $this->curl->write(
-                    \Zend_Http_Client::POST,
+                    'POST',
                     self::GOOGLE_VERIFY_URL,
                     '1.1',
                     [],
                     $curlParams
                 );
                 $googleResponse = $this->curl->read();
-                $responseBody = \Zend_Http_Response::extractBody($googleResponse);
-                $googleAnswer = \Zend_Json::decode($responseBody);
+                $responseBody = Response::fromString($googleResponse)->getBody();
+                $googleAnswer = json_decode($responseBody, true);
                 if (array_key_exists('success', $googleAnswer)) {
                     if (isset($googleAnswer['score'])
                         && $this->configProvider->getCaptchaVersion() === CaptchaVersion::VERSION_3

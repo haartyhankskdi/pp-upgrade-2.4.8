@@ -71,6 +71,11 @@ class Config
     const XML_PATH_REDIRECT_TO_NO_SLASH = 'mfblog/permalink/redirect_to_no_slash';
 
     /**
+     * Page pagination type
+     */
+    const XML_PATH_PAGE_PAGINATION_TYPE = 'mfblog/advanced_permalink/page_pagination_type';
+
+    /**
      * Redirect to no slash config path (blog+)
      */
     const XML_PATH_REDIRECT_TO_NO_SLASH_BLOG_PLUS = 'mfblog/advanced_permalink/redirect_to_no_slash';
@@ -99,6 +104,22 @@ class Config
     const XML_TAG_ROBOTS = 'mfblog/tag/robots';
     const XML_SEARCH_ROBOTS = 'mfblog/search/robots';
     const XML_AUTHOR_ROBOTS = 'mfblog/author/robots';
+
+    /**
+     * Blog CSS include config path
+     */
+
+    const XML_INCLUDE_BLOG_CSS_ALL_PAGES = 'mfblog/developer/css_settings/include_all_pages';
+    const XML_INCLUDE_BLOG_CSS_HOME_PAGE = 'mfblog/developer/css_settings/include_home_page';
+    const XML_INCLUDE_BLOG_CSS_PRODUCT_PAGES = 'mfblog/developer/css_settings/include_product_page';
+    const XML_BLOG_CUSTOM_CSS = 'mfblog/developer/css_settings/custom_css';
+
+    const XML_BLOG_INCLUDE_BOOTSTRAP_CUSTOM_MINI = 'mfblog/developer/css_settings/include_bootstrap_custom_mini';
+
+    /**
+     * @var ScopeConfigInterface
+     */
+    protected $scopeConfig;
 
     /**
      * Config constructor.
@@ -210,8 +231,85 @@ class Config
     public function getDisplayCanonicalTag($pageType)
     {
 
-        $displayFor = explode(',', $this->getConfig(self::XML_PATH_DISPLAY_CANONICAL_TAG_FOR));
+        if ($this->getConfig(self::XML_PATH_DISPLAY_CANONICAL_TAG_FOR)) {
+            $displayFor = explode(',', $this->getConfig(self::XML_PATH_DISPLAY_CANONICAL_TAG_FOR));
+        } else {
+            $displayFor = [];
+        }
 
         return in_array($pageType, $displayFor) || in_array(self::CANONICAL_PAGE_TYPE_ALL, $displayFor) ? true : false;
+    }
+
+    /**
+     * @param null $storeId
+     * @return bool
+     */
+    public function isBlogCssIncludeOnAll($storeId = null)
+    {
+        return (bool)$this->getConfig(
+            self::XML_INCLUDE_BLOG_CSS_ALL_PAGES,
+            $storeId
+        );
+    }
+
+    /**
+     * @param null $storeId
+     * @return bool
+     */
+    public function isBlogCssIncludeOnHome($storeId = null)
+    {
+        return (bool)$this->getConfig(
+            self::XML_INCLUDE_BLOG_CSS_HOME_PAGE,
+            $storeId
+        );
+    }
+
+    /**
+     * @param null $storeId
+     * @return bool
+     */
+    public function isBlogCssIncludeOnProduct($storeId = null)
+    {
+        return (bool)$this->getConfig(
+            self::XML_INCLUDE_BLOG_CSS_PRODUCT_PAGES,
+            $storeId
+        );
+    }
+
+    /**
+     * @param $storeId
+     * @return mixed
+     */
+    public function getPagePaginationType($storeId = null)
+    {
+        if ($this->getConfig(self::XML_PATH_ADVANCED_PERMALINK_ENABLED, $storeId)) {
+            return $this->getConfig(
+                self::XML_PATH_PAGE_PAGINATION_TYPE,
+                $storeId
+            );
+        }
+
+        return 'page';
+    }
+
+    /**
+     * @param $storeId
+     * @return string
+     */
+    public function getCustomCss($storeId = null): string
+    {
+        return (string)$this->getConfig(self::XML_BLOG_CUSTOM_CSS, $storeId);
+    }
+
+    /**
+     * @param $storeId
+     * @return bool
+     */
+    public function getIncludeBootstrapCustomMini($storeId = null)
+    {
+        return (bool)$this->getConfig(
+            self::XML_BLOG_INCLUDE_BOOTSTRAP_CUSTOM_MINI,
+            $storeId
+        );
     }
 }

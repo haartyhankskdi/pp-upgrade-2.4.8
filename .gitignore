@@ -13,6 +13,9 @@ db_bkp*.sql
 # --- Magento generated/cache directories ---
 /generated/
 /var/*
+/dev/
+/setup/
+/lib/
 !/var/.htaccess
 /pub/static/*
 !/pub/static/.htaccess

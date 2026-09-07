@@ -5,6 +5,9 @@ namespace Nilesh\Reorder\Controller\Index;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
+    protected $customerSession;
+    protected $orderRepository;
+    protected $storeManager;
 
     protected $resultPageFactory;
 

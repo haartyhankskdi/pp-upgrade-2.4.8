@@ -12,7 +12,6 @@ use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\ProductFactory;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Catalog\Model\CategoryFactory;
-use Magento\Framework\Json\EncoderInterface;
 use Magento\Framework\Locale\FormatInterface;
 use Magento\Catalog\Model\ProductCategoryList;
 use Magento\Store\Model\StoreManagerInterface;
@@ -21,16 +20,14 @@ use Magento\Framework\App\RequestInterface;
 
 class Data extends AbstractHelper 
 {
-    /**
-     * @var StoreManagerInterface
-     */
-    protected $_storeManagerInterface;
+    protected $_storeManager;
+    protected $productFactory;
 
     /**
      * @var RequestInterface
      */
-    protected $_requestInterface;
-    
+    protected $_request;
+
     /**
      * @var CategoryRepository
      */
@@ -67,19 +64,9 @@ class Data extends AbstractHelper
     protected $_collectionFactory;
 
     /**
-     * @var ProductFactory
-     */
-    protected $_productFactory;
-
-    /**
      * @var Magento\Catalog\Model\CategoryFactory;
      */
     protected $_categoryFactory;
-
-    /**
-     * @var EncoderInterface 
-     */
-    protected $_jsonEncoder;
 
     /**
      * @var FormatInterface 

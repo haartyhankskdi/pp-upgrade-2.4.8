@@ -24,9 +24,8 @@ namespace Mageplaza\Core\Model;
 use Exception;
 use Magento\Framework\DataObject;
 use Magento\Framework\HTTP\Adapter\CurlFactory;
+use Laminas\Http\Response;
 use Mageplaza\Core\Helper\AbstractData;
-use Zend_Http_Client;
-use Zend_Http_Response;
 
 /**
  * Class Activate
@@ -71,7 +70,7 @@ class Activate extends DataObject
 
         $curl = $this->curlFactory->create();
         $curl->write(
-            Zend_Http_Client::POST,
+            'POST',
             self::MAGEPLAZA_ACTIVE_URL,
             '1.1',
             [],
@@ -83,7 +82,7 @@ class Activate extends DataObject
             if (empty($resultCurl)) {
                 $result['message'] = __('Cannot connect to server. Please try again later.');
             } else {
-                $responseBody = Zend_Http_Response::extractBody($resultCurl);
+                $responseBody = Response::fromString($resultCurl)->getBody();
                 $result += AbstractData::jsonDecode($responseBody);
                 if (isset($result['status']) && in_array($result['status'], [200, 201])) {
                     $result['success'] = true;

@@ -16,6 +16,7 @@ use Magento\Ui\Component\MassAction\Filter;
 
 class MassDelete extends Action
 {
+    protected $_resultLayoutFactory;
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      **/

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Amasty\Reports\Model\Email;
 
 use Magento\Framework\Mail\MessageInterface;
+use Magento\Framework\Mail\MimeInterface;
+use Magento\Framework\Mail\MimePartInterfaceFactory;
 use Magento\Framework\Mail\Template\FactoryInterface;
 use Magento\Framework\Mail\Template\SenderResolverInterface;
 use Magento\Framework\Mail\TransportInterfaceFactory;
@@ -52,15 +54,21 @@ class TransportBuilder extends \Magento\Framework\Mail\Template\TransportBuilder
     public function addAttachment(
         $body,
         $fileName,
-        $mimeType = \Zend_Mime::TYPE_OCTETSTREAM,
-        $disposition = \Zend_Mime::DISPOSITION_ATTACHMENT,
-        $encoding = \Zend_Mime::ENCODING_BASE64
+        $mimeType = MimeInterface::TYPE_OCTET_STREAM,
+        $disposition = MimeInterface::DISPOSITION_ATTACHMENT,
+        $encoding = MimeInterface::ENCODING_BASE64
     ) {
-        $attachment = new \Zend\Mime\Part($body);
-        $attachment->encoding = $encoding;
-        $attachment->type = $mimeType;
-        $attachment->disposition = $disposition;
-        $attachment->filename = $fileName;
+        /** @var MimePartInterfaceFactory $mimePartInterfaceFactory */
+        $mimePartInterfaceFactory = $this->objectManager->get(MimePartInterfaceFactory::class);
+        $attachment = $mimePartInterfaceFactory->create(
+            [
+                'content' => $body,
+                'type' => $mimeType,
+                'fileName' => $fileName,
+                'disposition' => $disposition,
+                'encoding' => $encoding
+            ]
+        );
         $this->parts[] = $attachment;
 
         return $this;

@@ -60,11 +60,14 @@ class ModulesVersion extends \Magento\Backend\Block\Template
 
         curl_setopt($curl, CURLOPT_HEADER, 0);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 2);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 2);
         $response = curl_exec($curl);
+        curl_close($curl);
 
-        $latestVersions = json_decode($response, true);
+        $latestVersions = $response !== false ? json_decode($response, true) : null;
 
-        return $latestVersions;
+        return is_array($latestVersions) ? $latestVersions : [];
     }
 
     /**

@@ -13,6 +13,7 @@ use Magento\Store\Model\StoreManagerInterface ;
 
 class Index extends \Magento\Framework\View\Element\Template
 {
+    protected $collection;
 
 
     protected $postCollection;

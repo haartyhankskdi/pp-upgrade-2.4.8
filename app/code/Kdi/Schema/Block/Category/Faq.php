@@ -54,8 +54,8 @@ class Faq extends Template
 
         if ($category) {
             for ($i = 1; $i <= 10; $i++) {
-                $question = trim($category->getData("faq_question_$i"));
-                $answer = trim($category->getData("faq_answer_$i"));
+                $question = trim($category->getData("faq_question_$i") ?? '');
+                $answer = trim($category->getData("faq_answer_$i") ?? '');
 
                 if ($question || $answer) {
                     $faqs[] = [

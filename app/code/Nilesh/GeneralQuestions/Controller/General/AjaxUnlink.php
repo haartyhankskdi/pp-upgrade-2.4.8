@@ -9,6 +9,7 @@ namespace Nilesh\GeneralQuestions\Controller\General;
 
 class AjaxUnlink extends \Magento\Framework\App\Action\Action
 {
+    protected $logger;
 
     protected $resultPageFactory;
     protected $jsonHelper;

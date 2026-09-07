@@ -185,7 +185,7 @@ class SageHelperMoto extends AbstractHelper
         }
 
         $curl->write(
-            \Zend_Http_Client::POST,
+            \Laminas\Http\Request::METHOD_POST,
             $url,
             '1.0',
             ['Content-type: application/json'],
@@ -224,7 +224,7 @@ class SageHelperMoto extends AbstractHelper
         ];
 
         $http->write(
-            \Zend_Http_Client::POST,
+            \Laminas\Http\Request::METHOD_POST,
             $url,
             '1.0',
             $headers,

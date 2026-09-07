@@ -8,6 +8,7 @@
 
 namespace Magefan\Blog\Block\Author;
 
+use Magefan\Blog\Block\Post\PostList\Toolbar;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -53,17 +54,40 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->setDescription($author->getMetaDescription());
 
             if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_AUTHOR)) {
-                $this->pageConfig->addRemotePageAsset(
-                    $author->getAuthorUrl(),
-                    'canonical',
-                    ['attributes' => ['rel' => 'canonical']]
-                );
+                $layoutUpdate = $author->getData('layout_update_xml') ?: '';
+                if (false === strpos($layoutUpdate, 'rel="canonical"')) {
+                    $canonicalUrl = $author->getAuthorUrl();
+                    $page = (int)$this->_request->getParam($this->getPageParamName());
+                    if ($page > 1) {
+                        $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
+                            . $this->getPageParamName() . '=' . $page;
+                    }
+
+                    $this->pageConfig->addRemotePageAsset(
+                        $canonicalUrl,
+                        'canonical',
+                        ['attributes' => ['rel' => 'canonical']]
+                    );
+                }
             }
-            $page = $this->_request->getParam(\Magefan\Blog\Block\Post\PostList\Toolbar::PAGE_PARM_NAME);
+            /*
+            $page = $this->_request->getParam($this->getPageParamName());
             if ($page < 2) {
+            */
+            $robots = $author->getData('meta_robots');
+            if ($robots) {
+                $this->pageConfig->setRobots($robots);
+            } else {
                 $robots = $this->config->getAuthorRobots();
                 $this->pageConfig->setRobots($robots);
             }
+            /*
+            }
+
+            if ($page > 1) {
+                $this->pageConfig->setRobots('NOINDEX,FOLLOW');
+            }
+            */
 
             $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
             if ($pageMainTitle) {

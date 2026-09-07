@@ -20,6 +20,8 @@ use Webkul\AbandonedCart\Model\ResourceModel\Quote\Collection as QuoteCollection
 
 class Collection extends QuoteCollection implements SearchResultInterface
 {
+    protected $_objectManager;
+    protected $customerModel;
     /**
      * @var AggregationInterface
      */

@@ -46,7 +46,7 @@ class Mail extends AbstractHelper
     protected function sendEmailTemplate(
         $template,
         $fromArray = [],
-        $to,
+        $to = [],
         $templateParams = [],
         $storeId = null
     ) {

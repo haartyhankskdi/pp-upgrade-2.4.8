@@ -27,6 +27,7 @@ namespace Itoris\DynamicProductOptions\Model\Rewrite\Option;
 
 class Value extends \Magento\Catalog\Model\Product\Option\Value
 {
+    protected $_productRepository;
     /** @var \Magento\Framework\ObjectManagerInterface|null  */
     protected $_objectManager = null;
     protected $dpoConfig = null;

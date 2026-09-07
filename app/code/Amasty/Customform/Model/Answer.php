@@ -240,7 +240,7 @@ class Answer extends AbstractModel implements AnswerInterface
             }
         }
 
-        if (!\Zend_Validate::is($email, 'EmailAddress')) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $email = '';
         }
 

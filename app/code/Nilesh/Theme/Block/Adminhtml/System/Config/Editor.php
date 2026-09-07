@@ -7,6 +7,7 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
  
 class Editor extends \Magento\Config\Block\System\Config\Form\Field
 {
+    protected $_wysiwygConfig;
     /**
      * @var  Registry
      */

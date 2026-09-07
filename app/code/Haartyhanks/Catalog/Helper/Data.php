@@ -8,6 +8,7 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 
 class Data extends AbstractHelper
 {
+    protected $productFactory;
     protected $_registry;
     protected $product;
 

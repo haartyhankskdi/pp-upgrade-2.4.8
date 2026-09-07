@@ -27,6 +27,8 @@ namespace Itoris\DynamicProductOptions\Helper;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
+    protected $_coreRegistry;
+    protected $_localeDate;
     protected $alias = 'dynamic_product_options';
     protected $settings = [];
     protected $messageManager;

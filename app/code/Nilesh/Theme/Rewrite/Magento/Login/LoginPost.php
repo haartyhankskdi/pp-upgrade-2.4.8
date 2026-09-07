@@ -24,6 +24,8 @@ use Nilesh\Theme\Helper\RememberMe as CustomCooike;
 */
 class LoginPost extends \Magento\Customer\Controller\Account\LoginPost
 {
+    protected $customerUrl;
+    protected $scopeConfig;
    /** @var AccountManagementInterface */
    protected $customerAccountManagement;
 

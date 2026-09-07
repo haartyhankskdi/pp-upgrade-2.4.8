@@ -43,10 +43,10 @@ class ScheduleConfigRepository
     private $scheduleFactory;
 
     public function __construct(
-        FlagRepository $flagRepository = null, //@deprecated
-        SerializerInterface $serializer = null, //@deprecated
         DataObjectHelper $dataObjectHelper,
         ScheduleConfigFactory $scheduleConfigFactory,
+        FlagRepository $flagRepository = null, //@deprecated
+        SerializerInterface $serializer = null, //@deprecated
         Repository $scheduleRepository = null,
         ScheduleFactory $scheduleFactory = null
     ) {

@@ -1,1 +1,105 @@
-define(["jquery","uiComponent","mage/validation"],(function(e,t,i){"use strict";return t.extend({initialize:function(t){var i=e("#post-comments"),n=function(t,i){return e('<div class="message-'+i+" "+i+' message"><div>'+t+"</div></div>")},a=function(e,t){e.find("[type=submit]").removeAttr("disabled");var i=n(t,"error");i.insertBefore(e),setTimeout((function(){i.remove()}),4e3)};i.find("form").submit((function(){var t=e(this);return t.validation()&&t.validation("isValid")&&(t.find("[type=submit]").attr("disabled","disabled"),e.ajax({method:"post",url:t.attr("action"),dataType:"json",data:t.serialize(),success:function(e){e.success?function(e,t){e.find("[type=submit]").removeAttr("disabled");var i=n(t,"success");i.insertBefore(e),e.hide(),setTimeout((function(){i.remove()}),4e3)}(t,e.message):a(t,e.message)},error:function(){a(t,"Unexpected error. Please try again later or contact us.")}})),!1})),i.find(".more-comments-action").click((function(){var t=e(this).data("comment");return i.find(".c-comment-parent-"+t).fadeIn(),e(this).hide(),!1})),i.find("form textarea").click((function(){e(this).parents(".no-active").removeClass("no-active")}));var r=e("#c-replyform-comment");return i.find(".reply-action").click((function(){var t=e(this).data("comment");return r.hide(),r.appendTo(".c-post-"+t),r.find(".refresh-value").val("").html(""),r.find("[name=parent_id]").val(t),r.find("form").show(),r.fadeIn(),!1})),i.find(".reply-cancel-action").click((function(){r.hide()})),this}})}));
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+
+define(
+    [
+    'jquery',
+    'uiComponent',
+    'mage/validation'],
+    function ($, Component, validation) {
+    'use strict';
+
+
+    return Component.extend({
+        initialize: function ($options) {
+
+            var msgLifetime = 4000;
+            var $hd = $('#post-comments');
+
+            var getMessageHtml = function (msg, type) {
+                var h = '<div class="message-' + type + ' ' + type + ' message">'
+                    + '<div>' + msg + '</div>'
+                +'</div>';
+                return $(h);
+            };
+
+            var processError = function ($form, msg) {
+                $form.find('[type=submit]').removeAttr('disabled');
+                var $h = getMessageHtml(msg, 'error');
+                $h.insertBefore($form);
+                setTimeout(function () {
+                    $h.remove();
+                }, msgLifetime);
+            };
+
+            var processSuccess = function ($form, msg) {
+                $form.find('[type=submit]').removeAttr('disabled');
+                var $h = getMessageHtml(msg, 'success');
+                $h.insertBefore($form);
+                $form.hide();
+                setTimeout(function () {
+                    $h.remove();
+                }, msgLifetime);
+            };
+
+            $hd.find('form').submit(function () {
+                var $form = $(this);
+                if ($form.validation() && $form.validation('isValid')) {
+                    $form.find('[type=submit]').attr('disabled', 'disabled');
+                    $.ajax({
+                        'method': 'post',
+                        'url': $form.attr('action'),
+                        'dataType': 'json',
+                        'data': $form.serialize(),
+                        'success': function (res) {
+                            if (res.success) {
+                                processSuccess($form, res.message);
+                            } else {
+                                processError($form, res.message);
+                            }
+                        },
+                        'error': function () {
+                            processError($form, 'Unexpected error. Please try again later or contact us.')
+                        }
+                    })
+                }
+                return false;
+            });
+
+            $hd.find('.more-comments-action').click(function () {
+                var id = $(this).data('comment');
+                $hd.find('.c-comment-parent-'+id).fadeIn();
+                $(this).hide();
+                return false;
+            });
+
+            $hd.find('form textarea').click(function () {
+                $(this).parents('.no-active').removeClass('no-active');
+            });
+
+            var $rf = $('#c-replyform-comment');
+            $hd.find('.reply-action').click(function () {
+                var id = $(this).data('comment');
+                $rf.hide();
+                $rf.appendTo('.c-post-'+id);
+                $rf.find('.refresh-value').val('').html('');
+                $rf.find('[name=parent_id]').val(id);
+                $rf.find('form').show();
+                $rf.fadeIn();
+                return false;
+            });
+
+            $hd.find('.reply-cancel-action').click(function () {
+                $rf.hide();
+            });
+
+            return this;
+        },
+
+    });
+    }
+);

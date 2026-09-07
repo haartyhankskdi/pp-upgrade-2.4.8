@@ -5,6 +5,9 @@ namespace Nilesh\Reorder\Block\Index;
 
 class Index extends \Magento\Framework\View\Element\Template
 {
+    protected $_productRepository;
+    protected $imageHelperFactory;
+    protected $orderRepository;
 
     protected $resultPageFactory;
     protected $request;

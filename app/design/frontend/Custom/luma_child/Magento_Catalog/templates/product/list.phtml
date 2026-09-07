@@ -92,7 +92,7 @@ $_helper = $block->getData('outputHelper');
                             <!-- Short description -->
                         <p><?php if ($block->getMode() == 'grid') { ?>
                             
-                            <?php echo /* @noEscape */ strip_tags(@substr($_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description'),0,100)).$showreamore; ?>
+                            <?php echo /* @noEscape */ strip_tags(@substr($_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?? '',0,100)).$showreamore; ?>
                             <?php } ?>
                             
                         </p>
@@ -127,8 +127,8 @@ $_helper = $block->getData('outputHelper');
                         
 
                         <div class="product-item-inner">
-                            <div class="product actions product-item-actions"<?= strpos($pos, $viewMode . '-actions') ? $block->escapeHtmlAttr($position) : '' ?>>
-                                <div class="actions-primary"<?= strpos($pos, $viewMode . '-primary') ? $block->escapeHtmlAttr($position) : '' ?>>
+                            <div class="product actions product-item-actions"<?= strpos($pos ?? '', $viewMode . '-actions') ? $block->escapeHtmlAttr($position) : '' ?>>
+                                <div class="actions-primary"<?= strpos($pos ?? '', $viewMode . '-primary') ? $block->escapeHtmlAttr($position) : '' ?>>
                                     <?php if ($_product->isSaleable()) :?>
                                         <?php $postParams = $block->getAddToCartPostParams($_product); ?>
                                         <form data-role="tocart-form"
@@ -157,7 +157,7 @@ $_helper = $block->getData('outputHelper');
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 </div>
-                                <!-- <div data-role="add-to-links" class="actions-secondary"<?= strpos($pos, $viewMode . '-secondary') ? $block->escapeHtmlAttr($position) : '' ?>>
+                                <!-- <div data-role="add-to-links" class="actions-secondary"<?= strpos($pos ?? '', $viewMode . '-secondary') ? $block->escapeHtmlAttr($position) : '' ?>>
                                     <?php if ($addToBlock = $block->getChildBlock('addto')) :?>
                                         <?= $addToBlock->setProduct($_product)->getChildHtml() ?>
                                     <?php endif; ?>

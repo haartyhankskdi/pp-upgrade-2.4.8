@@ -10,6 +10,7 @@ use Magento\Checkout\Model\Cart;
 use Magento\Checkout\Model\Session as CheckoutSession;
 class Test extends \Magento\Framework\App\Action\Action
 {
+    protected $logger;
 
     protected $resultPageFactory;
     protected $soapClientFactory;

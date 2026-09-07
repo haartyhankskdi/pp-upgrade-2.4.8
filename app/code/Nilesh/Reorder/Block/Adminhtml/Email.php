@@ -9,6 +9,9 @@ namespace Nilesh\Reorder\Block\Adminhtml;
 
 class Email extends \Magento\Backend\Block\Template
 {
+    protected $_productRepository;
+    protected $imageHelperFactory;
+    protected $orderRepository;
 
     /**
      * Constructor

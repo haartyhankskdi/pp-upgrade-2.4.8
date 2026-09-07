@@ -11,9 +11,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magefan\Blog\Model\Url;
 
-/**
- * Class Link
- */
 class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
 {
     /**
@@ -61,12 +58,12 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
 
         $href = $this->blogUrl->getUrl($model, $this->model->getControllerName());
 
-        $title = trim($this->getData('title'));
+        $title = $this->getData('title') ? trim($this->getData('title')) : '';
         if (!$title) {
             $title = $model->getTitle();
         }
 
-        $anchorText = trim($this->getData('anchor_text'));
+        $anchorText = $this->getData('anchor_text') ? trim($this->getData('anchor_text')) : '';
         if (!$anchorText) {
             $anchorText = $model->getTitle();
         }
@@ -87,7 +84,7 @@ class Link extends AbstractBlock implements \Magento\Widget\Block\BlockInterface
             $this->model = false;
 
             try {
-                $id = trim($this->getData('entity_id'));
+                $id = $this->getData('entity_id') ? trim($this->getData('entity_id')) : '';
                 if ($id) {
                     $this->model = \Magento\Framework\App\ObjectManager::getInstance()
                         ->get($this->modelRepository['instance'])

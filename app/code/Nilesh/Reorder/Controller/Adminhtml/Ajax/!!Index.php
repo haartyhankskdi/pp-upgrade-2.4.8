@@ -5,6 +5,7 @@ namespace Nilesh\Reorder\Controller\Adminhtml\Ajax;
 
 class Index extends \Magento\Backend\App\Action
 {
+    protected $logger;
 
     protected $resultPageFactory;
     protected $jsonHelper;

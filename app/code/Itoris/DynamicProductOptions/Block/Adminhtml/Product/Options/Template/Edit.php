@@ -28,6 +28,7 @@ namespace Itoris\DynamicProductOptions\Block\Adminhtml\Product\Options\Template;
 
 class Edit extends \Magento\Backend\Block\Widget\Form\Container
 {
+    protected $_objectManager;
     public function _construct() {
         parent::_construct();
         $this->_objectId = 'template_id';

@@ -27,6 +27,7 @@ namespace Itoris\DynamicProductOptions\Model\Rewrite\Option\Type;
 
 class Text extends \Magento\Catalog\Model\Product\Option\Type\Text
 {
+    protected $isEnabledDynamicOptions;
     /** @var \Magento\Framework\ObjectManagerInterface|null  */
     protected $_objectManager = null;
     private $_formattedOptionValue = null;

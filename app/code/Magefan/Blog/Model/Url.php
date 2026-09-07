@@ -37,7 +37,7 @@ class Url
     protected $_registry;
 
     /**
-     * @var \Magento\Framework\UrlInterface
+     * @var \Magento\Framework\Url
      */
     protected $_url;
 
@@ -65,16 +65,14 @@ class Url
     protected $originalStore;
 
     /**
-     * Initialize dependencies.
-     *
      * @param \Magento\Framework\Registry $registry
-     * @param \Magento\Framework\UrlInterface $url
+     * @param \Magento\Framework\Url $url
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      */
     public function __construct(
         \Magento\Framework\Registry $registry,
-        \Magento\Framework\UrlInterface $url,
+        \Magento\Framework\Url $url,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {
@@ -183,6 +181,7 @@ class Url
             $object->setData('parent_category', null);
         }
 
+        /*
         $storeIds = $object->getStoreIds();
         $useOtherStore = false;
         $currentStore = $this->_storeManager->getStore($object->getStoreId());
@@ -219,6 +218,10 @@ class Url
         if ($storeChanged) {
             $this->stopStoreEmulation();
         }
+        */
+
+        $url = $this->getUrl($object, $object->getControllerName());
+
 
         return $url;
     }
@@ -372,7 +375,7 @@ class Url
      */
     public function getUrlSufix($controllerName)
     {
-        return trim($this->_getConfig($controllerName . '_sufix'));
+        return trim((string)$this->_getConfig($controllerName . '_sufix'));
     }
 
     /**

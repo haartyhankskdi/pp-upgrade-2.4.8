@@ -6,6 +6,9 @@ use Amasty\Customform\Model\ResourceModel\Answer\CollectionFactory as AnswerColl
 
 class View extends \Magento\Backend\Block\Template
 {
+    protected $_coreRegistry;
+    protected $orderRepository;
+    protected $orderRepositoryInterface;
     /**
      * @var AnswerCollectionFactory
      */

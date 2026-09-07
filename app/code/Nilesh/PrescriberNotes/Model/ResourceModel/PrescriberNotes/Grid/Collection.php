@@ -16,6 +16,7 @@ use Magento\Customer\Controller\RegistryConstants;
 
 class Collection extends \Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult
 {
+    protected $_coreRegistry;
 
     public function __construct(
         EntityFactory $entityFactory,

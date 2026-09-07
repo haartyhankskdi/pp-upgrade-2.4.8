@@ -112,7 +112,7 @@ class Data extends AbstractHelper
     {
         $this->_registry = $registry;
         $this->product = $product;
-        $this->productFactory = $productFactory;
+        $this->_productFactory = $productFactory;
         $this->logger = $logger;
         $this->productRepository = $productRepository;
         $this->_coreSession = $coreSession;
@@ -121,7 +121,7 @@ class Data extends AbstractHelper
         $this->_localeFormat = $localeFormat;
         $this->productCategory = $productCategory;
         $this->_categoryRepository = $categoryRepository;
-        $this->_storeManager = $storeManagerInterface;
+        $this->_storeManagerInterface = $storeManagerInterface;
     }
 
     /* Get Current Product */
@@ -164,7 +164,7 @@ class Data extends AbstractHelper
     /* Get Label by option id */
     public function getLabelById($attributeCode,$optionId)
     {
-        $product = $this->productFactory->create();
+        $product = $this->_productFactory->create();
         $isAttributeExist = $product->getResource()->getAttribute($attributeCode); 
         $optionText = '';
         if ($isAttributeExist && $isAttributeExist->usesSource()) {
@@ -245,7 +245,7 @@ class Data extends AbstractHelper
     }
 
     public function getCatUrlById($id){
-        $_category=$this->_categoryRepository->get($id, $this->_storeManager->getStore()->getId());
+        $_category=$this->_categoryRepository->get($id, $this->_storeManagerInterface->getStore()->getId());
         return $_category->getUrl();
     }
 

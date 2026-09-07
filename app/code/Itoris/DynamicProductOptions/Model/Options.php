@@ -66,7 +66,7 @@ class Options extends \Magento\Framework\Model\AbstractModel
             if ($this->getProductId()) {
                 $defaultOptions = [];
                 if ($this->getConfiguration()) {
-                    $sections = \Zend_Json::decode($this->getConfiguration());
+                    $sections = json_decode($this->getConfiguration(), true);
                     foreach ($sections as $key => $value) {
                         if (is_array($value) && isset($value['fields'])) {
                             (array)$sections[$key]['fields'];
@@ -92,7 +92,7 @@ class Options extends \Magento\Framework\Model\AbstractModel
                             $usedOptionIds[] = $option->getOrigOptionId();
                         }
                         if ($option->getConfiguration()) {
-                            $optionConfig = array_merge($optionConfig, \Zend_Json::decode($option->getConfiguration()));
+                            $optionConfig = array_merge($optionConfig, json_decode($option->getConfiguration(), true));
                             if (!in_array($optionConfig['type'], $this->customTypes)) {
                                 //lost option
                                 if ($option->getOrigOptionId()) {
@@ -141,7 +141,7 @@ class Options extends \Magento\Framework\Model\AbstractModel
                                         foreach ($optionConfig['items'] as $_origItem) {
                                             if(isset($_origItem['option_type_id']) && isset($item['orig_value_id'])){
                                                 if ($_origItem['option_type_id'] == $item['orig_value_id']) {
-                                                    $dynamicItems[] = array_merge($_origItem, \Zend_Json::decode($item->getConfiguration()));
+                                                    $dynamicItems[] = array_merge($_origItem, json_decode($item->getConfiguration(), true));
                                                 }
                                             }
                                            

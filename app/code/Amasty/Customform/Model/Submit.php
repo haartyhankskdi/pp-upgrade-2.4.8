@@ -473,7 +473,6 @@ class Submit
      * @param $value
      * @param $fileValidation
      * @throws LocalizedException
-     * @throws \Zend_Validate_Exception
      */
     private function validateField($field, $fieldType, $validation, $value, &$fileValidation)
     {
@@ -495,7 +494,7 @@ class Submit
                 case 'validation':
                     if ($item == 'validate-email' && !$this->isHiddenField($field)) {
                         $value = filter_var($value, FILTER_SANITIZE_EMAIL);
-                        if (!\Zend_Validate::is($value, 'EmailAddress')) {
+                        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
                             throw new LocalizedException(__('Please enter a valid email address.'));
                         }
                     }

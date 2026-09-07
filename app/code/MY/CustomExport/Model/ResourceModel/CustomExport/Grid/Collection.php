@@ -11,6 +11,7 @@ use MY\CustomExport\Model\ResourceModel\CustomExport\Collection as CustomExportC
  */
 class Collection extends CustomExportCollection implements SearchResultInterface
 {
+    protected $aggregations;
     /**
      * Resource initialization
      * @return $this
@@ -21,10 +22,10 @@ class Collection extends CustomExportCollection implements SearchResultInterface
         \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy,
         \Magento\Framework\Event\ManagerInterface $eventManager,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        $mainTable = "sales_order",
         $eventPrefix,
         $eventObject,
         $resourceModel,
+        $mainTable = "sales_order",
         $model = 'Magento\Framework\View\Element\UiComponent\DataProvider\Document',
         $connection = null,
         \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null

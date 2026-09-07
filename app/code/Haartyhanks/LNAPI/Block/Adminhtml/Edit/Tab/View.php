@@ -6,6 +6,7 @@ use Magento\Framework\Data\Form\FormKey;
  
 class View extends \Magento\Backend\Block\Template implements \Magento\Ui\Component\Layout\Tabs\TabInterface
 {
+    protected $_coreRegistry;
     /**
      * Template
      *

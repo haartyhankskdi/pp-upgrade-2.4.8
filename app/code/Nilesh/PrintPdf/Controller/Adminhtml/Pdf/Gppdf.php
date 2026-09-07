@@ -13,6 +13,9 @@ use Nilesh\GeneralQuestions\Model\ResourceModel\GeneralQuestions\Collection as G
 
 class Gppdf extends \Magento\Backend\App\Action
 {
+    protected $_countryFactory;
+    protected $_prescriberNameFactory;
+    protected $logger;
     protected $generalQuestions;
 
     protected $resultPageFactory;

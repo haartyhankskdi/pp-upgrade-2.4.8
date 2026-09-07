@@ -119,7 +119,7 @@ class Data extends AbstractHelper
         }
         $result = json_decode($data, true);
 
-        return $result;
+        return is_array($result) ? $result : [];
     }
 
     /**
@@ -187,8 +187,9 @@ class Data extends AbstractHelper
 
         $modules = $this->moduleList->getAll();
         foreach ($modules as $module) {
-            $moduleName = @$module['name'];
-            if (strstr($moduleName, 'Magenest_') === false
+            $moduleName = (string) ($module['name'] ?? '');
+            if ($moduleName === ''
+                || strstr($moduleName, 'Magenest_') === false
                 || $moduleName === 'Magenest_Core'
             ) {
                 continue;
@@ -239,18 +240,16 @@ class Data extends AbstractHelper
 
         $curl = $this->curlFactory->create();
         $curl->setConfig(['timeout' => 2]);
-        $curl->write(\Zend_Http_Client::GET, Data::getUpdateNotificationUrl() . $param);
+        $curl->write(\Laminas\Http\Request::METHOD_GET, Data::getUpdateNotificationUrl() . $param);
         $data = $curl->read();
 
         if ($data !== false) {
             $data = preg_split('/^\r?$/m', $data, 2);
-            $data = trim(@$data[1]);
-
+            $data = trim((string) ($data[1] ?? ''));
 
             $data = json_decode($data, true);
 
-            $count = count($data);
-            if ($count) {
+            if (is_array($data) && count($data)) {
                 foreach ($data as $value) {
                     $this->addNotification(@$value['id'], @$value['severity'], @$value['created_at'], @$value['title'], @$value['description'], @$value['url']);
                 }

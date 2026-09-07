@@ -8,11 +8,34 @@
 
 namespace Magefan\Blog\Block\Post\PostList;
 
+use Magefan\Blog\Model\Config;
+use Magento\Framework\View\Element\Template\Context;
+
 /**
  * Blog posts list toolbar
  */
 class Toolbar extends \Magento\Framework\View\Element\Template
 {
+    /**
+     * @var Config|null
+     */
+    private $config;
+
+    /**
+     * @param Context $context
+     * @param array $data
+     * @param Config|null $config
+     */
+    public function __construct(
+        Context $context,
+        array $data = [],
+        ?Config $config = null
+    ) {
+        parent::__construct($context, $data);
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $this->config = $config ?: $objectManager->create(Config::class);
+    }
+
     /**
      * Page GET parameter name
      */
@@ -84,16 +107,14 @@ class Toolbar extends \Magento\Framework\View\Element\Template
      */
     public function getCurrentPage()
     {
-        $page = (int) $this->_request->getParam(self::PAGE_PARM_NAME);
+        $page = (int) $this->_request->getParam($this->getPageParamName());
         return $page ? $page : 1;
     }
 
     /**
-     * Render pagination HTML
-     *
-     * @return string
+     * @return bool|\Magento\Framework\DataObject|\Magento\Framework\View\Element\AbstractBlock|\Magento\Theme\Block\Html\Pager
      */
-    public function getPagerHtml()
+    public function getPagerBlock()
     {
         $pagerBlock = $this->getChildBlock('post_list_toolbar_pager');
         if ($pagerBlock instanceof \Magento\Framework\DataObject) {
@@ -106,7 +127,7 @@ class Toolbar extends \Magento\Framework\View\Element\Template
             )->setShowAmounts(
                 false
             )->setPageVarName(
-                'page'
+                $this->getPageParamName()
             )->setFrameLength(
                 $this->_scopeConfig->getValue(
                     'design/pagination/pagination_frame',
@@ -122,9 +143,34 @@ class Toolbar extends \Magento\Framework\View\Element\Template
             )->setCollection(
                 $this->getCollection()
             );
+        } else {
+            $pagerBlock = false;
+        }
+
+
+        return $pagerBlock;
+    }
+
+    /**
+     * Render pagination HTML
+     *
+     * @return string
+     */
+    public function getPagerHtml()
+    {
+        $pagerBlock = $this->getPagerBlock();
+        if ($pagerBlock instanceof \Magento\Framework\DataObject) {
             return $pagerBlock->toHtml();
         }
 
         return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getPageParamName()
+    {
+        return $this->config->getPagePaginationType() !== 'p' ? 'page' : 'p';
     }
 }

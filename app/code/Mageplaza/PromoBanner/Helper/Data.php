@@ -46,6 +46,11 @@ class Data extends AbstractData
     const CONFIG_MODULE_PATH = 'mppromobanner';
 
     /**
+     * @var FilterProvider
+     */
+    protected $filterProvider;
+
+    /**
      * @var CollectionFactory
      */
     protected $bannerCollection;

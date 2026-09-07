@@ -15,6 +15,7 @@ use \Magento\Framework\DataObject\IdentityInterface;
 
 class Index extends \Magento\Framework\View\Element\Template 
 {
+    protected $collection;
 
 
     protected $postCollection;

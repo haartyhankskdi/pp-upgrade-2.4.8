@@ -67,7 +67,6 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
      * @param \Magento\Cms\Model\Template\FilterProvider $filterProvider
      * @param \Magefan\Blog\Model\PostFactory $postFactory
      * @param \Magefan\Blog\Model\Url $url
-     * @param \Magefan\Blog\Model\Config $config
      * @param array $data
      * @param null $config
      * @param null $templatePool
@@ -119,12 +118,17 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
      * Retrieve post short content
      *
      * @param  mixed $len
-     * @param  mixed $endСharacters
+     * @param  mixed $endCharacters
      * @return string
      */
-    public function getShorContent($len = null, $endСharacters = null)
+    public function getShorContent($len = null, $endCharacters = null)
     {
-        return $this->getPost()->getShortFilteredContent($len, $endСharacters);
+        return $this->getPost()->getShortFilteredContent($len, $endCharacters);
+    }
+
+    public function getShortFilteredContentWithoutImages($len = null, $endCharacters = null)
+    {
+        return $this->getPost()->getShortFilteredContentWithoutImages($len, $endCharacters);
     }
 
     /**
@@ -231,5 +235,36 @@ abstract class AbstractPost extends \Magento\Framework\View\Element\Template
         }
 
         return $viewModel;
+    }
+
+    /**
+     * Check if AddThis Enabled and key exist
+     *
+     * @return bool
+     */
+    public function displayAddThisToolbox()
+    {
+        $isSocialEnabled = $this->_scopeConfig->getValue(
+            'mfblog/social/add_this_enabled',
+            ScopeInterface::SCOPE_STORE
+        );
+        $isSocialIdExist = $this->_scopeConfig->getValue(
+            'mfblog/social/add_this_pubid',
+            ScopeInterface::SCOPE_STORE
+        );
+
+        return $isSocialEnabled && $isSocialIdExist;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllowedSocialNetworks(): array
+    {
+        $socialNetworks = (string)$this->_scopeConfig->getValue('mfblog/social/use_social_networks', ScopeInterface::SCOPE_STORE);
+        if ($socialNetworks) {
+            return explode(',', $socialNetworks);
+        }
+        return [];
     }
 }

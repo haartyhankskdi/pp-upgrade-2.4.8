@@ -27,6 +27,7 @@ namespace Itoris\DynamicProductOptions\Model\Rewrite\Option\Type;
 
 class Select extends \Magento\Catalog\Model\Product\Option\Type\Select
 {
+    protected $_backendConfig;
     protected $isEnabledDynamicOptions = false;
     /** @var \Magento\Framework\ObjectManagerInterface|null  */
     protected $_objectManager = null;

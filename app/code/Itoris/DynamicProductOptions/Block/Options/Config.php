@@ -28,6 +28,7 @@ namespace Itoris\DynamicProductOptions\Block\Options;
 
 class Config extends \Magento\Catalog\Block\Product\View\Options//\Magento\Framework\View\Element\Template//
 {
+    protected $_productRepository;
     static protected $isJsCssAdded = false;
 
     protected $config = null;

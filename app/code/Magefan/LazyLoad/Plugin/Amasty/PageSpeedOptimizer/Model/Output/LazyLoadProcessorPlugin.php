@@ -6,6 +6,8 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
+declare(strict_types=1);
+
 namespace Magefan\LazyLoad\Plugin\Amasty\PageSpeedOptimizer\Model\Output;
 
 use Magefan\LazyLoad\Model\Config;
@@ -16,8 +18,8 @@ use Magefan\LazyLoad\Model\Config;
 class LazyLoadProcessorPlugin
 {
 /**
-     * @var Config
-     */
+ * @var Config
+ */
     private $config;
 
     /**
@@ -26,7 +28,6 @@ class LazyLoadProcessorPlugin
      */
     public function __construct(
         Config $config
-
     ) {
         $this->config = $config;
     }
@@ -40,7 +41,7 @@ class LazyLoadProcessorPlugin
      */
     public function aroundReplaceWithPictureTag($subject, callable $proceed, $image, $imagePath)
     {
-        if (!$this->config->getEnabled()) {
+        if (!$this->config->getEnabled() || !$this->config->getIsJavascriptLazyLoadMethod()) {
             return $proceed($image, $imagePath);
         }
 
@@ -61,6 +62,57 @@ class LazyLoadProcessorPlugin
         }
 
         $html = $proceed($image, $imagePath);
+
+        if ($originImagePath != $imagePath) {
+
+            if (strpos($html, '<picture') !== false) {
+                $tmpSrc = 'TMP_SRC';
+                $pixelSrc = 'srcset="' . $originImagePath . '"';
+
+                $html = str_replace($pixelSrc, $tmpSrc, $html);
+
+                $html = preg_replace('#<source\s+([^>]*)(?:srcset="([^"]*)")([^>]*)?>#isU', '<source ' . $pixelSrc .
+                    ' data-originalset="$2" $1 $3/>', $html);
+
+                $html = str_replace($tmpSrc, $pixelSrc, $html);
+            }
+        }
+
+        return $html;
+    }
+
+    /**
+     * @param $subject
+     * @param callable $proceed
+     * @param algorithm
+     * @param $image
+     * @param $imagePath
+     * @return mixed|null|string|string[]
+     */
+    public function aroundReplace($subject, callable $proceed, $algorithm, $image, $imagePath)
+    {
+
+        if (!$this->config->getEnabled() || !$this->config->getIsJavascriptLazyLoadMethod()) {
+            return $proceed($algorithm, $image, $imagePath);
+        }
+
+        $originImagePath = $imagePath;
+
+        if (strpos($imagePath, 'Magefan_LazyLoad/images/pixel.jpg')) {
+
+            $doStr = 'data-original="';
+            $p1 = strpos($image, $doStr);
+
+            if ($p1 !== false) {
+                $p1 += strlen($doStr);
+                $p2 = strpos($image, '"', $p1);
+                if ($p2 !== false) {
+                    $imagePath = substr($image, $p1, $p2 - $p1);
+                }
+            }
+        }
+
+        $html = $proceed($algorithm, $image, $imagePath);
 
         if ($originImagePath != $imagePath) {
 

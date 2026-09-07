@@ -10,6 +10,7 @@ namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Model\Url;
 use Magento\Framework\DataObject\IdentityInterface;
+use Magefan\Blog\Api\ShortContentExtractorInterface;
 
 /**
  * Category model
@@ -82,6 +83,11 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     protected $controllerName;
 
     /**
+     * @var ShortContentExtractorInterface
+     */
+    protected $shortContentExtractor;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
@@ -96,8 +102,8 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
         \Magento\Framework\Registry $registry,
         Url $url,
         \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
-        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->_url = $url;
@@ -378,7 +384,7 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
             $title = $this->getData('title');
         }
 
-        return trim($title);
+        return trim($title ?: '');
     }
 
     /**
@@ -389,12 +395,20 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
     {
         $desc = $this->getData('meta_description');
         if (!$desc) {
-            $desc = $this->getData('content');
+            $desc = $this->getShortContentExtractor()->execute($this->getData('content'), 500);
         }
 
-        $desc = strip_tags($desc);
+        $stylePattern = "~<style\b[^>]*>.*?</style>~is";
+        $desc = preg_replace($stylePattern, '', $desc);
+        $desc = trim(strip_tags((string)$desc));
+        $desc = str_replace(["\r\n", "\n\r", "\r", "\n"], ' ', $desc);
+
         if (mb_strlen($desc) > 160) {
             $desc = mb_substr($desc, 0, 160);
+            $lastSpace = mb_strrpos($desc, ' ');
+            if ($lastSpace !== false) {
+                $desc = mb_substr($desc, 0, $lastSpace);
+            }
         }
 
         return trim($desc);
@@ -547,5 +561,35 @@ class Category extends \Magento\Framework\Model\AbstractModel implements Identit
             ->setData('is_active', 0);
 
         return $object->save();
+    }
+
+    /**
+     * @return ShortContentExtractorInterface
+     */
+    public function getShortContentExtractor()
+    {
+        if (null === $this->shortContentExtractor) {
+            $this->shortContentExtractor = \Magento\Framework\App\ObjectManager::getInstance()
+                ->get(ShortContentExtractorInterface::class);
+        }
+
+        return $this->shortContentExtractor;
+    }
+
+    /**
+     * @return array|mixed|null
+     */
+    public function getCategoryImage()
+    {
+        if (!$this->hasData('category_image')) {
+            if ($file = $this->getData('category_img')) {
+                $image = $this->_url->getMediaUrl($file);
+            } else {
+                $image = false;
+            }
+            $this->setData('category_image', $image);
+        }
+
+        return $this->getData('category_image');
     }
 }

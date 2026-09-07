@@ -9,6 +9,7 @@ namespace Sachin\Customer\Controller\Adminhtml\Ageverify;
 
 class Save extends \Magento\Backend\App\Action
 {
+    protected $logger;
 
     protected $resultPageFactory;
     protected $jsonHelper;

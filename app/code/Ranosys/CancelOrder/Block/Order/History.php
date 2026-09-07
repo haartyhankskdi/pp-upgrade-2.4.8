@@ -12,6 +12,7 @@ namespace Ranosys\CancelOrder\Block\Order;
  */
 class History extends \Magento\Sales\Block\Order\History
 {
+    protected $helper;
 
     /**
      * @param \Magento\Framework\View\Element\Template\Context           $context

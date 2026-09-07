@@ -6,6 +6,7 @@ use Magento\Framework\Message\ManagerInterface;
 use Magento\Checkout\Model\Session as CheckoutSession;
 
 class CartAddBefore implements ObserverInterface {
+    protected $storeManager;
 
     protected $messageManager;
     protected $checkoutSession;

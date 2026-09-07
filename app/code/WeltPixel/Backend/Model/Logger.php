@@ -15,7 +15,7 @@ class Logger extends \Magento\Framework\Logger\Monolog
     /**
      * Logger constructor.
      * @param ScopeConfigInterface $scopeConfig
-     * @param array $name
+     * @param string $name
      * @param array $handlers
      * @param array $processors
      */
@@ -36,14 +36,17 @@ class Logger extends \Magento\Framework\Logger\Monolog
      * @param  array   $context The log context
      * @return Boolean Whether the record has been processed
      */
-    public function warning($message, array $context = array())
-    {
-        $result = $this->_parseLogMessage($message, $context);
-        if ($result !== false) {
-            return parent::warning($message, $context);
+    
+    public function warning(\Stringable|string $message, array $context = []): void
+        {
+            $result = $this->_parseLogMessage($message, $context);
+
+            if ($result !== false) {
+                parent::warning($message, $context);
+            }
         }
-        return $result;
-    }
+
+
 
     /**
      * Adds a log record at the INFO level.
@@ -54,13 +57,13 @@ class Logger extends \Magento\Framework\Logger\Monolog
      * @param  array   $context The log context
      * @return Boolean Whether the record has been processed
      */
-    public function info($message, array $context = array())
+    public function info(\Stringable|string $message, array $context = []): void
     {
         $result = $this->_parseLogMessage($message, $context);
+
         if ($result !== false) {
-            return parent::info($message, $context);
+            parent::info($message, $context);
         }
-        return $result;
     }
 
     /**

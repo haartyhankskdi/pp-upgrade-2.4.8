@@ -660,10 +660,10 @@ class SageHelper extends AbstractHelper
             "Content-Type: application/json"
         ];
 
-        $method = \Zend_Http_Client::POST;
+        $method = \Laminas\Http\Request::METHOD_POST;
 
         if (!$payload) {
-            $method = \Zend_Http_Client::GET;
+            $method = \Laminas\Http\Request::METHOD_GET;
         }
         $http->write(
             $method,
@@ -689,10 +689,10 @@ class SageHelper extends AbstractHelper
     {
         $http = $this->_curlFactory->create();
 
-        $method = \Zend_Http_Client::POST;
+        $method = \Laminas\Http\Request::METHOD_POST;
 
         if (!$payload) {
-            $method = \Zend_Http_Client::GET;
+            $method = \Laminas\Http\Request::METHOD_GET;
         }
         $http->write(
             $method,

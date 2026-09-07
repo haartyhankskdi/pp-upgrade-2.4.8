@@ -19,6 +19,7 @@ use Magento\Framework\Controller\ResultInterface;
 
 class Validate extends Action implements HttpPostActionInterface
 {
+    protected $context;
     /**
      * @var Captcha
      */

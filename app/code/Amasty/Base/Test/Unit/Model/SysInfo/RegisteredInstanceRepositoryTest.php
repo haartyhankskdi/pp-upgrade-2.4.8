@@ -77,10 +77,10 @@ class RegisteredInstanceRepositoryTest extends TestCase
         $this->urlMock = $this->createMock(UrlInterface::class);
 
         $this->model = new RegisteredInstanceRepository(
-            $this->flagRepositoryMock,
             $this->serializerMock,
             $this->dataObjectHelperMock,
             $this->registeredInstanceFactoryMock,
+            $this->flagRepositoryMock,
             $this->instanceDataRepositoryMock,
             $this->instanceDataFactoryMock,
             $this->urlMock

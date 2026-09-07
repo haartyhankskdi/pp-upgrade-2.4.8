@@ -23,6 +23,7 @@ use Dompdf\Helpers;
  */
 class GD implements Canvas
 {
+    protected $_page_text;
     /**
      * @var Dompdf
      */

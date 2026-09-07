@@ -15,6 +15,7 @@ use Magento\Backend\App\Action\Context;
 
 class CartDetails extends Action
 {
+    protected $_resultLayoutFactory;
     /**
      * enabled webkul abandoned cart
      **/

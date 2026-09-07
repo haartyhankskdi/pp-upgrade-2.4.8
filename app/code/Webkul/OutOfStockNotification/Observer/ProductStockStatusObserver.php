@@ -19,6 +19,12 @@ use Webkul\OutOfStockNotification\Logger\Logger;
  */
 class ProductStockStatusObserver implements ObserverInterface
 {
+    protected $getSalableQuantityDataBySku;
+    protected $getStockId;
+    protected $productFactory;
+    protected $sourceDataBySku;
+    protected $stockRepository;
+    protected $stockSourceLinkFactory;
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */

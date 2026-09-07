@@ -16,6 +16,7 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Details extends Action
 {
+    protected $_localeDate;
     /**
      * enabled webkul abandoned cart
      **/

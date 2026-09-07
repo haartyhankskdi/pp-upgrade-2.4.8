@@ -10,6 +10,7 @@ namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Api\AuthorInterface;
 use Magento\Framework\Model\AbstractModel;
+use Magefan\Blog\Api\ShortContentExtractorInterface;
 
 /**
  * Blog author model
@@ -21,6 +22,16 @@ class Author extends AbstractModel implements AuthorInterface
      * @var string
      */
     protected $controllerName;
+
+    /**
+     * @var ShortContentExtractorInterface
+     */
+    protected $shortContentExtractor;
+
+    /**
+     * @var Url
+     */
+    protected $_url;
 
     /**
      * Initialize dependencies.
@@ -40,8 +51,8 @@ class Author extends AbstractModel implements AuthorInterface
         Url $url,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
@@ -58,6 +69,15 @@ class Author extends AbstractModel implements AuthorInterface
         $this->_init(\Magefan\Blog\Model\ResourceModel\Author::class);
         $this->_collectionName = \Magefan\Blog\Model\ResourceModel\Author\Collection::class;
         $this->controllerName = URL::CONTROLLER_AUTHOR;
+    }
+
+    /**
+     * Retrieve if is visible on store
+     * @return bool
+     */
+    public function isVisibleOnStore(int $storeId): bool
+    {
+        return $this->getIsActive();
     }
 
     /**
@@ -80,7 +100,7 @@ class Author extends AbstractModel implements AuthorInterface
             $title = $this->getTitle();
         }
 
-        return trim($title);
+        return trim($title ?: '');
     }
 
     /**
@@ -91,12 +111,20 @@ class Author extends AbstractModel implements AuthorInterface
     {
         $desc = $this->getData('meta_description');
         if (!$desc) {
-            $desc = $this->getData('content');
+            $desc = $this->getShortContentExtractor()->execute($this->getData('content'), 500);
         }
 
-        $desc = strip_tags($desc);
-        if (mb_strlen($desc) > 300) {
-            $desc = mb_substr($desc, 0, 300);
+        $stylePattern = "~<style\b[^>]*>.*?</style>~is";
+        $desc = preg_replace($stylePattern, '', $desc);
+        $desc = trim(strip_tags((string)$desc));
+        $desc = str_replace(["\r\n", "\n\r", "\r", "\n"], ' ', $desc);
+
+        if (mb_strlen($desc) > 160) {
+            $desc = mb_substr($desc, 0, 160);
+            $lastSpace = mb_strrpos($desc, ' ');
+            if ($lastSpace !== false) {
+                $desc = mb_substr($desc, 0, $lastSpace) . '...';
+            }
         }
 
         return trim($desc);
@@ -211,5 +239,18 @@ class Author extends AbstractModel implements AuthorInterface
     public function isActive()
     {
         return $this->getIsActive();
+    }
+
+    /**
+     * @return ShortContentExtractorInterface
+     */
+    public function getShortContentExtractor()
+    {
+        if (null === $this->shortContentExtractor) {
+            $this->shortContentExtractor = \Magento\Framework\App\ObjectManager::getInstance()
+                ->get(ShortContentExtractorInterface::class);
+        }
+
+        return $this->shortContentExtractor;
     }
 }

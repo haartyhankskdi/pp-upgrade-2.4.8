@@ -81,7 +81,7 @@ if ($coll > 0) {
                                                 </a>
                                     </div>
                                         <!-- <p><?php 
-                                        $shortDescription = $product->getShortDescription();
+                                        $shortDescription = (string) $product->getShortDescription();
                                         $words = explode(' ', $shortDescription);
                                         $shortenedDescription = implode(' ', array_slice($words, 0, 15));
                                         echo $block->escapeHtml($shortenedDescription);
@@ -89,7 +89,7 @@ if ($coll > 0) {
                                         <div class="p-details">
                                         <ul>
                                           <?php
-                                          $bulletPoints = $product->getPrBulletPoints(); // Fetch the bullet points attribute value
+                                          $bulletPoints = (string) $product->getPrBulletPoints(); // Fetch the bullet points attribute value
                                           $bulletPointsArray = explode("\n", $bulletPoints); // Split the attribute value by new lines into an array
                                           foreach ($bulletPointsArray as $bulletPoint): ?>
                                               <li><img src="/media/wysiwyg/WLImage/tick.svg" alt="tick"><?= $block->escapeHtml($bulletPoint); ?></li>

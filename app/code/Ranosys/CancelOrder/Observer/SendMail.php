@@ -14,6 +14,7 @@ use Magento\Framework\Event\ObserverInterface;
  */
 class SendMail implements ObserverInterface
 {
+    protected $helper;
     const XML_PATH_EMAIL_TEMPLATE_FIELD  = 'cancel_order_setting/general/custom_email_template';
 
     /**

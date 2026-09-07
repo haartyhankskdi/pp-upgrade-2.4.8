@@ -10,12 +10,13 @@ namespace Amasty\Customform\Model\Template;
 use Amasty\Customform\Model\Mail\MessageBuilder;
 use Amasty\Customform\Model\Mail\MessageBuilderFactory;
 use Magento\Framework\Mail\MessageInterface;
+use Magento\Framework\Mail\MimeInterface;
+use Magento\Framework\Mail\MimePartInterfaceFactory;
 use Magento\Framework\Mail\Template\FactoryInterface;
 use Magento\Framework\Mail\Template\SenderResolverInterface;
 use Magento\Framework\Mail\Template\TransportBuilder as Transport;
 use Magento\Framework\Mail\TransportInterfaceFactory;
 use Magento\Framework\ObjectManagerInterface;
-use Zend_Mime;
 
 class TransportBuilder extends Transport
 {
@@ -60,9 +61,9 @@ class TransportBuilder extends Transport
     public function addAttachment(
         $body,
         $filename = null,
-        $mimeType = Zend_Mime::TYPE_OCTETSTREAM,
-        $disposition = Zend_Mime::DISPOSITION_ATTACHMENT,
-        $encoding = Zend_Mime::ENCODING_BASE64
+        $mimeType = MimeInterface::TYPE_OCTET_STREAM,
+        $disposition = MimeInterface::DISPOSITION_ATTACHMENT,
+        $encoding = MimeInterface::ENCODING_BASE64
     ) {
         if ($this->message && method_exists($this->message, 'createAttachment')) {
             $this->message->createAttachment(
@@ -73,11 +74,17 @@ class TransportBuilder extends Transport
                 $filename
             );
         } else {
-            $mp = new \Zend\Mime\Part($body);
-            $mp->encoding = $encoding;
-            $mp->type = $mimeType;
-            $mp->disposition = $disposition;
-            $mp->filename = $filename;
+            /** @var MimePartInterfaceFactory $mimePartInterfaceFactory */
+            $mimePartInterfaceFactory = $this->objectManager->get(MimePartInterfaceFactory::class);
+            $mp = $mimePartInterfaceFactory->create(
+                [
+                    'content' => $body,
+                    'type' => $mimeType,
+                    'fileName' => $filename,
+                    'disposition' => $disposition,
+                    'encoding' => $encoding
+                ]
+            );
             $this->parts[] = $mp;
         }
 

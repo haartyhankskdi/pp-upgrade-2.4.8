@@ -8,6 +8,7 @@
 
 namespace Magefan\Blog\Block\Category;
 
+use Magefan\Blog\Block\Post\PostList\Toolbar;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -56,11 +57,27 @@ class View extends \Magefan\Blog\Block\Post\PostList
             $this->pageConfig->setDescription($category->getMetaDescription());
 
             if ($this->config->getDisplayCanonicalTag(\Magefan\Blog\Model\Config::CANONICAL_PAGE_TYPE_CATEGORY)) {
-                $this->pageConfig->addRemotePageAsset(
-                    $category->getCanonicalUrl(),
-                    'canonical',
-                    ['attributes' => ['rel' => 'canonical']]
-                );
+
+                $layoutUpdate = $category->getData('layout_update_xml') ?: '';
+                if (false === strpos($layoutUpdate, 'rel="canonical"')) {
+                    $canonicalUrl = $category->getCanonicalUrl();
+                    $page = (int)$this->_request->getParam($this->getPageParamName());
+                    if ($page > 1) {
+                        $canonicalUrl .= ((false === strpos($canonicalUrl, '?')) ? '?' : '&')
+                            . $this->getPageParamName() . '=' . $page;
+                    }
+
+                    $this->pageConfig->addRemotePageAsset(
+                        $canonicalUrl,
+                        'canonical',
+                        ['attributes' => ['rel' => 'canonical']]
+                    );
+                }
+            }
+
+            $robots = $category->getData('meta_robots');
+            if ($robots) {
+                $this->pageConfig->setRobots($robots);
             }
 
             $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
@@ -108,7 +125,7 @@ class View extends \Magefan\Blog\Block\Post\PostList
             ]);
         }
     }
-    
+
     /**
      * Retrieve identities
      *
@@ -116,6 +133,6 @@ class View extends \Magefan\Blog\Block\Post\PostList
      */
     public function getIdentities()
     {
-        return $this->getCategory()->getIdentities();
+        return $this->getCategory() ? $this->getCategory()->getIdentities() : [];
     }
 }

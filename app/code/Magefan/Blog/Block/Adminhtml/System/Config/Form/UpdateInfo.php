@@ -8,8 +8,7 @@
 
 namespace Magefan\Blog\Block\Adminhtml\System\Config\Form;
 
-use Magento\Framework\Module\ModuleListInterface;
-use Magefan\Blog\Model\AdminNotificationFeed;
+use Magefan\Community\Api\GetModuleVersionInterface;
 
 /**
  * Class Update Info Block
@@ -25,11 +24,6 @@ class UpdateInfo extends \Magento\Backend\Block\Template
     protected $curlClient;
 
     /**
-     * @var ModuleListInterface
-     */
-    protected $moduleList;
-
-    /**
      * @var mixed
      */
     protected $latestVersion;
@@ -40,37 +34,41 @@ class UpdateInfo extends \Magento\Backend\Block\Template
     protected $currentVersion;
 
     /**
-     * @var AdminNotificationFeed
-     */
-    protected $adminNotificationFeed;
-
-    /**
      * @var \Magento\Framework\App\CacheInterface
      */
     protected $cacheManager;
+
+    /**
+     * @var \Magento\Framework\Json\Helper\Data
+     */
+    private $jsonHelper;
+
+    /**
+     * @var GetModuleVersionInterface
+     */
+    private $getModuleVersion;
 
     /**
      * UpdateInfo constructor.
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\HTTP\Client\Curl $curl
      * @param \Magento\Framework\Json\Helper\Data $jsonHelper
-     * @param AdminNotificationFeed $adminNotificationFeed
-     * @param ModuleListInterface $moduleList
      * @param array $data
+     * @param GetModuleVersionInterface|null $getModuleVersion
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\HTTP\Client\Curl $curl,
         \Magento\Framework\Json\Helper\Data $jsonHelper,
-        AdminNotificationFeed $adminNotificationFeed,
-        ModuleListInterface $moduleList,
-        array $data = []
+        array $data = [],
+        ?GetModuleVersionInterface $getModuleVersion = null
     ) {
         $this->cacheManager = $context->getCache();
-        $this->adminNotificationFeed = $adminNotificationFeed;
-        $this->moduleList = $moduleList;
         $this->jsonHelper = $jsonHelper;
         $this->curlClient = $curl;
+        $this->getModuleVersion = $getModuleVersion ?: \Magento\Framework\App\ObjectManager::getInstance()->get(
+            \Magefan\Community\Api\GetModuleVersionInterface::class
+        );
         parent::__construct($context, $data);
     }
 
@@ -80,8 +78,7 @@ class UpdateInfo extends \Magento\Backend\Block\Template
     public function getCurrentVersion()
     {
         if (null === $this->currentVersion) {
-            $this->currentVersion = $this->moduleList
-                ->getOne($this->getModuleName())['setup_version'];
+            $this->currentVersion = $this->getModuleVersion->execute($this->getModuleName());
         }
 
         return $this->currentVersion;

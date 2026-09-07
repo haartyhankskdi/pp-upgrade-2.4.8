@@ -20,6 +20,8 @@ use Magezon\Builder\Data\Form\Element\CollectionFactory;
 
 class AbstractForm extends \Magento\Framework\DataObject
 {
+    protected $_factoryCollection;
+    protected $_factoryElement;
     /**
      * Form level elements collection
      *

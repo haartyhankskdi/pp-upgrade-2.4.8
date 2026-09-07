@@ -20,6 +20,10 @@ use Amasty\Customform\Controller\Form\SessionData;
 
 class Submit extends AmastySubmit
 {
+    protected $helper;
+    protected $logger;
+    protected $sessionFactory;
+    protected $submit;
 	protected $customSession;
 	protected $product;
 	protected $storeManager;

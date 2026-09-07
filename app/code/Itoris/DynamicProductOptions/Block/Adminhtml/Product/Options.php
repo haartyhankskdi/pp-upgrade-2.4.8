@@ -334,7 +334,7 @@ class Options extends \Magento\Backend\Block\Template
 
     public function getSectionsJson() {
         $sections = $this->getOptionsConfig()->getSections();
-        return \Zend_Json::encode($sections);
+        return json_encode($sections);
     }
 
     public function escapeJsHtml($text) {

@@ -6,6 +6,7 @@ use Magento\Framework\App\ResourceConnection;
 
 class GridMassAction extends \Magento\Catalog\Block\Product\View\Options
 {
+    protected $_objectManager;
     /**
      * @param \Magento\Framework\ObjectManagerInterface $objectManager
      * @param \Magento\Framework\View\Element\Template\Context $context

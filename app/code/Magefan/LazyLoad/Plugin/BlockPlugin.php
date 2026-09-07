@@ -6,7 +6,11 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 
+declare(strict_types = 1);
+
 namespace Magefan\LazyLoad\Plugin;
+
+use Magefan\LazyLoad\Model\Config;
 
 /**
  * Plugin for sitemap generation
@@ -14,6 +18,10 @@ namespace Magefan\LazyLoad\Plugin;
 class BlockPlugin
 {
     const LAZY_TAG = '<!-- MAGEFAN_LAZY_LOAD -->';
+
+    const REPLACEMENT_LABEL = 'mf-lazy';
+
+    const PATTERN = '#<img(?!\s+mfdislazy)([^>]*)(?:\ssrc="([^"]*)")([^>]*)\/?>#isU';
 
     /**
      * Request
@@ -41,25 +49,27 @@ class BlockPlugin
     protected $config;
 
     /**
-     * BlockPlugin constructor
+     * @var array
+     */
+    protected $skipBlocks = [];
+
+    /**
      * @param \Magento\Framework\App\RequestInterface $request
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param null|\Magefan\LazyLoad\Model\Config $config
+     * @param Config $config
+     * @param array $skipBlocks
      */
     public function __construct(
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        $config = null
+        Config $config,
+        array $skipBlocks
     ) {
         $this->request = $request;
         $this->scopeConfig = $scopeConfig;
-
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $this->config = $config ?: $objectManager->get(
-            \Magefan\LazyLoad\Model\Config::class
-        );
+        $this->config = $config;
+        $this->skipBlocks = $skipBlocks;
     }
-
 
     /**
      * @param \Magento\Framework\View\Element\AbstractBlock $block
@@ -68,25 +78,56 @@ class BlockPlugin
      */
     public function afterToHtml(\Magento\Framework\View\Element\AbstractBlock $block, $html)
     {
-        if (!$this->isEnabled($block, $html)) {
+        if (!$html || !$this->isEnabled($block, (string)$html)) {
             return $html;
         }
 
+        $numberOfReplacements = $this->config->getBlockFirstImagesToSkip($this->getBlockIdentifier($block));
+
+        if ($numberOfReplacements) {
+            $html = $this->removeLoadingLazyAttributeFromFirstNImages($html, $numberOfReplacements);
+        }
+
+        $html = $this->config->getIsJavascriptLazyLoadMethod()
+            ? $this->prepareForJsLazyLoad($block, $html)
+            : $this->prepareForNativeBrowserLazyLoad($html);
+
+        return $html;
+    }
+
+
+    /**
+     * @param string $html
+     * @return string
+     */
+    private function prepareForJsLazyLoad($block, string $html): string
+    {
+        $lazyAttribute = ' data-original=';
+
         $pixelSrc = ' src="' . $block->getViewFileUrl('Magefan_LazyLoad::images/pixel.jpg') . '"';
         $tmpSrc = 'TMP_SRC';
+        $tmpDataOriginal = 'TMP_DATA_ORIGINAL';
 
         $html = str_replace($pixelSrc, $tmpSrc, $html);
+        $html = str_replace($lazyAttribute, $tmpDataOriginal, $html);
 
-        $html = preg_replace('#<img(?!.*mfdislazy).*([^>]*)(?:\ssrc="([^"]*)")([^>]*)\/?>#isU', '<img ' .
-            ' data-original="$2" $1 $3/>
-            <noscript>
-                <img src="$2"  $1 $3  />
-            </noscript>
-           ', $html);
+        $noscript = '';
+        if ($this->config->isNoScriptEnabled()) {
+            $noscript = '<noscript>
+                    <img src="$2"  $1 $3  />
+                </noscript>';
+        }
 
-        $html = str_replace(' data-original=', $pixelSrc . ' data-original=', $html);
+        $html = preg_replace(
+            self::PATTERN,
+            '<img data-original="$2" $1 $3/>' . $noscript,
+            $html
+        );
+
+        $html = str_replace($lazyAttribute, $pixelSrc . $lazyAttribute, $html);
 
         $html = str_replace($tmpSrc, $pixelSrc, $html);
+        $html = str_replace($tmpDataOriginal, $lazyAttribute, $html);
         $html = str_replace(self::LAZY_TAG, '', $html);
 
         /* Disable Owl Slider LazyLoad */
@@ -95,6 +136,75 @@ class BlockPlugin
             ['"lazyLoad":false,', '&quot;lazyLoad&quot;:false,', ''],
             $html
         );
+
+        /* Fix for page builder bg images */
+        if (false !== strpos($html, 'background-image-')) {
+            $html = str_replace('.background-image-', '.tmpbgimg-', $html);
+            $html = str_replace('background-image-', 'mflazy-background-image mflazy-background-image-', $html);
+            $html = str_replace('.tmpbgimg-', '.background-image-', $html);
+        }
+
+        return $html;
+    }
+
+    /**
+     * @param string $html
+     * @return string
+     */
+    protected function prepareForNativeBrowserLazyLoad(string $html) :string
+    {
+        return preg_replace(self::PATTERN, '<img src="$2" $1 $3 loading="lazy" />', $html);
+    }
+
+    /**
+     * @param \Magento\Framework\View\Element\AbstractBlock $block
+     * @return string
+     */
+    protected function getBlockIdentifier(\Magento\Framework\View\Element\AbstractBlock $block): string
+    {
+        $blockName = $block->getBlockId() ?: $block->getNameInLayout();
+        $blockTemplate = $block->getTemplate();
+        $blocks = $this->config->getBlocks();
+
+        if (in_array($blockName, $blocks)) {
+            return $blockName;
+        } elseif (in_array(get_class($block), $blocks)) {
+            return get_class($block);
+        } elseif (in_array($blockTemplate, $blocks)) {
+            return $blockTemplate;
+        }
+
+        return '';
+    }
+
+    /**
+     * @param string $html
+     * @param int $numberOfReplacements
+     * @return string
+     */
+    protected function removeLoadingLazyAttributeFromFirstNImages(string $html, int $numberOfReplacements):string
+    {
+        $position = 0;
+
+        if (preg_match_all(self::PATTERN, $html, $matches, PREG_OFFSET_CAPTURE) !== false) {
+            foreach ($matches[0] as $i => $match) {
+                if ($i > $numberOfReplacements - 1) {
+                    break;
+                }
+
+                $offset = $match[1] + $position;
+                $htmlTag = $matches[0][$i][0];
+
+                $newHtmlTag = str_replace(
+                    ['loading="lazy"', '<img '],
+                    ['', '<img mfdislazy="1" fetchpriority="high" '],
+                    $htmlTag
+                );
+
+                $html = substr_replace($html, $newHtmlTag, $offset, strlen($htmlTag));
+                $position = $position + (strlen($newHtmlTag) - strlen($htmlTag));
+            }
+        }
 
         return $html;
     }
@@ -105,7 +215,7 @@ class BlockPlugin
      * @param string $html
      * @return boolean
      */
-    protected function isEnabled($block, $html)
+    protected function isEnabled($block, string $html): bool
     {
         if (PHP_SAPI === 'cli'
             || $this->request->isXmlHttpRequest()
@@ -120,18 +230,27 @@ class BlockPlugin
             return false;
         }
 
-        $blockName = $block->getBlockId() ?: $block->getNameInLayout();
-        $blockTemplate = $block->getTemplate();
-        $blocks = $this->config->getBlocks();
+        if ($this->config->isAllBlocksAddedToLazy() && !$this->isBlockSkipped($block)) {
+            return true;
+        }
 
-        if (!in_array($blockName, $blocks)
-            && !in_array(get_class($block), $blocks)
-            && !in_array($blockTemplate, $blocks)
-            && (false === strpos($html, self::LAZY_TAG))
-        ) {
+        if (false !== strpos($html, self::LAZY_TAG)) {
+            return true;
+        }
+
+        if (!$this->getBlockIdentifier($block)) {
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * @param $block
+     * @return bool
+     */
+    private function isBlockSkipped($block): bool
+    {
+        return in_array(get_class($block), $this->skipBlocks);
     }
 }

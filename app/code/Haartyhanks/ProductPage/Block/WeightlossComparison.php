@@ -9,6 +9,7 @@ use Magento\Catalog\Helper\Image as ImageHelper;
 
 class WeightlossComparison extends Template
 {
+    protected $registry;
     protected $productRepository;
     protected $imageHelper;
 

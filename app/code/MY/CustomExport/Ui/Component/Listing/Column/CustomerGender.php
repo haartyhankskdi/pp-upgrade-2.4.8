@@ -15,6 +15,7 @@ use \Magento\Framework\Api\SearchCriteriaBuilder;
  */
 class CustomerGender extends Column
 {
+    protected $_searchCriteria;
 
     /**
      * Constructor

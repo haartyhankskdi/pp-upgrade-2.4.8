@@ -12,6 +12,9 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 
 class Customc extends \Magento\Backend\App\Action
 {
+    protected $_countryFactory;
+    protected $_prescriberNameFactory;
+    protected $logger;
 
     protected $resultPageFactory;
     protected $jsonHelper;

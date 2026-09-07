@@ -510,7 +510,7 @@ class SpeedOptimizer extends \Magento\Framework\View\Element\Template
     public function isMobile()
     {
         $userAgent = $this->httpHeader->getHttpUserAgent();
-        $isMobile = \Zend_Http_UserAgent_Mobile::match($userAgent, $_SERVER);
+        return preg_match('/Mobile|Android|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i', (string) $userAgent);
     }
 
 }

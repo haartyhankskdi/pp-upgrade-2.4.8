@@ -3,6 +3,7 @@
 namespace Sabberworm\CSS\Value;
 
 class CSSFunction extends ValueList {
+    protected $iLineNo;
 
 	protected $sName;
 

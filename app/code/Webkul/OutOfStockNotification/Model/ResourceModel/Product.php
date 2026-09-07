@@ -16,6 +16,7 @@ namespace Webkul\OutOfStockNotification\Model\ResourceModel;
   */
 class Product extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
+    protected $context;
     /**
      * Store model
      *

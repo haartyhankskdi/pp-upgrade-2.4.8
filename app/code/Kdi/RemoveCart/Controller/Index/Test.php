@@ -3,6 +3,7 @@ namespace Kdi\RemoveCart\Controller\Index;
 
 class Test extends \Magento\Framework\App\Action\Action
 {
+    protected $removeCart;
 	protected $_pageFactory;
 
 	public function __construct(

@@ -26,6 +26,10 @@ namespace Itoris\Core\Block\System;
 
 class Installed extends \Magento\Config\Block\System\Config\Form\Fieldset
 {
+    protected $_backendConfig;
+    protected $_objectManager;
+    protected $curlFactory;
+    protected $productMetadata;
     protected $_moduleList;
 
     public function __construct(
@@ -132,7 +136,7 @@ class Installed extends \Magento\Config\Block\System\Config\Form\Fieldset
                 'referer'   => $this->getBase()
             ]
         );
-        $curl->write(\Zend_Http_Client::GET, $feedUrl, '1.0');
+        $curl->write('GET', $feedUrl, '1.0');
         $data = $curl->read();
         if ($data === false) {
             return 'Cannot connect the update server';

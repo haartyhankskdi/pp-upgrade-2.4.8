@@ -19,7 +19,7 @@
     $_postName = $block->escapeHtml($_post->getTitle(), null);
 ?>
 <?= $block->getStyleViewModel()->getStyle('Magefan_Blog::css/bootstrap-4.4.1-custom-min.css') ?>
-<div class="_post-view">
+<div class="_post-view post-view-modern">
     <div class="post-holder post-holder-<?= (int)$_post->getId() ?>">
 
         <div class="post-header clearfix">
@@ -37,7 +37,7 @@
             <?php }  ?>
 
             <!-- block data -->
-            <div class="post-data-wrap mb-5">
+            <div class="post-data-wrap mb-4">
                 <!-- post author -->
                 <?php if ($block->authorEnabled()) { ?>
                     <?php if ($_author = $_post->getAuthor()) { ?>
@@ -49,20 +49,42 @@
                             <?php } else { ?>
                                 <?= $block->escapeHtml($_author->getTitle()) ?>
                             <?php } ?>
-                            <span>-</span>
+
+                            <?php
+                                $coAuthors = $_post->getRelatedCoauthors();
+                                $coAuthorsCount = count($coAuthors);
+                            ?>
+                            <?php if ($coAuthorsCount) { ?>
+                                <?= $block->escapeHtml(__('and')) ?>
+                                <?php $z = 0 ?>
+                                <?php foreach($coAuthors as $coAuthor) { ?>
+                                    <?php $z++; ?>
+                                    <?php if ($block->authorPageEnabled()) { ?>
+                                        <a title="<?= $block->escapeHtml($coAuthor->getTitle()) ?>"
+                                           href="<?= $block->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $block->escapeHtml($coAuthor->getTitle()) ?></a><?php if ($z != $coAuthorsCount) echo ', ' ?>
+                                    <?php } else { ?>
+                                        <?= $block->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != $coAuthorsCount) echo ', ' ?>
+                                    <?php } ?>
+                                <?php } ?>
+                            <?php } ?>
                         </span>
                     <?php } ?>
                 <?php } ?>
 
                 <!-- post date -->
                 <?php if ($_post->isPublishDateEnabled()) { ?>
-                    <span class="post-date"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
+                    <span class="post-date"><span>-</span> <?= $block->escapeHtml($_post->getPublishDate()) ?></span>
                 <?php } ?>
 
-                <!-- post view -->
+                <!-- reading time -->
+                <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
+                    <span class="reading-time"><?= ' - ' . $block->escapeHtml($_post->getReadingTime()) . ' ' . __('min read') ?></span>
+                <?php } ?>
+
+                <!-- post views -->
                 <?php if ($block->viewsCountEnabled()) { ?>
                     <?php if ($viewsCount = $_post->getViewsCount()) { ?>
-                        <span class="post-view float-right d-none d-md-block">
+                        <span class="post-views float-right d-none d-md-block">
                             <i class="mf-blog-icon mfbi-views"></i>
                             <?= $block->escapeHtml($viewsCount)?>
                         </span>
@@ -79,12 +101,6 @@
                     </span>
                 <?php } ?>
             </div>
-            <?php /*
-            <div class="post-sharing mb-4 d-none">
-                <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                <div class="addthis_inline_share_toolbox text-center" addthis:url="<?= $block->escapeUrl($_postUrl) ?>"></div>
-            </div>
-            */ ?>
         </div>
 
         <div class="post-content">
@@ -104,10 +120,10 @@
                 <?php } ?>
 
                 <!-- Post Tags -->
-                <div class="post-tag">
-                    <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
+                <?php if ($_tagsCount = $_post->getTagsCount()) { ?>
+                    <div class="post-tag">
                         <div class="item post-tags">
-                            <div class="post-tag-title">Tags</div>
+                            <div class="post-tag-title"><?= $block->escapeHtml(__('Tags')) ?></div>
                             <?php $n = 0; ?>
                             <?php foreach ($_post->getRelatedTags() as $tag) { ?>
                                 <?php $n++; ?>
@@ -116,8 +132,9 @@
                                 ><?= $block->escapeHtml($tag->getTitle()) ?></a>
                             <?php } ?>
                         </div>
-                    <?php } ?>
-                </div>
+                    </div>
+                <?php } ?>
+                <!-- END Post Tags -->
 
                 <div class="post-description">
                     <?= /*@noEscape*/ $block->getContent() ?>
@@ -127,10 +144,24 @@
         </div>
 
         <div class="post-bottom">
-            <div class="post-sharing-bottom mb-4">
-                <!-- Go to www.addthis.com/dashboard to customize your tools -->
-                <div class="addthis_inline_share_toolbox" addthis:url="<?= $block->escapeUrl($_postUrl) ?>"></div>
+
+            <?php if ($block->displayAddThisToolbox()) : ?>
+            <!-- Post Sharing -->
+            <div class="post-sharing post-sharing-bottom">
+                <div class="share-elements">
+                    <?php foreach ($block->getAllowedSocialNetworks() as $network) { ?>
+                        <div class="icon-wrapper icon-<?= strtolower($network) ?>" onclick="mfShareWindowOpen('<?= $block->escapeUrl($_postUrl) ?>', '<?= strtolower($network) ?>')">
+                            <div class="icon" title="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
+                                <img src="<?= $this->getViewFileUrl('Magefan_Blog::images/social/' . strtolower($network) . '.svg') ?>" alt="<?= $block->escapeHtml(__('Share on %1', $network == 'Twitter' ? "X" : $network)) ?>">
+                            </div>
+                            <div class="label"><?= $block->escapeHtml(__('Share on %1',  $network == 'Twitter' ? "X" : $network)) ?></div>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
+            <!-- END Post Sharing -->
+            <?php endif; ?>
+
             <?= $block->getChildHtml('blog.post.bottom') ?>
         </div>
     </div>

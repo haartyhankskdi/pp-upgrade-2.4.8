@@ -161,7 +161,7 @@ class Feed extends \Magento\AdminNotification\Model\Feed
                 'referer'   => $this->getBase()
             ]
         );
-        $curl->write(\Zend_Http_Client::POST, $this->getFeedUrl(), '1.0', array(), $feedData);
+        $curl->write(\Laminas\Http\Request::METHOD_POST, $this->getFeedUrl(), '1.0', array(), $feedData);
         $data = $curl->read();
         if ($data === false) {
             return false;

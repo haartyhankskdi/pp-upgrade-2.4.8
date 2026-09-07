@@ -60,8 +60,18 @@ class Time extends AbstractRenderer
         $ago  = new DateTime($datetime);
         $diff = $now->diff($ago);
 
-        $diff->w = floor($diff->d / 7);
-        $diff->d -= $diff->w * 7;
+        $weeks = floor($diff->d / 7);
+        $days  = $diff->d - $weeks * 7;
+
+        $values = [
+            'y' => $diff->y,
+            'm' => $diff->m,
+            'w' => $weeks,
+            'd' => $days,
+            'h' => $diff->h,
+            'i' => $diff->i,
+            's' => $diff->s,
+        ];
 
         $string = [
             'y' => 'year',
@@ -73,8 +83,8 @@ class Time extends AbstractRenderer
             's' => 'second',
         ];
         foreach ($string as $k => &$v) {
-            if ($diff->$k) {
-                $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+            if ($values[$k]) {
+                $v = $values[$k] . ' ' . $v . ($values[$k] > 1 ? 's' : '');
             } else {
                 unset($string[$k]);
             }

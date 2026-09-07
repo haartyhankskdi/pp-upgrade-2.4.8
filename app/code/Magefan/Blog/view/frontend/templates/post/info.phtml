@@ -14,18 +14,7 @@
  */
 ?>
 
-<?php $_post = $block->getPost(); ?>
-<?php
-
-
-$update_time = $_post->getData('update_time');
-if ($update_time) {
-    $formatted_update_time = date('F j Y', strtotime($update_time));
-    
-}
-
-?>
-
+<?php $_post = $block->getPost() ?>
 
 <div class="post-info">
     <?php if ($_post->isPublishDateEnabled()) { ?>
@@ -33,13 +22,6 @@ if ($update_time) {
             <i class="mf-blog-icon mfbi-calendar"></i>
             <span class="label"><?= $block->escapeHtml(__('Posted:')) ?></span>
             <span class="value"><?= $block->escapeHtml($_post->getPublishDate()) ?></span>
-        </div>
-    <?php } ?>
-    <?php if ($update_time) { ?>
-        <div class="item post-posed-date">
-            <i class="mf-blog-icon mfbi-calendar"></i>
-            <span class="label"><?= $block->escapeHtml(__('Updated :')) ?></span>
-            <span class="value"><?= $block->escapeHtml($formatted_update_time) ?></span>
         </div>
     <?php } ?>
     <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
@@ -93,6 +75,26 @@ if ($update_time) {
                 <?php if ($authorPageEnabled) { ?>
                 </a>
                 <?php } ?>
+
+                <?php
+                    $coAuthors = $_post->getRelatedCoauthors();
+                    $coAuthorsCount = count($coAuthors);
+                ?>
+                <?php if ($coAuthorsCount) { ?>
+                    <?= $block->escapeHtml(__('and')) ?>
+                    <?php $z = 0 ?>
+                    <?php foreach($coAuthors as $coAuthor) { ?>
+                        <?php $z++; ?>
+                        <?php if ($block->authorPageEnabled()) { ?>
+                            <a title="<?= $block->escapeHtml($coAuthor->getTitle()) ?>"
+                               href="<?= $block->escapeUrl($coAuthor->getAuthorUrl()) ?>"><?= $block->escapeHtml($coAuthor->getTitle()) ?></a><?php if ($z != $coAuthorsCount) echo ', ' ?>
+                        <?php } else { ?>
+                            <?= $block->escapeHtml($coAuthor->getTitle()) ?><?php if ($z != $coAuthorsCount) echo ', ' ?>
+                        <?php } ?>
+                    <?php } ?>
+                <?php } ?>
+
+
             </span>
         </div>
         <?php } ?>
@@ -110,9 +112,12 @@ if ($update_time) {
         <?php } ?>
     <?php } ?>
 
+    <!-- reading time -->
+    <?php if ($block->readingTimeEnabled() && $_post->getReadingTime()) { ?>
+        <div class="item post-reading-time">
+            <i class="mf-blog-icon mfbi-reading-time"></i>
+            <span class="value"><?= $block->escapeHtml($_post->getReadingTime()) . ' ' . __('min read') ?></span>
+        </div>
+    <?php } ?>
+
 </div>
-
-
-
-
-

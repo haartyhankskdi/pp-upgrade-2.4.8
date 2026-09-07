@@ -5,7 +5,7 @@ $blockObj = $block->getLayout()->createBlock('Haartyhanks\LumaChild\Block\Weight
 $references = $blockObj->getProductAttribute('references');
 
 // Clean and check actual content
-$cleanedValue = trim(strip_tags($references));
+$cleanedValue = trim(strip_tags($references ?? ''));
 
 if (!empty($cleanedValue)): ?>
     <div class="blog-bottom-references-sec">
@@ -16,7 +16,7 @@ if (!empty($cleanedValue)): ?>
                     <ul>
                         <?php
                         // Split lines using newline or <br> or |
-                        $lines = preg_split('/\r\n|\r|\n|<br\s*\/?>|\|/', $references);
+                        $lines = preg_split('/\r\n|\r|\n|<br\s*\/?>|\|/', $references ?? '');
                         foreach ($lines as $line):
                             $line = trim($line);
                             if (!empty($line)):

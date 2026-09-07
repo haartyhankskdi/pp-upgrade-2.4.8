@@ -29,8 +29,8 @@ class Success extends Template
         Data $helper,
         OrderData $orderData,
         TrustpilotLog $trustpilotLog,
-        array $data = [],
-        TrustpilotPluginStatus $pluginStatus)
+        TrustpilotPluginStatus $pluginStatus,
+        array $data = [])
     {
         $this->_salesFactory = $salesOrderFactory;
         $this->_checkoutSession = $checkoutSession;

@@ -52,6 +52,7 @@ use Magento\Framework\Webapi\Soap\ClientFactory;
  */
 class CreatePost extends AbstractAccount implements CsrfAwareActionInterface, HttpPostActionInterface
 {
+    protected $scopeConfig;
     /**
      * @var \Magento\Customer\Api\AccountManagementInterface
      */
@@ -201,10 +202,10 @@ class CreatePost extends AbstractAccount implements CsrfAwareActionInterface, Ht
         DataObjectHelper $dataObjectHelper,
         AccountRedirect $accountRedirect,
         CustomerRepository $customerRepository,
-        Validator $formKeyValidator = null,
         Ageverify $dataHelper,
         Registerverify $verifyHelper,
-        ClientFactory $soapClientFactory
+        ClientFactory $soapClientFactory,
+        Validator $formKeyValidator = null
     ) {
         $this->session = $customerSession;
         $this->scopeConfig = $scopeConfig;

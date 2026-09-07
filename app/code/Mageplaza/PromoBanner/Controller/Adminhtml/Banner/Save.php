@@ -38,7 +38,6 @@ use Mageplaza\PromoBanner\Model\BannerFactory;
 use Mageplaza\PromoBanner\Model\Config\Source\Type;
 use Mageplaza\PromoBanner\Model\ResourceModel\Banner as ResourceModel;
 use Psr\Log\LoggerInterface;
-use Zend_Filter_Input;
 
 /**
  * Class Save
@@ -134,9 +133,9 @@ class Save extends Banner
             $bannerId = $this->getRequest()->getParam('banner_id');
             /** @var $model \Mageplaza\PromoBanner\Model\Banner */
             $model        = $this->bannerFactory->create();
-            $filterValues = ['from_date' => $this->_dateFilter];
-            $inputFilter  = new Zend_Filter_Input($filterValues, [], $data);
-            $data         = $inputFilter->getUnescaped();
+            if (isset($data['from_date'])) {
+                $data['from_date'] = $this->_dateFilter->filter($data['from_date']);
+            }
             if ($bannerId) {
                 $this->resourceModel->load($model, $bannerId);
                 if ($bannerId !== $model->getId()) {

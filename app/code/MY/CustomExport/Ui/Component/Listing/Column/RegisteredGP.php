@@ -15,6 +15,7 @@ use \Magento\Framework\Api\SearchCriteriaBuilder;
  */
 class RegisteredGP extends Column 
 {
+    protected $_searchCriteria;
 
     /**
      * Constructor

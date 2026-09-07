@@ -18,6 +18,7 @@ use Magento\Framework\UrlInterface;
  
 class MailDataProvider extends Column
 {
+    protected $_quoteModel;
     /**
      * @var UrlInterface
      */

@@ -20,6 +20,7 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 
 class Conditions extends Template implements RendererInterface
 {
+    protected $conditionsFactory;
     /**
      * @var \Magento\Rule\Block\Conditions
      */

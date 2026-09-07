@@ -6,6 +6,7 @@ use Magento\Framework\App\Helper\Context;
 
 class CartButton extends AbstractHelper
 {
+    protected $objectManager;
 
     public function __construct(
         Context $context

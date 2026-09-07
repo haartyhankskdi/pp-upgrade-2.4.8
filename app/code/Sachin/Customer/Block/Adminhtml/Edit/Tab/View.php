@@ -3,6 +3,7 @@ namespace Sachin\Customer\Block\Adminhtml\Edit\Tab;
  
 class View extends \Magento\Backend\Block\Template implements \Magento\Ui\Component\Layout\Tabs\TabInterface
 {
+    protected $_coreRegistry;
     /**
      * Template
      *

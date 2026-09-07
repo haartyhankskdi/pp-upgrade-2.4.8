@@ -12,6 +12,7 @@ namespace Ranosys\CancelOrder\Block\Order;
  */
 class Recent extends \Magento\Sales\Block\Order\Recent
 {
+    protected $helper;
 
     /**
      * @param \Magento\Framework\View\Element\Template\Context           $context

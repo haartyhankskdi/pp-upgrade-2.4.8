@@ -9,7 +9,7 @@
 namespace Magefan\Blog\Model\Import;
 
 use Magento\Framework\Config\ConfigOptionsListConstants;
-use Zend\Db\Adapter\Adapter;
+use Laminas\Db\Adapter\Adapter;
 
 /**
  * Aw2 import model
@@ -49,11 +49,11 @@ class Aw2 extends AbstractImport
 
             /* Find store ids */
             $data['store_ids'] = [];
-            $s_sql = 'SELECT 
-                          `store_id` 
-                      FROM 
-                          '.$_pref.'`aw_blog_category_store` 
-                      WHERE 
+            $s_sql = 'SELECT
+                          `store_id`
+                      FROM
+                          '.$_pref.'`aw_blog_category_store`
+                      WHERE
                           `category_id` = '. ((int)$data['old_id']) . ";";
             $s_result =  $adapter->query($s_sql)->execute();
             foreach ($s_result as $s_data) {
@@ -169,6 +169,10 @@ class Aw2 extends AbstractImport
             if (empty($data['store_ids']) || in_array(0, $data['store_ids'])) {
                 $data['store_ids'] = 0;
             }
+            if (!empty($data['featured_image_file'])) {
+                $imgPath = explode('/', $data['featured_image_file']);
+                $img = end($imgPath);
+            }
 
             /* Prepare post data */
             $data = [
@@ -180,12 +184,12 @@ class Aw2 extends AbstractImport
                 'content_heading' => '',
                 'content' => str_replace('<!--more-->', '<!-- pagebreak -->', $data['content']),
                 'short_content' => $data['short_content'],
-                'creation_time' => strtotime($data['created_at']),
-                'update_time' => strtotime($data['updated_at']),
-                'publish_time' => strtotime($data['publish_date']),
+                'creation_time' => strtotime((string)$data['created_at']),
+                'update_time' => strtotime((string)$data['updated_at']),
+                'publish_time' => strtotime((string)$data['publish_date']),
                 'is_active' => (int)($data['status'] == 'publication'),
                 'categories' => $postCategories,
-                'featured_img' => !empty($data['featured_image']) ? 'magefan_blog/' . $data['featured_image'] : '',
+                'featured_img' => !empty($img) ? 'magefan_blog/' . $img : '',
             ];
             $data['identifier'] = trim(strtolower($data['identifier']));
 

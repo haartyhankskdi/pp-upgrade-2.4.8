@@ -8,10 +8,14 @@
 
 namespace Magefan\Blog\Block\Widget;
 
+use Magefan\Blog\Block\Post\PostList\AbstractList;
+use Magefan\Blog\Model\Config\Source\PostsSortBy;
+use Magento\Framework\Api\SortOrder;
+
 /**
  * Blog recent posts widget
  */
-class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \Magento\Widget\Block\BlockInterface
+class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterface
 {
     /**
      * @var array
@@ -63,12 +67,11 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
             $this->getData('custom_template') ?: 'Magefan_Blog::widget/recent.phtml'
         );
 
-        $html = parent::_toHtml();
-
         foreach ($this->getPostCollection() as $item) {
             self::$processedIds[$item->getId()] = $item->getId();
         }
-        return $html;
+
+        return parent::_toHtml();
     }
 
     /**
@@ -102,7 +105,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
 
         $this->_postCollection->addRecentFilter();
 
-        $categoryIds = explode(',', $this->getData('category_id'));
+        $categoryIds = explode(',', (string)$this->getData('category_id'));
         if (count($categoryIds) > 1) {
             $this->_postCollection->addCategoryFilter($categoryIds);
         } elseif ($category = $this->getCategory()) {
@@ -163,11 +166,45 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
      *
      * @param  \Magefan\Blog\Model\Post $post
      * @param  mixed $len
-     * @param  mixed $endСharacters
+     * @param  mixed $endCharacters
      * @return string
      */
-    public function getShorContent($post, $len = null, $endСharacters = null)
+    public function getShorContent($post, $len = null, $endCharacters = null)
     {
-        return $post->getShortFilteredContent($len, $endСharacters);
+        return $post->getShortFilteredContent($len, $endCharacters);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCollectionOrderField(): string
+    {
+        $postsSortBy = (int)$this->getData('posts_sort_by');
+        if ($postsSortBy) {
+            switch ($postsSortBy) {
+                case PostsSortBy::POSITION:
+                    return AbstractList::POSTS_SORT_FIELD_BY_POSITION;
+                case PostsSortBy::TITLE:
+                    return AbstractList::POSTS_SORT_FIELD_BY_TITLE;
+            }
+        }
+
+        return parent::getCollectionOrderField();
+    }
+
+    /**
+     * Retrieve collection order direction
+     *
+     * @return string
+     */
+    public function getCollectionOrderDirection()
+    {
+        $postsSortBy = (int)$this->getData('posts_sort_by');
+
+        if (PostsSortBy::TITLE == $postsSortBy) {
+            return SortOrder::SORT_ASC;
+        }
+
+        return parent::getCollectionOrderDirection();
     }
 }

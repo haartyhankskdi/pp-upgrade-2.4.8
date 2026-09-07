@@ -15,6 +15,9 @@
         <referenceBlock name="head.additional">
             <block class="Magefan\Blog\Block\Post\View\Comments\HeadFbApi" name="mfblog.head.fb_api" />
         </referenceBlock>
+        <referenceBlock name="blog.sidebar">
+            <block class="Magefan\Blog\Block\Sidebar\PostRelatedProducts" name="blog.sidebar.postrelatedproducts" template="Magefan_Blog::sidebar/post-related-products.phtml" />
+        </referenceBlock>
         <referenceContainer name="content">
             <block class="Magefan\Blog\Block\Post\View\ViewsCount" name="blog.posts.views.count" template="post/view/views_count.phtml"></block>
             <block class="Magefan\Blog\Block\Post\View" name="blog.post" template="post/view.phtml">
@@ -24,12 +27,6 @@
                 </action>
                 <container name="blog.post.bottom" label="Blog Post Bottom Container" >
                     <block class="Magefan\Blog\Block\Post\View\Gallery" name="blog.post.gallery" as="gallery"  template="Magefan_Blog::post/view/gallery.phtml" />
-                    <!-- <block class="Magento\Framework\View\Element\Template" name="blog.post.author" template="Magefan_Blog::post/view/review.phtml"/> -->
-                    <block class="Magento\Framework\View\Element\Template" name="blog.post.author" template="Haartyhanks_AuthReview::post/view/reviewed.phtml">
-            <arguments>
-                <argument name="view_model" xsi:type="object">Haartyhanks\AuthReview\ViewModel\Post</argument>
-            </arguments>
-        </block>
                     <block class="Magefan\Blog\Block\Post\View\NextPrev" name="blog.post.nextprev" as="nextprev"  template="Magefan_Blog::post/view/nextprev.phtml" />
                     <block class="Magefan\Blog\Block\Post\View\RelatedPosts" name="blog.post.relatedposts" as="relatedposts"  template="Magefan_Blog::post/view/relatedposts.phtml" />
                     <block class="Magefan\Blog\Block\Post\View\RelatedProducts" name="blog.post.relatedproducts" as="relatedproducts"  template="Magefan_Blog::post/view/relatedproducts.phtml" />
@@ -64,6 +61,7 @@
                     <block class="Magefan\Blog\Block\Social\AddThis" name="addthis.js.init" as="addthisJs" template="Magefan_Blog::addthis-js.phtml"/>
                 </container>
             </block>
+            <block class="Magefan\Blog\Block\Post\View\CustomCss" name="magefan.blog.post.custom.css" />
         </referenceContainer>
     </body>
 </page>

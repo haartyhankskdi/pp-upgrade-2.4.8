@@ -11,6 +11,7 @@ use Nilesh\GpManagement\Model\GpManagementFactory as GpManagement;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
+    protected $logger;
 
     protected $resultPageFactory;
     protected $jsonHelper;

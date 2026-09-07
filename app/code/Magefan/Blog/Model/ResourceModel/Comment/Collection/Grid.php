@@ -21,6 +21,11 @@ class Grid extends Collection
      * @var int
      */
     protected $_storeId;
+    
+    /**
+     * @var bool
+     */
+    protected $_previewFlag;
 
     /**
      * @param \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory
@@ -38,7 +43,7 @@ class Grid extends Collection
         \Magento\Framework\Event\ManagerInterface $eventManager,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         $connection = null,
-        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
+        ?\Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
         $this->_storeManager = $storeManager;

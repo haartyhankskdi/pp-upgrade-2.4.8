@@ -10,6 +10,7 @@ use Magento\Framework\Api\AttributeValueFactory;
 
 class AbstractItem extends \Magento\Framework\Model\AbstractExtensibleModel 
 {
+    protected $_messages;
     public function aroundCheckData(
         \Magento\Quote\Model\Quote\Item\AbstractItem $subject,
         callable $proceed

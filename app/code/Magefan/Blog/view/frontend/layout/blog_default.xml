@@ -7,10 +7,11 @@
  * Glory to Ukraine! Glory to the heroes!
  */
 -->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="3columns" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-right" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <css src="Magefan_Blog::css/comments.css" />
     </head>
+    <update handle="blog_css"/>
     <body>
         <attribute name="class" value="blog-page" />
         <referenceContainer name="sidebar.additional">
@@ -62,6 +63,7 @@
             </block>
             <referenceBlock name="catalog.compare.sidebar" remove="true"/>
             <referenceBlock name="wishlist_sidebar" remove="true"/>
+            <referenceBlock name="sale.reorder.sidebar" remove="true"/>
         </referenceContainer>
     </body>
 </page>

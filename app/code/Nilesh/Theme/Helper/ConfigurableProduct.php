@@ -9,6 +9,8 @@ use Magento\Framework\App\Helper\Context;
 
 class ConfigurableProduct extends AbstractHelper
 {
+    protected $productFactory;
+    protected $stockItem;
     public function __construct(Context $context, ProductFactory $productFactory, Item $stockItem)
     {
         parent::__construct($context);

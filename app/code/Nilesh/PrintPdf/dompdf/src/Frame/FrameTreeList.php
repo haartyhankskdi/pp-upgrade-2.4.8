@@ -28,7 +28,7 @@ class FrameTreeList implements IteratorAggregate
     /**
      * @return FrameTreeIterator
      */
-    public function getIterator()
+    public function getIterator(): FrameTreeIterator
     {
         return new FrameTreeIterator($this->_root);
     }

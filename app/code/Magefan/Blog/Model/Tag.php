@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Model\Url;
+use Magefan\Blog\Api\ShortContentExtractorInterface;
 
 /**
  * Tag model
@@ -58,6 +59,11 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     protected $controllerName;
 
     /**
+     * @var ShortContentExtractorInterface
+     */
+    protected $shortContentExtractor;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
@@ -71,8 +77,8 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         Url $url,
-        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->_url = $url;
@@ -124,11 +130,12 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      * return tag id if tag exists
      *
      * @param string $identifier
+     * @param int $storeId
      * @return int
      */
-    public function checkIdentifier($identifier)
+    public function checkIdentifier($identifier, $storeId)
     {
-        return $this->load($identifier)->getId();
+        return $this->_getResource()->checkIdentifier($identifier, $storeId);
     }
 
     /**
@@ -166,7 +173,7 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
             $title = $this->getData('title');
         }
 
-        return trim($title);
+        return trim($title ?: '');
     }
 
     /**
@@ -177,12 +184,20 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     {
         $desc = $this->getData('meta_description');
         if (!$desc) {
-            $desc = $this->getData('content');
+            $desc = $this->getShortContentExtractor()->execute($this->getData('content'), 500);
         }
 
-        $desc = strip_tags($desc);
-        if (mb_strlen($desc) > 300) {
-            $desc = mb_substr($desc, 0, 300);
+        $stylePattern = "~<style\b[^>]*>.*?</style>~is";
+        $desc = preg_replace($stylePattern, '', $desc);
+        $desc = trim(strip_tags((string)$desc));
+        $desc = str_replace(["\r\n", "\n\r", "\r", "\n"], ' ', $desc);
+
+        if (mb_strlen($desc) > 160) {
+            $desc = mb_substr($desc, 0, 160);
+            $lastSpace = mb_strrpos($desc, ' ');
+            if ($lastSpace !== false) {
+                $desc = mb_substr($desc, 0, $lastSpace) . '...';
+            }
         }
 
         return trim($desc);
@@ -242,5 +257,36 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
         }
 
         return $data;
+    }
+
+    /**
+     * @return ShortContentExtractorInterface
+     */
+    public function getShortContentExtractor()
+    {
+        if (null === $this->shortContentExtractor) {
+            $this->shortContentExtractor = \Magento\Framework\App\ObjectManager::getInstance()
+                ->get(ShortContentExtractorInterface::class);
+        }
+
+        return $this->shortContentExtractor;
+    }
+
+    /**
+     * @return array|mixed|null
+     */
+    public function getTagImage()
+    {
+        if (!$this->hasData('tag_image')) {
+            if ($file = $this->getData('tag_img')) {
+                $image = $this->_url->getMediaUrl($file);
+
+            } else {
+                $image = false;
+            }
+            $this->setData('tag_image', $image);
+        }
+
+        return $this->getData('tag_image');
     }
 }

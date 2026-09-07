@@ -13,9 +13,7 @@
     <preference for="Amasty\Customform\Api\FormRepositoryInterface" type="Amasty\Customform\Model\FormRepository"/>
     <preference for="Amasty\Customform\Api\Answer\GetAttachedFileUrlInterface" type="Amasty\Customform\Model\Answer\GetSecuredFileUrl"/>
     <preference for="Amasty\Customform\Model\Answer\FinderInterface" type="Amasty\Customform\Model\Answer\Finder"/>
-    <preference for="Amasty\Customform\Api\Answer\GetGridDataInterface" type="Amasty\Customform\Model\Answer\CustomerAccount\Api\GetGridItems"/>
     <preference for="Amasty\Customform\ViewModel\Customer\CustomerInfoProviderInterface" type="Amasty\Customform\ViewModel\Customer\CustomerInfoFromCustomerSession"/>
-    <preference for="Amasty\Customform\Api\Answer\RemoveAnswerFromGridInterface" type="Amasty\Customform\Model\Answer\CustomerAccount\Api\RemoveAnswerFromGrid"/>
     <preference for="Amasty\Customform\Api\Answer\AttachedFileDataProviderInterface" type="Amasty\Customform\Model\Answer\AttachedFileDataProvider"/>
     <preference for="Amasty\Customform\Model\Form\Rendering\Autocomplete\ProcessorInterface" type="Amasty\Customform\Model\Form\Rendering\Autocomplete\Processor"/>
     <preference for="Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesProcessorInterface" type="Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesProcessor"/>

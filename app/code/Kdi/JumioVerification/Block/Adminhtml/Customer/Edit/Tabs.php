@@ -8,6 +8,7 @@ use Magento\Framework\App\RequestInterface;
 
 class Tabs extends \Magento\Backend\Block\Template implements \Magento\Ui\Component\Layout\Tabs\TabInterface
 {
+    protected $_coreRegistry;
     protected $_template = 'tab/customtab_view.phtml';//your template file path
     
      /**
