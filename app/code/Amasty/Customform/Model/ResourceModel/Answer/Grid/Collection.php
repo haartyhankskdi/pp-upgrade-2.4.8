@@ -1,17 +1,22 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 namespace Amasty\Customform\Model\ResourceModel\Answer\Grid;
 
 use Amasty\Customform\Api\Data\AnswerInterface;
+use Amasty\Customform\Api\Data\FormInterface;
 use Amasty\Customform\Model\ResourceModel\Form;
+use Magento\Framework\Api\Search\AggregationInterface;
 use Magento\Framework\Api\Search\SearchResultInterface;
 
 class Collection extends \Amasty\Customform\Model\ResourceModel\Answer\Collection implements SearchResultInterface
 {
+    /**
+     * @var AggregationInterface
+     */
     protected $aggregations;
 
     public function __construct(
@@ -25,7 +30,7 @@ class Collection extends \Amasty\Customform\Model\ResourceModel\Answer\Collectio
         $resourceModel,
         $model = \Magento\Framework\View\Element\UiComponent\DataProvider\Document::class,
         $connection = null,
-        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
+        ?\Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
         parent::__construct(
             $entityFactory,
@@ -44,12 +49,13 @@ class Collection extends \Amasty\Customform\Model\ResourceModel\Answer\Collectio
     protected function _construct(): void
     {
         $this->_setIdFieldName(AnswerInterface::ANSWER_ID);
+        $this->addFilterToMap('store_id', 'main_table.store_id');
 
         parent::_construct();
     }
 
     /**
-     * @return Collection|void
+     * @return Collection
      */
     protected function _initSelect()
     {
@@ -59,7 +65,9 @@ class Collection extends \Amasty\Customform\Model\ResourceModel\Answer\Collectio
             ['survey_mode_enable']
         );
 
-        return parent::_initSelect();
+        parent::_initSelect();
+
+        return $this;
     }
 
     public function getAggregations()
@@ -70,6 +78,8 @@ class Collection extends \Amasty\Customform\Model\ResourceModel\Answer\Collectio
     public function setAggregations($aggregations)
     {
         $this->aggregations = $aggregations;
+
+        return $this;
     }
 
     public function getAllIds($limit = null, $offset = null)
@@ -82,7 +92,7 @@ class Collection extends \Amasty\Customform\Model\ResourceModel\Answer\Collectio
         return null;
     }
 
-    public function setSearchCriteria(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = null)
+    public function setSearchCriteria(?\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = null)
     {
         return $this;
     }
@@ -97,9 +107,26 @@ class Collection extends \Amasty\Customform\Model\ResourceModel\Answer\Collectio
         return $this;
     }
 
-    public function setItems(array $items = null)
+    public function setItems(?array $items = null)
     {
         return $this;
+    }
+
+    /**
+     * Add field filter to collection
+     *
+     * @param string|array $field
+     * @param null|string|array $condition
+     * @return $this
+     */
+    public function addFieldToFilter($field, $condition = null)
+    {
+        if ($field === FormInterface::STORE_ID && is_array($condition)) {
+            $storeId = reset($condition);
+            $condition = ['finset' => $storeId];
+        }
+
+        return parent::addFieldToFilter($field, $condition);
     }
 
     /**

@@ -261,7 +261,7 @@ $products[] = $productRepository->getById(9411);
                             <?php
                             $bulletPoints = $product->getPrBulletPoints();
                             // Fetch the bullet points attribute value
-                            $bulletPointsArray = explode("\n", $bulletPoints);
+                            $bulletPointsArray = explode("\n", (string) $bulletPoints);
                             // Split the attribute value by new lines into an array
                             foreach ($bulletPointsArray as $bulletPoint): ?>
                                 <li><?= $block->escapeHtml($bulletPoint); ?></li>

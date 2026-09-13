@@ -1,21 +1,26 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Google Invisible reCaptcha for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Google Invisible reCaptcha for Magento 2
+ */
 
 namespace Amasty\InvisibleCaptcha\Model;
 
 use Amasty\Base\Model\GetCustomerIp;
+use Amasty\Base\Model\Serializer;
 use Amasty\InvisibleCaptcha\Model\Config\Source\CaptchaVersion;
+use Laminas\Http\Request;
 use Laminas\Http\Response;
 use Magento\Customer\Model\Group;
 use Magento\Customer\Model\Session;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\HTTP\Adapter\Curl;
 use Magento\Framework\Phrase;
+use Psr\Log\LoggerInterface;
 
 class Captcha
 {
@@ -44,16 +49,30 @@ class Captcha
      */
     private $configProvider;
 
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * @var Serializer
+     */
+    private $serializer;
+
     public function __construct(
         Curl $curl,
         Session $session,
         GetCustomerIp $getCustomerIp,
-        ConfigProvider $configProvider
+        ConfigProvider $configProvider,
+        LoggerInterface $logger,
+        Serializer $serializer
     ) {
         $this->curl = $curl;
         $this->session = $session;
         $this->getCustomerIp = $getCustomerIp;
         $this->configProvider = $configProvider;
+        $this->logger = $logger;
+        $this->serializer = $serializer;
     }
 
     /**
@@ -64,7 +83,14 @@ class Captcha
     public function isNeedToShowCaptcha(): bool
     {
         if ($this->configProvider->isEnabled() && $this->configProvider->isConfigured()) {
-            if ($this->session->getCustomerGroupId() == Group::NOT_LOGGED_IN_ID
+            try {
+                $customerGroupId = $this->session->getCustomerGroupId();
+            } catch (LocalizedException $e) {
+                $this->logger->error($e->getMessage());
+
+                return false;
+            }
+            if ($customerGroupId == Group::NOT_LOGGED_IN_ID
                 || !$this->configProvider->isEnabledForGuestsOnly()
             ) {
                 if (!in_array($this->getCustomerIp->getCurrentIp(), $this->configProvider->getWhiteIps())) {
@@ -96,7 +122,7 @@ class Captcha
 
             try {
                 $this->curl->write(
-                    'POST',
+                    Request::METHOD_POST,
                     self::GOOGLE_VERIFY_URL,
                     '1.1',
                     [],
@@ -104,7 +130,7 @@ class Captcha
                 );
                 $googleResponse = $this->curl->read();
                 $responseBody = Response::fromString($googleResponse)->getBody();
-                $googleAnswer = json_decode($responseBody, true);
+                $googleAnswer = $this->serializer->unserialize($responseBody);
                 if (array_key_exists('success', $googleAnswer)) {
                     if (isset($googleAnswer['score'])
                         && $this->configProvider->getCaptchaVersion() === CaptchaVersion::VERSION_3
@@ -119,7 +145,8 @@ class Captcha
                     }
                 }
             } catch (\Exception $e) {
-                $verification['error'] = __($e->getMessage());
+                $this->logger->error($e->getMessage());
+                $verification['error'] = __('Something went wrong while validating reCAPTCHA. Please try again.');
             }
         }
 
@@ -138,8 +165,9 @@ class Captcha
             'missing-input-response' => __('The response parameter is missing.'),
             'invalid-input-response' => __('The response parameter is invalid or malformed.'),
             'bad-request' => __('The request is invalid or malformed.'),
-            'timeout-or-duplicate' =>
-                __('The response is no longer valid: either is too old or has been used previously.')
+            'timeout-or-duplicate' => __(
+                'The response is no longer valid: either is too old or has been used previously.'
+            )
         ];
 
         if (array_key_exists($errorCode, $errorCodesGoogle)) {

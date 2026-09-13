@@ -43,13 +43,13 @@ if ($buyRequest) {
             <input type="hidden"
                    id="custom_giftcard_amount"
                    name="custom_giftcard_amount"
-                   value="<?= $giftCustomCardAmount ?>" />
+                   value="<?= $block->escapeHtml($giftCustomCardAmount) ?>" />
         <?php endif; ?>
         <?php if ($giftCardAmount) : ?>
             <input type="hidden"
                    id="giftcard_amount"
                    name="giftcard_amount"
-                   value="<?= $giftCardAmount ?>" />
+                   value="<?= $block->escapeHtml($giftCardAmount) ?>" />
         <?php endif; ?>
         <fieldset class="fieldset giftcard send">
             <legend class="legend">

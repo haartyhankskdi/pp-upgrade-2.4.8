@@ -1,0 +1,446 @@
+// Desktop
+.media-width(@extremum, @break) when (@extremum = "min") and (@break = @screen__m) {
+    .hdmx__ticket-new {
+        .group {
+            .field {
+                float: left;
+
+                &.subject {
+                    width: 50%;
+                }
+
+                &.priority, &.department {
+                    width: 25%;
+                }
+
+                &.custom, &.order {
+                    width: 33.333%;
+                }
+
+                &.message {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .hdmx__ticket-reply {
+        .actions-toolbar {
+            margin-top: 0;
+        }
+    }
+}
+textarea.input-text, input.input-text {
+    border: 1px solid #666;
+    background-color: #fff;
+    color: #000;
+}
+
+// Mobile
+.media-width(@extremum, @break) when (@extremum = "max") and (@break = @screen__m) {
+    .hdmx__ticket-new {
+        .group {
+            .field {
+                width: 100%;
+            }
+        }
+    }
+
+    .hdmx__ticket-reply {
+        .actions-toolbar {
+            margin-top: 0;
+        }
+    }
+}
+
+& when (@media-common = true) {
+    .hdmx__ticket-new {
+        .fieldset {
+            margin-bottom: 0;
+        }
+
+        .group {
+            .lib-clearfix();
+            margin-left:  -1rem;
+            margin-right: -1rem;
+
+            .field {
+                box-sizing:    border-box;
+                padding-left:  1rem;
+                padding-right: 1rem;
+
+                &:last-child {
+                    margin-bottom: 2rem;
+                }
+            }
+        }
+
+        .actions-toolbar {
+            .action.primary {
+                float:       right;
+                line-height: 2.2rem;
+                padding:     14px 17px;
+                font-size:   1.8rem;
+                height:      auto;
+            }
+        }
+    }
+
+    .hdmx__ticket-view {
+        position: relative;
+
+        p.max-attachment-size {
+            margin: 0 0 -7px;
+            color: darkgray;
+            font-size: smaller;
+        }
+    }
+
+    .hdmx__ticket-summary {
+        width:         auto;
+        margin-bottom: 3rem;
+        margin-top:    -1rem;
+
+        th {
+            font-weight: @font-weight__semibold;
+            padding:     0.5rem 4rem 0.5rem 0;
+        }
+
+        td {
+            padding: 0.5rem 4rem 0.5rem 1rem;
+        }
+    }
+
+    .hdmx__ticket-reply {
+        margin-bottom: 3rem;
+
+        .actions-toolbar {
+            .action.primary {
+                float:       right;
+                line-height: 2.2rem;
+                padding:     14px 17px;
+                font-size:   1.8rem;
+                height:      auto;
+            }
+
+            .action.secondary {
+                float:        right;
+                margin-right: 1rem;
+                margin-top:   1rem;
+            }
+        }
+    }
+
+    .hdmx__ticket-history {
+        .hdmx__message {
+            margin-bottom: 3rem;
+            position:      relative;
+
+            .hdmx-message__header {
+                padding: 0 0 5px 3px;
+                color:   #adadad;
+
+                strong {
+                    font-weight:  @font-weight__semibold;
+                    color:        #333333;
+                    margin-right: 1.5rem;
+                }
+            }
+
+            .hdmx-message__body {
+                background:  #f7ffec;
+                border-left: 3px solid #98cb4b;
+                padding:     1rem;
+
+                &.user {
+                    background:        #ecfaff;
+                    border-left-color: #4b8dcb;
+                }
+
+                .hdmx-message__attachments {
+                    margin-top: 2rem;
+                    a {
+                        font-size:    13px;
+                    }
+                    span {
+                        font-size:    13px;
+                        margin-right: 2rem;
+                        color:        red;
+                    }
+                }
+                .toggle-hdmx-sign {
+                    height: auto;
+                    display: block;
+                    margin-top: 10px;
+                    background: none;
+                    border: none;
+                    padding: 0;
+                    padding: 0;
+                    margin: 0;
+                    color: inherit;
+                    font: inherit;
+                    cursor: pointer;
+                    text-decoration: none;
+                    font-size: 2.3rem;
+                    opacity: 0.7;
+                }
+
+                .toggle-hdmx-sign:hover {
+                    text-decoration: underline;
+                    background: transparent;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+.mstAttachmentPopup {
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+    transition: margin .7s ease-out 0.7s;
+}
+
+.hdmx-arr-hover {
+    display: none;
+}
+
+button:hover .hdmx-arr {
+    display: none;
+}
+
+button:hover .hdmx-arr-hover {
+    display: block;
+}
+.mst-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    .mst-popup-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 60px 180px 30px 180px !important;
+        #mstPopupImage {
+            max-width: 100%;
+            min-width: 100px;
+            max-height: calc(100vh - 20px);
+            object-fit: contain;
+            z-index: 10000;
+            background: #FFFFFF;
+            margin-bottom: 30px;
+
+        }
+        #attachment-name {
+            align-self: center;
+            font-family: "Open Sans";
+            font-style: normal;
+            font-size: 12px;
+            line-height: 16px;
+            color: #FFFFFF;
+            position: absolute;
+            padding-bottom: 3vh;
+            margin-top: 20px;
+            bottom: 0;
+        }
+        > span {
+            align-self: center;
+            font-family: "Open Sans";
+            font-style: normal;
+            font-size: 12px;
+            line-height: 16px;
+            color: #FFFFFF;
+        }
+    }
+    .mst-popup-navigation {
+        position: absolute;
+        top: 50%;
+        //width: calc(100%);
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+        padding: 0 20px;
+        #hdmxPrevImage, #hdmxNextImage {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        > button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 50px;
+            cursor: pointer;
+        }
+    }
+
+}
+
+
+.mst-popup-action {
+    .mst-popup-close {
+        z-index: 10000;
+    }
+    > span {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        color: #fff;
+        font-size: 30px;
+        cursor: pointer;
+        /*z-index: 10000;*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+    }
+    #hdmx-download {
+        top: 50px;
+        position: fixed;
+    }
+}
+.attachment-item:hover .attachment-info {
+    opacity: 0;
+    transition: opacity 0.7s ease;
+}
+
+.attachment-item:hover .download-info {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px 0 5px 0;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    cursor: pointer;
+    .attachment-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    .download-link {
+        margin-right: auto;
+    }
+    .attachment-size {
+        margin-left: auto;
+    }
+    .attachment-icon {
+        margin: 0 8px 0 8px;
+        flex-shrink: 0;
+    }
+}
+
+.hdmx-no-scroll {
+    overflow: hidden;
+}
+
+.hdmx-message__attachments {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.attachment-item {
+    display: inline-flex;
+    border: 1px #DDDDDD;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    position: relative;
+    width: 180px;
+    height: 120px;
+    .attachment-thumbnail-container {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        .image-link {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .attachment-link {
+                > img {
+                    min-height: 48px;
+                    max-height: 120px;
+                    margin-bottom: 1rem;
+                }
+            }
+            > a {
+
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+            }
+        }
+    }
+    .attachment-info {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 5px 0;
+        opacity: 1;
+        transition: opacity 0.7s ease;
+        .attachment-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: calc(100% - 16px);
+            padding-right: 16px;
+            .attachment-name {
+                flex: 1;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                color: #888 !important;
+                padding-right: 8px;
+                /*width: calc(100% - 16px);*/
+            }
+        }
+    }
+}
+
+.download-info {
+    display: none;
+}
+
+.download-link, .attachment-size {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #888 !important;
+    bottom: 0;
+    transition: opacity 0.7s;
+    max-width: 120px;
+    padding-right: 8px;
+}
+
+.attachment-icon {
+    margin: 0 8px 0 8px;
+    flex-shrink: 0;
+}

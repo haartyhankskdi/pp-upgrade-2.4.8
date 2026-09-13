@@ -76,6 +76,7 @@
      						</argument>
                         </arguments>
                     </block>
+                    <!-- commented out - Mirasvit Helpdesk pending purchase approval
                     <block class="Mirasvit\Helpdesk\Block\Account\Link" ifconfig="helpdesk/frontend/is_active" name="customer-account-navigation-helpdesk-link">
                         <arguments>
                             <argument name="path" xsi:type="string">helpdesk</argument>
@@ -85,6 +86,7 @@
                             </argument>
                         </arguments>
                     </block>
+                    -->
                     <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-newsletter-subscriptions-link">
                         <arguments>
                             <argument name="label" xsi:type="string" translate="true">Newsletter Subscriptions</argument>

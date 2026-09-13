@@ -1,0 +1,226 @@
+"Something went wrong while building the report","Beim Erstellen des Berichts ist ein Fehler aufgetreten"
+"Not logged in","Nicht angemeldet"
+"Email Notifications","E-Mail-Benachrichtigungen"
+"The email report has been deleted.","Der E-Mail-Bericht wurde gelöscht."
+"This email report no longer exists.","Dieser E-Mail-Bericht existiert nicht mehr."
+"This email no longer exists.","Diese E-Mail existiert nicht mehr."
+"Edit Email ""%1""","E-Mail ""%1"" bearbeiten"
+"New Email Report","Neuer E-Mail-Bericht"
+"You saved the email report.","Sie haben den E-Mail-Bericht gespeichert."
+"No data to save.","Keine Daten zum Speichern."
+"This report no longer exists.","Dieser Bericht existiert nicht mehr."
+"Report columns saved.","Berichtsspalten gespeichert."
+"Unsupported format ""%1""","Nicht unterstütztes Format ""%1"""
+"This report does not exist or is not available for sharing.","Dieser Bericht existiert nicht oder ist nicht für die Freigabe verfügbar"
+"Report identifier is required","Berichtskennung ist erforderlich"
+"Report: %1","Bericht: %1"
+"Block identifier ""%1"" does not match any available report or dashboard block. Use GET /V1/reports/reports to discover valid identifiers.","Die Block-Kennung ""%1"" stimmt mit keinem verfügbaren Bericht oder Dashboard-Block überein. Verwenden Sie GET /V1/reports/reports, um gültige Kennungen zu ermitteln."
+"Time range ""%1"" is not valid. Valid values: %2","Der Zeitraum ""%1"" ist ungültig. Gültige Werte: %2"
+"Email with ID ""%1"" does not exist.","E-Mail mit der ID ""%1"" existiert nicht."
+Back,Zurück
+Delete,Löschen
+"Are you sure you want to do this?","Sind Sie sicher, dass Sie dies tun möchten?"
+Save,Speichern
+"Save & Continue","Speichern & Fortfahren"
+"Save & Send","Speichern & Senden"
+Edit,Bearbeiten
+"Delete email?","E-Mail löschen?"
+(previous),(vorherige)
+"%1 out of %2 selected","%1 von %2 ausgewählt"
+"Access URL","Zugriffs-URL"
+Actions,Aktionen
+"Active filters:","Aktive Filter:"
+"Add Empty Widget","Leeres Widget hinzufügen"
+"Add filter","Filter hinzufügen"
+"Add Filter","Filter hinzufügen"
+"Add New Board","Neues Board hinzufügen"
+"Add New Widget","Neues Widget hinzufügen"
+"Add Widget","Widget hinzufügen"
+"Additional Filters","Zusätzliche Filter"
+"Advanced mode","Erweiterter Modus"
+Aggregator,Aggregator
+"and more %1 other columns","und %1 weitere Spalten"
+applicable,anwendbar
+Apply,Anwenden
+"Apply date filter","Datumsfilter anwenden"
+"Apply Filters","Filter anwenden"
+"Are you sure you want to reset the access token?","Sind Sie sicher, dass Sie das Zugriffstoken zurücksetzen möchten?"
+Average,Durchschnitt
+"Base Table","Basistabelle"
+"Block Type","Blocktyp"
+Cancel,Abbrechen
+"Cancel date filter","Datumsfilter abbrechen"
+Chart,Diagramm
+"Chart type selector","Diagrammtyp-Auswahl"
+"Clear all","Alle löschen"
+Close,Schließen
+"Close menu","Menü schließen"
+Column,Spalte
+"Column for grouping data in the table","Spalte zur Gruppierung der Daten in der Tabelle"
+"Column for grouping the data in the table","Spalte zur Gruppierung der Daten in der Tabelle"
+"Column selector mode switcher. Current mode: %1","Moduswechsler für Spaltenauswahl. Aktueller Modus: %1"
+Columns,Spalten
+"Columns to group the rows in the table","Spalten zur Gruppierung der Zeilen in der Tabelle"
+Comparison,Vergleich
+contains,enthält
+Content,Inhalt
+Copied,Kopiert
+"Copy importdata code for Google Sheets","ImportData-Code für Google Sheets kopieren"
+"Copy to clipboard","In die Zwischenablage kopieren"
+Count,Anzahl
+Country,Land
+"Current mode: %1","Aktueller Modus: %1"
+"Current Page","Aktuelle Seite"
+Custom,Benutzerdefiniert
+Customize,Anpassen
+Date,Datum
+"Date filter","Datumsfilter"
+Day,Tag
+"Delete report","Bericht löschen"
+Description,Beschreibung
+Dimension,Dimension
+"Dimension column table","Dimensionsspaltentabelle"
+Dimensions,Dimensionen
+Disable,Deaktivieren
+"Disable sharing report","Berichtsfreigabe deaktivieren"
+"Do not compare","Nicht vergleichen"
+"doesn't contain","enthält nicht"
+Download,Herunterladen
+Duplicate,Duplizieren
+"Duplicate report","Bericht duplizieren"
+Early,Früh
+"Edit Board","Board bearbeiten"
+"Edit columns","Spalten bearbeiten"
+"Edit report","Bericht bearbeiten"
+"Empty report data table","Leere Berichtsdatentabelle"
+Enable,Aktivieren
+"Enable Remote Access","Fernzugriff aktivieren"
+"Enable Remote Access on Storefront","Fernzugriff im Storefront aktivieren"
+"Enable sharing report","Berichtsfreigabe aktivieren"
+"Enter page number","Seitenzahl eingeben"
+"Excel XML","Excel XML"
+Export,Exportieren
+"Filter value","Filterwert"
+Filters,Filter
+"Found: %1 columns","Gefunden: %1 Spalten"
+from,von
+"From date","Von Datum"
+"General Information","Allgemeine Informationen"
+"Go to next page","Zur nächsten Seite"
+"Go to previous page","Zur vorherigen Seite"
+"Group by","Gruppieren nach"
+"Hide percentage of total","Prozentsatz des Gesamtwerts ausblenden"
+"Image for %1","Bild für %1"
+"Import data code","Importdaten-Code"
+"Insert the below code into your Google Sheet and it will automatically import the most recent data from the report every hour:","Fügen Sie den folgenden Code in Ihr Google Sheet ein, und es importiert automatisch stündlich die neuesten Daten aus dem Bericht:"
+"Insert To Google Sheet","In Google Sheet einfügen"
+"Insert widget's HTML content here","HTML-Inhalt des Widgets hier einfügen"
+"Internal Filters","Interne Filter"
+"Is Default","Ist Standard"
+"is not","ist nicht"
+"is not one of","ist keiner von"
+"is one of","ist einer von"
+Loading...,Wird geladen...
+"Lower number means higher position. Boards with the same sort order will be ordered according to the dashboard general sorting settings.","Eine niedrigere Zahl bedeutet eine höhere Position. Boards mit derselben Sortierreihenfolge werden gemäß den allgemeinen Sortiereinstellungen des Dashboards sortiert."
+"Make a copy","Kopie erstellen"
+"Make sure that the selected columns are","Stellen Sie sicher, dass die ausgewählten Spalten"
+Manage,Verwalten
+"Manage columns","Spalten verwalten"
+"Manage filters","Filter verwalten"
+Metric,Kennzahl
+Month,Monat
+"More filters","Weitere Filter"
+"More Filters","Weitere Filter"
+"No next pages, action disabled","Keine weiteren Seiten, Aktion deaktiviert"
+"No previous pages, action disabled","Keine vorherigen Seiten, Aktion deaktiviert"
+"not allowed","nicht erlaubt"
+Number,Zahl
+of,von
+"Once you have configured the report, you can use a direct link to open the report on any device without opening the admin and always with fresh live data.","Sobald Sie den Bericht konfiguriert haben, können Sie einen Direktlink verwenden, um den Bericht auf jedem Gerät ohne Öffnen des Admin-Bereichs und stets mit aktuellen Live-Daten zu öffnen."
+"Open link","Link öffnen"
+"Open menu","Menü öffnen"
+"Override dashboard time","Dashboard-Zeit überschreiben"
+"Page Size","Seitengröße"
+Percent,Prozent
+"Please select","Bitte auswählen"
+"Previous period","Vorheriger Zeitraum"
+"Primary Filters","Primäre Filter"
+"Private Board","Privates Board"
+"Private Board will be available only for the current admin user. Shared Board will be available for all admin users.","Das private Board ist nur für den aktuellen Admin-Benutzer verfügbar. Das freigegebene Board ist für alle Admin-Benutzer verfügbar."
+Quarter,Quartal
+"Quick Access & Sharing","Schnellzugriff & Freigabe"
+"A quick access link to the report is a great alternative to routine daily exporting.","Der Schnellzugriffslink zum Bericht ist eine großartige Alternative zum routinemäßigen täglichen Exportieren."
+Range,Bereich
+"records found","Datensätze gefunden"
+Refresh,Aktualisieren
+Remove,Entfernen
+"Remove filter","Filter entfernen"
+"Remove from chart","Aus Diagramm entfernen"
+"Removing board...","Board wird entfernt..."
+"Report data table with %1 rows","Berichtsdatentabelle mit %1 Zeilen"
+Reset,Zurücksetzen
+"Reset access token","Zugriffstoken zurücksetzen"
+"Reset Changes","Änderungen zurücksetzen"
+"Resetting the access token will deactivate the old access link. Anyone who previously had access to the board will lose it and will need the new link to access it.","Das Zurücksetzen des Zugriffstokens deaktiviert den alten Zugriffslink. Alle bisherigen Zugriffsberechtigten verlieren den Zugriff und benötigen den neuen Link, um auf das Board zuzugreifen."
+"Rows Limit","Zeilenlimit"
+"Same period last month","Gleicher Zeitraum im Vormonat"
+"Same period last week","Gleicher Zeitraum in der Vorwoche"
+"Same period last year","Gleicher Zeitraum im Vorjahr"
+"Save Changes","Änderungen speichern"
+"Saving report...","Bericht wird gespeichert..."
+Saving...,Wird gespeichert...
+"Search column across ALL tables by identifier.","Spalte in ALLEN Tabellen nach Kennung durchsuchen."
+"Search for column","Nach Spalte suchen"
+"Select condition","Bedingung auswählen"
+"Select date range","Datumsbereich auswählen"
+"Select Date Range","Datumsbereich auswählen"
+Share,Teilen
+"Share Dashboard","Dashboard teilen"
+"Share in %1 format","Im Format %1 teilen"
+"Shared Board","Freigegebenes Board"
+"Sharing link","Freigabelink"
+"Show in chart","Im Diagramm anzeigen"
+"Show percentage of total","Prozentsatz des Gesamtwerts anzeigen"
+"Single Value","Einzelwert"
+"Sort by %1","Sortieren nach %1"
+"Sort Order","Sortierreihenfolge"
+Sorting,Sortierung
+"Spark line","Sparkline"
+String,Zeichenkette
+Sum,Summe
+"Switch to %1 chart","Zu %1-Diagramm wechseln"
+Table,Tabelle
+"Time Range","Zeitraum"
+Title,Titel
+to,bis
+"To date","Bis Datum"
+"to the current report.","zum aktuellen Bericht."
+Toolbar,Symbolleiste
+Type,Typ
+"Type to search","Zum Suchen tippen"
+"Untitled Block","Unbenannter Block"
+"Untitled Board","Unbenanntes Board"
+Value,Wert
+"We couldn't find any records.","Wir konnten keine Datensätze finden."
+Week,Woche
+"Widget Library","Widget-Bibliothek"
+"Wrong configuration. Please change report building conditions.","Falsche Konfiguration. Bitte ändern Sie die Bedingungen für die Berichtserstellung."
+Year,Jahr
+"To add your first block, unlock the board (top right corner).","Sie müssen das Board entsperren (oben rechts), um den ersten Block hinzuzufügen."
+"Loading report data","Berichtsdaten werden geladen"
+"Report data table for %1","Berichtsdatentabelle für %1"
+Block,Block
+"Date Interval","Datumsintervall"
+Limit,Limit
+"Add Block","Block hinzufügen"
+Active,Aktiv
+"Attach each block as a separate CSV report","Jeden Block als separaten CSV-Bericht anhängen"
+Subject,Betreff
+Recipient,Empfänger
+Schedule,Zeitplan
+"Should be cron-like expression. <br/>Example: 59 23 * * * <br/>Will be sent report every day at 23:59","Sollte ein cron-ähnlicher Ausdruck sein. <br/>Beispiel: 59 23 * * * <br/>Der Bericht wird jeden Tag um 23:59 Uhr gesendet"
+Body,Inhalt
+"Add New Email","Neue E-Mail hinzufügen"
+ID,ID
+Status,Status
+"Last Sent At","Zuletzt gesendet am"

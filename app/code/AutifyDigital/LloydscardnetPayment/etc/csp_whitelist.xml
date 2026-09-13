@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+   ~ This software is the confidential and proprietary information of Autify Digital Ltd.
+   ~ Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+   ~ Copyright (c) 2020-Present Autify Digital Ltd.
+   ~ This work is protected under applicable copyright and intellectual property laws.
+   ~ All rights reserved. Distribution and disclosure are permitted only in accordance with
+   ~ the terms of a valid written agreement with Autify Digital Ltd.
+-->
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp/etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="script-src">
+            <values>
+                <value id="firstdata" type="host">*.firstdata.com</value>
+                <value id="self" type="host">self</value>
+                <value id="unsafe-inline" type="host">unsafe-inline</value>
+                <value id="payjs" type="host">https://pay.google.com</value>
+                <value id="payjs-sandbox" type="host">https://pay.sandbox.google.com</value>
+                <value id="google-uk" type="host">https://pay.google.co.uk</value>
+                <value id="google-ie" type="host">https://pay.google.ie</value>
+                <value id="apple-pay" type="host">https://applepay.cdn-apple.com</value>
+                <value id="apple-pay-gateway" type="host">https://apple-pay-gateway.apple.com</value>
+                <value id="apple-pay-cert" type="host">https://apple-pay-gateway-cert.apple.com</value>
+                <value id="apple-pay-nc" type="host">https://apple-pay-gateway-nc-pod1.apple.com</value>
+                <value id="apple-pay-pr" type="host">https://apple-pay-gateway-pr-pod1.apple.com</value>
+                <value id="ipgonline" type="host">*.ipg-online.com</value>
+                <value id="checkout-lane" type="host">https://ci.checkout-lane.com</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <value id="firstdata" type="host">*.firstdata.com</value>
+                <value id="ipgonline" type="host">*.ipg-online.com</value>
+            </values>
+        </policy>
+        <policy id="img-src">
+            <values>
+                <value id="firstdata" type="host">*.firstdata.com</value>
+                <value id="ipgonline" type="host">*.ipg-online.com</value>
+                <value id="img-gstatic" type="host">https://www.gstatic.com</value>
+            </values>
+        </policy>
+        <policy id="connect-src">
+            <values>
+                <value id="firstdata" type="host">*.firstdata.com</value>
+                <value id="ipgonline" type="host">*.ipg-online.com</value>
+                <value id="payjs" type="host">https://pay.google.com</value>
+                <value id="payjs-sandbox" type="host">https://pay.sandbox.google.com</value>
+                <value id="google-uk" type="host">https://pay.google.co.uk</value>
+                <value id="google-ie" type="host">https://pay.google.ie</value>
+                <value id="google-apis" type="host">https://payments.google.com</value>
+                <value id="apple-pay" type="host">https://applepay.cdn-apple.com</value>
+                <value id="apple-pay-gateway" type="host">https://apple-pay-gateway.apple.com</value>
+                <value id="apple-pay-cert" type="host">https://apple-pay-gateway-cert.apple.com</value>
+                <value id="apple-pay-nc" type="host">https://apple-pay-gateway-nc-pod1.apple.com</value>
+                <value id="apple-pay-pr" type="host">https://apple-pay-gateway-pr-pod1.apple.com</value>
+                <value id="checkout-lane" type="host">https://ci.checkout-lane.com</value>
+            </values>
+        </policy>
+        <policy id="font-src">
+            <values>
+                <value id="firstdata" type="host">*.firstdata.com</value>
+                <value id="apple-pay" type="host">https://applepay.cdn-apple.com</value>
+            </values>
+        </policy>
+        <policy id="frame-src">
+            <values>
+                <value id="firstdata" type="host">*.firstdata.com</value>
+                <value id="payjs" type="host">https://pay.google.com</value>
+                <value id="payjs-sandbox" type="host">https://pay.sandbox.google.com</value>
+                <value id="google-uk" type="host">https://pay.google.co.uk</value>
+                <value id="google-ie" type="host">https://pay.google.ie</value>
+                <value id="apple-pay" type="host">https://applepay.cdn-apple.com</value>
+                <value id="apple-pay-gateway" type="host">https://apple-pay-gateway.apple.com</value>
+                <value id="apple-pay-cert" type="host">https://apple-pay-gateway-cert.apple.com</value>
+                <value id="apple-pay-nc" type="host">https://apple-pay-gateway-nc-pod1.apple.com</value>
+                <value id="apple-pay-pr" type="host">https://apple-pay-gateway-pr-pod1.apple.com</value>
+                <value id="ipgonline" type="host">*.ipg-online.com</value>
+                <value id="checkout-lane" type="host">https://ci.checkout-lane.com</value>
+            </values>
+        </policy>
+
+        <policy id="form-action">
+            <values>
+                <value id="self" type="host">self</value>
+                <value id="firstdata" type="host">*.firstdata.com</value>
+                <value id="ipgonline" type="host">*.ipg-online.com</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>

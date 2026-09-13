@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Test\Unit\Osc\Model\Plugin\Quote;
@@ -27,10 +27,6 @@ use Mageplaza\Osc\Model\Plugin\Quote\QuoteValidator;
 use PHPUnit\Framework\MockObject\Matcher\InvokedCount as InvokedCountMatcher;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class QuoteValidatorTest
- * @package Mageplaza\Test\Unit\Osc\Model\Plugin\Quote
- */
 class QuoteValidatorTest extends TestCase
 {
     /**
@@ -38,7 +34,7 @@ class QuoteValidatorTest extends TestCase
      */
     private $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->plugin = new QuoteValidator();
     }
@@ -53,7 +49,7 @@ class QuoteValidatorTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestBeforeValidateBeforeSubmit()
+    public static function providerTestBeforeValidateBeforeSubmit()
     {
         return [
             [self::once(), false],
@@ -63,7 +59,7 @@ class QuoteValidatorTest extends TestCase
 
     /**
      * @param InvokedCountMatcher $isVirtualExpect
-     * @param boolean $isVirtual
+     * @param boolean             $isVirtual
      *
      * @dataProvider providerTestBeforeValidateBeforeSubmit
      */
@@ -81,13 +77,13 @@ class QuoteValidatorTest extends TestCase
         $quoteMock = $this->getMockBuilder(Quote::class)->disableOriginalConstructor()->getMock();
         $quoteMock->expects($this->once())->method('isVirtual')->willReturn($isVirtual);
         $shippingAddressMock = $this->getMockBuilder(Address::class)
-            ->setMethods(['setShouldIgnoreValidation'])
+            ->addMethods(['setShouldIgnoreValidation'])
             ->disableOriginalConstructor()
             ->getMock();
         $quoteMock->expects($isVirtualExpect)->method('getShippingAddress')->willReturn($shippingAddressMock);
 
         $billingAddressMock = $this->getMockBuilder(Address::class)
-            ->setMethods(['setShouldIgnoreValidation'])
+            ->addMethods(['setShouldIgnoreValidation'])
             ->disableOriginalConstructor()
             ->getMock();
         $quoteMock->expects($this->once())->method('getBillingAddress')->willReturn($billingAddressMock);

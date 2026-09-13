@@ -1,0 +1,206 @@
+<?php
+//@codingStandardsIgnoreFile
+/** @var \Mirasvit\Helpdesk\Block\Adminhtml\Ticket\Edit\Tab\General $block */
+/** @var \Mirasvit\Helpdesk\Model\Ticket $ticket */
+
+use Mirasvit\Core\Service\CspService;
+
+$ticket = $block->getTicket();
+$nonce = CspService::getNonce();
+?>
+<input type="hidden" name="ticket_id" value="<?= $ticket->getId() ?>">
+
+<input type="hidden" name="reply_type" value="">
+
+<div class="page-layout-admin-2columns-left" data-mage-init='{"ticketEditPage":{}}'>
+    <div data-role="spinner" class="admin__data-grid-loading-mask">
+        <div class="spinner">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div>
+    </div>
+
+    <div class="page-columns">
+        <div class="side-col" id="page:left">
+
+            <?= $block->getCustomerSummaryHtml() ?>
+
+            <div class="clearfix"></div>
+            <div class="ticket-summary">
+                <div class="section">
+                    <div class="admin__fieldset-wrapper-title" tabindex="3">
+                        <strong class="title">
+                            <span><?= __('Ticket Summary') ?></span>
+                        </strong>
+                    </div>
+                    <?php if (!$ticket->getId()): ?>
+                        <div class="admin__field _required">
+                            <label class="admin__field-label" for="subject">
+                                <span><?= __('Subject') ?></span>
+                            </label>
+                            <div class="admin__field-control">
+                                <input type="text" name="subject" class="required" placeholder="<?= $block->escapeHtmlAttr(__('enter subject of ticket')) ?>"
+                                       value="<?php $ticket->getSubject() ?>">
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <div class="admin__field">
+                            <label class="admin__field-label" for="status">
+                                <span><?= __('Ticket ID') ?></span>
+                            </label>
+                            <div class="admin__field-control hdmx-ticket-id-control">
+                                <span><?= $block->escapeHtml($ticket->getCode()) ?></span>
+                                <button type="button"
+                                        id="copy-ticket-code-btn"
+                                        class="hdmx-copy-btn"
+                                        data-code="<?= $block->escapeHtmlAttr($ticket->getCode()) ?>"
+                                        data-copied-label="<?= $block->escapeHtmlAttr(__('Copied!')) ?>">
+                                    <?= __('Copy') ?>
+                                </button>
+                            </div>
+                        </div>
+                        <script <?php if ($nonce): ?> nonce="<?= $block->escapeHtml($nonce) ?>"<?php endif; ?> type="text/javascript">
+                            document.getElementById('copy-ticket-code-btn').addEventListener('click', function () {
+                                var btn = this;
+                                var code = btn.getAttribute('data-code');
+                                var copiedLabel = btn.getAttribute('data-copied-label');
+                                var originalLabel = btn.textContent.trim();
+                                if (navigator.clipboard) {
+                                    navigator.clipboard.writeText(code);
+                                } else {
+                                    var ta = document.createElement('textarea');
+                                    ta.value = code;
+                                    ta.style.position = 'fixed';
+                                    ta.style.opacity = '0';
+                                    document.body.appendChild(ta);
+                                    ta.select();
+                                    document.execCommand('copy');
+                                    document.body.removeChild(ta);
+                                }
+                                btn.textContent = copiedLabel;
+                                setTimeout(function () { btn.textContent = originalLabel; }, 2000);
+                            });
+                        </script>
+                    <?php endif; ?>
+                    <div class="admin__field">
+                        <label class="admin__field-label" for="status">
+                            <span><?= __('Status') ?></span>
+                        </label>
+                        <div class="admin__field-control">
+                            <select class="admin__control-select" name="status_id">
+                                <?php foreach ($block->getStatusCollection() as $status): ?>
+                                    <option value="<?= $status->getId() ?>" <?= $status->getId() == $ticket->getStatusId() ? 'selected' : '' ?>>
+                                        <?= $status->getName() ?>
+                                    </option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="admin__field">
+                        <label class="admin__field-label" for="priority">
+                            <span><?= __('Priority') ?></span>
+                        </label>
+                        <div class="admin__field-control">
+                            <select class="admin__control-select" name="priority_id">
+                                <?php foreach ($block->getPriorityCollection() as $priority): ?>
+                                    <option value="<?= $priority->getId() ?>" <?= $priority->getId() == $ticket->getPriorityId() ? 'selected' : '' ?>>
+                                        <?= $priority->getName() ?>
+                                    </option>
+                                <?php endforeach ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="admin__field">
+                        <label class="admin__field-label" for="owner">
+                            <span><?= __('Assignee') ?></span>
+                        </label>
+                        <div class="admin__field-control">
+                            <select class="admin__control-select" name="owner">
+                                <?php foreach ($block->getAdminOwnerOptionArray() as $id => $name): ?>
+                                    <option value="<?= $id ?>" <?= $id == $ticket->getOwner() ? 'selected' : '' ?>>
+                                        <?= $name; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="admin__fieldset-wrapper-title" tabindex="3">
+                        <strong class="title">
+                            <span><?= __('Additional Info') ?></span>
+                        </strong>
+                    </div>
+                    <?php foreach ($block->getCustomFields() as $field): ?>
+                        <div class="admin__field">
+                            <?= $field->getLabelHtml(); ?>
+                            <?= $field->getElementHtml(); ?>
+                            <div class="note"><?= $field->getNote(); ?></div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-col">
+            <?php if ($block->getIsTicketLocked()): ?>
+                <div class="hdmx__ticket-locked">
+            <span>
+                <?= __('You are not allowed to add the message to the current ticket as it is locked. To add the message to the current ticket you should change its status to one of unlocked.') ?>
+            </span>
+                </div>
+            <?php else: ?>
+            <div data-bind="scope: 'replyArea'">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <script <?php if ($nonce): ?> nonce="<?= $block->escapeHtml($nonce) ?>"<?php endif; ?> type="text/x-magento-init">
+                    {
+                        "*": {
+                            "Magento_Ui/js/core/app": {
+                                "components": {
+                                    "replyArea": {
+                                        "component": "Mirasvit_Helpdesk/js/reply-area",
+                                        "config": {
+                                            "field_html": <?= $block->getEditField(); ?>
+                                        }
+                                    },
+                                    "replySwitcher": {
+                                        "component": "Mirasvit_Helpdesk/js/reply-switcher",
+                                        "config": <?= $block->getReplySwitcherJson(); ?>
+                                    },
+                                    "quickResponse": {
+                                        "component": "Mirasvit_Helpdesk/js/quick-response",
+                                        "config": <?= $block->getQuickRespoinsesJson(); ?>
+                                    },
+                                    "quickResponseBadges": {
+                                        "component": "Mirasvit_Helpdesk/js/quick-response-badges",
+                                        "config": <?= $block->getQuickRespoinsesJson(); ?>
+                                    }
+                                }
+                            }
+                        }
+                    }
+                </script>
+            </div>
+
+            <?php endif; ?>
+            <?= $block->getChildHtml('helpdesk_messages'); ?>
+        </div>
+
+    </div>
+</div>
+<script <?php if ($nonce): ?> nonce="<?= $block->escapeHtml($nonce) ?>"<?php endif; ?> type="text/javascript">
+    var draftDelayPeriod = "<?php echo $block->getDraftInterval(); ?>";
+    var draftUpdateUrl   = "<?php echo $block->getDrafUpdateUrl(); ?>";
+    var draftTicketId    = "<?php echo $block->getTicket()->getId(); ?>";
+    var isAllowDraft     = "<?php echo $block->isAllowDraft(); ?>";
+    var draftText        = "<?php echo str_replace(["\r\n", "\r", "\n", '"'], ['NEW_LINE_SPR', 'NEW_LINE_SPR', 'NEW_LINE_SPR', '\"'], (string) $block->getDraftText()); ?>";
+
+    draftText = draftText.replace(/NEW_LINE_SPR/g, "\n");
+</script>
+
+
+<script <?php if ($nonce): ?> nonce="<?= $block->escapeHtml($nonce) ?>"<?php endif; ?>>
+    //<![CDATA[
+    require(['Mirasvit_Helpdesk/js/reply-update'], function () {});
+    //]]>
+</script>

@@ -1,0 +1,79 @@
+<?php
+use AutifyDigital\LloydscardnetPayment\Block\Adminhtml\Order\Config;
+
+/** @var \AutifyDigital\LloydscardnetPayment\Block\Form\Lcnetpaymentjs $block */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \AutifyDigital\LloydscardnetPayment\Block\Adminhtml\Order\Config $configBlock */
+
+$configBlock = $block->getLayout()->createBlock(Config::class);
+$config = $configBlock->getPaymentConfig();
+$paymentJsUrl = $configBlock->getLibrary();
+$mode = $configBlock->getMode();
+?>
+<script src="<?= $escaper->escapeUrl($paymentJsUrl) ?>"></script> 
+
+<div id="lcnetpayment-config" 
+     data-lcnet-config='<?= /* @noEscape */ $configBlock->getJsonEncode($config) ?>'
+     data-lcnet-url='<?= $escaper->escapeJs($paymentJsUrl) ?>'
+     data-lcnet-mode='<?= /* @noEscape */ $mode ?>'>
+</div>
+<div id="lcnetpayment-container" class="admin-payment-method-lcnetpaymentjs" style="display: none;">        
+    <div class="payment-fields-container">
+        <div class="paymentjs-form">
+            <form id="admin-payment-form">
+                <fieldset class="admin-fieldset">
+                    <div class="field">
+                        <label for="cc-name" class="label">
+                            <?= $escaper->escapeHtml(__('Card Holder Name')) ?>
+                            <span class="required-field">*</span>
+                        </label>
+                        <div class="control payment-fields disabled" id="cc-name" data-cc-name></div>
+                    </div>
+                    <div class="field">
+                        <label for="cc-card" class="label">
+                            <?= $escaper->escapeHtml(__('Card Number')) ?>
+                            <span class="required-field">*</span>
+                        </label>
+                        <div class="control payment-fields disabled empty" id="cc-card" data-cc-card></div>
+                    </div>
+                    <div class="fields-group">
+                        <div class="field">
+                            <label for="cc-exp" class="label">
+                                <?= $escaper->escapeHtml(__('Exp Date')) ?>
+                                <span class="required-field">*</span>
+                            </label>
+                            <div class="control payment-fields disabled empty" id="cc-exp" data-cc-exp></div>
+                        </div>
+                        <div class="field">
+                            <label for="cc-cvv" class="label">
+                                <?= $escaper->escapeHtml(__('CVV')) ?>
+                                <span class="required-field">*</span>
+                            </label>
+                            <div class="control payment-fields disabled empty" id="cc-cvv" data-cc-cvv></div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    require(['jquery'], function($) {
+        'use strict';
+        
+        $(document).ready(function() {
+            var scriptUrl = <?= /* @noEscape */ $configBlock->getJsonEncode($paymentJsUrl) ?>;
+            
+            if (!window.PaymentJs && scriptUrl) {
+                var script = document.createElement('script');
+                script.type = 'application/javascript';
+                script.src = scriptUrl;
+                script.async = true;
+                script.onerror = function(error) {
+                    console.error('Failed to load payment script:', error);
+                };
+                document.head.appendChild(script);
+            }
+        });
+    });
+</script>

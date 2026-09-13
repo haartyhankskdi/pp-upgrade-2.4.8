@@ -12,10 +12,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 define(
@@ -33,20 +33,27 @@ define(
         'uiRegistry'
     ],
     function ($,
-              quote,
-              resourceUrlManager,
-              storage,
-              errorProcessor,
-              customer,
-              methodConverter,
-              paymentService,
-              shippingService,
-              oscLoader,
-              registry) {
+        quote,
+        resourceUrlManager,
+        storage,
+        errorProcessor,
+        customer,
+        methodConverter,
+        paymentService,
+        shippingService,
+        oscLoader,
+        registry
+    ) {
         'use strict';
-
+        var itemUpdateLoader = ['total',],
+            loadingSpeedConfig = window.loadingSpeedConfig;
         return function () {
-            oscLoader.startLoader();
+            if (loadingSpeedConfig && loadingSpeedConfig.refresh_page !== '1' 
+                && loadingSpeedConfig.product_change.includes("1")
+            ) {
+                itemUpdateLoader.push('shipping');
+            }
+            oscLoader.startLoader(itemUpdateLoader);
 
             return storage.post(
                 resourceUrlManager.getUrlForUpdatePaymentTotalInformation(quote)
@@ -71,17 +78,21 @@ define(
                     if (response.options) {
                         options = JSON.parse(response.options);
 
-                        response.totals.items.forEach(function (item) {
-                            item.mposc = options[item.item_id];
-                        });
+                        response.totals.items.forEach(
+                            function (item) {
+                                item.mposc = options[item.item_id];
+                            }
+                        );
                     }
 
                     if (response.request_path) {
                         paths = JSON.parse(response.request_path);
 
-                        response.totals.items.forEach(function (item) {
-                            item.request_path = paths[item.item_id];
-                        });
+                        response.totals.items.forEach(
+                            function (item) {
+                                item.request_path = paths[item.item_id];
+                            }
+                        );
                     }
 
                     quote.setTotals(response.totals);
@@ -93,7 +104,7 @@ define(
                 }
             ).always(
                 function () {
-                    oscLoader.stopLoader();
+                    oscLoader.stopLoader(itemUpdateLoader);
                 }
             );
         };

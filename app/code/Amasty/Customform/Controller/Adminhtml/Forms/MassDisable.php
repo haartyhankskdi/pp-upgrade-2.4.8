@@ -1,9 +1,9 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Controller\Adminhtml\Forms;
 
@@ -14,6 +14,8 @@ use Amasty\Customform\Model\ResourceModel\Form\CollectionFactory;
 
 class MassDisable extends \Magento\Backend\App\Action
 {
+    public const ADMIN_RESOURCE = 'Amasty_Customform::page';
+
     /**
      * @var CollectionFactory
      */

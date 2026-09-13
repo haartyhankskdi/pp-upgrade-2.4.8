@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Observer;
@@ -27,10 +27,6 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Sales\Model\Order;
 
-/**
- * Class ReindexCustomer
- * @package Mageplaza\Osc\Observer
- */
 class ReindexCustomer implements ObserverInterface
 {
     /**
@@ -46,7 +42,7 @@ class ReindexCustomer implements ObserverInterface
     /**
      * ReindexCustomer constructor.
      *
-     * @param CustomerFactory $customerFactory
+     * @param CustomerFactory  $customerFactory
      * @param ResourceCustomer $resourceCustomer
      */
     public function __construct(CustomerFactory $customerFactory, ResourceCustomer $resourceCustomer)
@@ -60,7 +56,9 @@ class ReindexCustomer implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        /** @var Order $order */
+        /**
+ * @var Order $order
+*/
         $order = $observer->getEvent()->getOrder();
         if ($order instanceof Order) {
             $customerId = $order->getCustomerId();

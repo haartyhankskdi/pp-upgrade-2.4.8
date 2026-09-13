@@ -120,9 +120,8 @@ class Add extends \Magento\Checkout\Controller\Cart implements HttpPostActionInt
             // One Item per configurable
             $cartItems = $this->cart->getQuote()->getAllVisibleItems();
             foreach ($cartItems as $cartP) {
-                if(strtok($cartP->getName(),'') == strtok($product->getName(), '')){
-                    $this->messageManager->addExceptionMessage(
-                        $e,
+                if($product && strtok($cartP->getName(),'') == strtok($product->getName(), '')){
+                    $this->messageManager->addErrorMessage(
                         __('Duplicate Product Not Allowed')
                     );
                     return $this->goBack();

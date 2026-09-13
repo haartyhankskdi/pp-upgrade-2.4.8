@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Model\Mail;
 
@@ -23,11 +24,6 @@ use Psr\Log\LoggerInterface;
 class Notification
 {
     public const SYSTEM_CONFIG_VALUE = 2;
-
-    /**
-     * @var TransportBuilderFactory
-     */
-    private $transportBuilder;
 
     /**
      * @var Data
@@ -67,14 +63,12 @@ class Notification
     public function __construct(
         StoreManagerInterface $storeManager,
         ManagerInterface $messageManager,
-        TransportBuilderFactory $transportBuilderFactory,
         Data $helper,
         LoggerInterface $logger,
         EmailSender $emailSender,
         SubmittedFieldsRenderer $submittedFieldsRenderer,
         Escaper $escaper
     ) {
-        $this->transportBuilder = $transportBuilderFactory->create();
         $this->helper = $helper;
         $this->logger = $logger;
         $this->storeManager = $storeManager;

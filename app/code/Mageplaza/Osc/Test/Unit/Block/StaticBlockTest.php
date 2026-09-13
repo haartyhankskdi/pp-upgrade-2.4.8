@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Block;
@@ -32,10 +32,6 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use ReflectionException;
 
-/**
- * Class StaticBlockTest
- * @package Mageplaza\Osc\Test\Unit\Block
- */
 class StaticBlockTest extends TestCase
 {
     /**
@@ -63,7 +59,7 @@ class StaticBlockTest extends TestCase
      */
     private $contextMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->contextMock = $this->getMockBuilder(Context::class)
             ->disableOriginalConstructor()
@@ -92,15 +88,16 @@ class StaticBlockTest extends TestCase
     {
         $this->layoutMock = $this->getMockForAbstractClass(LayoutInterface::class);
         $this->staticBock->setLayout($this->layoutMock);
+        $this->oscHelperMock->expects($this->once())->method('isEnabled')->willReturn(true);
         $this->oscHelperMock->expects($this->once())->method('isEnableStaticBlock')->willReturn(false);
 
-        $this->staticBock->getStaticBlock();
+        $this->assertEquals([], $this->staticBock->getStaticBlock());
     }
 
     /**
      * @return array
      */
-    public function providerTestGetStaticBlock()
+    public static function providerTestGetStaticBlock()
     {
         return [
             [
@@ -188,30 +185,39 @@ class StaticBlockTest extends TestCase
     }
 
     /**
-     * @param array $result
-     * @param array $staticBlockList
+     * @param array  $result
+     * @param array  $staticBlockList
      * @param string $nameLayout
      *
      * @dataProvider providerTestGetStaticBlock
-     * @throws ReflectionException
+     * @throws       ReflectionException
      */
     public function testGetStaticBlock($result, $staticBlockList, $nameLayout)
     {
         $this->layoutMock = $this->getMockForAbstractClass(LayoutInterface::class);
         $this->staticBock->setLayout($this->layoutMock);
+        $this->oscHelperMock->expects($this->once())->method('isEnabled')->willReturn(true);
         $this->oscHelperMock->expects($this->once())->method('isEnableStaticBlock')->willReturn(true);
         $this->oscHelperMock->expects($this->once())->method('getStaticBlockList')->willReturn($staticBlockList);
         $blockInterfaceMock = $this->getMockBuilder(BlockInterface::class)
-            ->setMethods(['setBlockId'])
+            ->addMethods(['setBlockId'])
             ->getMockForAbstractClass();
 
         $this->layoutMock->expects($this->exactly(2))
             ->method('createBlock')
             ->with(Block::class)->willReturn($blockInterfaceMock);
+        $setBlockIdCallCount = 0;
         $blockInterfaceMock->expects($this->exactly(2))
             ->method('setBlockId')
-            ->withConsecutive([1], [2])
-            ->willReturnSelf();
+            ->willReturnCallback(function ($blockId) use (&$setBlockIdCallCount, $blockInterfaceMock) {
+                $setBlockIdCallCount++;
+                if ($setBlockIdCallCount === 1) {
+                    $this->assertEquals(1, $blockId);
+                } else {
+                    $this->assertEquals(2, $blockId);
+                }
+                return $blockInterfaceMock;
+            });
         $blockInterfaceMock->expects($this->exactly(2))
             ->method('toHtml')
             ->willReturnOnConsecutiveCalls('test1', 'test2');

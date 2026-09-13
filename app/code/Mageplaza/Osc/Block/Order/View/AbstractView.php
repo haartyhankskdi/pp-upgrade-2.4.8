@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Block\Order\View;
@@ -27,10 +27,6 @@ use Magento\Framework\View\Element\Template\Context;
 use Magento\Sales\Model\Order;
 use Mageplaza\Osc\Helper\Data;
 
-/**
- * Class AbstractView
- * @package Mageplaza\Osc\Block\Order\View
- */
 class AbstractView extends Template
 {
     /**
@@ -44,10 +40,10 @@ class AbstractView extends Template
     protected $helper;
 
     /**
-     * @param Context $context
+     * @param Context  $context
      * @param Registry $registry
-     * @param Data $helper
-     * @param array $data
+     * @param Data     $helper
+     * @param array    $data
      */
     public function __construct(
         Context $context,

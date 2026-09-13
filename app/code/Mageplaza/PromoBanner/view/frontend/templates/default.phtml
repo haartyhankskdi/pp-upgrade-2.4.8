@@ -23,7 +23,9 @@
     require(['jquery', 'Magento_Customer/js/customer-data'], function ($, customerData) {
         var sections = ['cart'];
         setTimeout(function () {
-            customerData.reload(sections, true);
+            customerData.getInitCustomerData().done(function () {
+                customerData.reload(sections, true);
+            });
         }, 3000);
     });
 </script>

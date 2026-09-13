@@ -1,0 +1,39 @@
+<?php
+/*
+ * This software is the confidential and proprietary information of Autify Digital Ltd.
+ * Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+ * Copyright (c) 2020-Present Autify Digital Ltd.
+ * This work is protected under applicable copyright and intellectual property laws.
+ * All rights reserved. Distribution and disclosure are permitted only in accordance with
+ * the terms of a valid written agreement with Autify Digital Ltd.
+ */
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+
+$formData = $block->getFormData();
+$iframeData = $block->getIframeData();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Redirecting to payment gateway</title></head>
+<?php if (!empty($formData)): ?>
+    <body onload="document.forms['proxy_form'].submit()">
+        <form id="proxy_form" action="<?= $escaper->escapeUrl($formData['action']) ?>"
+            method="POST" enctype="application/x-www-form-urlencoded" class="no-display">
+            <?php foreach ($formData['fields'] as $name => $value): ?>
+                <input value="<?= $escaper->escapeHtmlAttr($value) ?>"
+                    name="<?= $escaper->escapeHtmlAttr($name) ?>" type="hidden"/>
+            <?php endforeach ?>
+        </form>
+    </body>
+<?php endif; ?>
+
+<?php if (!empty($iframeData)): ?>
+    <body style="display:none;">
+        <?= /* @noEscape */ $iframeData ?>
+    </body>
+<?php endif; ?>
+</html>

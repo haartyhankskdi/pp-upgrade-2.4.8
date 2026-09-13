@@ -20,6 +20,7 @@
 
 var config = {
     paths: {
+        'jquery/file-uploader': 'Mageplaza_Core/lib/fileUploader/jquery.fileuploader',
         'mageplaza/core/jquery/popup': 'Mageplaza_Core/js/jquery.magnific-popup.min',
         'mageplaza/core/owl.carousel': 'Mageplaza_Core/js/owl.carousel.min',
         'mageplaza/core/bootstrap': 'Mageplaza_Core/js/bootstrap.min',
@@ -33,6 +34,6 @@ var config = {
         "mageplaza/core/bootstrap": ["jquery"],
         mpIonRangeSlider: ["jquery"],
         mpDevbridgeAutocomplete: ["jquery"],
-        touchPunch: ['jquery', 'jquery/ui']
+        touchPunch: ['jquery', 'jquery-ui-modules/widget', 'jquery-ui-modules/mouse']
     }
 };

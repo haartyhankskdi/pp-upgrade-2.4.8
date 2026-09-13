@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Amasty\Base\Test\Unit\Utils\Http\Url;
 
 use Amasty\Base\Utils\Http\Url\UrlComparator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class UrlComparatorTest extends TestCase
@@ -33,12 +34,13 @@ class UrlComparatorTest extends TestCase
      * @dataProvider isEqualDataProvider
      * @return void
      */
+    #[DataProvider('isEqualDataProvider')]
     public function testIsEqual(string $url1, string $url2, string $mask, bool $expected): void
     {
         $this->assertEquals($expected, $this->model->isEqual($url1, $url2));
     }
 
-    public function isEqualDataProvider(): array
+    public static function isEqualDataProvider(): array
     {
         return [
             ['/api/v1/instance/registration', '/api/v1/instance/registration', '{}', true],

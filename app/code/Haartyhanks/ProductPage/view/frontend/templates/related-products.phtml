@@ -27,9 +27,10 @@ if ($relatedProducts && $relatedProducts->getSize() > 0):
                                         <?= $block->escapeHtml($product->getName()) ?>
                                     </a>
                                 </div>
+                                <?php $shortDescription = strip_tags((string) $product->getShortDescription()); ?>
                                 <div class="product-short-description">
-                                     <?= $block->escapeHtml(mb_substr(strip_tags($product->getShortDescription()), 0, 75)) ?>
-                                    <?php if (mb_strlen(strip_tags($product->getShortDescription())) > 75): ?>
+                                     <?= $block->escapeHtml(mb_substr($shortDescription, 0, 75)) ?>
+                                    <?php if (mb_strlen($shortDescription) > 75): ?>
                                         ...
                                     <?php endif; ?>
                                 </div>

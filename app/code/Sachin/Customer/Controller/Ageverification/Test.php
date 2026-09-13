@@ -286,7 +286,7 @@ class Test extends \Magento\Framework\App\Action\Action
             //$age = $results->Age->AgeLower;
         }
         
-        if (strpos($tracesmart_register, 'TR') !== false)
+        if (strpos((string) $tracesmart_register, 'TR') !== false)
           {
             $customer->setCustomAttribute('tracesmart_register', 1);
           

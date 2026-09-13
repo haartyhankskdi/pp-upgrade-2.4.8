@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="magefan_blog_import_old_new_ids">
+        <column xsi:type="int" name="id" padding="11" unsigned="false" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="int" name="old_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Old Entity ID"/>
+        <column xsi:type="int" name="new_id" padding="11" unsigned="false" nullable="true" identity="false" comment="New Entity ID"/>
+        <column xsi:type="varchar" name="type" length="255" nullable="false" comment="Entity Type"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

@@ -18,6 +18,7 @@ use Magento\Backend\Model\Menu;
 use Magento\Backend\Model\Menu\Config;
 use Magento\Backend\Model\Menu\Item;
 use Magento\Backend\Model\Url;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -91,6 +92,7 @@ class ExtensionTest extends TestCase
      * @param array|null $expected
      * @return void
      */
+    #[DataProvider('processDataProvider')]
     public function testProcess(
         array $resources,
         bool $withConfig,
@@ -119,7 +121,7 @@ class ExtensionTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function processDataProvider(): array
+    public static function processDataProvider(): array
     {
         return [
             'no items, no config, no guide' => [[], false, false, null],

@@ -21,20 +21,18 @@
 
 namespace Mageplaza\PromoBanner\Model\Config\Source;
 
-use Magento\Framework\Option\ArrayInterface;
-
 /**
  * Class Type
  * @package Mageplaza\PromoBanner\Model\Config\Source
  */
-class Type implements ArrayInterface
+class Type extends AbstractSource
 {
     const SINGLE_IMAGE = 'banner_image';
-    const SLIDER       = 'slider_images';
-    const POPUP        = 'popup_image';
-    const FLOATING     = 'floating_image';
-    const HTML_TEXT    = 'html';
-    const CMS_BLOCK    = 'cms-block';
+    const SLIDER = 'slider_images';
+    const POPUP = 'popup_image';
+    const FLOATING = 'floating_image';
+    const HTML_TEXT = 'html';
+    const CMS_BLOCK = 'cms-block';
 
     /**
      * @return array

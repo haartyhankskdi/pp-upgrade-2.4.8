@@ -6,7 +6,7 @@ define([
     'mage/url',
     'mage/translate',
     'mage/calendar',
-    'Magento_Ui/js/modal/modal'
+    'Magento_Ui/js/modal/modal',
 ], function ($, urlBuilder) {
     'use strict';
 
@@ -203,7 +203,12 @@ define([
                 }
 
                 value = value.toString();
-                valString = fbUtils.escapeAttr(value.replace(',', ' ').trim());
+
+                if (['regexp', 'data-validate'].includes(name)) {
+                    valString = fbUtils.escapeAttr(value);
+                } else {
+                    valString = fbUtils.escapeAttr(value.replace(',', ' ').trim());
+                }
             }
         }
 
@@ -468,7 +473,8 @@ define([
 
         var withoutLabel = false,
             ratingClass = '',
-            withBr = true;
+            withBr = true,
+            withoutMainLabel = false;
 
         switch (fieldData.type) {
             case 'textinput':
@@ -486,7 +492,7 @@ define([
                 withoutLabel = true;
                 break;
             case 'hone':
-                fieldData.type = 'p';
+                fieldData.type = 'h1';
                 withoutLabel = true;
                 break;
             case 'htwo':
@@ -515,6 +521,10 @@ define([
             // eslint-disable-next-line no-fallthrough
             case 'checkbox':
                 fieldData.type = 'checkbox-group';
+                break;
+            case 'single-checkbox':
+                fieldData.type = 'checkbox';
+                withoutMainLabel = true;
                 break;
             case 'listbox':
                 fieldData.type = 'select';
@@ -706,7 +716,10 @@ define([
                 + fieldLabelVal + '</' + fieldData.type + '>';
         }
 
-        fieldMarkup = fieldLabel + '<div class="control">' + fieldMarkup + '</div>';
+        fieldMarkup = '<div class="control">' + fieldMarkup + '</div>';
+        if (!withoutMainLabel) {
+            fieldMarkup = fieldLabel + fieldMarkup;
+        }
 
         if (fieldData.type !== 'hidden') {
             var className = fieldData.id ?
@@ -749,16 +762,25 @@ define([
                 break;
             case 'date':
                 var dateInput = $(fieldMarkup).find('input');
+                const fieldId = dateInput.attr('id') || fieldData.name || fieldData.id || 'am-customform-date';
+                const datepickerDescId = fieldId + '-datepicker-desc';
 
+                dateInput?.addClass('am-datepicker-observed');
                 dateInput.removeAttr('type');
                 dateInput.attr('readonly', 'readonly');
+
+                if (fieldData.readonly) {
+                    dateInput.addClass('readonly-blocked');
+                    break
+                }
                 dateInput.datepicker({
-                    showOn: 'both',
+                    showOn: 'button',
                     changeYear: true,
                     yearRange: '1900:2100',
                     autoSize: true,
                     dateFormat: opts.dateFormat
                 });
+
 
                 if (fieldData.value) {
                     dateInput.datepicker('setDate', fieldData.value);
@@ -766,7 +788,27 @@ define([
 
                 dateInput.attr('placeholder', opts.placeholder);
                 dateInput.attr('size', 15);
-                $(fieldMarkup).find('button').html('');
+                dateInput.after(
+                        fbUtils.markup('span',
+                            '(' + $.mage.__('date format: ') + opts.dateFormat + ')',
+                            {
+                                className: 'amform-datepicker-desc sr-only',
+                                id: datepickerDescId
+                            }
+                        )
+                    );
+
+                dateInput.attr('aria-describedby', datepickerDescId);
+
+                $(fieldMarkup)
+                    .find('button')
+                    .html('')
+                    .addClass('amform-datepicker-button')
+                    .attr({
+                        'aria-label': $.mage.__('Select date'),
+                        'aria-haspopup': 'dialog',
+                        'aria-controls': 'ui-datepicker-div'
+                    });
 
                 var datepicker = $('#ui-datepicker-div');
 
@@ -821,6 +863,7 @@ define([
                 '.control [type="h1"],' +
                 '.control [type="h2"],' +
                 '.control [type="h3"],' +
+                '.control [type="wysiwyg"],' +
                 '.form-control'
             ).first().attr('name');
 
@@ -965,15 +1008,21 @@ define([
         var form = this;
 
         event.preventDefault();
+        let formId = form.attr('id').match(/\d+/);
+        const ajaxSubmit = fbUtils.formOptions[formId].ajax_submit;
 
         if (form.valid()) {
             form.find('[type="submit"]').addClass('disabled');
+            if (!ajaxSubmit) {
+                form.off('submit');
+                form.submit();
+
+                return;
+            }
             if (form.has('input[type="file"]').length && form.find('input[type="file"]').val() !== '') {
                 form.off('submit');
                 form.submit();
             } else {
-                var formId = form.attr('id').match(/\d+/);
-
                 $.ajax({
                     url: form.attr('action'),
                     data: form.serialize(),
@@ -1016,8 +1065,10 @@ define([
                                 if (form.parent().hasClass('amform-popup')) {
                                     form.parent().hide();
                                 } else if (form.hasClass('amhideprice-form')) {
-                                    $.fancyambox.close();
+                                    $.fancybox.close();
                                 }
+
+                                $(document).trigger('amcform-submit-success', form);
                             }
 
                             $(document).trigger('amcform-init-multipage', [renderedForm]);
@@ -1136,7 +1187,8 @@ define([
 
             var multiPageWrap = $('<div data-amcform-js="multi-page" class="amcform-multi-page fieldset"></div>')
                     .appendTo(element),
-                pageTitlesWrap = $('<ul data-amcform-js="page-titles" class="amcform-page-titles"></ul>')
+                formId = $(element).closest('form').attr('data-amform-id'),
+                pageTitlesWrap = $(`<ul data-amcform-js="page-titles-${formId}" class="amcform-page-titles"></ul>`)
                     .appendTo(multiPageWrap);
 
             if (typeof pageTitles != 'undefined') {
@@ -1165,13 +1217,16 @@ define([
                 }
 
                 if (i === pages.length - 1) {
-                    if ($('[data-amcform-js="gdpr"]').length) {
-                        var gdpr =  $(element).next('[data-amcform-js="gdpr"]').clone().appendTo(pageWrap),
-                            inputId = gdpr.find('input').attr('data-id');
+                    const gdpr = $(element).next('[data-amcform-js="gdpr"]');
 
+                    if (gdpr.length) {
+                        const inputId = gdpr.find('input').attr('data-id');
+
+                        gdpr.appendTo(pageWrap);
                         gdpr.find('input').prop('disabled', false).attr('id', inputId);
                         gdpr.show();
                     }
+
                     var form = $(element).closest('.amform-form'),
                         isSurvey = parseInt($(form).find('[name="is_survey"]').attr('value'), 10),
                         prompt = '';
@@ -1193,6 +1248,12 @@ define([
 
                 $(toolbar + '</div>').appendTo(pageWrap);
             }
+
+             window.dispatchEvent(new CustomEvent('amform-elements-rendered', {
+                 detail: {
+                     form: $(element).closest('form')
+                 }
+             }));
         },
 
         // Begin the core plugin
@@ -1337,11 +1398,11 @@ define([
 
         fbUtils.updateDependency(this, $);
 
-        if (opts.ajax_submit === 1) {
-            var form = this.form;
+        const form = this.form;
 
-            form.unbind('submit');
-            form.on('submit', fbUtils.submitForm.bind(form));
+        form.unbind('submit');
+        form.on('submit', fbUtils.submitForm.bind(form));
+        if (opts.ajax_submit === 1) {
             form.trigger('ajaxFormLoaded');
         }
 
@@ -1475,15 +1536,23 @@ define([
                                 popupWrapper.remove();
                             }
 
+                            if (popupBlock.hasClass(componentOptions.classes.active)) {
+                                $(document).trigger('amcform-popup-close', popupBlock.find('.amform-form'));
+                            }
+
                             popupBlock.removeClass(componentOptions.classes.active);
                         }
                     });
 
-                    popupBlock.find(componentOptions.selectors.closeButton).on('click', function () {
+                    popupBlock
+                        .find(componentOptions.selectors.closeButton)
+                        .off('click')
+                        .on('click', function () {
                         if (buttonBlock.hasClass(componentOptions.classes.formEdit)) {
                             popupWrapper.remove();
                         }
 
+                        $(document).trigger('amcform-popup-close', popupBlock.find('.amform-form'));
                         popupBlock.removeClass(componentOptions.classes.active);
                     });
                 });

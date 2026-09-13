@@ -16,10 +16,6 @@ use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magefan\Blog\Api\CategoryRepositoryInterface;
 
-/**
- * Class Categories
- * @package Magefan\BlogGraphQl\Model\Resolver
- */
 class Categories implements ResolverInterface
 {
     /**
@@ -97,7 +93,7 @@ class Categories implements ResolverInterface
 
         $scopeFilter = $this->filterBuilder
             ->setField('store_id')
-            ->setValue($scope)
+            ->setValue($args['storeId'] ?? $scope)
             ->setConditionType('eq')
             ->create();
         $filterGroups[] = $this->filterGroupBuilder->addFilter($scopeFilter)->create();
@@ -110,7 +106,7 @@ class Categories implements ResolverInterface
 
         foreach ($items as $k => $data) {
             $items[$k] = $this->categoryDataProvider->getData(
-                $data['category_id'],
+                $data,
                 isset($fields['items']) ? $fields['items'] : null
             );
         }

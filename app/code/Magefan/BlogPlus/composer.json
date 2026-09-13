@@ -1,0 +1,16 @@
+{
+    "name": "magefan/module-blog-plus",
+    "description": "Implements Additional Blog functionality on Magento 2 store",
+    "require": {
+        "magefan/module-blog" : "2.16.2"
+    },
+    "type": "magento2-module",
+    "version": "2.16.2",
+    "license": "EULA",
+    "autoload": {
+        "files": [ "registration.php" ],
+        "psr-4": {
+            "Magefan\\BlogPlus\\": ""
+        }
+    }
+}

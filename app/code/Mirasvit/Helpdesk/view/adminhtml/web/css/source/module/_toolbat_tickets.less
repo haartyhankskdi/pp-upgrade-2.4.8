@@ -1,0 +1,49 @@
+.notifications-action.helpdesk-tickets {
+  &.medium {
+    padding-right: 2.4em;
+  }
+  &.large {
+    padding-right: 4.4em;
+
+    .mst-notifications-counter {
+      left: 33%;
+    }
+  }
+
+  .mst-notifications-counter {
+    margin-left: 0;
+    background-color: @notifications-counter__background-color;
+    border-radius: 1em;
+    color: @color-white;
+    display: inline-block;
+    font-size: @notifications__font-size;
+    font-weight: @font-weight__bold;
+    height: 20px;
+    left: 50%;
+    line-height: 20px;
+    //margin-left: .3em;
+    margin-top: -1.1em;
+    min-width: 20px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+  }
+}
+.notifications-action.helpdesk-tickets::before {
+
+  content: '\e602';
+  font-size: 1.9rem;
+  margin-right: 0;
+
+}
+
+.mst-notifications-wrapper {
+  float: right;
+  line-height: 1;
+  position: relative;
+  .admin__action-dropdown-menu {
+    padding: 1rem 0 0;
+    width: 32rem;
+    z-index: 1000;
+  }
+}

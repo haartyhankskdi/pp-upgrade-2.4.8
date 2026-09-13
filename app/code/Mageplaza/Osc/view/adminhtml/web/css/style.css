@@ -42,8 +42,7 @@
     display: table-cell;
     vertical-align: top;
     float: unset;
-    border: 1px solid #adadad;
-    border-top: none;
+    border-radius: 10px;
 }
 
 .field-wrapper ul {
@@ -110,17 +109,18 @@
 }
 
 #mposc-field-tabs a {
+    width: 100%;
     padding: 5px;
     font-size: 2rem;
     line-height: 1.5;
     white-space: nowrap;
     text-overflow: ellipsis;
-    overflow: hidden;
+    min-height: 125px;
 }
 
 #mposc-field-tabs a._active {
-    background-color: #1979c3;
-    border-color: #1979c3;
+    background-color: #4440A3;
+    border-color: #4440A3;
     color: #ffffff;
 }
 
@@ -142,10 +142,46 @@
     float: left;
 }
 
-#field-position-sortable > .mposc-field-container > .messages {
-    margin-top: 3rem;
-}
-
 #field-position-sortable > .mposc-field-container > .messages > .message:last-child {
     margin: 0;
 }
+div#mposc-field-tabs {
+    display: flex;
+    flex-direction: column;
+}
+div#field-position-sortable {
+    width: 100%;
+    margin-left: 2%;
+    padding: 10px;
+}
+.field-wrapper.sorted-wrapper {
+    margin-left: 2%;
+    background-color: #fafafa;
+}
+.mposc-field-container {
+    width: 100%;
+}
+a.button.action-default {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+a.button.action-default span{
+    padding-left:10px;
+}
+div#position-save-messages {
+    margin-bottom: 20px;
+}
+
+#mposc-field-tabs {
+    height: 500px;
+    width: 20%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+img.icon_type_custom_image {
+    width: 20px;
+    height: 20px;
+}
+

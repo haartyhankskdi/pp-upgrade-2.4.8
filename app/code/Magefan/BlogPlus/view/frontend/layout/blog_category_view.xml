@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magefan\BlogPlus\Block\Category\Image" name="blog.category.image" template="Magefan_BlogPlus::category/image.phtml" before="blog.posts.list" />
+            <block class="Magefan\BlogPlus\Block\Category\BottomContent" name="blog.category.bottom.content" template="Magefan_BlogPlus::category/bottom-content.phtml" after="blog.posts.list" />
+        </referenceContainer>
+    </body>
+</page>

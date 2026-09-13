@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model;
@@ -39,10 +39,6 @@ use Mageplaza\Osc\Model\CheckoutRegister;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class CheckoutRegisterTest
- * @package Mageplaza\Osc\Test\Unit\Model
- */
 class CheckoutRegisterTest extends TestCase
 {
     /**
@@ -95,13 +91,11 @@ class CheckoutRegisterTest extends TestCase
      */
     private $billingAddressMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
-        $checkoutSessionMethods = get_class_methods(Session::class);
-        $checkoutSessionMethods[] = 'getOscData';
-        $checkoutSessionMethods[] = 'setIsCreatedAccountPaypalExpress';
         $this->checkoutSessionMock = $this->getMockBuilder(Session::class)
-            ->setMethods($checkoutSessionMethods)
+            ->onlyMethods(['getQuote'])
+            ->addMethods(['getOscData', 'setIsCreatedAccountPaypalExpress'])
             ->disableOriginalConstructor()
             ->getMock();
         $this->objectCopyServiceMock = $this->getMockBuilder(Copy::class)
@@ -135,7 +129,7 @@ class CheckoutRegisterTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestCheckRegisterNewCustomer()
+    public static function providerTestCheckRegisterNewCustomer()
     {
         return [
             [
@@ -168,11 +162,9 @@ class CheckoutRegisterTest extends TestCase
      */
     public function testCheckRegisterNewCustomer()
     {
-        $quoteMethods = get_class_methods(Quote::class);
-        $quoteMethods[] = 'setCustomerGroupId';
-        $quoteMethods[] = 'setPasswordHash';
         $quoteMock = $this->getMockBuilder(Quote::class)
-            ->setMethods($quoteMethods)
+            ->onlyMethods(['setCheckoutMethod', 'setCustomerIsGuest', 'getCustomer', 'getBillingAddress', 'isVirtual', 'setCustomer', 'addCustomerAddress'])
+            ->addMethods(['setCustomerGroupId', 'setPasswordHash', 'getCustomerEmail', 'getCustomerId'])
             ->disableOriginalConstructor()->getMock();
         $oscData = [
             'register' => true,
@@ -215,7 +207,7 @@ class CheckoutRegisterTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestPrepareNewCustomerQuoteWithQuoteIsVirtual()
+    public static function providerTestPrepareNewCustomerQuoteWithQuoteIsVirtual()
     {
         return [
             [1]
@@ -229,30 +221,22 @@ class CheckoutRegisterTest extends TestCase
      */
     public function testPrepareNewCustomerQuoteWithQuoteIsVirtual($customerId)
     {
-        $quoteMethods = get_class_methods(Quote::class);
-        $quoteMethods[] = 'getCustomerEmail';
-        $quoteMethods[] = 'setPasswordHash';
-        $quoteMethods[] = 'getCustomerId';
-
         /**
          * @var Quote|MockObject $quoteMock
          */
         $quoteMock = $this->getMockBuilder(Quote::class)
-            ->setMethods($quoteMethods)
+            ->onlyMethods(['getBillingAddress', 'isVirtual', 'getCustomer', 'setCustomer', 'addCustomerAddress'])
+            ->addMethods(['getCustomerEmail', 'setPasswordHash', 'getCustomerId'])
             ->disableOriginalConstructor()->getMock();
 
-        $billingAddressMethods = get_class_methods(Quote\Address::class);
-        $billingAddressMethods[] = 'setShouldIgnoreValidation';
-        $billingAddressMethods[] = 'setCustomerAddressData';
         $billingAddressMock = $this->getMockBuilder(Quote\Address::class)
-            ->setMethods($billingAddressMethods)
+            ->onlyMethods(['exportCustomerAddress', 'getData', 'setCustomerId'])
+            ->addMethods(['setShouldIgnoreValidation', 'setCustomerAddressData'])
             ->disableOriginalConstructor()
             ->getMock();
         $quoteMock->expects($this->atLeastOnce())->method('getBillingAddress')->willReturn($billingAddressMock);
 
         $quoteMock->expects($this->atLeastOnce())->method('isVirtual')->willReturn(true);
-        $customerMethods = get_class_methods(Customer::class);
-        $customerMethods[] = 'setEmail';
         $customerMock = $this->getMockBuilder(\Magento\Customer\Model\Data\Customer::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -292,7 +276,7 @@ class CheckoutRegisterTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestPrepareNewCustomerQuote()
+    public static function providerTestPrepareNewCustomerQuote()
     {
         return [
             [1, true],
@@ -301,18 +285,13 @@ class CheckoutRegisterTest extends TestCase
     }
 
     /**
-     * @param int $customerId
+     * @param int     $customerId
      * @param boolean $isSameAsShipping
      *
      * @dataProvider providerTestPrepareNewCustomerQuote
      */
     public function testPrepareNewCustomerQuote($customerId, $isSameAsShipping)
     {
-        $quoteMethods = get_class_methods(Quote::class);
-        $quoteMethods[] = 'getCustomerEmail';
-        $quoteMethods[] = 'setPasswordHash';
-        $quoteMethods[] = 'getCustomerId';
-
         $oscDataMock = [
             'customerAttributes' => [],
             'same_as_shipping' => $isSameAsShipping
@@ -322,29 +301,25 @@ class CheckoutRegisterTest extends TestCase
          * @var Quote|MockObject $quoteMock
          */
         $quoteMock = $this->getMockBuilder(Quote::class)
-            ->setMethods($quoteMethods)
+            ->onlyMethods(['getShippingAddress', 'getBillingAddress', 'isVirtual', 'getCustomer', 'setCustomer', 'addCustomerAddress'])
+            ->addMethods(['getCustomerEmail', 'setPasswordHash', 'getCustomerId'])
             ->disableOriginalConstructor()->getMock();
 
-        $billingAddressMethods = get_class_methods(Quote\Address::class);
-        $billingAddressMethods[] = 'setShouldIgnoreValidation';
-        $billingAddressMethods[] = 'setCustomerAddressData';
         $billingAddressMock = $this->getMockBuilder(Quote\Address::class)
-            ->setMethods($billingAddressMethods)
+            ->onlyMethods(['exportCustomerAddress', 'getData', 'setCustomerId'])
+            ->addMethods(['setShouldIgnoreValidation', 'setCustomerAddressData'])
             ->disableOriginalConstructor()
             ->getMock();
 
-        $shippingAddressMethods = get_class_methods(Quote\Address::class);
-        $shippingAddressMethods[] = 'setCustomerAddressData';
         $shippingAddressMock = $this->getMockBuilder(Quote\Address::class)
-            ->setMethods($shippingAddressMethods)
+            ->onlyMethods(['exportCustomerAddress', 'setCustomerId'])
+            ->addMethods(['setCustomerAddressData'])
             ->disableOriginalConstructor()
             ->getMock();
         $quoteMock->expects($this->atLeastOnce())->method('getShippingAddress')->willReturn($shippingAddressMock);
         $quoteMock->expects($this->atLeastOnce())->method('getBillingAddress')->willReturn($billingAddressMock);
 
         $quoteMock->expects($this->atLeastOnce())->method('isVirtual')->willReturn(false);
-        $customerMethods = get_class_methods(Customer::class);
-        $customerMethods[] = 'setEmail';
         $customerMock = $this->getMockBuilder(\Magento\Customer\Model\Data\Customer::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -367,7 +342,6 @@ class CheckoutRegisterTest extends TestCase
         $customerBillingDataMock->expects($this->once())->method('setIsDefaultBilling')->with(true)->willReturnSelf();
         $customerBillingDataMock->expects($this->once())->method('setData')->with('should_ignore_validation', true)
             ->willReturnSelf();
-        $quoteAt = 6;
         if ($isSameAsShipping) {
             $shippingAddressMock->expects($this->once())->method('setCustomerAddressData')
                 ->with($customerBillingDataMock);
@@ -375,6 +349,7 @@ class CheckoutRegisterTest extends TestCase
                 ->method('setIsDefaultShipping')
                 ->with(true)
                 ->willReturnSelf();
+            $quoteMock->expects($this->once())->method('addCustomerAddress')->with($customerBillingDataMock);
         } else {
             $customerShippingDataMock = $this->getMockBuilder(Address::class)
                 ->disableOriginalConstructor()
@@ -389,12 +364,19 @@ class CheckoutRegisterTest extends TestCase
             $shippingAddressMock->expects($this->once())
                 ->method('setCustomerAddressData')
                 ->with($customerShippingDataMock);
-            $quoteMock->expects($this->at($quoteAt))->method('addCustomerAddress')->with($customerShippingDataMock);
-            $quoteAt++;
+            $addCustomerAddressCounter = 0;
+            $quoteMock->expects($this->exactly(2))->method('addCustomerAddress')
+                ->willReturnCallback(function ($address) use ($customerShippingDataMock, $customerBillingDataMock, &$addCustomerAddressCounter) {
+                    if ($addCustomerAddressCounter === 0) {
+                        $this->assertSame($customerShippingDataMock, $address);
+                    } else {
+                        $this->assertSame($customerBillingDataMock, $address);
+                    }
+                    $addCustomerAddressCounter++;
+                });
         }
 
         $billingAddressMock->expects($this->once())->method('setCustomerAddressData')->with($customerBillingDataMock);
-        $quoteMock->expects($this->at($quoteAt))->method('addCustomerAddress')->with($customerBillingDataMock);
         $quoteMock->expects($this->atLeastOnce())->method('getCustomerId')->willReturn($customerId);
 
         if ($customerId) {
@@ -409,8 +391,8 @@ class CheckoutRegisterTest extends TestCase
 
     /**
      * @param Quote|MockObject $quoteMock
-     * @param boolean $isVirtual
-     * @param array $oscData
+     * @param boolean          $isVirtual
+     * @param array            $oscData
      */
     public function mockValidateAddressBeforeSubmit($quoteMock, $isVirtual, $oscData = [])
     {
@@ -418,18 +400,17 @@ class CheckoutRegisterTest extends TestCase
         $quoteMock->expects($this->atLeastOnce())->method('isVirtual')->willReturn($isVirtual);
         if (!$isVirtual) {
             $this->shippingAddressMock = $this->getMockBuilder(Quote\Address::class)
-                ->setMethods(['setShouldIgnoreValidation'])
+                ->addMethods(['setShouldIgnoreValidation'])
                 ->disableOriginalConstructor()
                 ->getMock();
             $quoteMock->expects($this->atLeastOnce())->method('getShippingAddress')
                 ->willReturn($this->shippingAddressMock);
             $this->shippingAddressMock->expects($this->once())->method('setShouldIgnoreValidation')->with(true);
         }
-        $billingAddressMethods = get_class_methods(Quote\Address::class);
-        $billingAddressMethods[] = 'setShouldIgnoreValidation';
 
         $this->billingAddressMock = $this->getMockBuilder(Quote\Address::class)
-            ->setMethods($billingAddressMethods)
+            ->onlyMethods(['exportCustomerAddress', 'getData'])
+            ->addMethods(['setShouldIgnoreValidation'])
             ->disableOriginalConstructor()
             ->getMock();
         $quoteMock->expects($this->atLeastOnce())->method('getBillingAddress')->willReturn($this->billingAddressMock);

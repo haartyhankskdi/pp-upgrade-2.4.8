@@ -12,10 +12,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 define(
@@ -52,11 +52,13 @@ define(
 
                 if (typeof blocks !== 'undefined') {
                     services = {};
-                    $.each(blocks, function (index, block) {
-                        if (blockLoader.hasOwnProperty(block)) {
-                            services[block] = blockLoader[block].service;
+                    $.each(
+                        blocks, function (index, block) {
+                            if (blockLoader.hasOwnProperty(block)) {
+                                services[block] = blockLoader[block].service;
+                            }
                         }
-                    });
+                    );
                 }
 
                 return services;
@@ -67,10 +69,12 @@ define(
              */
             startLoader: function (blocks) {
                 var services = this.getServices(blocks);
-                $.each(services, function (index, service) {
-                    blockLoader[index].queue += 1;
-                    service.isLoading(true);
-                });
+                $.each(
+                    services, function (index, service) {
+                        blockLoader[index].queue += 1;
+                        service.isLoading(true);
+                    }
+                );
             },
 
             /**
@@ -78,12 +82,14 @@ define(
              */
             stopLoader: function (blocks) {
                 var services = this.getServices(blocks);
-                $.each(services, function (index, service) {
-                    blockLoader[index].queue -= 1;
-                    if (blockLoader[index].queue == 0) {
-                        service.isLoading(false);
+                $.each(
+                    services, function (index, service) {
+                        blockLoader[index].queue -= 1;
+                        if (blockLoader[index].queue == 0) {
+                            service.isLoading(false);
+                        }
                     }
-                });
+                );
             }
         };
     }

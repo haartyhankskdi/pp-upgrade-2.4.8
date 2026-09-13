@@ -1,0 +1,16 @@
+{
+    "name": "magefan/module-blog-import",
+    "description": "Magefan Blog Import for Magento 2",
+    "version": "2.16.2",
+    "type": "magento2-module",
+    "license": "EULA",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Magefan\\BlogImport\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

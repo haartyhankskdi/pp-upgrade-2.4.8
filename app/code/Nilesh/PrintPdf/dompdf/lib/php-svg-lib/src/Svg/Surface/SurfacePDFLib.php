@@ -337,7 +337,7 @@ class SurfacePDFLib implements SurfaceInterface
             );
         }
 
-        if ($fillRule = strtolower($style->fillRule)) {
+        if ($fillRule = strtolower((string)$style->fillRule)) {
             $map = array(
                 "nonzero" => "winding",
                 "evenodd" => "evenodd",

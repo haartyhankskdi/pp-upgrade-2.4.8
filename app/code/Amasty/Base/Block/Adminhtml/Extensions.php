@@ -20,6 +20,7 @@ use Amasty\Base\Model\SysInfo\Data\LicenseValidation;
 use Amasty\Base\Model\SysInfo\Data\LicenseValidation\Module;
 use Amasty\Base\Model\SysInfo\Data\LicenseValidation\Module\Message;
 use Amasty\Base\Model\SysInfo\Data\LicenseValidation\Module\VerifyStatus;
+use Amasty\Base\Model\SysInfo\RegisteredInstanceRepository;
 use Magento\Backend\Block\Template;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\App\ObjectManager;
@@ -29,6 +30,7 @@ use Magento\Framework\Serialize\Serializer\Json;
 class Extensions extends Field
 {
     public const SEO_PARAMS = '?utm_source=extension&utm_medium=backend&utm_campaign=ext_list';
+    private const TEST_URL = 'https://amasty.com/amasty_license/project/manage/id/%INSTANCE_KEY%/';
 
     /**
      * Constants for keys of data array
@@ -39,9 +41,11 @@ class Extensions extends Field
     public const LAST_VERSION = 'last_version';
     public const HAS_UPDATE = 'has_update';
     public const UPDATE_URL = 'update_url';
+    public const MODULE_URL = 'module_url';
     public const IS_SOLUTION = 'is_solution';
     public const PLAN_LABEL = 'plan_label';
     public const UPGRADE_URL = 'upgrade_url';
+    public const BUY_TEST_URL = 'buy_test_url';
     public const VERIFY_STATUS = 'verify_status';
     public const MESSAGES = 'messages';
 
@@ -85,6 +89,16 @@ class Extensions extends Field
      */
     private $currentLicenseValidation;
 
+    /**
+     * @var RegisteredInstanceRepository|null
+     */
+    private $instanceRepository;
+
+    /**
+     * @var string
+     */
+    private $builtTestUrl = '';
+
     public function __construct(
         Template\Context $context,
         ModuleListProcessor $moduleListProcessor,
@@ -94,7 +108,8 @@ class Extensions extends Field
         ModuleTitlesResolver $moduleTitlesResolver,
         ActiveSolutionsProvider $activeSolutionsProvider,
         array $data = [],
-        GetCurrentLicenseValidation $currentLicenseValidation = null
+        ?GetCurrentLicenseValidation $currentLicenseValidation = null,
+        ?RegisteredInstanceRepository $instanceRepository = null
     ) {
         parent::__construct($context, $data);
         $this->moduleListProcessor = $moduleListProcessor;
@@ -105,6 +120,8 @@ class Extensions extends Field
         $this->activeSolutionsProvider = $activeSolutionsProvider;
         $this->currentLicenseValidation = $currentLicenseValidation
             ?: ObjectManager::getInstance()->get(GetCurrentLicenseValidation::class);
+        $this->instanceRepository = $instanceRepository
+            ?: ObjectManager::getInstance()->get(RegisteredInstanceRepository::class);
     }
 
     protected function _getElementHtml(AbstractElement $element)
@@ -157,9 +174,11 @@ class Extensions extends Field
             $item[self::LAST_VERSION] = $module['lastVersion'];
             $item[self::HAS_UPDATE] = $module['hasUpdate'];
             $item[self::UPDATE_URL] = $this->prepareUpdateUrl($module['url']);
+            $item[self::MODULE_URL] = $module['url'];
             $item[self::IS_SOLUTION] = $isSolution;
             $item[self::PLAN_LABEL] = $planLabel;
             $item[self::UPGRADE_URL] = $isSolution ? $activeSolutions[$moduleCode]['upgrade_url'] : '';
+            $item[self::BUY_TEST_URL] = '';
 
             $result[] = $item;
         }
@@ -204,6 +223,10 @@ class Extensions extends Field
                     VerifyStatus::TYPE => $verifyStatus ? $verifyStatus->getType() : 'pending',
                     VerifyStatus::STATUS => $verifyStatus ? $verifyStatus->getStatus() : 'Pending Verification'
                 ];
+                $moduleData[self::BUY_TEST_URL] = ($verifyStatus && $verifyStatus->getStatus() === 'test only')
+                    ? $this->buildTestUrl()
+                    : '';
+
                 foreach ($licenseModule->getMessages() as $message) {
                     $moduleData[self::MESSAGES][] = [
                         Message::TYPE => $message->getType(),
@@ -226,5 +249,16 @@ class Extensions extends Field
         }
 
         return $result;
+    }
+
+    private function buildTestUrl(): string
+    {
+        if (!$this->builtTestUrl) {
+            $registeredInstance = $this->instanceRepository->get()->getCurrentInstance();
+            $instanceKey = $registeredInstance ? $registeredInstance->getSystemInstanceKey() : '';
+            $this->builtTestUrl = str_replace('%INSTANCE_KEY%', $instanceKey, self::TEST_URL);
+        }
+
+        return $this->builtTestUrl;
     }
 }

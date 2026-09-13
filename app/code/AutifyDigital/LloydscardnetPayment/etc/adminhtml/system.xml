@@ -1,0 +1,553 @@
+<?xml version="1.0" ?>
+<!--
+   ~ This software is the confidential and proprietary information of Autify Digital Ltd.
+   ~ Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+   ~ Copyright (c) 2020-Present Autify Digital Ltd.
+   ~ This work is protected under applicable copyright and intellectual property laws.
+   ~ All rights reserved. Distribution and disclosure are permitted only in accordance with
+   ~ the terms of a valid written agreement with Autify Digital Ltd.
+-->
+<config
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="autifydigital" translate="label" type="text" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Lloyds Cardnet Payments</label>
+                <group id="basic" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Basic Settings</label>
+                    <field id="module_version" translate="label" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Module Version</label>
+                        <frontend_model>AutifyDigital\LloydscardnetPayment\Block\Adminhtml\System\Config\ModuleVersion</frontend_model>
+                    </field>
+                    <field id="log" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable Log</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/basic/log</config_path>
+                    </field>
+                    <field id="lloyds_mode" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Mode</label>
+                        <source_model>AutifyDigital\LloydscardnetPayment\Model\Config\Source\LloydsMode</source_model>
+                        <config_path>payment/basic/lloyds_mode</config_path>
+                    </field>
+                    <field id="active_po_number" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable Order Data in PO number</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/basic/active_po_number</config_path>
+                    </field>
+                    <field id="dynamic_data_po_number" translate="label comment" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Dynamic Order Data in PO number</label>
+                        <comment>Pass the Magento order object here, such as order increment ID or billing information. Limited to 128 characters.</comment>
+                        <config_path>payment/basic/dynamic_data_po_number</config_path>
+                    </field>
+                    <field id="order_id_suffix" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable Order ID Timestamp Suffix</label>
+                        <comment>Append a timestamp suffix to the order ID sent in payment requests to ensure uniqueness.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/basic/order_id_suffix</config_path>
+                    </field>
+                    <field id="challenge_indicator" type="select" sortOrder="6" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Challenge Indicator</label>
+                        <source_model>AutifyDigital\LloydscardnetPayment\Model\Config\Source\ChallengeIndicator</source_model>
+                        <config_path>payment/basic/challenge_indicator</config_path>
+                    </field>
+                    <field id="refund_active" translate="label comment" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable Refund</label>
+                        <comment><![CDATA[If disabled, the online Refund button is hidden and refunds cannot be issued through Lloyds Cardnet.]]></comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/basic/refund_active</config_path>
+                    </field>
+                    <field id="license_key" translate="label comment" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>License Key</label>
+                        <config_path>payment/lloyds/license_key</config_path>
+                    </field>
+                    <group id="test_credential" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Test Credentials</label>
+                        <field id="store_id" translate="label" type="obscure" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Store ID</label>
+                            <backend_model>AutifyDigital\LloydscardnetPayment\Model\Config\Backend\EncryptedStoreId</backend_model>
+                        </field>
+                        <field id="shared_secret" translate="label" type="obscure" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Shared Secret</label>
+                            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        </field>
+                        <field id="api_key" translate="label" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>API Key</label>
+                            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        </field>
+                        <field id="api_secret" translate="label" type="obscure" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>API Secret</label>
+                            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        </field>
+                        <field id="library_uat" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Test Payment Library</label>
+                            <config_path>payment/basic/library_uat</config_path>
+                            <comment><![CDATA[If the https://docs.paymentjs.firstdata.com/lib/uat/client-2.0.0.js URL does not work for you, please use https://lib.paymentjs.firstdata.com/uat/client-2.0.0.js]]></comment>
+                        </field>
+                        <field id="test_credential_validation" translate="label" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Test API Health</label>
+                            <frontend_model>AutifyDigital\LloydscardnetPayment\Block\Adminhtml\System\Config\CredentialValidator</frontend_model>
+                        </field>
+                    </group>
+                    <group id="live_credential" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Live Credentials</label>
+                        <field id="store_id" translate="label" type="obscure" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Store ID</label>
+                            <backend_model>AutifyDigital\LloydscardnetPayment\Model\Config\Backend\EncryptedStoreId</backend_model>
+                        </field>
+                        <field id="shared_secret" translate="label" type="obscure" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Shared Secret</label>
+                            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        </field>
+                        <field id="api_key" translate="label" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>API Key</label>
+                            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        </field>
+                        <field id="api_secret" translate="label" type="obscure" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>API Secret</label>
+                            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        </field>
+                        <field id="library_live" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Live Payment Library</label>
+                            <config_path>payment/basic/library_live</config_path>
+                            <comment><![CDATA[If the https://docs.paymentjs.firstdata.com/lib/prod/client-2.0.0.js URL does not work for you, please use https://lib.paymentjs.firstdata.com/prod/client-2.0.0.js ]]></comment>
+                        </field>
+                        <field id="live_credential_validation" translate="label" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Live API Health</label>
+                            <frontend_model>AutifyDigital\LloydscardnetPayment\Block\Adminhtml\System\Config\LiveCredentialValidator</frontend_model>
+                        </field>
+                    </group>
+                </group>
+                <group id="redirect" sortOrder="20" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Redirect (Hosted) Settings</label>
+                    <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/lcnetredirect/active</config_path>
+                    </field>
+                    <field id="display_text" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Display Text</label>
+                        <comment>This text will display on the frontend.</comment>
+                        <config_path>payment/lcnetredirect/title</config_path>
+                    </field>
+                    <field id="allowed_payment_methods" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Allowed Payment Methods</label>
+                        <config_path>payment/lcnetredirect/allowed_payment_methods</config_path>
+                        <source_model>AutifyDigital\LloydscardnetPayment\Model\Config\Source\PaymentMethods</source_model>
+                        <comment><![CDATA[Please select allowed payment methods for the Connect (HPP) solution.]]></comment>
+                    </field>
+                    <field id="allowspecific" translate="label" type="allowspecific" sortOrder="4" showInDefault="9" showInWebsite="1" showInStore="1">
+                        <label>Payment From Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                        <config_path>payment/lcnetredirect/allowspecific</config_path>
+                    </field>
+                    <field id="specificcountry" translate="label" type="multiselect" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment From Specific Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <config_path>payment/lcnetredirect/specificcountry</config_path>
+                    </field>
+                    <field id="min_order_total" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Minimum Order</label>
+                        <config_path>payment/lcnetredirect/min_order_total</config_path>
+                    </field>
+                    <field id="max_order_total" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Maximum Order </label>
+                        <config_path>payment/lcnetredirect/max_order_total</config_path>
+                    </field>
+                    <field id="order_status" type="select" sortOrder="11" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Magento Order Status</label>
+                        <source_model>AutifyDigital\LloydscardnetPayment\Model\Config\Source\PaymentStatus</source_model>
+                        <config_path>payment/lcnetredirect/order_status</config_path>
+                        <comment><![CDATA[Setting a Magento Order status while redirecting to hosted page.]]></comment>
+                    </field>
+                    <field id="sort_order" type="text" sortOrder="12" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Sort Order</label>
+                        <config_path>payment/lcnetredirect/sort_order</config_path>
+                    </field>
+                    <field id="payment_logo" translate="label" sortOrder="13" type="Magento\Config\Block\System\Config\Form\Field\Image" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Logo</label>
+                        <config_path>payment/lcnetredirect/payment_logo</config_path>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <base_url type="media" scope_info="1">lloydscardnet</base_url>
+                        <upload_dir config="system" scope_info="1">lloydscardnet</upload_dir>
+                        <comment><![CDATA[Please upload jpg, jpeg, svg, png.]]></comment>
+                    </field>
+                    <field id="tooltip_before_button" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Tooltip before Place Order button </label>
+                        <config_path>payment/lcnetredirect/tooltip_before_button</config_path>
+                        <comment><![CDATA[e.g We will redirect you to the LBOP hosted page.]]></comment>
+                    </field>
+                    <field id="dynamic_merchant_name" translate="label" type="hidden" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>payment/lcnetredirect/dynamic_merchant_name</config_path>
+                    </field>
+                </group>
+                <group id="paymentjs" sortOrder="30" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Payment JS (iFrame) Settings</label>
+                    <field id="active" type="select" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/lcnetpaymentjs/active</config_path>
+                    </field>
+                    <field id="payment_action" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Payment Action</label>
+                        <source_model>AutifyDigital\LloydscardnetPayment\Model\Config\Source\PaymentAction</source_model>
+                        <config_path>payment/lcnetpaymentjs/payment_action</config_path>
+                        <comment>Choose "Authorize Only" to authorize payments and capture later, or "Authorize and Capture" for immediate processing.</comment>
+                    </field>
+                    <field id="title" type="text" sortOrder="20" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Title</label>
+                        <config_path>payment/lcnetpaymentjs/title</config_path>
+                    </field>
+                    <field id="order_status" type="select" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Magento Order Status</label>
+                        <source_model>AutifyDigital\LloydscardnetPayment\Model\Config\Source\PaymentStatus</source_model>
+                        <comment><![CDATA[Setting a Magento Order status while redirecting to hosted page.]]></comment>
+                        <config_path>payment/lcnetpaymentjs/order_status</config_path>
+                    </field>
+                    <field id="allowspecific" type="allowspecific" sortOrder="60" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Payment from Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                        <config_path>payment/lcnetpaymentjs/allowspecific</config_path>
+                    </field>
+                    <field id="specificcountry" type="multiselect" sortOrder="70" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Payment from Applicable Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <can_be_empty>1</can_be_empty>
+                        <config_path>payment/lcnetpaymentjs/specificcountry</config_path>
+                    </field>
+                    <field id="supported_networks" type="multiselect" sortOrder="85" showInWebsite="1" showInStore="1" showInDefault="1" translate="label comment">
+                        <label>Supported Card Brands</label>
+                        <source_model>AutifyDigital\LloydscardnetPayment\Model\Config\Source\PaymentJSSupportedNetworks</source_model>
+                        <can_be_empty>1</can_be_empty>
+                        <config_path>payment/lcnetpaymentjs/supported_networks</config_path>
+                        <comment><![CDATA[Card brands the hosted card fields will accept. A card from any other brand is rejected as invalid before the form can be submitted. Leave empty to accept every brand your Lloyds Cardnet account supports.]]></comment>
+                    </field>
+                    <field id="min_order_total" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Minimum Order </label>
+                        <config_path>payment/lcnetpaymentjs/min_order_total</config_path>
+                    </field>
+                    <field id="max_order_total" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Maximum Order </label>
+                        <config_path>payment/lcnetpaymentjs/max_order_total</config_path>
+                    </field>
+                    <field id="sort_order" type="text" sortOrder="110" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Sort Order</label>
+                        <config_path>payment/lcnetpaymentjs/sort_order</config_path>
+                    </field>
+                    <field id="placeholder_card" type="text" sortOrder="120" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Placeholder Card Number</label>
+                        <config_path>payment/lcnetpaymentjs/placeholder_card</config_path>
+                    </field>
+                    <field id="placeholder_cvv" type="text" sortOrder="130" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Placeholder CVV</label>
+                        <config_path>payment/lcnetpaymentjs/placeholder_cvv</config_path>
+                    </field>
+                    <field id="placeholder_name" type="text" sortOrder="140" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Placeholder Card Holder Name</label>
+                        <config_path>payment/lcnetpaymentjs/placeholder_name</config_path>
+                    </field>
+                    <field id="payment_logo" translate="label" sortOrder="150" type="Magento\Config\Block\System\Config\Form\Field\Image" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Logo</label>
+                        <config_path>payment/lcnetpaymentjs/payment_logo</config_path>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <base_url type="media" scope_info="1">lloydscardnet</base_url>
+                        <upload_dir config="system" scope_info="1">lloydscardnet</upload_dir>
+                        <comment><![CDATA[Please upload jpg, jpeg, svg, png.]]></comment>
+                    </field>
+                    <field id="css_code" translate="label" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Custom CSS</label>
+                        <comment>Custom CSS</comment>
+                        <validate>css</validate>
+                        <config_path>payment/lcnetpaymentjs/css_code</config_path>
+                    </field>
+                </group>
+                <group id="cardnetapplepay" sortOrder="40" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Applepay</label>
+                    <field id="active" type="select" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/cardnetapplepay/active</config_path>
+                    </field>
+                    <field id="title" type="text" sortOrder="20" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Payment Title</label>
+                        <config_path>payment/cardnetapplepay/title</config_path>
+                    </field>
+                    <field id="payment_method_integration" translate="label" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Method Integration</label>
+                        <source_model>AutifyDigital\LloydscardnetPayment\Model\Config\Source\PaymentIntegrationType</source_model>
+                        <comment>Select how Apple Pay should be integrated. On-site processes payment directly, Hosted redirects to payment page.</comment>
+                        <config_path>payment/cardnetapplepay/payment_method_integration</config_path>
+                    </field>
+                    <!--ApplePay Config Files-->
+                    <field id="merchant_identifier" type="text" sortOrder="21" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>ApplePay Merchant Identifier</label>
+                        <config_path>payment/cardnetapplepay/merchant_identifier</config_path>
+                        <comment><![CDATA[Please enter ApplePay Merchant Identifier. e.g. merchant.com.apple]]></comment>
+                    </field>
+                    <field id="certificate_key" translate="label" sortOrder="21" type="Magento\Config\Block\System\Config\Form\Field\File" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>ApplePay Certificate Key File</label>
+                        <config_path>payment/cardnetapplepay/certificate_key</config_path>
+                        <backend_model>AutifyDigital\LloydscardnetPayment\Model\Config\Certificate</backend_model>
+                        <base_url type="media" scope_info="1">lloydscardnet</base_url>
+                        <upload_dir config="system" scope_info="1">lloydscardnet</upload_dir>
+                        <comment><![CDATA[Please upload PEM file.]]></comment>
+                    </field>
+                    <field id="certificate_path" translate="label" sortOrder="22" type="Magento\Config\Block\System\Config\Form\Field\File" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>ApplePay Certificate Path File</label>
+                        <config_path>payment/cardnetapplepay/certificate_path</config_path>
+                        <backend_model>AutifyDigital\LloydscardnetPayment\Model\Config\Certificate</backend_model>
+                        <base_url type="media" scope_info="1">lloydscardnet</base_url>
+                        <upload_dir config="system" scope_info="1">lloydscardnet</upload_dir>
+                        <comment><![CDATA[Please upload PEM file.]]></comment>
+                    </field>
+                    <field id="certificate_password" type="obscure" sortOrder="25" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>ApplePay Certificate Password</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <config_path>payment/cardnetapplepay/certificate_password</config_path>
+                        <comment><![CDATA[Please enter ApplePay Certificate Password.]]></comment>
+                    </field>
+                    <!--ApplePay Config Files-->
+                    <field id="supported_networks" type="multiselect" sortOrder="28" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Supported Networks</label>
+                        <config_path>payment/cardnetapplepay/supported_networks</config_path>
+                        <source_model>AutifyDigital\LloydscardnetPayment\Model\Config\Source\SupportedNetworks</source_model>
+                        <comment><![CDATA[Please select the networks from here.]]></comment>
+                    </field>
+                    <field id="display_cart" type="select" sortOrder="29" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Display ApplePay for Cart Page</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/cardnetapplepay/display_cart</config_path>
+                    </field>
+                    <!-- <field id="display_minicart" type="select" sortOrder="29" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Display ApplePay for Minicart</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/cardnetapplepay/display_minicart</config_path>
+                    </field> -->
+                    <field id="display_product" type="select" sortOrder="30" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Display ApplePay for Product Page</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/cardnetapplepay/display_product</config_path>
+                    </field>
+                    <field id="button_color" type="select" sortOrder="21" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>ApplePay Button Color</label>
+                        <source_model>AutifyDigital\LloydscardnetPayment\Model\Config\Source\ButtonColor</source_model>
+                        <config_path>payment/cardnetapplepay/button_color</config_path>
+                    </field>
+                    <field id="allowspecific" type="allowspecific" sortOrder="40" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Payment from Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                        <config_path>payment/cardnetapplepay/allowspecific</config_path>
+                    </field>
+                    <field id="specificcountry" type="multiselect" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Payment from Applicable Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <can_be_empty>1</can_be_empty>
+                        <config_path>payment/cardnetapplepay/specificcountry</config_path>
+                    </field>
+                    <field id="min_order_total" translate="label" type="text" sortOrder="52" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Minimum Order </label>
+                        <config_path>payment/cardnetapplepay/min_order_total</config_path>
+                    </field>
+                    <field id="max_order_total" translate="label" type="text" sortOrder="53" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Maximum Order </label>
+                        <config_path>payment/cardnetapplepay/max_order_total</config_path>
+                    </field>
+                    <field id="sort_order" type="text" sortOrder="60" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Sort Order</label>
+                        <config_path>payment/cardnetapplepay/sort_order</config_path>
+                    </field>
+                    <field id="firstname_limit" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>First Name Character Limit</label>
+                        <comment><![CDATA[Maximum number of characters allowed for the first name. Leave empty for no limit.]]></comment>
+                        <config_path>payment/cardnetapplepay/firstname_limit</config_path>
+                        <validate>validate-digits</validate>
+                    </field>
+                    <field id="lastname_limit" translate="label comment" type="text" sortOrder="71" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Last Name Character Limit</label>
+                        <comment><![CDATA[Maximum number of characters allowed for the last name. Leave empty for no limit.]]></comment>
+                        <config_path>payment/cardnetapplepay/lastname_limit</config_path>
+                        <validate>validate-digits</validate>
+                    </field>
+                    <field id="address1_limit" translate="label comment" type="text" sortOrder="72" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Address Line 1 Character Limit</label>
+                        <comment><![CDATA[Maximum number of characters allowed for address line 1. Leave empty for no limit.]]></comment>
+                        <config_path>payment/cardnetapplepay/address1_limit</config_path>
+                        <validate>validate-digits</validate>
+                    </field>
+                    <field id="address2_limit" translate="label comment" type="text" sortOrder="73" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Address Line 2 Character Limit</label>
+                        <comment><![CDATA[Maximum number of characters allowed for address line 2. Leave empty for no limit.]]></comment>
+                        <config_path>payment/cardnetapplepay/address2_limit</config_path>
+                        <validate>validate-digits</validate>
+                    </field>
+                    <field id="payment_logo" translate="label" sortOrder="101" type="Magento\Config\Block\System\Config\Form\Field\Image" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Logo</label>
+                        <config_path>payment/cardnetapplepay/payment_logo</config_path>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <base_url type="media" scope_info="1">lloydscardnet</base_url>
+                        <upload_dir config="system" scope_info="1">lloydscardnet</upload_dir>
+                        <comment><![CDATA[Please upload jpg, jpeg, svg, png.]]></comment>
+                    </field>
+                </group>
+                <group id="cardnetgooglepay" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>Googlepay</label>
+                    <field id="active" type="select" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/cardnetgooglepay/active</config_path>
+                    </field>
+                    <field id="title" type="text" sortOrder="20" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Title</label>
+                        <config_path>payment/cardnetgooglepay/title</config_path>
+                    </field>
+                    <field id="payment_method_integration" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Method Integration</label>
+                        <source_model>AutifyDigital\LloydscardnetPayment\Model\Config\Source\PaymentIntegrationType</source_model>
+                        <comment>Select how Google Pay should be integrated. On-site processes payment directly, Hosted redirects to payment page.</comment>
+                        <config_path>payment/cardnetgooglepay/payment_method_integration</config_path>
+                    </field>
+                    <field id="button_color" type="select" sortOrder="23" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Googlepay Button Color</label>
+                        <source_model>AutifyDigital\LloydscardnetPayment\Model\Config\Source\ButtonColor</source_model>
+                        <config_path>payment/cardnetgooglepay/button_color</config_path>
+                    </field>
+                    <field id="display_cart" type="select" sortOrder="22" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Display GooglePay for Cart Page</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/cardnetgooglepay/display_cart</config_path>
+                    </field>
+                    <!-- <field id="display_minicart" type="select" sortOrder="23" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Display GooglePay for Minicart</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/cardnetgooglepay/display_minicart</config_path>
+                    </field> -->
+                    <field id="display_product" type="select" sortOrder="25" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Display GooglePay for Product Page</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/cardnetgooglepay/display_product</config_path>
+                    </field>
+                    <!-- GooglePay Credentials -->
+                    <field id="supported_networks" type="multiselect" sortOrder="28" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Supported Networks</label>
+                        <config_path>payment/cardnetgooglepay/supported_networks</config_path>
+                        <source_model>AutifyDigital\LloydscardnetPayment\Model\Config\Source\GooglePaySupportedNetworks</source_model>
+                        <comment><![CDATA[Please select the networks from here.]]></comment>
+                    </field>
+                    <field id="merchant_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>GooglePay Merchant Id</label>
+                        <comment><![CDATA[To Generate by the merchant for the live Please click <a href=""https://support.google.com/paymentscenter/answer/7163092>here</a>.]]></comment>
+                        <config_path>payment/cardnetgooglepay/merchant_id</config_path>
+                    </field>
+                    <field id="merchant_name" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>GooglePay Merchant Name</label>
+                        <comment><![CDATA[To display the brand name in the GooglePay Payment Sheet.]]></comment>
+                        <config_path>payment/cardnetgooglepay/merchant_name</config_path>
+                    </field>
+                    <field id="allowspecific" type="allowspecific" sortOrder="40" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Payment from Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                        <config_path>payment/cardnetgooglepay/allowspecific</config_path>
+                    </field>
+                    <field id="specificcountry" type="multiselect" sortOrder="50" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Payment from Applicable Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <can_be_empty>1</can_be_empty>
+                        <config_path>payment/cardnetgooglepay/specificcountry</config_path>
+                    </field>
+                    <field id="min_order_total" translate="label" type="text" sortOrder="52" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Minimum Order </label>
+                        <config_path>payment/cardnetgooglepay/min_order_total</config_path>
+                    </field>
+                    <field id="max_order_total" translate="label" type="text" sortOrder="53" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Maximum Order </label>
+                        <config_path>payment/cardnetgooglepay/max_order_total</config_path>
+                    </field>
+                    <field id="sort_order" type="text" sortOrder="60" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Sort Order</label>
+                        <config_path>payment/cardnetgooglepay/sort_order</config_path>
+                    </field>
+                    <field id="firstname_limit" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>First Name Character Limit</label>
+                        <comment><![CDATA[Maximum number of characters allowed for the first name. Leave empty for no limit.]]></comment>
+                        <config_path>payment/cardnetgooglepay/firstname_limit</config_path>
+                        <validate>validate-digits</validate>
+                    </field>
+                    <field id="lastname_limit" translate="label comment" type="text" sortOrder="71" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Last Name Character Limit</label>
+                        <comment><![CDATA[Maximum number of characters allowed for the last name. Leave empty for no limit.]]></comment>
+                        <config_path>payment/cardnetgooglepay/lastname_limit</config_path>
+                        <validate>validate-digits</validate>
+                    </field>
+                    <field id="address1_limit" translate="label comment" type="text" sortOrder="72" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Address Line 1 Character Limit</label>
+                        <comment><![CDATA[Maximum number of characters allowed for address line 1. Leave empty for no limit.]]></comment>
+                        <config_path>payment/cardnetgooglepay/address1_limit</config_path>
+                        <validate>validate-digits</validate>
+                    </field>
+                    <field id="address2_limit" translate="label comment" type="text" sortOrder="73" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Address Line 2 Character Limit</label>
+                        <comment><![CDATA[Maximum number of characters allowed for address line 2. Leave empty for no limit.]]></comment>
+                        <config_path>payment/cardnetgooglepay/address2_limit</config_path>
+                        <validate>validate-digits</validate>
+                    </field>
+                    <field id="payment_logo" translate="label" sortOrder="101" type="Magento\Config\Block\System\Config\Form\Field\Image" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Logo</label>
+                        <config_path>payment/cardnetgooglepay/payment_logo</config_path>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <base_url type="media" scope_info="1">lloydscardnet</base_url>
+                        <upload_dir config="system" scope_info="1">lloydscardnet</upload_dir>
+                        <comment><![CDATA[Please upload jpg, jpeg, svg, png.]]></comment>
+                    </field>
+                </group>
+                <group id="lbopcheckoutsolution" sortOrder="60" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                    <label>LBOP Checkout Solution</label>
+                    <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/lbopcheckoutsolution/active</config_path>
+                    </field>
+                    <field id="display_text" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Title</label>
+                        <comment>This text will display on the frontend.</comment>
+                        <config_path>payment/lbopcheckoutsolution/title</config_path>
+                    </field>
+                    <field id="allowspecific" translate="label" type="allowspecific" sortOrder="4" showInDefault="9" showInWebsite="1" showInStore="1">
+                        <label>Payment From Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                        <config_path>payment/lbopcheckoutsolution/allowspecific</config_path>
+                    </field>
+                    <field id="specificcountry" translate="label" type="multiselect" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment From Specific Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <config_path>payment/lcnetredirect/specificcountry</config_path>
+                    </field>
+                    <field id="min_order_total" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Minimum Order </label>
+                        <config_path>payment/lbopcheckoutsolution/min_order_total</config_path>
+                    </field>
+                    <field id="max_order_total" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Maximum Order </label>
+                        <config_path>payment/lbopcheckoutsolution/max_order_total</config_path>
+                    </field>
+                    <field id="order_status" type="select" sortOrder="11" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Magento Order Status</label>
+                        <source_model>AutifyDigital\LloydscardnetPayment\Model\Config\Source\PaymentStatus</source_model>
+                        <config_path>payment/lbopcheckoutsolution/order_status</config_path>
+                        <comment><![CDATA[Setting a Magento Order status while redirecting to hosted page.]]></comment>
+                    </field>
+                    <field id="sort_order" type="text" sortOrder="12" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+                        <label>Sort Order</label>
+                        <config_path>payment/lbopcheckoutsolution/sort_order</config_path>
+                    </field>
+                    <field id="payment_logo" translate="label" sortOrder="101" type="Magento\Config\Block\System\Config\Form\Field\Image" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payment Logo</label>
+                        <config_path>payment/lbopcheckoutsolution/payment_logo</config_path>
+                        <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                        <base_url type="media" scope_info="1">lloydscardnet</base_url>
+                        <upload_dir config="system" scope_info="1">lloydscardnet</upload_dir>
+                        <comment><![CDATA[Please upload jpg, jpeg, svg, png.]]></comment>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

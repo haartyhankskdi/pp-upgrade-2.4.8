@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin;
@@ -29,10 +29,6 @@ use Mageplaza\Osc\Model\Plugin\Quote;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class QuoteTest
- * @package Mageplaza\Osc\Test\Unit\Model\Plugin
- */
 class QuoteTest extends TestCase
 {
     /**
@@ -50,7 +46,7 @@ class QuoteTest extends TestCase
      */
     protected $closureMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->quotePlugin = new Quote();
     }
@@ -81,7 +77,7 @@ class QuoteTest extends TestCase
 
     /**
      * @param boolean|MockObject $result
-     * @param int $itemId
+     * @param int                $itemId
      *
      * @dataProvider providerTestAroundGetItemById
      */

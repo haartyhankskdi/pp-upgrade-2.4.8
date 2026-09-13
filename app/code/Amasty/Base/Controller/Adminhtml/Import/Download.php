@@ -7,8 +7,13 @@
 
 namespace Amasty\Base\Controller\Adminhtml\Import;
 
+use Amasty\Base\Model\Response\File\FileOctetResponse;
+use Amasty\Base\Model\Response\OctetResponseInterfaceFactory;
+use Magento\Backend\Model\View\Result\Redirect;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Response\Http\FileFactory;
+use Magento\Framework\App\Response\HttpInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Filesystem\Directory\ReadFactory;
 use Magento\Framework\Message\ManagerInterface;
@@ -46,13 +51,19 @@ class Download
      */
     private $resultFactory;
 
+    /**
+     * @var OctetResponseInterfaceFactory
+     */
+    private OctetResponseInterfaceFactory $responseFactory;
+
     public function __construct(
         Reader $reader,
         ReadFactory $readFactory,
         FileFactory $fileFactory,
         RequestInterface $request,
         ManagerInterface $messageManager,
-        ResultFactory $resultFactory
+        ResultFactory $resultFactory,
+        ?OctetResponseInterfaceFactory $responseFactory = null // TODO move to not optional
     ) {
         $this->reader = $reader;
         $this->readFactory = $readFactory;
@@ -60,10 +71,14 @@ class Download
         $this->request = $request;
         $this->messageManager = $messageManager;
         $this->resultFactory = $resultFactory;
+        // OM form backward compatibility
+        $this->responseFactory = $responseFactory ?? ObjectManager::getInstance()
+            ->get(OctetResponseInterfaceFactory::class);
     }
 
     /**
-     * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Framework\Controller\Result\Raw
+     * @param string $moduleName
+     * @return Redirect|HttpInterface
      */
     public function downloadSample($moduleName)
     {
@@ -92,19 +107,19 @@ class Download
             'application/octet-stream',
             $directoryRead->stat($filePath)['size']
         );
-        /** @var \Magento\Framework\Controller\Result\Raw $resultRaw */
-        $resultRaw = $this->resultFactory->create(ResultFactory::TYPE_RAW);
-        $resultRaw->setContents($directoryRead->readFile($filePath));
-        return $resultRaw;
+
+        /** @var FileOctetResponse $response */
+        $response = $this->responseFactory->create($fileAbsolutePath);
+        return $response;
     }
 
     /**
-     * @return \Magento\Backend\Model\View\Result\Redirect
+     * @return Redirect
      */
     private function noEntityFound()
     {
         $this->messageManager->addErrorMessage(__('There is no sample file for this entity.'));
-        /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+        /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $resultRedirect->setPath('*/*/');
 
@@ -112,12 +127,12 @@ class Download
     }
 
     /**
-     * @return \Magento\Backend\Model\View\Result\Redirect
+     * @return Redirect
      */
     private function emptyModuleName()
     {
         $this->messageManager->addErrorMessage(__('Module Name is empty.'));
-        /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+        /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $resultRedirect->setPath('*/*/');
 

@@ -13,20 +13,16 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\SocialLogin;
 
 use Mageplaza\Osc\Helper\Data;
 
-/**
- * Class Social
- * @package Mageplaza\Osc\Model\Plugin\SocialLogin
- */
 class Social
 {
     /**

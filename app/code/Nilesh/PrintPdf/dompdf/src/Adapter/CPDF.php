@@ -184,13 +184,13 @@ class CPDF implements Canvas
     {
         if (is_array($paper)) {
             $size = $paper;
-        } else if (isset(self::$PAPER_SIZES[mb_strtolower($paper)])) {
-            $size = self::$PAPER_SIZES[mb_strtolower($paper)];
+        } else if (isset(self::$PAPER_SIZES[mb_strtolower((string)$paper)])) {
+            $size = self::$PAPER_SIZES[mb_strtolower((string)$paper)];
         } else {
             $size = self::$PAPER_SIZES["letter"];
         }
 
-        if (mb_strtolower($orientation) === "landscape") {
+        if (mb_strtolower((string)$orientation) === "landscape") {
             [$size[2], $size[3]] = [$size[3], $size[2]];
         }
 
@@ -1006,6 +1006,7 @@ class CPDF implements Canvas
      */
     public function add_link($url, $x, $y, $width, $height)
     {
+        $url = (string)$url;
         $y = $this->y($y) - $height;
 
         if (strpos($url, '#') === 0) {

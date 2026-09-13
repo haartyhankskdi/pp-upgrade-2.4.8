@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">gateway_edit_form.gateway_edit_form_data_source</item>
+            <item name="deps" xsi:type="string">gateway_edit_form.gateway_edit_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">gateway_edit_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Mirasvit\Helpdesk\Ui\Form\Gateway\Control\BackButton</item>
+            <item name="delete" xsi:type="string">Mirasvit\Helpdesk\Ui\Form\Gateway\Control\DeleteButton</item>
+            <item name="reset" xsi:type="string">Mirasvit\Helpdesk\Ui\Form\Gateway\Control\ResetButton</item>
+            <item name="debug" xsi:type="string">Mirasvit\Helpdesk\Ui\Form\Gateway\Control\DebugButton</item>
+            <item name="save" xsi:type="string">Mirasvit\Helpdesk\Ui\Form\Gateway\Control\SaveButton</item>
+            <item name="save_and_continue" xsi:type="string">Mirasvit\Helpdesk\Ui\Form\Gateway\Control\SaveAndContinueButton</item>
+        </item>
+    </argument>
+    <dataSource name="gateway_edit_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Mirasvit\Helpdesk\Ui\Form\Gateway\DataProvider</argument>
+            <argument name="name" xsi:type="string">gateway_edit_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">gateway_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="helpdesk/gateway/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">General Information</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <field name="gateway_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="dataScope" xsi:type="string">gateway_id</item>
+                </item>
+            </argument>
+        </field>
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Title</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="is_active">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="label" xsi:type="string" translate="true">Active</item>
+                    <item name="dataScope" xsi:type="string">is_active</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+        </field>
+        <field name="authorization_type">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Mirasvit\Helpdesk\Model\Config\Source\AuthorizationType</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Authorization Type</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">authorization_type</item>
+                    <item name="component" xsi:type="string">Mirasvit_Helpdesk/js/form/element/authorization-type</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+
+                </item>
+            </argument>
+        </field>
+        <field name="oauth_gmail_instructions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="componentType" xsi:type="string">container</item>
+                    <item name="dataScope" xsi:type="string">oauth_gmail_instructions</item>
+                    <item name="component" xsi:type="string">Mirasvit_Helpdesk/js/form/element/oauth-instructions</item>
+                    <item name="template" xsi:type="string">Mirasvit_Helpdesk/form/element/oauth-gmail-instructions</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field>
+        <field name="oauth_microsoft_instructions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="componentType" xsi:type="string">container</item>
+                    <item name="dataScope" xsi:type="string">oauth_microsoft_instructions</item>
+                    <item name="component" xsi:type="string">Mirasvit_Helpdesk/js/form/element/oauth-instructions</item>
+                    <item name="template" xsi:type="string">Mirasvit_Helpdesk/form/element/oauth-microsoft-instructions</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field>
+        <field name="tenant">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Microsoft Directory (tenant) ID</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataScope" xsi:type="string">tenant</item>
+                    <item name="notice" xsi:type="string" translate="true">Azure AD Directory (tenant) ID, from the Azure App registration Overview page. Leave empty to use "common".</item>
+                </item>
+            </argument>
+        </field>
+        <field name="client_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">OAuth2 Client ID</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="notice" xsi:type="string" translate="true">For Gmail: the OAuth client ID from Google Cloud Console (APIs &amp; Services then Credentials). For Microsoft 365: the Application (client) ID from the Azure App registration Overview page. See the steps above.</item>
+                </item>
+            </argument>
+        </field>
+        <field name="client_secret">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">OAuth2 Client Secret</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="elementType" xsi:type="string">password</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="notice" xsi:type="string" translate="true">For Gmail: the client secret created alongside the OAuth client ID in Google Cloud Console. For Microsoft 365: the client secret Value from Certificates &amp; secrets in the Azure App registration. See the steps above.</item>
+                </item>
+            </argument>
+        </field>
+        <field name="redirect_uri">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">OAuth2 Redirect URI</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="notice" xsi:type="string" translate="true">Register this URL as the redirect URI in your OAuth2 app (Google Cloud Console for Gmail, or the Azure App Registration for Microsoft 365 / Exchange Online).</item>
+                </item>
+            </argument>
+        </field>
+        <field name="oauth_connect_button">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="componentType" xsi:type="string">container</item>
+                    <item name="dataScope" xsi:type="string">oauth_connect_button</item>
+                    <item name="component" xsi:type="string">Mirasvit_Helpdesk/js/form/element/oauth-connect-button</item>
+                    <item name="template" xsi:type="string">Mirasvit_Helpdesk/form/element/oauth-connect-button</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="label" xsi:type="string" translate="true">Mailbox Connection</item>
+                </item>
+            </argument>
+        </field>
+        <field name="connection_status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Connection Status</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="access_token">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataScope" xsi:type="string">access_token</item>
+                </item>
+            </argument>
+        </field>
+        <field name="refresh_token">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataScope" xsi:type="string">refresh_token</item>
+                </item>
+            </argument>
+        </field>
+        <field name="token_expires">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataScope" xsi:type="string">token_expires</item>
+                </item>
+            </argument>
+        </field>
+        <field name="email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Email</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-email" xsi:type="boolean">true</item>
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="login">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Login</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="password">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Password</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="elementType" xsi:type="string">password</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="elementTmpl" xsi:type="string">Mirasvit_Helpdesk/form/element/password</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="host">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Host</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="folder">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Folder</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                </item>
+            </argument>
+        </field>
+        <field name="protocol">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Mirasvit\Helpdesk\Ui\Form\Gateway\ProtocolOptionsProvider</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Protocol</item>
+                    <item name="dataType" xsi:type="string">input</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="dataScope" xsi:type="string">protocol</item>
+                </item>
+            </argument>
+        </field>
+        <field name="encryption">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Mirasvit\Helpdesk\Ui\Form\Gateway\EncryptionOptionsProvider</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Encryption</item>
+                    <item name="dataType" xsi:type="string">input</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="dataScope" xsi:type="string">encryption</item>
+                </item>
+            </argument>
+        </field>
+        <field name="port">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Port</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="fetch_frequency">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Fetch Frequency (minutes)</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="fetch_max">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Fetch Max</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="fetch_limit">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="label" xsi:type="string" translate="true">Fetch Only X Last Emails</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="tooltip" xsi:type="array">
+                        <item name="link" xsi:type="string">http://docs.mirasvit.com/module-helpdesk/current/configuration/gateway</item>
+                        <item name="description" xsi:type="string" translate="true">Can be useful for some mailboxes. Leave empty to disable this feature.</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="is_delete_emails">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="label" xsi:type="string" translate="true">Remove emails after fetching</item>
+                    <item name="dataScope" xsi:type="string">is_delete_emails</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+        </field>
+        <field name="store_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Mirasvit\Helpdesk\Ui\Component\Listing\Columns\StoreOptions</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="label" xsi:type="string" translate="true">Auto-assign tickets to Store View</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">store_id</item>
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="department_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Mirasvit\Helpdesk\Ui\Form\Gateway\DepartmentOptionsProvider</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="label" xsi:type="string" translate="true">Auto-assign tickets to department</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="dataScope" xsi:type="string">department_id</item>
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="notes">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Notes</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+</form>

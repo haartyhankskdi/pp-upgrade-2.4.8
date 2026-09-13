@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Quote;
@@ -29,10 +29,6 @@ use Magento\Quote\Model\Quote\Item;
 use Mageplaza\Osc\Model\Plugin\Quote\Processor;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class ProcessorTest
- * @package Mageplaza\Osc\Test\Unit\Model\Plugin\Quote
- */
 class ProcessorTest extends TestCase
 {
     /**
@@ -45,7 +41,7 @@ class ProcessorTest extends TestCase
      */
     protected $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->stockStateMock = $this->getMockForAbstractClass(StockStateInterface::class);
 
@@ -75,10 +71,9 @@ class ProcessorTest extends TestCase
          * @var Product $candidateMock
          */
         $candidateMock = $this->getMockBuilder(Product::class)
-            ->setMethods(['getCartQty', 'getId', 'getStickWithinParent'])
+            ->onlyMethods(['getId'])
+            ->addMethods(['getCartQty', 'getStickWithinParent'])
             ->disableOriginalConstructor()->getMock();
-        $itemMethods = get_class_methods(Item::class);
-        $itemMethods[] = 'getId';
 
         /**
          * @var Item $itemMock
@@ -93,7 +88,7 @@ class ProcessorTest extends TestCase
          * @var DataObject $dataObjectMock
          */
         $dataObjectMock = $this->getMockBuilder(DataObject::class)
-            ->setMethods(['getResetCount', 'getId', 'getCustomPrice'])
+            ->addMethods(['getResetCount', 'getId', 'getCustomPrice'])
             ->disableOriginalConstructor()->getMock();
         $dataObjectMock->expects($this->once())->method('getResetCount')->willReturn(1);
 

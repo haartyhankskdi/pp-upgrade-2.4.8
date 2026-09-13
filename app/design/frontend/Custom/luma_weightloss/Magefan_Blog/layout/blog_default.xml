@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Theme override: restore 3-column blog layout.
+ *
+ * Magefan_Blog's own blog_default.xml switched to layout="2columns-right",
+ * which collides with this theme's Magento_Contact/page_layout/2columns-right.xml
+ * (a global page-layout override with no sidebar.additional container),
+ * silently dropping the blog sidebar (Search posts, Categories, etc.).
+ * Reverting to 3columns here avoids touching the vendor Magefan_Blog module.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="3columns" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+</page>

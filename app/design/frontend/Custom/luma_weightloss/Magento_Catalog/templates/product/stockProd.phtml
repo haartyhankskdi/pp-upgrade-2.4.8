@@ -80,7 +80,7 @@ $logUrls = [
                                                         <input type="hidden" name="product_id" value="<?php echo $product->getId(); ?>">
                                                         <button type="submit" style="border: none; background: none; padding: 0; font: inherit; color: inherit; text-align: left;">
                                                             <?php
-                                                                $productName = $product->getName();
+                                                                $productName = (string) $product->getName();
                                                                 $words = explode(' ', $productName);
                                                                 $prodName = implode(' ', array_slice($words, 0, 5));
                                                                 echo $block->escapeHtml($prodName); 
@@ -89,7 +89,7 @@ $logUrls = [
                                                         </a>
                                             </div>
                                                 <!-- <p><?php 
-                                                $shortDescription = $product->getShortDescription();
+                                                $shortDescription = (string) $product->getShortDescription();
                                                 $words = explode(' ', $shortDescription);
                                                 $shortenedDescription = implode(' ', array_slice($words, 0, 15));
                                                 echo $block->escapeHtml($shortenedDescription);
@@ -97,7 +97,7 @@ $logUrls = [
 
                                                 <ul>
                                                     <?php
-                                                    $bulletPoints = $product->getPrBulletPoints(); // Fetch the bullet points attribute value
+                                                    $bulletPoints = (string) $product->getPrBulletPoints(); // Fetch the bullet points attribute value
                                                     $bulletPointsArray = explode("\n", $bulletPoints); // Split the attribute value by new lines into an array
                                                     foreach ($bulletPointsArray as $bulletPoint): ?>
                                                         <li><img src="/media/wysiwyg/WLImage/tick.svg" alt="tick"><?= $block->escapeHtml($bulletPoint); ?></li>

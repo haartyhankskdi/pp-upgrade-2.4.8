@@ -129,6 +129,6 @@ class Load extends \Itoris\DynamicProductOptions\Controller\Adminhtml\Product\Op
             $result['error'] = $error;
         }
 
-        $this->getResponse()->setBody(\Zend_Json::encode($result));
+        $this->getResponse()->setBody(json_encode($result));
     }
 }

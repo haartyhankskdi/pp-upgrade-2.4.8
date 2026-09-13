@@ -126,24 +126,24 @@ class Settings extends Template
             }
 
             if ($this->configProvider->isAllowed(Config::ANONYMIZE) && $this->isVisible()) {
-                $result[self::ANONYMISE_DATA_BLOCK_SHORT_NAME] = [
-                    'title' => __('Anonymise personal data'),
-                    'cssModifier' => '-anonymise',
-                    'content' => __(
-                        'By clicking ‘Agree and Proceed’ you agree that your personal data '
-                        . 'will be replaced with non-personal anonymous information. When you receive '
-                        . 'a new login email, your email address and all other personal data will be '
-                        . 'deleted from the website.'
-                    ),
-                    'hasCheckbox' => false,
-                    'checkboxText' => __('I agree and I want to proceed'),
-                    'hidePassword' => false,
-                    'checkboxDataValidate' => '{required:true}',
-                    'needPassword' => $this->isNeedPassword(),
-                    'submitText' => __('Agree and Proceed'),
-                    'action' => $this->getUrl('gdpr/customer/anonymise'),
-                    'actionCode' => Config::ANONYMIZE,
-                ];
+                // $result[self::ANONYMISE_DATA_BLOCK_SHORT_NAME] = [
+                //     'title' => __('Anonymise personal data'),
+                //     'cssModifier' => '-anonymise',
+                //     'content' => __(
+                //         'By clicking ‘Agree and Proceed’ you agree that your personal data '
+                //         . 'will be replaced with non-personal anonymous information. When you receive '
+                //         . 'a new login email, your email address and all other personal data will be '
+                //         . 'deleted from the website.'
+                //     ),
+                //     'hasCheckbox' => false,
+                //     'checkboxText' => __('I agree and I want to proceed'),
+                //     'hidePassword' => false,
+                //     'checkboxDataValidate' => '{required:true}',
+                //     'needPassword' => $this->isNeedPassword(),
+                //     'submitText' => __('Agree and Proceed'),
+                //     'action' => $this->getUrl('gdpr/customer/anonymise'),
+                //     'actionCode' => Config::ANONYMIZE,
+                // ];
             }
 
             if ($this->configProvider->isAllowed(Config::DELETE)) {

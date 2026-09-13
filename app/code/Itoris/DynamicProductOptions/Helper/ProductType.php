@@ -83,7 +83,7 @@ class ProductType extends \Magento\Framework\App\Helper\AbstractHelper
                 $valuesByInternalId = [];
                 foreach ($dynamicOptions as $dynamicOption) {
                     if ($dynamicOption->getConfiguration()) {
-                        $configuration = \Zend_Json::decode($dynamicOption->getConfiguration());
+                        $configuration = json_decode($dynamicOption->getConfiguration(), true);
                         if (isset($configuration['internal_id'])) {
                             $dynamicOption->setConfiguration($configuration);
                             $optionsByInternalId[$configuration['internal_id']] = $dynamicOption;
@@ -96,7 +96,7 @@ class ProductType extends \Magento\Framework\App\Helper\AbstractHelper
                 $sections = json_decode($config->getConfiguration(), true); //$config->getSections();
                 foreach ($sections as $section) {
                     if (isset($section['visibility_condition'])) {
-                        $condition = \Zend_Json::decode($section['visibility_condition']);
+                        $condition = json_decode($section['visibility_condition'], true);
                         $skipSectionRequiredOptions = false;
                         if ($this->getConditionHelper()->isConditionCorrect($condition, $valuesByInternalId)) {
                             if ($section['visibility'] == 'visible') {
@@ -123,7 +123,7 @@ class ProductType extends \Magento\Framework\App\Helper\AbstractHelper
                         if (strpos(json_encode($configuration), 'separate_cart_item') !== false) {
                             $product->setData('skip_required_option' . $_option->getOrigOptionId(), 1);
                         } else if (@$configuration['visibility_condition']) {
-                            $condition = \Zend_Json::decode($configuration['visibility_condition']);
+                            $condition = json_decode($configuration['visibility_condition'], true);
                             if ($this->getConditionHelper()->isConditionCorrect($condition, $valuesByInternalId)) {
                                 if ($configuration['visibility'] == 'visible') {
                                     $product->setData('skip_required_option' . $_option->getOrigOptionId(), 1);
@@ -145,10 +145,10 @@ class ProductType extends \Magento\Framework\App\Helper\AbstractHelper
                                 foreach ($optionValueCollection as $_optionValue) {
                                     $valueConfiguration = $_optionValue->getConfiguration();
                                     if (is_string($valueConfiguration)) {
-                                        $valueConfiguration = \Zend_Json::decode($valueConfiguration);
+                                        $valueConfiguration = json_decode($valueConfiguration, true);
                                     }
                                     if (isset($valueConfiguration['visibility_condition']) && $valueConfiguration['visibility_condition']) {
-                                        $valueCondition = \Zend_Json::decode($valueConfiguration['visibility_condition']);
+                                        $valueCondition = json_decode($valueConfiguration['visibility_condition'], true);
                                         if ($this->getConditionHelper()->isConditionCorrect($valueCondition, $valuesByInternalId)) {
                                             if ($valueConfiguration['visibility_action'] == 'visible') {
                                                 $hasVisibleItems = true;

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!--
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/-->
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */-->
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="amasty_customform_form" resource="default" engine="innodb" comment="amasty_customform_form">
         <column xsi:type="int" name="form_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
@@ -52,7 +52,7 @@
         <column xsi:type="text" name="store_id" nullable="false" comment="Store"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Form Creation Time"/>
         <column xsi:type="datetime" name="updated_at" nullable="true" comment="Date of last answer edit"/>
-        <column xsi:type="varchar" name="ip" nullable="false" length="255" default="" comment="IP"/>
+        <column xsi:type="varchar" name="ip" nullable="false" length="45" default="" comment="IP"/>
         <column xsi:type="int" name="customer_id" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Customer Id"/>
         <column xsi:type="text" name="response_json" nullable="false" comment="Response json"/>
         <column xsi:type="text" name="admin_response_email" nullable="false" comment="Response Email"/>

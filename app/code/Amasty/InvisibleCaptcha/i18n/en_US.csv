@@ -1,6 +1,7 @@
 "Please update Amasty Base module. Re-upload it and replace all the files.","Please update Amasty Base module. Re-upload it and replace all the files."
 "Please provide right ReCaptcha token","Please provide right ReCaptcha token"
 "No reCaptcha token.","No reCaptcha token."
+"Something went wrong while validating reCAPTCHA. Please try again.","Something went wrong while validating reCAPTCHA. Please try again."
 "The secret parameter is missing.","The secret parameter is missing."
 "The secret parameter is invalid or malformed.","The secret parameter is invalid or malformed."
 "The response parameter is missing.","The response parameter is missing."
@@ -12,8 +13,9 @@
 "Bottom Left","Bottom Left"
 Light,Light
 Dark,Dark
-"Version 2","Version 2"
-"Version 3","Version 3"
+"Version 2 (""I am not a robot"")","Version 2 (""I am not a robot"")"
+"Version 2 Invisible","Version 2 Invisible"
+"Version 3 Invisible","Version 3 Invisible"
 "Customer Create Account","Customer Create Account"
 "Customer Login","Customer Login"
 "News Letter Subscription","News Letter Subscription"
@@ -22,9 +24,11 @@ Dark,Dark
 "Product Review","Product Review"
 "Change Password","Change Password"
 "Checkout Payments","Checkout Payments"
+"Customer Edit Account Information","Customer Edit Account Information"
 No,No
 Yes,Yes
 "Not Installed","Not Installed"
+"Prove you are not a robot","Prove you are not a robot"
 "Google Invisible Captcha","Google Invisible Captcha"
 Information,Information
 "General Settings","General Settings"

@@ -1,18 +1,20 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Api\Data;
+
+use Magento\Framework\Api\ExtensibleDataInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  *
  * @api
  */
-interface FormInterface
+interface FormInterface extends ExtensibleDataInterface
 {
     public const FORM_ID = 'form_id';
     public const CODE = 'code';
@@ -42,6 +44,10 @@ interface FormInterface
     public const SCHEDULED_TO = 'scheduled_to';
     public const FORM_CONTAINS_SENSITIVE_DATA = 'form_contains_sensitive_data';
     public const IS_VISIBLE = 'is_visible';
+
+    public const IS_SUBSCRIPTION_ENABLED = 'subscription_enabled';
+    public const IS_SUBSCRIPTION_REQUIRED = 'subscription_required';
+    public const SUBSCRIPTION_TEXT = 'subscription_text';
 
     public const ADMIN_RESOURCE_DELETE = 'Amasty_Customform::delete';
 
@@ -365,4 +371,56 @@ interface FormInterface
      * @SuppressWarnings(PHPMD.BooleanGetMethodName)
      */
     public function setIsVisible(bool $isVisible): void;
+
+    /**
+     * Extension for module CustomFormNewsletterSubscription.
+     * @return bool|null null in case module CustomFormNewsletterSubscription not installed
+     */
+    public function isSubscriptionEnabled(): ?bool;
+
+    /**
+     * Extension for module CustomFormNewsletterSubscription.
+     * @param bool $isSubscriptionEnabled
+     * @return void
+     */
+    public function setSubscriptionEnabled(bool $isSubscriptionEnabled): void;
+
+    /**
+     * Extension for module CustomFormNewsletterSubscription.
+     * @return bool|null null in case module CustomFormNewsletterSubscription not installed
+     */
+    public function isSubscriptionRequired(): ?bool;
+
+    /**
+     * Extension for module CustomFormNewsletterSubscription.
+     * @param bool $isSubscriptionRequired
+     * @return void
+     */
+    public function setSubscriptionRequired(bool $isSubscriptionRequired): void;
+
+    /**
+     * Extension for module CustomFormNewsletterSubscription.
+     * @return string|null null in case module CustomFormNewsletterSubscription not installed
+     */
+    public function getSubscriptionText(): ?string;
+
+    /**
+     * Extension for module CustomFormNewsletterSubscription.
+     * @param string $subscriptionText
+     * @return void
+     */
+    public function setSubscriptionText(string $subscriptionText): void;
+
+    /**
+     * @return \Amasty\Customform\Api\Data\FormExtensionInterface|null
+     */
+    public function getExtensionAttributes(): ?\Amasty\Customform\Api\Data\FormExtensionInterface;
+
+    /**
+     * @param \Amasty\Customform\Api\Data\FormExtensionInterface $extensionAttributes
+     * @return void
+     */
+    public function setExtensionAttributes(
+        FormExtensionInterface $extensionAttributes
+    ): void;
 }

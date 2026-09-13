@@ -1,0 +1,166 @@
+//
+//  Variables
+//  ----------------------------------------------
+
+@am-datepicker-focus-outline-color: #06c;
+@am-datepicker-focus-shadow-color: rgba(0, 102, 204, .2);
+@am-datepicker-arrow-color: #333;
+@am-datepicker-border-color: #ddd;
+@am-datepicker-cancel-border-color: #ccc;
+@am-datepicker-cancel-text-color: #333;
+@am-datepicker-ok-bg-color: #06c;
+@am-datepicker-ok-bg-hover-color: #0052a3;
+@am-datepicker-current-day-bg: #468ed4;
+@am-datepicker-today-bg: #e6f2ff;
+
+//
+//  Common
+//  ----------------------------------------------
+
+.ui-datepicker.amasty-custom-datepicker {
+    a:focus {
+        box-shadow: 0 0 0 3px @am-datepicker-focus-shadow-color;
+        outline: 2px solid @am-datepicker-focus-outline-color;
+        outline-offset: 2px;
+    }
+
+    .ui-datepicker-header {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        min-height: 2.5em;
+        padding: .5em 0;
+        position: relative;
+
+        .ui-datepicker-prev,
+        .ui-datepicker-next {
+            align-items: center;
+            cursor: pointer;
+            display: flex;
+            height: 1.5em;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1.5em;
+
+            &:focus {
+                box-shadow: 0 0 0 3px @am-datepicker-focus-shadow-color;
+                outline: 2px solid @am-datepicker-focus-outline-color;
+                outline-offset: 2px;
+            }
+
+            &:hover {
+                opacity: .7;
+            }
+        }
+    }
+
+    .ui-datepicker-prev {
+        left: .5em;
+    }
+
+    .ui-datepicker-next {
+        right: .5em;
+    }
+
+    .ui-datepicker-title {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        line-height: 1.8em;
+        margin: 0;
+    }
+
+    .ui-datepicker-month-year-label {
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+    .ui-datepicker-buttonpane {
+        display: none;
+    }
+
+    .custom-datepicker-buttonpane {
+        background: @color-white-smoke;
+        border-top: 1px solid @am-datepicker-border-color;
+        display: flex;
+        gap: .5em;
+        justify-content: space-between;
+        padding: .5em;
+    }
+
+    .custom-datepicker-today,
+    .custom-datepicker-cancel,
+    .custom-datepicker-ok {
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: .9em;
+        padding: .4em 1em;
+
+        &:focus {
+            box-shadow: 0 0 0 3px @am-datepicker-focus-shadow-color;
+            outline: 2px solid @am-datepicker-focus-outline-color;
+            outline-offset: 2px;
+        }
+    }
+
+    .custom-datepicker-today,
+    .custom-datepicker-cancel {
+        background: @color-white;
+        border: 1px solid @am-datepicker-cancel-border-color;
+        color: @am-datepicker-cancel-text-color;
+
+        &:hover {
+            background: @color-white-smoke;
+        }
+    }
+
+    .custom-datepicker-today {
+        margin-right: auto;
+    }
+
+    .custom-datepicker-ok {
+        background: @am-datepicker-ok-bg-color;
+        border: 1px solid @am-datepicker-ok-bg-color;
+        color: @color-white;
+
+        &:hover {
+            background: @am-datepicker-ok-bg-hover-color;
+        }
+    }
+
+    .ui-datepicker-calendar {
+        td {
+            outline: none;
+
+            &:focus {
+                box-shadow: 0 0 0 3px @am-datepicker-focus-shadow-color;
+                outline: 2px solid @am-datepicker-focus-outline-color;
+                outline-offset: -2px;
+
+                a {
+                    background: lighten(@am-datepicker-focus-outline-color, 50%);
+                }
+            }
+        }
+
+        td a:focus,
+        td.am-datepicker-cell-active a {
+            box-shadow: 0 0 0 3px @am-datepicker-focus-shadow-color;
+            outline: 2px solid @am-datepicker-focus-outline-color;
+            outline-offset: -2px;
+        }
+
+        td.ui-datepicker-current-day a {
+            background: @am-datepicker-current-day-bg;
+            color: @color-black;
+        }
+
+        td.ui-datepicker-today a {
+            background: @am-datepicker-today-bg;
+        }
+    }
+}

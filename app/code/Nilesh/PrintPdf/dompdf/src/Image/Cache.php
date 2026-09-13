@@ -61,7 +61,7 @@ class Cache
     {
         self::$_dompdf = $dompdf;
         
-        $protocol = mb_strtolower($protocol);
+        $protocol = mb_strtolower($protocol ?? '');
         $parsed_url = Helpers::explode_url($url);
         $message = null;
 
@@ -126,9 +126,13 @@ class Cache
 
                 if ($protocol == "" || $protocol === "file://") {
                     $realfile = realpath($resolved_url);
-        
+
+                    if (!$realfile) {
+                        throw new ImageException("File '$resolved_url' not found.", E_WARNING);
+                    }
+
                     $rootDir = realpath($dompdf->getOptions()->getRootDir());
-                    if (strpos($realfile, $rootDir) !== 0) {
+                    if (strpos($realfile, $rootDir ?? '') !== 0) {
                         $chroot = $dompdf->getOptions()->getChroot();
                         $chrootValid = false;
                         foreach ($chroot as $chrootPath) {
@@ -142,11 +146,7 @@ class Cache
                             throw new ImageException("Permission denied on $resolved_url. The file could not be found under the paths specified by Options::chroot.", E_WARNING);
                         }
                     }
-        
-                    if (!$realfile) {
-                        throw new ImageException("File '$realfile' not found.", E_WARNING);
-                    }
-        
+
                     $resolved_url = $realfile;
                 }
             }

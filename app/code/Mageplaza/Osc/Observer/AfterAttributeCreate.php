@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Observer;
@@ -28,10 +28,6 @@ use Mageplaza\OrderAttributes\Model\Attribute as OrderAttribute;
 use Mageplaza\OrderAttributes\Model\Config\Source\Position;
 use Mageplaza\Osc\Helper\Address;
 
-/**
- * Class AfterAttributeCreate
- * @package Mageplaza\Osc\Observer
- */
 class AfterAttributeCreate implements ObserverInterface
 {
     /**
@@ -65,8 +61,8 @@ class AfterAttributeCreate implements ObserverInterface
 
     /**
      * @param OrderAttribute|CustomerAttribute $attribute
-     * @param array $fields
-     * @param string $path
+     * @param array                            $fields
+     * @param string                           $path
      */
     private function addField($attribute, $fields, $path)
     {
@@ -89,9 +85,9 @@ class AfterAttributeCreate implements ObserverInterface
             switch ($path) {
                 case ADDRESS::OA_FIELD_POSITION:
                     $isBottomPos = [
-                        Position::SHIPPING_BOTTOM,
-                        Position::PAYMENT_BOTTOM,
-                        Position::ORDER_SUMMARY
+                    Position::SHIPPING_BOTTOM,
+                    Position::PAYMENT_BOTTOM,
+                    Position::ORDER_SUMMARY
                     ];
                     $newField['bottom'] = in_array((int)$attribute->getPosition(), $isBottomPos, true);
 

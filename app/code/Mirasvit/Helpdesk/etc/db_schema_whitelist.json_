@@ -1,0 +1,647 @@
+{
+    "mst_helpdesk_attachment": {
+        "column": {
+            "attachment_id": true,
+            "email_id": true,
+            "message_id": true,
+            "name": true,
+            "type": true,
+            "size": true,
+            "body": true,
+            "external_id": true,
+            "storage": true,
+            "is_allowed": true
+        },
+        "index": {
+            "MST_HELPDESK_ATTACHMENT_MESSAGE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_helpdesk_department": {
+        "column": {
+            "department_id": true,
+            "name": true,
+            "sender_email": true,
+            "is_active": true,
+            "signature": true,
+            "sort_order": true,
+            "is_notification_enabled": true,
+            "notification_email": true,
+            "is_members_notification_enabled": true,
+            "is_show_in_frontend": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_helpdesk_department_store": {
+        "column": {
+            "department_store_id": true,
+            "ds_department_id": true,
+            "ds_store_id": true
+        },
+        "index": {
+            "MST_HELPDESK_DEPARTMENT_STORE_DS_DEPARTMENT_ID": true,
+            "MST_HELPDESK_DEPARTMENT_STORE_DS_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_719407C2245519D8E93B8F70D3CE172A": true,
+            "MST_HELPDESK_DEPARTMENT_STORE_DS_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "mst_helpdesk_department_user": {
+        "column": {
+            "department_user_id": true,
+            "du_department_id": true,
+            "du_user_id": true
+        },
+        "index": {
+            "MST_HELPDESK_DEPARTMENT_USER_DU_DEPARTMENT_ID": true,
+            "MST_HELPDESK_DEPARTMENT_USER_DU_USER_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_HELPDESK_DEPARTMENT_USER_DU_USER_ID_ADMIN_USER_USER_ID": true,
+            "FK_3006847FAEA0275AFAEDC40845187E45": true
+        }
+    },
+    "mst_helpdesk_status": {
+        "column": {
+            "status_id": true,
+            "name": true,
+            "code": true,
+            "sort_order": true,
+            "color": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_helpdesk_status_store": {
+        "column": {
+            "status_store_id": true,
+            "ss_status_id": true,
+            "ss_store_id": true
+        },
+        "index": {
+            "MST_HELPDESK_STATUS_STORE_SS_STATUS_ID": true,
+            "MST_HELPDESK_STATUS_STORE_SS_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_HELPDESK_STS_STORE_SS_STS_ID_MST_HELPDESK_STS_STS_ID": true,
+            "MST_HELPDESK_STATUS_STORE_SS_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "mst_helpdesk_tag": {
+        "column": {
+            "tag_id": true,
+            "name": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_helpdesk_template": {
+        "column": {
+            "template_id": true,
+            "name": true,
+            "template": true,
+            "is_active": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_helpdesk_template_store": {
+        "column": {
+            "template_store_id": true,
+            "ts_template_id": true,
+            "ts_store_id": true
+        },
+        "index": {
+            "MST_HELPDESK_TEMPLATE_STORE_TS_TEMPLATE_ID": true,
+            "MST_HELPDESK_TEMPLATE_STORE_TS_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_5784181CAA718E8328162B4EBA43D5B1": true,
+            "MST_HELPDESK_TEMPLATE_STORE_TS_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "mst_helpdesk_priority": {
+        "column": {
+            "priority_id": true,
+            "name": true,
+            "sort_order": true,
+            "color": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_helpdesk_priority_store": {
+        "column": {
+            "priority_store_id": true,
+            "ps_priority_id": true,
+            "ps_store_id": true
+        },
+        "index": {
+            "MST_HELPDESK_PRIORITY_STORE_PS_PRIORITY_ID": true,
+            "MST_HELPDESK_PRIORITY_STORE_PS_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_HELPDESK_PRIORITY_STORE_PS_STORE_ID_STORE_STORE_ID": true,
+            "FK_6A2138BAFE44FECF092E7B00C4C362F1": true
+        }
+    },
+    "mst_helpdesk_rule": {
+        "column": {
+            "rule_id": true,
+            "name": true,
+            "event": true,
+            "email_subject": true,
+            "email_body": true,
+            "is_active": true,
+            "conditions_serialized": true,
+            "is_send_owner": true,
+            "is_send_department": true,
+            "is_send_user": true,
+            "other_email": true,
+            "sort_order": true,
+            "is_stop_processing": true,
+            "priority_id": true,
+            "status_id": true,
+            "department_id": true,
+            "add_tags": true,
+            "remove_tags": true,
+            "user_id": true,
+            "is_send_attachment": true,
+            "is_archive": true
+        },
+        "index": {
+            "MST_HELPDESK_RULE_PRIORITY_ID": true,
+            "MST_HELPDESK_RULE_STATUS_ID": true,
+            "MST_HELPDESK_RULE_DEPARTMENT_ID": true,
+            "MST_HELPDESK_RULE_USER_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_HELPDESK_RULE_PRIORITY_ID_MST_HELPDESK_PRIORITY_PRIORITY_ID": true,
+            "MST_HELPDESK_RULE_USER_ID_ADMIN_USER_USER_ID": true,
+            "MST_HELPDESK_RULE_STATUS_ID_MST_HELPDESK_STATUS_STATUS_ID": true,
+            "FK_805EE186A96FFF9464BCA84758F7F036": true
+        }
+    },
+    "mst_helpdesk_ticket": {
+        "column": {
+            "ticket_id": true,
+            "code": true,
+            "external_id": true,
+            "user_id": true,
+            "subject": true,
+            "description": true,
+            "priority_id": true,
+            "status_id": true,
+            "department_id": true,
+            "customer_id": true,
+            "quote_address_id": true,
+            "customer_email": true,
+            "customer_name": true,
+            "order_id": true,
+            "last_reply_name": true,
+            "last_reply_at": true,
+            "reply_cnt": true,
+            "store_id": true,
+            "created_at": true,
+            "updated_at": true,
+            "folder": true,
+            "email_id": true,
+            "first_reply_at": true,
+            "first_solved_at": true,
+            "fp_period_unit": true,
+            "fp_period_value": true,
+            "fp_execute_at": true,
+            "fp_is_remind": true,
+            "fp_remind_email": true,
+            "fp_priority_id": true,
+            "fp_status_id": true,
+            "fp_department_id": true,
+            "fp_user_id": true,
+            "channel": true,
+            "channel_data": true,
+            "third_party_email": true,
+            "search_index": true,
+            "cc": true,
+            "bcc": true,
+            "merged_ticket_id": true
+        },
+        "index": {
+            "MST_HELPDESK_TICKET_PRIORITY_ID": true,
+            "MST_HELPDESK_TICKET_STATUS_ID": true,
+            "MST_HELPDESK_TICKET_DEPARTMENT_ID": true,
+            "MST_HELPDESK_TICKET_STORE_ID": true,
+            "FTI_7F5498151A54057A00281E57D721A604": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_F4BD3A0C170982C38FBD6AA0874B152A": true,
+            "MST_HELPDESK_TICKET_STORE_ID_STORE_STORE_ID": true,
+            "MST_HELPDESK_TICKET_STATUS_ID_MST_HELPDESK_STATUS_STATUS_ID": true,
+            "FK_C676D75E774A876088E47ACDF575479C": true
+        }
+    },
+    "mst_helpdesk_draft": {
+        "column": {
+            "draft_id": true,
+            "ticket_id": true,
+            "users_online": true,
+            "body": true,
+            "updated_by": true,
+            "updated_at": true
+        },
+        "index": {
+            "MST_HELPDESK_DRAFT_TICKET_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_HELPDESK_DRAFT_TICKET_ID_MST_HELPDESK_TICKET_TICKET_ID": true
+        }
+    },
+    "mst_helpdesk_email": {
+        "column": {
+            "email_id": true,
+            "from_email": true,
+            "to_email": true,
+            "subject": true,
+            "body": true,
+            "format": true,
+            "sender_name": true,
+            "message_id": true,
+            "pattern_id": true,
+            "gateway_id": true,
+            "headers": true,
+            "created_at": true,
+            "is_processed": true,
+            "cc": true,
+            "bcc": true,
+            "mailing_date": true
+        },
+        "index": {
+            "MST_HELPDESK_EMAIL_IS_PROCESSED": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_helpdesk_field": {
+        "column": {
+            "field_id": true,
+            "name": true,
+            "code": true,
+            "type": true,
+            "values": true,
+            "description": true,
+            "is_active": true,
+            "sort_order": true,
+            "is_required_staff": true,
+            "is_required_customer": true,
+            "is_visible_customer": true,
+            "is_editable_customer": true,
+            "is_visible_contact_form": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_helpdesk_field_store": {
+        "column": {
+            "field_store_id": true,
+            "fs_field_id": true,
+            "fs_store_id": true
+        },
+        "index": {
+            "MST_HELPDESK_FIELD_STORE_FS_FIELD_ID": true,
+            "MST_HELPDESK_FIELD_STORE_FS_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_HELPDESK_FIELD_STORE_FS_STORE_ID_STORE_STORE_ID": true,
+            "MST_HELPDESK_FIELD_STORE_FS_FIELD_ID_MST_HELPDESK_FIELD_FIELD_ID": true
+        }
+    },
+    "mst_helpdesk_gateway": {
+        "column": {
+            "gateway_id": true,
+            "name": true,
+            "email": true,
+            "login": true,
+            "password": true,
+            "is_active": true,
+            "host": true,
+            "port": true,
+            "protocol": true,
+            "encryption": true,
+            "fetch_frequency": true,
+            "fetch_max": true,
+            "department_id": true,
+            "store_id": true,
+            "notes": true,
+            "fetched_at": true,
+            "last_fetch_result": true,
+            "fetch_limit": true,
+            "is_delete_emails": true,
+            "folder": true
+        },
+        "index": {
+            "MST_HELPDESK_GATEWAY_STORE_ID": true,
+            "MST_HELPDESK_GATEWAY_DEPARTMENT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_21C70B6D5E147553C878230468909BAA": true,
+            "MST_HELPDESK_GATEWAY_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "mst_helpdesk_history": {
+        "column": {
+            "history_id": true,
+            "ticket_id": true,
+            "triggered_by": true,
+            "name": true,
+            "message": true,
+            "created_at": true
+        },
+        "index": {
+            "MST_HELPDESK_HISTORY_TICKET_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_HELPDESK_HISTORY_TICKET_ID_MST_HELPDESK_TICKET_TICKET_ID": true
+        }
+    },
+    "mst_helpdesk_message": {
+        "column": {
+            "message_id": true,
+            "ticket_id": true,
+            "email_id": true,
+            "user_id": true,
+            "customer_id": true,
+            "customer_email": true,
+            "customer_name": true,
+            "body": true,
+            "body_format": true,
+            "created_at": true,
+            "updated_at": true,
+            "uid": true,
+            "type": true,
+            "third_party_email": true,
+            "third_party_name": true,
+            "triggered_by": true,
+            "is_read": true
+        },
+        "index": {
+            "MST_HELPDESK_MESSAGE_TICKET_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_HELPDESK_MESSAGE_TICKET_ID_MST_HELPDESK_TICKET_TICKET_ID": true
+        }
+    },
+    "mst_helpdesk_pattern": {
+        "column": {
+            "pattern_id": true,
+            "name": true,
+            "pattern": true,
+            "scope": true,
+            "is_active": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_helpdesk_permission": {
+        "column": {
+            "permission_id": true,
+            "role_id": true,
+            "is_ticket_remove_allowed": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_HELPDESK_PERMISSION_ROLE_ID_AUTHORIZATION_ROLE_ROLE_ID": true
+        },
+        "index": {
+            "MST_HELPDESK_PERMISSION_ROLE_ID": true
+        }
+    },
+    "mst_helpdesk_permission_department": {
+        "column": {
+            "permission_department_id": true,
+            "permission_id": true,
+            "department_id": true
+        },
+        "index": {
+            "MST_HELPDESK_PERMISSION_DEPARTMENT_PERMISSION_ID": true,
+            "MST_HELPDESK_PERMISSION_DEPARTMENT_DEPARTMENT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_C486739D95D907B4D43CE9E043995F6F": true,
+            "FK_C0D77422CE58966B2029D101EEC19097": true
+        }
+    },
+    "mst_helpdesk_satisfaction": {
+        "column": {
+            "satisfaction_id": true,
+            "ticket_id": true,
+            "message_id": true,
+            "user_id": true,
+            "customer_id": true,
+            "store_id": true,
+            "rate": true,
+            "comment": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "MST_HELPDESK_SATISFACTION_TICKET_ID": true,
+            "MST_HELPDESK_SATISFACTION_MESSAGE_ID": true,
+            "MST_HELPDESK_SATISFACTION_USER_ID": true,
+            "MST_HELPDESK_SATISFACTION_CUSTOMER_ID": true,
+            "MST_HELPDESK_SATISFACTION_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_HELPDESK_SATISFACTION_STORE_ID_STORE_STORE_ID": true,
+            "FK_1F2E09A831023B3F623BFD9682F4A085": true,
+            "MST_HELPDESK_SATISFACTION_USER_ID_ADMIN_USER_USER_ID": true,
+            "MST_HELPDESK_SATISFACTION_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true,
+            "FK_3C06E5992DC668D589FDC0DDDBEA8A7B": true
+        }
+    },
+    "mst_helpdesk_ticket_aggregated_day": {
+        "column": {
+            "period": true,
+            "store_id": true,
+            "user_id": true,
+            "new_ticket_cnt": true,
+            "solved_ticket_cnt": true,
+            "changed_ticket_cnt": true,
+            "total_reply_cnt": true,
+            "first_reply_time": true,
+            "first_resolution_time": true,
+            "full_resolution_time": true,
+            "satisfaction_rate_1_cnt": true,
+            "satisfaction_rate_2_cnt": true,
+            "satisfaction_rate_3_cnt": true,
+            "satisfaction_rate": true,
+            "satisfaction_response_cnt": true,
+            "satisfaction_response_rate": true
+        },
+        "constraint": {
+            "MST_HELPDESK_TICKET_AGGREGATED_DAY_PERIOD_STORE_ID_USER_ID": true
+        }
+    },
+    "mst_helpdesk_ticket_aggregated_hour": {
+        "column": {
+            "period": true,
+            "store_id": true,
+            "user_id": true,
+            "new_ticket_cnt": true,
+            "solved_ticket_cnt": true,
+            "changed_ticket_cnt": true,
+            "total_reply_cnt": true,
+            "first_reply_time": true,
+            "first_resolution_time": true,
+            "full_resolution_time": true,
+            "satisfaction_rate_1_cnt": true,
+            "satisfaction_rate_2_cnt": true,
+            "satisfaction_rate_3_cnt": true,
+            "satisfaction_rate": true,
+            "satisfaction_response_cnt": true,
+            "satisfaction_response_rate": true
+        },
+        "constraint": {
+            "MST_HELPDESK_TICKET_AGGREGATED_HOUR_PERIOD_STORE_ID_USER_ID": true
+        }
+    },
+    "mst_helpdesk_ticket_aggregated_month": {
+        "column": {
+            "period": true,
+            "store_id": true,
+            "user_id": true,
+            "new_ticket_cnt": true,
+            "solved_ticket_cnt": true,
+            "changed_ticket_cnt": true,
+            "total_reply_cnt": true,
+            "first_reply_time": true,
+            "first_resolution_time": true,
+            "full_resolution_time": true,
+            "satisfaction_rate_1_cnt": true,
+            "satisfaction_rate_2_cnt": true,
+            "satisfaction_rate_3_cnt": true,
+            "satisfaction_rate": true,
+            "satisfaction_response_cnt": true,
+            "satisfaction_response_rate": true
+        },
+        "constraint": {
+            "MST_HELPDESK_TICKET_AGGREGATED_MONTH_PERIOD_STORE_ID_USER_ID": true
+        }
+    },
+    "mst_helpdesk_ticket_tag": {
+        "column": {
+            "ticket_tag_id": true,
+            "tt_ticket_id": true,
+            "tt_tag_id": true
+        },
+        "index": {
+            "MST_HELPDESK_TICKET_TAG_TT_TICKET_ID": true,
+            "MST_HELPDESK_TICKET_TAG_TT_TAG_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_142681B707A4551995B122E7B6DFE79F": true,
+            "MST_HELPDESK_TICKET_TAG_TT_TAG_ID_MST_HELPDESK_TAG_TAG_ID": true
+        }
+    },
+    "mst_helpdesk_user": {
+        "column": {
+            "user_id": true,
+            "signature": true,
+            "store_id": true
+        },
+        "index": {
+            "MST_HELPDESK_USER_USER_ID": true,
+            "MST_HELPDESK_USER_STORE_ID": true
+        },
+        "constraint": {
+            "MST_HELPDESK_USER_STORE_ID_STORE_STORE_ID": true,
+            "MST_HELPDESK_USER_USER_ID_ADMIN_USER_USER_ID": true
+        }
+    },
+    "mst_helpdesk_schedule": {
+        "column": {
+            "schedule_id": true,
+            "name": true,
+            "is_active": true,
+            "active_from": true,
+            "active_to": true,
+            "timezone": true,
+            "sort_order": true,
+            "is_holiday": true,
+            "type": true,
+            "working_hours": true,
+            "open_message": true,
+            "closed_message": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mst_helpdesk_schedule_store": {
+        "column": {
+            "schedule_store_id": true,
+            "whs_schedule_id": true,
+            "whs_store_id": true
+        },
+        "index": {
+            "MST_HELPDESK_SCHEDULE_STORE_WHS_SCHEDULE_ID": true,
+            "MST_HELPDESK_FIELD_STORE_WHS_SCHEDULE_ID": true,
+            "MST_HELPDESK_FIELD_STORE_WHS_STORE_ID": true,
+            "MST_HELPDESK_SCHEDULE_STORE_WHS_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MST_HELPDESK_SCHEDULE_STORE_WHS_STORE_ID_STORE_STORE_ID": true,
+            "FK_2CE07221C4A7B9841E460B4CC6227D1C": true
+        }
+    },
+    "mst_helpdesk_desktop_notification": {
+        "column": {
+            "notification_id": true,
+            "ticket_id": true,
+            "message_id": true,
+            "notification_type": true,
+            "read_by_user_ids": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_25E2023FFB8BE0DE487BE3D5B1415286": true
+        }
+    },
+    "mst_helpdesk_customer": {
+        "column": {
+            "customer_id": true,
+            "customer_note": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

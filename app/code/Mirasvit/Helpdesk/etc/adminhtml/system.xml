@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="helpdesk" showInDefault="1" showInWebsite="1" showInStore="1" type="text" translate="label" sortOrder="100">
+            <label>Help Desk</label>
+            <tab>mirasvit</tab>
+            <resource>Mirasvit_Helpdesk::config_helpdesk</resource>
+            <group id="general" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="10">
+                <label>General Settings</label>
+                <comment>Enhance the overall performance and user experience of your helpdesk by setting up core features such as how communication is managed, personalizing customer interactions, and ensuring smooth ticket management with automated tasks.</comment>
+                <field id="front_title" translate="label comment" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Helpdesk title in the customer account</label>
+                    <comment>Customize the title displayed for the Helpdesk section in the customer's account to create a clear and branded support experience.</comment>
+                </field>
+                <field id="sign_ticket_by" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sign staff replies</label>
+                    <comment>Adds a personal touch to customer communication, which helps personalize responses and provide clarity on who handled the support request increasing trust and transparency.</comment>
+                    <source_model>\Mirasvit\Helpdesk\Model\Config\Source\Sign\Ticket\By</source_model>
+                </field>
+                <field id="sign_ticket_template" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Signature template</label>
+                    <depends>
+                        <field id="sign_ticket_by">template</field>
+                    </depends>
+                    <comment>You can use variables: [store_name], [user_name], [department_name]</comment>
+                </field>
+                <field id="bcc_email" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send blind carbon copy (BCC) of all emails to</label>
+                    <comment>Automatically send a BCC of all helpdesk-related emails to a specified address for monitoring or record-keeping, helping ensure nothing gets overlooked.</comment>
+                </field>
+                <field id="is_default_cron" translate="label tooltip comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Use default Magento cron</label>
+                    <comment>Enable magento cron to ensure scheduled actions like email fetching are handled efficiently without extra configuration.</comment>
+                    <tooltip>If this option is disabled, helpdesk-related tasks will not be processed automatically. For instance, emails from the configured gateway will not be fetched. However, you can still manually trigger cron tasks to test the module's functionality.</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_allow_external_urls" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Allow customer to open ticket by unique URL (without additional authentication)</label>
+                    <comment>Customers will receive link in the email notification to access their support tickets via a unique URL, simplifying the process and increasing accessibility by eliminating extra login steps.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="fetch_autoreplies" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Fetch auto-replies into tickets</label>
+                    <comment>When enabled, automatic responses (out-of-office, vacation responders, mailing-list mail, delivery bounces) are fetched and added to the ticket thread, which also means the sender receives the usual ticket notifications. When disabled, they are stored but never added to a thread. Outgoing notifications always carry RFC 3834 suppression headers, so a compliant remote responder will not reply back and start a loop.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="ticket_management" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="150">
+                    <label>Tickets Settings</label>
+                    <comment>Manage the flow and organization of support tickets efficiently by controlling the prioritization, categorization, and statuses of incoming customer requests. This section ensures that support agents can handle tickets based on urgency and track progress seamlessly.</comment>
+                    <field id="default_priority" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <config_path>helpdesk/general/default_priority</config_path>
+                        <label>Priority for new tickets</label>
+                        <comment>Set the default priority for new tickets to help organize and prioritize customer issues based on urgency.</comment>
+                        <source_model>\Mirasvit\Helpdesk\Model\Priority</source_model>
+                    </field>
+                    <field id="default_status" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <config_path>helpdesk/general/default_status</config_path>
+                        <label>Status for new tickets</label>
+                        <comment>Define the default status for new tickets to give clear visibility of ticket progress.</comment>
+                        <source_model>\Mirasvit\Helpdesk\Model\Status</source_model>
+                    </field>
+                    <field id="archived_status_list" translate="label comment" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <config_path>helpdesk/general/archived_status_list</config_path>
+                        <label>Move Ticket to Archive if it has one of following statuses:</label>
+                        <comment>Automatically move tickets to the archive when they reach specified statuses, ensuring the system stays organized.</comment>
+                        <source_model>\Mirasvit\Helpdesk\Model\Status</source_model>
+                        <can_be_empty>1</can_be_empty>
+                    </field>
+                    <field id="locked_status_list" translate="label tooltip comment" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <config_path>helpdesk/general/locked_status_list</config_path>
+                        <label>Lock Ticket if it has one of following statuses:</label>
+                        <comment>Control when tickets are locked based on their statuses to avoid further changes once certain progress is made.</comment>
+                        <tooltip>When ticket is locked the customer cannot add a new message to the ticket, while admin still can send messages</tooltip>
+                        <source_model>\Mirasvit\Helpdesk\Model\Status</source_model>
+                        <can_be_empty>1</can_be_empty>
+                    </field>
+                    <field id="draft_update_period" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <config_path>helpdesk/general/draft_update_period</config_path>
+                        <label>Tickets autosave period, sec</label>
+                        <comment>Set how frequently ticket drafts are autosaved, minimizing the risk of losing unsaved work. Leave empty to disable autosave.</comment>
+                    </field>
+                    <field id="is_wysiwyg" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <config_path>helpdesk/general/is_wysiwyg</config_path>
+                        <label>Use WYSIWYG Editor in backend</label>
+                        <comment>Enable the use of a text editor for tickets in the backend, making it easier for staff to format replies and provide detailed, structured responses.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="contact_us_is_active" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/general/contact_us_is_active</config_path>
+                        <label>Create Tickets from Contact Us form</label>
+                        <comment>Automatically create helpdesk tickets from submissions via the 'Contact Us' form, turning every inquiry into a manageable support ticket.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+                <group id="display_options" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="160">
+                    <label>Admin Display Options</label>
+                    <comment>Improve the visual accessibility and ease of navigating through tickets in the admin panel. This section allows you to enable quick access to essential data, helping your support team handle tickets faster and more effectively.</comment>
+                    <field id="show_quick_bar_in_admin" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1">
+                        <config_path>helpdesk/general/show_quick_bar_in_admin</config_path>
+                        <label>Show Quick Data Bar in admin ticket grid</label>
+                        <comment>This feature enhances workflow visibility and helps agents stay on top of their responsibilities.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="show_activity_bar_in_admin" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1">
+                        <config_path>helpdesk/general/show_activity_bar_in_admin</config_path>
+                        <label>Show User Activity Data Bar in admin ticket grid</label>
+                        <comment>Shows recent user activity related to the ticket, helping managers track staff interactions with customers more efficiently.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="prev_next_buttons" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <config_path>helpdesk/general/prev_next_buttons</config_path>
+                        <label>Show previous/next button in backend ticket edit page</label>
+                        <comment>Display 'previous' and 'next' buttons on the ticket editing page in the backend to move through tickets quickly without returning to the grid.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+                <group id="attachment" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="170">
+                    <label>Attachments Settings</label>
+                    <comment>Customize how file attachments are managed within the helpdesk. This section helps you control the storage, format, and retention of attachments, ensuring customers and staff can exchange relevant files without compromising storage space.</comment>
+                    <field id="attachment_storage" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <config_path>helpdesk/general/attachment_storage</config_path>
+                        <label>Store attachments in</label>
+                        <comment>Select the storage location for ticket attachments, giving you control over file management.</comment>
+                        <source_model>\Mirasvit\Helpdesk\Model\Config\Source\Attachment\Storage</source_model>
+                    </field>
+                    <field id="is_allow_attachment_removal" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <config_path>helpdesk/general/is_allow_attachment_removal</config_path>
+                        <label>Auto-removing old attachments</label>
+                        <comment>Enable automatic removal of old attachments to free up storage space and keep the system clutter-free</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="attachment_removal_days" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <config_path>helpdesk/general/attachment_removal_days</config_path>
+                        <label>Remove attachments older than, days</label>
+                        <comment>Specifies the number of days after which old ticket attachments will be deleted.</comment>
+                        <depends>
+                            <field id="is_allow_attachment_removal">1</field>
+                        </depends>
+                    </field>
+                    <field id="allowed_attachements" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <config_path>helpdesk/general/allowed_attachements</config_path>
+                        <label>Only allow upload of attachments with extensions</label>
+                        <comment>Restrict attachment uploads to specific file types to avoid security risks and maintain control over the type of files uploaded. Comma separated list. e.g. jpg, jpeg, gif, png, bmp, pdf></comment>
+                    </field>
+                </group>
+            </group>
+            <group id="contact_form" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="20">
+                <label>Feedback Tab</label>
+                <comment>Boost customer engagement by offering an easy-to-use feedback system. The feedback tab allows customers to submit inquiries or tickets directly from the website, improving accessibility to your support team.</comment>
+                <field id="is_active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <comment>Activate the feedback tab on your website, making it easy for customers to submit support requests.</comment>
+                    <label>Enable Feedback Tab</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="default_department" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Assign to Department</label>
+                    <comment>Automatically assign feedback tab-generated tickets to a specific department, ensuring they reach the right team for quick resolution.</comment>
+                    <source_model>\Mirasvit\Helpdesk\Model\Department</source_model>
+                </field>
+                <field id="color" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tab Color</label>
+                    <comment>Customize the feedback tab color to align with your brand, making it more visually appealing and noticeable.</comment>
+                </field>
+                <field id="title" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tab Title</label>
+                    <comment>Set the title for the feedback tab, giving customers a clear call to action</comment>
+                </field>
+                <field id="position" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tab Position</label>
+                    <comment>Choose where the feedback tab is displayed on the screen, ensuring it's easily accessible</comment>
+                    <source_model>\Mirasvit\Helpdesk\Model\Config\Source\Position</source_model>
+                </field>
+                <field id="is_active_kb" translate="label comment" type="select" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Search Knowledge Base Topics first</label>
+                    <comment>Allow the feedback tab to suggest knowledge base topics before showing the form, helping reduce support ticket volume by guiding customers to self-help resources.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="form_fields" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="70">
+                    <label>Form Fields</label>
+                    <comment>Tailor the feedback submission forms to collect the right information from customers. This section lets you customize form fields and improve the accuracy of the information gathered from customers, enhancing the quality of support requests.</comment>
+                    <field id="form_title" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/contact_form/form_title</config_path>
+                        <label>Form Title</label>
+                        <comment>Set a title for the feedback form to provide context and guide customers on what to expect.</comment>
+                    </field>
+                    <field id="subject_title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/contact_form/subject_title</config_path>
+                        <label>Subject Title</label>
+                        <comment>Label the subject field to ensure customers provide a brief overview of their issue.</comment>
+                    </field>
+                    <field id="subject_placeholder" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/contact_form/subject_placeholder</config_path>
+                        <label>Subject Placeholder</label>
+                        <comment>Placeholder text displayed inside the subject input field that provides guidance on what kind of information the customer should enter.</comment>
+                    </field>
+                    <field id="description_title" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/contact_form/description_title</config_path>
+                        <label>Description Title</label>
+                        <comment>Label the description field to prompt customers to provide more details about their inquiry.</comment>
+                    </field>
+                    <field id="description_placeholder" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/contact_form/description_placeholder</config_path>
+                        <label>Description Placeholder</label>
+                        <comment>Add helpful placeholder text to guide customers in providing relevant information.</comment>
+                    </field>
+                    <field id="is_active_attachment" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/contact_form/is_active_attachment</config_path>
+                        <label>Allow customer to attach files</label>
+                        <comment>Enables the option for customers to upload files (e.g., screenshots or documents) with their feedback or support request providing additional context or supporting materials for their issue.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="is_allow_priority" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/contact_form/is_allow_priority</config_path>
+                        <label>Allow customers to select Priority</label>
+                        <comment>Gives customers the ability to set the priority of their feedback or ticket that can help the support team to prioritize urgent requests over less critical ones.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="is_allow_department" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/contact_form/is_allow_department</config_path>
+                        <label>Allow customer to select Department</label>
+                        <comment>Allows customers to choose the department their request should be sent to. This ensures that inquiries are routed to the correct team for faster handling.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+            </group>
+            <group id="frontend" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="30">
+                <label>Customer Account</label>
+                <comment>Improve customer experience by integrating helpdesk functionality into the customer’s account. This section helps you enable features like tracking ticket status, prioritizing requests, and allowing file attachments, making the support process more user-friendly.</comment>
+                <field id="is_active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show the Help Desk section in the Customer Account</label>
+                    <comment>Display a Help Desk section in the customer’s account, making it easy for customers to submit and track their support tickets directly from their account dashboard.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_in_customer_menu" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <config_path>helpdesk/general/show_in_customer_menu</config_path>
+                    <label>Show Help Desk link in customer menu</label>
+                    <comment>Add a Help Desk link in the customer's dropdown menu for quick access to the support page, ensuring customers can easily find the help they need.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_allow_priority" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow customers to select Priority</label>
+                    <comment>Let customers the ability to set the priority of the ticket that can help the support team to prioritize urgent requests over less critical ones.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_allow_department" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow customer to select Department</label>
+                    <comment>Allows customers to choose the department their request should be sent to. This ensures that inquiries are routed to the correct team for faster handling.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_allow_order" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow customer to select Order</label>
+                    <comment>Allows customers to link their support tickets to particular orders they have placed, helping support staff to address issues more efficiently.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_active_attachment" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow customer to attach files</label>
+                    <comment>When enabled, customers can upload files with their ticket submissions, providing additional context or supporting materials for their issue.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="satisfaction" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="40">
+                <label>Customer Satisfaction Survey</label>
+                <comment>Gain valuable insights into customer satisfaction with your support. This section allows you to include surveys in your communications and view the results, helping you continually improve your service based on real feedback.</comment>
+                <field id="is_active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Include a satisfaction survey in the reply email from staff members</label>
+                    <comment>Automatically include a satisfaction survey in staff reply emails to encourage feedback and measure customer satisfaction with the support they received.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_show_results_on_frontend" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show survey results in the frontend ticket history</label>
+                    <comment>Allow customers to view their survey ratings in the ticket history within their account, giving them transparency on how they rated their interaction with support.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_show_results_in_ticket" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show survey results in the backend ticket history</label>
+                    <comment>Provide support staff access to customer satisfaction ratings in the backend, allowing them to review and address feedback for service improvement.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_send_results_owner" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send survey results to the ticket owner</label>
+                    <comment>Notify the assigned staff member when a customer submits a satisfaction survey, giving them the opportunity to review their performance.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="results_email" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send survey results to emails</label>
+                    <comment>Automatically send customer satisfaction survey results to designated email addresses (e.g., managers) for analysis and performance tracking. You can enter multiple emails separated by a comma.</comment>
+                </field>
+            </group>
+            <group id="notification" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="50">
+                <label>Email Notification Settings</label>
+                <comment>Ensure efficient communication between your support team and customers by configuring how and when email notifications are sent. This section helps automate key touchpoints, keeping all parties informed about ticket statuses.</comment>
+                <field id="is_show_code" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Ticket ID in the email title</label>
+                    <comment>Include the ticket ID in the subject line of helpdesk-related emails, making it easy for both customers and staff to reference specific tickets in ongoing conversations.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_cc_added" translate="label comment" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add customers Cc emails to the ticket</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>When enabled will automatically add additional email recipients (Cc) to the ticket from the fetched email. If option is enabled spam Cc email are possible.</comment>
+                </field>
+                <field id="history_records_number" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Number of last replies to be shown in the ticket history</label>
+                    <comment>Control how many recent replies are displayed in the ticket history within email notifications, providing context without overwhelming the recipient with too much information.</comment>
+                </field>
+                <group id="notification_template" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="30">
+                    <label>Email Notification Templates</label>
+                    <comment>Streamline your email communication with customers and staff by setting notification templates. This section ensures that each email interaction is consistent and professional, keeping everyone aligned with support activities.</comment>
+                    <field id="new_ticket_template" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Template of New Ticket Email for Customer</label>
+                        <comment>Set the email template that notifies customers when a new ticket is created, ensuring consistent branding and communication.</comment>
+                        <source_model>\Mirasvit\Helpdesk\Model\System\Config\Source\Email\Template</source_model>
+                        <config_path>helpdesk/notification/new_ticket_template</config_path>
+                    </field>
+                    <field id="staff_new_ticket_template" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/notification/staff_new_ticket_template</config_path>
+                        <label>Template of New Ticket Email for Staff</label>
+                        <comment>Set the template for the email notifying staff about new tickets, ensuring timely alerts and a professional look.</comment>
+                        <source_model>\Mirasvit\Helpdesk\Model\System\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="staff_assign_ticket_template" translate="label comment" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/notification/staff_assign_ticket_template</config_path>
+                        <label>Template of Ticket Email Assigned to Staff</label>
+                        <comment>Set the email template used when a ticket is assigned to a staff member, ensuring they are informed of their new task promptly.</comment>
+                        <source_model>\Mirasvit\Helpdesk\Model\System\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="new_message_template" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/notification/new_message_template</config_path>
+                        <label>Template of New Message Email for Customer</label>
+                        <comment>Set the template for emails that update customers when a new message is posted to their ticket, ensuring they stay informed about progress.</comment>
+                        <source_model>\Mirasvit\Helpdesk\Model\System\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="staff_new_message_template" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/notification/staff_new_message_template</config_path>
+                        <label>Template of New Message Email for Staff</label>
+                        <comment>Set the template to alert staff when a customer responds, ensuring timely follow-ups.</comment>
+                        <source_model>\Mirasvit\Helpdesk\Model\System\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="third_new_message_template" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/notification/third_new_message_template</config_path>
+                        <label>Template of New Message Email for Third Party</label>
+                        <comment>Set the template for notifying third-party collaborators, ensuring external stakeholders stay updated on the ticket progress.</comment>
+                        <source_model>\Mirasvit\Helpdesk\Model\System\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="reminder_template" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/notification/reminder_template</config_path>
+                        <label>Template of Ticket Reminder</label>
+                        <comment>Set the template for reminder emails, prompting customers to follow up on unresolved tickets.</comment>
+                        <source_model>\Mirasvit\Helpdesk\Model\System\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="rule_template" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/notification/rule_template</config_path>
+                        <label>Template of Rule Notification</label>
+                        <comment>Set a rule-specific template for automated emails sent via helpdesk workflow rules, ensuring consistency in communications.</comment>
+                        <source_model>\Mirasvit\Helpdesk\Model\System\Config\Source\Email\Template</source_model>
+                    </field>
+                    <field id="staff_new_satisfaction_template" translate="label comment" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/notification/staff_new_satisfaction_template</config_path>
+                        <label>Template of Survey Satisfaction Result</label>
+                        <comment>Set the template used to send staff survey feedback results, providing insights into customer satisfaction.</comment>
+                        <source_model>\Mirasvit\Helpdesk\Model\System\Config\Source\Email\Template</source_model>
+                    </field>
+                </group>
+            </group>
+            <group id="desktop_notification" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="60">
+                <label>Desktop Notification Settings</label>
+                <comment>Keep your staff informed in real time with desktop notifications about new tickets and updates. This section enables instant awareness of new tasks, helping the support team act quickly and stay organized.</comment>
+                <field id="check_period" translate="label tooltip comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Notifications check period, sec</label>
+                    <comment>Adjusting the frequency helps staff stay updated in real-time, ensuring timely follow-ups.</comment>
+                    <tooltip>On heavy-loaded systems, this can cause production loss - so in this case, you need to disable this feature, or increase the check period to 500-600 secs. Setting to 0 will disable them.</tooltip>
+                </field>
+                <field id="is_notification_about_ticket_user_ids" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show notification about arrival of new tickets for</label>
+                    <comment>Allows you to specify which users should receive notifications about the arrival of new tickets, ensuring the right team members are alerted promptly.</comment>
+                    <source_model>Mirasvit\Helpdesk\Model\Config\Source\Notification\Users</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="is_notification_allow_message" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable notification about arrival of new messages in tickets assigned for user</label>
+                    <comment>Notifies users about a new message is added to any ticket that they are assigned to, helping them stay informed on ticket updates.
+                    </comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_notification_allow_assign" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable notification about assigning a ticket to the user</label>
+                    <comment>Sends a notification to users when a ticket is assigned to them, ensuring they are aware of their new responsibilities.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="schedule" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="70">
+                <label>Working Hours</label>
+                <comment>Set clear expectations for customers by displaying your business hours. This section helps customers know when they can expect support availability, enhancing the overall customer experience and ensuring timely responses.</comment>
+                <field id="working_schedule_title" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Working schedule title</label>
+                    <comment>Customize the title for the working hours section on the 'Contact Us' page, ensuring customers know when your team is available.</comment>
+                </field>
+                <field id="upcoming_schedule_title" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Upcoming working schedule title</label>
+                    <comment>Add a title for upcoming business hours, providing customers with clear information on future availability.</comment>
+                </field>
+                <field id="default_open_message" translate="label tooltip comment" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default message when we are open</label>
+                    <comment>Set a default message to display when the helpdesk is open, encouraging customers to reach out during business hours.</comment>
+                    <tooltip>Can be overwritten for each schedule in Customers > Help Desk MX > Working Hours.  This allows you to provide customized messages for different time periods or scenarios, depending on the specific schedule of your support team.</tooltip>
+                </field>
+                <field id="default_close_message" translate="label comment" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default message when we are closed</label>
+                    <comment>Define the message displayed when the helpdesk is closed managing customer expectations during off-hours.</comment>
+                    <tooltip>Can be overwritten for each schedule in Customers > Help Desk MX > Working Hours. You can use the variable [time_left_to_open] to specify exactly how much time remains until your support team is available again. </tooltip>
+                </field>
+                <group id="schedule_display_settings" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="50">
+                    <label>Display settings</label>
+                    <field id="is_show_status_on_contactus" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/schedule/is_show_status_on_contactus</config_path>
+                        <label>Show online/offline status on the Contact Us page</label>
+                        <comment>Display the status on the Contact Us page that can help manage customer expectations about when support is available.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="is_show_status_on_feedbackpopup" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/schedule/is_show_status_on_feedbackpopup</config_path>
+                        <label>Show online/offline status in the Feedback popup</label>
+                        <comment>Display the status in the Feedback popup that can be useful for informing customers about availability before submitting a request or feedback.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="is_show_status_on_mytickets" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/schedule/is_show_status_on_mytickets</config_path>
+                        <label>Show online/offline status in the Customer Account > My Tickets</label>
+                        <comment>Display the status in the My Tickets section of the customer's account. This help customers know whether they can expect a prompt response to their support ticket.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="is_show_schedule_on_contactus" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/schedule/is_show_schedule_on_contactus</config_path>
+                        <label>Show working hours on the Contact Us page</label>
+                        <comment>Display the status on the Contact Us page to give customers a clear idea of when you are available for support</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="show_holiday_schedule_before_days" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <config_path>helpdesk/schedule/show_holiday_schedule_before_days</config_path>
+                        <label>Show holiday schedule in X days before activation</label>
+                        <comment>Specifies how many days in advance your holiday schedule will be displayed to customers to ensure that customers are informed about upcoming holiday hours before they take effect</comment>
+                    </field>
+                </group>
+            </group>
+            <group id="report" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="75">
+                <label>Reports</label>
+                <comment>Track the performance of your helpdesk with reporting on solved tickets. This section allows you to define which ticket statuses are considered solved, helping you monitor team efficiency and customer service success.</comment>
+                <field id="solved_status" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Solved Statuses</label>
+                    <source_model>\Mirasvit\Helpdesk\Model\Status</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+            </group>
+            <group id="developer" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="80">
+                <label>Developer Settings</label>
+                <comment>Optimize the technical aspects of the helpdesk system with developer-specific options. This section helps in testing, debugging, and customizing the module to suit your website's infrastructure without disrupting live operations.</comment>
+                <field id="is_active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Activate Sandbox</label>
+                    <comment>Enable sandbox mode to test the helpdesk system without affecting live data. All emails will be redirected to the sandbox email, preventing disruptions to real customer interactions.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sandbox_email" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Send All Outgoing emails to Email</label>
+                    <comment>Set an email address to receive all outgoing emails in sandbox mode, ensuring a controlled environment for testing email templates and notifications.</comment>
+                </field>
+                <field id="apply_styles" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Force store's theme to apply styles</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[If theme overrides Magento way of including style this option will add Help Desk styles to page]]></comment>
+                </field>
+                <field id="log_ticket_deletion" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Log ticket deletion</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Keep a log of deleted tickets to track deletions and maintain a record for audit or recovery purposes, stored in the /var/log/mirasvit/helpdesk.log file.</comment>
+                </field>
+            </group>
+            <group id="extended" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="90">
+                <label>Extended settings</label>
+                <field id="contactus_help_text" translate="label comment" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Help Text</label>
+                    <comment>Add customizable help text that appears under the title on the 'Contact Us' page and Feedback tab, providing customers with clear guidance on how to submit a support request.</comment>
+                </field>
+                <field id="is_show_customer_time" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show customer the local time in backend</label>
+                    <comment>Display the customer’s local time in the backend to help support staff understand when the customer submitted the ticket, providing context for time-sensitive issues.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_recaptcha" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Google reCaptcha</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Activate Google reCaptcha on Helpdesk pages to prevent spam and bots from submitting fraudulent tickets. Configuration for reCaptcha settings is available in Configuration > Security > Google reCaptcha.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

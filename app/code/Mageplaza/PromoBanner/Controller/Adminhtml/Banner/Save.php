@@ -38,6 +38,7 @@ use Mageplaza\PromoBanner\Model\BannerFactory;
 use Mageplaza\PromoBanner\Model\Config\Source\Type;
 use Mageplaza\PromoBanner\Model\ResourceModel\Banner as ResourceModel;
 use Psr\Log\LoggerInterface;
+use Zend_Filter_Input;
 
 /**
  * Class Save
@@ -108,8 +109,8 @@ class Save extends Banner
         DataPersistorInterface $dataPersistor
     ) {
         $this->dataPersistor = $dataPersistor;
-        $this->helperImage   = $helperImage;
-        $this->bannerType    = $bannerType;
+        $this->helperImage = $helperImage;
+        $this->bannerType = $bannerType;
         parent::__construct(
             $context,
             $resultForwardFactory,
@@ -132,10 +133,87 @@ class Save extends Banner
         if ($data) {
             $bannerId = $this->getRequest()->getParam('banner_id');
             /** @var $model \Mageplaza\PromoBanner\Model\Banner */
-            $model        = $this->bannerFactory->create();
-            if (isset($data['from_date'])) {
-                $data['from_date'] = $this->_dateFilter->filter($data['from_date']);
+            $model = $this->bannerFactory->create();
+
+            if ($data['from_date'] !== '') {
+                if (strpos($data['from_date'], '/') !== false && substr_count($data['from_date'], '/') === 2) {
+                    list($monthFrom, $dayFrom, $yearFrom) = explode("/", $data['from_date']);
+                    if ($monthFrom === '' || $dayFrom === '' || $yearFrom === '') {
+                        $this->messageManager->addErrorMessage(__('Please enter the from date in the format.'));
+                        if (empty($bannerId)) {
+                            $this->_redirect('*/*/new');
+                        } else {
+                            $this->_redirect('*/*/edit', ['banner_id' => $bannerId]);
+                        }
+                        return;
+                    } else {
+                        if (!checkdate($monthFrom, $dayFrom, $yearFrom)) {
+                            $this->messageManager->addErrorMessage(__('Please enter the from date in the format.'));
+                            if (empty($bannerId)) {
+                                $this->_redirect('*/*/new');
+                            } else {
+                                $this->_redirect('*/*/edit', ['banner_id' => $bannerId]);
+                            }
+                            return;
+                        }
+                    }
+                } else {
+                    $this->messageManager->addErrorMessage(__('Please enter the from date in the format.'));
+                    if (empty($bannerId)) {
+                        $this->_redirect('*/*/new');
+                    } else {
+                        $this->_redirect('*/*/edit', ['banner_id' => $bannerId]);
+                    }
+                    return;
+                }
             }
+
+            if ($data['to_date'] !== '') {
+                if (strpos($data['to_date'], '/') !== false && substr_count($data['to_date'], '/') === 2) {
+                    list($monthTo, $dayTo, $yearTo) = explode("/", $data['to_date']);
+                    if ($monthTo === '' || $dayTo === '' || $yearTo === '') {
+                        $this->messageManager->addErrorMessage(__('Please enter the to date in the format.'));
+                        if (empty($bannerId)) {
+                            $this->_redirect('*/*/new');
+                        } else {
+                            $this->_redirect('*/*/edit', ['banner_id' => $bannerId]);
+                        }
+                        return;
+                    } else {
+                        if (!checkdate($monthTo, $dayTo, $yearTo)) {
+                            $this->messageManager->addErrorMessage(__('Please enter the to date in the format.'));
+                            if (empty($bannerId)) {
+                                $this->_redirect('*/*/new');
+                            } else {
+                                $this->_redirect('*/*/edit', ['banner_id' => $bannerId]);
+                            }
+                            return;
+                        }
+                    }
+                } else {
+                    $this->messageManager->addErrorMessage(__('Please enter the to date in the format.'));
+                    if (empty($bannerId)) {
+                        $this->_redirect('*/*/new');
+                    } else {
+                        $this->_redirect('*/*/edit', ['banner_id' => $bannerId]);
+                    }
+                    return;
+                }
+            }
+
+            if ($data['to_date'] !== '' && strtotime($data['from_date']) > strtotime($data['to_date'])) {
+                $this->messageManager->addErrorMessage(__('End date must not be less than Start date 1123123.'));
+                if (empty($bannerId)) {
+                    $this->_redirect('*/*/new');
+                } else {
+                    $this->_redirect('*/*/edit', ['banner_id' => $bannerId]);
+                }
+                return;
+            }
+
+            $filterValues = ['from_date' => $this->_dateFilter];
+            $inputFilter = new Zend_Filter_Input($filterValues, [], $data);
+            $data = $inputFilter->getUnescaped();
             if ($bannerId) {
                 $this->resourceModel->load($model, $bannerId);
                 if ($bannerId !== $model->getId()) {

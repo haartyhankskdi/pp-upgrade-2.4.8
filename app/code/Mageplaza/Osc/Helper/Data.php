@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Helper;
@@ -33,30 +33,30 @@ use Magento\Framework\View\DesignInterface;
 use Magento\Newsletter\Model\Subscriber;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Item;
+use Magento\ReCaptchaUi\Model\UiConfigResolverInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Core\Helper\AbstractData;
 use Mageplaza\Osc\Model\System\Config\Source\ComponentPosition;
 use Zend_Serializer_Exception;
 
-/**
- * Class Data
- * @package Mageplaza\Osc\Helper
- */
 class Data extends AbstractData
 {
-    const CONFIG_MODULE_PATH = 'osc';
-    const CONFIG_PATH_DISPLAY = 'display_configuration';
-    const CONFIG_PATH_DESIGN = 'design_configuration';
-    const CONFIG_PATH_BLOCK = 'block_configuration';
-    const CONFIG_PATH_FIELD = 'field_configuration';
-    const SORTED_FIELD_POSITION = 'osc/field/position';
-    const OA_FIELD_POSITION = 'osc/oa_field/position';
-    const CONFIG_ROUTE_PATH = 'onestepcheckout';
+    const CONFIG_MODULE_PATH         = 'osc';
+    const CONFIG_PATH_DISPLAY        = 'display_configuration';
+    const CONFIG_PATH_DISPLAY_UPDATE = 'display';
+    const CONFIG_PATH_DESIGN         = 'design_configuration';
+    const CONFIG_PATH_BLOCK          = 'block_configuration';
+    const CONFIG_PATH_FIELD          = 'field_configuration';
+    const SORTED_FIELD_POSITION      = 'osc/field/position';
+    const SORTED_BLOCK_POSITION      = 'osc/block/position';
+    const OA_FIELD_POSITION          = 'osc/oa_field/position';
+    const CONFIG_ROUTE_PATH          = 'onestepcheckout';
+    const CONFIG_DISPLAY_PAGE_LAYOUT = 'osc/design_configuration/page_layout';
 
-    const UTM_PARAMS = '?utm_source=configuration&utm_medium=link&utm_campaign=one-step-checkout';
+    const UTM_PARAMS        = '?utm_source=configuration&utm_medium=link&utm_campaign=one-step-checkout';
     const CUSTOMER_ATTR_URL = 'https://www.mageplaza.com/magento-2-customer-attributes/' . self::UTM_PARAMS;
-    const ORDER_ATTR_URL = 'https://www.mageplaza.com/magento-2-order-attributes/' . self::UTM_PARAMS;
+    const ORDER_ATTR_URL    = 'https://www.mageplaza.com/magento-2-order-attributes/' . self::UTM_PARAMS;
 
     /**
      * @var bool Osc Method Register
@@ -89,6 +89,11 @@ class Data extends AbstractData
     protected $checkoutSession;
 
     /**
+     * @var UiConfigResolverInterface
+     */
+    protected $captchaUiConfigResolver;
+
+    /**
      * Data constructor.
      *
      * @param Context $context
@@ -98,6 +103,7 @@ class Data extends AbstractData
      * @param Json $json
      * @param Subscriber $subscriber
      * @param Session $checkoutSession
+     * @param UiConfigResolverInterface $captchaUiConfigResolver
      */
     public function __construct(
         Context $context,
@@ -106,12 +112,14 @@ class Data extends AbstractData
         EncryptorInterface $encryptor,
         Json $json,
         Subscriber $subscriber,
-        Session $checkoutSession
+        Session $checkoutSession,
+        UiConfigResolverInterface $captchaUiConfigResolver
     ) {
-        $this->encryptor = $encryptor;
-        $this->json = $json;
-        $this->subscriber = $subscriber;
-        $this->checkoutSession = $checkoutSession;
+        $this->encryptor               = $encryptor;
+        $this->json                    = $json;
+        $this->subscriber              = $subscriber;
+        $this->checkoutSession         = $checkoutSession;
+        $this->captchaUiConfigResolver = $captchaUiConfigResolver;
 
         parent::__construct($context, $objectManager, $storeManager);
     }
@@ -165,9 +173,12 @@ class Data extends AbstractData
      */
     public function isOscPage($store = null)
     {
-        $moduleEnable = $this->isEnabled($store);
+        if (!$this->isEnabled($store)) {
+            return false;
+        }
 
-        return $moduleEnable && ($this->_request->getRouteName() === self::CONFIG_ROUTE_PATH);
+        return $this->_request->getRouteName() === self::CONFIG_ROUTE_PATH
+            || ($this->_request->isAjax() && $this->_request->getFullActionName() === 'customer_section_load');
     }
 
     /**
@@ -198,7 +209,9 @@ class Data extends AbstractData
         return $this->getConfigGeneral('title', $store) ?: 'One Step Checkout';
     }
 
-    /************************ General Configuration *************************/
+    /************************
+     * General Configuration
+     *************************/
     /**
      * One step checkout page description
      *
@@ -265,7 +278,9 @@ class Data extends AbstractData
             $store
         );
         if ($flag) {
-            /** @var Item $item */
+            /**
+             * @var Item $item
+             */
             foreach ($quote->getAllItems() as $item) {
                 if (($product = $item->getProduct()) && $product->getTypeId() === Type::TYPE_DOWNLOADABLE) {
                     return false;
@@ -285,7 +300,7 @@ class Data extends AbstractData
      */
     public function isRedirectToOneStepCheckout($store = null)
     {
-        return (bool)$this->getConfigGeneral('redirect_to_one_step_checkout', $store);
+        return (bool) $this->getConfigGeneral('redirect_to_one_step_checkout', $store);
     }
 
     /**
@@ -297,7 +312,19 @@ class Data extends AbstractData
      */
     public function getShowBillingAddress($store = null)
     {
-        return (bool)$this->getConfigGeneral('show_billing_address', $store);
+        return (bool) $this->getConfigGeneral('show_billing_address', $store);
+    }
+
+    /**
+     * check Same Shipping address
+     *
+     * @param null $store
+     *
+     * @return mixed
+     */
+    public function checkSameAsShipping($store = null)
+    {
+        return (bool) $this->getConfigGeneral('same_as_shipping', $store);
     }
 
     /**
@@ -358,7 +385,8 @@ class Data extends AbstractData
         return !$this->getDisplayConfig('is_enabled_login_link', $store);
     }
 
-    /********************************** Display Configuration *********************
+    /**********************************
+     * Display Configuration *********************
      *
      * @param $code
      * @param null $store
@@ -371,6 +399,22 @@ class Data extends AbstractData
 
         return $this->getModuleConfig($code, $store);
     }
+
+    /**********************************
+     * Display Configuration *********************
+     *
+     * @param $code
+     * @param null $store
+     *
+     * @return mixed
+     */
+    public function getDisplayConfigUpdate($code = '', $store = null)
+    {
+        $code = $code ? self::CONFIG_PATH_DISPLAY_UPDATE . '/' . $code : self::CONFIG_PATH_DISPLAY_UPDATE;
+
+        return $this->getModuleConfig($code, $store);
+    }
+
 
     /**
      * Item detail will be hided if this function return 'true'
@@ -393,7 +437,7 @@ class Data extends AbstractData
      */
     public function isShowItemListToggle($store = null)
     {
-        return (bool)$this->getDisplayConfig('is_show_item_list_toggle', $store);
+        return (bool) $this->getDisplayConfig('is_show_item_list_toggle', $store);
     }
 
     /**
@@ -417,7 +461,7 @@ class Data extends AbstractData
      */
     public function disabledPaymentCoupon($store = null)
     {
-        return (int)$this->getDisplayConfig('show_coupon', $store) !== ComponentPosition::SHOW_IN_PAYMENT;
+        return (int) $this->getDisplayConfig('show_coupon', $store) !== ComponentPosition::SHOW_IN_PAYMENT;
     }
 
     /**
@@ -429,7 +473,31 @@ class Data extends AbstractData
      */
     public function disabledReviewCoupon($store = null)
     {
-        return (int)$this->getDisplayConfig('show_coupon', $store) !== ComponentPosition::SHOW_IN_REVIEW;
+        return (int) $this->getDisplayConfig('show_coupon', $store) !== ComponentPosition::SHOW_IN_REVIEW;
+    }
+
+    /**
+     * @return array
+     */
+    public function reCaptchaConfig()
+    {
+        try {
+            return $this->captchaUiConfigResolver->get('coupon_code');
+        } catch (\Exception $e) {
+            return [];
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCaptchaEnabled()
+    {
+        $reCaptchaConfig =  $this->reCaptchaConfig();
+        if ($reCaptchaConfig === []) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -461,7 +529,7 @@ class Data extends AbstractData
      */
     public function isEnabledTOC($store = null)
     {
-        return (int)$this->getDisplayConfig('show_toc', $store) !== ComponentPosition::NOT_SHOW;
+        return (int) $this->getDisplayConfig('show_toc', $store) !== ComponentPosition::NOT_SHOW;
     }
 
     /**
@@ -473,7 +541,7 @@ class Data extends AbstractData
      */
     public function disabledPaymentTOC($store = null)
     {
-        return (int)$this->getDisplayConfig('show_toc', $store) !== ComponentPosition::SHOW_IN_PAYMENT;
+        return (int) $this->getDisplayConfig('show_toc', $store) !== ComponentPosition::SHOW_IN_PAYMENT;
     }
 
     /**
@@ -485,7 +553,7 @@ class Data extends AbstractData
      */
     public function disabledReviewTOC($store = null)
     {
-        return (int)$this->getDisplayConfig('show_toc', $store) !== ComponentPosition::SHOW_IN_REVIEW;
+        return (int) $this->getDisplayConfig('show_toc', $store) !== ComponentPosition::SHOW_IN_REVIEW;
     }
 
     /**
@@ -497,7 +565,11 @@ class Data extends AbstractData
      */
     public function isDisabledGiftMessage($store = null)
     {
-        return !$this->getDisplayConfig('is_enabled_gift_message', $store);
+        if ($this->getConfigGiftMessage($store) && strpos($this->getConfigGiftMessage($store), 'order') !== false) {
+            return 1;
+        }
+
+        return 0;
     }
 
     /**
@@ -509,7 +581,21 @@ class Data extends AbstractData
      */
     public function isEnableGiftMessageItems($store = null)
     {
-        return (bool)$this->getDisplayConfig('is_enabled_gift_message_items', $store);
+        if ($this->getConfigGiftMessage($store) && strpos($this->getConfigGiftMessage($store), 'item') !== false) {
+            return 1;
+        }
+
+        return 0;
+    }
+
+    /**
+     * @param $store
+     *
+     * @return mixed
+     */
+    public function getConfigGiftMessage($store = null)
+    {
+        return $this->getConfigValue('osc/general/gift_message', $store);
     }
 
     /**
@@ -522,7 +608,7 @@ class Data extends AbstractData
     public function isDisabledGiftWrap($store = null)
     {
         $giftWrapEnabled = $this->getDisplayConfig('is_enabled_gift_wrap', $store);
-        $giftWrapAmount = $this->getOrderGiftwrapAmount();
+        $giftWrapAmount  = $this->getOrderGiftwrapAmount();
 
         return !$giftWrapEnabled || ($giftWrapAmount < 0);
     }
@@ -536,7 +622,7 @@ class Data extends AbstractData
      */
     public function getOrderGiftWrapAmount($store = null)
     {
-        return (float)$this->getDisplayConfig('gift_wrap_amount', $store);
+        return (float) $this->getDisplayConfig('gift_wrap_amount', $store);
     }
 
     /**
@@ -545,7 +631,7 @@ class Data extends AbstractData
     public function getGiftWrapConfiguration()
     {
         return [
-            'gift_wrap_type' => $this->getGiftWrapType(),
+            'gift_wrap_type'   => $this->getGiftWrapType(),
             'gift_wrap_amount' => $this->formatGiftWrapAmount()
         ];
     }
@@ -582,8 +668,8 @@ class Data extends AbstractData
      */
     public function isDisabledNewsletter($store = null)
     {
-        $email = $this->checkoutSession->getQuote()->getCustomerEmail();
-        $isEnable = $this->getDisplayConfig('is_enabled_newsletter', $store);
+        $email        = $this->checkoutSession->getQuote()->getCustomerEmail();
+        $isEnable     = $this->getDisplayConfig('is_enabled_newsletter', $store);
         $isSubscribed = $email ? $this->subscriber->loadByEmail($email)->isSubscribed() : false;
 
         return $isEnable ? $isSubscribed : true;
@@ -598,19 +684,36 @@ class Data extends AbstractData
      */
     public function isSubscribedByDefault($store = null)
     {
-        return (bool)$this->getDisplayConfig('is_checked_newsletter', $store);
+        return (bool) $this->getDisplayConfig('is_checked_newsletter', $store);
     }
 
     /**
-     * Social Login On Checkout Page
+     * Check Social Login enable
      *
      * @param null $store
      *
      * @return bool
      */
-    public function isDisabledSocialLoginOnCheckout($store = null)
+    public function isDisabledSocialLoginOnCheckout()
     {
-        return !$this->getDisplayConfig('is_enabled_social_login', $store);
+        $socialLoginData = $this->objectManager->get(\Mageplaza\SocialLogin\Helper\Data::class);
+
+        return $socialLoginData ? $socialLoginData->isEnabled() : false;
+    }
+
+    /**
+     * Show multiple addresses checkout link if this function returns 'true'
+     *
+     * @param null $store
+     *
+     * @return bool
+     */
+    public function isShowMultiAddessCheckoutLink($store = null)
+    {
+        if ($this->scopeConfig->getValue('hyva_theme_fallback/general/enable', ScopeInterface::SCOPE_STORE, $store)) {
+            return false;
+        }
+        return $this->getDisplayConfig('show_multi_address_checkout_link', $store);
     }
 
     /**
@@ -667,7 +770,7 @@ class Data extends AbstractData
      */
     public function isEnabledSealBlock($stores = null)
     {
-        return (int)$this->getDisplayConfig('seal_block/is_enabled_seal_block', $stores);
+        return (int) $this->getDisplayConfigUpdate('additional_field/is_enabled_seal_block', $stores);
     }
 
     /**
@@ -677,7 +780,7 @@ class Data extends AbstractData
      */
     public function getSealStaticBlock($stores = null)
     {
-        return $this->getDisplayConfig('seal_block/seal_static_block', $stores);
+        return $this->getDisplayConfigUpdate('additional_field/seal_static_block', $stores);
     }
 
     /**
@@ -687,7 +790,7 @@ class Data extends AbstractData
      */
     public function getSealImage($stores = null)
     {
-        return $this->getDisplayConfig('seal_block/seal_image', $stores);
+        return $this->getDisplayConfigUpdate('additional_field/seal_image', $stores);
     }
 
     /**
@@ -697,7 +800,7 @@ class Data extends AbstractData
      */
     public function getSealDescription($stores = null)
     {
-        return $this->getDisplayConfig('seal_block/seal_description', $stores);
+        return $this->getDisplayConfigUpdate('additional_field/seal_description', $stores);
     }
 
     /**
@@ -712,7 +815,8 @@ class Data extends AbstractData
         return 'Mageplaza_Osc/' . $this->getDesignConfig('page_layout', $store);
     }
 
-    /***************************** Design Configuration *****************************
+    /*****************************
+     * Design Configuration *****************************
      *
      * @param string $code
      * @param null $store
@@ -734,7 +838,8 @@ class Data extends AbstractData
         return $this->getDesignConfig('page_design') === 'material';
     }
 
-    /***************************** CMS Static Block Configuration *****************************
+    /*****************************
+     * CMS Static Block Configuration *****************************
      *
      * @param string $code
      * @param null $store
@@ -755,7 +860,7 @@ class Data extends AbstractData
      */
     public function isEnableStaticBlock($store = null)
     {
-        return (bool)$this->getStaticBlockConfig('is_enabled_block', $store);
+        return (bool) $this->getStaticBlockConfig('is_enabled_block', $store);
     }
 
     /**
@@ -769,7 +874,8 @@ class Data extends AbstractData
         return $this->unserialize($this->getStaticBlockConfig('list', $stores));
     }
 
-    /***************************** Custom Fields Configuration *****************************
+    /*****************************
+     * Custom Fields Configuration *****************************
      *
      * @param string $code
      * @param null $store
@@ -802,7 +908,8 @@ class Data extends AbstractData
         return $this->getCustomFieldConfig('show_in_customer_grid');
     }
 
-    /***************************** Compatible Modules *****************************
+    /*****************************
+     * Compatible Modules *****************************
      *
      * @return bool
      */
@@ -852,7 +959,16 @@ class Data extends AbstractData
     }
 
     /**
+     * @return bool
+     */
+    public function isEnableBetterStaticBlock()
+    {
+        return $this->isModuleOutputEnabled('Mageplaza_BetterStaticBlock');
+    }
+
+    /**
      * Get current theme id
+     *
      * @return mixed
      */
     public function getCurrentThemeId()
@@ -916,7 +1032,7 @@ class Data extends AbstractData
     public function versionCompare($ver, $operator = '>=')
     {
         $productMetadata = $this->objectManager->get(ProductMetadataInterface::class);
-        $version = $productMetadata->getVersion(); //will return the magento version
+        $version         = $productMetadata->getVersion(); //will return the magento version
 
         return version_compare($version, $ver, $operator);
     }

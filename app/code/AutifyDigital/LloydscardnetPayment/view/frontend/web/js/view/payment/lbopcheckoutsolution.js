@@ -1,0 +1,21 @@
+define(
+    [
+        'uiComponent',
+        'Magento_Checkout/js/model/payment/renderer-list'
+    ],
+    function (
+        Component,
+        rendererList
+    ) {
+        'use strict';
+        
+        rendererList.push(
+            {
+                type: 'lbopcheckoutsolution',
+                component: 'AutifyDigital_LloydscardnetPayment/js/view/payment/method-renderer/lbopcheckoutsolution-method'
+            }
+        );
+        
+        return Component.extend({});
+    }
+);

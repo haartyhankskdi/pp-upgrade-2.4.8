@@ -1,9 +1,9 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Amasty Custom Forms GraphQl for Magento 2 (System)
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Amasty Custom Forms GraphQl for Magento 2 (System)
+ */
 
 \Magento\Framework\Component\ComponentRegistrar::register(
     \Magento\Framework\Component\ComponentRegistrar::MODULE,

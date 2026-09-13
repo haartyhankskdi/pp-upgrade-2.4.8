@@ -1,0 +1,26 @@
+<?php
+/*
+ * This software is the confidential and proprietary information of Autify Digital Ltd.
+ * Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+ * Copyright (c) 2020-Present Autify Digital Ltd.
+ * This work is protected under applicable copyright and intellectual property laws.
+ * All rights reserved. Distribution and disclosure are permitted only in accordance with
+ * the terms of a valid written agreement with Autify Digital Ltd.
+ */
+
+/** @var \AutifyDigital\LloydscardnetPayment\Block\Googlepay\Minicart $block */
+$helper = $block->getHelper();
+$orderTotal = $block->getBaseGrandTotal();
+?>
+<?php if ($helper->displayMiniCartGooglePay($orderTotal) &&
+$helper->getGooglepayPaymentMethodInteration() == 'onsite'):?>
+    <div id="google-pay-minicart-button" class="google-pay-cart-button"
+    data-bind="afterRender: initGooglePayIfNeeded" data-mage-init='{
+             "AutifyDigital_LloydscardnetPayment/js/view/minicart-googlepay": {
+                 "storeName": "<?= $escaper->escapeJs($block->getStoreName()); ?>",
+                 "grandTotal": "<?= $escaper->escapeJs($block->getBaseGrandTotal()); ?>",
+                 "storeCountry": "<?= $escaper->escapeJs($block->getStoreCountry()); ?>",
+                 "storeCurrency": "<?= $escaper->escapeJs($block->getStoreCurrency()); ?>"
+             }
+        }'></div>
+<?php endif; ?>

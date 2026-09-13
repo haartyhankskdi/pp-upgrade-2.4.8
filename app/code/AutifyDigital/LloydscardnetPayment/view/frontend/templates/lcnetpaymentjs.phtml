@@ -1,0 +1,25 @@
+<!--
+/*
+ * This software is the confidential and proprietary information of Autify Digital Ltd.
+ * Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+ * Copyright (c) 2020-Present Autify Digital Ltd.
+ * This work is protected under applicable copyright and intellectual property laws.
+ * All rights reserved. Distribution and disclosure are permitted only in accordance with
+ * the terms of a valid written agreement with Autify Digital Ltd.
+ */
+-->
+<?php
+/** @var \AutifyDigital\LloydscardnetPayment\Block\Lcnetpaymentjs $block */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+
+$library = $block->getLibrary();
+
+$scriptString = <<<script
+window.lcnetpaymentjs = null;
+require(['$library'],function(clientJsUrl){
+    window.lcnetpaymentjs = clientJsUrl;
+});
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>

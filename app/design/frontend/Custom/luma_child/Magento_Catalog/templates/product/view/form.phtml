@@ -83,40 +83,20 @@ $key = array_search($currentProduct->getId(), $weightLossProductsId);
              $isAvailable = in_array($currentProductId, $availableProducts);
             ?>
             <?php if (!empty($proCustopt) && $_product->isSaleable() && !$isAvailable) {
-
-                // $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-                // $current_category = $_helperCatalog->getCurrentCategory(); 
-                // $current_category = $_helperCatalog->getCategory(); 
-                // $current_category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
-                // $curCatId = '';
-                // $curCat = "";
-                // if ($current_category) {
-                //     $curCat = $current_category->getPath();
-                //     $curCatId = $current_category->getId();
-                // }
                 
-                
-                // file_put_contents('/home/devanna/Desktop/text.txt', $_product->getId());
                 $_helperCatalog->setCatValueSession($prodCategoryIds[0]);
                 $_helperCatalog->setProdValueSession($_product->getId());
 
             ?>
                 <!-- For Config product with custom option/Questionaire -->
                 <button type="button" class="start-consultation"><?php echo $button; ?></button>
-                <!-- <div class="view-price-btn"><button type="button" class="view-pricing" id="click-me"><?php //echo __("View Pricing"); ?></button></div> -->
-                <!-- <a href="#selected-data1" class="viewpricing"><?php //echo __("View Pricing"); ?></a> -->
-                <!-- <button type="button" class="go-to-start-consultation"><?php //echo __("Start Consultation"); ?></button> -->
-                 <!-- Old Back to start consultation button -->
-                <!-- <a href="<?= $catUrl; ?>" class="back-to-start-consultation"><button type="button"><?php echo __("Back To Start Consultation"); ?></button></a> -->
-
-                <!-- Weightloss Logic button redirect code -->
                 <?php if ($key !== false) :  ?>
                    
-                    <a href="/weightloss/wl-login" class="back-to-start-consultation" data-product="<?= $block->escapeHtmlAttr(strtolower(trim($_product->getName()))) ?>">
+                    <a href="/weightloss/wl-login" class="back-to-start-consultation" data-product="<?= $block->escapeHtmlAttr(strtolower(trim((string) $_product->getName()))) ?>">
     <button type="button"><?php echo __("Start Consultation"); ?></button>
 </a>
                 <?php else : ?>
-                     <!-- <a href="<?= $catUrl; ?>" class="back-to-start-consultation"><button type="button"><?php echo __("Back To Start Consultation"); ?></button></a> -->
+                    
                 <?php endif; ?>
 
 
@@ -132,10 +112,6 @@ $key = array_search($currentProduct->getId(), $weightLossProductsId);
                 <?php if ($_product->getTypeId() == "simple" || $_product->getTypeId() == "virtual") : ?>
                     <button type="submit" class=""><?= $block->escapeHtml($buttonTitle) ?></button>
                 <?php else : ?>
-                    <!-- <a href="?true" class="back-to-start-consultation"><button type="button"><?= $block->escapeHtml($buttonTitle); ?></button></a> -->
-                    <!-- <div class="view-price-btn"><button type="button" class="view-pricing" id="click-me"><?php //echo __("View Pricing"); ?></button></div> -->
-                    <!-- <a href="#selected-data1" class="viewpricing"><?php //echo __("View Pricing"); ?></a> -->
-                    <!-- <button type="button" class="start-consultation"><?php //echo __("Continue"); ?></button> -->
                 <?php endif; ?>
             <?php }
 
@@ -198,16 +174,6 @@ foreach ($childProducts as $child) {
 }
 $filterOptions = array_unique($filterOptions);
 $filterOptionStren = array_unique($filterOptionStren);
-// function removeDash($array) {
-//     $array = array_filter($array, function($value) {
-//         return $value !== '-';
-//     });
-//     return array_values($array); // Reindex array after filtering
-// }
-
-// // Remove '-' and reindex for both filterOptions and filterOptionStren
-// $filterOptions = array_values(array_unique(removeDash($filterOptions)));
-// $filterOptionStren = array_values(array_unique(removeDash($filterOptionStren)));
 
 ?>
 
@@ -388,6 +354,7 @@ $filterOptionStren = array_unique($filterOptionStren);
         $(".product-det").hide();
         $(".configurable").hide();
         $(".fill-cat-question").hide();
+        $(".product-options-wrapper").hide();
         $(function(){
         // $(".go-to-start-consultation").click(function(event) {
             // Go to second page
@@ -398,6 +365,7 @@ $filterOptionStren = array_unique($filterOptionStren);
                 $("body").addClass('start_consultation');
                 //event.preventDefault();
                 window.scrollTo(0, 0);
+                $(".product-options-wrapper").show();
                 $(this).hide();
                 $("#product-addtocart-button").show();
                 $("#product-updatecart-button").hide();

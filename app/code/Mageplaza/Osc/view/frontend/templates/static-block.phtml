@@ -20,7 +20,8 @@
  */
 
 /** @var \Mageplaza\Osc\Block\StaticBlock $block */
+/** @var \Magento\Framework\Escaper $escaper */
 $blockArray = $block->getStaticBlock();
 foreach ($blockArray as $item): ?>
-    <div class="osc-cms-block"><?= /** @noEscape */ $item['content'] ?></div>
+    <div class="osc-cms-block"><?= /** @noEscape */ $block->sanitizeContent($item['content'])  ?></div>
 <?php endforeach ?>

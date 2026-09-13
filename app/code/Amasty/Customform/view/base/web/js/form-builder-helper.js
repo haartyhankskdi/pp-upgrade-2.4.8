@@ -565,10 +565,15 @@ define([
                             }
 
                             var labelText = ratingClass ? '' : optionAttrs.label;
-
-                            optionsMarkup += '<input ' + _optionAttrsString + '/' + '> <label for="'
+                            let inputAsString = '<input ' + _optionAttrsString + '/' + '> <label for="'
                                 + optionAttrs.id + '" ' + classNameLabel + '>'
                                 + fbUtils.cutJs(labelText) + '</label>' + br;
+
+                            if (optionAttrs.name.startsWith('checkboxtwo') || optionAttrs.name.startsWith('radiotwo')) {
+                                inputAsString = `<div class="amform-groupv2">${inputAsString}</div>`;
+                            }
+
+                            optionsMarkup += inputAsString;
                         }
 
                     }
@@ -672,9 +677,10 @@ define([
      * @returns {void}
      */
     fbUtils.wysiwygListener = function (selector, html, wysiwygConfig) {
-        var editors = Object.keys(tinymce.EditorManager.editors);
+        var editor = tinymce.EditorManager?.editors || tinymce.EditorManager?.Editor;
+        var editors = Object.keys(editor);
 
-        if (tinymce.EditorManager.editors.length && editors.includes(selector)) {
+        if (editor.length && editors.includes(selector)) {
             fbUtils.setWysiwygContent(selector, html);
             fbUtils.refreshWysiwyg(selector);
         } else {
@@ -1159,7 +1165,7 @@ define([
             $('[class*="fld-"]', field).each(function () {
                 var name = utils.camelCase(this.name);
 
-                previewData[name] = this.type === 'checkbox' ? this.checked : this.value;
+                previewData[name] = this.type === 'checkbox' ? this.checked : fbUtils.escapeAttr(this.value);
             });
 
             var style = $('.btn-style', field).val();
@@ -1190,7 +1196,7 @@ define([
                         field.data('fieldData').attrs.value :
                         field.data('fieldData').value;
 
-                previewData.value = value;
+                previewData.value = previewData.value || value;
             }
 
             previewData = utils.trimObj(previewData);

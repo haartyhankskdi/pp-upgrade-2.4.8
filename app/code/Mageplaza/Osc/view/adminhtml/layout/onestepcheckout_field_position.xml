@@ -33,6 +33,7 @@
                 <block class="Mageplaza\Osc\Block\Adminhtml\Field\Shipping" name="mposc.field.shipping"/>
                 <block class="Mageplaza\Osc\Block\Adminhtml\Field\Payment" name="mposc.field.payment"/>
                 <block class="Mageplaza\Osc\Block\Adminhtml\Field\Order" name="mposc.field.order"/>
+                <block class="Mageplaza\Osc\Block\Adminhtml\Field\CheckoutSteps" name="mposc.checkout.steps"/>
             </block>
         </referenceContainer>
     </body>

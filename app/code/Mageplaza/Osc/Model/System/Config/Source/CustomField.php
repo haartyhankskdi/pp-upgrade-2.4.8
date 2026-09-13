@@ -13,20 +13,16 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\System\Config\Source;
 
 use Magento\Framework\Option\ArrayInterface;
 
-/**
- * Class CustomField
- * @package Mageplaza\Osc\Model\System\Config\Source
- */
 class CustomField implements ArrayInterface
 {
     /**
@@ -36,7 +32,6 @@ class CustomField implements ArrayInterface
     {
         $result = [];
 
-        $result[] = ['value' => '', 'label' => __('-- Please select --')];
         for ($i = 1; $i <= 3; $i++) {
             $result[] = ['value' => 'mposc_field_' . $i, 'label' => __('Custom Field %1', $i)];
         }

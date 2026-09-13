@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magefan\Blog\Api\SitemapConfigInterface" type="Magefan\BlogPlus\Model\Sitemap\SitemapConfig" />
+    <preference for="Magefan\Blog\Model\Sitemap\SitemapConfig" type="Magefan\BlogPlus\Model\Sitemap\SitemapConfig" />
+
+    <type name="Magefan\Blog\Model\Post">
+        <plugin name="magefan_blog_plus_model_post_plugin"
+                type="Magefan\BlogPlus\Plugin\Model\PostPlugin" sortOrder="10" />
+    </type>
+    <type name="Magefan\Blog\Model\ResourceModel\Post">
+        <plugin name="magefan_blog_plus_resourcemodel_post_plugin"
+                type="Magefan\BlogPlus\Plugin\Model\ResourceModel\PostPlugin" sortOrder="10" />
+    </type>
+    <type name="Magefan\Blog\Model\ResourceModel\Post\Collection">
+        <plugin name="magefan_blog_plus_collection_post_plugin"
+                type="Magefan\BlogPlus\Plugin\Model\ResourceModel\Post\CollectionPlugin" sortOrder="10" />
+    </type>
+
+    <type name="Magefan\Blog\Model\Category">
+        <plugin name="magefan_blog_plus_model_category_plugin"
+                type="Magefan\BlogPlus\Plugin\Model\CategoryPlugin" sortOrder="10" />
+    </type>
+    <type name="Magefan\Blog\Model\ResourceModel\Category">
+        <plugin name="magefan_blog_plus_resourcemodel_category_plugin"
+                type="Magefan\BlogPlus\Plugin\Model\ResourceModel\CategoryPlugin" sortOrder="10" />
+    </type>
+    <type name="Magefan\Blog\Model\ResourceModel\Category\Collection">
+        <plugin name="magefan_blog_plus_collection_category_plugin"
+                type="Magefan\BlogPlus\Plugin\Model\ResourceModel\Category\CollectionPlugin" sortOrder="10" />
+    </type>
+
+    <preference for="Magefan\Blog\Model\Url" type="Magefan\BlogPlus\Model\Url" />
+
+    <type name="Magefan\BlogPlus\Controller\Adminhtml\Tag\Upload\TagImg">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Magefan\Blog\ImageUpload</argument>
+        </arguments>
+    </type>
+
+    <type name="Magefan\BlogPlus\Controller\Adminhtml\Category\Upload\CategoryImg">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Magefan\Blog\ImageUpload</argument>
+        </arguments>
+    </type>
+
+    <type name="Magefan\BlogPlus\Controller\Adminhtml\Post\Upload\FeaturedListImg">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Magefan\Blog\ImageUpload</argument>
+        </arguments>
+    </type>
+
+    <preference for="Magefan\Blog\Api\UrlResolverInterface" type="Magefan\BlogPlus\Model\UrlResolver" />
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_related_post_listing_data_source" xsi:type="string">Magefan\Blog\Model\ResourceModel\Post\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Sitemap\Model\ItemProvider\Composite">
+        <arguments>
+            <argument name="itemProviders" xsi:type="array">
+                <item name="mfblogTagProvider" xsi:type="object">Magefan\BlogPlus\Model\Sitemap\ItemProvider\Tag</item>
+                <item name="mfblogAuthorProvider" xsi:type="object">Magefan\BlogPlus\Model\Sitemap\ItemProvider\Author</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

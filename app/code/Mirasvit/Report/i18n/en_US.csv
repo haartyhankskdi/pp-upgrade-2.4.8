@@ -1,0 +1,263 @@
+"Something went wrong while building the report","Something went wrong while building the report"
+"Not logged in","Not logged in"
+"Email Notifications","Email Notifications"
+"The email report has been deleted.","The email report has been deleted."
+"This email report no longer exists.","This email report no longer exists."
+"This email no longer exists.","This email no longer exists."
+"Edit Email ""%1""","Edit Email ""%1"""
+"New Email Report","New Email Report"
+"You saved the email report.","You saved the email report."
+"No data to save.","No data to save."
+"This report no longer exists.","This report no longer exists."
+"Report columns saved.","Report columns saved."
+"Unsupported format ""%1""","Unsupported format ""%1"""
+"This report does not exist or is not available for sharing.","This report does not exist or is not available for sharing."
+"Report identifier is required","Report identifier is required"
+"Report: %1","Report: %1"
+"Block identifier ""%1"" does not match any available report or dashboard block. Use GET /V1/reports/reports to discover valid identifiers.","Block identifier ""%1"" does not match any available report or dashboard block. Use GET /V1/reports/reports to discover valid identifiers."
+"Time range ""%1"" is not valid. Valid values: %2","Time range ""%1"" is not valid. Valid values: %2"
+"Email with ID ""%1"" does not exist.","Email with ID ""%1"" does not exist."
+Back,Back
+Delete,Delete
+"Are you sure you want to do this?","Are you sure you want to do this?"
+Save,Save
+"Save & Continue","Save & Continue"
+"Save & Send","Save & Send"
+Edit,Edit
+"Delete email?","Delete email?"
+(previous),(previous)
+"%1 out of %2 selected","%1 out of %2 selected"
+"A quick access link to the report is a great alternative to routine daily exporting.","A quick access link to the report is a great alternative to routine daily exporting."
+"Access URL","Access URL"
+Achieved,Achieved
+Actions,Actions
+"Active filters:","Active filters:"
+"Add Empty Widget","Add Empty Widget"
+"Add filter","Add filter"
+"Add Filter","Add Filter"
+"Add New Board","Add New Board"
+"Add New Widget","Add New Widget"
+"Add Widget","Add Widget"
+"Additional Filters","Additional Filters"
+"Advanced mode","Advanced mode"
+Aggregator,Aggregator
+"and more %1 other columns","and more %1 other columns"
+applicable,applicable
+Apply,Apply
+"Apply date filter","Apply date filter"
+"Apply Filters","Apply Filters"
+"Are you sure you want to reset the access token?","Are you sure you want to reset the access token?"
+Average,Average
+"Base Table","Base Table"
+"Block Type","Block Type"
+Cancel,Cancel
+"Cancel date filter","Cancel date filter"
+Chart,Chart
+"Chart type selector","Chart type selector"
+"Clear all","Clear all"
+Close,Close
+"Close menu","Close menu"
+Column,Column
+"Column for grouping data in the table","Column for grouping data in the table"
+"Column for grouping the data in the table","Column for grouping the data in the table"
+"Column selector mode switcher. Current mode: %1","Column selector mode switcher. Current mode: %1"
+Columns,Columns
+"Columns to group the rows in the table","Columns to group the rows in the table"
+Comparison,Comparison
+contains,contains
+Content,Content
+Copied,Copied
+"Copy importdata code for Google Sheets","Copy importdata code for Google Sheets"
+"Copy to clipboard","Copy to clipboard"
+Count,Count
+Country,Country
+"Current mode: %1","Current mode: %1"
+"Current Page","Current Page"
+Custom,Custom
+Customize,Customize
+Date,Date
+"Date filter","Date filter"
+Day,Day
+"Delete report","Delete report"
+Description,Description
+Dimension,Dimension
+"Dimension column table","Dimension column table"
+Dimensions,Dimensions
+Disable,Disable
+"Disable sharing report","Disable sharing report"
+"Do not compare","Do not compare"
+"doesn't contain","doesn't contain"
+Download,Download
+Duplicate,Duplicate
+"Duplicate report","Duplicate report"
+Early,Early
+"Edit Board","Edit Board"
+"Edit columns","Edit columns"
+"Edit report","Edit report"
+"Empty report data table","Empty report data table"
+Enable,Enable
+"Enable Remote Access","Enable Remote Access"
+"Enable Remote Access on Storefront","Enable Remote Access on Storefront"
+"Enable sharing report","Enable sharing report"
+"Enter page number","Enter page number"
+"Excel XML","Excel XML"
+Export,Export
+"Filter value","Filter value"
+Filters,Filters
+"Found: %1 columns","Found: %1 columns"
+from,from
+"From date","From date"
+"General Information","General Information"
+"Go to next page","Go to next page"
+"Go to previous page","Go to previous page"
+"Goal / target","Goal / target"
+"Group by","Group by"
+"Hide percentage of total","Hide percentage of total"
+"Image for %1","Image for %1"
+"Import data code","Import data code"
+"Insert the below code into your Google Sheet and it will automatically import the most recent data from the report every hour:","Insert the below code into your Google Sheet and it will automatically import the most recent data from the report every hour:"
+"Insert To Google Sheet","Insert To Google Sheet"
+"Insert widget's HTML content here","Insert widget's HTML content here"
+"Internal Filters","Internal Filters"
+"Is Default","Is Default"
+"is not","is not"
+"is not one of","is not one of"
+"is one of","is one of"
+Loading...,Loading...
+"Lower number means higher position. Boards with the same sort order will be ordered according to the dashboard general sorting settings.","Lower number means higher position. Boards with the same sort order will be ordered according to the dashboard general sorting settings."
+"Make a copy","Make a copy"
+"Make sure that the selected columns are","Make sure that the selected columns are"
+Manage,Manage
+"Manage columns","Manage columns"
+"Manage filters","Manage filters"
+Metric,Metric
+Month,Month
+"More filters","More filters"
+"More Filters","More Filters"
+"No next pages, action disabled","No next pages, action disabled"
+"No previous pages, action disabled","No previous pages, action disabled"
+"not allowed","not allowed"
+Number,Number
+of,of
+"of goal","of goal"
+"Once you have configured the report, you can use a direct link to open the report on any device without opening the admin and always with fresh live data.","Once you have configured the report, you can use a direct link to open the report on any device without opening the admin and always with fresh live data."
+"Open link","Open link"
+"Open menu","Open menu"
+"Override dashboard time","Override dashboard time"
+"Page Size","Page Size"
+Percent,Percent
+"Please select","Please select"
+"Previous period","Previous period"
+"Primary Filters","Primary Filters"
+"Private Board","Private Board"
+"Private Board will be available only for the current admin user. Shared Board will be available for all admin users.","Private Board will be available only for the current admin user. Shared Board will be available for all admin users."
+Quarter,Quarter
+"Quick Access & Sharing","Quick Access & Sharing"
+Range,Range
+"records found","records found"
+Refresh,Refresh
+Remaining,Remaining
+Remove,Remove
+"Remove filter","Remove filter"
+"Remove from chart","Remove from chart"
+"Removing board...","Removing board..."
+"Report data table with %1 rows","Report data table with %1 rows"
+Reset,Reset
+"Reset access token","Reset access token"
+"Reset Changes","Reset Changes"
+"Resetting the access token will deactivate the old access link. Anyone who previously had access to the board will lose it and will need the new link to access it.","Resetting the access token will deactivate the old access link. Anyone who previously had access to the board will lose it and will need the new link to access it."
+"Rows Limit","Rows Limit"
+"Same period last month","Same period last month"
+"Same period last week","Same period last week"
+"Same period last year","Same period last year"
+"Save Changes","Save Changes"
+"Saving report...","Saving report..."
+Saving...,Saving...
+"Search column across ALL tables by identifier.","Search column across ALL tables by identifier."
+"Search for column","Search for column"
+"Select condition","Select condition"
+"Select date range","Select date range"
+"Select Date Range","Select Date Range"
+Share,Share
+"Share Dashboard","Share Dashboard"
+"Share in %1 format","Share in %1 format"
+"Shared Board","Shared Board"
+"Sharing link","Sharing link"
+"Show in chart","Show in chart"
+"Show percentage of total","Show percentage of total"
+"Show progress toward this target as a gauge. Leave empty for a plain value.","Show progress toward this target as a gauge. Leave empty for a plain value."
+"Single Value","Single Value"
+"Sort by %1","Sort by %1"
+"Sort Order","Sort Order"
+Sorting,Sorting
+"Spark line","Spark line"
+String,String
+Sum,Sum
+"Switch to %1 chart","Switch to %1 chart"
+Table,Table
+"Time Range","Time Range"
+Title,Title
+to,to
+"To add your first block, unlock the board (top right corner).","To add your first block, unlock the board (top right corner)."
+"To date","To date"
+"to the current report.","to the current report."
+Toolbar,Toolbar
+Type,Type
+"Type to search","Type to search"
+"Untitled Block","Untitled Block"
+"Untitled Board","Untitled Board"
+Value,Value
+"We couldn't find any records.","We couldn't find any records."
+Week,Week
+"Widget Library","Widget Library"
+"Wrong configuration. Please change report building conditions.","Wrong configuration. Please change report building conditions."
+Year,Year
+"Loading report data","Loading report data"
+"Report data table for %1","Report data table for %1"
+Block,Block
+"Date Interval","Date Interval"
+Limit,Limit
+"Add Block","Add Block"
+Active,Active
+"Attach each block as a separate CSV report","Attach each block as a separate CSV report"
+Subject,Subject
+Recipient,Recipient
+Schedule,Schedule
+"Should be cron-like expression. <br/>Example: 59 23 * * * <br/>Will be sent report every day at 23:59","Should be cron-like expression. <br/>Example: 59 23 * * * <br/>Will be sent report every day at 23:59"
+Body,Body
+"Add New Email","Add New Email"
+ID,ID
+Status,Status
+"Last Sent At","Last Sent At"
+"Goal type","Goal type"
+"Fixed value","Fixed value"
+"Compare to period","Compare to period"
+"Goal style","Goal style"
+"Ring gauge","Ring gauge"
+"Half gauge","Half gauge"
+"Progress bar","Progress bar"
+"Tracks the selected comparison period","Tracks the selected comparison period"
+"Select a comparison period above","Select a comparison period above"
+"Target is taken from the comparison period selected above.","Target is taken from the comparison period selected above."
+"Chart type","Chart type"
+"Line","Line"
+"Area","Area"
+"Bar","Bar"
+"Stacked bar","Stacked bar"
+"Icon","Icon"
+"Money","Money"
+"Orders","Orders"
+"Cart","Cart"
+"Abandoned cart","Abandoned cart"
+"Customers","Customers"
+"First order","First order"
+"Products","Products"
+"Inventory","Inventory"
+"Discounts","Discounts"
+"Refund","Refund"
+"Shipping","Shipping"
+"Revenue","Revenue"
+"Analytics","Analytics"
+"Calendar","Calendar"
+"Store","Store"
+"Star","Star"

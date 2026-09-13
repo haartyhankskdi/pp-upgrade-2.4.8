@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="magefan_blog_post" resource="default">
+      <column xsi:type="mediumtext" name="rp_conditions_serialized" nullable="true" comment="Related Products Rules (Blog+)"/>
+      <column xsi:type="smallint" name="enable_comments" padding="6" unsigned="false" nullable="false" identity="false" default="1" comment="Enable Comments (Blog+)"/>
+      <column xsi:type="timestamp" name="rp_conditions_generation_time" on_update="false" nullable="false" default="NULL" comment="Related Products Rules Last Run (Blog+)"/>
+      <column xsi:type="varchar" name="featured_list_img" nullable="true" length="255" comment="Thumbnail Image (Blog+)"/>
+      <column xsi:type="varchar" name="featured_list_img_alt" nullable="true" length="255" comment="Featured List Image Alt (Blog+)"/>
+
+      <index referenceId="MAGEFAN_BLOG_POST_TITLE" indexType="fulltext">
+          <column name="title"/>
+      </index>
+
+      <index referenceId="MAGEFAN_BLOG_POST_CONTENT" indexType="fulltext">
+          <column name="content"/>
+      </index>
+  </table>
+
+  <table name="magefan_blog_post_relatedpost" resource="default">
+      <column xsi:type="smallint" name="auto_related" padding="6" unsigned="false" nullable="true" identity="false" comment="Auto Related"/>
+  </table>
+
+  <table name="magefan_blog_post_relatedproduct" resource="default">
+      <column xsi:type="smallint" name="auto_related" padding="6" unsigned="false" nullable="true" identity="false" comment="Auto Related"/>
+      <column xsi:type="smallint" name="display_on_product" padding="6" unsigned="false" nullable="true" identity="false" comment="Display Post On Product Page"/>
+      <column xsi:type="smallint" name="display_on_post" padding="6" unsigned="false" nullable="true" identity="false" comment="Display Product On Post Page"/>
+  </table>
+
+  <table name="magefan_blog_post_relatedproduct_by_rule" resource="default" engine="innodb" comment="Magefan Blog Product Related Posts">
+      <column xsi:type="int" name="id" padding="11" unsigned="false" nullable="false" identity="true" comment="ID"/>
+      <column xsi:type="int" name="post_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Post ID"/>
+      <column xsi:type="int" name="product_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Product ID"/>
+      <column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Store ID"/>
+      <constraint xsi:type="primary" referenceId="PRIMARY">
+          <column name="id"/>
+      </constraint>
+      <index referenceId="MAGEFAN_BLOG_POST_RELATEDPRODUCT_BY_RULE_STORE_ID" indexType="btree">
+          <column name="store_id"/>
+      </index>
+      <index referenceId="MAGEFAN_BLOG_POST_RELATEDPRODUCT_BY_RULE_POST_ID" indexType="btree">
+          <column name="post_id"/>
+      </index>
+      <index referenceId="MAGEFAN_BLOG_POST_RELATEDPRODUCT_BY_RULE_PRODUCT_ID" indexType="btree">
+          <column name="product_id"/>
+      </index>
+  </table>
+
+  <table name="magefan_blog_post_relatedpost_log" resource="default" engine="innodb" comment="Magefan Blog Post Related Log Table">
+      <column xsi:type="int" name="post_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Post ID"/>
+      <column xsi:type="date" name="created_at" comment="Created Related Post"/>
+
+      <constraint xsi:type="primary" referenceId="PRIMARY">
+          <column name="post_id"/>
+      </constraint>
+
+      <constraint xsi:type="foreign" referenceId="FK_E38C2E7FB91DA8F5BBEC4D2D6EF1A659" table="magefan_blog_post_relatedpost_log" column="post_id" referenceTable="magefan_blog_post" referenceColumn="post_id" onDelete="CASCADE"/>
+  </table>
+
+  <table name="magefan_blog_post_relatedproduct_log" resource="default" engine="innodb" comment="Magefan Blog Product Related Log Table">
+      <column xsi:type="int" name="post_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Post ID"/>
+      <column xsi:type="date" name="created_at" comment="Created Related Product"/>
+
+      <constraint xsi:type="primary" referenceId="PRIMARY">
+          <column name="post_id"/>
+      </constraint>
+
+      <constraint xsi:type="foreign" referenceId="FK_DFDA8F0BD066050BEF9793F769741D5B" table="magefan_blog_post_relatedproduct_log" column="post_id" referenceTable="magefan_blog_post" referenceColumn="post_id" onDelete="CASCADE"/>
+  </table>
+
+
+  <table name="magefan_blog_post_group" resource="default" engine="innodb" comment="Catalog Rules To Posts Groups">
+      <column xsi:type="int" name="post_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Post ID"/>
+      <column xsi:type="smallint" name="group_id" padding="6" unsigned="false" nullable="false" identity="false" comment="Group ID"/>
+
+      <constraint xsi:type="primary" referenceId="PRIMARY">
+          <column name="post_id"/>
+          <column name="group_id"/>
+      </constraint>
+
+      <constraint xsi:type="foreign" referenceId="MAGEFAN_BLOG_POST_GROUP_POST_ID_MAGEFAN_BLOG_POST_POST_ID" table="magefan_blog_post_group" column="post_id" referenceTable="magefan_blog_post" referenceColumn="post_id" onDelete="CASCADE"/>
+
+      <index referenceId="MAGEFAN_BLOG_POST_GROUP_GROUP_ID" indexType="btree">
+          <column name="group_id"/>
+      </index>
+  </table>
+
+  <table name="magefan_blog_category_group" resource="default" engine="innodb" comment="Catalog Rules To Category Groups">
+      <column xsi:type="int" name="category_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Category ID"/>
+      <column xsi:type="smallint" name="group_id" padding="5" unsigned="true" nullable="false" identity="false" comment="Group ID"/>
+
+      <constraint xsi:type="primary" referenceId="PRIMARY">
+          <column name="category_id"/>
+          <column name="group_id"/>
+      </constraint>
+
+      <constraint xsi:type="foreign" referenceId="MAGEFAN_BLOG_CTGR_GROUP_CTGR_ID_MAGEFAN_BLOG_CTGR_CTGR_ID" table="magefan_blog_category_group" column="category_id" referenceTable="magefan_blog_category" referenceColumn="category_id" onDelete="CASCADE"/>
+
+      <index referenceId="MAGEFAN_BLOG_CATEGORY_GROUP_GROUP_ID" indexType="btree">
+          <column name="group_id"/>
+      </index>
+  </table>
+
+  <table name="magefan_blog_category" resource="default">
+      <column xsi:type="varchar" name="category_img" nullable="true" length="255" comment="Category Image"/>
+      <column xsi:type="varchar" name="category_img_alt" nullable="true" length="255" comment="Category Image Alt"/>
+      <column xsi:type="text" name="bottom_content" nullable="true" comment="Bottom Content"/>
+  </table>
+
+  <table name="magefan_blog_tag" resource="default">
+      <column xsi:type="varchar" name="tag_img" nullable="true" length="255" comment="Tag Image"/>
+      <column xsi:type="varchar" name="tag_img_alt" nullable="true" length="255" comment="Tag Image Alt"/>
+  </table>
+</schema>

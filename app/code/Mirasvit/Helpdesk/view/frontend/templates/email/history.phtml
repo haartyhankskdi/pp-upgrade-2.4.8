@@ -1,0 +1,26 @@
+<?php /** @var \Mirasvit\Helpdesk\Block\Email\History $block */?>
+<?php if ($block->getTicket()) :?>
+    <?php if ($block->getMessages()->count() && $block->getLimit()) :?>
+    <br>
+    <br>
+    <b><?= $block->escapeHtml(__('Ticket History')) ?></b><br>
+        <?php foreach ($block->getMessages() as $message):?>
+        <p>
+            <i>
+                <?php if ($message->getCustomerName()):?>
+                    <?= $block->escapeHtml($message->getCustomerName()) ?>
+                <?php else: ?>
+                    <?= $block->escapeHtml($message->getFrontendUserName()) ?>
+                <?php endif ?> |
+                <?= $block->escapeHtml($block->formatDate($message->getCreatedAt(), \IntlDateFormatter::MEDIUM)) ?>
+            </i><br>
+
+            <?php
+            //DONT CHANGE THIS
+            echo $block->escapeHtml($message->getUnsafeBodyHtml(), $message->getAllowedTags());
+            //END DONT CHANGE THIS
+            ?>
+        </p>
+        <?php endforeach ?>
+    <?php endif;?>
+<?php endif;?>

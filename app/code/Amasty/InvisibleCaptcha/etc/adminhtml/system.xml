@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!--
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Google Invisible reCaptcha for Magento 2
-*/-->
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Google Invisible reCaptcha for Magento 2
+ */-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/system_file.xsd">
     <system>
         <section id="aminvisiblecaptcha" translate="label" type="text" sortOrder="091422" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -54,7 +54,7 @@
                     <label>Site Key (Version 2)</label>
                     <comment><![CDATA[You can generate site key <a href="https://www.google.com/recaptcha/admin" target="_blank">here</a>]]></comment>
                     <depends>
-                        <field id="captchaVersion">2</field>
+                        <field id="captchaVersion" separator=",">1,2</field>
                         <field id="enabledCaptcha">1</field>
                     </depends>
                 </field>
@@ -63,7 +63,7 @@
                     <comment><![CDATA[You can generate secret key <a href="https://www.google.com/recaptcha/admin" target="_blank">here</a>]]></comment>
                     <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                     <depends>
-                        <field id="captchaVersion">2</field>
+                        <field id="captchaVersion" separator=",">1,2</field>
                         <field id="enabledCaptcha">1</field>
                     </depends>
                 </field>

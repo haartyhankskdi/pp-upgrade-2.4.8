@@ -31,7 +31,7 @@ use Mageplaza\Core\Helper\Media;
  */
 class Image extends Media
 {
-    const TEMPLATE_MEDIA_PATH        = 'mageplaza/promobanner';
+    const TEMPLATE_MEDIA_PATH = 'mageplaza/promobanner';
     const TEMPLATE_MEDIA_TYPE_BANNER = 'banner/image';
 
     /**

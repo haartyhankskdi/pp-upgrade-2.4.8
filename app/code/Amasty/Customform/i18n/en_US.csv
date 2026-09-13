@@ -39,6 +39,7 @@ Textarea,Textarea
 "Text Input","Text Input"
 Time,Time
 Wysiwyg,Wysiwyg
+"Forms Analytics","Forms Analytics"
 "Answer was deleted.","Answer was deleted."
 "Can't delete item right now. Please review the log and try again.","Can't delete item right now. Please review the log and try again."
 "Can't find a item to delete.","Can't find a item to delete."
@@ -78,6 +79,7 @@ Content,Content
 "Attached file %1 does not exists.","Attached file %1 does not exists."
 Guest,Guest
 "Can't save file without extensions name","Can't save file without extensions name"
+"File MIME type does not match file extension","File MIME type does not match file extension"
 "Field exceeds the allowed file size(%1 mb).","Field exceeds the allowed file size(%1 mb)."
 "Add Option +","Add Option +"
 "All fields were removed.","All fields were removed."
@@ -198,6 +200,8 @@ Dependency,Dependency
 "Product Paget Url -  %1","Product Paget Url -  %1"
 "Regular Price -  %1","Regular Price -  %1"
 "Actual Price -  %1","Actual Price -  %1"
+"Product Sku -  %1","Product Sku -  %1"
+"Product Name -  %1","Product Name -  %1"
 "Attribute Value, e.g. {product_color} - {product_ATTRIBUTE%CODE}","Attribute Value, e.g. {product_color} - {product_ATTRIBUTE%CODE}"
 "Please make sure that the attribute is used in the %1product listing%2","Please make sure that the attribute is used in the %1product listing%2"
 "Any Text Field|Text Area|Date|Dropdown|Multiple Select|Yes/No Customer or Customer Address attribute code is supported here.","Any Text Field|Text Area|Date|Dropdown|Multiple Select|Yes/No Customer or Customer Address attribute code is supported here."
@@ -220,6 +224,7 @@ Answered,Answered
 "DI configuration for result type %1 does not exists or is invalid","DI configuration for result type %1 does not exists or is invalid"
 "To use ZIP functionality, please install the library maennchen/zipstream-php. To do this, run the command ""composer require maennchen/zipstream-php"" in the main site folder.","To use ZIP functionality, please install the library maennchen/zipstream-php. To do this, run the command ""composer require maennchen/zipstream-php"" in the main site folder."
 "To use PDF functionality, please install the library dompdf/dompdf. To do this, run the command ""composer require dompdf/dompdf"" in the main site folder.","To use PDF functionality, please install the library dompdf/dompdf. To do this, run the command ""composer require dompdf/dompdf"" in the main site folder."
+"The form content exceeds the maximum allowed length of 65,535 characters.","The form content exceeds the maximum allowed length of 65,535 characters."
 "Registry key ""%1"" already exists","Registry key ""%1"" already exists"
 "Form with code %1 already exists.","Form with code %1 already exists."
 "Unable to save request with ID %1. Error: %2","Unable to save request with ID %1. Error: %2"
@@ -228,7 +233,6 @@ Answered,Answered
 "Unable to remove form with ID %1. Error: %2","Unable to remove form with ID %1. Error: %2"
 "Unable to remove form. Error: %1","Unable to remove form. Error: %1"
 "Form code was not found","Form code was not found"
-"To create a message, you need it's prototype...","To create a message, you need it's prototype..."
 "Unable to send the email.","Unable to send the email."
 "Email was not sent. Please specify email sender in Amasty Custom Form module configuration.","Email was not sent. Please specify email sender in Amasty Custom Form module configuration."
 "Use System Config Value","Use System Config Value"
@@ -236,6 +240,7 @@ Answered,Answered
 "-- Please save this form first --","-- Please save this form first --"
 Enabled,Enabled
 Disabled,Disabled
+"Form is disabled.","Form is disabled."
 "form_id is not resolved.","form_id is not resolved."
 "Form key is not valid. Please try to reload the page.","Form key is not valid. Please try to reload the page."
 "Please agree to the Privacy Policy","Please agree to the Privacy Policy"
@@ -290,14 +295,17 @@ Logo,Logo
 Download,Download
 Download:,Download:
 "Google map","Google map"
+"Close form","Close form"
 GDPR,GDPR
 "Thank you for filling the form out. Your feedback is much appreciated!","Thank you for filling the form out. Your feedback is much appreciated!"
 "Best Regards","Best Regards"
 "Submitted Data:","Submitted Data:"
 "You have new submitted custom form.","You have new submitted custom form."
 "%form_title form was submitted  by ","%form_title form was submitted  by "
+%userName,%userName
 "which you can see by the following ","which you can see by the following "
 link,link
+"Referrer URL: %referer_url","Referrer URL: %referer_url"
 Sincerely,Sincerely
 " Form#"," Form#"
 " (removed)"," (removed)"
@@ -307,8 +315,11 @@ Attention,Attention
 Error,Error
 "You have exceeded the maximum allowed number of fields. Please try to create several forms instead of this one.","You have exceeded the maximum allowed number of fields. Please try to create several forms instead of this one."
 "This form can be submitted only once. Ready to proceed?","This form can be submitted only once. Ready to proceed?"
+"date format: ","date format: "
+"Select date","Select date"
 Previous,Previous
 Next,Next
+"Amasty Custom Form","Amasty Custom Form"
 "Admin Notification","Admin Notification"
 "Enable Notification to Email","Enable Notification to Email"
 "Send Emails To","Send Emails To"
@@ -342,19 +353,20 @@ Advanced,Advanced
                         Use “0” to disable this functionality","After set amount of days file links will no longer be valid.
                         Use “0” to disable this functionality"
 "Please disable the setting if you use consent checkboxes configured for Custom Forms via <a href='%1'>GDPR Consent Checkboxes.</a>","Please disable the setting if you use consent checkboxes configured for Custom Forms via <a href='%1'>GDPR Consent Checkboxes.</a>"
-"Amasty Custom Form","Amasty Custom Form"
 "Form ID","Form ID"
 "Show on Button Click","Show on Button Click"
 "Custom Form popup will be displayed after the button is clicked. This setting has priority over the form value.","Custom Form popup will be displayed after the button is clicked. This setting has priority over the form value."
 "Button Text","Button Text"
 Template,Template
+"Upgrade to Unlock","Upgrade to Unlock"
 CSV,CSV
 "Individual PDFs","Individual PDFs"
+"All Store Views","All Store Views"
+"Store View","Store View"
 "Delete items","Delete items"
 "Are you sure you wan't to delete selected items?","Are you sure you wan't to delete selected items?"
 ID,ID
 "Form Code","Form Code"
-"Store View","Store View"
 "Created at","Created at"
 "IP Address","IP Address"
 "Customer Email","Customer Email"
@@ -390,11 +402,7 @@ Notifications,Notifications
                         and use email address specified in the customer account.
                     "
 "Hide Email Address Field","Hide Email Address Field"
-"Please note. ""Email Address Field"" should be selected for detecting
-                        recipient email.
-                    ","Please note. ""Email Address Field"" should be selected for detecting
-                        recipient email.
-                    "
+"Please note. ""Email Address Field"" should be selected for detecting recipient email.","Please note. ""Email Address Field"" should be selected for detecting recipient email."
 "Form Design","Form Design"
 "Submit Button","Submit Button"
 "Success Message","Success Message"
@@ -406,13 +414,10 @@ Embedding,Embedding
 "Cms Embedding Code","Cms Embedding Code"
 "Copy this code into CMS Page Editor to insert form into any CMS page.","Copy this code into CMS Page Editor to insert form into any CMS page."
 "Template Embedding Code","Template Embedding Code"
-"Insert this code into *.phtml template directly to display form in any block.
-                ","Insert this code into *.phtml template directly to display form in any block.
-                "
+"Insert this code into *.phtml template directly to display form in any block.","Insert this code into *.phtml template directly to display form in any block."
 "Layout Embedding Code","Layout Embedding Code"
 "Insert this code into layout to display the form.","Insert this code into layout to display the form."
 "Add New Form","Add New Form"
-"All Store Views","All Store Views"
 Disable,Disable
 Enable,Enable
 Status,Status

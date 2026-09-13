@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Observer;
@@ -28,10 +28,6 @@ use Mageplaza\Osc\Helper\Address;
 use Mageplaza\Osc\Observer\AfterAttributeCreate;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class AfterAttributeCreateTest
- * @package Mageplaza\Osc\Test\Unit\Observer
- */
 class AfterAttributeCreateTest extends TestCase
 {
     /**
@@ -44,7 +40,7 @@ class AfterAttributeCreateTest extends TestCase
      */
     private $observer;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->helperMock = $this->getMockBuilder(Address::class)
             ->disableOriginalConstructor()
@@ -56,7 +52,7 @@ class AfterAttributeCreateTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestExecuteWithCustomerAttribute()
+    public static function providerTestExecuteWithCustomerAttribute()
     {
         $fields = [
             [
@@ -143,16 +139,14 @@ class AfterAttributeCreateTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
         $eventMock = $this->getMockBuilder(Event::class)
-            ->setMethods(['getAttribute'])
+            ->addMethods(['getAttribute'])
             ->disableOriginalConstructor()
             ->getMock();
 
         $observerMock->expects($this->once())->method('getEvent')->willReturn($eventMock);
-        $methods = get_class_methods(CustomerAttribute::class);
-        $methods[] = 'getPosition';
-
         $attributeMock = $this->getMockBuilder(CustomerAttribute::class)
-            ->setMethods($methods)
+            ->onlyMethods(['getAttributeCode', 'getIsRequired', 'isObjectNew', 'getUsedInForms', 'save', 'setDefaultFrontendLabel'])
+            ->addMethods(['getPosition'])
             ->disableOriginalConstructor()->getMock();
         $eventMock->expects($this->once())->method('getAttribute')->willReturn($attributeMock);
         $fieldPosition = [

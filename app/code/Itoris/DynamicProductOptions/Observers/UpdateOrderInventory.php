@@ -108,7 +108,7 @@ class UpdateOrderInventory implements ObserverInterface
                             $dynamicValue = $this->_objectManager->create('Itoris\DynamicProductOptions\Model\Option\Value')->load($optionTypeId, 'orig_value_id');
                             $valueConfiguration = $dynamicValue->getConfiguration();
                             if ($valueConfiguration) {
-                                $valueConfiguration = \Zend_Json::decode($valueConfiguration);
+                                $valueConfiguration = json_decode($valueConfiguration, true);
                                 if (isset($valueConfiguration['sku_is_product_id']) && $valueConfiguration['sku_is_product_id']) {
                                     /** @var  $valueModel \Magento\Catalog\Model\Product\Option\Value */
                                     //$valueModel = $this->_objectManager->create('Magento\Catalog\Model\Product\Option\Value')->load($optionTypeId);

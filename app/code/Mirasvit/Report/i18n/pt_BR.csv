@@ -1,0 +1,226 @@
+"Something went wrong while building the report","Ocorreu um erro ao gerar o relatório"
+"Not logged in","Não autenticado"
+"Email Notifications","Notificações por e-mail"
+"The email report has been deleted.","O relatório de e-mail foi excluído."
+"This email report no longer exists.","Este relatório de e-mail não existe mais."
+"This email no longer exists.","Este e-mail não existe mais."
+"Edit Email ""%1""","Editar e-mail ""%1"""
+"New Email Report","Novo relatório de e-mail"
+"You saved the email report.","O relatório de e-mail foi salvo."
+"No data to save.","Nenhum dado para salvar."
+"This report no longer exists.","Este relatório não existe mais."
+"Report columns saved.","Colunas do relatório salvas."
+"Unsupported format ""%1""","Formato não suportado ""%1"""
+"This report does not exist or is not available for sharing.","Este relatório não existe ou não está disponível para compartilhamento"
+"Report identifier is required","O identificador do relatório é obrigatório"
+"Report: %1","Relatório: %1"
+"Block identifier ""%1"" does not match any available report or dashboard block. Use GET /V1/reports/reports to discover valid identifiers.","O identificador do bloco ""%1"" não corresponde a nenhum relatório ou bloco de painel disponível. Use GET /V1/reports/reports para descobrir identificadores válidos."
+"Time range ""%1"" is not valid. Valid values: %2","O intervalo de tempo ""%1"" não é válido. Valores válidos: %2"
+"Email with ID ""%1"" does not exist.","O e-mail com ID ""%1"" não existe."
+Back,Voltar
+Delete,Excluir
+"Are you sure you want to do this?","Tem certeza de que deseja fazer isso?"
+Save,Salvar
+"Save & Continue","Salvar e continuar"
+"Save & Send","Salvar e enviar"
+Edit,Editar
+"Delete email?","Excluir e-mail?"
+(previous),(anterior)
+"%1 out of %2 selected","%1 de %2 selecionados"
+"Access URL","URL de acesso"
+Actions,Ações
+"Active filters:","Filtros ativos:"
+"Add Empty Widget","Adicionar widget vazio"
+"Add filter","Adicionar filtro"
+"Add Filter","Adicionar filtro"
+"Add New Board","Adicionar novo painel"
+"Add New Widget","Adicionar novo widget"
+"Add Widget","Adicionar widget"
+"Additional Filters","Filtros adicionais"
+"Advanced mode","Modo avançado"
+Aggregator,Agregador
+"and more %1 other columns","e mais %1 outras colunas"
+applicable,aplicáveis
+Apply,Aplicar
+"Apply date filter","Aplicar filtro de data"
+"Apply Filters","Aplicar filtros"
+"Are you sure you want to reset the access token?","Tem certeza de que deseja redefinir o token de acesso?"
+Average,Média
+"Base Table","Tabela base"
+"Block Type","Tipo de bloco"
+Cancel,Cancelar
+"Cancel date filter","Cancelar filtro de data"
+Chart,Gráfico
+"Chart type selector","Seletor de tipo de gráfico"
+"Clear all","Limpar tudo"
+Close,Fechar
+"Close menu","Fechar menu"
+Column,Coluna
+"Column for grouping data in the table","Coluna para agrupar dados na tabela"
+"Column for grouping the data in the table","Coluna para agrupar os dados na tabela"
+"Column selector mode switcher. Current mode: %1","Alternador do modo do seletor de colunas. Modo atual: %1"
+Columns,Colunas
+"Columns to group the rows in the table","Colunas para agrupar as linhas da tabela"
+Comparison,Comparação
+contains,contém
+Content,Conteúdo
+Copied,Copiado
+"Copy importdata code for Google Sheets","Copiar código importdata para o Planilhas Google"
+"Copy to clipboard","Copiar para a área de transferência"
+Count,Contagem
+Country,País
+"Current mode: %1","Modo atual: %1"
+"Current Page","Página atual"
+Custom,Personalizado
+Customize,Personalizar
+Date,Data
+"Date filter","Filtro de data"
+Day,Dia
+"Delete report","Excluir relatório"
+Description,Descrição
+Dimension,Dimensão
+"Dimension column table","Tabela de coluna de dimensão"
+Dimensions,Dimensões
+Disable,Desativar
+"Disable sharing report","Desativar compartilhamento do relatório"
+"Do not compare","Não comparar"
+"doesn't contain","não contém"
+Download,Baixar
+Duplicate,Duplicar
+"Duplicate report","Duplicar relatório"
+Early,Antecipado
+"Edit Board","Editar painel"
+"Edit columns","Editar colunas"
+"Edit report","Editar relatório"
+"Empty report data table","Tabela de dados do relatório vazia"
+Enable,Ativar
+"Enable Remote Access","Ativar acesso remoto"
+"Enable Remote Access on Storefront","Ativar acesso remoto na loja"
+"Enable sharing report","Ativar compartilhamento do relatório"
+"Enter page number","Digite o número da página"
+"Excel XML","Excel XML"
+Export,Exportar
+"Filter value","Valor do filtro"
+Filters,Filtros
+"Found: %1 columns","Encontradas: %1 colunas"
+from,de
+"From date","Data inicial"
+"General Information","Informações gerais"
+"Go to next page","Ir para a próxima página"
+"Go to previous page","Ir para a página anterior"
+"Group by","Agrupar por"
+"Hide percentage of total","Ocultar porcentagem do total"
+"Image for %1","Imagem de %1"
+"Import data code","Código de importação de dados"
+"Insert the below code into your Google Sheet and it will automatically import the most recent data from the report every hour:","Insira o código abaixo em sua planilha do Google e ele importará automaticamente os dados mais recentes do relatório a cada hora:"
+"Insert To Google Sheet","Inserir no Planilhas Google"
+"Insert widget's HTML content here","Insira aqui o conteúdo HTML do widget"
+"Internal Filters","Filtros internos"
+"Is Default","É padrão"
+"is not","não é"
+"is not one of","não é nenhum de"
+"is one of","é um de"
+Loading...,Carregando...
+"Lower number means higher position. Boards with the same sort order will be ordered according to the dashboard general sorting settings.","Números menores indicam posição mais alta. Painéis com a mesma ordem de classificação serão ordenados conforme as configurações gerais de ordenação do dashboard."
+"Make a copy","Fazer uma cópia"
+"Make sure that the selected columns are","Verifique se as colunas selecionadas estão"
+Manage,Gerenciar
+"Manage columns","Gerenciar colunas"
+"Manage filters","Gerenciar filtros"
+Metric,Métrica
+Month,Mês
+"More filters","Mais filtros"
+"More Filters","Mais filtros"
+"No next pages, action disabled","Sem páginas seguintes, ação desativada"
+"No previous pages, action disabled","Sem páginas anteriores, ação desativada"
+"not allowed","não permitido"
+Number,Número
+of,de
+"Once you have configured the report, you can use a direct link to open the report on any device without opening the admin and always with fresh live data.","Depois de configurar o relatório, você pode usar um link direto para abri-lo em qualquer dispositivo sem acessar o admin, sempre com dados atualizados em tempo real."
+"Open link","Abrir link"
+"Open menu","Abrir menu"
+"Override dashboard time","Substituir período do painel"
+"Page Size","Tamanho da página"
+Percent,Porcentagem
+"Please select","Selecione"
+"Previous period","Período anterior"
+"Primary Filters","Filtros principais"
+"Private Board","Painel privado"
+"Private Board will be available only for the current admin user. Shared Board will be available for all admin users.","O painel privado estará disponível apenas para o usuário admin atual. O painel compartilhado estará disponível para todos os usuários admin."
+Quarter,Trimestre
+"Quick Access & Sharing","Acesso rápido e compartilhamento"
+"A quick access link to the report is a great alternative to routine daily exporting.","O link de acesso rápido ao relatório é uma ótima alternativa à exportação diária de rotina."
+Range,Intervalo
+"records found","registros encontrados"
+Refresh,Atualizar
+Remove,Remover
+"Remove filter","Remover filtro"
+"Remove from chart","Remover do gráfico"
+"Removing board...","Removendo painel..."
+"Report data table with %1 rows","Tabela de dados do relatório com %1 linhas"
+Reset,Redefinir
+"Reset access token","Redefinir token de acesso"
+"Reset Changes","Redefinir alterações"
+"Resetting the access token will deactivate the old access link. Anyone who previously had access to the board will lose it and will need the new link to access it.","Redefinir o token de acesso desativará o link de acesso antigo. Quem tinha acesso ao painel perderá o acesso e precisará do novo link para acessá-lo."
+"Rows Limit","Limite de linhas"
+"Same period last month","Mesmo período do mês passado"
+"Same period last week","Mesmo período da semana passada"
+"Same period last year","Mesmo período do ano passado"
+"Save Changes","Salvar alterações"
+"Saving report...","Salvando relatório..."
+Saving...,Salvando...
+"Search column across ALL tables by identifier.","Pesquisar coluna em TODAS as tabelas por identificador."
+"Search for column","Pesquisar coluna"
+"Select condition","Selecionar condição"
+"Select date range","Selecionar intervalo de datas"
+"Select Date Range","Selecionar intervalo de datas"
+Share,Compartilhar
+"Share Dashboard","Compartilhar painel"
+"Share in %1 format","Compartilhar no formato %1"
+"Shared Board","Painel compartilhado"
+"Sharing link","Link de compartilhamento"
+"Show in chart","Mostrar no gráfico"
+"Show percentage of total","Mostrar porcentagem do total"
+"Single Value","Valor único"
+"Sort by %1","Ordenar por %1"
+"Sort Order","Ordem de classificação"
+Sorting,Ordenação
+"Spark line","Minigráfico"
+String,Texto
+Sum,Soma
+"Switch to %1 chart","Alternar para gráfico %1"
+Table,Tabela
+"Time Range","Intervalo de tempo"
+Title,Título
+to,até
+"To date","Data final"
+"to the current report.","ao relatório atual."
+Toolbar,Barra de ferramentas
+Type,Tipo
+"Type to search","Digite para pesquisar"
+"Untitled Block","Bloco sem título"
+"Untitled Board","Painel sem título"
+Value,Valor
+"We couldn't find any records.","Não encontramos nenhum registro."
+Week,Semana
+"Widget Library","Biblioteca de widgets"
+"Wrong configuration. Please change report building conditions.","Configuração incorreta. Altere as condições de construção do relatório."
+Year,Ano
+"To add your first block, unlock the board (top right corner).","É necessário desbloquear o painel (canto superior direito) para adicionar o primeiro bloco."
+"Loading report data","Carregando dados do relatório"
+"Report data table for %1","Tabela de dados do relatório para %1"
+Block,Bloco
+"Date Interval","Intervalo de datas"
+Limit,Limite
+"Add Block","Adicionar bloco"
+Active,Ativo
+"Attach each block as a separate CSV report","Anexar cada bloco como um relatório CSV separado"
+Subject,Assunto
+Recipient,Destinatário
+Schedule,Agendamento
+"Should be cron-like expression. <br/>Example: 59 23 * * * <br/>Will be sent report every day at 23:59","Deve ser uma expressão no formato cron. <br/>Exemplo: 59 23 * * * <br/>O relatório será enviado todos os dias às 23:59"
+Body,Corpo
+"Add New Email","Adicionar novo e-mail"
+ID,ID
+Status,Status
+"Last Sent At","Último envio em"

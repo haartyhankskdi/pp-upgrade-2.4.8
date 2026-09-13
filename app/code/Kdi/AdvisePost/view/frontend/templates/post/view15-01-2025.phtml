@@ -99,7 +99,7 @@ $model = $block->getModelData();
                                 <?php echo $product->getName(); ?>
                             </div>
                             <div class="product-description">
-                                <?= substr($product->getShortDescription(), 0,50 ) ?>
+                                <?= substr((string) $product->getShortDescription(), 0,50 ) ?>
                             </div>
                             <button class="view-details-button"> <a href="<?= $productUrl;?>">View More</a> </button>
                         </div>
@@ -177,7 +177,7 @@ $model = $block->getModelData();
                                     </div>
                                     <div class="product-adv-sec">
                                         <div class="product-title"><?php echo $post['title'] ; ?></div>
-                                         <div class="product-description"><?= substr( $post['short_content'] , 0,50 ) ?></div>
+                                         <div class="product-description"><?= substr( (string) $post['short_content'] , 0,50 ) ?></div>
                                         <button class="view-details-button"><?= $formattedDate ?></button>
                                     </div>
                                 </div>   

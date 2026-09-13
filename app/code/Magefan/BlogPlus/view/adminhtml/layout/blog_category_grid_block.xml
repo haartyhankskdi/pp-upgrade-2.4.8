@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="blog.category.grid.columnSet">
+            <block class="Magento\Backend\Block\Widget\Grid\Column" as="category_img" name="blog.category.grid.category_img" after="blog.category.grid.id">
+                <arguments>
+                    <argument name="header" xsi:type="string" translate="true">Image</argument>
+                    <argument name="index" xsi:type="string">category_img</argument>
+                    <argument name="header_css_class" xsi:type="string">col-img</argument>
+                    <argument name="column_css_class" xsi:type="string">col-img</argument>
+                    <argument name="type" xsi:type="string">text</argument>
+                    <argument name="renderer" xsi:type="string">Magefan\Blog\Block\Adminhtml\Grid\Column\Render\Image</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,10 @@
+<script type="text/javascript">
+    jQuery('.admin__data-grid-outer-wrap[data-bind="scope: \'customer_order_view_helpdesk_tickets_grid.customer_order_view_helpdesk_tickets_grid\'"]').show();
+    jQuery('body').on('focusin', '.admin__page-nav-link', function() {
+        if (jQuery(this).attr('id') == 'tab_block_customer_helpdesk_tickets.grid.container') {
+            jQuery('.admin__data-grid-outer-wrap[data-bind="scope: \'customer_order_view_helpdesk_tickets_grid.customer_order_view_helpdesk_tickets_grid\'"]').show();
+        } else {
+            jQuery('.admin__data-grid-outer-wrap[data-bind="scope: \'customer_order_view_helpdesk_tickets_grid.customer_order_view_helpdesk_tickets_grid\'"]').hide();
+        }
+    });
+</script>

@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Paypal\Model;
@@ -27,10 +27,6 @@ use Magento\Quote\Api\Data\PaymentInterface;
 use Mageplaza\Osc\Model\Plugin\Paypal\Model\Express as PluginExpress;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class ExpressTest
- * @package Mageplaza\Osc\Test\Unit\Model\Plugin\Paypal\Model
- */
 class ExpressTest extends TestCase
 {
     /**
@@ -38,7 +34,7 @@ class ExpressTest extends TestCase
      */
     protected $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->plugin = new PluginExpress();
     }

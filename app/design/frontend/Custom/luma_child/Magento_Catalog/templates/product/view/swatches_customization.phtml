@@ -27,7 +27,7 @@ if (in_array($productType, $allowedTypes)) {
                 ], function($,_){
                     var outOfStockArray = <?php echo json_encode($optionConfigurationOutOfStock) ?>;
                     // console.log(outOfStockArray);
-                    $(window).load(function(){
+                    $(function(){
                         $( ".product-options-wrapper div" ).click(function() {
                             var selected_options = {};
                             $('div.swatch-attribute').each(function(k,v){

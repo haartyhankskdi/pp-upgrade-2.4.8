@@ -46,33 +46,33 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
     protected function _beforeToHtml()
     {
         $this->addTab('general', [
-            'label'   => __('General'),
-            'title'   => __('General'),
+            'label' => __('General'),
+            'title' => __('General'),
             'content' => $this->getChildHtml('general'),
-            'active'  => true
+            'active' => true
         ]);
 
         $this->addTab('condition', [
-            'label'   => __('Conditions'),
-            'title'   => __('Conditions'),
+            'label' => __('Conditions'),
+            'title' => __('Conditions'),
             'content' => $this->getChildHtml('condition')
         ]);
 
         $this->addTab('design', [
-            'label'   => __('Design'),
-            'title'   => __('Design'),
+            'label' => __('Design'),
+            'title' => __('Design'),
             'content' => $this->getChildHtml('design')
         ]);
 
         $this->addTab('display', [
-            'label'   => __('Display'),
-            'title'   => __('Display'),
+            'label' => __('Display'),
+            'title' => __('Display'),
             'content' => $this->getChildHtml('display')
         ]);
 
         $this->addTab('trigger', [
-            'label'   => __('Trigger'),
-            'title'   => __('Trigger'),
+            'label' => __('Trigger'),
+            'title' => __('Trigger'),
             'content' => $this->getChildHtml('trigger')
         ]);
 

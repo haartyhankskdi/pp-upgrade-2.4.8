@@ -22,6 +22,7 @@ use Amasty\Base\Model\SysInfo\Data\RegisteredInstance\Instance;
 use Amasty\Base\Model\SysInfo\Provider\Collector;
 use Amasty\Base\Model\SysInfo\RegisteredInstanceRepository;
 use Magento\Framework\Exception\LocalizedException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -86,6 +87,7 @@ class SendSysInfoTest extends TestCase
      * @dataProvider executeDataProvider
      * @return void
      */
+    #[DataProvider('executeDataProvider')]
     public function testExecute(array $changedData): void
     {
         $instanceInfoMock = $this->initExecute($changedData);
@@ -184,7 +186,7 @@ class SendSysInfoTest extends TestCase
             ->willReturn($instanceMock);
     }
 
-    public function executeDataProvider(): array
+    public static function executeDataProvider(): array
     {
         return [
             [['domains' => [0 => ['url' => 'test']]]], //collect

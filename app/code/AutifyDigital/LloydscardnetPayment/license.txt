@@ -1,0 +1,5 @@
+Copyright (c) 2020-Present Autify Digital Ltd.
+
+This software and associated files (the "Software") are the CONFIDENTIAL and PROPRIETARY property of Autify Digital Ltd. Unauthorized copying, reproduction, modification, distribution, or disclosure of the Software, in whole or in part, is strictly prohibited.
+
+The Software is protected by copyright and other applicable intellectual property laws. It may only be used, reproduced, or distributed in accordance with the terms of a valid written agreement executed by Autify Digital Ltd.

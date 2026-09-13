@@ -1,72 +1,107 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Google Invisible reCaptcha for Magento 2
-*/
-?>
-<?php
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Google Invisible reCaptcha for Magento 2
+ */
 /**
  * @var $block Magento\Framework\View\Element\Template
  * @var $viewModel Amasty\InvisibleCaptcha\ViewModel\Captcha
  * @var $escaper Magento\Framework\Escaper
+ * @var $secureRenderer Magento\Framework\View\Helper\SecureHtmlRenderer
  */
 
 $viewModel = $block->getViewModel();
 ?>
 
 <?php if ($viewModel->isNeedToShowCaptcha()): ?>
-    <script>
-        require([
-            'Amasty_InvisibleCaptcha/js/model/am-recaptcha',
-    ], function (amRecaptchaModel) {
-            amRecaptchaModel.setConfig({
-                "formsToProtect": "<?= $escaper->escapeJs(implode(',', $viewModel->getAllFormSelectors())) ?>",
-                "isEnabledOnPayments": "<?= $escaper->escapeJs($viewModel->isCaptchaOnPayments())?>",
-                "checkoutRecaptchaValidateUrl": "<?= $escaper->escapeHtml($viewModel->getCheckoutValidateCaptchaUrl()) ?>",
-                "invisibleCaptchaCustomForm": "<?= $escaper->escapeHtml($viewModel->getInvisibleCaptchaCustomForm()) ?>",
-                "recaptchaConfig": {
-                    "lang": "<?= $escaper->escapeJs($viewModel->getLanguage()) ?>",
-                    "theme": "<?= $escaper->escapeHtml($viewModel->getBadgeTheme()) ?>",
-                    "badge": "<?= $escaper->escapeHtml($viewModel->getBadgePosition()) ?>",
-                    "sitekey": "<?= $escaper->escapeHtml($viewModel->getSiteKey()) ?>"
-                }
-            })
-    });
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Amasty_InvisibleCaptcha/js/action/am-recaptcha-configure": {
+                    "formsToProtect": "<?= $escaper->escapeJs(implode(',', $viewModel->getAllFormSelectors())) ?>",
+                    "isEnabledOnPayments": "<?= $escaper->escapeJs($viewModel->isCaptchaOnPayments()) ?>",
+                    "checkoutRecaptchaValidateUrl": "<?= $escaper->escapeHtml($viewModel->getCheckoutValidateCaptchaUrl()) ?>",
+                    "invisibleCaptchaCustomForm": "<?= $escaper->escapeHtml($viewModel->getInvisibleCaptchaCustomForm()) ?>",
+                    "recaptchaConfig": {
+                        "lang": "<?= $escaper->escapeJs($viewModel->getLanguage()) ?>",
+                        "theme": "<?= $escaper->escapeHtml($viewModel->getBadgeTheme()) ?>",
+                        "badge": "<?= $escaper->escapeHtml($viewModel->getBadgePosition()) ?>",
+                        "sitekey": "<?= $escaper->escapeHtml($viewModel->getSiteKey()) ?>",
+                        "size": "<?= $escaper->escapeHtml($viewModel->getSize()) ?>",
+                        "isInvisible": <?= $viewModel->isInvisibleCaptcha() ? 'true' : 'false' ?>,
+                        "recaptchaVersion": <?= $escaper->escapeHtml($viewModel->getCaptchaVersion()) ?>
+                    },
+                    "reCaptchaErrorMessage": "<?= $escaper->escapeHtml(__('Prove you are not a robot')) ?>"
+                 }
+            }
+        }
     </script>
-    <script>
+
+    <?php if ($block->getRequest()->getFullActionName() !== 'checkout_index_index'): ?>
+        <?php
+        $formsToProtectJs = $escaper->escapeJs(implode(',', $viewModel->getAllFormSelectors()));
+
         // Fix to prevent 'no reCaptcha Token' error while slow site loading.
-        // Submit button should catch am-captcha.js initialization8 first
-        (function () {
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', onReadyState);
-            } else {
-                onReadyState();
-            }
+        // Submit button should catch am-captcha.js initialization first
+        $scriptString = <<<script
+            (function () {
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', onReadyStateListener);
+                } else {
+                    onReadyState();
+                }
 
-            function onReadyState () {
-                let formsToProtect = "<?= $escaper->escapeJs(implode(',', $viewModel->getAllFormSelectors())) ?>";
-                let forms = formsToProtect.split(',');
-                let formsOnPage = [];
+                function onReadyStateListener() {
+                    onReadyState();
+                }
 
-                forms.forEach(form => {
-                    let existingForm = document.querySelectorAll(form);
+                function onReadyState (formsOnPage) {
+                    if (typeof formsOnPage === 'undefined') {
+                        let formsToProtect = "{$formsToProtectJs}";
+                        let forms = formsToProtect.split(',');
 
-                    if (existingForm.length) {
-                        formsOnPage.push(existingForm);
+                        formsOnPage = [];
+                        forms.forEach(form => {
+                            let existingForm = form ? document.querySelectorAll(form) : [];
+
+                            if (existingForm.length) {
+                                formsOnPage.push(existingForm);
+                            }
+                        })
                     }
-                })
 
-                formsOnPage.forEach(form => {
-                    let submit = form[0].querySelector('[type="submit"]');
-                    let isAlreadyDisabled = submit.getAttribute('disabled');
+                    formsOnPage.forEach(form => {
+                        let submit = form[0].querySelector('[type="submit"]');
+                        if (submit) {
+                            let isAlreadyDisabled = submit.getAttribute('disabled');
 
-                    if (!isAlreadyDisabled) {
-                        submit.setAttribute('disabled', true);
-                        submit.setAttribute('am-captcha-protect', true);
-                    }
-                })
-            }
-        })();
-    </script>
+                            if (!isAlreadyDisabled) {
+                                submit.setAttribute('disabled', true);
+                                submit.setAttribute('am-captcha-protect', true);
+                            }
+                        }
+                    })
+                }
+            script;
+
+        if ($viewModel->getInvisibleCaptchaCustomForm()) {
+            $scriptString .= <<<script
+
+                window.addEventListener('amform-elements-rendered', function (event) {
+                    onReadyState([event.detail.form]);
+                });
+                window.addEventListener('am-recaptcha-submit-event', function (event) {
+                    onReadyState([event.detail.form]);
+                });
+            script;
+        }
+
+        $scriptString .= <<<script
+
+            })();
+            script;
+        ?>
+        <?= /** @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>
+    <?php endif; ?>
 <?php endif; ?>

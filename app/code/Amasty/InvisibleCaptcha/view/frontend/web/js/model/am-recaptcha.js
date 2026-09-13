@@ -23,6 +23,9 @@ define([
             size: 'invisible'
         },
         formToProtect: '',
+        reCaptchaErrorMessage: 'Prove you are not a robot',
+        recaptchaVersion: null,
+        isInvisible: null,
 
         setConfig: function (config) {
             if (_.has(config, 'recaptchaConfig')) {
@@ -36,6 +39,8 @@ define([
             this.checkoutRecaptchaValidateUrl = config.checkoutRecaptchaValidateUrl;
             this.invisibleCaptchaCustomForm = config.invisibleCaptchaCustomForm;
             this.isEnabledOnPayments = !!config.isEnabledOnPayments;
+            this.reCaptchaErrorMessage = config.reCaptchaErrorMessage;
+            this.recaptchaVersion = config.recaptchaVersion;
         },
 
         setRecaptchaConfig: function (config) {

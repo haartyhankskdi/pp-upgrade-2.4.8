@@ -62,7 +62,7 @@ class PromotionSelectOptionSource implements OptionSourceInterface
         $existingOptionValues = array_column($result, 'value');
         foreach ($this->getPromoOptions() as $promoOption) {
             if (!in_array($promoOption->getValue(), $existingOptionValues, true)) {
-                $result[] = $promoOption;
+                $result[] = $promoOption->toArray();
             }
         }
 

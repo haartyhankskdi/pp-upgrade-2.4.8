@@ -1,9 +1,9 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 namespace Amasty\Customform\Controller\Adminhtml\Forms;
 
 use Magento\Backend\App\Action\Context;
@@ -13,8 +13,16 @@ use Amasty\Customform\Model\ResourceModel\Form\CollectionFactory;
 
 class MassEnable extends \Magento\Backend\App\Action
 {
+    public const ADMIN_RESOURCE = 'Amasty_Customform::page';
+
+    /**
+     * @var Filter
+     */
     protected $filter;
 
+    /**
+     * @var CollectionFactory
+     */
     protected $collectionFactory;
 
     public function __construct(

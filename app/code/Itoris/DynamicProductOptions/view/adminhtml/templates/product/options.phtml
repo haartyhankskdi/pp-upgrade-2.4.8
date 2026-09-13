@@ -518,7 +518,7 @@
             + '<th style="width:80px;"><?php echo $block->escapeJsHtml('Carriage Return') ?></th><th style="width:120px;"><?php echo $block->escapeJsHtml('CSS class') ?></th>'
             + '<th style="width:70px;"><?php echo $block->escapeJsHtml('Order') ?></th><th style="width:40px;"><?php echo $block->escapeJsHtml('Del') ?></th>'
         };
-        itorisDynamicOptions = new Itoris.OptionManager(<?php echo \Zend_Json::encode($config) ?>, <?php echo $block->getSectionsJson() ?>);
+        itorisDynamicOptions = new Itoris.OptionManager(<?php echo json_encode($config) ?>, <?php echo $block->getSectionsJson() ?>);
 
     });
 </script>

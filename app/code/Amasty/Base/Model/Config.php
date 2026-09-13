@@ -24,7 +24,6 @@ class Config extends ConfigProviderAbstract
 
     public const NOTIFICATIONS_FREQUENCY = 'notifications/frequency';
     public const NOTIFICATIONS_TYPE = 'notifications/type';
-    public const NOTIFICATIONS_ADS_ENABLE = 'notifications/ads_enable';
     public const LICENSE_NOTIFICATIONS_ENABLE = 'notifications/enable_license_notifications';
     public const LICENCE_SERVICE_API_URL = 'licence_service/api_url';
 
@@ -52,7 +51,7 @@ class Config extends ConfigProviderAbstract
         ScopeConfigInterface $scopeConfig,
         WriterInterface $configWriter,
         ReinitableConfigInterface $reinitableConfig,
-        Serializer $serializer = null
+        ?Serializer $serializer = null
     ) {
         parent::__construct($scopeConfig);
         $this->configWriter = $configWriter;
@@ -90,7 +89,7 @@ class Config extends ConfigProviderAbstract
 
     public function isAdsEnabled(): bool
     {
-        return (bool)$this->getValue(self::NOTIFICATIONS_ADS_ENABLE);
+        return false; //backward compatibility for some modules
     }
 
     public function isLicenseNotificationsEnabled(): bool

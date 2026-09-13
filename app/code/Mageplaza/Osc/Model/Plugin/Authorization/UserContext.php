@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\Authorization;
@@ -27,10 +27,6 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Mageplaza\Osc\Helper\Data as OscHelper;
 
-/**
- * Class UserContext
- * @package Mageplaza\Osc\Model\Plugin\Authorization
- */
 class UserContext
 {
     /**
@@ -47,7 +43,7 @@ class UserContext
      * UserContext constructor.
      *
      * @param OscHelper $oscHelper
-     * @param Session $checkoutSession
+     * @param Session   $checkoutSession
      */
     public function __construct(
         OscHelper $oscHelper,

@@ -54,7 +54,7 @@ class InstallSchema implements InstallSchemaInterface
                     'identity' => true,
                     'unsigned' => true,
                     'nullable' => false,
-                    'primary'  => true
+                    'primary' => true
                 ], 'Banner Id')
                 ->addColumn('name', Table::TYPE_TEXT, 255, [], 'Name')
                 ->addColumn('status', Table::TYPE_INTEGER, 1, ['nullable' => false], 'Status')
@@ -85,11 +85,11 @@ class InstallSchema implements InstallSchemaInterface
                 ->addColumn('auto_reopen_time', Table::TYPE_TEXT, 255, [], 'Auto Re-Open PromoBanner')
                 ->addColumn('created_at', Table::TYPE_TIMESTAMP, null, [
                     'nullable' => false,
-                    'default'  => Table::TIMESTAMP_INIT
+                    'default' => Table::TIMESTAMP_INIT
                 ], 'Creation Time')
                 ->addColumn('updated_at', Table::TYPE_TIMESTAMP, null, [
                     'nullable' => false,
-                    'default'  => Table::TIMESTAMP_INIT_UPDATE
+                    'default' => Table::TIMESTAMP_INIT_UPDATE
                 ], 'Update Time')
                 ->addIndex(
                     $installer->getIdxName('mageplaza_promobanner_banners', ['status', 'priority']),

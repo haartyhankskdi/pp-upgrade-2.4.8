@@ -5,6 +5,8 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
+
 namespace Magefan\Blog\Model;
 
 use Magento\Framework\UrlInterface;
@@ -49,10 +51,12 @@ class SlashUrlRedirect
     }
 
     /**
+     * Executes observer to handle URL modifications and redirections
+     *
      * @param \Magento\Framework\Event\Observer $observer
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(\Magento\Framework\Event\Observer $observer): void
     {
         $moduleEnabled = $this->scopeConfig->getValue(Config::XML_PATH_EXTENSION_ENABLED, ScopeInterface::SCOPE_STORE);
 
@@ -78,7 +82,7 @@ class SlashUrlRedirect
                         ScopeInterface::SCOPE_STORE
                     );
                     if ($controllerSufix) {
-                        if (strpos($result[0], $controllerSufix) == strlen($result[0]) - strlen($controllerSufix)) {
+                        if (strpos($result[0], $controllerSufix) === strlen($result[0]) - strlen($controllerSufix)) {
                             return;
                         }
                     }
@@ -86,7 +90,7 @@ class SlashUrlRedirect
             } else {
                 $controllerSufix = '.html';
                 if ($controllerSufix) {
-                    if (strpos($result[0], $controllerSufix) == strlen($result[0]) - strlen($controllerSufix)) {
+                    if (strpos($result[0], $controllerSufix) === strlen($result[0]) - strlen($controllerSufix)) {
                         return;
                     }
                 }

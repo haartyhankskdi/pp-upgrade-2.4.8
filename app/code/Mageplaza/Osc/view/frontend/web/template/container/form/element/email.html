@@ -36,31 +36,34 @@
     <fieldset id="customer-email-fieldset" class="fieldset" data-bind="blockLoader: isLoading">
         <div class="field required col-mp mp-12">
             <!-- ko ifnot: window.checkoutConfig.oscConfig.isUsedMaterialDesign -->
-                <label class="label" for="customer-email">
-                    <span data-bind="i18n: 'Email Address'"></span>
+            <label class="label" for="customer-email">
+                <span data-bind="i18n: 'Email Address'"></span>
 
-                </label>
+            </label>
             <!-- /ko -->
             <div class="control input-field _with-tooltip">
                 <input class="input-text"
                        type="email"
-                       data-bind="
-                            textInput: email,
-                            hasFocus: emailFocused,
-                            css: hasValue() ,
-                            event: {change: emailHasChanged,blur: hasValue}"
                        name="username"
+                       id="customer-email"
+                       required
                        data-validate="{required:true, 'validate-email':true}"
-                       id="customer-email"  required/>
+                       data-bind="
+                    textInput: email,
+                    hasFocus: emailFocused,
+                    afterRender: emailHasChanged,
+                    css: hasValue(),
+                    event: {change: emailHasChanged, blur: hasValue},
+                    mageInit: {'mage/trim-input':{}}
+               ">
                 <!-- ko if: window.checkoutConfig.oscConfig.isUsedMaterialDesign -->
                 <label class="label" for="customer-email">
                     <span data-bind="i18n: 'Email Address'"></span>
                     <i class="required-entry">*</i>
                 </label>
-                <div for="customer-email" generated="true" class="mage-error" id="customer-email-error"></div>
                 <!-- /ko -->
                 <!-- ko template: 'ui/form/element/helper/tooltip' --><!-- /ko -->
-                <div data-bind="fadeVisible: isPasswordVisible" >
+                <div data-bind="fadeVisible: isPasswordVisible">
                     <span class="note" data-bind="i18n: 'You already have an account with us.'"></span>
                     <a href="javascript:void(0)" data-bind="click:triggerLogin.bind(),i18n: 'Sign in'"></a>
                     <span class="note" data-bind="i18n: 'or continue as guest.'"></span>
@@ -82,7 +85,8 @@
                            name="password"
                            id="customer-password"
                            data-validate="{required:true}" autocomplete="off"/>
-                    <span class="note" data-bind="i18n: 'You already have an account with us. Sign in or continue as guest.'"></span>
+                    <span class="note"
+                          data-bind="i18n: 'You already have an account with us. Sign in or continue as guest.'"></span>
                 </div>
 
             </div>
@@ -90,9 +94,10 @@
             <!-- ko template: getTemplate() --><!-- /ko -->
             <!-- /ko -->
             <div class="actions-toolbar">
-                <input name="context" type="hidden" value="checkout" />
+                <input name="context" type="hidden" value="checkout"/>
                 <div class="primary">
-                    <button type="submit" class="action login primary" data-action="checkout-method-login"><span data-bind="i18n: 'Login'"></span></button>
+                    <button type="submit" class="action login primary" data-action="checkout-method-login"><span
+                        data-bind="i18n: 'Login'"></span></button>
                 </div>
                 <div class="secondary">
                     <a class="action remind" data-bind="attr: { href: forgotPasswordUrl }">

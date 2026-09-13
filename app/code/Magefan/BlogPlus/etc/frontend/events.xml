@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!--
+    <event name="controller_action_predispatch_blog">
+        <observer name="magefan_blogplus_controller_action_predispatch" instance="Magefan\BlogPlus\Observer\PredispathFrontendBlogActionControllerObserver" />
+    </event>
+	-->
+    <event name="magefan_blog_page_render_before">
+        <observer name="magefan_blogplus_page_render_before" instance="Magefan\BlogPlus\Observer\PageRenderBefore" />
+    </event>
+
+    <event name="mfblog_relatedproducts_block_load_collection_before">
+        <observer name="mfblogplus_relatedproducts_block_load_collection_before" instance="Magefan\BlogPlus\Observer\RelatedProductsBlockLoadCollectionBefore" />
+    </event>
+</config>

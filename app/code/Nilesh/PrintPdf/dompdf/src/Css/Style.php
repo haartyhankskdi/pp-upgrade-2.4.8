@@ -635,6 +635,8 @@ class Style
                 continue;
             }
 
+            $l = (string)$l;
+
             if ($l === "normal") {
                 $ret += (float)$ref_size;
                 continue;
@@ -1133,7 +1135,7 @@ class Style
      */
     function get_font_family_raw()
     {
-        return trim($this->_props["font_family"], " \t\n\r\x0B\"'");
+        return trim((string)($this->_props["font_family"] ?? ""), " \t\n\r\x0B\"'");
     }
 
     /**
@@ -1721,7 +1723,7 @@ class Style
      */
     function get_counter_increment()
     {
-        $val = trim($this->_props_computed["counter_increment"]);
+        $val = trim((string)($this->_props_computed["counter_increment"] ?? ""));
         $value = null;
 
         if (in_array($val, ["none", "inherit"])) {
@@ -1824,14 +1826,14 @@ class Style
             if ($val_computed < 0 && ($style === "border" || $style === "padding" || $style === "outline")) {
                 $this->_props[$prop] = null; // passed-in value is invalid
             } else if (
-                (($style === "border" || $style === "outline") && $type === "width" && strpos($val, "%") !== false)
+                (($style === "border" || $style === "outline") && $type === "width" && strpos((string)$val, "%") !== false)
                 ||
-                ($style === "padding" && strpos($val, "%") !== false)
+                ($style === "padding" && strpos((string)$val, "%") !== false)
                 ||
-                ($style === "margin" && (strpos($val, "%") !== false || $val === "auto"))
+                ($style === "margin" && (strpos((string)$val, "%") !== false || $val === "auto"))
             ) {
                 $this->_props_computed[$prop] = $val;
-            } elseif (($style === "border" || $style === "outline") && $type === "width" && strpos($val, "%") === false) {
+            } elseif (($style === "border" || $style === "outline") && $type === "width" && strpos((string)$val, "%") === false) {
                 $line_style_prop = $style;
                 if (!empty($side)) {
                     $line_style_prop .= "_" . $side;
@@ -2124,7 +2126,7 @@ class Style
         $this->_props["background_size"] = $val;
         $this->_prop_cache["background_size"] = null;
 
-        $result = explode(" ", $val);
+        $result = explode(" ", (string)$val);
         $width = $result[0];
 
         switch ($width) {
@@ -2156,7 +2158,7 @@ class Style
      */
     function set_background($val)
     {
-        $val = trim($val);
+        $val = trim((string)$val);
         $important = isset($this->_important_props["background"]);
 
         if ($val === "none") {
@@ -2238,6 +2240,7 @@ class Style
         }
 
         // length_in_pt uses the font size if units are em or ex (and, potentially, rem) so we'll calculate in the method
+        $fs = (string)$fs;
         if (($i = mb_strpos($fs, "rem")) !== false) {
             if ($this->_stylesheet->get_dompdf()->getTree()->get_root()->get_style() === null) {
                 // Interpreting it as "em", see https://github.com/dompdf/dompdf/issues/1406
@@ -2307,6 +2310,8 @@ class Style
      */
     function set_font($val)
     {
+        $val = (string)$val;
+
         //see __set and __get, on all assignments clear cache, not needed on direct set through __set
         $this->_prop_cache["font"] = null;
         $this->_props["font"] = $val;
@@ -2396,7 +2401,7 @@ class Style
             return;
         }
 
-        if ($val === "normal" || strpos($val, "%") !== false) {
+        if ($val === "normal" || strpos((string)$val, "%") !== false) {
             $this->_props_computed["word_spacing"] = $val;
         } else {
             $this->_props_computed["word_spacing"] = ((float)$this->length_in_pt($val, $this->__get("font_size"))) . "pt";
@@ -3034,7 +3039,7 @@ class Style
     function set_list_style($val)
     {
         $important = isset($this->_important_props["list_style"]);
-        $arr = explode(" ", str_replace(",", " ", $val));
+        $arr = explode(" ", str_replace(",", " ", (string)$val));
 
         static $types = [
             "disc", "circle", "square",
@@ -3093,7 +3098,7 @@ class Style
 
         $length_re = "/(\d+\s*(?:pt|px|pc|em|ex|in|cm|mm|%))/";
 
-        $val = mb_strtolower($val);
+        $val = mb_strtolower((string)$val);
 
         if ($val === "auto") {
             $this->_props["size"] = $val;

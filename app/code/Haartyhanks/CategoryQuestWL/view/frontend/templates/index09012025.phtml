@@ -59,7 +59,7 @@ $stockRegistry = $objectManager->get('Magento\CatalogInventory\Api\StockRegistry
                                             <ul>
                                                 <?php
                                                 $bulletPoints = $selectedProduct->getPrBulletPoints(); // Fetch the bullet points attribute value
-                                                $bulletPointsArray = explode("\n", $bulletPoints); // Split the attribute value by new lines into an array
+                                                $bulletPointsArray = explode("\n", (string) $bulletPoints); // Split the attribute value by new lines into an array
                                                 foreach ($bulletPointsArray as $bulletPoint): ?>
                                                     <li><img src="/media/wysiwyg//WLImage/tick.svg" alt="tick"><?= $block->escapeHtml($bulletPoint); ?></li>
                                                 <?php endforeach; ?>
@@ -112,7 +112,7 @@ $stockRegistry = $objectManager->get('Magento\CatalogInventory\Api\StockRegistry
                                                 <ul>
                                                     <?php
                                                     $bulletPoints = $product->getPrBulletPoints(); // Fetch the bullet points attribute value
-                                                    $bulletPointsArray = explode("\n", $bulletPoints); // Split the attribute value by new lines into an array
+                                                    $bulletPointsArray = explode("\n", (string) $bulletPoints); // Split the attribute value by new lines into an array
                                                     foreach ($bulletPointsArray as $bulletPoint): ?>
                                                         <li><img src="/media/wysiwyg//WLImage/tick.svg" alt="tick"><?= $block->escapeHtml($bulletPoint); ?></li>
                                                     <?php endforeach; ?>

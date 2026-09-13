@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Model\Form\Rendering\Autocomplete\VariablesValue;
 
@@ -22,6 +23,8 @@ class ProductFieldsProvider
         Messages::PRODUCT_URL,
         Messages::PRODUCT_PRICE,
         Messages::PRODUCT_FINAL_PRICE,
+        Messages::PRODUCT_SKU,
+        Messages::PRODUCT_NAME
     ];
 
     /**
@@ -80,6 +83,12 @@ class ProductFieldsProvider
         switch (sprintf("{%s}", $variableName)) {
             case Messages::PRODUCT_URL:
                 $value = $product->getProductUrl();
+                break;
+            case Messages::PRODUCT_SKU:
+                $value = $product->getSku();
+                break;
+            case Messages::PRODUCT_NAME:
+                $value = $product->getName();
                 break;
             case Messages::PRODUCT_PRICE:
                 $product->setPriceCalculation(false);

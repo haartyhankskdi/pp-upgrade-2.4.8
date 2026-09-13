@@ -1,0 +1,81 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+
+<?php
+/** @var $block \Magento\ConfigurableProduct\Block\Product\View\Type\Configurable*/
+$_product    = $block->getProduct();
+$_attributes = $block->decorateArray($block->getAllowAttributes());
+?>
+<?php if ($_product->isSaleable() && count($_attributes)) :?>
+    <style>
+        .field.configurable .configurable-options-loader {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin: 4px 0;
+            font-size: 12px;
+            color: #757575;
+        }
+        .field.configurable.options-ready .configurable-options-loader {
+            display: none;
+        }
+        .field.configurable .configurable-options-loader-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url('<?= $block->escapeUrl($block->getViewFileUrl('images/loader-1.gif')) ?>') no-repeat center center;
+            background-size: contain;
+        }
+        .field.configurable:not(.options-ready) select.super-attribute-select {
+            opacity: .6;
+            pointer-events: none;
+        }
+    </style>
+    <?php foreach ($_attributes as $_attribute) : ?>
+        <div class="field configurable required">
+            <label class="label" for="attribute<?= $block->escapeHtmlAttr($_attribute->getAttributeId()) ?>">
+                <span><?= $block->escapeHtml($_attribute->getProductAttribute()->getStoreLabel()) ?></span>
+            </label>
+            <div class="control">
+                <span class="configurable-options-loader" aria-hidden="true">
+                    <span class="configurable-options-loader-spinner"></span>
+                    <span class="configurable-options-loader-text"><?= $block->escapeHtml(__('Loading options...')) ?></span>
+                </span>
+                <select name="super_attribute[<?= $block->escapeHtmlAttr($_attribute->getAttributeId()) ?>]"
+                        data-selector="super_attribute[<?= $block->escapeHtmlAttr($_attribute->getAttributeId()) ?>]"
+                        data-validate="{required:true}"
+                        id="attribute<?= $block->escapeHtmlAttr($_attribute->getAttributeId()) ?>"
+                        class="super-attribute-select">
+                    <option value=""><?= $block->escapeHtml(__('Choose an Option...')) ?></option>
+                </select>
+            </div>
+        </div>
+    <?php endforeach; ?>
+    <script type="text/x-magento-init">
+        {
+            "#product_addtocart_form": {
+                "configurable": {
+                    "spConfig": <?= /* @noEscape */ $block->getJsonConfig() ?>,
+                    "gallerySwitchStrategy": "<?= $block->escapeJs($block->getVar(
+                        'gallery_switch_strategy',
+                        'Magento_ConfigurableProduct'
+                    ) ?: 'replace'); ?>"
+                }
+            },
+            "*" : {
+                "Magento_ConfigurableProduct/js/catalog-add-to-cart": {}
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        require(['jquery'], function ($) {
+            $('#product_addtocart_form').on('configurable.initialized', function (event) {
+                $(event.target).find('.field.configurable').addClass('options-ready');
+            });
+        });
+    </script>
+<?php endif;?>

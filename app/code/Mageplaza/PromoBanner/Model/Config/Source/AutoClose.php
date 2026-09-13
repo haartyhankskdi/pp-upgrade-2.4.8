@@ -21,21 +21,19 @@
 
 namespace Mageplaza\PromoBanner\Model\Config\Source;
 
-use Magento\Framework\Option\ArrayInterface;
-
 /**
  * Class AutoClose
  *
  * @package Mageplaza\PromoBanner\Model\Config\Source
  */
-class AutoClose implements ArrayInterface
+class AutoClose extends AbstractSource
 {
     /**
      * @return array
      */
     public function toOptionArrayConfig()
     {
-        $option   = $this->toOptionArray();
+        $option = $this->toOptionArray();
         $option[] = ['value' => 'use_config', 'label' => __('Use Config')];
 
         return $option;
@@ -63,5 +61,16 @@ class AutoClose implements ArrayInterface
             ['value' => 45 * 60, 'label' => __('45 minutes')],
             ['value' => 1 * 60 * 60, 'label' => __('1 hour')]
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $result = parent::toArray();
+        $result['use_config'] = __('Use Config');
+
+        return $result;
     }
 }

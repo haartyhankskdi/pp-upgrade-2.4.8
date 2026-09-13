@@ -12,18 +12,22 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
-define(['Magento_Ui/js/form/element/date'], function (Component) {
-    'use strict';
+define(
+    ['Magento_Ui/js/form/element/date'], function (Component) {
+        'use strict';
 
-    return Component.extend({
-        defaults: {
-            inputDateFormat: 'MM/dd/y'
-        }
-    });
-});
+        return Component.extend(
+            {
+                defaults: {
+                    inputDateFormat: 'MM/dd/y'
+                }
+            }
+        );
+    }
+);

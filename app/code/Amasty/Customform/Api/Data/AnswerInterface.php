@@ -1,9 +1,9 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Api\Data;
 
@@ -26,8 +26,7 @@ interface AnswerInterface
     public const UPDATED_AT = 'updated_at';
     public const FORM_NAME = 'form_name';
     public const FORM_CODE = 'form_code';
-    public const QUESTIONNAIRE_UNIQUE_ID = 'questionnaire_unique_id';
-    // setQuestionnaireUniqueId
+
     /**
      * @return int Answer id.
      */
@@ -205,17 +204,4 @@ interface AnswerInterface
      * @return void
      */
     public function setFormCode(?string $formCode): void;
-
-    /**
-     * @return string
-     */
-    public function getQuestionnaireUniqueId();
-
-    /**
-     * @param string $uniqueId
-     *
-     * @return \Amasty\Customform\Api\Data\AnswerInterface
-     */
-    public function setQuestionnaireUniqueId($uniqueId);
-
 }

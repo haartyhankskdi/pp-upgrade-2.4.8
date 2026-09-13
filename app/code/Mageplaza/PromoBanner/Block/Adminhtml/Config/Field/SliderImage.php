@@ -75,18 +75,18 @@ class SliderImage extends AbstractFieldArray
         $this->addColumn('image', ['label' => __('Image'), 'type' => 'file', 'class' => 'required-entry input-file']);
         $this->addColumn('url', [
             'label' => __('Direct URL'),
-            'type'  => 'text',
-            'size'  => 40,
+            'type' => 'text',
+            'size' => 40,
             'class' => 'validate-url validate-no-html-tags input-text'
         ]);
         $this->addColumn('sort_order', [
             'label' => __('Sort Order'),
-            'type'  => 'text',
-            'size'  => 5,
+            'type' => 'text',
+            'size' => 5,
             'class' => 'required-entry validate-digits'
         ]);
 
-        $this->_addAfter       = false;
+        $this->_addAfter = false;
         $this->_addButtonLabel = __('Add New Image');
     }
 
@@ -97,10 +97,10 @@ class SliderImage extends AbstractFieldArray
     public function addColumn($name, $params)
     {
         $this->_columns[$name] = [
-            'label'    => $this->_getParam($params, 'label', 'Column'),
-            'size'     => $this->_getParam($params, 'size', false),
-            'style'    => $this->_getParam($params, 'style'),
-            'class'    => $this->_getParam($params, 'class'),
+            'label' => $this->_getParam($params, 'label', 'Column'),
+            'size' => $this->_getParam($params, 'size', false),
+            'style' => $this->_getParam($params, 'style'),
+            'class' => $this->_getParam($params, 'class'),
             'renderer' => false,
         ];
         if (!empty($params['type'])) {
@@ -125,7 +125,7 @@ class SliderImage extends AbstractFieldArray
             return '<input type="file" id="' .
                 $this->_getCellInputElementId('<%- _id %>', $columnName) .
                 '"' .
-                ' name="slider_images<%- _id %>_image" 
+                ' name="slider_images<%- _id %>_image"
                 value="<%- ' .
                 $columnName .
                 ' %>" ' .

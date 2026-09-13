@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Controller;
@@ -30,10 +30,6 @@ use Magento\Framework\App\RouterInterface;
 use Magento\Framework\Url;
 use Mageplaza\Osc\Helper\Data;
 
-/**
- * Class Router
- * @package Mageplaza\Osc\Controller
- */
 class Router implements RouterInterface
 {
     /**
@@ -50,7 +46,7 @@ class Router implements RouterInterface
      * Router constructor.
      *
      * @param ActionFactory $actionFactory
-     * @param Data $helperData
+     * @param Data          $helperData
      */
     public function __construct(
         ActionFactory $actionFactory,

@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Amasty Custom Forms GraphQl for Magento 2 (System)
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Amasty Custom Forms GraphQl for Magento 2 (System)
+ */
 
 namespace Amasty\CustomformGraphQl\Model\Resolver\Mutation;
 
@@ -58,8 +59,8 @@ class Submit implements ResolverInterface
         Field $field,
         $context,
         ResolveInfo $info,
-        array $value = null,
-        array $args = null
+        ?array $value = null,
+        ?array $args = null
     ) {
         if (empty($args['input'][self::FORM_DATA_KEY])) {
             throw new GraphQlInputException(__('Required parameter "%1" is missing', self::FORM_DATA_KEY));

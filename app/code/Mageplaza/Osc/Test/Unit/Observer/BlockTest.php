@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Observer;
@@ -32,10 +32,6 @@ use Mageplaza\Osc\Observer\Block;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class BlockTest
- * @package Mageplaza\Osc\Test\Unit\Observer
- */
 class BlockTest extends TestCase
 {
     /**
@@ -53,11 +49,11 @@ class BlockTest extends TestCase
      */
     private $observer;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->helperDataMock = $this->getMockBuilder(Data::class)->disableOriginalConstructor()->getMock();
         $this->requestMock = $this->getMockBuilder(RequestInterface::class)
-            ->setMethods(['getFullActionName'])
+            ->addMethods(['getFullActionName'])
             ->getMockForAbstractClass();
 
         $this->observer = new Block(
@@ -78,7 +74,8 @@ class BlockTest extends TestCase
             ->method('getFullActionName')
             ->willReturn('onestepcheckout_index_index');
         $eventMock = $this->getMockBuilder(Event::class)
-            ->setMethods(['getBlock', 'getTransport'])
+            ->onlyMethods(['getBlock'])
+            ->addMethods(['getTransport'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -87,7 +84,7 @@ class BlockTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
         $transportMock = $this->getMockBuilder(DataObject::class)
-            ->setMethods(['getHtml', 'setHtml'])
+            ->addMethods(['getHtml', 'setHtml'])
             ->disableOriginalConstructor()->getMock();
 
         $eventMock->expects($this->once())->method('getBlock')->willReturn($blockMock);
@@ -97,10 +94,12 @@ class BlockTest extends TestCase
         $html = 'test';
         $transportMock->expects($this->once())->method('getHtml')->willReturn($html);
         $this->helperDataMock->expects($this->once())->method('jsonEncodeData')->with($oscRoute)->willReturn('"osc"');
+        $this->helperDataMock->expects($this->once())->method('isEnableAmazonPayCv2')->willReturn(false);
         $layoutMock = $this->getMockForAbstractClass(LayoutInterface::class);
         $blockMock->expects($this->once())->method('getLayout')->willReturn($layoutMock);
         $layoutMock->expects($this->once())->method('isBlock')->with('require.js')->willReturn(true);
         $html .= '<script> window.oscRoute = "osc"</script>';
+        $html .= '<script> window.isEnableAmazonPayCv2 = false</script>';
         $transportMock->expects($this->once())->method('setHtml')->with($html);
 
         $this->observer->execute($observerMock);

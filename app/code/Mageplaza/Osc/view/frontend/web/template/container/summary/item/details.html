@@ -80,7 +80,7 @@
              data-bind="attr: { id: 'item' + $parent.item_id,title: $parent.name}, afterRender: function(element){setModalElement(element, $parent.item_id)}">
             <div class="gift-options-content">
                 <div class="fieldset">
-                    <div class="field field-from col-mp mp-6">
+                    <div class="field field-from col-mp mp-12">
                         <!-- ko ifnot: window.checkoutConfig.oscConfig.isUsedMaterialDesign -->
                         <label for="gift-message-whole-from" class="label">
                             <span data-bind="i18n: 'From:'"></span>
@@ -95,7 +95,7 @@
                             <!-- /ko -->
                         </div>
                     </div>
-                    <div class="field field-to col-mp mp-6">
+                    <div class="field field-to col-mp mp-12">
                         <!-- ko ifnot: window.checkoutConfig.oscConfig.isUsedMaterialDesign -->
                         <label for="gift-message-whole-to" class="label">
                             <span data-bind="i18n: 'To:'"></span>
@@ -149,6 +149,9 @@
     <!-- ko foreach: getRegion('after_item_details') -->
     <!-- ko template: getTemplate() --><!-- /ko -->
     <!-- /ko -->
+    <!-- ko foreach: getRegion('item_message') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
 </td>
 <td class="a-center details-qty">
     <div class="qty-wrapper">
@@ -157,7 +160,7 @@
         </a>
         <div class="qty-wrap">
             <input class="item_qty input-text update value" name="item_qty"
-                   data-bind="value: getProductQty($parent.item_id), attr: {id: $parent.item_id}, event: {change: changeQty}"/>
+                   data-bind="value: getProductQty($parent.item_id), attr: {id: $parent.item_id}, event: {change: changeQty, load: checkGiftsItem($parent)}"/>
         </div>
         <a class="button-action plus" data-bind="click: plusQty" title="Plus">
             <i class="fa fa-plus"></i>
@@ -177,7 +180,7 @@
             <i class="fa fa-pencil"></i>
         </a>
         <a class="button-action remove" data-bind="click:function(){removeItem($parent.item_id)}">
-            <i class="fa fa-times"></i>
+            <i class="fa fa-trash-o"></i>
         </a>
     </div>
 </td>

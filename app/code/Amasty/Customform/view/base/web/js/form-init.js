@@ -30,7 +30,9 @@ define([
 
         initialization: function (element) {
             var self = this,
-                stepsWrap = element.find(self.options.pageTitles);
+                formId = $(element).closest('form').attr('data-amform-id');
+            self.options.pageTitles = `[data-amcform-js="page-titles-${formId}"]`;
+            var stepsWrap = element.find(self.options.pageTitles);
 
             $.ui.tabs({active: 0}, element);
 
@@ -151,5 +153,5 @@ define([
         }
     });
 
-    return $.mage.amformData;
+    return $.mage.amFormInit;
 });

@@ -41,7 +41,7 @@ if ($notice) {
                     $productName = implode(', ', $productname); ?>
                     <tr>
 
-                        <td data-th="<?= $block->escapeHtmlAttr(__('Date')) ?>" class="col date"><?= /* @noEscape */ date("j M Y",strtotime($_order->getCreatedAt())); ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Date')) ?>" class="col date"><?= /* @noEscape */ date("j M Y",strtotime((string) $_order->getCreatedAt())); ?></td>
 
                         <td data-th="<?php echo $block->escapeHtml(__('Order #')) ?>" class="col id">
                             <div class="pro-name"><?php /* @escapeNotVerified */  print_r($productName); ?></div></td>

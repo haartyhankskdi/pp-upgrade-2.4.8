@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Helper;
@@ -37,12 +37,9 @@ use Magento\Framework\Locale\Resolver;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Newsletter\Model\Subscriber;
+use Magento\ReCaptchaUi\Model\UiConfigResolverInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
-/**
- * Class Address
- * @package Mageplaza\Osc\Helper
- */
 class Address extends Data
 {
     /**
@@ -83,20 +80,21 @@ class Address extends Data
     /**
      * Address constructor.
      *
-     * @param Context $context
-     * @param ObjectManagerInterface $objectManager
-     * @param StoreManagerInterface $storeManager
-     * @param EncryptorInterface $encryptor
-     * @param Json $json
-     * @param DirectoryList $directoryList
-     * @param Resolver $localeResolver
-     * @param Region $regionModel
-     * @param CustomerAddressHelper $addressHelper
+     * @param Context                       $context
+     * @param ObjectManagerInterface        $objectManager
+     * @param StoreManagerInterface         $storeManager
+     * @param EncryptorInterface            $encryptor
+     * @param Json                          $json
+     * @param DirectoryList                 $directoryList
+     * @param Resolver                      $localeResolver
+     * @param Region                        $regionModel
+     * @param CustomerAddressHelper         $addressHelper
      * @param AttributeMetadataDataProvider $attributeMetadataDataProvider
-     * @param Config $resourceConfig
-     * @param ReinitableConfigInterface $appConfig
-     * @param Subscriber $subscriber
-     * @param Session $checkoutSession
+     * @param Config                        $resourceConfig
+     * @param ReinitableConfigInterface     $appConfig
+     * @param Subscriber                    $subscriber
+     * @param Session                       $checkoutSession
+     * @param UiConfigResolverInterface     $captchaUiConfigResolver
      */
     public function __construct(
         Context $context,
@@ -112,17 +110,18 @@ class Address extends Data
         Config $resourceConfig,
         ReinitableConfigInterface $appConfig,
         Subscriber $subscriber,
-        Session $checkoutSession
+        Session $checkoutSession,
+        UiConfigResolverInterface $captchaUiConfigResolver
     ) {
-        $this->_directoryList = $directoryList;
-        $this->_localeResolver = $localeResolver;
-        $this->_regionModel = $regionModel;
-        $this->addressHelper = $addressHelper;
+        $this->_directoryList                = $directoryList;
+        $this->_localeResolver               = $localeResolver;
+        $this->_regionModel                  = $regionModel;
+        $this->addressHelper                 = $addressHelper;
         $this->attributeMetadataDataProvider = $attributeMetadataDataProvider;
-        $this->resourceConfig = $resourceConfig;
-        $this->appConfig = $appConfig;
+        $this->resourceConfig                = $resourceConfig;
+        $this->appConfig                     = $appConfig;
 
-        parent::__construct($context, $objectManager, $storeManager, $encryptor, $json, $subscriber, $checkoutSession);
+        parent::__construct($context, $objectManager, $storeManager, $encryptor, $json, $subscriber, $checkoutSession, $captchaUiConfigResolver);
     }
 
     /**
@@ -184,7 +183,9 @@ class Address extends Data
             'customer_address',
             'customer_register_address'
         );
-        /** @var Attribute $field */
+        /**
+ * @var Attribute $field
+*/
         foreach ($collection as $field) {
             if ($this->isAddressAttributeVisible($field)) {
                 $availableFields[$field->getAttributeCode()] = $field;
@@ -195,7 +196,9 @@ class Address extends Data
             'customer',
             'customer_account_create'
         );
-        /** @var Attribute $field */
+        /**
+ * @var Attribute $field
+*/
         foreach ($collection as $field) {
             if ($this->isCustomerAttributeVisible($field)) {
                 $availableFields[$field->getAttributeCode()] = $field;
@@ -206,7 +209,9 @@ class Address extends Data
             'customer_address',
             'onestepcheckout_index_index'
         );
-        /** @var Attribute $field */
+        /**
+ * @var Attribute $field
+*/
         foreach ($collection as $field) {
             if ($field->getIsVisible()) {
                 $availableFields[$field->getAttributeCode()] = $field;
@@ -373,7 +378,9 @@ class Address extends Data
         $this->appConfig->reinit();
     }
 
-    /***************************************** Maxmind Db GeoIp ******************************************************/
+    /*****************************************
+     * Maxmind Db GeoIp
+     ******************************************************/
     /**
      * @param $storeId
      *

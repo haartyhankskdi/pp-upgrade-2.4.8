@@ -1,0 +1,26 @@
+<?php
+/*
+ * This software is the confidential and proprietary information of Autify Digital Ltd.
+ * Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+ * Copyright (c) 2020-Present Autify Digital Ltd.
+ * This work is protected under applicable copyright and intellectual property laws.
+ * All rights reserved. Distribution and disclosure are permitted only in accordance with
+ * the terms of a valid written agreement with Autify Digital Ltd.
+ */
+
+/** @var \AutifyDigital\LloydscardnetPayment\Block\ApplePayCart $block */
+$helper = $block->getHelper();
+$orderTotal = $block->getCartGrandTotal();
+?>
+<?php if ($helper->displayCartApplePay($orderTotal) &&
+        $helper->getApplepayPaymentMethodInteration() == 'onsite'
+):?>
+    <div id="apple-pay-button-container" class="apple-pay-button-container"></div>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "AutifyDigital_LloydscardnetPayment/js/view/cart-applepay": {}
+            }
+        }
+    </script>
+<?php endif; ?>

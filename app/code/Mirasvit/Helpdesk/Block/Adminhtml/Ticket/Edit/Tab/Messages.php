@@ -1,0 +1,255 @@
+<?php
+/**
+ * Mirasvit
+ *
+ * This source file is subject to the Mirasvit Software License, which is available at https://mirasvit.com/license/.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category  Mirasvit
+ * @package   mirasvit/module-helpdesk
+ * @version   1.6.0
+ * @copyright Copyright (C) 2026 Mirasvit (https://mirasvit.com/)
+ */
+
+
+
+namespace Mirasvit\Helpdesk\Block\Adminhtml\Ticket\Edit\Tab;
+
+use Magento\Framework\File\Size as FileSize;
+use Mirasvit\Helpdesk\Helper\Notification;
+
+/**
+ * Class Messages
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
+class Messages extends \Magento\Backend\Block\Template
+{
+    /**
+     * @var \Magento\User\Model\User[]
+     */
+    private $users;
+
+    /**
+     * @var \Mirasvit\Helpdesk\Model\ResourceModel\Satisfaction\CollectionFactory
+     */
+    protected $satisfactionCollectionFactory;
+
+    /**
+     * @var \Mirasvit\Helpdesk\Model\Config
+     */
+    protected $config;
+
+    /**
+     * @var \Magento\Framework\Registry
+     */
+    protected $registry;
+
+    /**
+     * @var \Magento\Backend\Block\Widget\Context
+     */
+    protected $context;
+    /**
+     * @var \Mirasvit\Helpdesk\Helper\StringUtil
+     */
+    private $helpdeskString;
+
+    /**
+     * @var \Magento\User\Model\UserFactory
+     */
+    protected $userFactory;
+
+    protected $helpdeskNotification;
+
+    private $fileSize;
+
+    /**
+     * @param \Mirasvit\Helpdesk\Model\ResourceModel\Satisfaction\CollectionFactory $satisfactionCollectionFactory
+     * @param \Mirasvit\Helpdesk\Model\Config                                       $config
+     * @param \Magento\Framework\Registry                                           $registry
+     * @param \Magento\User\Model\UserFactory                                       $userFactory
+     * @param \Magento\Backend\Block\Widget\Context                                 $context
+     * @param \Mirasvit\Helpdesk\Helper\StringUtil                                  $helpdeskString
+     * @param array                                                                 $data
+     */
+    public function __construct(
+        \Mirasvit\Helpdesk\Model\ResourceModel\Satisfaction\CollectionFactory $satisfactionCollectionFactory,
+        \Mirasvit\Helpdesk\Model\Config $config,
+        \Magento\Framework\Registry $registry,
+        \Magento\User\Model\UserFactory $userFactory,
+        \Magento\Backend\Block\Widget\Context $context,
+        \Mirasvit\Helpdesk\Helper\StringUtil $helpdeskString,
+        FileSize $fileSize,
+        Notification $helpdeskNotification,
+        array $data = []
+    ) {
+        $this->satisfactionCollectionFactory = $satisfactionCollectionFactory;
+        $this->config                        = $config;
+        $this->registry                      = $registry;
+        $this->userFactory                   = $userFactory;
+        $this->context                       = $context;
+        $this->helpdeskString                = $helpdeskString;
+        $this->helpdeskNotification          = $helpdeskNotification;
+        $this->fileSize                      = $fileSize;
+
+        parent::__construct($context, $data);
+    }
+
+    /**
+     *
+     */
+    protected function _construct()
+    {
+        parent::_construct();
+        $this->setTemplate('ticket/edit/messages.phtml');
+    }
+
+    /**
+     * @return \Mirasvit\Helpdesk\Model\Ticket
+     */
+    public function getTicket()
+    {
+        return $this->registry->registry('current_ticket');
+    }
+
+    /**
+     * @return \Mirasvit\Helpdesk\Model\Message[]|\Mirasvit\Helpdesk\Model\ResourceModel\Message\Collection
+     */
+    public function getMessages()
+    {
+        return $this->getTicket()->getMessages(true);
+    }
+
+    /**
+     * @param \Mirasvit\Helpdesk\Model\Message $message
+     * @return string
+     */
+    public function getSourceUrl($message)
+    {
+        return $this->getUrl('*/*/source', ['message_id' => $message->getId()]);
+    }
+
+    /**
+     * @param \Mirasvit\Helpdesk\Model\Message $message
+     *
+     * @return \Mirasvit\Helpdesk\Model\ResourceModel\Satisfaction\Collection|\Mirasvit\Helpdesk\Model\Satisfaction[]
+     */
+    public function getSatisfactions($message)
+    {
+        $collection = $this->satisfactionCollectionFactory->create()
+            ->addFieldToFilter('message_id', $message->getId());
+
+        return $collection;
+    }
+
+    /**
+     * @return string
+     */
+    public function isShowSatisfactions()
+    {
+        return $this->config->getSatisfactionIsShowResultsInTicket();
+    }
+
+    /**
+     * @param string $time
+     *
+     * @return string
+     */
+    public function getNicetimeSpan($time)
+    {
+        return $this->helpdeskString->nicetime((int) strtotime($time));
+    }
+
+    /**
+     * @param string $time
+     *
+     * @return string
+     */
+    public function formatDateTime($time): string
+    {
+        $date = new \DateTime($time);
+        $now = new \DateTime();
+
+        if ($date->format('Y-m-d') === $now->format('Y-m-d')) {
+
+            return $this->formatTime($time, \IntlDateFormatter::SHORT);
+        }
+
+        return $this->formatDate($time, \IntlDateFormatter::MEDIUM) . ' ' .
+            $this->formatTime($time, \IntlDateFormatter::SHORT);
+    }
+
+    /**
+     * Escape HTML entities
+     *
+     * @param string|array $data
+     * @param array|null $allowedTags
+     * @return string|string[]
+     */
+    public function escapeHtml($data, $allowedTags = null)
+    {
+        //html can contain incorrect symbols which produce warrnings to log
+        $internalErrors = libxml_use_internal_errors(true);
+        $res = parent::escapeHtml($data, $allowedTags);
+        libxml_use_internal_errors($internalErrors);
+        return $res;
+    }
+
+    /**
+     * @param \Mirasvit\Helpdesk\Model\Message $message
+     * @return string
+     */
+    public function getUserSignatureHTML($message)
+    {
+        $user = $this->getUser($message->getUserId());
+
+        if ($message->getUserId() && $user->getSignature()) {
+            $variables  = [];
+            /** @var \Mirasvit\Helpdesk\Model\Ticket $ticket */
+            $ticket     = $message->getTicket();
+            /** @var \Magento\Store\Model\Store $store */
+            $store      = $ticket->getStore();
+
+            $variables = array_merge(
+                $variables,
+                [
+                    'ticket'     => $ticket,
+                    'customer'   => $ticket->getCustomer(),
+                    'user'       => $user,
+                    'department' => $ticket->getDepartment(),
+                    'store'      => $store, // do not override store due to strict types in Magento
+                ]
+            );
+            $user->setSignature($this->helpdeskNotification->processVariable($user->getSignature(), $variables, $store->getId()));
+
+            return '<br><br>' . $message->stripTagWithContent($user->getSignature(), ['style']);
+        } else {
+            return '';
+        }
+    }
+
+    /**
+     * @return float
+     */
+    public function getAttachmentSize()
+    {
+        return $this->fileSize->getMaxFileSizeInMb();
+    }
+
+    /**
+     * @param int|null $userId
+     * @return \Magento\User\Model\User
+     */
+    private function getUser($userId)
+    {
+        $key = $userId ?? '';
+        if (empty($this->users[$key])) {
+            $user =  $this->userFactory->create()->load((int) $userId);
+            $this->users[$key] = $user;
+        }
+
+        return $this->users[$key];
+    }
+}

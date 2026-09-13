@@ -758,6 +758,7 @@ obtain stock that some other pharmacies cannot. </p>
     }
 
     public function remove_http($url) {
+        $url = (string) $url;
         $disallowed = array('http://', 'https://');
         foreach($disallowed as $d) {
             if(strpos($url, $d) === 0) {

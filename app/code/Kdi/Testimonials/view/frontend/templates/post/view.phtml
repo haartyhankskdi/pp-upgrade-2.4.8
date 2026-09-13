@@ -16,11 +16,11 @@ $data = $vm->getModelData() ?: [];
 
 
            
-                if (strpos($before, 'media') === false) {
-                    $before = $mediaUrl . ltrim($before, '/');
+                if (strpos((string) $before, 'media') === false) {
+                    $before = $mediaUrl . ltrim((string) $before, '/');
                 }
-                if (strpos($after, 'media') === false) {
-                    $after = $mediaUrl . ltrim($after, '/');
+                if (strpos((string) $after, 'media') === false) {
+                    $after = $mediaUrl . ltrim((string) $after, '/');
                 }
               
 

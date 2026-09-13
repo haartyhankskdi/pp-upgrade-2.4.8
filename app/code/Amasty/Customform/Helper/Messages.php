@@ -1,9 +1,9 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Helper;
 
@@ -28,6 +28,8 @@ class Messages extends \Magento\Framework\App\Helper\AbstractHelper
     public const PRODUCT_URL = '{product_url}';
     public const PRODUCT_PRICE = '{product_price}';
     public const PRODUCT_FINAL_PRICE = '{product_final_price}';
+    public const PRODUCT_SKU = '{product_sku}';
+    public const PRODUCT_NAME = '{product_name}';
 
     /**
      * @var array
@@ -211,6 +213,8 @@ class Messages extends \Magento\Framework\App\Helper\AbstractHelper
                             __('Product Paget Url -  %1', self::PRODUCT_URL),
                             __('Regular Price -  %1', self::PRODUCT_PRICE),
                             __('Actual Price -  %1', self::PRODUCT_FINAL_PRICE),
+                            __('Product Sku -  %1', self::PRODUCT_SKU),
+                            __('Product Name -  %1', self::PRODUCT_NAME),
                             __('Attribute Value, e.g. {product_color} - {product_ATTRIBUTE%CODE}'),
                             __(
                                 'Please make sure that the attribute is used in the %1product listing%2',
@@ -241,7 +245,7 @@ class Messages extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getMessages()
     {
-        $validations = $this->eavData->getFrontendClasses(null);
+        $validations = $this->eavData->getFrontendClasses('');
         $validations[] = ['value' => 'pattern', 'label' => __('Regular Expression')];
         if (isset($validations[0]['value']) && !$validations[0]['value']) {
             $this->messages['validations'][0]['value'] = ' ';

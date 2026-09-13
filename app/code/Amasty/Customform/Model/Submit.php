@@ -1,17 +1,21 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
 
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
+
 namespace Amasty\Customform\Model;
 
+use Amasty\Base\Model\GetCustomerIp;
 use Amasty\Customform\Api\Data\AnswerInterface;
 use Amasty\Customform\Api\Data\FormInterface;
 use Amasty\Customform\Helper\Data;
+use Laminas\Validator\EmailAddress;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Response\RedirectInterface;
 use Magento\Framework\Data\Form\FormKey\Validator;
@@ -95,11 +99,21 @@ class Submit
     private $timezone;
 
     /**
+     * @var GetCustomerIp
+     */
+    private $customerIp;
+
+    /**
      * This is temporary solution.
      *
      * @var bool
      */
     private $canProcessSubmitFilesByAjax;
+
+    /**
+     * @var EmailAddress
+     */
+    private $emailAddressValidator;
 
     public function __construct(
         CachingFormProvider $formProvider,
@@ -114,7 +128,9 @@ class Submit
         RequestInterface $request,
         ManagerInterface $eventManager,
         TimezoneInterface $timezone,
-        bool $canProcessSubmitFilesByAjax = false
+        GetCustomerIp $customerIp,
+        bool $canProcessSubmitFilesByAjax = false,
+        ?EmailAddress $emailAddressValidator = null // TODO move to not optional
     ) {
         $this->answerRepository = $answerRepository;
         $this->answerFactory = $answerFactory;
@@ -128,7 +144,9 @@ class Submit
         $this->request = $request;
         $this->eventManager = $eventManager;
         $this->timezone = $timezone;
+        $this->customerIp = $customerIp;
         $this->canProcessSubmitFilesByAjax = $canProcessSubmitFilesByAjax;
+        $this->emailAddressValidator = $emailAddressValidator ?? ObjectManager::getInstance()->get(EmailAddress::class);
     }
 
     public function process(array $params, ?AnswerInterface $answer = null): string
@@ -138,6 +156,11 @@ class Submit
         if ($this->validateData($params)) {
             /** @var Form $formModel */
             $formModel = $this->formProvider->getById((int) $params['form_id']);
+
+            if (!$formModel->isEnabled()) {
+                throw new LocalizedException(__('Form is disabled.'));
+            }
+
             $model = $this->submit($formModel, $answer);
 
             if ($formModel->getEmailField()) {
@@ -160,10 +183,7 @@ class Submit
                 $eventName,
                 [
                     'answer' => $model,
-                    'form' => $formModel,
-
-                    // set hash unique id for questionaire01082024
-                    'questionnaire_unique_id' => $model->getQuestionnaireUniqueId()
+                    'form' => $formModel
                 ]
             );
         }
@@ -219,36 +239,33 @@ class Submit
     }
 
     /**
-     * @param array $fileFields
-     *
      * @throws LocalizedException
      * @throws ValidatorException
      */
-    private function validateFiles($fileFields)
+    private function validateFiles(array $files): void
     {
-        foreach ($fileFields as $files) {
-            foreach ($files as $file) {
-                $errorCode = $file['error'] ?? 0;
+        foreach ($files as $file) {
+            $errorCode = $file['error'] ?? 0;
 
-                switch ($errorCode) {
-                    case UPLOAD_ERR_FORM_SIZE:
-                    case UPLOAD_ERR_INI_SIZE:
-                        $fileName = $file['name'] ?: '';
-                        throw new LocalizedException(
-                            __(
-                                'File with name "%1" exceeds the allowed file size. Form was not submitted',
-                                $fileName
-                            )
-                        );
-                    case UPLOAD_ERR_CANT_WRITE:
-                        throw new ValidatorException(__('File upload error. Failed to write file to disk'));
-                    case UPLOAD_ERR_NO_TMP_DIR:
-                        throw new ValidatorException(__('File upload error. Missing a temporary folder'));
-                    case UPLOAD_ERR_PARTIAL:
-                        throw new ValidatorException(
-                            __('File upload error.  The uploaded file was only partially uploaded')
-                        );
-                }
+            switch ($errorCode) {
+                case UPLOAD_ERR_FORM_SIZE:
+                case UPLOAD_ERR_INI_SIZE:
+                    $fileName = $file['name'] ?: '';
+                    throw new LocalizedException(
+                        __(
+                            'File with name "%1" exceeds the allowed file size. '
+                            . 'Form was not submitted',
+                            $fileName
+                        )
+                    );
+                case UPLOAD_ERR_CANT_WRITE:
+                    throw new ValidatorException(__('File upload error. Failed to write file to disk'));
+                case UPLOAD_ERR_NO_TMP_DIR:
+                    throw new ValidatorException(__('File upload error. Missing a temporary folder'));
+                case UPLOAD_ERR_PARTIAL:
+                    throw new ValidatorException(
+                        __('File upload error.  The uploaded file was only partially uploaded')
+                    );
             }
         }
     }
@@ -258,9 +275,8 @@ class Submit
         $answerResponse = $this->generateAnswerResponse($formModel);
         $data = [
             'form_id' => $formModel->getId(),
-            'ip' => $this->helper->getCurrentIp(),
-            'customer_id' => (int) $this->helper->getCurrentCustomerId(),
-            'questionnaire_unique_id' => $this->helper->getQuestionnaireUniqueId()
+            'ip' => $this->customerIp->getCurrentIp(),
+            'customer_id' => (int) $this->helper->getCurrentCustomerId()
         ];
 
         if ($answer) {
@@ -494,7 +510,7 @@ class Submit
                 case 'validation':
                     if ($item == 'validate-email' && !$this->isHiddenField($field)) {
                         $value = filter_var($value, FILTER_SANITIZE_EMAIL);
-                        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                        if (!$this->emailAddressValidator->isValid($value)) {
                             throw new LocalizedException(__('Please enter a valid email address.'));
                         }
                     }
@@ -533,7 +549,9 @@ class Submit
             foreach ($field['dependency'] as $dependency) {
                 if (isset($dependency['field']) && isset($dependency[self::VALUE])) {
                     if (isset($this->params[$dependency['field']])) {
-                        $isHidden = $this->params[$dependency['field']] != $dependency[self::VALUE];
+                        $isHidden = is_array($this->params[$dependency['field']])
+                            ? !in_array($dependency[self::VALUE], $this->params[$dependency['field']])
+                            : $dependency[self::VALUE] != $this->params[$dependency['field']];
                     } else {
                         $isHidden = true;
                     }

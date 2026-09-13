@@ -29,12 +29,12 @@ if (empty($data)) {
 
 <?php foreach ($data as $address): ?>
     <div class="box">
-        <strong class="box-title"><span><?= $block->escapeHtml($address['label']) ?></span></strong>
+        <strong class="box-title"><span><?= $escaper->escapeHtml($address['label']) ?></span></strong>
         <div class="box-content">
             <?php foreach ((array) $address['value'] as $field): ?>
                 <div>
-                    <strong><?= $block->escapeHtml($field['label']) ?>:&nbsp;</strong>
-                    <span><?= $block->escapeHtml($field['value']) ?></span>
+                    <strong><?= $escaper->escapeHtml($field['label']) ?>:&nbsp;</strong>
+                    <span><?= $escaper->escapeHtml($field['value']) ?></span>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -44,5 +44,14 @@ if (empty($data)) {
 <style type="text/css">
     .block-order-additional-view .box-title {
         font-weight: 600;
+    }
+    .block-order-additional-view .box:nth-child(2){
+        float:right;
+    }
+    .block-order-additional-view .box{
+        width:48%
+    }
+    .block-order-additional-view .box:nth-child(1){
+        float:left;
     }
 </style>

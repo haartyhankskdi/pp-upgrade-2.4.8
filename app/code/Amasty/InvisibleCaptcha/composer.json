@@ -2,13 +2,13 @@
     "name": "amasty/aminvisiblecaptcha",
     "description": "Amasty Google Invisible Captcha",
     "require": {
-        "php": ">=7.3.0",
-        "amasty/base": ">=1.13.5"
+        "php": ">=7.4",
+        "amasty/base": ">=1.21.3"
     },
     "type": "magento2-module",
-    "version": "2.4.6",
+    "version": "2.5.5",
     "license": [
-        "Commercial"
+        "proprietary"
     ],
     "autoload": {
         "files": [

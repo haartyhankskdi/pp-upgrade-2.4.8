@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\Checkout\Cart;
@@ -27,10 +27,6 @@ use Magento\Framework\Message\MessageInterface;
 use Magento\Framework\UrlInterface;
 use Mageplaza\Osc\Helper\Data;
 
-/**
- * Class Addgroup
- * @package Mageplaza\Osc\Model\Plugin\Checkout\Cart
- */
 class Addgroup
 {
     /**
@@ -56,9 +52,9 @@ class Addgroup
     /**
      * Addgroup constructor.
      *
-     * @param Data $helper
-     * @param UrlInterface $url
-     * @param ModelCart $cart
+     * @param Data             $helper
+     * @param UrlInterface     $url
+     * @param ModelCart        $cart
      * @param ManagerInterface $messageManager
      */
     public function __construct(Data $helper, UrlInterface $url, ModelCart $cart, ManagerInterface $messageManager)

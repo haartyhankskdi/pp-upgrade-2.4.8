@@ -1,0 +1,97 @@
+& when (@media-common = true) {
+    .hdmx__ticket-message-rate-satisfaction {
+        position:      absolute;
+        right:         5px;
+        top:           5px;
+        padding:       .5rem;
+        display:       flex;
+        align-items:   center;
+        background:    #ffffff;
+        border-radius: 10rem;
+        max-width:     50%;
+        box-shadow:    0 0 5px rgba(0, 0, 0, 0.1);
+
+        .rate {
+            margin-left: 1rem;
+            flex-shrink: 0;
+            display:     flex;
+
+            img {
+                width:  2rem;
+                height: 2rem;
+            }
+        }
+
+        .comment {
+            overflow:           hidden;
+            text-overflow:      ellipsis;
+            font-size:          1.3rem;
+            margin-left:        1rem;
+            display:            -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+    }
+
+    .hdmx__ticket-message-rate {
+        display:       flex;
+        position:      absolute;
+        right:         5px;
+        top:           10px;
+        padding:       .5rem;
+        align-items:   center;
+        background:    #ffffff;
+        border-radius: 10rem;
+        box-shadow:    0 0 5px rgba(0, 0, 0, 0.1);
+
+        * {
+            transition: all .1s ease-in;
+        }
+
+        a {
+            display:         flex;
+            align-items:     center;
+            color:           #999999;
+            text-decoration: none;
+            cursor:          pointer;
+
+            img {
+                width:  2rem;
+                height: 2rem;
+            }
+
+            span {
+                display:     block;
+                width:       0;
+                overflow:    hidden;
+                margin-left: .5rem;
+            }
+
+            &:hover {
+                color: #333333;
+            }
+        }
+
+        &:hover {
+            a {
+                margin: 0 1rem;
+
+                img {
+                    width:  3rem;
+                    height: 3rem;
+                }
+
+                span {
+                    width: auto;
+                }
+            }
+        }
+
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = "max") and (@break = @screen__m) {
+    .hdmx__ticket-message-rate-satisfaction, .hdmx__ticket-message-rate {
+        display: none;
+    }
+}

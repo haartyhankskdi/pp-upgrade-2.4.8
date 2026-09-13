@@ -12,10 +12,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 define(
@@ -39,38 +39,43 @@ define(
             passwordElement = '.popup-authentication #login-password',
             emailScope      = "checkout.steps.shipping-step.shippingAddress.customer-email";
 
-        return Component.extend({
-            registerUrl: checkoutConfig.registerUrl,
-            forgotPasswordUrl: checkoutConfig.forgotPasswordUrl,
-            autocomplete: checkoutConfig.autocomplete,
-            modalWindow: null,
-            isLoading: ko.observable(false),
+        return Component.extend(
+            {
+                registerUrl: checkoutConfig.registerUrl,
+                forgotPasswordUrl: checkoutConfig.forgotPasswordUrl,
+                autocomplete: checkoutConfig.autocomplete,
+                modalWindow: null,
+                isLoading: ko.observable(false),
 
-            defaults: {
-                template: 'Mageplaza_Osc/container/authentication',
-                email: ko.observable()
-            },
+                defaults: {
+                    template: 'Mageplaza_Osc/container/authentication',
+                    email: ko.observable()
+                },
 
-            /**
-             * Init
-             */
-            initialize: function () {
-                var self = this;
+                /**
+                 * Init
+                 */
+                initialize: function () {
+                    var self = this;
 
-                this._super();
-                loginAction.registerLoginCallback(function () {
-                    self.isLoading(false);
-                });
-            },
+                    this._super();
+                    loginAction.registerLoginCallback(
+                        function () {
+                            self.isLoading(false);
+                        }
+                    );
+                },
 
-            /** Init popup login window */
-            setModalElement: function (element) {
-                if (window.checkoutConfig.oscConfig.isPopupSlideSocialLogin || window.checkoutConfig.oscConfig.isPopupQuickLogin) {
-                    return;
-                }
+                /**
+                 * Init popup login window 
+                 */
+                setModalElement: function (element) {
+                    if (window.checkoutConfig.oscConfig.isPopupSlideSocialLogin || window.checkoutConfig.oscConfig.isPopupQuickLogin) {
+                        return;
+                    }
 
-                this.modalWindow     = element;
-                var self             = this,
+                    this.modalWindow     = element;
+                    var self             = this,
                     socialLoginPopup = $("#social-login-popup"),
                     options          = {
                         'type': 'popup',
@@ -87,52 +92,65 @@ define(
                         }
                     };
 
-                if (window.checkoutConfig.oscConfig.isDisplaySocialLogin && socialLoginPopup.length > 0) {
-                    this.modalWindow   = socialLoginPopup;
-                    options.modalClass = 'osc-social-login-popup';
-                }
-                modal(options, $(this.modalWindow));
-            },
+                    if (window.checkoutConfig.oscConfig.isDisplaySocialLogin && socialLoginPopup.length > 0) {
+                        this.modalWindow   = socialLoginPopup;
+                        options.modalClass = 'osc-social-login-popup';
+                    }
+                    modal(options, $(this.modalWindow));
+                },
 
-            /** Is login form enabled for current customer */
-            isActive: function () {
-                return !customer.isLoggedIn();
-            },
+                /**
+                 * Is login form enabled for current customer 
+                 */
+                isActive: function () {
+                    return !customer.isLoggedIn();
+                },
 
-            /** Show login popup window */
-            showModal: function () {
-                $(this.modalWindow).modal('openModal');
-            },
+                /**
+                 * Show login popup window 
+                 */
+                showModal: function () {
+                    $(this.modalWindow).modal('openModal');
+                },
 
-            /** Provide login action */
-            login: function (loginForm) {
-                var loginData     = {},
+                /**
+                 * Provide login action 
+                 */
+                login: function (loginForm) {
+                    var loginData     = {},
                     formDataArray = $(loginForm).serializeArray();
 
-                formDataArray.forEach(function (entry) {
-                    loginData[entry.name] = entry.value;
-                });
-
-                if ($(loginForm).validation() &&
-                    $(loginForm).validation('isValid')
-                ) {
-                    this.isLoading(true);
-                    loginAction(loginData, null, true, messageContainer)
-                    .done(function (response) {
-                        if (!response.errors) {
-                            messageContainer.addSuccessMessage({'message': $t('Login successfully. Please wait...')});
+                    formDataArray.forEach(
+                        function (entry) {
+                            loginData[entry.name] = entry.value;
                         }
-                    });
-                }
-            },
+                    );
 
-            /** Move label element when input has value */
-            hasValue: function () {
-                if (window.checkoutConfig.oscConfig.isUsedMaterialDesign) {
-                    $(emailElement).val() ? $(emailElement).addClass('active') : $(emailElement).removeClass('active');
-                    $(passwordElement).val() ? $(passwordElement).addClass('active') : $(passwordElement).removeClass('active');
+                    if ($(loginForm).validation() 
+                        && $(loginForm).validation('isValid')
+                    ) {
+                        this.isLoading(true);
+                        loginAction(loginData, null, true, messageContainer)
+                        .done(
+                            function (response) {
+                                if (!response.errors) {
+                                    messageContainer.addSuccessMessage({'message': $t('Login successfully. Please wait...')});
+                                }
+                            }
+                        );
+                    }
+                },
+
+                /**
+                 * Move label element when input has value 
+                 */
+                hasValue: function () {
+                    if (window.checkoutConfig.oscConfig.isUsedMaterialDesign) {
+                        $(emailElement).val() ? $(emailElement).addClass('active') : $(emailElement).removeClass('active');
+                        $(passwordElement).val() ? $(passwordElement).addClass('active') : $(passwordElement).removeClass('active');
+                    }
                 }
             }
-        });
+        );
     }
 );

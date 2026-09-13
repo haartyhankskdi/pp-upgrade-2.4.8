@@ -13,24 +13,25 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Api;
 
 /**
  * Interface for update item information
+ *
  * @api
  */
 interface GuestCheckoutManagementInterface
 {
     /**
      * @param string $cartId
-     * @param int $itemId
-     * @param float $itemQty
+     * @param int    $itemId
+     * @param float  $itemQty
      *
      * @return \Mageplaza\Osc\Api\Data\OscDetailsInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
@@ -40,7 +41,7 @@ interface GuestCheckoutManagementInterface
 
     /**
      * @param string $cartId
-     * @param int $itemId
+     * @param int    $itemId
      *
      * @return \Mageplaza\Osc\Api\Data\OscDetailsInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
@@ -59,7 +60,7 @@ interface GuestCheckoutManagementInterface
 
     /**
      * @param string $cartId
-     * @param bool $isUseGiftWrap
+     * @param bool   $isUseGiftWrap
      *
      * @return \Mageplaza\Osc\Api\Data\OscDetailsInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
@@ -68,10 +69,10 @@ interface GuestCheckoutManagementInterface
     public function updateGiftWrap($cartId, $isUseGiftWrap);
 
     /**
-     * @param string $cartId
+     * @param string                                                  $cartId
      * @param \Magento\Checkout\Api\Data\ShippingInformationInterface $addressInformation
-     * @param string[] $customerAttributes
-     * @param string[] $additionInformation
+     * @param string[]                                                $customerAttributes
+     * @param string[]                                                $additionInformation
      *
      * @return bool
      * @throws \Magento\Framework\Exception\InputException
@@ -96,7 +97,7 @@ interface GuestCheckoutManagementInterface
      *
      * @param string $cartId
      * @param string $customerEmail
-     * @param int $websiteId If not set, will use the current websiteId
+     * @param int    $websiteId     If not set, will use the current websiteId
      *
      * @return bool
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -104,7 +105,7 @@ interface GuestCheckoutManagementInterface
     public function isEmailAvailable($cartId, $customerEmail, $websiteId = null);
 
     /**
-     * @param string $cartId
+     * @param string                                   $cartId
      * @param \Magento\Quote\Api\Data\PaymentInterface $paymentMethod
      *
      * @return \Magento\Quote\Api\Data\TotalsInterface $totals

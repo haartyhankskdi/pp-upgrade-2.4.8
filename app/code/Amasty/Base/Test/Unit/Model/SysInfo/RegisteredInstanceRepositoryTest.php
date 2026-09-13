@@ -21,6 +21,7 @@ use Amasty\Base\Model\SysInfo\RegisteredInstanceRepository;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\UrlInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -77,10 +78,10 @@ class RegisteredInstanceRepositoryTest extends TestCase
         $this->urlMock = $this->createMock(UrlInterface::class);
 
         $this->model = new RegisteredInstanceRepository(
+            $this->flagRepositoryMock,
             $this->serializerMock,
             $this->dataObjectHelperMock,
             $this->registeredInstanceFactoryMock,
-            $this->flagRepositoryMock,
             $this->instanceDataRepositoryMock,
             $this->instanceDataFactoryMock,
             $this->urlMock
@@ -93,6 +94,7 @@ class RegisteredInstanceRepositoryTest extends TestCase
      * @dataProvider getDataProvider
      * @return void
      */
+    #[DataProvider('getDataProvider')]
     public function testGet(string $regInstSerialized, array $regInstArray): void
     {
         $this->urlMock->method('getBaseUrl')->willReturn('https://test.com');
@@ -123,7 +125,7 @@ class RegisteredInstanceRepositoryTest extends TestCase
         $this->assertEquals($emptyInstanceMock->getCurrentInstance(), $this->model->get()->getCurrentInstance());
     }
 
-    public function getDataProvider(): array
+    public static function getDataProvider(): array
     {
         return [
             ['', []],

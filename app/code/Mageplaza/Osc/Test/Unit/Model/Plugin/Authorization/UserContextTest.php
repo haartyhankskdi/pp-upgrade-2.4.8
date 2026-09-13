@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Authorization;
@@ -33,10 +33,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
-/**
- * Class UserContextTest
- * @package Mageplaza\Osc\Test\Unit\Model\Plugin\Authorization
- */
 class UserContextTest extends TestCase
 {
     /**
@@ -54,7 +50,7 @@ class UserContextTest extends TestCase
      */
     private $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->oscHelperMock = $this->getMockBuilder(OscHelper::class)
             ->disableOriginalConstructor()
@@ -77,7 +73,7 @@ class UserContextTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestAfterGetUserType()
+    public static function providerTestAfterGetUserType()
     {
         return [
             [
@@ -92,11 +88,11 @@ class UserContextTest extends TestCase
     }
 
     /**
-     * @param string $result
+     * @param string  $result
      * @param boolean $flagOsc
      *
      * @dataProvider providerTestAfterGetUserType
-     * @throws ReflectionException
+     * @throws       ReflectionException
      */
     public function testAfterGetUserType($result, $flagOsc)
     {
@@ -113,7 +109,7 @@ class UserContextTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestAfterGetUserId()
+    public static function providerTestAfterGetUserId()
     {
         return [
             [
@@ -128,7 +124,7 @@ class UserContextTest extends TestCase
     }
 
     /**
-     * @param string $result
+     * @param string  $result
      * @param boolean $flagOsc
      *
      * @dataProvider providerTestAfterGetUserId
@@ -147,7 +143,7 @@ class UserContextTest extends TestCase
         $this->oscHelperMock->expects($this->once())->method('isFlagOscMethodRegister')->willReturn($flagOsc);
         if ($flagOsc) {
             $quoteMock = $this->getMockBuilder(QuoteCore::class)
-                ->setMethods(['getCustomerId'])
+                ->addMethods(['getCustomerId'])
                 ->disableOriginalConstructor()->getMock();
             $this->checkoutSessionMock->expects($this->once())->method('getQuote')->willReturn($quoteMock);
             $quoteMock->expects($this->once())->method('getCustomerId')->willReturn(1);

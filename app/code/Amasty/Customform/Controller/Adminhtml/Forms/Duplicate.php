@@ -1,9 +1,9 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Controller\Adminhtml\Forms;
 
@@ -35,6 +35,6 @@ class Duplicate extends \Amasty\Customform\Controller\Adminhtml\Form
             $this->messageManager->addErrorMessage(__('Something went wrong during duplication'));
         }
 
-        $this->_redirect('*/*/index');
+        return $this->_redirect('*/*/index');
     }
 }

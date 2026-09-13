@@ -26,7 +26,6 @@ trait ReflectionTrait
     {
         $reflection = new \ReflectionClass(get_class($object));
         $method = $reflection->getMethod($methodName);
-        $method->setAccessible(true);
 
         return $method->invokeArgs($object, $parameters);
     }
@@ -44,7 +43,6 @@ trait ReflectionTrait
     {
         $reflection = new \ReflectionClass($origClassName ?: get_class($object));
         $property = $reflection->getProperty($propertyName);
-        $property->setAccessible(true);
         $property->setValue($object, $value);
 
         return $object;
@@ -62,7 +60,6 @@ trait ReflectionTrait
     {
         $reflection = new \ReflectionClass($origClassName ?: get_class($object));
         $property = $reflection->getProperty($propertyName);
-        $property->setAccessible(true);
 
         return $property->getValue($object);
     }

@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <script src="https://pay.google.com/gp/p/js/pay.js" src_type="url"/>
+    </head>
+	<body>
+		<referenceBlock name="head.additional">
+            <block class="AutifyDigital\LloydscardnetPayment\Block\Lcnetpaymentjs" name="lcnetpaymentjs.js" template="AutifyDigital_LloydscardnetPayment::lcnetpaymentjs.phtml" ifconfig="payment/lcnetpaymentjs/active"/>
+        </referenceBlock>
+		<referenceBlock name="checkout.root">
+			<arguments>
+				<argument name="jsLayout" xsi:type="array">
+					<item name="components" xsi:type="array">
+						<item name="checkout" xsi:type="array">
+							<item name="children" xsi:type="array">
+								<item name="steps" xsi:type="array">
+									<item name="children" xsi:type="array">
+										<item name="billing-step" xsi:type="array">
+											<item name="children" xsi:type="array">
+												<item name="payment" xsi:type="array">
+													<item name="children" xsi:type="array">
+														<item name="renders" xsi:type="array">
+															<item name="children" xsi:type="array">
+																<item name="lcnetredirect" xsi:type="array">
+																	<item name="component" xsi:type="string">AutifyDigital_LloydscardnetPayment/js/view/payment/lcnetredirect</item>
+																	<item name="methods" xsi:type="array">
+																		<item name="lcnetredirect" xsi:type="array">
+																			<item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+																		</item>
+																	</item>
+																</item>
+																<item name="lcnetpaymentjs" xsi:type="array">
+																	<item name="component" xsi:type="string">AutifyDigital_LloydscardnetPayment/js/view/payment/lcnetpaymentjs</item>
+																	<item name="methods" xsi:type="array">
+																		<item name="lcnetpaymentjs" xsi:type="array">
+																			<item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+																		</item>
+																	</item>
+																</item>
+																<item name="cardnetapplepay" xsi:type="array">
+																	<item name="component" xsi:type="string">AutifyDigital_LloydscardnetPayment/js/view/payment/cardnetapplepay</item>
+																	<item name="methods" xsi:type="array">
+																		<item name="cardnetapplepay" xsi:type="array">
+																			<item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+																		</item>
+																	</item>
+																</item>
+																<item name="cardnetgooglepay" xsi:type="array">
+																	<item name="component" xsi:type="string">AutifyDigital_LloydscardnetPayment/js/view/payment/cardnetgooglepay</item>
+																	<item name="methods" xsi:type="array">
+																		<item name="cardnetgooglepay" xsi:type="array">
+																			<item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+																		</item>
+																	</item>
+																</item>
+																<item name="lbopcheckoutsolution" xsi:type="array">
+																	<item name="component" xsi:type="string">AutifyDigital_LloydscardnetPayment/js/view/payment/lbopcheckoutsolution</item>
+																	<item name="methods" xsi:type="array">
+																		<item name="lbopcheckoutsolution" xsi:type="array">
+																			<item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+																		</item>
+																	</item>
+																</item>
+															</item>
+														</item>
+													</item>
+												</item>
+											</item>
+										</item>
+									</item>
+								</item>
+							</item>
+						</item>
+					</item>
+				</argument>
+			</arguments>
+		</referenceBlock>
+	</body>
+</page>

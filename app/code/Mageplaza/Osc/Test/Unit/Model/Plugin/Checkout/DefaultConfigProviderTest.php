@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Checkout;
@@ -31,10 +31,6 @@ use Mageplaza\Osc\Model\Plugin\Checkout\DefaultConfigProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class DefaultConfigProviderTest
- * @package Mageplaza\Osc\Test\Unit\Model\Plugin\Checkout
- */
 class DefaultConfigProviderTest extends TestCase
 {
     /**
@@ -52,7 +48,7 @@ class DefaultConfigProviderTest extends TestCase
      */
     private $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->checkoutSessionMock = $this->getMockBuilder(CheckoutSession::class)
             ->disableOriginalConstructor()->getMock();

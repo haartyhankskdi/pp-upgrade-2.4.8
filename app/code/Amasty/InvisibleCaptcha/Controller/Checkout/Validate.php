@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Google Invisible reCaptcha for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Google Invisible reCaptcha for Magento 2
+ */
 
 namespace Amasty\InvisibleCaptcha\Controller\Checkout;
 
@@ -19,7 +20,6 @@ use Magento\Framework\Controller\ResultInterface;
 
 class Validate extends Action implements HttpPostActionInterface
 {
-    protected $context;
     /**
      * @var Captcha
      */
@@ -38,7 +38,6 @@ class Validate extends Action implements HttpPostActionInterface
         parent::__construct($context);
         $this->captchaModel = $captchaModel;
         $this->request = $request;
-        $this->context = $context;
     }
 
     /**

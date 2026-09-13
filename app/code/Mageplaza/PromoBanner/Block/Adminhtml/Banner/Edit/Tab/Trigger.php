@@ -79,26 +79,26 @@ class Trigger extends Generic implements TabInterface
     {
         /** @var Banner $model */
         $model = $this->_coreRegistry->registry('mppromobanner_banner');
-        $form  = $this->_formFactory->create();
+        $form = $this->_formFactory->create();
         $form->setHtmlIdPrefix('mppromobanner_');
         $form->setFieldNameSuffix('mppromobanner');
 
-        $fieldset = $form->addFieldset('base_fieldset', ['legend' => __('Trigger')]);
+        $fieldset = $form->addFieldset('trigger_fieldset', ['legend' => __('Trigger')]);
 
         $fieldset->addField('auto_close_time', 'select', [
-            'name'   => 'auto_close_time',
-            'label'  => __('Auto-close after'),
-            'title'  => __('Auto-close after'),
+            'name' => 'auto_close_time',
+            'label' => __('Auto-close after'),
+            'title' => __('Auto-close after'),
             'values' => $this->autoClose->toOptionArrayConfig(),
-            'note'   => __('Set the time to auto close promo banners after showing.')
+            'note' => __('Set the time to auto close promo banners after showing.')
         ]);
 
         $fieldset->addField('auto_reopen_time', 'select', [
-            'name'   => 'auto_reopen_time',
-            'label'  => __('Auto-reopen schedule'),
-            'title'  => __('Auto-reopen schedule'),
+            'name' => 'auto_reopen_time',
+            'label' => __('Auto-reopen schedule'),
+            'title' => __('Auto-reopen schedule'),
             'values' => $this->frequency->toOptionArrayConfig(),
-            'note'   => __('Set the time to reopen promo banners after being closed (when customers click on the close button).')
+            'note' => __('Set the time to reopen promo banners after being closed (when customers click on the close button).')
         ]);
 
         if (!$model->getAutoCloseTime()) {

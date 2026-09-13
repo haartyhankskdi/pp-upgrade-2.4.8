@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Controller\Index;
@@ -53,10 +53,6 @@ use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Osc\Helper\Data;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class Index
- * @package Mageplaza\Osc\Controller\Index
- */
 class Index extends Onepage
 {
     /**
@@ -107,54 +103,54 @@ class Index extends Onepage
     /**
      * Index constructor.
      *
-     * @param Context $context
-     * @param Session $customerSession
-     * @param CustomerRepositoryInterface $customerRepository
-     * @param AccountManagementInterface $accountManagement
-     * @param Registry $coreRegistry
-     * @param InlineInterface $translateInline
-     * @param Validator $formKeyValidator
-     * @param ScopeConfigInterface $scopeConfig
-     * @param LayoutFactory $layoutFactory
-     * @param CartRepositoryInterface $quoteRepository
-     * @param PageFactory $resultPageFactory
-     * @param ResultLayoutFactory $resultLayoutFactory
-     * @param RawFactory $resultRawFactory
-     * @param JsonFactory $resultJsonFactory
-     * @param ProductRepository $productRepository
-     * @param StoreManagerInterface $storeManager
-     * @param Cart $cart
-     * @param LoggerInterface $logger
-     * @param Configurable $configurable
-     * @param TotalsCollector $totalsCollector
+     * @param Context                           $context
+     * @param Session                           $customerSession
+     * @param CustomerRepositoryInterface       $customerRepository
+     * @param AccountManagementInterface        $accountManagement
+     * @param Registry                          $coreRegistry
+     * @param InlineInterface                   $translateInline
+     * @param Validator                         $formKeyValidator
+     * @param ScopeConfigInterface              $scopeConfig
+     * @param LayoutFactory                     $layoutFactory
+     * @param CartRepositoryInterface           $quoteRepository
+     * @param PageFactory                       $resultPageFactory
+     * @param ResultLayoutFactory               $resultLayoutFactory
+     * @param RawFactory                        $resultRawFactory
+     * @param JsonFactory                       $resultJsonFactory
+     * @param ProductRepository                 $productRepository
+     * @param StoreManagerInterface             $storeManager
+     * @param Cart                              $cart
+     * @param LoggerInterface                   $logger
+     * @param Configurable                      $configurable
+     * @param TotalsCollector                   $totalsCollector
      * @param ShippingMethodManagementInterface $shippingMethodManagement
-     * @param \Magento\Checkout\Model\Session $checkoutSession
-     * @param Data $helper
+     * @param \Magento\Checkout\Model\Session   $checkoutSession
+     * @param Data                              $helper
      */
     public function __construct(
-        Context $context,
-        Session $customerSession,
-        CustomerRepositoryInterface $customerRepository,
-        AccountManagementInterface $accountManagement,
-        Registry $coreRegistry,
-        InlineInterface $translateInline,
-        Validator $formKeyValidator,
-        ScopeConfigInterface $scopeConfig,
-        LayoutFactory $layoutFactory,
-        CartRepositoryInterface $quoteRepository,
-        PageFactory $resultPageFactory,
-        ResultLayoutFactory $resultLayoutFactory,
-        RawFactory $resultRawFactory,
-        JsonFactory $resultJsonFactory,
-        ProductRepository $productRepository,
-        StoreManagerInterface $storeManager,
-        Cart $cart,
-        LoggerInterface $logger,
-        Configurable $configurable,
-        TotalsCollector $totalsCollector,
+        Context                           $context,
+        Session                           $customerSession,
+        CustomerRepositoryInterface       $customerRepository,
+        AccountManagementInterface        $accountManagement,
+        Registry                          $coreRegistry,
+        InlineInterface                   $translateInline,
+        Validator                         $formKeyValidator,
+        ScopeConfigInterface              $scopeConfig,
+        LayoutFactory                     $layoutFactory,
+        CartRepositoryInterface           $quoteRepository,
+        PageFactory                       $resultPageFactory,
+        ResultLayoutFactory               $resultLayoutFactory,
+        RawFactory                        $resultRawFactory,
+        JsonFactory                       $resultJsonFactory,
+        ProductRepository                 $productRepository,
+        StoreManagerInterface             $storeManager,
+        Cart                              $cart,
+        LoggerInterface                   $logger,
+        Configurable                      $configurable,
+        TotalsCollector                   $totalsCollector,
         ShippingMethodManagementInterface $shippingMethodManagement,
-        \Magento\Checkout\Model\Session $checkoutSession,
-        Data $helper
+        \Magento\Checkout\Model\Session   $checkoutSession,
+        Data                              $helper
     ) {
         $this->productRepository = $productRepository;
         $this->storeManager = $storeManager;
@@ -195,6 +191,9 @@ class Index extends Onepage
             $this->messageManager->addErrorMessage(__('One step checkout is turned off.'));
 
             return $this->resultRedirectFactory->create()->setPath('checkout');
+        }
+        if (trim($this->getRequest()->getRequestString(), '/') !== $this->helper->getOscRoute()) {
+            return $this->resultRedirectFactory->create()->setPath($this->helper->getOscRoute());
         }
 
         $quote = $this->getOnepage()->getQuote();
@@ -282,7 +281,9 @@ class Index extends Onepage
 
             $availableMethods = $this->shippingMethodManagement->getList($quote->getId());
 
-            /** @var ShippingMethodInterface|null $method */
+            /**
+ * @var ShippingMethodInterface|null $method
+*/
             $method = null;
             if (count($availableMethods) === 1) {
                 $method = array_shift($availableMethods);
@@ -321,7 +322,7 @@ class Index extends Onepage
     }
 
     /**
-     * @param Quote $quote
+     * @param Quote  $quote
      * @param string $coupon
      */
     public function setCouponCodeOsc($quote, $coupon)
@@ -354,7 +355,8 @@ class Index extends Onepage
             try {
                 $product = $this->productRepository->get($sku, false, $storeId, true);
                 if ($product && $product->getExtensionAttributes()->getStockItem()
-                    && $product->getExtensionAttributes()->getStockItem()->getIsInStock()) {
+                    && $product->getExtensionAttributes()->getStockItem()->getIsInStock()
+                ) {
                     $configurableProductId = $this->configurable->getParentIdsByChild($product->getId());
                     if ($configurableProductId) {
                         $productParent = $this->productRepository->getById($configurableProductId[0]);

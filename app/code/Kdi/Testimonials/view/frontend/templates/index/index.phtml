@@ -21,11 +21,11 @@ $mediaUrl = $block->getUrl('media/');
                 // If not, prepend the $mediaUrl
                 $image1 = $item['image1'];
                 $image2 = $item['image2'];
-                if (strpos($image1, 'media') === false) {
-                    $image1 = $mediaUrl . ltrim($image1, '/');
+                if (strpos((string) $image1, 'media') === false) {
+                    $image1 = $mediaUrl . ltrim((string) $image1, '/');
                 }
-                if (strpos($image2, 'media') === false) {
-                    $image2 = $mediaUrl . ltrim($image2, '/');
+                if (strpos((string) $image2, 'media') === false) {
+                    $image2 = $mediaUrl . ltrim((string) $image2, '/');
                 }
               ?>
       <!-- Card 1 -->

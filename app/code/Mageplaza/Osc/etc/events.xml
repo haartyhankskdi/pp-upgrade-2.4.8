@@ -39,4 +39,28 @@
     <event name="sales_quote_address_save_before">
         <observer name="osc_before_save_customer_address_attribute" instance="Mageplaza\Osc\Observer\QuoteAddressBeforeSave"/>
     </event>
+    <event name="email_order_set_template_vars_before">
+        <observer name="add_order_attribute_to_order" instance="Mageplaza\Osc\Observer\OrderEmail" />
+    </event>
+    <event name="email_invoice_set_template_vars_before">
+        <observer name="add_custom_field_to_invoice" instance="Mageplaza\Osc\Observer\InvoiceEmail" />
+    </event>
+    <event name="email_shipment_set_template_vars_before">
+        <observer name="add_custom_field_to_shipment" instance="Mageplaza\Osc\Observer\ShipmentEmail" />
+    </event>
+    <event name="email_creditmemo_set_template_vars_before">
+        <observer name="add_custom_field_to_credit_memo" instance="Mageplaza\Osc\Observer\CreditMemoEmail" />
+    </event>
+    <event name="email_order_comment_set_template_vars_before">
+        <observer name="add_custom_field_to_order_comment" instance="Mageplaza\Osc\Observer\OrderCommentEmail" />
+    </event>
+    <event name="email_invoice_comment_set_template_vars_before">
+        <observer name="add_custom_field_to_invoice_comment" instance="Mageplaza\Osc\Observer\InvoiceCommentEmail" />
+    </event>
+    <event name="email_shipment_comment_set_template_vars_before">
+        <observer name="add_custom_field_to_shipment_comment" instance="Mageplaza\Osc\Observer\ShipmentCommentEmail" />
+    </event>
+    <event name="email_creditmemo_comment_set_template_vars_before">
+        <observer name="add_customfield_to_credit_memo_comment" instance="Mageplaza\Osc\Observer\CreditMemoCommentEmail" />
+    </event>
 </config>

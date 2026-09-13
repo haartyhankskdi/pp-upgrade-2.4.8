@@ -24,4 +24,10 @@
     <extension_attributes for="Magento\Quote\Api\Data\TotalsInterface">
         <attribute code="mp_promo_banner" type="array"/>
     </extension_attributes>
+    <extension_attributes for="Magento\Catalog\Api\Data\ProductInterface">
+        <attribute code="mp_promo_banners" type="Mageplaza\PromoBanner\Api\Data\PromoBannerSearchResultsInterface"/>
+    </extension_attributes>
+    <extension_attributes for="Magento\Catalog\Api\Data\CategoryInterface">
+        <attribute code="mp_promo_banners" type="Mageplaza\PromoBanner\Api\Data\PromoBannerSearchResultsInterface"/>
+    </extension_attributes>
 </config>

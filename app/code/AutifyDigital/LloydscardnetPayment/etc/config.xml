@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<!--
+   ~ This software is the confidential and proprietary information of Autify Digital Ltd.
+   ~ Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+   ~ Copyright (c) 2020-Present Autify Digital Ltd.
+   ~ This work is protected under applicable copyright and intellectual property laws.
+   ~ All rights reserved. Distribution and disclosure are permitted only in accordance with
+   ~ the terms of a valid written agreement with Autify Digital Ltd.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<payment>
+		    <basic>
+				<log>1</log>
+				<lloyds_mode>Test</lloyds_mode>
+				<library_uat>https://lib.paymentjs.firstdata.com/uat/client-2.0.0.js</library_uat>
+				<library_live>https://lib.paymentjs.firstdata.com/prod/client-2.0.0.js</library_live>
+				<order_id_suffix>0</order_id_suffix>
+				<active_po_number>0</active_po_number>
+				<dynamic_data_po_number>increment_id|customer_email|customer_firstname|customer_lastname</dynamic_data_po_number>
+		    	<challenge_indicator>02</challenge_indicator>
+				<refund_active>1</refund_active>
+			</basic>
+			<lcnetredirect>
+				<active>0</active>
+				<model>AutifyDigital\LloydscardnetPayment\Model\Payment\Lcnetredirect</model>
+				<order_status>pending_payment</order_status>
+				<title>Pay By Lloyds Cardnet (Connect)</title>
+				<allowspecific>0</allowspecific>
+				<payment_type>Redirect</payment_type>
+				<min_order_total>0.01</min_order_total>
+				<tooltip_before_button>You will be redirected to the Lloyds Online Payment gateway to proceed with payment.</tooltip_before_button>
+			</lcnetredirect>
+			<lcnetpaymentjs>
+				<active>0</active>
+				<model>AutifyDigital\LloydscardnetPayment\Model\Payment\Lcnetpaymentjs</model>
+				<library_uat>https://lib.paymentjs.firstdata.com/uat/client-2.0.0.js</library_uat>
+				<library_live>https://lib.paymentjs.firstdata.com/prod/client-2.0.0.js</library_live>
+				<order_status>pending_payment</order_status>
+				<title>Pay By Lloyds Cardnet (Payment.js)</title>
+				<payment_action>authorize_capture</payment_action>
+				<allowspecific>0</allowspecific>
+				<min_order_total>0.01</min_order_total>
+				<placeholder_card>4242 4242 4242 4242</placeholder_card>
+				<placeholder_cvv>123</placeholder_cvv>
+				<placeholder_name>Card Holder Name</placeholder_name>
+			</lcnetpaymentjs>
+			<cardnetapplepay>
+				<active>0</active>
+				<model>AutifyDigital\LloydscardnetPayment\Model\Payment\CardnetApplepay</model>
+				<order_status>pending_payment</order_status>
+				<title>Pay By ApplePay</title>
+				<payment_method_integration>onsite</payment_method_integration>
+				<button_color>black</button_color>
+				<allowspecific>0</allowspecific>
+				<min_order_total>0.01</min_order_total>
+				<supported_networks>amex,discover,electron,maestro,masterCard,visa</supported_networks>
+				<firstname_limit>0</firstname_limit>
+				<lastname_limit>0</lastname_limit>
+				<address1_limit>0</address1_limit>
+				<address2_limit>0</address2_limit>
+			</cardnetapplepay>
+			<cardnetgooglepay>
+				<active>0</active>
+				<model>AutifyDigital\LloydscardnetPayment\Model\Payment\CardnetGooglepay</model>
+				<order_status>pending_payment</order_status>
+				<title>Pay By GooglePay</title>
+				<payment_method_integration>onsite</payment_method_integration>
+				<allowspecific>0</allowspecific>
+				<button_color>black</button_color>
+				<min_order_total>0.01</min_order_total>
+				<supported_networks>AMEX,DISCOVER,INTERAC,JCB,MASTERCARD,VISA</supported_networks>
+				<firstname_limit>0</firstname_limit>
+				<lastname_limit>0</lastname_limit>
+				<address1_limit>0</address1_limit>
+				<address2_limit>0</address2_limit>
+			</cardnetgooglepay>
+			<lbopcheckoutsolution>
+				<active>0</active>
+				<model>AutifyDigital\LloydscardnetPayment\Model\Payment\LbopCheckoutSolution</model>
+				<title>Pay By Lloyds Cardnet (Checkout Solution)</title>
+				<order_status>pending_payment</order_status>
+				<allowspecific>0</allowspecific>
+			</lbopcheckoutsolution>
+		</payment>
+	</default>
+</config>

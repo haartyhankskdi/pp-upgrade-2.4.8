@@ -1,9 +1,9 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Ui\Component\Listing;
 
@@ -41,7 +41,7 @@ class AnswerDataProvider extends \Magento\Framework\View\Element\UiComponent\Dat
 
     /**
      * @param Filter $filter
-     * @return mixed|void
+     * @return void
      */
     public function addFilter(Filter $filter)
     {

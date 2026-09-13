@@ -86,9 +86,9 @@ class Condition extends Generic implements TabInterface
         array $data = []
     ) {
         $this->rendererFieldset = $rendererFieldset;
-        $this->conditions       = $conditions;
-        $this->bannerFactory    = $bannerFactory;
-        $this->resourceModel    = $resourceModel;
+        $this->conditions = $conditions;
+        $this->bannerFactory = $bannerFactory;
+        $this->resourceModel = $resourceModel;
 
         parent::__construct($context, $registry, $formFactory, $data);
     }
@@ -177,7 +177,7 @@ class Condition extends Generic implements TabInterface
     protected function _prepareForm()
     {
         $model = $this->_coreRegistry->registry('mppromobanner_banner');
-        $form  = $this->addTabToForm($model);
+        $form = $this->addTabToForm($model);
         $this->setForm($form);
 
         return parent::_prepareForm();
@@ -203,7 +203,7 @@ class Condition extends Generic implements TabInterface
         $form->setHtmlIdPrefix('mppromobanner_');
 
         $conditionsFieldSetId = $model->getConditionsFieldSetId($formName);
-        $newChildUrl          = $this->getUrl(
+        $newChildUrl = $this->getUrl(
             'mppromobanner/condition/newConditionHtml/form/' . $conditionsFieldSetId,
             ['form_namespace' => $formName]
         );
@@ -221,10 +221,10 @@ class Condition extends Generic implements TabInterface
             'conditions',
             'text',
             [
-                'name'           => 'conditions',
-                'label'          => __('Conditions'),
-                'title'          => __('Conditions'),
-                'required'       => true,
+                'name' => 'conditions',
+                'label' => __('Conditions'),
+                'title' => __('Conditions'),
+                'required' => true,
                 'data-form-part' => $formName
             ]
         )

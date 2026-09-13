@@ -7,7 +7,7 @@ $data = $AnsCollection->getData();
 $order = $block->getOrderDetails($block->getOrderId());
 // $collection = $order->getAllItems();
 $collection = $order->getAllVisibleItems();
-$hashKey = json_decode($block->getQuestionnaireHashKey());
+$hashKey = json_decode((string) $block->getQuestionnaireHashKey());
 ?>
 <div id="modal-content">
     <div class="modal-inner-content">
@@ -15,7 +15,7 @@ $hashKey = json_decode($block->getQuestionnaireHashKey());
         echo "Order Id : " . $order->getIncrementId() . "<br>";
         echo "ip Address:" . $order->getRemoteIp() . "<br>";
         $orderIp = $order->getRemoteIp();
-        $orderDate = explode(" ", $order->getCreatedAt());
+        $orderDate = explode(" ", (string) $order->getCreatedAt());
 
         foreach ($collection as $item) {
 
@@ -34,7 +34,7 @@ $hashKey = json_decode($block->getQuestionnaireHashKey());
                     foreach ($data as $items) {
                         if ($questionnaireUniqueId == $items['questionnaire_unique_id']) {
                             echo $items['form_name'] . "<hr>";
-                            $objects = json_decode($items['response_json']);
+                            $objects = json_decode((string) $items['response_json']);
                             $values = json_decode(json_encode($objects), true);
 
                             foreach ($values as $value) {
@@ -55,7 +55,7 @@ $hashKey = json_decode($block->getQuestionnaireHashKey());
                         foreach ($data as $items) {
                             if ($key === $items['questionnaire_unique_id']) {
                                 echo $items['form_name'] . "<hr>";
-                                $objects = json_decode($items['response_json']);
+                                $objects = json_decode((string) $items['response_json']);
                                 $values = json_decode(json_encode($objects), true);
 
                                 foreach ($values as $value) {
@@ -74,10 +74,10 @@ $hashKey = json_decode($block->getQuestionnaireHashKey());
                 } 
                 else {
                     foreach ($data as $items) {
-                        $date = explode(" ", $items['created_at']);
+                        $date = explode(" ", (string) $items['created_at']);
                         if ($orderIp == $items['ip'] && $orderDate[0] == $date[0]) {
                             echo $items['form_name'] . " | Submitted At :" . $items['created_at'] . "<hr>";
-                            $objects = json_decode($items['response_json']);
+                            $objects = json_decode((string) $items['response_json']);
                             $values = json_decode(json_encode($objects), true);
 
                             foreach ($values as $value) {

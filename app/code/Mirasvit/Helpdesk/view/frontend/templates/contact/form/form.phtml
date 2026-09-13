@@ -1,0 +1,185 @@
+<?php
+use Mirasvit\Core\Service\CspService;
+/** @var \Mirasvit\Helpdesk\Block\Contact\ContactUsForm $block */
+$config = $block->getConfig();
+$customer = $block->getCustomer();
+$helpText = $block->getHelpText();
+$nonce = CspService::getNonce();
+?>
+<div id="hdmx__contact-popup" class="hdmx__contact-popup" style="display: none;">
+    <div class="hdmx__wrapper">
+        <?php if ($block->isKbEnabled()): ?>
+            <?= $block->getKbBlock()->toHtml() ?>
+        <?php endif ?>
+
+        <form action="<?= $block->escapeUrl($block->getPostUrl()) ?>" method="POST" data-id="hdmx__contact-form"
+              class="hdmx__contact-form helpdesk-contact-form"
+              enctype="multipart/form-data" data-mage-init='{"validation":{}}'>
+
+            <?= $block->getBlockHtml('formkey') ?>
+
+            <button type="button" class="action close" aria-label="<?= $block->escapeHtml(__('Close contact form')) ?>">
+                <span>&times;</span>
+            </button>
+
+            <fieldset class="fieldset">
+                <legend class="legend"><?= $block->escapeHtml($config->getFormTitle()) ?></legend>
+                <?php if ($helpText): ?>
+                    <div>
+                        <p class="cms-content-important"><?= $block->escapeHtml($helpText); ?></p>
+                    </div>
+                <?php endif; ?>
+
+                <?= $block->getChildHtml('helpdesk_contacts_schedule_status_feedback') ?>
+
+                <div class="field" style="display: none;">
+                    <label class="label" for="email_123"><?= $block->escapeHtml(__('Email')) ?></label>
+
+                    <div class="control">
+                        <input type="text" id="email_123" name="email_123" data-id="email_123" class="email input-text">
+                    </div>
+                </div>
+
+                <div class="field required">
+                    <label class="label" for="subject"><?= $block->escapeHtml($config->getSubjectTitle()) ?></label>
+
+                    <div class="control">
+                        <input type="text" id="subject" name="subject" class="input-text subject" data-id="subject"
+                               placeholder="<?= $block->escapeHtml($config->getSubjectPlaceholder()) ?>"
+                               value="<?= $block->escapeHtml($block->getSearchQuery()) ?>"
+                               data-validate="{required:true}">
+                    </div>
+                </div>
+
+                <div class="field required">
+                    <label class="label" for="message"><?= $block->escapeHtml($config->getDescriptionTitle()) ?></label>
+
+                    <div class="control">
+                            <textarea id="message" name="message" class="message input-text" rows="3" data-id="message"
+                                      placeholder="<?= $block->escapeHtml($config->getDescriptionPlaceholder()) ?>"
+                                      data-validate="{required:true}"></textarea>
+                    </div>
+                </div>
+
+                <?php if (!$customer): ?>
+                    <div class="fields group-2">
+                        <div class="field required">
+                            <label class="label" for="customer_name"><?= $block->escapeHtml(__('Name')) ?></label>
+
+                            <div class="control">
+                                <input type="text" name='customer_name' id='customer_name'
+                                       autocomplete="name"
+                                       class="input-text" data-validate="{required:true}">
+                            </div>
+                        </div>
+                        <div class="field required">
+                            <label class="label" for="customer_email"><?= $block->escapeHtml(__('Email')) ?></label>
+
+                            <div class="control">
+                                <input type="text" name='customer_email' id='customer_email'
+                                       autocomplete="email"
+                                       class="input-text validate-email" data-validate="{required:true}">
+                            </div>
+                        </div>
+                    </div>
+                <?php endif ?>
+
+                <div class="field">
+                    <label for="telephone" class="label"><?= $block->escapeHtml(__('Telephone')) ?></label>
+
+                    <div class="control">
+                        <input id="telephone" name="telephone" class="telephone" data-id="telephone" autocomplete="tel"
+                               title="<?= $block->escapeHtml(__('Telephone')) ?>" value="" type="text" class="input-text"/>
+                    </div>
+                </div>
+
+                <?php if ($block->getIsAllowPriority() || $block->getIsAllowDepartment()): ?>
+                    <div class="fields">
+                        <?php if ($block->getIsAllowPriority()): ?>
+                            <div class="field">
+                                <label class="label" for="priority_id"><?= $block->escapeHtml(__('Priority')) ?></label>
+
+                                <div class="control">
+                                    <select id="priority_id" name="priority_id" class="priority_id" data-id="priority_id">
+                                        <?php foreach ($block->getPriorityCollection() as $priority): ?>
+                                            <option
+                                                value="<?= $block->escapeHtml($priority->getId()) ?>"><?= $block->escapeHtml($priority->getName()) ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                            </div>
+                        <?php endif ?>
+
+                        <?php if ($block->getIsAllowDepartment()): ?>
+                            <div class="field">
+                                <label class="label" for="department_id"><?= $block->escapeHtml(__('Department')) ?></label>
+
+                                <div class="control">
+                                    <select id="department_id" name="department_id" class='department_id' data-id="department_id">
+                                        <?php foreach ($block->getDepartmentCollection() as $department): ?>
+                                            <option
+                                                value="<?= $block->escapeHtml($department->getId()) ?>"><?= $block->escapeHtml($department->getName()) ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                            </div>
+                        <?php endif ?>
+                    </div>
+                <?php endif ?>
+
+                <?php if (count($block->getCustomFields())): ?>
+                    <div class="fields group-2">
+                        <?php foreach ($block->getCustomFields() as $field): ?>
+                            <div class="field <?= $block->escapeHtml($field->getType()) ?>">
+                                <label class="label" for="<?= $block->escapeHtml($field->getCode()) ?>"
+                                    <?= $field->getIsRequiredCustomer() ? 'class="_required"' : '' ?>>
+                                    <?= $block->escapeHtml(__($field->getName())) ?>
+                                </label>
+                                <div class="control">
+                                    <?= $block->getInputHtml($field) ?>
+                                </div>
+                                <p><?= $block->escapeHtml($field->getDescription()) ?></p>
+                            </div>
+                        <?php endforeach ?>
+                    </div>
+                <?php endif ?>
+
+                <?php if ($block->isAttachmentEnabled()) : ?>
+                    <div class="field">
+                        <label for="attachment"><?= $block->escapeHtml(__('Attach files')) ?></label>
+                        <p class="max-attachment-size"><?= $block->escapeHtml(__('Max file size: %1 Mb', $block->getAttachmentSize())) ?></p>
+
+                        <div class="control">
+                            <input type='file' class='multi' id='attachment' name='attachment[]' data-id='attachment' multiple/>
+                        </div>
+                    </div>
+                <?php endif ?>
+                <?= $block->getChildHtml('hdmx-msp-recaptcha') ?>
+            </fieldset>
+
+            <div class="actions-toolbar">
+                <input type="hidden" name="hideit" class="hideit" data-id="hideit" value="">
+                <input type="hidden" name="current_url" class="current_url"  value="">
+                <button type="submit" title="<?= $block->escapeHtml(__('Submit')) ?>" class="action primary hdmx-submit-btn">
+                    <span><?= $block->escapeHtml(__('Submit Ticket')) ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" <?php if ($nonce): ?> nonce="<?= $block->escapeHtml($nonce) ?>"<?php endif; ?>>
+    require([
+        "jquery",
+        'mage/validation'
+    ], function ($) {
+        $('.current_url').val(window.location.href);
+        var submitBtn = $('.action.primary', $('.hideit').parent());
+        $('form').on('invalid-form.validate', function(event, validation) {
+            $(submitBtn).show();
+        });
+        $(submitBtn).click(function() {
+            $(submitBtn).hide();
+        })
+    });
+</script>

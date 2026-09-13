@@ -60,7 +60,7 @@ class SendEmail extends Action
         $store = $this->_storeManager->getStore($storeId);
         $customerEmail = $order->getCustomerEmail();
         $response = $this->tabs->getInitiate();
-        $res = json_decode($response, true);
+        $res = json_decode((string) $response, true);
 
         # get the href value
         $href = $res['web']['href'];

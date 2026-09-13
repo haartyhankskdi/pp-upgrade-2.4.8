@@ -22,19 +22,23 @@
 namespace Mageplaza\Core\Helper;
 
 use Exception;
-use Laminas\Serializer\Adapter\PhpSerialize;
 use Magento\Backend\App\Config;
+use Magento\Backend\App\ConfigInterface;
 use Magento\Framework\App\Area;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\App\State;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Json\Helper\Data as JsonHelper;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\UrlInterface;
+use Magento\Framework\View\Design\Theme\ThemeProviderInterface;
+use Magento\Framework\View\DesignInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
+use Mageplaza\Core\Model\Config\Source\NoticeType;
 
 /**
  * Class AbstractData
@@ -82,7 +86,7 @@ class AbstractData extends AbstractHelper
         StoreManagerInterface $storeManager
     ) {
         $this->objectManager = $objectManager;
-        $this->storeManager = $storeManager;
+        $this->storeManager  = $storeManager;
 
         parent::__construct($context);
     }
@@ -95,6 +99,23 @@ class AbstractData extends AbstractHelper
     public function isEnabled($storeId = null)
     {
         return $this->getConfigGeneral('enabled', $storeId);
+    }
+
+    /**
+     * @param null $storeId
+     *
+     * @return bool
+     */
+    public function isEnabledNotificationUpdate($storeId = null)
+    {
+        $isEnable   = $this->getConfigGeneral('notice_enable', $storeId);
+        $noticeType = $this->getConfigGeneral('notice_type', $storeId);
+        if ($noticeType) {
+            $noticeType = explode(',', $noticeType);
+            $noticeType = in_array(NoticeType::TYPE_NEWUPDATE, $noticeType);
+        }
+
+        return $isEnable && $noticeType;
     }
 
     /**
@@ -135,7 +156,7 @@ class AbstractData extends AbstractHelper
         if ($scopeValue === null && !$this->isArea()) {
             /** @var Config $backendConfig */
             if (!$this->backendConfig) {
-                $this->backendConfig = $this->objectManager->get(\Magento\Backend\App\ConfigInterface::class);
+                $this->backendConfig = $this->objectManager->get(ConfigInterface::class);
             }
 
             return $this->backendConfig->getValue($field);
@@ -185,14 +206,24 @@ class AbstractData extends AbstractHelper
      * @param $ver
      * @param string $operator
      *
-     * @return mixed
+     * @return bool|int
      */
     public function versionCompare($ver, $operator = '>=')
     {
         $productMetadata = $this->objectManager->get(ProductMetadataInterface::class);
-        $version = $productMetadata->getVersion(); //will return the magento version
+        $version         = $productMetadata->getVersion(); //will return the magento version
 
         return version_compare($version, $ver, $operator);
+    }
+
+    /**
+     * Is <= 247
+     *
+     * @return bool
+     */
+    public function is247Below()
+    {
+        return $this->versionCompare('2.4.8', '<');
     }
 
     /**
@@ -279,7 +310,7 @@ class AbstractData extends AbstractHelper
     {
         if (!isset($this->isArea[$area])) {
             /** @var State $state */
-            $state = $this->objectManager->get(\Magento\Framework\App\State::class);
+            $state = $this->objectManager->get(State::class);
 
             try {
                 $this->isArea[$area] = ($state->getAreaCode() == $area);
@@ -325,6 +356,125 @@ class AbstractData extends AbstractHelper
      */
     protected function getSerializeClass()
     {
-        return $this->objectManager->get(PhpSerialize::class);
+        return $this->objectManager->get('Zend_Serializer_Adapter_PhpSerialize');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEdition()
+    {
+        return $this->objectManager->get(ProductMetadataInterface::class)->getEdition();
+    }
+
+    /**
+     * Extract the body from a response string
+     *
+     * @param string $response_str
+     *
+     * @return string
+     */
+    public static function extractBody($response_str)
+    {
+        $parts = preg_split('|(?:\r\n){2}|m', $response_str, 2);
+        if (isset($parts[1])) {
+            return $parts[1];
+        }
+
+        return '';
+    }
+
+    /**
+     * getHtmlJqColorPicker
+     *
+     * @param string $htmlId // id of the input html
+     * @param string|null $value
+     *
+     * @return string
+     */
+    public static function getHtmlJqColorPicker(string $htmlId, $value = '')
+    {
+        // Hex flags keep the value inert inside an inline <script> without relying on
+        // json_encode's default slash escaping. false means invalid UTF-8, so fall back
+        // to an empty string literal rather than emitting nothing and breaking the script.
+        $safeValue = json_encode(
+            (string) $value,
+            JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
+        );
+        if ($safeValue === false) {
+            $safeValue = '""';
+        }
+
+        return <<<HTML
+<script type="text/javascript">
+        require(["jquery","jquery/colorpicker/js/colorpicker"], function ($) {
+            $(document).ready(function () {
+
+                var el = $("#{$htmlId}");
+                el.css("backgroundColor", {$safeValue});
+                el.ColorPicker({
+                    color: {$safeValue},
+                    onChange: function (hsb, hex, rgb) {
+                        el.css("backgroundColor", "#" + hex).val("#" + hex);
+                    }
+                });
+            });
+        });
+</script>
+HTML;
+    }
+
+    /**
+     * Return is Hyva Theme
+     *
+     * @return bool
+     */
+    public function checkHyvaTheme()
+    {
+        try {
+            $themeCode = $this->getThemeCodeByCache();
+        } catch (Exception $e) {
+            try {
+                /** @var ThemeProviderInterface $themeProviderInterface */
+                $themeProviderInterface = $this->objectManager->create(ThemeProviderInterface::class);
+                $themeId                = $this->storeManager->getStore()->getConfig('design/theme/theme_id');
+                $theme                  = $themeProviderInterface->getThemeById($themeId);
+                $themeCode              = $theme->getCode();
+            } catch (NoSuchEntityException $noSuchEntityException) {
+                return false;
+            }
+        }
+
+        if (str_contains(strtolower($themeCode), 'hyva')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * GetThemeCode By Cache in DesignInterface
+     *
+     * @return string
+     */
+    private function getThemeCodeByCache()
+    {
+        /** @var DesignInterface $themeProviderInterface */
+        $themeProviderInterface = $this->objectManager->create(DesignInterface::class);
+        $theme                  = $themeProviderInterface->getDesignTheme();
+
+        $parentTheme = $theme->getParentTheme();
+
+        return $parentTheme ? $parentTheme->getCode() : $theme->getCode();
+    }
+
+    /**
+     * IsHyvaTheme
+     *
+     * @return bool
+     */
+    public function isHyvaTheme()
+    {
+        return $this->checkHyvaTheme();
     }
 }

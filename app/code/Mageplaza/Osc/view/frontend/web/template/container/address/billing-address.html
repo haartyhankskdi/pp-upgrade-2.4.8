@@ -23,13 +23,6 @@
 <div id="billing" class="checkout-billing-address" data-bind="visible: !isAddressSameAsShipping()">
        <!-- ko if: !isAmazonAccountLoggedIn() -->
             <div class="step-title" data-role="title">
-                <i class="fa fa-home"></i>
-                <!-- ko if: (window.checkoutConfig.oscConfig.isUsedMaterialDesign && !!Number(window.checkoutConfig.quoteData.is_virtual)) -->
-                <span class="fa-stack fa-2x">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <strong class="fa-stack-1x fa-stack-text fa-inverse">1</strong>
-                </span>
-                <!-- /ko -->
                 <span data-bind="i18n: 'Billing Address'"></span>
             </div>
     <!--/ko-->

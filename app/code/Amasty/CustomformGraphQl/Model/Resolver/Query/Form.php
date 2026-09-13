@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Amasty Custom Forms GraphQl for Magento 2 (System)
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Amasty Custom Forms GraphQl for Magento 2 (System)
+ */
 
 namespace Amasty\CustomformGraphQl\Model\Resolver\Query;
 
@@ -56,8 +57,8 @@ class Form implements ResolverInterface
         Field $field,
         $context,
         ResolveInfo $info,
-        array $value = null,
-        array $args = null
+        ?array $value = null,
+        ?array $args = null
     ) {
         try {
             $storeId = (int) $context->getExtensionAttributes()->getStore()->getId();

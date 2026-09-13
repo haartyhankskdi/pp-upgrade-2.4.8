@@ -28,7 +28,7 @@ class News
     /**
      * @var array
      */
-    protected $amastyModules = [];
+    private $amastyModules = [];
 
     /**
      * @var Config
@@ -138,13 +138,13 @@ class News
                 }
                 $date = strtotime((string)$item->pubDate);
                 $expired = isset($item->expirationDate) ? strtotime((string)$item->expirationDate) : null;
-
-                if ($installDate <= $date && (!$expired || $expired > gmdate('U'))) {
+                $severity = $this->resolveSeverity((int)$priority);
+                if ($severity !== 0 && $installDate <= $date && (!$expired || $expired > gmdate('U'))) {
                     $maxPriority = $priority;
                     $expired = $expired ? date('Y-m-d H:i:s', $expired) : null;
 
                     $feedData = [
-                        'severity'        => MessageInterface::SEVERITY_NOTICE,
+                        'severity'        => $severity,
                         'date_added'      => date('Y-m-d H:i:s', $date),
                         'expiration_date' => $expired,
                         'title'           => $this->convertString($item->title),
@@ -160,12 +160,29 @@ class News
         return $feedData;
     }
 
+    private function resolveSeverity(int $priority): int
+    {
+        $priority = min($priority, 4);
+        switch ($priority) {
+            case 4:
+                return MessageInterface::SEVERITY_NOTICE;
+            case 3:
+                return MessageInterface::SEVERITY_MINOR;
+            case 2:
+                return MessageInterface::SEVERITY_MAJOR;
+            case 1:
+                return MessageInterface::SEVERITY_CRITICAL;
+        }
+
+        return 0;
+    }
+
     /**
      * @param \SimpleXMLElement $item
      *
      * @return bool
      */
-    protected function isItemValid(\SimpleXMLElement $item): bool
+    private function isItemValid(\SimpleXMLElement $item): bool
     {
         return $this->validateByExtension((string)$item->extension)
             && $this->validateByAmastyCount($item->amasty_module_qty)
@@ -178,7 +195,7 @@ class News
     /**
      * @return string
      */
-    protected function getCurrentEdition(): string
+    private function getCurrentEdition(): string
     {
         return $this->productMetadata->getEdition() === 'Community' ? 'ce' : 'ee';
     }

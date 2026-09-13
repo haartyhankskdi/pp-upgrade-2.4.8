@@ -12,40 +12,44 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
-define([
+define(
+    [
     'jquery',
     'Magento_ConfigurableProduct/js/configurable',
     'jquery-ui-modules/widget'
-], function ($) {
-    'use strict';
+    ], function ($) {
+        'use strict';
 
-    $.widget('mage.mposcConfigurable', $.mage.configurable, {
-        _initializeOptions: function () {
-            var element = $(this.options.priceHolderSelector);
+        $.widget(
+            'mage.mposcConfigurable', $.mage.configurable, {
+                _initializeOptions: function () {
+                    var element = $(this.options.priceHolderSelector);
 
-            if (!element.data('magePriceBox')) {
-                element.priceBox();
+                    if (!element.data('magePriceBox')) {
+                        element.priceBox();
+                    }
+
+                    return this._super();
+                },
+
+                _calculatePrice: function (config) {
+                    var element = $(this.options.priceHolderSelector);
+
+                    if (!element.data('magePriceBox')) {
+                        element.priceBox();
+                    }
+
+                    return this._super(config);
+                },
             }
+        );
 
-            return this._super();
-        },
-
-        _calculatePrice: function (config) {
-            var element = $(this.options.priceHolderSelector);
-
-            if (!element.data('magePriceBox')) {
-                element.priceBox();
-            }
-
-            return this._super(config);
-        },
-    });
-
-    return $.mage.mposcConfigurable;
-});
+        return $.mage.mposcConfigurable;
+    }
+);

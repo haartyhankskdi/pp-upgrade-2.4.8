@@ -349,7 +349,7 @@ class CreatePost extends AbstractAccount implements CsrfAwareActionInterface, Ht
     public function execute()
     {
         //echo "<pre>";print_r($_POST);exit();
-        $old_date = explode('/', $_POST['dob']); 
+        $old_date = explode('/', (string) ($_POST['dob'] ?? ''));
         //$new_date = $old_date[2].'/'.$old_date[1].'/'.$old_date[0];//d-m-y  
         $new_date = $old_date[2].'-'.$old_date[1].'-'.$old_date[0];//y-m-d
         if($_POST['gender']==1){

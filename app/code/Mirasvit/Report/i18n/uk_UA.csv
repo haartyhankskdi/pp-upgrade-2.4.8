@@ -1,0 +1,226 @@
+"Something went wrong while building the report","Під час формування звіту сталася помилка"
+"Not logged in","Не виконано вхід"
+"Email Notifications","Сповіщення електронною поштою"
+"The email report has been deleted.","Звіт електронною поштою видалено."
+"This email report no longer exists.","Цей звіт електронною поштою більше не існує."
+"This email no longer exists.","Цей лист більше не існує."
+"Edit Email ""%1""","Редагувати лист ""%1"""
+"New Email Report","Новий звіт електронною поштою"
+"You saved the email report.","Ви зберегли звіт електронною поштою."
+"No data to save.","Немає даних для збереження."
+"This report no longer exists.","Цей звіт більше не існує."
+"Report columns saved.","Стовпці звіту збережено."
+"Unsupported format ""%1""","Непідтримуваний формат ""%1"""
+"This report does not exist or is not available for sharing.","Цей звіт не існує або недоступний для поширення"
+"Report identifier is required","Необхідно вказати ідентифікатор звіту"
+"Report: %1","Звіт: %1"
+"Block identifier ""%1"" does not match any available report or dashboard block. Use GET /V1/reports/reports to discover valid identifiers.","Ідентифікатор блоку ""%1"" не відповідає жодному доступному звіту або блоку інформаційної панелі. Використайте GET /V1/reports/reports, щоб дізнатися дійсні ідентифікатори."
+"Time range ""%1"" is not valid. Valid values: %2","Часовий діапазон ""%1"" недійсний. Дійсні значення: %2"
+"Email with ID ""%1"" does not exist.","Лист із ідентифікатором ""%1"" не існує."
+Back,Назад
+Delete,Видалити
+"Are you sure you want to do this?","Ви впевнені, що хочете це зробити?"
+Save,Зберегти
+"Save & Continue","Зберегти та продовжити"
+"Save & Send","Зберегти та надіслати"
+Edit,Редагувати
+"Delete email?","Видалити лист?"
+(previous),(попередній)
+"%1 out of %2 selected","Вибрано %1 з %2"
+"Access URL","URL-адреса доступу"
+Actions,Дії
+"Active filters:","Активні фільтри:"
+"Add Empty Widget","Додати порожній віджет"
+"Add filter","Додати фільтр"
+"Add Filter","Додати фільтр"
+"Add New Board","Додати нову дошку"
+"Add New Widget","Додати новий віджет"
+"Add Widget","Додати віджет"
+"Additional Filters","Додаткові фільтри"
+"Advanced mode","Розширений режим"
+Aggregator,Агрегатор
+"and more %1 other columns","та ще %1 інших стовпців"
+applicable,застосовно
+Apply,Застосувати
+"Apply date filter","Застосувати фільтр дати"
+"Apply Filters","Застосувати фільтри"
+"Are you sure you want to reset the access token?","Ви впевнені, що хочете скинути токен доступу?"
+Average,Середнє
+"Base Table","Базова таблиця"
+"Block Type","Тип блоку"
+Cancel,Скасувати
+"Cancel date filter","Скасувати фільтр дати"
+Chart,Діаграма
+"Chart type selector","Селектор типу діаграми"
+"Clear all","Очистити все"
+Close,Закрити
+"Close menu","Закрити меню"
+Column,Стовпець
+"Column for grouping data in the table","Стовпець для групування даних у таблиці"
+"Column for grouping the data in the table","Стовпець для групування даних у таблиці"
+"Column selector mode switcher. Current mode: %1","Перемикач режиму селектора стовпців. Поточний режим: %1"
+Columns,Стовпці
+"Columns to group the rows in the table","Стовпці для групування рядків у таблиці"
+Comparison,Порівняння
+contains,містить
+Content,Вміст
+Copied,Скопійовано
+"Copy importdata code for Google Sheets","Скопіювати код importdata для Google Таблиць"
+"Copy to clipboard","Скопіювати до буфера обміну"
+Count,Кількість
+Country,Країна
+"Current mode: %1","Поточний режим: %1"
+"Current Page","Поточна сторінка"
+Custom,Користувацький
+Customize,Налаштувати
+Date,Дата
+"Date filter","Фільтр дати"
+Day,День
+"Delete report","Видалити звіт"
+Description,Опис
+Dimension,Вимір
+"Dimension column table","Таблиця стовпця виміру"
+Dimensions,Виміри
+Disable,Вимкнути
+"Disable sharing report","Вимкнути поширення звіту"
+"Do not compare","Не порівнювати"
+"doesn't contain","не містить"
+Download,Завантажити
+Duplicate,Дублювати
+"Duplicate report","Дублювати звіт"
+Early,Раніше
+"Edit Board","Редагувати дошку"
+"Edit columns","Редагувати стовпці"
+"Edit report","Редагувати звіт"
+"Empty report data table","Порожня таблиця даних звіту"
+Enable,Увімкнути
+"Enable Remote Access","Увімкнути віддалений доступ"
+"Enable Remote Access on Storefront","Увімкнути віддалений доступ у вітрині магазину"
+"Enable sharing report","Увімкнути поширення звіту"
+"Enter page number","Введіть номер сторінки"
+"Excel XML","Excel XML"
+Export,Експорт
+"Filter value","Значення фільтра"
+Filters,Фільтри
+"Found: %1 columns","Знайдено: %1 стовпців"
+from,з
+"From date","Дата з"
+"General Information","Загальна інформація"
+"Go to next page","Перейти на наступну сторінку"
+"Go to previous page","Перейти на попередню сторінку"
+"Group by","Групувати за"
+"Hide percentage of total","Сховати відсоток від загальної суми"
+"Image for %1","Зображення для %1"
+"Import data code","Код імпорту даних"
+"Insert the below code into your Google Sheet and it will automatically import the most recent data from the report every hour:","Вставте наведений нижче код у свою Google Таблицю, і вона автоматично імпортуватиме найновіші дані зі звіту щогодини:"
+"Insert To Google Sheet","Вставити у Google Таблицю"
+"Insert widget's HTML content here","Вставте HTML-вміст віджета сюди"
+"Internal Filters","Внутрішні фільтри"
+"Is Default","За замовчуванням"
+"is not","не є"
+"is not one of","не є одним з"
+"is one of","є одним з"
+Loading...,Завантаження...
+"Lower number means higher position. Boards with the same sort order will be ordered according to the dashboard general sorting settings.","Менше число означає вищу позицію. Дошки з однаковим порядком сортування впорядковуються відповідно до загальних налаштувань сортування інформаційної панелі."
+"Make a copy","Створити копію"
+"Make sure that the selected columns are","Переконайтеся, що вибрані стовпці є"
+Manage,Керувати
+"Manage columns","Керувати стовпцями"
+"Manage filters","Керувати фільтрами"
+Metric,Метрика
+Month,Місяць
+"More filters","Більше фільтрів"
+"More Filters","Більше фільтрів"
+"No next pages, action disabled","Немає наступних сторінок, дію вимкнено"
+"No previous pages, action disabled","Немає попередніх сторінок, дію вимкнено"
+"not allowed","не дозволено"
+Number,Число
+of,з
+"Once you have configured the report, you can use a direct link to open the report on any device without opening the admin and always with fresh live data.","Після налаштування звіту ви можете використовувати пряме посилання, щоб відкрити звіт на будь-якому пристрої без входу в адмінпанель, завжди зі свіжими актуальними даними."
+"Open link","Відкрити посилання"
+"Open menu","Відкрити меню"
+"Override dashboard time","Перевизначити час інформаційної панелі"
+"Page Size","Розмір сторінки"
+Percent,Відсоток
+"Please select","Будь ласка, виберіть"
+"Previous period","Попередній період"
+"Primary Filters","Основні фільтри"
+"Private Board","Приватна дошка"
+"Private Board will be available only for the current admin user. Shared Board will be available for all admin users.","Приватна дошка буде доступна лише для поточного адміністратора. Спільна дошка буде доступна для всіх користувачів-адміністраторів."
+Quarter,Квартал
+"Quick Access & Sharing","Швидкий доступ і поширення"
+"A quick access link to the report is a great alternative to routine daily exporting.","Посилання швидкого доступу до звіту — чудова альтернатива щоденному експорту."
+Range,Діапазон
+"records found","записів знайдено"
+Refresh,Оновити
+Remove,Видалити
+"Remove filter","Видалити фільтр"
+"Remove from chart","Видалити з діаграми"
+"Removing board...","Видалення дошки..."
+"Report data table with %1 rows","Таблиця даних звіту з %1 рядками"
+Reset,Скинути
+"Reset access token","Скинути токен доступу"
+"Reset Changes","Скинути зміни"
+"Resetting the access token will deactivate the old access link. Anyone who previously had access to the board will lose it and will need the new link to access it.","Скидання токена доступу деактивує старе посилання доступу. Усі, хто раніше мав доступ до дошки, втратять його, і їм знадобиться нове посилання для доступу."
+"Rows Limit","Обмеження рядків"
+"Same period last month","Той самий період минулого місяця"
+"Same period last week","Той самий період минулого тижня"
+"Same period last year","Той самий період минулого року"
+"Save Changes","Зберегти зміни"
+"Saving report...","Збереження звіту..."
+Saving...,Збереження...
+"Search column across ALL tables by identifier.","Шукати стовпець у ВСІХ таблицях за ідентифікатором."
+"Search for column","Шукати стовпець"
+"Select condition","Виберіть умову"
+"Select date range","Виберіть діапазон дат"
+"Select Date Range","Виберіть діапазон дат"
+Share,Поділитися
+"Share Dashboard","Поділитися інформаційною панеллю"
+"Share in %1 format","Поділитися у форматі %1"
+"Shared Board","Спільна дошка"
+"Sharing link","Посилання для поширення"
+"Show in chart","Показати на діаграмі"
+"Show percentage of total","Показати відсоток від загальної суми"
+"Single Value","Одиничне значення"
+"Sort by %1","Сортувати за %1"
+"Sort Order","Порядок сортування"
+Sorting,Сортування
+"Spark line","Спарклайн"
+String,Рядок
+Sum,Сума
+"Switch to %1 chart","Перемкнути на діаграму %1"
+Table,Таблиця
+"Time Range","Часовий діапазон"
+Title,Заголовок
+to,до
+"To date","Дата до"
+"to the current report.","до поточного звіту."
+Toolbar,Панель інструментів
+Type,Тип
+"Type to search","Введіть для пошуку"
+"Untitled Block","Блок без назви"
+"Untitled Board","Дошка без назви"
+Value,Значення
+"We couldn't find any records.","Не вдалося знайти жодного запису."
+Week,Тиждень
+"Widget Library","Бібліотека віджетів"
+"Wrong configuration. Please change report building conditions.","Неправильна конфігурація. Будь ласка, змініть умови формування звіту."
+Year,Рік
+"To add your first block, unlock the board (top right corner).","Щоб додати перший блок, потрібно розблокувати дошку (у верхньому правому куті)."
+"Loading report data","Завантаження даних звіту"
+"Report data table for %1","Таблиця даних звіту для %1"
+Block,Блок
+"Date Interval","Інтервал дат"
+Limit,Ліміт
+"Add Block","Додати блок"
+Active,Активний
+"Attach each block as a separate CSV report","Додавати кожен блок як окремий CSV-звіт"
+Subject,Тема
+Recipient,Одержувач
+Schedule,Розклад
+"Should be cron-like expression. <br/>Example: 59 23 * * * <br/>Will be sent report every day at 23:59","Має бути cron-подібним виразом. <br/>Приклад: 59 23 * * * <br/>Звіт надсилатиметься щодня о 23:59"
+Body,Тіло
+"Add New Email","Додати новий лист"
+ID,ID
+Status,Статус
+"Last Sent At","Востаннє надіслано"

@@ -26,12 +26,28 @@
         <policy id="script-src">
             <values>
                 <value id="avada" type="host">*.avada.io</value>
+                <value id="shopify" type="host">*.shopify.com</value>
             </values>
         </policy>
         <policy id="connect-src">
             <values>
                 <value id="geojs" type="host">https://get.geojs.io</value>
                 <value id="avada" type="host">*.avada.io</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <value id="fonts_bunny" type="host">https://fonts.bunny.net</value>
+            </values>
+        </policy>
+        <policy id="font-src">
+            <values>
+                <value id="fonts_bunny" type="host">https://fonts.bunny.net</value>
+            </values>
+        </policy>
+        <policy id="img-src">
+            <values>
+                <value id="firebase-storage" type="host">https://firebasestorage.googleapis.com</value>
             </values>
         </policy>
     </policies>

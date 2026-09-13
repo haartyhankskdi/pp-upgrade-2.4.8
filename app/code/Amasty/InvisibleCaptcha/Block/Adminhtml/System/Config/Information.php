@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Google Invisible reCaptcha for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Google Invisible reCaptcha for Magento 2
+ */
 
 namespace Amasty\InvisibleCaptcha\Block\Adminhtml\System\Config;
 

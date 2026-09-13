@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Helper;
@@ -46,12 +46,9 @@ use Magento\GiftCard\Block\Catalog\Product\View\Type\Giftcard;
 use Magento\Newsletter\Model\Subscriber;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Item as QuoteItem;
+use Magento\ReCaptchaUi\Model\UiConfigResolverInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
-/**
- * Class Item
- * @package Mageplaza\Osc\Helper
- */
 class Item extends Data
 {
     /**
@@ -92,19 +89,20 @@ class Item extends Data
     /**
      * Item constructor.
      *
-     * @param Context $context
-     * @param ObjectManagerInterface $objectManager
-     * @param StoreManagerInterface $storeManager
-     * @param EncryptorInterface $encryptor
-     * @param Json $json
-     * @param LayoutFactory $layoutFactory
-     * @param BuilderFactory $builderFactory
-     * @param Registry $registry
-     * @param Image $catalogHelper
-     * @param ConfigInterface $viewConfig
-     * @param Repository $repository
-     * @param Subscriber $subscriber
-     * @param Session $checkoutSession
+     * @param Context                   $context
+     * @param ObjectManagerInterface    $objectManager
+     * @param StoreManagerInterface     $storeManager
+     * @param EncryptorInterface        $encryptor
+     * @param Json                      $json
+     * @param LayoutFactory             $layoutFactory
+     * @param BuilderFactory            $builderFactory
+     * @param Registry                  $registry
+     * @param Image                     $catalogHelper
+     * @param ConfigInterface           $viewConfig
+     * @param Repository                $repository
+     * @param Subscriber                $subscriber
+     * @param Session                   $checkoutSession
+     * @param UiConfigResolverInterface $captchaUiConfigResolver
      */
     public function __construct(
         Context $context,
@@ -119,7 +117,8 @@ class Item extends Data
         ConfigInterface $viewConfig,
         Repository $repository,
         Subscriber $subscriber,
-        Session $checkoutSession
+        Session $checkoutSession,
+        UiConfigResolverInterface $captchaUiConfigResolver
     ) {
         $this->layoutFactory  = $layoutFactory;
         $this->builderFactory = $builderFactory;
@@ -128,16 +127,17 @@ class Item extends Data
         $this->viewConfig     = $viewConfig;
         $this->repository     = $repository;
 
-        parent::__construct($context, $objectManager, $storeManager, $encryptor, $json, $subscriber, $checkoutSession);
+        parent::__construct($context, $objectManager, $storeManager, $encryptor, $json, $subscriber, $checkoutSession, $captchaUiConfigResolver);
     }
 
     /**
-     * @param Quote $quote
+     * @param Quote              $quote
      * @param QuoteItem|int|bool $item
+     * @param bool               $displayItem
      *
      * @return array
      */
-    public function getItemOptionsConfig($quote, $item)
+    public function getItemOptionsConfig($quote, $item, $displayItem)
     {
         $result = [];
 
@@ -155,7 +155,9 @@ class Item extends Data
         $this->registry->register('current_product', $product);
 
         if ($product->getOptions()) {
-            /** @var Options $options */
+            /**
+ * @var Options $options
+*/
             $options = $this->getLayout()->getBlock('mposc.product.options');
             $options->setProduct($product);
 
@@ -164,20 +166,21 @@ class Item extends Data
                 'optionConfig' => $options->getJsonConfig()
             ];
         }
-
-        switch ($item->getProductType()) {
-            case 'configurable':
-                $result['configurableAttributes'] = $this->getConfigurableConfig($item, $product);
-                break;
-            case 'bundle':
-                $result['customOptions'] = $this->getBundleConfig($item);
-                break;
-            case 'downloadable':
-                $result['customOptions'] = $this->getDownloadableConfig($item);
-                break;
-            case 'giftcard':
-                $result['customOptions'] = $this->getGiftCardConfig($item);
-                break;
+        if ($displayItem) {
+            switch ($item->getProductType()) {
+                case 'configurable':
+                    $result['configurableAttributes'] = $this->getConfigurableConfig($item, $product);
+                    break;
+                case 'bundle':
+                    $result['customOptions'] = $this->getBundleConfig($item);
+                    break;
+                case 'downloadable':
+                    $result['customOptions'] = $this->getDownloadableConfig($item);
+                    break;
+                case 'giftcard':
+                    $result['customOptions'] = $this->getGiftCardConfig($item);
+                    break;
+            }
         }
 
         return $result;
@@ -195,7 +198,9 @@ class Item extends Data
 
             $layout->getUpdate()->addHandle(['default', 'onestepcheckout_product_config']);
 
-            /** @var AbstractBlock $block */
+            /**
+ * @var AbstractBlock $block
+*/
             foreach ($layout->getAllBlocks() as $block) {
                 $block->setData('area', Area::AREA_FRONTEND);
             }
@@ -208,19 +213,23 @@ class Item extends Data
 
     /**
      * @param QuoteItem $item
-     * @param Product $product
+     * @param Product   $product
      *
      * @return array
      */
     private function getConfigurableConfig($item, $product)
     {
-        /** @var Configurable $block */
+        /**
+ * @var Configurable $block
+*/
         $block = $this->getLayout()->getBlock('mposc.configurable.options');
         $block->unsetData('allow_products');
-        $block->addData([
+        $block->addData(
+            [
             'product'    => $product,
             'quote_item' => $item
-        ]);
+            ]
+        );
 
         $spConfig        = $this->unserialize($block->getJsonConfig());
         $spConfig['sku'] = [];
@@ -238,12 +247,16 @@ class Item extends Data
      */
     private function getBundleConfig($item)
     {
-        /** @var Bundle $block */
+        /**
+ * @var Bundle $block
+*/
         $block = $this->getLayout()->getBlock('mposc.bundle.options');
-        $block->setData([
+        $block->setData(
+            [
             'product' => $item->getProduct(),
             'item'    => $item
-        ]);
+            ]
+        );
         $block->getOptions(true);
 
         return [
@@ -259,12 +272,16 @@ class Item extends Data
      */
     private function getDownloadableConfig($item)
     {
-        /** @var Renderer $block */
+        /**
+ * @var Renderer $block
+*/
         $block = $this->getLayout()->getBlock('mposc.downloadable.options');
-        $block->setData([
+        $block->setData(
+            [
             'product' => $item->getProduct(),
             'item'    => $item
-        ]);
+            ]
+        );
 
         return [
             'template'     => $item->getProduct()->getLinksPurchasedSeparately() ? $block->toHtml() : '',
@@ -279,7 +296,9 @@ class Item extends Data
      */
     private function getGiftCardConfig($item)
     {
-        /** @var Giftcard $block */
+        /**
+ * @var Giftcard $block
+*/
         if (!$block = $this->getLayout()->getBlock('mposc.giftcard.options')) {
             $block = $this->getLayout()->createBlock(
                 Giftcard::class,
@@ -288,10 +307,12 @@ class Item extends Data
         }
 
         $block->setTemplate('Mageplaza_Osc::product/view/type/options/giftcard.phtml');
-        $block->setData([
+        $block->setData(
+            [
             'product' => $item->getProduct(),
             'item'    => $item
-        ]);
+            ]
+        );
 
         return [
             'template'     => $block->toHtml(),
@@ -308,10 +329,14 @@ class Item extends Data
     public function getItemImages($item)
     {
         if ($this->versionCompare('2.3.0')) {
-            /** @var ItemResolverInterface $itemResolver */
+            /**
+ * @var ItemResolverInterface $itemResolver
+*/
             $itemResolver = $this->getObject(ItemResolverInterface::class);
 
-            /** @var Product $finalProduct */
+            /**
+ * @var Product $finalProduct
+*/
             $finalProduct = $itemResolver->getFinalProduct($item);
         } else {
             $finalProduct = $item->getProduct();

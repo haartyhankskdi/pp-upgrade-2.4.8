@@ -34,7 +34,7 @@ class Template extends \Magento\Framework\Model\AbstractModel
     public function getSections() {
         $sections = [];
         if ($this->getConfiguration()) {
-            $sections = \Zend_Json::decode($this->getConfiguration());
+            $sections = json_decode($this->getConfiguration(), true);
         }
         return $sections;
     }

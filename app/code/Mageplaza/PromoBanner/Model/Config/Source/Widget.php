@@ -21,7 +21,6 @@
 
 namespace Mageplaza\PromoBanner\Model\Config\Source;
 
-use Magento\Framework\Option\ArrayInterface;
 use Mageplaza\PromoBanner\Model\ResourceModel\Banner\Collection as BannerCollection;
 use Mageplaza\PromoBanner\Model\ResourceModel\Banner\CollectionFactory;
 
@@ -29,7 +28,7 @@ use Mageplaza\PromoBanner\Model\ResourceModel\Banner\CollectionFactory;
  * Class Widget
  * @package Mageplaza\PromoBanner\Model\Config\Source
  */
-class Widget implements ArrayInterface
+class Widget extends AbstractSource
 {
     /**
      * @var CollectionFactory

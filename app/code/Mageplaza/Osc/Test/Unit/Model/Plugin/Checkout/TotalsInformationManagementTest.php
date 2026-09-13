@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Checkout;
@@ -35,10 +35,6 @@ use Mageplaza\Osc\Model\Plugin\Checkout\TotalsInformationManagement;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class TotalsInformationManagementTest
- * @package Mageplaza\Osc\Test\Unit\Model\Plugin\Checkout
- */
 class TotalsInformationManagementTest extends TestCase
 {
     /**
@@ -71,7 +67,7 @@ class TotalsInformationManagementTest extends TestCase
      */
     private $totalsInformationMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->quoteRepositoryMock = $this->getMockForAbstractClass(CartRepositoryInterface::class);
         $this->cartTotalRepositoryMock = $this->getMockForAbstractClass(CartTotalRepositoryInterface::class);
@@ -140,9 +136,7 @@ class TotalsInformationManagementTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $cartExtensionMock = $this->getMockBuilder(CartExtensionInterface::class)
-            ->setMethods(['getShippingAssignments'])
-            ->getMockForAbstractClass();
+        $cartExtensionMock = $this->getMockForAbstractClass(CartExtensionInterface::class);
         $this->quoteRepositoryMock->expects($this->once())
             ->method('get')
             ->with($cartId)
@@ -162,9 +156,7 @@ class TotalsInformationManagementTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $cartExtensionMock = $this->getMockBuilder(CartExtensionInterface::class)
-            ->setMethods(['getShippingAssignments'])
-            ->getMockForAbstractClass();
+        $cartExtensionMock = $this->getMockForAbstractClass(CartExtensionInterface::class);
         $this->quoteRepositoryMock->expects($this->once())
             ->method('get')
             ->with($cartId)

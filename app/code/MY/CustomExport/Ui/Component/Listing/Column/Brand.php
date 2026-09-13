@@ -48,7 +48,7 @@ class Brand extends Column
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
             	
-                $options = json_decode($item['product_options'], TRUE);    
+                $options = json_decode((string) $item['product_options'], TRUE);
 
             	if (isset($options['attributes_info']) && !empty($options['attributes_info'])) 
 		        {             

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   ~ This software is the confidential and proprietary information of Autify Digital Ltd.
+   ~ Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+   ~ Copyright (c) 2020-Present Autify Digital Ltd.
+   ~ This work is protected under applicable copyright and intellectual property laws.
+   ~ All rights reserved. Distribution and disclosure are permitted only in accordance with
+   ~ the terms of a valid written agreement with Autify Digital Ltd.
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="sales_order_columns">
+        <column name="payment_method_icon" class="AutifyDigital\LloydscardnetPayment\Ui\Component\Listing\Column\OrderPaymentMethodIcon">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Payment Method</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <sortable>false</sortable>
+                <filter>false</filter>
+            </settings>
+        </column>
+        <column name="street_match" sortOrder="210" class="AutifyDigital\LloydscardnetPayment\Ui\Component\Listing\Column\AvsCheckColumn">
+            <settings>
+                <options class="AutifyDigital\LloydscardnetPayment\Model\Config\Source\AvsCheckResult"/>
+                <filter>select</filter>
+                <dataType>text</dataType>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">AVS Street Check</label>
+            </settings>
+        </column>
+        <column name="postcode_match" sortOrder="220" class="AutifyDigital\LloydscardnetPayment\Ui\Component\Listing\Column\AvsCheckColumn">
+            <settings>
+                <options class="AutifyDigital\LloydscardnetPayment\Model\Config\Source\AvsCheckResult"/>
+                <filter>select</filter>
+                <dataType>text</dataType>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">Postcode Check</label>
+            </settings>
+        </column>
+        <column name="cvv_match" sortOrder="230" class="AutifyDigital\LloydscardnetPayment\Ui\Component\Listing\Column\AvsCheckColumn">
+            <settings>
+                <options class="AutifyDigital\LloydscardnetPayment\Model\Config\Source\AvsCheckResult"/>
+                <filter>select</filter>
+                <dataType>text</dataType>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <label translate="true">CVV Check</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

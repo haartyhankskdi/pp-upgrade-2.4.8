@@ -25,7 +25,7 @@ class RestrictDropOperationsPlugin
     /**
      * @var Reader
      */
-    private $moduleReader;
+    private Reader $moduleReader;
 
     public function __construct(
         Reader $moduleReader
@@ -42,8 +42,8 @@ class RestrictDropOperationsPlugin
      */
     public function afterGet(FileResolverByModule $subject, array $result, $filename, $scope): array
     {
-        if ($filename == 'db_schema.xml'
-            && $scope == FileResolverByModule::ALL_MODULES
+        if ($filename === 'db_schema.xml'
+            && $scope === FileResolverByModule::ALL_MODULES
         ) {
             $amastyDisabledModules = $this->moduleReader->getConfigurationFiles($filename, 'Amasty', false)->toArray();
             $allModulesIterator = $this->moduleReader->getConfigurationFiles($filename);

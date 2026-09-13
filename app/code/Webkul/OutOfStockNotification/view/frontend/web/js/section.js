@@ -6,14 +6,16 @@ define([
     'uiComponent',
     'jquery',
     'mage/translate',
+    'Magento_Customer/js/customer-data',
     'jquery/validate'
-], function (Component, $, $t) {
+], function (Component, $, $t, customerData) {
     'use strict';
 
     return Component.extend({
 
         initialize: function () {
             this._super();
+            this.customer = customerData.get('customer');
             this.bindEvents();
             return this;
         },

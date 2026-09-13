@@ -13,16 +13,19 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Block\Adminhtml\Field;
 
 use Magento\Backend\Block\Widget\Context;
+use Magento\Framework\App\ObjectManager as AppObjectManager;
+use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Phrase;
+use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Mageplaza\Osc\Block\Adminhtml\Field\Address;
 use Mageplaza\Osc\Helper\Address as HelperAddress;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -30,7 +33,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class Address
- * @package Mageplaza\Osc\Block\Adminhtml\Field
+ *
  */
 class AddressTest extends TestCase
 {
@@ -39,14 +42,13 @@ class AddressTest extends TestCase
      */
     private $addressBlock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
-        /**
-         * @var Context|MockObject $contextMock
-         */
-        $contextMock = $this->getMockBuilder(Context::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $objectManagerMock = $this->getMockForAbstractClass(ObjectManagerInterface::class);
+        $objectManagerMock->method('get')->willReturn(new \stdClass());
+        AppObjectManager::setInstance($objectManagerMock);
+
+        $objectManager = new ObjectManager($this);
 
         /**
          * @var HelperAddress|MockObject $helperAddressMock
@@ -58,10 +60,18 @@ class AddressTest extends TestCase
             ->method('getSortedField')
             ->with(false);
 
-        $this->addressBlock = new Address(
-            $contextMock,
-            $helperAddressMock
+        $this->addressBlock = $objectManager->getObject(
+            Address::class,
+            [
+                'helper' => $helperAddressMock,
+            ]
         );
+    }
+
+    protected function tearDown(): void
+    {
+        $objectManagerMock = $this->getMockForAbstractClass(ObjectManagerInterface::class);
+        AppObjectManager::setInstance($objectManagerMock);
     }
 
     public function testGetBlockTitle()

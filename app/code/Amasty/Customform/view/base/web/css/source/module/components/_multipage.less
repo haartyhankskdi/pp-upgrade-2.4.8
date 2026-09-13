@@ -11,50 +11,50 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        list-style: none;
         overflow: hidden;
         padding: 0;
-        list-style: none;
     }
 
     .amcform-step {
-        margin: 0 auto 20px;
-        width: @amcform-page__size;
-        height: @amcform-page__size;
+        background-color: @amcform-pager__background;
         border: 1px solid @amcform-pager__background;
         border-radius: 50%;
-        background-color: @amcform-pager__background;
         color: @amcform-pager__color;
-        font-weight: 400;
         font-size: 14px;
-        line-height: @amcform-page__size - 2px;
+        font-weight: 400;
+        height: @amcform-page__size;
+        line-height: (@amcform-page__size - 2px);
+        margin: 0 auto 20px;
+        width: @amcform-page__size;
     }
 
     .amcform-title-wrap {
         & {
-            position: relative;
             flex-grow: 1;
             margin-bottom: 18px;
-            min-width: 90px;
             max-width: 148px;
+            min-width: 90px;
+            position: relative;
             text-align: center;
         }
 
         &:before,
         &:after {
-            position: absolute;
-            top: (@amcform-page__size / 2) - (@amcform-page__line-size / 2);
-            right: 51%;
-            display: block;
-            width: 100%;
-            height: @amcform-page__line-size;
             background: @amcform-pager__border-color;
             content: '';
+            display: block;
+            height: @amcform-page__line-size;
+            position: absolute;
+            right: 51%;
+            top: (@amcform-page__size / 2) - (@amcform-page__line-size / 2);
+            width: 100%;
         }
 
         &:after {
-            right: auto;
-            left: 50%;
             content: none;
+            left: 50%;
+            right: auto;
         }
 
         &:first-child:before,
@@ -64,14 +64,14 @@
 
         .amcform-title {
             & {
-                position: relative;
-                z-index: 1;
-                display: inline-block;
-                margin: 0 10px;
                 color: @amcform-title__color;
-                text-align: center;
+                display: inline-block;
                 font-size: 14px;
                 line-height: 19px;
+                margin: 0 10px;
+                position: relative;
+                text-align: center;
+                z-index: 1;
             }
 
             &:hover {
@@ -92,15 +92,15 @@
         }
 
         &.-disabled .amcform-step {
-            border-color: @amcform-pager__border-color;
             background: @amcform-pager__disabled__background;
+            border-color: @amcform-pager__border-color;
             color: @amcform-pager__disabled__color;
         }
 
         &.-error .amcform-step {
-            border-color: @amcform-error__color;
             background: @amcform-error__color @amcform-error__icon center center no-repeat;
-            color: #fff;
+            border-color: @amcform-error__color;
+            color: @color-white;
             font-size: 0;
         }
 
@@ -142,8 +142,8 @@
     .amcform-title-wrap {
         & {
             flex-grow: unset;
-            min-width: 30%;
             max-width: initial;
+            min-width: 30%;
         }
 
         .amcform-title {
@@ -156,9 +156,9 @@
             }
 
             &:last-child:before {
-                width: 50%;
                 background: linear-gradient(270deg, @amcform-pager__border-color 4.63%, rgba(227, 227, 227, 0) 83.33%);
                 content: '';
+                width: 50%;
             }
 
             &.ui-state-active:last-child:before {
@@ -181,8 +181,8 @@
 
         &:not(:last-child):after,
         &:before {
-            width: 50%;
             content: '';
+            width: 50%;
         }
 
         &:first-child:before {

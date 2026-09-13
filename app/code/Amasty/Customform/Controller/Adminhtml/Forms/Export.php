@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Controller\Adminhtml\Forms;
 
@@ -20,6 +21,8 @@ use Magento\Framework\Exception\NoSuchEntityException;
 
 class Export extends \Magento\Backend\App\Action
 {
+    public const ADMIN_RESOURCE = 'Amasty_Customform::data';
+
     public const AMASTY_CUSTOM_FORMS_EXPORT_PATH = 'amasty/custom_forms';
 
     /**
@@ -179,7 +182,7 @@ class Export extends \Magento\Backend\App\Action
             }
         }
 
-        return array_unique($headers);
+        return $headers;
     }
 
     /**

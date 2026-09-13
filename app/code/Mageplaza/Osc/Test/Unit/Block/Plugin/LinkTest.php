@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Block\Plugin;
@@ -28,10 +28,6 @@ use Mageplaza\Osc\Helper\Data as OscHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class LinkTest
- * @package Mageplaza\Osc\Test\Unit\Block\Plugin
- */
 class LinkTest extends TestCase
 {
     /**
@@ -51,10 +47,10 @@ class LinkTest extends TestCase
      */
     protected $linkPlugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->requestMock = $this->getMockBuilder(RequestInterface::class)
-            ->setMethods(['getFullActionName'])
+            ->addMethods(['getFullActionName'])
             ->getMockForAbstractClass();
         $this->oscHelperMock = $this->getMockBuilder(OscHelper::class)
             ->disableOriginalConstructor()

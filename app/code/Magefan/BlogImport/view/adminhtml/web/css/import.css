@@ -1,0 +1,16 @@
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+
+.mfblog-imports {width:100%;display: grid;grid-template-columns: repeat(auto-fill, minmax(200px, 252px));gap: 20px}
+/*.mfblog-imports .item {width:16%;display: inline-block;min-width: 270px;}*/
+.mfblog-imports .item {text-align: center;margin:0;padding:0;}
+.mfblog-imports .item .itm-hld {display: flex;flex-direction: column;gap: 20px;height: 100%;padding: 25px;margin: 0;background: #ffffff;border: 1px solid #f0f0f0;border-radius: 16px;box-shadow: 34.434px 11.478px 176.28px 0px rgba(0, 0, 0, .05);cursor: pointer;}
+.mfblog-imports .item .itm-hld:hover {box-shadow: 34.434px 11.478px 176.28px 0px rgba(0, 0, 0, 0.1);border: 1px solid #e3e1e1;}
+.mfblog-imports .item .img {width: 100%;height: auto;min-width: 200px;}
+.mfblog-imports .item .more {background: #AAA6A0;color: white;padding-top: 30px;font-weight: 700;}
+.mfblog-imports .item .lable {font-weight: 700;font-size:16px;color: #000000;}
+

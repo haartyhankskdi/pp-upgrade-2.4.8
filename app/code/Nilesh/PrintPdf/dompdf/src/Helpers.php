@@ -56,7 +56,10 @@ class Helpers
      */
     public static function build_url($protocol, $host, $base_path, $url)
     {
-        $protocol = mb_strtolower($protocol);
+        $protocol = mb_strtolower((string)$protocol);
+        $host = (string)$host;
+        $base_path = (string)$base_path;
+        $url = (string)$url;
         if (strlen($url) == 0) {
             //return $protocol . $host . rtrim($base_path, "/\\") . "/";
             return $protocol . $host . $base_path;

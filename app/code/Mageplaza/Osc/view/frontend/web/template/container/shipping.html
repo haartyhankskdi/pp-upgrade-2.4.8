@@ -27,13 +27,6 @@
      role="presentation">
     <div class="checkout-shipping-method">
         <div class="step-title" data-role="title">
-            <i class="fa fa-truck"></i>
-            <!-- ko if: window.checkoutConfig.oscConfig.isUsedMaterialDesign -->
-                <span class="fa-stack fa-2x">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <strong class="fa-stack-1x fa-stack-text fa-inverse">2</strong>
-                </span>
-            <!-- /ko -->
             <span data-bind="i18n: 'Shipping Methods'"></span>
         </div>
         <!-- ko foreach: getRegion('before-shipping-method-form') -->

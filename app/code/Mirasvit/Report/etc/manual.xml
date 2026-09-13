@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../module-core/src/Core/etc/manual.xsd">
+    <!-- Email notifications -->
+    <link action="report_email_index" title="Learn more about Email notifications" url="https://mirasvit.com/manual/magento-2-advanced-reports/configuration/email-notifications/"/>
+    <link action="report_email_edit" title="Learn more about Email notifications" url="https://mirasvit.com/manual/magento-2-advanced-reports/configuration/email-notifications/"/>
+</config>

@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Customer\Address;
@@ -27,10 +27,6 @@ use Mageplaza\Osc\Model\CustomAttributeList;
 use Mageplaza\Osc\Model\Plugin\Customer\Address\CustomAttributeList as PluginCustomerAttributeList;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class CustomAttributeListTest
- * @package Mageplaza\Osc\Test\Unit\Model\Plugin\Customer\Address
- */
 class CustomAttributeListTest extends TestCase
 {
     /**
@@ -43,7 +39,7 @@ class CustomAttributeListTest extends TestCase
      */
     private $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->customAttributeListMockMock = $this->getMockBuilder(CustomAttributeList::class)
             ->disableOriginalConstructor()

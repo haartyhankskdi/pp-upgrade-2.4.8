@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Checkout;
@@ -35,10 +35,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
-/**
- * Class ShippingMethodManagementTest
- * @package Mageplaza\Osc\Model\Plugin\Checkout
- */
 class ShippingMethodManagementTest extends TestCase
 {
     /**
@@ -56,7 +52,7 @@ class ShippingMethodManagementTest extends TestCase
      */
     private $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->quoteRepositoryMock = $this->getMockForAbstractClass(CartRepositoryInterface::class);
         $this->addressRepositoryMock = $this->getMockForAbstractClass(AddressRepositoryInterface::class);
@@ -78,7 +74,7 @@ class ShippingMethodManagementTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestAroundEstimateByAddress()
+    public static function providerTestAroundEstimateByAddress()
     {
         return [
             ['aroundEstimateByAddress', EstimateAddressInterface::class, true],
@@ -88,12 +84,12 @@ class ShippingMethodManagementTest extends TestCase
 
     /**
      * @param EstimateAddressInterface|AddressInterface $class
-     * @param string $method
-     * @param boolean $isAdditionalMethod
+     * @param string                                    $method
+     * @param boolean                                   $isAdditionalMethod
      *
      * @dataProvider providerTestAroundEstimateByAddress
-     * @throws NoSuchEntityException
-     * @throws ReflectionException
+     * @throws       NoSuchEntityException
+     * @throws       ReflectionException
      */
     public function testAroundEstimateByAddress($method, $class, $isAdditionalMethod)
     {
@@ -108,19 +104,17 @@ class ShippingMethodManagementTest extends TestCase
         };
 
         $cartId = 1;
-        $estimateAddressMethods = get_class_methods($class);
-        if ($isAdditionalMethod) {
-            $estimateAddressMethods[] = 'getStreet';
-            $estimateAddressMethods[] = 'getCity';
-            $estimateAddressMethods[] = 'getId';
-        }
 
         /**
          * @var EstimateAddressInterface $estimateAddressMock
          */
-        $estimateAddressMock = $this->getMockBuilder($class)
-            ->setMethods($estimateAddressMethods)
-            ->getMockForAbstractClass();
+        if ($isAdditionalMethod) {
+            $estimateAddressMock = $this->getMockBuilder($class)
+                ->addMethods(['getStreet', 'getCity', 'getId'])
+                ->getMockForAbstractClass();
+        } else {
+            $estimateAddressMock = $this->getMockForAbstractClass($class);
+        }
         $this->mockSaveAddress($estimateAddressMock);
 
         $this->plugin->{$method}($subject, $closureMock, $cartId, $estimateAddressMock);
@@ -129,7 +123,7 @@ class ShippingMethodManagementTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestAroundEstimateWithQuoteVirtual()
+    public static function providerTestAroundEstimateWithQuoteVirtual()
     {
         return [
             ['aroundEstimateByAddress', EstimateAddressInterface::class],
@@ -139,11 +133,11 @@ class ShippingMethodManagementTest extends TestCase
 
     /**
      * @param EstimateAddressInterface|AddressInterface $class
-     * @param string $method
+     * @param string                                    $method
      *
      * @dataProvider providerTestAroundEstimateWithQuoteVirtual
-     * @throws NoSuchEntityException
-     * @throws ReflectionException
+     * @throws       NoSuchEntityException
+     * @throws       ReflectionException
      */
     public function testAroundEstimateWithQuoteVirtual($method, $class)
     {
@@ -163,6 +157,7 @@ class ShippingMethodManagementTest extends TestCase
          * @var EstimateAddressInterface $estimateAddressMock
          */
         $estimateAddressMock = $this->getMockForAbstractClass($class);
+        $estimateAddressMock->method('getCustomAttributes')->willReturn([]);
         $this->mockSaveAddressWithVirtual();
 
         $this->plugin->{$method}($subject, $closureMock, $cartId, $estimateAddressMock);
@@ -264,6 +259,8 @@ class ShippingMethodManagementTest extends TestCase
             AddressInterface::KEY_CITY => 'city',
             AddressInterface::CUSTOMER_ADDRESS_ID => 1
         ];
+
+        $addressMock->method('getCustomAttributes')->willReturn([]);
 
         $shippingAddressMock->expects($this->once())->method('addData')->with($addressData)->willReturnSelf();
         $shippingAddressMock->expects($this->once())->method('save')->willReturnSelf();

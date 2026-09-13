@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Observer;
@@ -32,10 +32,6 @@ use Magento\GiftMessage\Helper\Message;
 use Magento\Store\Model\ScopeInterface;
 use Mageplaza\Osc\Helper\Data as OscHelper;
 
-/**
- * Class OscConfigObserver
- * @package Mageplaza\Osc\Observer
- */
 class OscConfigObserver implements ObserverInterface
 {
     /**
@@ -56,8 +52,8 @@ class OscConfigObserver implements ObserverInterface
     /**
      * OscConfigObserver constructor.
      *
-     * @param ModelConfig $modelConfig
-     * @param OscHelper $oscHelper
+     * @param ModelConfig                   $modelConfig
+     * @param OscHelper                     $oscHelper
      * @param AttributeMetadataDataProvider $attributeMetadataDataProvider
      */
     public function __construct(
@@ -90,13 +86,20 @@ class OscConfigObserver implements ObserverInterface
             $scopeId = $website;
         }
         $this->_modelConfig->saveConfig(
+            Message::XPATH_CONFIG_GIFT_MESSAGE_ALLOW_ITEMS,
+            (int)$this->_oscHelper->isEnableGiftMessageItems(),
+            $scope,
+            $scopeId
+        );
+
+        $this->_modelConfig->saveConfig(
             Message::XPATH_CONFIG_GIFT_MESSAGE_ALLOW_ORDER,
-            !$this->_oscHelper->isDisabledGiftMessage(),
+            (int)$this->_oscHelper->isDisabledGiftMessage(),
             $scope,
             $scopeId
         )->saveConfig(
             Message::XPATH_CONFIG_GIFT_MESSAGE_ALLOW_ITEMS,
-            $this->_oscHelper->isEnableGiftMessageItems(),
+            (int)$this->_oscHelper->isEnableGiftMessageItems(),
             $scope,
             $scopeId
         )->saveConfig(
@@ -110,10 +113,12 @@ class OscConfigObserver implements ObserverInterface
             return;
         }
 
-        $customFieldsInCustomerGrid = explode(',', $this->_oscHelper->getShowCustomerGrid());
+        $customFieldsInCustomerGrid = explode(',', $this->_oscHelper->getShowCustomerGrid() ?? '');
         for ($i = 1; $i <= 3; $i++) {
             $key = 'mposc_field_' . $i;
-            /** @var AbstractAttribute $attr */
+            /**
+ * @var AbstractAttribute $attr
+*/
             $attr = $this->attributeMetadataDataProvider->getAttribute('customer_address', $key);
 
             if (!$attr) {
@@ -133,7 +138,7 @@ class OscConfigObserver implements ObserverInterface
 
     /**
      * @param AbstractAttribute $attribute
-     * @param boolean $isDisplayInGrid
+     * @param boolean           $isDisplayInGrid
      */
     private function showInGrid($attribute, $isDisplayInGrid)
     {

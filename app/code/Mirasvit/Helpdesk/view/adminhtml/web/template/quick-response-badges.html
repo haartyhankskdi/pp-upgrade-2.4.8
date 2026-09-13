@@ -1,0 +1,10 @@
+<div class="hdmx-quick-responsebadges__section">
+    <!-- ko foreach: { data: templates, as: 'template' } -->
+    <div class="data-badge-content">
+        <span class="hdmx-quick-responsebadge" data-bind="text: template.name,
+                click: $parent.onChangeTemplate,
+                attr: {'data-template': template.body},
+                event: {mouseover: $parent.showPreview, mouseout: $parent.hidePreview}"></span>
+    </div>
+    <!-- /ko -->
+</div>

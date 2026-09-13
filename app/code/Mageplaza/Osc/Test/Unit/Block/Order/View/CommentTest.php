@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Block\Order\View;
@@ -29,10 +29,6 @@ use Mageplaza\Osc\Helper\Data;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class CommentTest
- * @package Mageplaza\Osc\Test\Unit\Block\Order\View
- */
 class CommentTest extends TestCase
 {
     /**
@@ -50,7 +46,7 @@ class CommentTest extends TestCase
      */
     protected $commentBlock;
 
-    public function setUp()
+    public function setUp(): void
     {
         /**
          * @var Context|MockObject $contextMock
@@ -76,7 +72,7 @@ class CommentTest extends TestCase
     public function testGetOrderComment()
     {
         $orderMock = $this->getMockBuilder(Order::class)
-            ->setMethods(['getOscOrderComment'])
+            ->addMethods(['getOscOrderComment'])
             ->disableOriginalConstructor()->getMock();
         $this->coreRegistryMock->expects($this->once())
             ->method('registry')

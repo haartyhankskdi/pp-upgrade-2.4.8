@@ -19,12 +19,10 @@ define([
          * @return string|null
          */
         buildOptionUrl: function (option) {
-            var params,
-                emptySelection;
+            const params = this.getParams();
+            var emptySelection;
 
             if (this.emptySelectionProcess.indexOf(option.value) !== -1) {
-                params = this.getParams();
-
                 if (Boolean(params['empty_selection'])) {
                     alert({
                         title: $.mage.__('Attention'),
@@ -35,7 +33,11 @@ define([
                 }
             }
 
-            return this._super();
+            if (!params) {
+                return 'javascript:void(0);';
+            }
+
+            return option.url + '?' + $.param(params);
         },
 
         /**

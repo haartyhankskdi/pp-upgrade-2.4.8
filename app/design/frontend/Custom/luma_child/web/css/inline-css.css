@@ -246,7 +246,7 @@ body {
 	padding: 0 28px;
 	font-weight: 400;
 	box-shadow: inset 0 0px 0 0 #ffffff, inset 0 0 0 0 rgba(204, 204, 204, 0);
-	border-radius: 50px;
+	border-radius: 50px !important;
 	-webkit-transition: all 0.1s;
 	-moz-transition: all 0.1s;
 	-o-transition: all 0.1s;
@@ -537,7 +537,7 @@ body.cms-index-index {
 
 .searchbar .block-search {
 	width: 100%;
-	margin-bottom: 0;
+	margin-bottom: 0 !important;
 }
 
 .searchbar .block-search .control {
@@ -3427,8 +3427,8 @@ input:not([disabled]):focus, textarea:not([disabled]):focus, select:not([disable
 
 .qty-wrapper {
 	padding: 0px 12px;
-	min-width: auto;
-	height: 44px;
+	min-width: auto !important;
+	height: 44px !important;
 	float: left;
 	border-radius: 50px;
 	background: #f1f7f9;
@@ -3452,14 +3452,14 @@ input:not([disabled]):focus, textarea:not([disabled]):focus, select:not([disable
 }
 
 .qty-wrapper .qty-wrap .input-text.update {
-	background: none;
-	border: 0;
+	background: none !important;
+	border: 0 !important;
 	line-height: 43px;
 	color: #000;
 	font-family: 'Ubuntu', sans-serif;
 	font-size: 13px;
-	top: 0;
-	width: 100%;
+	top: 0 !important; 
+	width: 100% !important;
 }
 
 .qty-wrapper .fa-minus:before {
@@ -3593,7 +3593,7 @@ input:not([disabled]):focus, textarea:not([disabled]):focus, select:not([disable
 }
 
 .osc-trust-seal {
-	margin: 0;
+	margin: 0 !important;
 }
 
 .column.main .opc-block-summary .product-item {
@@ -3623,7 +3623,7 @@ input:not([disabled]):focus, textarea:not([disabled]):focus, select:not([disable
 	height: 30px;
 	width: 30px;
 	line-height: 30px;
-	background: #ED3237;
+	background: #ED3237 !important;
 	color: #fff;
 	border-radius: 0;
 	margin-right: 5px;
@@ -5441,10 +5441,7 @@ table > tbody > tr > td {
 .view-all-treatment-menu .view-treatment-1 p a {
 	position: relative;
 }
-
-.searchbar .block-search {
-	margin-bottom: 0;
-}
+ 
 
 .block.newsletter .form.subscribe {
 	position: relative;
@@ -6391,14 +6388,14 @@ table > tbody > tr > td {
 .blog-page .widget.blog-search, .block-categories, .block-recent-posts {
 }
 
-.blog-page .widget.blog-search input {
+/*.blog-page .widget.blog-search input {
 	border-radius: 3px;
 	font-size: 14px;
 	border: 1px solid #e9e9e9;
 	background: #fff;
 	padding: 15px 10px 15px 15px;
 	height: auto;
-}
+}*/
 
 .blog-page .widget.block .block-title {
 	font-size: 22px;

@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Block\Order;
@@ -33,7 +33,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class GiftWrap
- * @package Mageplaza\Osc\Block\Totals\Order
+ *
  */
 class TotalsTest extends TestCase
 {
@@ -42,7 +42,7 @@ class TotalsTest extends TestCase
      */
     protected $totalBlock;
 
-    public function setUp()
+    public function setUp(): void
     {
         /**
          * @var \Magento\Backend\Block\Widget\Context|MockObject $contextMock
@@ -65,7 +65,7 @@ class TotalsTest extends TestCase
         $layoutMock = $this->getMockForAbstractClass(LayoutInterface::class);
 
         $blockMock = $this->getMockBuilder(BlockInterface::class)
-            ->setMethods(['getSource', 'addTotal'])
+            ->addMethods(['getSource', 'addTotal'])
             ->getMockForAbstractClass();
         $this->totalBlock->setLayout($layoutMock);
         $this->totalBlock->setNameInLayout('test');
@@ -73,21 +73,26 @@ class TotalsTest extends TestCase
         $layoutMock->expects($this->once())->method('getblock')->with('parentName')->willReturn($blockMock);
 
         $orderMock = $this->getMockBuilder(Order::class)
-            ->setMethods(['getOscGiftWrapAmount'])
+            ->addMethods(['getOscGiftWrapAmount', 'getBaseOscGiftWrapAmount'])
             ->disableOriginalConstructor()
             ->getMock();
         $blockMock->expects($this->once())->method('getSource')->willReturn($orderMock);
         $oscGiftWrapAmount = 10;
+        $baseOscGiftWrapAmount = 10;
         $orderMock->expects($this->exactly(2))->method('getOscGiftWrapAmount')->willReturn($oscGiftWrapAmount);
-        $dataObject = new DataObject([
+        $orderMock->expects($this->once())->method('getBaseOscGiftWrapAmount')->willReturn($baseOscGiftWrapAmount);
+        $dataObject = new DataObject(
+            [
             'code' => 'gift_wrap',
             'field' => 'osc_gift_wrap_amount',
             'label' => new Phrase('Gift Wrap'),
+            'base_value' => $baseOscGiftWrapAmount,
             'value' => $oscGiftWrapAmount,
-        ]);
+            ]
+        );
         $blockMock->expects($this->once())
             ->method('addTotal')
-            ->with($dataObject)
+            ->with($dataObject, 'shipping')
             ->willReturnSelf();
 
         $this->totalBlock->initTotals();

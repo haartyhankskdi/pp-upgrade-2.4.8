@@ -69,7 +69,7 @@ class Value extends \Magento\Framework\Model\AbstractModel
             $configuration[$key] = $value->getData($key);
         }
         $this->setCustomerGroup($value->getCustomerGroup());
-        $configuration = \Zend_Json::encode($configuration);
+        $configuration = json_encode($configuration);
         $isUseGlobal = !!$this->_request->getPostValue('idpo_use_global');
         if ((int) $value->getOption()->getStoreId() == 0) $isUseGlobal = false;
         
@@ -112,7 +112,7 @@ class Value extends \Magento\Framework\Model\AbstractModel
         if (is_null($this->configuration)) {
             $configuration = $this->getConfiguration();
             if ($configuration) {
-                $configuration = \Zend_Json::decode($configuration);
+                $configuration = json_decode($configuration, true);
             } else {
                 $configuration = [];
             }

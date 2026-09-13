@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\Quote;
@@ -27,7 +27,7 @@ use Magento\Quote\Model\Cart\TotalsConverter;
 
 /**
  * Class Address
- * @package Mageplaza\Osc\Model\Plugin\Customer
+ *
  */
 class GiftWrap
 {
@@ -48,8 +48,8 @@ class GiftWrap
 
     /**
      * @param TotalsConverter $subject
-     * @param Closure $proceed
-     * @param array $addressTotals
+     * @param Closure         $proceed
+     * @param array           $addressTotals
      *
      * @return mixed
      */

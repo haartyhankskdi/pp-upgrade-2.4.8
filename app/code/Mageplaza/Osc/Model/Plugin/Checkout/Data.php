@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\Checkout;
@@ -26,10 +26,6 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Mageplaza\Osc\Helper\Data as OscData;
 
-/**
- * Class Data
- * @package Mageplaza\Osc\Model\Plugin\Checkout
- */
 class Data
 {
     /**
@@ -64,10 +60,12 @@ class Data
      */
     public function afterIsAllowedGuestCheckout(\Magento\Checkout\Helper\Data $subject, $result)
     {
-        if (!($quote = $this->checkoutSession->getQuote()) || !$this->helper->isEnabled()) {
+        $quote = $this->checkoutSession->getQuote();
+        if (!$quote || !$this->helper->isEnabled()) {
             return $result;
         }
+        $storeId = $quote->getStoreId() ? $quote->getStoreId() : null;
 
-        return (bool)$this->helper->getAllowGuestCheckout($quote);
+        return (bool)$this->helper->getAllowGuestCheckout($quote,  $storeId);
     }
 }

@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\Checkout;
@@ -33,11 +33,6 @@ use Magento\Quote\Model\ShippingMethodManagement as QuoteShippingMethodManagemen
 use Magento\Customer\Api\Data\AddressInterface as CustomerAddressInterface;
 use Magento\Quote\Model\Quote;
 
-/**
- * Class ShippingMethodManagement
- *
- * @package Mageplaza\Osc\Model\Plugin\Checkout
- */
 class ShippingMethodManagement
 {
     /**
@@ -69,7 +64,7 @@ class ShippingMethodManagement
     /**
      * @param QuoteShippingMethodManagement $subject
      * @param Closure                       $proceed
-     * @param                               $cartId
+     * @param $cartId
      * @param EstimateAddressInterface      $address
      *
      * @return mixed
@@ -77,9 +72,9 @@ class ShippingMethodManagement
      */
     public function aroundEstimateByAddress(
         QuoteShippingMethodManagement $subject,
-        Closure $proceed,
+        Closure                       $proceed,
         $cartId,
-        EstimateAddressInterface $address
+        EstimateAddressInterface      $address
     ) {
         $this->saveAddress($cartId, $address);
 
@@ -89,7 +84,7 @@ class ShippingMethodManagement
     /**
      * @param QuoteShippingMethodManagement $subject
      * @param Closure                       $proceed
-     * @param                               $cartId
+     * @param $cartId
      * @param AddressInterface              $address
      *
      * @return mixed
@@ -115,8 +110,8 @@ class ShippingMethodManagement
     /**
      * @param QuoteShippingMethodManagement $subject
      * @param Closure                       $proceed
-     * @param                               $cartId
-     * @param                               $addressId
+     * @param $cartId
+     * @param $addressId
      *
      * @return mixed
      * @throws LocalizedException
@@ -134,7 +129,7 @@ class ShippingMethodManagement
     }
 
     /**
-     * @param                                                                    $cartId
+     * @param $cartId
      * @param EstimateAddressInterface|AddressInterface|CustomerAddressInterface $address
      *
      * @return $this
@@ -142,20 +137,27 @@ class ShippingMethodManagement
      */
     private function saveAddress($cartId, $address)
     {
-        /** @var Quote $quote */
+        /**
+ * @var Quote $quote
+*/
         $quote = $this->quoteRepository->getActive($cartId);
 
         if (!$quote->isVirtual()) {
             $addressData = [
-                AddressInterface::KEY_COUNTRY_ID      => $address->getCountryId(),
-                AddressInterface::KEY_POSTCODE        => $address->getPostcode(),
-                AddressInterface::KEY_REGION_ID       => $address->getRegionId(),
-                AddressInterface::KEY_STREET          => $address->getStreet(),
-                AddressInterface::KEY_CITY            => $address->getCity(),
+                AddressInterface::KEY_COUNTRY_ID => $address->getCountryId(),
+                AddressInterface::KEY_POSTCODE => $address->getPostcode(),
+                AddressInterface::KEY_REGION_ID => $address->getRegionId(),
+                AddressInterface::KEY_STREET => $address->getStreet(),
+                AddressInterface::KEY_CITY => $address->getCity(),
                 AddressInterface::CUSTOMER_ADDRESS_ID => $address->getId()
             ];
 
             $shippingAddress = $quote->getShippingAddress();
+            //save CustomAttribute to quote.
+            foreach ($address->getCustomAttributes() as $attribute) {
+                $shippingAddress->setCustomAttribute($attribute->getAttributeCode(), $attribute->getValue());
+            }
+
             try {
                 $shippingAddress->addData($addressData)
                     ->save();

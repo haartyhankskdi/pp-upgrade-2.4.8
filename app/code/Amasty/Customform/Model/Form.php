@@ -1,27 +1,37 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
 
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
+
 namespace Amasty\Customform\Model;
 
+use Amasty\Customform\Api\Data\FormExtensionInterface;
 use Amasty\Customform\Api\Data\FormInterface;
 use Amasty\Customform\Block\Widget\Form\Element\Wysiwyg;
 use Amasty\Customform\Model\Config\Source\Design;
+use Magento\Framework\Api\ExtensionAttributesFactory;
+use Magento\Framework\Api\AttributeValueFactory;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\DataObject\IdentityInterface;
-use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\AbstractExtensibleModel;
 
-class Form extends AbstractModel implements FormInterface, IdentityInterface
+class Form extends AbstractExtensibleModel implements FormInterface, IdentityInterface
 {
     public const STATUS_ENABLED = 1;
 
     public const STATUS_DISABLED = 0;
 
     public const CACHE_TAG = 'amasty_customform';
+
+    /**
+     * @var string
+     */
+    protected $_eventPrefix = 'amasty_customform';
 
     /**
      * @var \Magento\Framework\Json\DecoderInterface
@@ -50,11 +60,24 @@ class Form extends AbstractModel implements FormInterface, IdentityInterface
         \Magento\Framework\Json\EncoderInterface $jsonEncoder,
         \Amasty\Customform\Helper\Data $helper,
         \Amasty\Customform\Model\Form\Rendering\Autocomplete\Cleaning\FieldsCleaner $fieldsCleaner,
-        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
-        array $data = []
+        ?\Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        ?\Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        array $data = [],
+        ?ExtensionAttributesFactory $extensionFactory = null, // TODO move to not optional
+        ?AttributeValueFactory $customAttributeFactory = null // TODO move to not optional
     ) {
-        parent::__construct($context, $registry, $resource, $resourceCollection, $data);
+        $extensionFactory = $extensionFactory ?? ObjectManager::getInstance()->get(ExtensionAttributesFactory::class);
+        $customAttributeFactory = $customAttributeFactory
+            ?? ObjectManager::getInstance()->get(AttributeValueFactory::class);
+        parent::__construct(
+            $context,
+            $registry,
+            $extensionFactory,
+            $customAttributeFactory,
+            $resource,
+            $resourceCollection,
+            $data
+        );
 
         $this->jsonDecoder = $jsonDecoder;
         $this->jsonEncoder = $jsonEncoder;
@@ -129,7 +152,7 @@ class Form extends AbstractModel implements FormInterface, IdentityInterface
                 continue;
             }
 
-            $data[$field] = $field == 'label' ? $value : $this->helper->escapeHtml($value);
+            $data[$field] = $field == 'label' ? $value : $this->helper->stripTags($value);
         }
     }
 
@@ -612,5 +635,51 @@ class Form extends AbstractModel implements FormInterface, IdentityInterface
     public function setIsVisible(bool $isVisible): void
     {
         $this->setData(self::IS_VISIBLE, $isVisible);
+    }
+
+    public function isSubscriptionEnabled(): ?bool
+    {
+        return $this->hasData(self::IS_SUBSCRIPTION_ENABLED)
+            ? (bool) $this->_getData(self::IS_SUBSCRIPTION_ENABLED)
+            : null;
+    }
+
+    public function setSubscriptionEnabled(bool $isSubscriptionEnabled): void
+    {
+        $this->setData(self::IS_SUBSCRIPTION_ENABLED, $isSubscriptionEnabled);
+    }
+
+    public function isSubscriptionRequired(): ?bool
+    {
+        return $this->hasData(self::IS_SUBSCRIPTION_ENABLED)
+            ? (bool) $this->_getData(self::IS_SUBSCRIPTION_REQUIRED)
+            : null;
+    }
+
+    public function setSubscriptionRequired(bool $isSubscriptionRequired): void
+    {
+        $this->setData(self::IS_SUBSCRIPTION_REQUIRED, $isSubscriptionRequired);
+    }
+
+    public function getSubscriptionText(): ?string
+    {
+        return $this->hasData(self::IS_SUBSCRIPTION_ENABLED)
+            ? (string) $this->_getData(self::SUBSCRIPTION_TEXT)
+            : null;
+    }
+
+    public function setSubscriptionText(string $subscriptionText): void
+    {
+        $this->setData(self::SUBSCRIPTION_TEXT, $subscriptionText);
+    }
+
+    public function getExtensionAttributes(): FormExtensionInterface
+    {
+        return $this->_getExtensionAttributes();
+    }
+
+    public function setExtensionAttributes(FormExtensionInterface $extensionAttributes): void
+    {
+        $this->_setExtensionAttributes($extensionAttributes);
     }
 }

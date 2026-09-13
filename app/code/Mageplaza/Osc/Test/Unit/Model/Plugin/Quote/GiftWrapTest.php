@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Quote;
@@ -30,10 +30,6 @@ use Mageplaza\Osc\Model\Plugin\Quote\GiftWrap;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class GiftWrapTest
- * @package Mageplaza\Osc\Test\Unit\Model\Plugin\Quote
- */
 class GiftWrapTest extends TestCase
 {
     /**
@@ -56,7 +52,7 @@ class GiftWrapTest extends TestCase
      */
     private $closureMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->totalSegmentExtensionFactoryMock = $this->getMockBuilder(TotalSegmentExtensionFactory::class)
             ->disableOriginalConstructor()
@@ -112,7 +108,8 @@ class GiftWrapTest extends TestCase
     public function testAroundProcessWithEmptyExtensionAttributes()
     {
         $quoteAddressTotalMock = $this->getMockBuilder(Total::class)
-            ->setMethods(['getExtensionAttributes', 'setExtensionAttributes', 'getData'])
+            ->onlyMethods(['getData'])
+            ->addMethods(['getExtensionAttributes', 'setExtensionAttributes'])
             ->disableOriginalConstructor()
             ->getMock();
         $addressTotalsMock = ['osc_gift_wrap' => $quoteAddressTotalMock];
@@ -125,6 +122,7 @@ class GiftWrapTest extends TestCase
             ->willReturn(['gift_wrap_amount' => 10]);
         $quoteAddressTotalMock->expects($this->once())->method('getExtensionAttributes')->willReturn(null);
         $totalExtension = $this->getMockBuilder(TotalSegmentExtension::class)
+            ->addMethods(['setGiftWrapAmount'])
             ->disableOriginalConstructor()
             ->getMock();
         $this->totalSegmentExtensionFactoryMock->expects($this->once())->method('create')->willReturn($totalExtension);

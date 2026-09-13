@@ -68,7 +68,7 @@ class Banner extends AbstractDb
         Data $helperData,
         $connectionName = null
     ) {
-        $this->_date      = $date;
+        $this->_date = $date;
         $this->helperData = $helperData;
 
         parent::__construct($context, $connectionName);

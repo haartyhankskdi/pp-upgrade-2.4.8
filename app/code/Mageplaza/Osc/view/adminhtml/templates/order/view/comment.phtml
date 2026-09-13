@@ -24,10 +24,10 @@
 if ($commentHtml = $block->getOrderComment()): ?>
     <div class="admin__page-section-item order-osc-comment">
         <div class="admin__page-section-item-title">
-            <span class="title"><?= $block->escapeHtml(__('Order Comment')) ?></span>
+            <span class="title"><?= $escaper->escapeHtml(__('Order Comment')) ?></span>
         </div>
         <div class="admin__page-section-item-content">
-            <?= $block->escapeHtml($commentHtml) ?>
+            <?= $escaper->escapeHtml($commentHtml) ?>
         </div>
     </div>
 <?php endif; ?>

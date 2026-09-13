@@ -63,7 +63,7 @@ $stockRegistry = $objectManager->get('Magento\CatalogInventory\Api\StockRegistry
                                             <ul>
                                                 <?php
                                                 $bulletPoints = $selectedProduct->getPrBulletPoints(); // Fetch the bullet points attribute value
-                                                $bulletPointsArray = explode("\n", $bulletPoints); // Split the attribute value by new lines into an array
+                                                $bulletPointsArray = explode("\n", (string) $bulletPoints); // Split the attribute value by new lines into an array
                                                 foreach ($bulletPointsArray as $bulletPoint): ?>
                                                     <li><img src="/media/wysiwyg/WLImage/tick.svg" alt="tick"><?= $block->escapeHtml($bulletPoint); ?></li>
                                                 <?php endforeach; ?>
@@ -98,7 +98,7 @@ $stockRegistry = $objectManager->get('Magento\CatalogInventory\Api\StockRegistry
 
                                                 // Allow only style and href attributes, strip everything else
                                                 $cleanDesc = preg_replace('/<(\w+)\s[^>]*?(style="[^"]*")?[^>]*>/', '<$1 $2>', $shortDesc);
-                                                $cleanDesc = trim(preg_replace('/\s+/', ' ', $cleanDesc));
+                                                $cleanDesc = trim((string) preg_replace('/\s+/', ' ', $cleanDesc));
                                             ?>
                                                 <div class="info-tooltip">
                                                     <?= $block->escapeHtml($cleanDesc, ['p', 'br', 'strong', 'em', 'span', 'ul', 'li', 'a']); ?>
@@ -124,7 +124,7 @@ $stockRegistry = $objectManager->get('Magento\CatalogInventory\Api\StockRegistry
                                                 <ul>
                                                     <?php
                                                     $bulletPoints = $product->getPrBulletPoints(); // Fetch the bullet points attribute value
-                                                    $bulletPointsArray = explode("\n", $bulletPoints); // Split the attribute value by new lines into an array
+                                                    $bulletPointsArray = explode("\n", (string) $bulletPoints); // Split the attribute value by new lines into an array
                                                     foreach ($bulletPointsArray as $bulletPoint): ?>
                                                         <li><img src="/media/wysiwyg/WLImage/tick.svg" alt="tick"><?= $block->escapeHtml($bulletPoint); ?></li>
                                                     <?php endforeach; ?>

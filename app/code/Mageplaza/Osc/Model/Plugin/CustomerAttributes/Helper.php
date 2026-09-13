@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\CustomerAttributes;
@@ -25,10 +25,6 @@ use Magento\Eav\Model\Attribute;
 use Mageplaza\CustomerAttributes\Helper\Data;
 use Mageplaza\Osc\Helper\Address;
 
-/**
- * Class Helper
- * @package Mageplaza\Osc\Model\Plugin\CustomerAttributes
- */
 class Helper
 {
     /**
@@ -47,7 +43,7 @@ class Helper
     }
 
     /**
-     * @param Data $subject
+     * @param Data        $subject
      * @param Attribute[] $result
      *
      * @return Attribute[]
@@ -74,5 +70,22 @@ class Helper
         }
 
         return $attributes;
+    }
+
+    /**
+     * @param Data $subject
+     * @param $entityType
+     * @param $formCode
+     * @param $bypassFilter
+     *
+     * @return array
+     */
+    public function beforeGetAttributeWithFilters(Data $subject, $entityType, $formCode, $bypassFilter = false)
+    {
+        if ($this->helper->isOscPage()) {
+            $formCode = $formCode == 'checkout_index_index' ? 'onestepcheckout_index_index' : $formCode;
+        }
+
+        return [$entityType, $formCode, $bypassFilter];
     }
 }

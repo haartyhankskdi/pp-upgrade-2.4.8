@@ -1,14 +1,17 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Model;
 
 use Amasty\Customform\Api\Data\AnswerInterface;
+use Laminas\Validator\EmailAddress;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Model\AbstractModel;
 
 class Answer extends AbstractModel implements AnswerInterface
@@ -240,7 +243,11 @@ class Answer extends AbstractModel implements AnswerInterface
             }
         }
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        //use object manager to avoid loading dependencies of parent class
+        $objectManager = ObjectManager::getInstance();
+        $emailValidator = $objectManager->create(EmailAddress::class);
+
+        if (!$emailValidator->isValid($email)) {
             $email = '';
         }
 
@@ -254,7 +261,11 @@ class Answer extends AbstractModel implements AnswerInterface
     {
         $name = '';
         if ($this->getCustomerId()) {
-            $name = $this->customerRepository->getById($this->getCustomerId())->getFirstname();
+            try {
+                $name = $this->customerRepository->getById($this->getCustomerId())->getFirstname();
+            } catch (NoSuchEntityException $e) {
+                $name = '';
+            }
         }
 
         return $name;
@@ -322,23 +333,5 @@ class Answer extends AbstractModel implements AnswerInterface
     public function setFormCode(?string $formCode): void
     {
         $this->setData(self::FORM_CODE, $formCode);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getQuestionnaireUniqueId()
-    {
-        return $this->_getData(AnswerInterface::QUESTIONNAIRE_UNIQUE_ID);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setQuestionnaireUniqueId($ip)
-    {
-        $this->setData(AnswerInterface::QUESTIONNAIRE_UNIQUE_ID, $uniqueId);
-
-        return $this;
     }
 }

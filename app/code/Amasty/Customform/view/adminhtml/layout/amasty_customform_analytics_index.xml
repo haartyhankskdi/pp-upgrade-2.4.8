@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block name="custom_form_analytic_demo"
+                   class="Amasty\Base\Block\Adminhtml\System\Config\Form\Field\Promo\PromoGrid">
+                <arguments>
+                    <argument name="moduleName" xsi:type="string">Amasty_CustomFormAnalytics</argument>
+                    <argument name="promoConfig" xsi:type="array">
+                        <item name="gridImageSrc" xsi:type="string">Amasty_Customform/img/analytics_grid_demo.png</item>
+                        <item name="promoLink" xsi:type="string"><![CDATA[https://amasty.com/amcustomer/account/products/?utm_source=extension&utm_medium=backend&utm_campaign=subscribe_customform]]></item>
+                        <item name="message" xsi:type="string"><![CDATA[The functionality is available within the Pro module tariff. To upgrade and obtain functionality please follow the <a href="https://amasty.com/amcustomer/account/products/?utm_source=extension&utm_medium=backend&utm_campaign=subscribe_customform" target="_blank">link</a>. Then you can find the 'amasty/module-custom-form-analytics' package for installation in composer suggest.]]></item>
+                        <item name="buttonText" xsi:type="string" translate="true">Upgrade to Unlock</item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

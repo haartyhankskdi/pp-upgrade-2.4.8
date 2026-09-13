@@ -1,0 +1,351 @@
+<?php
+use Mirasvit\Core\Service\CspService;
+use \Mirasvit\Helpdesk\Model\Config as Config;
+
+$nonce = CspService::getNonce();
+/* @var \Mirasvit\Helpdesk\Block\Adminhtml\Ticket\Edit\Tab\Messages $block */
+?>
+<div class="hdmx__ticket-history">
+    <?php foreach ($block->getMessages(true) as $message): ?>
+
+        <?php if ($block->isShowSatisfactions()): ?>
+            <?php foreach ($block->getSatisfactions($message) as $satisfaction): ?>
+                <div class="hdmx__satisfaction-rate rate-<?= $block->escapeHtml($satisfaction->getRate()) ?>"
+                     title="<?= $block->escapeHtml(__('Satisfaction survey')) ?>">
+                    <img
+                            src="<?= $block->escapeUrl($block->getViewFileUrl('Mirasvit_Helpdesk::images/smile/' . $satisfaction->getRate() . '.png', ['_area' => 'frontend'])) ?>"
+                            width="40" height="40" border="0"
+                            alt="<?= $block->escapeHtml(__('Satisfaction rating: %1 out of 5', $satisfaction->getRate())) ?>">
+                    <?php if ($satisfaction->getComment()) : ?>
+                        <div class="comment">
+                            <?= $block->escapeHtml($satisfaction->getComment()) ?>
+                        </div>
+                    <?php endif ?>
+                </div>
+                <div class="hdmx__satisfaction-rate-clear"></div>
+            <?php endforeach ?>
+        <?php endif ?>
+
+        <div class="hdmx__message">
+            <div class="hdmx-message__header">
+                <a target="_blank" class="hdmx-message__source"
+                   href="<?= $block->escapeUrl($block->getSourceUrl($message)) ?>"
+                   aria-label="<?= $block->escapeHtml(__('View message source in new window')) ?>">
+                    <?= $block->escapeHtml(__('show source')) ?>
+                </a>&nbsp;
+
+                <?php if ($message->getTriggeredBy() == \Mirasvit\Helpdesk\Model\Config::CUSTOMER): ?>
+                    <?php if ($message->getCustomerName() != ''): ?>
+                        <strong><?= $block->escapeHtml($message->getCustomerName()) ?></strong>,
+                    <?php endif ?>
+                    <?= $block->escapeHtml($message->getCustomerEmail()) ?>
+                <?php elseif ($message->getTriggeredBy() == \Mirasvit\Helpdesk\Model\Config::USER): ?>
+                    <?php if ($message->getType() == Config::MESSAGE_INTERNAL): ?>
+                        <span class="internal-note">note</span>
+                    <?php endif ?>
+                    <strong><?= $block->escapeHtml($message->getUserName()) ?></strong>
+                    <?php if ($message->isThirdParty()): ?>
+                        <?php if ($message->getType() == Config::MESSAGE_INTERNAL): ?>
+                            <span>note</span>
+                        <?php endif ?>
+                        <?= $block->escapeHtml(__('to %1 (third party)', $message->getThirdPartyEmail())) ?>
+                    <?php endif ?>
+                <?php elseif ($message->getTriggeredBy() == Config::THIRD): ?>
+                    <?php if ($message->getType() == Config::MESSAGE_INTERNAL): ?>
+                        <span>note</span>
+                    <?php endif ?>
+                    <?= $block->escapeHtml(__('%1 %2 (third party)', $block->escapeHtml($message->getThirdPartyName()), $block->escapeHtml($message->getThirdPartyEmail()))) ?>
+                <?php endif ?>
+
+                <span class="minor">
+                    <?= $block->escapeHtml(__('%1', $block->formatDateTime($message->getCreatedAt()))) ?>
+                </span>
+            </div>
+            <div class="hdmx-message__body <?= $block->escapeHtml($message->getType()) ?> <?php if ($message->getCustomerEmail()): ?>user<?php else: ?>staff<?php endif ?> ">
+                <?php
+                //DONT CHANGE THIS
+                $message->setIsBackend(true);
+                echo $block->escapeHtml($message->getUnsafeBodyHtml(), $message->getAllowedTags());
+                //END DONT CHANGE THIS
+                ?>
+                <?= $block->escapeHtml($block->getUserSignatureHTML($message), $message->getAllowedTags()); ?>
+
+            </div>
+            <?php $_attachments = $message->getAttachments() ?>
+            <?php if (count($_attachments)): ?>
+                <div class="hdmx-message__attachments">
+                    <?php foreach ($_attachments as $_attachment): ?>
+                        <?php if ($_attachment->getIsAllowed()): ?>
+
+                            <div class="attachment-item">
+                                <div class="attachment-thumbnail-container">
+                                    <div class="image-link" >
+                                        <?php if (strpos(strtolower($_attachment->getType()), 'image') !== false): ?>
+                                            <a href="#" class="attachment-link"
+                                               data-src="<?= $block->escapeUrl($_attachment->getBackendUrl()) ?>"
+                                               data-name="<?= $block->escapeHtml($_attachment->getName()) ?>"
+                                               data-type="mstimage" >
+                                                <img src="<?= $block->escapeUrl($_attachment->getBackendUrl()) ?>"
+                                                     alt="<?= $block->escapeHtml(__('Attachment image: %1', $_attachment->getName())) ?>"
+                                                     title="<?= $block->escapeHtml($_attachment->getName()) ?>"
+                                                     style="cursor: pointer; "/>
+                                            </a>
+
+                                        <?php else: ?>
+                                            <?php if ($_attachment->getBackendUrl()): ?>
+
+                                                <a class="attachment-link" href="<?= $block->escapeUrl($_attachment->getBackendUrl()) ?>"
+                                                   data-src="<?= $block->escapeUrl($_attachment->getBackendUrl()) ?>"
+                                                   data-name="<?= $block->escapeHtml($_attachment->getName()) ?>"
+                                                >
+                                                    <img class="attachment-downloadable"
+                                                         src=<?php echo $block->getViewFileUrl('Mirasvit_Helpdesk::images/plug_item.svg') ?>
+                                                         alt="<?= $block->escapeHtml($_attachment->getName()) ?>"
+                                                         title="<?= $block->escapeHtml($_attachment->getName()) ?>"
+                                                         style="cursor: pointer;"/>
+                                                </a>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="attachment-info">
+                                        <div class="attachment-icon">
+                                            <?php if (strpos(strtolower($_attachment->getType()), 'image') !== false): ?>
+                                                <img src=<?php echo $block->getViewFileUrl('Mirasvit_Helpdesk::images/img_icon.svg') ?>>
+                                            <?php else: ?>
+                                                <img src=<?php echo $block->getViewFileUrl('Mirasvit_Helpdesk::images/doc_icon.svg') ?> alt="<?= $block->escapeHtml(__('Document file icon')) ?>">
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="attachment-details">
+                                            <span class="attachment-name"><?= $block->escapeHtml($_attachment->getName()) ?></span>
+                                        </div>
+                                    </div>
+                                    <div class="download-info">
+                                        <div class="attachment-icon">
+                                            <img src=<?php echo $block->getViewFileUrl('Mirasvit_Helpdesk::images/download-small.svg') ?> alt="<?= $block->escapeHtml(__('Download icon')) ?>">
+                                        </div>
+                                        <div class="attachment-details">
+                                            <span class="download-link"><?= $block->escapeHtml(__('Download')) ?></span>
+                                            <span class="attachment-size"><?= $block->escapeHtml(round($_attachment->getSize() / 1024, 2)) ?> KB</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                </div>
+            <?php endif ?>
+        </div>
+    <?php endforeach ?>
+</div>
+<input type="hidden" id="max-attachment-size" value="<?php echo __('Max file size: %1 Mb', $this->getAttachmentSize())?>"/>
+<img alt="" type="hidden" style="display: none" id="hdmx-attachment-image" src="<?php echo $block->getViewFileUrl('Mirasvit_Helpdesk::images/scr.svg')?>"/>
+<img alt="" type="hidden" style="display: none" id="hdmx-plug_item" src="<?php echo $block->getViewFileUrl('Mirasvit_Helpdesk::images/plug_item.svg') ?>"/>
+<div id="mstAttachmentPopup" class="mst-popup">
+    <div class="mst-popup-action">
+        <span class="mst-popup-close">
+            <img src=<?php echo $block->getViewFileUrl('Mirasvit_Helpdesk::images/close_icon.svg') ?> alt="<?= $block->escapeHtml(__('Close')) ?>">
+        </span>
+        <span>
+            <a id="hdmx-download" href="#" download style="display: none;">
+            <img src=<?php echo $block->getViewFileUrl('Mirasvit_Helpdesk::images/download-large.svg') ?> alt="<?= $block->escapeHtml(__('Download')) ?>">
+        </a>
+        </span>
+    </div>
+
+    <div class="mst-popup-content">
+        <img id="mstPopupImage" src="" alt="<?= $block->escapeHtml(__('Image preview')) ?>">
+        <span id="attachment-name"></span>
+    </div>
+    <div class="mst-popup-navigation">
+        <button id="hdmxPrevImage" aria-label="<?= $block->escapeHtml(__('Previous image')) ?>">
+            <img class="hdmx-arr" src="<?php echo $block->getViewFileUrl('Mirasvit_Helpdesk::images/left.svg'); ?>" alt="<?= $block->escapeHtml(__('Previous')) ?>">
+            <img class="hdmx-arr-hover" src="<?php echo $block->getViewFileUrl('Mirasvit_Helpdesk::images/left_hover.svg'); ?>" alt="<?= $block->escapeHtml(__('Previous')) ?>">
+        </button>
+        <button id="hdmxNextImage">
+            <img class="hdmx-arr" src="<?php echo $block->getViewFileUrl('Mirasvit_Helpdesk::images/right.svg'); ?>" alt="<?= $block->escapeHtml(__('Next')) ?>">
+            <img class="hdmx-arr-hover" src="<?php echo $block->getViewFileUrl('Mirasvit_Helpdesk::images/right_hover.svg'); ?>" alt="<?= $block->escapeHtml(__('Next')) ?>">
+        </button>
+    </div>
+</div>
+
+<script <?php if ($nonce): ?> nonce="<?= $block->escapeHtml($nonce) ?>"<?php endif; ?>>
+    document.addEventListener('DOMContentLoaded', function () {
+        const patterns = [
+            /-+\s*on\s[\s\S]+?\s*wrote\s-+/i,
+            /^\s*Le\s[\s\S]*?(?:a\s+)?écrit\s*:/im,
+            /##-+\s*please\s+type\s+your\s+reply\s+above\s+this\s+line\s*-+##/i,
+            /(?:^|\n)(--|__|-\w|--\s$)/i,
+            /On\s\w{3},\s\w{3}\s\d{1,2},\s\d{4}\sat\s\d{1,2}:\d{2}[ \u00A0\u202F]*[AP]M/i,
+            /On\s+\w{3},\s+\d{1,2}\s+\w+\s+\d{4}\s+at\s+\d{1,2}:\d{2},\s+[\s\S]*?(?:<|&lt;)[^>]+(?:>|&gt;)\s+wrote:/i,
+            /Le\s?:\s?\d{2}\s(?:janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)\s\d{4}\sà\s\d{2}:\d{2}(?:\s?\(GMT\s?[+-]\d{2}:\d{2}\))?/i,
+            /&gt;\s*a écrit&nbsp;?:/i,
+            /On\s.*wrote:/i,
+            /El\s.*(escribió|ha\sescrit)\s*:/i,
+            /Il\s.*scritto\s*:/i,
+            /написа(л|ла|в)+:/i,
+            /Op\s.+?(schreef|geschreven).+:/i,
+            /(W\s?dniu|Dnia)\s.+?(pisze|napisał(\(a\))?):/i,
+            /Den\s.+\sskrev\s.+:/i,
+            /Am\s.+\sum\s.+\sschrieb\s.+:/i,
+            /在.+写道：/i,
+            /20\d{2}\..+\s작성:/,
+            /20\d{2}\/.+のメッセージ:/,
+            /.+\s<.+>\sschrieb:/i,
+            /From\s?:.+<.+>/i,
+            /发件人\s?:.+<.+>/i,
+            /^\s*De\s?:\s?.*<.+>/im,
+            /Van\s?:.+<.+>/i,
+            /Da\s?:.+<.+>/i,
+            /20\d{2}-\d{1,2}-\d{1,2}\s[0-2]?\d:\d{2}.*?:/,
+            /[a-z]{3,4}\.\s.+\sskrev\s.+:/i,
+            /(?:Best regards|Kind regards|Sincerely|Thanks|Cheers|Yours truly|Cordialement)[\s,]*((\n|<br\s*\/?>).*){1,3}/i,
+            /Historique du Ticket/i,
+            /={30,}/
+        ];
+        var attachmentLinks = document.querySelectorAll('.attachment-link');
+        var popup = document.getElementById('mstAttachmentPopup');
+        var popupImage = document.getElementById('mstPopupImage');
+        var closeBtn = document.querySelector('.mst-popup-close');
+        var prevBtn = document.getElementById('hdmxPrevImage');
+        var nextBtn = document.getElementById('hdmxNextImage');
+        var downloadBtn = document.getElementById('hdmx-download');
+        var attachmentName = document.getElementById('attachment-name');
+        var currentIndex = 0;
+        var images = [];
+        var imageNames = [];
+        var noScroll = 'hdmx-no-scroll';
+        let isZoomed = false;
+
+        popupImage.style.transition = 'transform 0.3s ease-in-out';
+        popupImage.style.cursor = 'zoom-in';
+
+        popupImage.addEventListener('click', function () {
+            isZoomed = !isZoomed;
+            if (isZoomed) {
+                popupImage.style.transform = 'scale(1.35)';
+                popupImage.style.cursor = 'zoom-out';
+            } else {
+                popupImage.style.transform = 'scale(1)';
+                popupImage.style.cursor = 'zoom-in';
+            }
+        });
+
+        document.querySelectorAll('.hdmx-message__body').forEach(function (el) {
+            const original = el.innerHTML;
+            let matchIndex = -1;
+
+            for (const pattern of patterns) {
+                const match = original.match(pattern);
+                if (match) {
+                    matchIndex = original.indexOf(match[0]);
+                    break;
+                }
+            }
+
+            if (matchIndex > -1) {
+                const before = original.substring(0, matchIndex);
+                const after = original.substring(matchIndex);
+
+                el.innerHTML = `
+                ${before}
+                <button class="toggle-hdmx-sign" >...</button>
+                <span class="hdmx-sign" style="display:none;">${after}</span>
+            `;
+
+                const btn = el.querySelector('.toggle-hdmx-sign');
+                const span = el.querySelector('.hdmx-sign');
+
+                btn.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const isHidden = span.style.display === 'none';
+                    span.style.display = isHidden ? 'inline' : 'none';
+                });
+            }
+        });
+        attachmentLinks.forEach(function (link, index) {
+            if (link.getAttribute('data-type') === 'mstimage') {
+                images.push(link.getAttribute('data-src'));
+                imageNames.push(link.getAttribute('data-name'));
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    currentIndex = images.indexOf(link.getAttribute('data-src'));
+                    popupImage.src = images[currentIndex];
+                    downloadBtn.href = images[currentIndex];
+                    downloadBtn.style.display = 'block';
+                    attachmentName.textContent = imageNames[currentIndex];
+                    popup.style.display = 'flex';
+                    document.body.classList.add(noScroll);
+                });
+            }
+        });
+
+        closeBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+            popup.style.display = 'none';
+            document.body.classList.remove(noScroll);
+        });
+
+        prevBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+            showPrevImage();
+        });
+
+        nextBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+            showNextImage();
+        });
+
+        popup.addEventListener('click', function (event) {
+            if (event.target === popup) {
+                popup.style.display = 'none';
+                document.body.classList.remove(noScroll);
+            }
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closePopup();
+            } else if (event.key === 'ArrowLeft') {
+                showPrevImage();
+            } else if (event.key === 'ArrowRight') {
+                showNextImage();
+            }
+        });
+
+        function showPrevImage() {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+            popupImage.src = images[currentIndex];
+            downloadBtn.href = images[currentIndex];
+            attachmentName.textContent = imageNames[currentIndex];
+        }
+
+        function showNextImage() {
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            popupImage.src = images[currentIndex];
+            downloadBtn.href = images[currentIndex];
+            attachmentName.textContent = imageNames[currentIndex];
+        }
+
+        function closePopup() {
+            popup.style.display = 'none';
+            document.body.classList.remove(noScroll);
+        }
+
+        var downloadIcons = document.querySelectorAll('.download-info');
+        downloadIcons.forEach(function (icon) {
+            icon.addEventListener('click', function (event) {
+                var attachmentItem = icon.closest('.attachment-item');
+                var downloadLink = attachmentItem.querySelector('.attachment-link');
+                if (downloadLink) {
+                    var url = downloadLink.getAttribute('data-src');
+                    var link = document.createElement('a');
+                    link.href = url;
+                    link.download = '';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            });
+        });
+    });
+</script>

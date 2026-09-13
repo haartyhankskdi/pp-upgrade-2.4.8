@@ -1,23 +1,26 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Block;
 
 use Amasty\Customform\Api\Data\FormInterface;
 use Amasty\Customform\Helper\Data;
 use Amasty\Customform\Model\Config\Source\DateFormat;
+use Amasty\Customform\Model\Form\Rendering\GetFormJson;
 use Amasty\Customform\ViewModel\Form\FormInit\AnswerModeFactory;
 use Amasty\Customform\ViewModel\Form\FormInitInterface;
 use Magento\Backend\Block\Widget\Grid\Column\Filter\Store;
 use Magento\Customer\Api\Data\GroupInterface;
 use Magento\Customer\Model\Context as CustomerContext;
 use Magento\Framework\App\Http\Context;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Template;
@@ -48,19 +51,25 @@ class Form extends Template implements IdentityInterface
      * @var Context
      */
     private $httpContext;
+    /**
+     * @var GetFormJson|null
+     */
+    private $getFormJson;
 
     public function __construct(
         Template\Context $context,
         Data $helper,
         AnswerModeFactory $viewModelFactory,
         Context $httpContext,
-        array $data = []
+        array $data = [],
+        ?GetFormJson $getFormJson = null // TODO move to not optional
     ) {
         parent::__construct($context, $data);
 
         $this->helper = $helper;
         $this->viewModelFactory = $viewModelFactory;
         $this->httpContext = $httpContext;
+        $this->getFormJson = $getFormJson ?? ObjectManager::getInstance()->get(GetFormJson::class);
     }
 
     private function init()
@@ -135,12 +144,11 @@ class Form extends Template implements IdentityInterface
     {
         $viewModel = $this->getViewModel();
         $form = $viewModel->getCurrentForm();
-        $formData = $form->getFormJson();
         $formTitles = $form->getFormTitle();
 
         $result = [
             'dataType' => 'json',
-            'formData' => $formData,
+            'formData' => $this->getFormJson->execute($form),
             'src_image_progress' => $this->getViewFileUrl('Amasty_Customform::images/loading.gif'),
             'ajax_submit' => $this->getCurrentForm()->getSuccessUrl() == Data::REDIRECT_PREVIOUS_PAGE ? 1 : 0,
             'pageTitles' => $formTitles,

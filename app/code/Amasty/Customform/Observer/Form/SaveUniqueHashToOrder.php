@@ -27,12 +27,10 @@ class SaveUniqueHashToOrder implements ObserverInterface
     protected $customCookie;
 
     public function __construct(
-        // HelperData $helperData
         Session $session,
         CustomCookie $customCookie
     )
     {
-        // $this->helperData = $helperData;
         $this->session = $session;
         $this->customCookie = $customCookie;
     }
@@ -43,15 +41,11 @@ class SaveUniqueHashToOrder implements ObserverInterface
         $this->unsUniqueHassSession();
         
         if(empty($hashKeyJson) || $hashKeyJson == null){
-            // echo "hash Key not found";
-            // die;
             $hashKeyJson = $this->customCookie->get();
-            // $this->customCookie->delete();
+      
         }
         $this->customCookie->delete();
-        // }
-        // $value = $this->helperData->getUniqueHash();
-        // $this->helperData->unsUniqueHash();
+      
         $order= $observer->getData('order');
         $order->setQuestionnaireUniqueId($hashKeyJson); 
         $order->save();

@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Amasty\Base\Test\Unit\Utils\Text;
 
 use Amasty\Base\Utils\Text\Splitter;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class SplitterTest extends TestCase
@@ -32,12 +33,13 @@ class SplitterTest extends TestCase
      * @return void
      * @dataProvider splitDataProvider
      */
+    #[DataProvider('splitDataProvider')]
     public function testSplit(string $initialText, int $maxLength, array $expectedSplit): void
     {
         $this->assertEquals($expectedSplit, $this->splitter->splitByMaxLength($initialText, $maxLength));
     }
 
-    public function splitDataProvider(): array
+    public static function splitDataProvider(): array
     {
         return [
             'empty string' => [

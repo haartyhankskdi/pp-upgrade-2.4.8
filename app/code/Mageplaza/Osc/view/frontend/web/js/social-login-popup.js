@@ -44,17 +44,17 @@ define(
                 _create: function () {
                     this._super();
                     switch (this.options.popupLogin){
-                        case 'popup_login':
-                            this.changeSocialBtnPosition();
+                    case 'popup_login':
+                        this.changeSocialBtnPosition();
                             break;
-                        case 'quick_login':
-                            this.initQuickLogin();
-                            this.hideQuickLogin();
+                    case 'quick_login':
+                        this.initQuickLogin();
+                        this.hideQuickLogin();
                             break;
-                        case 'popup_slide':
-                            this.initPopupSlide()
+                    case 'popup_slide':
+                        this.initPopupSlide()
                             break;
-                        default:
+                    default:
                             break;
                     }
                 },
@@ -70,17 +70,17 @@ define(
 
                     if (btnPosition !== '' && social.length > 0 && loginForm.length > 0) {
                         switch (btnPosition){
-                            case 'left':
-                                social.after(loginForm);
+                        case 'left':
+                            social.after(loginForm);
                                 break;
-                            case 'top':
-                                social.after(loginForm);
-                                this.changeResponsive(social, loginForm, socialBtn);
+                        case 'top':
+                            social.after(loginForm);
+                            this.changeResponsive(social, loginForm, socialBtn);
                                 break;
-                            case 'bottom':
-                                this.changeResponsive(social, loginForm, socialBtn);
+                        case 'bottom':
+                            this.changeResponsive(social, loginForm, socialBtn);
                                 break;
-                            default:
+                        default:
                                 break;
                         }
                     }
@@ -88,6 +88,7 @@ define(
 
                 /**
                  * Change Responsive
+                 *
                  * @param social
                  * @param loginForm
                  */
@@ -96,11 +97,13 @@ define(
                     social.removeClass('mp-6');
                     loginForm.addClass('mp-12');
                     loginForm.removeClass('mp-7');
-                    socialBtn.each(function () {
-                        $(this).addClass('col-mp');
-                        $(this).addClass('mp-6');
-                        ;
-                    });
+                    socialBtn.each(
+                        function () {
+                            $(this).addClass('col-mp');
+                            $(this).addClass('mp-6');
+                            ;
+                        }
+                    );
                 },
 
                 /**
@@ -116,7 +119,9 @@ define(
                         'trigger': '.osc-authentication-toggle',
                         'buttons': [],
                     };
-                    modal(options, $(this.modalWindow));
+                    if (window.checkoutConfig.oscConfig.isDisplaySocialLogin) {
+                        modal(options, $(this.modalWindow));
+                    }
                 },
 
                 /**
@@ -132,14 +137,17 @@ define(
                             'modalClass': 'social-popup-slide',
                             'buttons': [],
                             'parentModalClass': '_has-modal quick-login-wrapper-has-modal'
-                        };
-
-                    modal(options, wrapper);
-                    wrapper.modal({
-                        opened: function () {
-                            $('.social-popup-slide').css('z-index', 102);
-                        }
-                    });
+                    };
+                    if (window.checkoutConfig.oscConfig.isDisplaySocialLogin) {
+                        modal(options, wrapper);
+                        wrapper.modal(
+                            {
+                                opened: function () {
+                                    $('.social-popup-slide').css('z-index', 102);
+                                }
+                            }
+                        );
+                    }
                 },
 
                 /**
@@ -416,26 +424,26 @@ define(
                                     parameters = {
                                         'sitekey': self.options.captchaClientKey,
                                         'size': isInvisible ? 'invisible' : 'normal'
-                                    };
+                                };
 
                                 switch (value){
-                                    case 'user_login':
-                                        target = isInvisible ? 'bnt-social-login-authentication' : 'mageplaza-g-recaptcha-user_login';
-                                        if (isInvisible) {
-                                            parameters.callback = self.processLogin.bind(self);
-                                        }
+                                case 'user_login':
+                                    target = isInvisible ? 'bnt-social-login-authentication' : 'mageplaza-g-recaptcha-user_login';
+                                    if (isInvisible) {
+                                        parameters.callback = self.processLogin.bind(self);
+                                    }
                                         break;
-                                    case 'user_create':
-                                        target = isInvisible ? 'button-create-social' : 'mageplaza-g-recaptcha-user_create';
-                                        if (isInvisible) {
-                                            parameters.callback = self.processCreate.bind(self);
-                                        }
+                                case 'user_create':
+                                    target = isInvisible ? 'button-create-social' : 'mageplaza-g-recaptcha-user_create';
+                                    if (isInvisible) {
+                                        parameters.callback = self.processCreate.bind(self);
+                                    }
                                         break;
-                                    case 'user_forgotpassword':
-                                        target = isInvisible ? 'bnt-social-login-forgot' : 'mageplaza-g-recaptcha-user_forgotpassword';
-                                        if (isInvisible) {
-                                            parameters.callback = self.processForgot.bind(self);
-                                        }
+                                case 'user_forgotpassword':
+                                    target = isInvisible ? 'bnt-social-login-forgot' : 'mageplaza-g-recaptcha-user_forgotpassword';
+                                    if (isInvisible) {
+                                        parameters.callback = self.processForgot.bind(self);
+                                    }
                                         break;
                                 }
                                 grecaptcha.render(target, parameters);

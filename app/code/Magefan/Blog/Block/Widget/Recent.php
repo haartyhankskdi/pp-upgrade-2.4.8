@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Widget;
 
@@ -20,7 +21,7 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
     /**
      * @var array
      */
-    static $processedIds = [];
+    private static $processedIds = [];
 
     /**
      * @var \Magefan\Blog\Model\CategoryFactory
@@ -63,10 +64,6 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
      */
     public function _toHtml()
     {
-        $this->setTemplate(
-            $this->getData('custom_template') ?: 'Magefan_Blog::widget/recent.phtml'
-        );
-
         foreach ($this->getPostCollection() as $item) {
             self::$processedIds[$item->getId()] = $item->getId();
         }
@@ -175,6 +172,8 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
     }
 
     /**
+     * Retrieve collection order field
+     *
      * @return string
      */
     public function getCollectionOrderField(): string
@@ -206,5 +205,29 @@ class Recent extends AbstractList implements \Magento\Widget\Block\BlockInterfac
         }
 
         return parent::getCollectionOrderDirection();
+    }
+
+    /**
+     * Retrieve template
+     *
+     * @return string
+     */
+    public function getTemplate()
+    {
+        if ($this->_template) {
+            return parent::getTemplate();
+        }
+
+        $defaultTemplate = 'Magefan_Blog::widget/recent.phtml';
+        $templateType = $this->getData('template_type');
+        if (!$templateType || 'custom_template' === $templateType) {
+            $this->_template = $this->getData('custom_template') ?: $defaultTemplate;
+        } elseif ($template = $this->templatePool->getTemplate('blog_post_list', $templateType)) {
+            $this->_template = $template;
+        } else {
+            $this->_template = $defaultTemplate;
+        }
+
+        return parent::getTemplate();
     }
 }

@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\Checkout;
@@ -30,10 +30,6 @@ use Magento\Quote\Api\Data\ShippingAssignmentInterface;
 use Magento\Quote\Api\Data\TotalsInterface;
 use Magento\Quote\Model\Quote;
 
-/**
- * Class TotalsInformationManagement
- * @package Mageplaza\Osc\Model\Plugin\Checkout
- */
 class TotalsInformationManagement
 {
     /**
@@ -47,7 +43,7 @@ class TotalsInformationManagement
     protected $cartTotalRepository;
 
     /**
-     * @param CartRepositoryInterface $quoteRepository
+     * @param CartRepositoryInterface      $quoteRepository
      * @param CartTotalRepositoryInterface $cartTotalRepository
      */
     public function __construct(
@@ -60,9 +56,9 @@ class TotalsInformationManagement
 
     /**
      * @param \Magento\Checkout\Model\TotalsInformationManagement $subject
-     * @param Closure $proceed
+     * @param Closure                                             $proceed
      * @param $cartId
-     * @param TotalsInformationInterface $addressInformation
+     * @param TotalsInformationInterface                          $addressInformation
      *
      * @return TotalsInterface
      * @throws NoSuchEntityException
@@ -80,7 +76,9 @@ class TotalsInformationManagement
 
         $extensionAttributes = $quote->getExtensionAttributes();
         if ($extensionAttributes && !$quote->isVirtual() && $extensionAttributes->getShippingAssignments()) {
-            /** @var ShippingAssignmentInterface[] $shippingAssignments */
+            /**
+ * @var ShippingAssignmentInterface[] $shippingAssignments
+*/
             $shippingAssignments = $extensionAttributes->getShippingAssignments();
 
             if (count($shippingAssignments)) {

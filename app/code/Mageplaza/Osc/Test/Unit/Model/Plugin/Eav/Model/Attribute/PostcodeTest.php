@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Eav\Model\Attribute;
@@ -30,10 +30,6 @@ use PHPUnit\Framework\MockObject\Matcher\InvokedCount as InvokedCountMatcher;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class PostcodeTest
- * @package Mageplaza\Osc\Test\Unit\Model\Plugin\Eav\Model\Attribute
- */
 class PostcodeTest extends TestCase
 {
     /**
@@ -51,7 +47,7 @@ class PostcodeTest extends TestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->helperMock = $this->getMockBuilder(Address::class)
             ->disableOriginalConstructor()
@@ -111,8 +107,8 @@ class PostcodeTest extends TestCase
     }
 
     /**
-     * @param boolean $result
-     * @param array $fieldPosition
+     * @param boolean             $result
+     * @param array               $fieldPosition
      * @param InvokedCountMatcher $attributeCodeExpects
      *
      * @dataProvider providerTestAfterValidateValue

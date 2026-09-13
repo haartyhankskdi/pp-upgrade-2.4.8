@@ -1,0 +1,55 @@
+{
+    "autify_lloydscardnetpayment_payments": {
+        "column": {
+            "payments_id": true,
+            "amount": true,
+            "status": true,
+            "order_id": true,
+            "order_increment_id": true,
+            "remote_reference": true,
+            "remote_message": true,
+            "remote_status_or_code": true,
+            "cardnet_order_id": true,
+            "cardnet_refund_id": true,
+            "transaction_update_webhook": true,
+            "transaction_update_response": true,
+            "redirect_email_sent": true,
+            "save_card": true,
+            "brand": true,
+            "last4": true,
+            "approval_code": true,
+            "ipgTransactionId": true,
+            "response_3ds_code_message": true,
+            "street_match": true,
+            "postcode_match": true,
+            "cvv_match": true,
+            "payment_method": true,
+            "iframe_received": true,
+            "threeds_received": true,
+            "order_processed": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "autify_lloydscardnetpayment_paymenttoken": {
+        "column": {
+            "paymenttoken_id": true,
+            "customer_id": true,
+            "payment_token": true,
+            "scheme_transaction_id": true,
+            "masked": true,
+            "brand": true,
+            "last4": true,
+            "exp_month": true,
+            "exp_year": true,
+            "is_fiserv": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

@@ -41,7 +41,7 @@ class ViewAction extends \Magento\Sales\Ui\Component\Listing\Column\ViewAction
             foreach ($dataSource['data']['items'] as & $item) {
                 $item[$this->getData('name')] = [
                     'edit' => [
-                        'href'  => $this->urlBuilder->getUrl('mppromobanner/banner/edit', [
+                        'href' => $this->urlBuilder->getUrl('mppromobanner/banner/edit', [
                             'banner_id' => $item['banner_id']
                         ]),
                         'label' => __('Edit')

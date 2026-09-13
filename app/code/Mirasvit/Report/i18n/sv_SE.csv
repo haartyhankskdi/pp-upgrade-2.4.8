@@ -1,0 +1,226 @@
+"Something went wrong while building the report","Något gick fel när rapporten byggdes"
+"Not logged in","Inte inloggad"
+"Email Notifications","E-postaviseringar"
+"The email report has been deleted.","E-postrapporten har tagits bort."
+"This email report no longer exists.","Den här e-postrapporten finns inte längre."
+"This email no longer exists.","Det här e-postmeddelandet finns inte längre."
+"Edit Email ""%1""","Redigera e-post ""%1"""
+"New Email Report","Ny e-postrapport"
+"You saved the email report.","Du har sparat e-postrapporten."
+"No data to save.","Inga data att spara."
+"This report no longer exists.","Den här rapporten finns inte längre."
+"Report columns saved.","Rapportkolumner sparade."
+"Unsupported format ""%1""","Formatet ""%1"" stöds inte"
+"This report does not exist or is not available for sharing.","Den här rapporten finns inte eller är inte tillgänglig för delning"
+"Report identifier is required","Rapportidentifierare krävs"
+"Report: %1","Rapport: %1"
+"Block identifier ""%1"" does not match any available report or dashboard block. Use GET /V1/reports/reports to discover valid identifiers.","Blockidentifieraren ""%1"" matchar inte någon tillgänglig rapport eller instrumentpanelsblock. Använd GET /V1/reports/reports för att hitta giltiga identifierare."
+"Time range ""%1"" is not valid. Valid values: %2","Tidsintervallet ""%1"" är inte giltigt. Giltiga värden: %2"
+"Email with ID ""%1"" does not exist.","E-post med ID ""%1"" finns inte."
+Back,Tillbaka
+Delete,Ta bort
+"Are you sure you want to do this?","Är du säker på att du vill göra detta?"
+Save,Spara
+"Save & Continue","Spara och fortsätt"
+"Save & Send","Spara och skicka"
+Edit,Redigera
+"Delete email?","Ta bort e-post?"
+(previous),(föregående)
+"%1 out of %2 selected","%1 av %2 valda"
+"Access URL","Åtkomst-URL"
+Actions,Åtgärder
+"Active filters:","Aktiva filter:"
+"Add Empty Widget","Lägg till tom widget"
+"Add filter","Lägg till filter"
+"Add Filter","Lägg till filter"
+"Add New Board","Lägg till ny tavla"
+"Add New Widget","Lägg till ny widget"
+"Add Widget","Lägg till widget"
+"Additional Filters","Ytterligare filter"
+"Advanced mode","Avancerat läge"
+Aggregator,Aggregator
+"and more %1 other columns","och ytterligare %1 andra kolumner"
+applicable,tillämpliga
+Apply,Tillämpa
+"Apply date filter","Tillämpa datumfilter"
+"Apply Filters","Tillämpa filter"
+"Are you sure you want to reset the access token?","Är du säker på att du vill återställa åtkomsttoken?"
+Average,Genomsnitt
+"Base Table","Bastabell"
+"Block Type","Blocktyp"
+Cancel,Avbryt
+"Cancel date filter","Avbryt datumfilter"
+Chart,Diagram
+"Chart type selector","Diagramtypväljare"
+"Clear all","Rensa allt"
+Close,Stäng
+"Close menu","Stäng meny"
+Column,Kolumn
+"Column for grouping data in the table","Kolumn för att gruppera data i tabellen"
+"Column for grouping the data in the table","Kolumn för att gruppera data i tabellen"
+"Column selector mode switcher. Current mode: %1","Lägesväxlare för kolumnväljare. Aktuellt läge: %1"
+Columns,Kolumner
+"Columns to group the rows in the table","Kolumner för att gruppera raderna i tabellen"
+Comparison,Jämförelse
+contains,innehåller
+Content,Innehåll
+Copied,Kopierat
+"Copy importdata code for Google Sheets","Kopiera importdata-kod för Google Kalkylark"
+"Copy to clipboard","Kopiera till urklipp"
+Count,Antal
+Country,Land
+"Current mode: %1","Aktuellt läge: %1"
+"Current Page","Aktuell sida"
+Custom,Anpassad
+Customize,Anpassa
+Date,Datum
+"Date filter","Datumfilter"
+Day,Dag
+"Delete report","Ta bort rapport"
+Description,Beskrivning
+Dimension,Dimension
+"Dimension column table","Tabell för dimensionskolumn"
+Dimensions,Dimensioner
+Disable,Inaktivera
+"Disable sharing report","Inaktivera rapportdelning"
+"Do not compare","Jämför inte"
+"doesn't contain","innehåller inte"
+Download,Ladda ner
+Duplicate,Duplicera
+"Duplicate report","Duplicera rapport"
+Early,Tidig
+"Edit Board","Redigera tavla"
+"Edit columns","Redigera kolumner"
+"Edit report","Redigera rapport"
+"Empty report data table","Tom datatabell för rapport"
+Enable,Aktivera
+"Enable Remote Access","Aktivera fjärråtkomst"
+"Enable Remote Access on Storefront","Aktivera fjärråtkomst i butiken"
+"Enable sharing report","Aktivera rapportdelning"
+"Enter page number","Ange sidnummer"
+"Excel XML","Excel XML"
+Export,Exportera
+"Filter value","Filtervärde"
+Filters,Filter
+"Found: %1 columns","Hittade: %1 kolumner"
+from,från
+"From date","Från datum"
+"General Information","Allmän information"
+"Go to next page","Gå till nästa sida"
+"Go to previous page","Gå till föregående sida"
+"Group by","Gruppera efter"
+"Hide percentage of total","Dölj procent av totalen"
+"Image for %1","Bild för %1"
+"Import data code","Kod för dataimport"
+"Insert the below code into your Google Sheet and it will automatically import the most recent data from the report every hour:","Infoga koden nedan i ditt Google-kalkylark så importeras de senaste uppgifterna från rapporten automatiskt varje timme:"
+"Insert To Google Sheet","Infoga i Google Kalkylark"
+"Insert widget's HTML content here","Infoga widgetens HTML-innehåll här"
+"Internal Filters","Interna filter"
+"Is Default","Är standard"
+"is not","är inte"
+"is not one of","är inte en av"
+"is one of","är en av"
+Loading...,Laddar...
+"Lower number means higher position. Boards with the same sort order will be ordered according to the dashboard general sorting settings.","Lägre nummer innebär högre position. Tavlor med samma sorteringsordning sorteras enligt instrumentpanelens allmänna sorteringsinställningar."
+"Make a copy","Gör en kopia"
+"Make sure that the selected columns are","Se till att de valda kolumnerna är"
+Manage,Hantera
+"Manage columns","Hantera kolumner"
+"Manage filters","Hantera filter"
+Metric,Mått
+Month,Månad
+"More filters","Fler filter"
+"More Filters","Fler filter"
+"No next pages, action disabled","Inga fler sidor, åtgärd inaktiverad"
+"No previous pages, action disabled","Inga föregående sidor, åtgärd inaktiverad"
+"not allowed","inte tillåtet"
+Number,Tal
+of,av
+"Once you have configured the report, you can use a direct link to open the report on any device without opening the admin and always with fresh live data.","När du har konfigurerat rapporten kan du använda en direktlänk för att öppna den på valfri enhet utan att logga in i administrationen och alltid med färska livedata."
+"Open link","Öppna länk"
+"Open menu","Öppna meny"
+"Override dashboard time","Åsidosätt instrumentpanelens tid"
+"Page Size","Sidstorlek"
+Percent,Procent
+"Please select","Välj"
+"Previous period","Föregående period"
+"Primary Filters","Primära filter"
+"Private Board","Privat tavla"
+"Private Board will be available only for the current admin user. Shared Board will be available for all admin users.","Privat tavla är endast tillgänglig för den aktuella administratören. Delad tavla är tillgänglig för alla administratörer."
+Quarter,Kvartal
+"Quick Access & Sharing","Snabbåtkomst och delning"
+"A quick access link to the report is a great alternative to routine daily exporting.","En snabbåtkomstlänk till rapporten är ett bra alternativ till rutinmässig daglig export."
+Range,Intervall
+"records found","poster hittade"
+Refresh,Uppdatera
+Remove,Ta bort
+"Remove filter","Ta bort filter"
+"Remove from chart","Ta bort från diagram"
+"Removing board...","Tar bort tavla..."
+"Report data table with %1 rows","Rapportdatatabell med %1 rader"
+Reset,Återställ
+"Reset access token","Återställ åtkomsttoken"
+"Reset Changes","Återställ ändringar"
+"Resetting the access token will deactivate the old access link. Anyone who previously had access to the board will lose it and will need the new link to access it.","Om åtkomsttoken återställs inaktiveras den gamla åtkomstlänken. Alla som tidigare hade åtkomst till tavlan förlorar den och behöver den nya länken för att komma åt den."
+"Rows Limit","Radgräns"
+"Same period last month","Samma period förra månaden"
+"Same period last week","Samma period förra veckan"
+"Same period last year","Samma period förra året"
+"Save Changes","Spara ändringar"
+"Saving report...","Sparar rapport..."
+Saving...,Sparar...
+"Search column across ALL tables by identifier.","Sök kolumn i ALLA tabeller efter identifierare."
+"Search for column","Sök efter kolumn"
+"Select condition","Välj villkor"
+"Select date range","Välj datumintervall"
+"Select Date Range","Välj datumintervall"
+Share,Dela
+"Share Dashboard","Dela instrumentpanel"
+"Share in %1 format","Dela i formatet %1"
+"Shared Board","Delad tavla"
+"Sharing link","Delningslänk"
+"Show in chart","Visa i diagram"
+"Show percentage of total","Visa procent av totalen"
+"Single Value","Enskilt värde"
+"Sort by %1","Sortera efter %1"
+"Sort Order","Sorteringsordning"
+Sorting,Sortering
+"Spark line","Sparkline"
+String,Sträng
+Sum,Summa
+"Switch to %1 chart","Växla till %1-diagram"
+Table,Tabell
+"Time Range","Tidsintervall"
+Title,Titel
+to,till
+"To date","Till datum"
+"to the current report.","till den aktuella rapporten."
+Toolbar,Verktygsfält
+Type,Typ
+"Type to search","Skriv för att söka"
+"Untitled Block","Namnlöst block"
+"Untitled Board","Namnlös tavla"
+Value,Värde
+"We couldn't find any records.","Vi hittade inga poster."
+Week,Vecka
+"Widget Library","Widgetbibliotek"
+"Wrong configuration. Please change report building conditions.","Fel konfiguration. Ändra villkoren för rapportbyggnad."
+Year,År
+"To add your first block, unlock the board (top right corner).","Du måste låsa upp tavlan (övre högra hörnet) för att lägga till det första blocket."
+"Loading report data","Laddar rapportdata"
+"Report data table for %1","Rapportdatatabell för %1"
+Block,Block
+"Date Interval","Datumintervall"
+Limit,Gräns
+"Add Block","Lägg till block"
+Active,Aktiv
+"Attach each block as a separate CSV report","Bifoga varje block som en separat CSV-rapport"
+Subject,Ämne
+Recipient,Mottagare
+Schedule,Schema
+"Should be cron-like expression. <br/>Example: 59 23 * * * <br/>Will be sent report every day at 23:59","Ska vara ett cron-liknande uttryck. <br/>Exempel: 59 23 * * * <br/>Rapporten skickas varje dag kl. 23:59"
+Body,Brödtext
+"Add New Email","Lägg till ny e-post"
+ID,ID
+Status,Status
+"Last Sent At","Senast skickad"

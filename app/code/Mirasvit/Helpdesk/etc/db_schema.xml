@@ -1,0 +1,687 @@
+<?xml version="1.0"?>
+<schema
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="mst_helpdesk_attachment" resource="default" engine="innodb" comment="mst_helpdesk_attachment">
+        <column xsi:type="int" name="attachment_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Attachment Id"/>
+        <column xsi:type="int" name="email_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Email Id"/>
+        <column xsi:type="int" name="message_id" padding="11" unsigned="false" nullable="false" identity="false" onCreate="migrateDataFrom(message_id)"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="255" comment="Type"/>
+        <column xsi:type="int" name="size" padding="11" unsigned="false" nullable="true" identity="false" comment="Size"/>
+        <column xsi:type="longblob" name="body" nullable="true" comment="Body"/>
+        <column xsi:type="varchar" name="external_id" nullable="false" length="255" comment="External Id"/>
+        <column xsi:type="varchar" name="storage" nullable="true" length="255" comment="Storage"/>
+        <column xsi:type="smallint" name="is_allowed" padding="6" unsigned="false" nullable="false" identity="false" default="1" comment="Is attachment allowed by settings"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="attachment_id"/>
+        </constraint>
+        <index referenceId="MST_HELPDESK_ATTACHMENT_MESSAGE_ID" indexType="btree">
+            <column name="message_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_department" resource="default" engine="innodb" comment="mst_helpdesk_department">
+        <column xsi:type="int" name="department_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Department Id"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="varchar" name="sender_email" nullable="false" length="255" comment="Sender Email"/>
+        <column xsi:type="int" name="is_active" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Active"/>
+        <column xsi:type="text" name="signature" nullable="true" comment="Signature"/>
+        <column xsi:type="int" name="sort_order" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Sort Order"/>
+        <column xsi:type="int" name="is_notification_enabled" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Notification Enabled"/>
+        <column xsi:type="varchar" name="notification_email" nullable="false" length="255" comment="Notification Email"/>
+        <column xsi:type="int" name="is_members_notification_enabled" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Members Notification Enabled"/>
+        <column xsi:type="int" name="is_show_in_frontend" padding="11" unsigned="false" nullable="false" identity="false" default="1" comment="Is Shown at the Frontend"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="department_id"/>
+        </constraint>
+    </table>
+    <table name="mst_helpdesk_department_store" resource="default" engine="innodb" comment="mst_helpdesk_department_store">
+        <column xsi:type="int" name="department_store_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Department Store Id"/>
+        <column xsi:type="int" name="ds_department_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Ds Department Id"/>
+        <column xsi:type="smallint" name="ds_store_id" padding="5" unsigned="true" nullable="false" identity="false" comment="Ds Store Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="department_store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_719407C2245519D8E93B8F70D3CE172A" table="mst_helpdesk_department_store" column="ds_department_id" referenceTable="mst_helpdesk_department" referenceColumn="department_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_DEPARTMENT_STORE_DS_STORE_ID_STORE_STORE_ID" table="mst_helpdesk_department_store" column="ds_store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_DEPARTMENT_STORE_DS_DEPARTMENT_ID" indexType="btree">
+            <column name="ds_department_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_DEPARTMENT_STORE_DS_STORE_ID" indexType="btree">
+            <column name="ds_store_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_department_user" resource="default" engine="innodb" comment="mst_helpdesk_department_user">
+        <column xsi:type="int" name="department_user_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Department User Id"/>
+        <column xsi:type="int" name="du_department_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Du Department Id"/>
+        <column xsi:type="int" name="du_user_id" padding="10" unsigned="true" nullable="true" identity="false" comment="Du User Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="department_user_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_DEPARTMENT_USER_DU_USER_ID_ADMIN_USER_USER_ID" table="mst_helpdesk_department_user" column="du_user_id" referenceTable="admin_user" referenceColumn="user_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_3006847FAEA0275AFAEDC40845187E45" table="mst_helpdesk_department_user" column="du_department_id" referenceTable="mst_helpdesk_department" referenceColumn="department_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_DEPARTMENT_USER_DU_DEPARTMENT_ID" indexType="btree">
+            <column name="du_department_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_DEPARTMENT_USER_DU_USER_ID" indexType="btree">
+            <column name="du_user_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_status" resource="default" engine="innodb" comment="mst_helpdesk_status">
+        <column xsi:type="int" name="status_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Status Id"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="500" comment="Name"/>
+        <column xsi:type="varchar" name="code" nullable="false" length="255" comment="Code"/>
+        <column xsi:type="int" name="sort_order" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Sort Order"/>
+        <column xsi:type="varchar" name="color" nullable="false" length="255" comment="Color"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="status_id"/>
+        </constraint>
+    </table>
+    <table name="mst_helpdesk_status_store" resource="default" engine="innodb" comment="mst_helpdesk_status_store">
+        <column xsi:type="int" name="status_store_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Status Store Id"/>
+        <column xsi:type="int" name="ss_status_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Ss Status Id"/>
+        <column xsi:type="smallint" name="ss_store_id" padding="5" unsigned="true" nullable="false" identity="false" comment="Ss Store Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="status_store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_STS_STORE_SS_STS_ID_MST_HELPDESK_STS_STS_ID" table="mst_helpdesk_status_store" column="ss_status_id" referenceTable="mst_helpdesk_status" referenceColumn="status_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_STATUS_STORE_SS_STORE_ID_STORE_STORE_ID" table="mst_helpdesk_status_store" column="ss_store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_STATUS_STORE_SS_STATUS_ID" indexType="btree">
+            <column name="ss_status_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_STATUS_STORE_SS_STORE_ID" indexType="btree">
+            <column name="ss_store_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_tag" resource="default" engine="innodb" comment="mst_helpdesk_tag">
+        <column xsi:type="int" name="tag_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Tag Id"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="tag_id"/>
+        </constraint>
+    </table>
+    <table name="mst_helpdesk_template" resource="default" engine="innodb" comment="mst_helpdesk_template">
+        <column xsi:type="int" name="template_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Template Id"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="text" name="template" nullable="true" comment="Template"/>
+        <column xsi:type="int" name="is_active" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Active"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="template_id"/>
+        </constraint>
+    </table>
+    <table name="mst_helpdesk_template_store" resource="default" engine="innodb" comment="mst_helpdesk_template_store">
+        <column xsi:type="int" name="template_store_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Template Store Id"/>
+        <column xsi:type="int" name="ts_template_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Ts Template Id"/>
+        <column xsi:type="smallint" name="ts_store_id" padding="5" unsigned="true" nullable="false" identity="false" comment="Ts Store Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="template_store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_5784181CAA718E8328162B4EBA43D5B1" table="mst_helpdesk_template_store" column="ts_template_id" referenceTable="mst_helpdesk_template" referenceColumn="template_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_TEMPLATE_STORE_TS_STORE_ID_STORE_STORE_ID" table="mst_helpdesk_template_store" column="ts_store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_TEMPLATE_STORE_TS_TEMPLATE_ID" indexType="btree">
+            <column name="ts_template_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_TEMPLATE_STORE_TS_STORE_ID" indexType="btree">
+            <column name="ts_store_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_priority" resource="default" engine="innodb" comment="mst_helpdesk_priority">
+        <column xsi:type="int" name="priority_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Priority Id"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="500" comment="Name"/>
+        <column xsi:type="int" name="sort_order" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Sort Order"/>
+        <column xsi:type="varchar" name="color" nullable="false" length="255" comment="Color"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="priority_id"/>
+        </constraint>
+    </table>
+    <table name="mst_helpdesk_priority_store" resource="default" engine="innodb" comment="mst_helpdesk_priority_store">
+        <column xsi:type="int" name="priority_store_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Priority Store Id"/>
+        <column xsi:type="int" name="ps_priority_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Ps Priority Id"/>
+        <column xsi:type="smallint" name="ps_store_id" padding="5" unsigned="true" nullable="false" identity="false" comment="Ps Store Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="priority_store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_PRIORITY_STORE_PS_STORE_ID_STORE_STORE_ID" table="mst_helpdesk_priority_store" column="ps_store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_6A2138BAFE44FECF092E7B00C4C362F1" table="mst_helpdesk_priority_store" column="ps_priority_id" referenceTable="mst_helpdesk_priority" referenceColumn="priority_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_PRIORITY_STORE_PS_PRIORITY_ID" indexType="btree">
+            <column name="ps_priority_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_PRIORITY_STORE_PS_STORE_ID" indexType="btree">
+            <column name="ps_store_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_rule" resource="default" engine="innodb" comment="mst_helpdesk_rule">
+        <column xsi:type="int" name="rule_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Rule Id"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="varchar" name="event" nullable="false" length="255" comment="Event"/>
+        <column xsi:type="varchar" name="email_subject" nullable="false" length="255" comment="Email Subject"/>
+        <column xsi:type="text" name="email_body" nullable="true" comment="Email Body"/>
+        <column xsi:type="int" name="is_active" padding="11" unsigned="false" nullable="true" identity="false" comment="Is Active"/>
+        <column xsi:type="text" name="conditions_serialized" nullable="true" comment="Conditions Serialized"/>
+        <column xsi:type="int" name="is_send_owner" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Send Owner"/>
+        <column xsi:type="int" name="is_send_department" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Send Department"/>
+        <column xsi:type="int" name="is_send_user" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Send User"/>
+        <column xsi:type="varchar" name="other_email" nullable="false" length="255" comment="Other Email"/>
+        <column xsi:type="int" name="sort_order" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Sort Order"/>
+        <column xsi:type="int" name="is_stop_processing" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Stop Processing"/>
+        <column xsi:type="int" name="priority_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Priority Id"/>
+        <column xsi:type="int" name="status_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Status Id"/>
+        <column xsi:type="int" name="department_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Department Id"/>
+        <column xsi:type="varchar" name="add_tags" nullable="false" length="255" comment="Add Tags"/>
+        <column xsi:type="varchar" name="remove_tags" nullable="false" length="255" comment="Remove Tags"/>
+        <column xsi:type="int" name="user_id" padding="10" unsigned="true" nullable="true" identity="false" comment="User Id"/>
+        <column xsi:type="int" name="is_send_attachment" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Send Attachment"/>
+        <column xsi:type="tinyint" name="is_archive" padding="3" unsigned="false" nullable="true" identity="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="rule_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_RULE_PRIORITY_ID_MST_HELPDESK_PRIORITY_PRIORITY_ID" table="mst_helpdesk_rule" column="priority_id" referenceTable="mst_helpdesk_priority" referenceColumn="priority_id" onDelete="SET NULL"/>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_RULE_USER_ID_ADMIN_USER_USER_ID" table="mst_helpdesk_rule" column="user_id" referenceTable="admin_user" referenceColumn="user_id" onDelete="SET NULL"/>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_RULE_STATUS_ID_MST_HELPDESK_STATUS_STATUS_ID" table="mst_helpdesk_rule" column="status_id" referenceTable="mst_helpdesk_status" referenceColumn="status_id" onDelete="SET NULL"/>
+        <constraint xsi:type="foreign" referenceId="FK_805EE186A96FFF9464BCA84758F7F036" table="mst_helpdesk_rule" column="department_id" referenceTable="mst_helpdesk_department" referenceColumn="department_id" onDelete="SET NULL"/>
+        <index referenceId="MST_HELPDESK_RULE_PRIORITY_ID" indexType="btree">
+            <column name="priority_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_RULE_STATUS_ID" indexType="btree">
+            <column name="status_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_RULE_DEPARTMENT_ID" indexType="btree">
+            <column name="department_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_RULE_USER_ID" indexType="btree">
+            <column name="user_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_ticket" resource="default" engine="innodb" comment="mst_helpdesk_ticket">
+        <column xsi:type="int" name="ticket_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Ticket Id"/>
+        <column xsi:type="varchar" name="code" nullable="false" length="255" comment="Code"/>
+        <column xsi:type="varchar" name="external_id" nullable="false" length="255" comment="External Id"/>
+        <column xsi:type="int" name="user_id" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="User Id"/>
+        <column xsi:type="varchar" name="subject" nullable="false" length="255" comment="Subject"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+        <column xsi:type="int" name="priority_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Priority Id"/>
+        <column xsi:type="int" name="status_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Status Id"/>
+        <column xsi:type="int" name="department_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Department Id"/>
+        <column xsi:type="int" name="customer_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Customer Id"/>
+        <column xsi:type="int" name="quote_address_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Quote Address Id"/>
+        <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Customer Email"/>
+        <column xsi:type="varchar" name="customer_name" nullable="false" length="255" comment="Customer Name"/>
+        <column xsi:type="int" name="order_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Order Id"/>
+        <column xsi:type="varchar" name="last_reply_name" nullable="false" length="255" comment="Last Reply Name"/>
+        <column xsi:type="timestamp" name="last_reply_at" on_update="false" nullable="true" onCreate="migrateDataFrom(last_reply_at)"/>
+        <column xsi:type="int" name="reply_cnt" padding="11" unsigned="false" nullable="true" identity="false" comment="Reply Cnt"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="true" identity="false" comment="Store Id"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="true" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <column xsi:type="int" name="folder" padding="11" unsigned="false" nullable="false" identity="false" default="1" comment="Folder"/>
+        <column xsi:type="int" name="email_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Email Id"/>
+        <column xsi:type="timestamp" name="first_reply_at" on_update="false" nullable="true" comment="First Reply At"/>
+        <column xsi:type="timestamp" name="first_solved_at" on_update="false" nullable="true" comment="First Solved At"/>
+        <column xsi:type="varchar" name="fp_period_unit" nullable="false" length="255" comment="Fp Period Unit"/>
+        <column xsi:type="int" name="fp_period_value" padding="11" unsigned="false" nullable="true" identity="false" comment="Fp Period Value"/>
+        <column xsi:type="timestamp" name="fp_execute_at" on_update="false" nullable="true" comment="Fp Execute At"/>
+        <column xsi:type="int" name="fp_is_remind" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Fp Is Remind"/>
+        <column xsi:type="varchar" name="fp_remind_email" nullable="false" length="255" comment="Fp Remind Email"/>
+        <column xsi:type="int" name="fp_priority_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Fp Priority Id"/>
+        <column xsi:type="int" name="fp_status_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Fp Status Id"/>
+        <column xsi:type="int" name="fp_department_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Fp Department Id"/>
+        <column xsi:type="int" name="fp_user_id" padding="10" unsigned="true" nullable="true" identity="false" comment="Fp User Id"/>
+        <column xsi:type="varchar" name="channel" nullable="false" length="255" comment="Channel"/>
+        <column xsi:type="text" name="channel_data" nullable="true" comment="Channel Data"/>
+        <column xsi:type="varchar" name="third_party_email" nullable="false" length="255" comment="Third Party Email"/>
+        <column xsi:type="text" name="search_index" nullable="true" comment="Search Index"/>
+        <column xsi:type="text" name="cc" nullable="true" comment="Cc"/>
+        <column xsi:type="text" name="bcc" nullable="true" comment="Bcc"/>
+        <column xsi:type="int" name="merged_ticket_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Merged Ticket Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="ticket_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_F4BD3A0C170982C38FBD6AA0874B152A" table="mst_helpdesk_ticket" column="department_id" referenceTable="mst_helpdesk_department" referenceColumn="department_id" onDelete="SET NULL"/>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_TICKET_STORE_ID_STORE_STORE_ID" table="mst_helpdesk_ticket" column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="SET NULL"/>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_TICKET_STATUS_ID_MST_HELPDESK_STATUS_STATUS_ID" table="mst_helpdesk_ticket" column="status_id" referenceTable="mst_helpdesk_status" referenceColumn="status_id" onDelete="SET NULL"/>
+        <constraint xsi:type="foreign" referenceId="FK_C676D75E774A876088E47ACDF575479C" table="mst_helpdesk_ticket" column="priority_id" referenceTable="mst_helpdesk_priority" referenceColumn="priority_id" onDelete="SET NULL"/>
+        <index referenceId="MST_HELPDESK_TICKET_PRIORITY_ID" indexType="btree">
+            <column name="priority_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_TICKET_STATUS_ID" indexType="btree">
+            <column name="status_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_TICKET_DEPARTMENT_ID" indexType="btree">
+            <column name="department_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_TICKET_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_TICKET_FOLDER_USER_ID" indexType="btree">
+            <column name="folder"/>
+            <column name="user_id"/>
+        </index>
+        <index referenceId="FTI_7F5498151A54057A00281E57D721A604" indexType="fulltext">
+            <column name="code"/>
+            <column name="subject"/>
+            <column name="customer_email"/>
+            <column name="customer_name"/>
+            <column name="search_index"/>
+            <column name="cc"/>
+            <column name="bcc"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_draft" resource="default" engine="innodb" comment="mst_helpdesk_draft">
+        <column xsi:type="int" name="draft_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Draft Id"/>
+        <column xsi:type="int" name="ticket_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Ticket Id"/>
+        <column xsi:type="varchar" name="users_online" nullable="false" length="255" comment="Users Online"/>
+        <column xsi:type="text" name="body" nullable="true" comment="Body"/>
+        <column xsi:type="int" name="updated_by" padding="11" unsigned="false" nullable="true" identity="false" comment="Updated By"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="true" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="draft_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_DRAFT_TICKET_ID_MST_HELPDESK_TICKET_TICKET_ID" table="mst_helpdesk_draft" column="ticket_id" referenceTable="mst_helpdesk_ticket" referenceColumn="ticket_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_DRAFT_TICKET_ID" indexType="btree">
+            <column name="ticket_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_email" resource="default" engine="innodb" comment="mst_helpdesk_email">
+        <column xsi:type="int" name="email_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Email Id"/>
+        <column xsi:type="varchar" name="from_email" nullable="false" length="255" comment="From Email"/>
+        <column xsi:type="varchar" name="to_email" nullable="false" length="255" comment="To Email"/>
+        <column xsi:type="text" name="subject" nullable="true" comment="Subject"/>
+        <column xsi:type="mediumtext" name="body" nullable="true"/>
+        <column xsi:type="smallint" name="format" padding="6" unsigned="false" nullable="false" identity="false" comment="Format"/>
+        <column xsi:type="varchar" name="sender_name" nullable="false" length="255" comment="Sender Name"/>
+        <column xsi:type="varchar" name="message_id" nullable="false" length="255" comment="Message Id"/>
+        <column xsi:type="int" name="pattern_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Pattern Id"/>
+        <column xsi:type="int" name="gateway_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Gateway Id"/>
+        <column xsi:type="text" name="headers" nullable="true" comment="Headers"/>
+        <column xsi:type="timestamp" name="created_at" on_update="true" nullable="true" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="int" name="is_processed" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Processed"/>
+        <column xsi:type="int" name="is_autosubmitted" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Autosubmitted"/>
+        <column xsi:type="text" name="cc" nullable="true" comment="Cc"/>
+        <column xsi:type="text" name="bcc" nullable="true" comment="Bcc"/>
+        <column xsi:type="timestamp" name="mailing_date" on_update="false" nullable="true" comment="Email receiving date"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="email_id"/>
+        </constraint>
+        <index referenceId="MST_HELPDESK_EMAIL_IS_PROCESSED" indexType="btree">
+            <column name="is_processed"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_field" resource="default" engine="innodb" comment="mst_helpdesk_field">
+        <column xsi:type="int" name="field_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Field Id"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="500" comment="Name"/>
+        <column xsi:type="varchar" name="code" nullable="false" length="255" comment="Code"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="255" comment="Type"/>
+        <column xsi:type="text" name="values" nullable="true" comment="Values"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+        <column xsi:type="int" name="is_active" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Active"/>
+        <column xsi:type="int" name="sort_order" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Sort Order"/>
+        <column xsi:type="int" name="is_required_staff" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Required Staff"/>
+        <column xsi:type="int" name="is_required_customer" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Required Customer"/>
+        <column xsi:type="int" name="is_visible_customer" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Visible Customer"/>
+        <column xsi:type="int" name="is_editable_customer" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Editable Customer"/>
+        <column xsi:type="int" name="is_visible_contact_form" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Visible Contact Form"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="field_id"/>
+        </constraint>
+    </table>
+    <table name="mst_helpdesk_field_store" resource="default" engine="innodb" comment="mst_helpdesk_field_store">
+        <column xsi:type="int" name="field_store_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Field Store Id"/>
+        <column xsi:type="int" name="fs_field_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Fs Field Id"/>
+        <column xsi:type="smallint" name="fs_store_id" padding="5" unsigned="true" nullable="false" identity="false" comment="Fs Store Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="field_store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_FIELD_STORE_FS_STORE_ID_STORE_STORE_ID" table="mst_helpdesk_field_store" column="fs_store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_FIELD_STORE_FS_FIELD_ID_MST_HELPDESK_FIELD_FIELD_ID" table="mst_helpdesk_field_store" column="fs_field_id" referenceTable="mst_helpdesk_field" referenceColumn="field_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_FIELD_STORE_FS_FIELD_ID" indexType="btree">
+            <column name="fs_field_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_FIELD_STORE_FS_STORE_ID" indexType="btree">
+            <column name="fs_store_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_gateway" resource="default" engine="innodb" comment="mst_helpdesk_gateway">
+        <column xsi:type="int" name="gateway_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Gateway Id"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="varchar" name="email" nullable="false" length="255" comment="Email"/>
+        <column xsi:type="varchar" name="login" nullable="false" length="255" comment="Login"/>
+        <column xsi:type="varchar" name="password" nullable="false" length="255" comment="Password"/>
+        <column xsi:type="int" name="is_active" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Active"/>
+        <column xsi:type="varchar" name="host" nullable="false" length="255" comment="Host"/>
+        <column xsi:type="int" name="port" padding="11" unsigned="false" nullable="true" identity="false" comment="Port"/>
+        <column xsi:type="varchar" name="protocol" nullable="false" length="255" comment="Protocol"/>
+        <column xsi:type="varchar" name="encryption" nullable="false" length="255" comment="Encryption"/>
+        <column xsi:type="int" name="fetch_frequency" padding="11" unsigned="false" nullable="true" identity="false" comment="Fetch Frequency"/>
+        <column xsi:type="int" name="fetch_max" padding="11" unsigned="false" nullable="true" identity="false" comment="Fetch Max"/>
+        <column xsi:type="int" name="department_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Department Id"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false" comment="Store Id"/>
+        <column xsi:type="text" name="notes" nullable="true" comment="Notes"/>
+        <column xsi:type="timestamp" name="fetched_at" on_update="true" nullable="true" default="CURRENT_TIMESTAMP" comment="Fetched At"/>
+        <column xsi:type="text" name="last_fetch_result" nullable="true" comment="Last Fetch Result"/>
+        <column xsi:type="int" name="fetch_limit" padding="11" unsigned="false" nullable="true" identity="false" comment="Fetch Limit"/>
+        <column xsi:type="int" name="is_delete_emails" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Delete Emails"/>
+        <column xsi:type="varchar" name="folder" nullable="false" length="255" comment="Gateway email folder"/>
+        <column xsi:type="varchar" name="authorization_type" nullable="false" length="50" default="imap" comment="Authorization Type (imap, oauth2, oauth2_microsoft)"/>
+        <column xsi:type="varchar" name="tenant" nullable="true" length="255" comment="OAuth2 Microsoft Azure AD Tenant"/>
+        <column xsi:type="varchar" name="client_id" nullable="true" length="255" comment="OAuth2 Client ID"/>
+        <column xsi:type="varchar" name="client_secret" nullable="true" length="255" comment="OAuth2 Client Secret"/>
+        <column xsi:type="text" name="access_token" nullable="true" comment="OAuth2 Access Token"/>
+        <column xsi:type="text" name="refresh_token" nullable="true" comment="OAuth2 Refresh Token"/>
+        <column xsi:type="int" name="token_expires" padding="11" unsigned="false" nullable="true" identity="false" comment="OAuth2 Token Expiration Timestamp"/>
+        <column xsi:type="varchar" name="connection_status" nullable="true" length="255" comment="OAuth2 Connection Status"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="gateway_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_21C70B6D5E147553C878230468909BAA" table="mst_helpdesk_gateway" column="department_id" referenceTable="mst_helpdesk_department" referenceColumn="department_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_GATEWAY_STORE_ID_STORE_STORE_ID" table="mst_helpdesk_gateway" column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_GATEWAY_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_GATEWAY_DEPARTMENT_ID" indexType="btree">
+            <column name="department_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_history" resource="default" engine="innodb" comment="mst_helpdesk_history">
+        <column xsi:type="int" name="history_id" padding="11" unsigned="false" nullable="false" identity="true" comment="History Id"/>
+        <column xsi:type="int" name="ticket_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Ticket Id"/>
+        <column xsi:type="varchar" name="triggered_by" nullable="false" length="255" comment="Triggered By"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="varchar" name="message" nullable="false" length="255" comment="Message"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="history_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_HISTORY_TICKET_ID_MST_HELPDESK_TICKET_TICKET_ID" table="mst_helpdesk_history" column="ticket_id" referenceTable="mst_helpdesk_ticket" referenceColumn="ticket_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_HISTORY_TICKET_ID" indexType="btree">
+            <column name="ticket_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_message" resource="default" engine="innodb" comment="mst_helpdesk_message">
+        <column xsi:type="int" name="message_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Message Id"/>
+        <column xsi:type="int" name="ticket_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Ticket Id"/>
+        <column xsi:type="int" name="email_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Email Id"/>
+        <column xsi:type="int" name="user_id" padding="11" unsigned="false" nullable="true" identity="false" comment="User Id"/>
+        <column xsi:type="int" name="customer_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Customer Id"/>
+        <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Customer Email"/>
+        <column xsi:type="varchar" name="customer_name" nullable="false" length="255" comment="Customer Name"/>
+        <column xsi:type="mediumtext" name="body" nullable="true"/>
+        <column xsi:type="smallint" name="body_format" padding="6" unsigned="false" nullable="false" identity="false" comment="Body Format"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="true" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <column xsi:type="varchar" name="uid" nullable="false" length="255" comment="Uid"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="255" comment="Type"/>
+        <column xsi:type="varchar" name="third_party_email" nullable="false" length="255" comment="Third Party Email"/>
+        <column xsi:type="varchar" name="third_party_name" nullable="false" length="255" comment="Third Party Name"/>
+        <column xsi:type="varchar" name="triggered_by" nullable="false" length="255" comment="Triggered By"/>
+        <column xsi:type="int" name="is_read" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Read"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="message_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_MESSAGE_TICKET_ID_MST_HELPDESK_TICKET_TICKET_ID" table="mst_helpdesk_message" column="ticket_id" referenceTable="mst_helpdesk_ticket" referenceColumn="ticket_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_MESSAGE_TICKET_ID" indexType="btree">
+            <column name="ticket_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_pattern" resource="default" engine="innodb" comment="mst_helpdesk_pattern">
+        <column xsi:type="int" name="pattern_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Pattern Id"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="text" name="pattern" nullable="true" comment="Pattern"/>
+        <column xsi:type="varchar" name="scope" nullable="false" length="255" comment="Scope"/>
+        <column xsi:type="int" name="is_active" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Active"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="pattern_id"/>
+        </constraint>
+    </table>
+    <table name="mst_helpdesk_permission" resource="default" engine="innodb" comment="mst_helpdesk_permission">
+        <column xsi:type="int" name="permission_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Permission Id"/>
+        <column xsi:type="int" name="role_id" padding="10" unsigned="true" nullable="true" identity="false" comment="Role Id"/>
+        <column xsi:type="int" name="is_ticket_remove_allowed" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Is Ticket Remove Allowed"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="permission_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_PERMISSION_ROLE_ID_AUTHORIZATION_ROLE_ROLE_ID" table="mst_helpdesk_permission" column="role_id" referenceTable="authorization_role" referenceColumn="role_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_PERMISSION_ROLE_ID" indexType="btree">
+            <column name="role_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_permission_department" resource="default" engine="innodb" comment="mst_helpdesk_permission_department">
+        <column xsi:type="int" name="permission_department_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Permission Department Id"/>
+        <column xsi:type="int" name="permission_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Permission Id"/>
+        <column xsi:type="int" name="department_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Department Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="permission_department_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_C486739D95D907B4D43CE9E043995F6F" table="mst_helpdesk_permission_department" column="permission_id" referenceTable="mst_helpdesk_permission" referenceColumn="permission_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_C0D77422CE58966B2029D101EEC19097" table="mst_helpdesk_permission_department" column="department_id" referenceTable="mst_helpdesk_department" referenceColumn="department_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_PERMISSION_DEPARTMENT_PERMISSION_ID" indexType="btree">
+            <column name="permission_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_PERMISSION_DEPARTMENT_DEPARTMENT_ID" indexType="btree">
+            <column name="department_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_satisfaction" resource="default" engine="innodb" comment="mst_helpdesk_satisfaction">
+        <column xsi:type="int" name="satisfaction_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Satisfaction Id"/>
+        <column xsi:type="int" name="ticket_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Ticket Id"/>
+        <column xsi:type="int" name="message_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Message Id"/>
+        <column xsi:type="int" name="user_id" padding="10" unsigned="true" nullable="true" identity="false" comment="User Id"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="true" identity="false" comment="Customer Id"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false" comment="Store Id"/>
+        <column xsi:type="int" name="rate" padding="11" unsigned="false" nullable="true" identity="false" comment="Rate"/>
+        <column xsi:type="text" name="comment" nullable="true" comment="Comment"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="true" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="true" comment="Updated At"/>
+        <column xsi:type="text" name="user_agent" nullable="true" comment="User Agent"/>
+        <column xsi:type="text" name="remote_ip" nullable="true" comment="Remote Ip"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="satisfaction_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_SATISFACTION_STORE_ID_STORE_STORE_ID" table="mst_helpdesk_satisfaction" column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_1F2E09A831023B3F623BFD9682F4A085" table="mst_helpdesk_satisfaction" column="message_id" referenceTable="mst_helpdesk_message" referenceColumn="message_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_SATISFACTION_USER_ID_ADMIN_USER_USER_ID" table="mst_helpdesk_satisfaction" column="user_id" referenceTable="admin_user" referenceColumn="user_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_SATISFACTION_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID" table="mst_helpdesk_satisfaction" column="customer_id" referenceTable="customer_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_3C06E5992DC668D589FDC0DDDBEA8A7B" table="mst_helpdesk_satisfaction" column="ticket_id" referenceTable="mst_helpdesk_ticket" referenceColumn="ticket_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_SATISFACTION_TICKET_ID" indexType="btree">
+            <column name="ticket_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_SATISFACTION_MESSAGE_ID" indexType="btree">
+            <column name="message_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_SATISFACTION_USER_ID" indexType="btree">
+            <column name="user_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_SATISFACTION_CUSTOMER_ID" indexType="btree">
+            <column name="customer_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_SATISFACTION_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_ticket_aggregated_day" resource="default" engine="innodb" comment="mst_helpdesk_ticket_aggregated_day">
+        <column xsi:type="datetime" name="period" on_update="false" nullable="false" comment="Period"/>
+        <column xsi:type="smallint" name="store_id" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Store Id"/>
+        <column xsi:type="int" name="user_id" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="User Id"/>
+        <column xsi:type="int" name="new_ticket_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="New Ticket Cnt"/>
+        <column xsi:type="int" name="solved_ticket_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Solved Ticket Cnt"/>
+        <column xsi:type="int" name="changed_ticket_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Changed Ticket Cnt"/>
+        <column xsi:type="int" name="total_reply_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Total Reply Cnt"/>
+        <column xsi:type="int" name="first_reply_time" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="First Reply Time"/>
+        <column xsi:type="int" name="first_resolution_time" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="First Resolution Time"/>
+        <column xsi:type="int" name="full_resolution_time" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Full Resolution Time"/>
+        <column xsi:type="int" name="satisfaction_rate_1_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Rate 1 Cnt"/>
+        <column xsi:type="int" name="satisfaction_rate_2_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Rate 2 Cnt"/>
+        <column xsi:type="int" name="satisfaction_rate_3_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Rate 3 Cnt"/>
+        <column xsi:type="int" name="satisfaction_rate" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Rate"/>
+        <column xsi:type="int" name="satisfaction_response_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Response Cnt"/>
+        <column xsi:type="int" name="satisfaction_response_rate" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Response Rate"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="period"/>
+            <column name="store_id"/>
+            <column name="user_id"/>
+        </constraint>
+        <index referenceId="MST_HELPDESK_AGGREGATED_DAY_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_ticket_aggregated_hour" resource="default" engine="innodb" comment="mst_helpdesk_ticket_aggregated_hour">
+        <column xsi:type="timestamp" name="period" on_update="false" nullable="false"/>
+        <column xsi:type="smallint" name="store_id" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Store Id"/>
+        <column xsi:type="int" name="user_id" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="User Id"/>
+        <column xsi:type="int" name="new_ticket_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="New Ticket Cnt"/>
+        <column xsi:type="int" name="solved_ticket_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Solved Ticket Cnt"/>
+        <column xsi:type="int" name="changed_ticket_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Changed Ticket Cnt"/>
+        <column xsi:type="int" name="total_reply_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Total Reply Cnt"/>
+        <column xsi:type="int" name="first_reply_time" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="First Reply Time"/>
+        <column xsi:type="int" name="first_resolution_time" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="First Resolution Time"/>
+        <column xsi:type="int" name="full_resolution_time" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Full Resolution Time"/>
+        <column xsi:type="int" name="satisfaction_rate_1_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Rate 1 Cnt"/>
+        <column xsi:type="int" name="satisfaction_rate_2_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Rate 2 Cnt"/>
+        <column xsi:type="int" name="satisfaction_rate_3_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Rate 3 Cnt"/>
+        <column xsi:type="int" name="satisfaction_rate" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Rate"/>
+        <column xsi:type="int" name="satisfaction_response_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Response Cnt"/>
+        <column xsi:type="int" name="satisfaction_response_rate" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Response Rate"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="period"/>
+            <column name="store_id"/>
+            <column name="user_id"/>
+        </constraint>
+        <index referenceId="MST_HELPDESK_AGGREGATED_HOUR_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_ticket_aggregated_month" resource="default" engine="innodb" comment="mst_helpdesk_ticket_aggregated_month">
+        <column xsi:type="datetime" name="period" on_update="false" nullable="false" comment="Period"/>
+        <column xsi:type="smallint" name="store_id" padding="6" unsigned="false" nullable="false" identity="false" default="0" comment="Store Id"/>
+        <column xsi:type="int" name="user_id" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="User Id"/>
+        <column xsi:type="int" name="new_ticket_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="New Ticket Cnt"/>
+        <column xsi:type="int" name="solved_ticket_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Solved Ticket Cnt"/>
+        <column xsi:type="int" name="changed_ticket_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Changed Ticket Cnt"/>
+        <column xsi:type="int" name="total_reply_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Total Reply Cnt"/>
+        <column xsi:type="int" name="first_reply_time" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="First Reply Time"/>
+        <column xsi:type="int" name="first_resolution_time" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="First Resolution Time"/>
+        <column xsi:type="int" name="full_resolution_time" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Full Resolution Time"/>
+        <column xsi:type="int" name="satisfaction_rate_1_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Rate 1 Cnt"/>
+        <column xsi:type="int" name="satisfaction_rate_2_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Rate 2 Cnt"/>
+        <column xsi:type="int" name="satisfaction_rate_3_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Rate 3 Cnt"/>
+        <column xsi:type="int" name="satisfaction_rate" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Rate"/>
+        <column xsi:type="int" name="satisfaction_response_cnt" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Response Cnt"/>
+        <column xsi:type="int" name="satisfaction_response_rate" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Satisfaction Response Rate"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="period"/>
+            <column name="store_id"/>
+            <column name="user_id"/>
+        </constraint>
+        <index referenceId="MST_HELPDESK_AGGREGATED_MONTH_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_ticket_tag" resource="default" engine="innodb" comment="mst_helpdesk_ticket_tag">
+        <column xsi:type="int" name="ticket_tag_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Ticket Tag Id"/>
+        <column xsi:type="int" name="tt_ticket_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Tt Ticket Id"/>
+        <column xsi:type="int" name="tt_tag_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Tt Tag Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="ticket_tag_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_142681B707A4551995B122E7B6DFE79F" table="mst_helpdesk_ticket_tag" column="tt_ticket_id" referenceTable="mst_helpdesk_ticket" referenceColumn="ticket_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_TICKET_TAG_TT_TAG_ID_MST_HELPDESK_TAG_TAG_ID" table="mst_helpdesk_ticket_tag" column="tt_tag_id" referenceTable="mst_helpdesk_tag" referenceColumn="tag_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_TICKET_TAG_TT_TICKET_ID" indexType="btree">
+            <column name="tt_ticket_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_TICKET_TAG_TT_TAG_ID" indexType="btree">
+            <column name="tt_tag_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_user" resource="default" engine="innodb" comment="mst_helpdesk_user">
+        <column xsi:type="int" name="user_id" padding="10" unsigned="true" nullable="false" identity="false" default="0" comment="User Id"/>
+        <column xsi:type="text" name="signature" nullable="true" comment="Signature"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="true" identity="false" comment="Store Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="user_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_USER_STORE_ID_STORE_STORE_ID" table="mst_helpdesk_user" column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_USER_USER_ID_ADMIN_USER_USER_ID" table="mst_helpdesk_user" column="user_id" referenceTable="admin_user" referenceColumn="user_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_USER_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_schedule" resource="default" engine="innodb" comment="mst_helpdesk_schedule">
+        <column xsi:type="int" name="schedule_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Workign Hours Id"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Schedule Name"/>
+        <column xsi:type="int" name="is_active" padding="11" unsigned="false" nullable="true" identity="false" default="0" comment="Is Active"/>
+        <column xsi:type="datetime" name="active_from" on_update="false" nullable="true" onCreate="migrateDataFrom(active_from)"/>
+        <column xsi:type="datetime" name="active_to" on_update="false" nullable="true" onCreate="migrateDataFrom(active_to)"/>
+        <column xsi:type="varchar" name="timezone" nullable="false" length="255" comment="Size"/>
+        <column xsi:type="int" name="sort_order" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="Body"/>
+        <column xsi:type="int" name="is_holiday" padding="11" unsigned="false" nullable="false" identity="false" default="0" comment="External Id"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="255" comment="type"/>
+        <column xsi:type="text" name="working_hours" nullable="true" comment="Storage"/>
+        <column xsi:type="text" name="open_message" nullable="true" comment="Storage"/>
+        <column xsi:type="text" name="closed_message" nullable="true" comment="Storage"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="schedule_id"/>
+        </constraint>
+    </table>
+    <table name="mst_helpdesk_schedule_store" resource="default" engine="innodb" comment="mst_helpdesk_schedule_store">
+        <column xsi:type="int" name="schedule_store_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Working Hours Store Id"/>
+        <column xsi:type="int" name="whs_schedule_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Working Hours Id"/>
+        <column xsi:type="smallint" name="whs_store_id" padding="5" unsigned="true" nullable="false" identity="false" comment="Store Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="schedule_store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MST_HELPDESK_SCHEDULE_STORE_WHS_STORE_ID_STORE_STORE_ID" table="mst_helpdesk_schedule_store" column="whs_store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_2CE07221C4A7B9841E460B4CC6227D1C" table="mst_helpdesk_schedule_store" column="whs_schedule_id" referenceTable="mst_helpdesk_schedule" referenceColumn="schedule_id" onDelete="CASCADE"/>
+        <index referenceId="MST_HELPDESK_SCHEDULE_STORE_WHS_SCHEDULE_ID" indexType="btree">
+            <column name="whs_schedule_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_SCHEDULE_STORE_WHS_STORE_ID" indexType="btree">
+            <column name="whs_store_id"/>
+        </index>
+    </table>
+    <table name="mst_helpdesk_desktop_notification" resource="default" engine="innodb" comment="mst_helpdesk_desktop_notification">
+        <column xsi:type="int" name="notification_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Desktop Notificatopn Id"/>
+        <column xsi:type="int" name="ticket_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Ticket Id"/>
+        <column xsi:type="int" name="message_id" padding="11" unsigned="false" nullable="true" identity="false" comment="Message Id"/>
+        <column xsi:type="varchar" name="notification_type" nullable="false" length="20" comment="Notification Type"/>
+        <column xsi:type="varchar" name="read_by_user_ids" nullable="false" length="255" default="" comment="User List"/>
+        <column xsi:type="timestamp" name="created_at" on_update="true" nullable="true" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="true" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="notification_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_25E2023FFB8BE0DE487BE3D5B1415286" table="mst_helpdesk_desktop_notification" column="ticket_id" referenceTable="mst_helpdesk_ticket" referenceColumn="ticket_id" onDelete="CASCADE"/>
+    </table>
+    <table name="mst_helpdesk_customer" resource="default" engine="innodb" comment="mst_helpdesk_customer">
+        <column xsi:type="int" name="customer_id" padding="11" unsigned="false" nullable="false" identity="false" comment="Customer Id"/>
+        <column xsi:type="text" name="customer_note" nullable="true" comment="Customer Note"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="customer_id"/>
+        </constraint>
+    </table>
+    <table name="mst_helpdeskext_activity" resource="default" engine="innodb" comment="mst_helpdeskext_activity">
+        <column xsi:type="int" name="activity_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Activity Id"/>
+        <column xsi:type="varchar" name="external_id" nullable="false" length="255" comment="external_id"/>
+        <column xsi:type="varchar" name="mst_kind" nullable="false" length="255" comment="mst_kind"/>
+        <column xsi:type="timestamp" name="mst_timestamp" nullable="false" default="CURRENT_TIMESTAMP" comment="mst_timestamp"/>
+        <column xsi:type="int" name="user_id" padding="11" nullable="true" comment="user_id"/>
+        <column xsi:type="text" name="mst_title" nullable="true" comment="mst_title"/>
+        <column xsi:type="text" name="mst_description" nullable="true" comment="mst_description"/>
+        <column xsi:type="varchar" name="mst_url" nullable="true" length="255" default="" comment="mst_url"/>
+        <column xsi:type="text" name="payload" nullable="true" comment="payload"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="activity_id"/>
+        </constraint>
+        <index referenceId="MST_HELPDESK_ACTIVITY_EXTERNAL_ID" indexType="btree">
+            <column name="external_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_ACTIVITY_USER_ID" indexType="btree">
+            <column name="user_id"/>
+        </index>
+        <index referenceId="MST_HELPDESK_ACTIVITY_MST_TIMESTAMP" indexType="btree">
+            <column name="mst_timestamp"/>
+        </index>
+        <index referenceId="MST_HELPDESK_ACTIVITY_MST_KIND" indexType="btree">
+            <column name="mst_kind"/>
+        </index>
+    </table>
+</schema>

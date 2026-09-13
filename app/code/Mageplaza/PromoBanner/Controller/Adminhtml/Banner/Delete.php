@@ -40,7 +40,7 @@ class Delete extends Banner
     public function execute()
     {
         $resultRedirect = $this->resultRedirectFactory->create();
-        $bannerId       = $this->getRequest()->getParam('banner_id');
+        $bannerId = $this->getRequest()->getParam('banner_id');
         try {
             /** @var \Mageplaza\PromoBanner\Model\Banner $banner */
             $banner = $this->bannerFactory->create();

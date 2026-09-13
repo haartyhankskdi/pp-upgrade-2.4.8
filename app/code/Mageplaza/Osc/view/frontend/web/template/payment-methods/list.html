@@ -23,6 +23,6 @@
      class="items payment-methods">
     <div repeat="foreach: paymentGroupsList, item: '$group'"
          class="payment-group">
-        <each args="data: getRegion($group().displayArea), as: 'method'" render=""/>
+        <each args="data: getRegion($group().displayArea), as: 'method'" render=""></each>
     </div>
 </div>

@@ -69,7 +69,7 @@ class Category extends Column
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
-            $fieldName    = $this->getName();
+            $fieldName = $this->getName();
             $categoryList = $this->helperData->getCategoryList();
             foreach ($dataSource['data']['items'] as &$item) {
                 if (isset($categoryList[$item[$fieldName]])) {

@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Mirasvit_Core:etc/manual.xsd">
+    <link action="helpdesk_department_index" title="Discover more about Departments" url="https://mirasvit.com/manual/helpdesk/configuration/departments"/>
+    <link action="helpdesk_gateway_index" title="Discover more about Getaways" url="https://mirasvit.com/manual/helpdesk/configuration/email-gateways"/>
+    <link action="helpdesk_priority_index" title="Discover more about Priorities" url="https://mirasvit.com/manual/helpdesk/configuration/priorities"/>
+    <link action="helpdesk_status_index" title="Discover more about Statuses" url="https://mirasvit.com/manual/helpdesk/configuration/statuses"/>
+    <link action="helpdesk_template_index" title="Discover more about Quick Responses" url="https://mirasvit.com/manual/helpdesk/configuration/quick-responses"/>
+    <link action="helpdesk_field_index" title="Discover more about Custom Fields" url="https://mirasvit.com/manual/helpdesk/configuration/custom-fields"/>
+    <link action="helpdesk_pattern_index" title="Discover more about Spam Patterns" url="https://mirasvit.com/manual/helpdesk/configuration/spam-patterns"/>
+    <link action="helpdesk_permission_index" title="Discover more about Permissions" url="https://mirasvit.com/manual/helpdesk/configuration/permissions"/>
+    <link action="helpdesk_rule_index" title="Discover more about Workflow Rules" url="https://mirasvit.com/manual/helpdesk/configuration/workflow-rules"/>
+    <link action="helpdesk_satisfaction_index" title="Discover more about Satisfaction Survey Results" url="https://mirasvit.com/manual/helpdesk/configuration/satisfaction-survey-results"/>
+    <link action="helpdesk_schedule_index" title="Discover more about Working Hours" url="https://mirasvit.com/manual/helpdesk/configuration/working-hours"/>
+    <link action="helpdesk_report_view" title="Discover more about Reports" url="https://mirasvit.com/manual/helpdesk/how-to/generate-reports" position="bottom"/>
+</config>

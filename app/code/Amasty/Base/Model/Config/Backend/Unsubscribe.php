@@ -7,15 +7,23 @@
 
 namespace Amasty\Base\Model\Config\Backend;
 
+use Amasty\Base\Model\AdminNotification\Messages;
 use Amasty\Base\Model\Source\NotificationType;
+use Magento\Framework\App\Cache\TypeListInterface;
+use Magento\Framework\App\Config\Data\ProcessorInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\Config\Value;
+use Magento\Framework\Data\Collection\AbstractDb;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Model\ResourceModel\AbstractResource;
+use Magento\Framework\Registry;
 
-class Unsubscribe extends \Magento\Framework\App\Config\Value implements
-    \Magento\Framework\App\Config\Data\ProcessorInterface
+class Unsubscribe extends Value implements ProcessorInterface
 {
     public const PATH_TO_FEED_IMAGES = 'https://feed.amasty.net/news/unsubscribe/';
 
     /**
-     * @var \Amasty\Base\Model\AdminNotification\Messages
+     * @var Messages
      */
     private $messageManager;
 
@@ -25,14 +33,14 @@ class Unsubscribe extends \Magento\Framework\App\Config\Value implements
     private $notificationType;
 
     public function __construct(
-        \Magento\Framework\Model\Context $context,
-        \Magento\Framework\Registry $registry,
-        \Magento\Framework\App\Config\ScopeConfigInterface $config,
-        \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
-        \Amasty\Base\Model\AdminNotification\Messages $messageManager,
+        Context $context,
+        Registry $registry,
+        ScopeConfigInterface $config,
+        TypeListInterface $cacheTypeList,
+        Messages $messageManager,
         NotificationType $notificationType,
-        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        AbstractResource $resource,
+        AbstractDb $resourceCollection,
         array $data = []
     ) {
         parent::__construct($context, $registry, $config, $cacheTypeList, $resource, $resourceCollection, $data);
@@ -81,7 +89,7 @@ class Unsubscribe extends \Magento\Framework\App\Config\Value implements
         return $value;
     }
 
-    protected function generateMessage($change)
+    private function generateMessage($change)
     {
         $message = '';
         $titles = $this->notificationType->toOptionArray();

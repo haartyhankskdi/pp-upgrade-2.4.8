@@ -37,6 +37,7 @@ use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Rule\Model\AbstractModel;
 use Magento\SalesRule\Model\Rule\Condition\Combine as SaleRuleCombine;
 use Magento\SalesRule\Model\Rule\Condition\CombineFactory as SalesCombineFactory;
+use Mageplaza\PromoBanner\Api\Data\PromoBannerInterface;
 use Mageplaza\PromoBanner\Model\Config\Source\Position;
 use Mageplaza\PromoBanner\Model\ResourceModel\Banner as ResourceModelBanner;
 
@@ -44,45 +45,8 @@ use Mageplaza\PromoBanner\Model\ResourceModel\Banner as ResourceModelBanner;
  * Class Banner
  *
  * @package Mageplaza\PromoBanner\Model
- *
- * @method string getName()
- * @method Banner setName(string $value)
- * @method int getStatus()
- * @method Banner setStatus(int $value)
- * @method string getStoreIds()
- * @method string getCustomerGroupIds()
- * @method string getType()
- * @method Banner setType(string $value)
- * @method string getContent()
- * @method Banner setContent(string $value)
- * @method string getCmsBlockId()
- * @method Banner setCmsBlockId(int $value)
- * @method string getBannerImage()
- * @method Banner setBannerImage(string $value)
- * @method string getSliderImages()
- * @method Banner setSliderImages(string $value)
- * @method string getPopupImage()
- * @method Banner setPopupImage(string $value)
- * @method string getPopupResponsive()
- * @method Banner setPopupResponsive(string $value)
- * @method string getFloatingImage()
- * @method Banner setFloatingImage(string $value)
- * @method string getUrl()
- * @method Banner setUrl(string $value)
- * @method string getPosition()
- * @method Banner setPosition(string $value)
- * @method int getPage()
- * @method Banner setPage(int $value)
- * @method string getPageType()
- * @method Banner setPageType(string $value)
- * @method int getShowProductPage()
- * @method Banner setShowProductPage(int $value)
- * @method string getAutoCloseTime()
- * @method Banner setAutoCloseTime(string $value)
- * @method string getAutoReopenTime()
- * @method Banner setAutoReopenTime(string $value)
  */
-class Banner extends AbstractModel
+class Banner extends AbstractModel implements PromoBannerInterface
 {
     /**
      * @var ProductCombineFactory
@@ -160,12 +124,12 @@ class Banner extends AbstractModel
         AbstractDb $resourceCollection = null,
         array $data = []
     ) {
-        $this->_productCombineFactory    = $productCombineFactory;
-        $this->_salesCombineFactory      = $salesCombineFactory;
+        $this->_productCombineFactory = $productCombineFactory;
+        $this->_salesCombineFactory = $salesCombineFactory;
         $this->_productCollectionFactory = $productCollectionFactory;
-        $this->_resourceIterator         = $resourceIterator;
-        $this->_productFactory           = $productFactory;
-        $this->resourceModel             = $resourceModel;
+        $this->_resourceIterator = $resourceIterator;
+        $this->_productFactory = $productFactory;
+        $this->resourceModel = $resourceModel;
 
         parent::__construct($context, $registry, $formFactory, $localeDate, $resource, $resourceCollection, $data);
     }
@@ -265,7 +229,7 @@ class Banner extends AbstractModel
                 [[$this, 'callbackValidateProduct']],
                 [
                     'attributes' => $this->getCollectedAttributes(),
-                    'product'    => $this->_productFactory->create()
+                    'product' => $this->_productFactory->create()
                 ]
             );
         }
@@ -305,8 +269,440 @@ class Banner extends AbstractModel
         $product->setData($args['row']);
         $bannerId = $this->getId();
         if ($bannerId && $this->getActions()->validate($product)) {
-            $this->_productIds[]    = $product->getId();
+            $this->_productIds[] = $product->getId();
             $this->dataProductIds[] = ['banner_id' => $bannerId, 'product_id' => $product->getId()];
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getBannerId()
+    {
+        return $this->getData(PromoBannerInterface::BANNER_ID);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setBannerId($value)
+    {
+        return $this->setData(PromoBannerInterface::BANNER_ID, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getName()
+    {
+        return $this->getData(PromoBannerInterface::NAME);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setName($value)
+    {
+        return $this->setData(PromoBannerInterface::NAME, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getStatus()
+    {
+        return $this->getData(PromoBannerInterface::STATUS);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setStatus($value)
+    {
+        return $this->setData(PromoBannerInterface::STATUS, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getStoreIds()
+    {
+        return $this->getData(PromoBannerInterface::STORE_IDS);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setStoreIds($value)
+    {
+        return $this->setData(PromoBannerInterface::STORE_IDS, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCustomerGroupIds()
+    {
+        return $this->getData(PromoBannerInterface::CUSTOMER_GROUP_IDS);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setCustomerGroupIds($value)
+    {
+        return $this->setData(PromoBannerInterface::CUSTOMER_GROUP_IDS, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCategory()
+    {
+        return $this->getData(PromoBannerInterface::CATEGORY);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setCategory($value)
+    {
+        return $this->setData(PromoBannerInterface::CATEGORY, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getFromDate()
+    {
+        return $this->getData(PromoBannerInterface::FROM_DATE);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setFromDate($value)
+    {
+        return $this->setData(PromoBannerInterface::FROM_DATE, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getToDate()
+    {
+        return $this->getData(PromoBannerInterface::TO_DATE);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setToDate($value)
+    {
+        return $this->setData(PromoBannerInterface::TO_DATE, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPriority()
+    {
+        return $this->getData(PromoBannerInterface::PRIORITY);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setPriority($value)
+    {
+        return $this->setData(PromoBannerInterface::PRIORITY, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getType()
+    {
+        return $this->getData(PromoBannerInterface::TYPE);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setType($value)
+    {
+        return $this->setData(PromoBannerInterface::TYPE, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getBannerImage()
+    {
+        return $this->getData(PromoBannerInterface::BANNER_IMAGE);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setBannerImage($value)
+    {
+        return $this->setData(PromoBannerInterface::BANNER_IMAGE, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSliderImages()
+    {
+        return $this->getData(PromoBannerInterface::SLIDER_IMAGES);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setSliderImages($value)
+    {
+        return $this->setData(PromoBannerInterface::SLIDER_IMAGES, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCmsBlockId()
+    {
+        return $this->getData(PromoBannerInterface::CMS_BLOCK_ID);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setCmsBlockId($value)
+    {
+        return $this->setData(PromoBannerInterface::CMS_BLOCK_ID, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getContent()
+    {
+        return $this->getData(PromoBannerInterface::CONTENT);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setContent($value)
+    {
+        return $this->setData(PromoBannerInterface::CONTENT, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPopupImage()
+    {
+        return $this->getData(PromoBannerInterface::POPUP_IMAGE);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setPopupImage($value)
+    {
+        return $this->setData(PromoBannerInterface::POPUP_IMAGE, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPopupResponsive()
+    {
+        return $this->getData(PromoBannerInterface::POPUP_RESPONSIVE);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setPopupResponsive($value)
+    {
+        return $this->setData(PromoBannerInterface::POPUP_RESPONSIVE, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getFloatingImage()
+    {
+        return $this->getData(PromoBannerInterface::FLOATING_IMAGE);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setFloatingImage($value)
+    {
+        return $this->setData(PromoBannerInterface::FLOATING_IMAGE, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUrl()
+    {
+        return $this->getData(PromoBannerInterface::URL);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setUrl($value)
+    {
+        return $this->setData(PromoBannerInterface::URL, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPosition()
+    {
+        return $this->getData(PromoBannerInterface::POSITION);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setPosition($value)
+    {
+        return $this->setData(PromoBannerInterface::POSITION, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getFloatingPosition()
+    {
+        return $this->getData(PromoBannerInterface::FLOATING_POSITION);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setFloatingPosition($value)
+    {
+        return $this->setData(PromoBannerInterface::FLOATING_POSITION, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPage()
+    {
+        return (int)$this->getData(PromoBannerInterface::PAGE);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setPage($value)
+    {
+        return $this->setData(PromoBannerInterface::PAGE, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPageType()
+    {
+        return $this->getData(PromoBannerInterface::PAGE_TYPE);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setPageType($value)
+    {
+        return $this->setData(PromoBannerInterface::PAGE_TYPE, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCategoryIds()
+    {
+        return $this->getData(PromoBannerInterface::CATEGORY_IDS);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setCategoryIds($value)
+    {
+        return $this->setData(PromoBannerInterface::CATEGORY_IDS, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getShowProductPage()
+    {
+        return $this->getData(PromoBannerInterface::SHOW_PRODUCT_PAGE);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setShowProductPage($value)
+    {
+        return $this->setData(PromoBannerInterface::SHOW_PRODUCT_PAGE, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAutoCloseTime()
+    {
+        return $this->getData(PromoBannerInterface::AUTO_CLOSE_TIME);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setAutoCloseTime($value)
+    {
+        return $this->setData(PromoBannerInterface::AUTO_CLOSE_TIME, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAutoReopenTime()
+    {
+        return $this->getData(PromoBannerInterface::AUTO_REOPEN_TIME);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setAutoReopenTime($value)
+    {
+        return $this->setData(PromoBannerInterface::AUTO_REOPEN_TIME, $value);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getUpdatedAt()
+    {
+        return $this->getData(PromoBannerInterface::UPDATED_AT);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getCreatedAt()
+    {
+        return $this->getData(PromoBannerInterface::CREATED_AT);
     }
 }

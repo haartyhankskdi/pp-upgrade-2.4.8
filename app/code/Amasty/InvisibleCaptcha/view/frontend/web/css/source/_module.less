@@ -1,4 +1,10 @@
 //
+//  Variables
+//  ---------------------------------------------
+
+@am-recaptcha-error-color:#dd4b39;
+
+//
 //  Common
 //  ---------------------------------------------
 
@@ -9,13 +15,43 @@
         }
 
         .hidden {
-            position: absolute;
             left: -10000px;
+            position: absolute;
             visibility: hidden;
         }
     }
 
-    #am-recaptcha-place-order .grecaptcha-badge {
+    .am-recaptcha-place-order .grecaptcha-badge {
         z-index: 1000;
+    }
+
+    .recaptcha-error {
+        .recaptcha-error-message {
+            color: @am-recaptcha-error-color;
+            font-size: 12px;
+            padding: 4px 0;
+        }
+
+        & {
+            border: 1px solid @am-recaptcha-error-color;
+            padding: 5px;
+        }
+    }
+
+    /* phpcs:ignore Magento2.Less.AvoidId.IdSelectorUsage */
+    .am-submit-summary #checkout-payment-method-load .actions-toolbar:has(#am-recaptcha-block) {
+        /* phpcs:ignore Magento2.Less.AvoidId.IdSelectorUsage */
+        .primary > *:not(#am-recaptcha-block) {
+            display: none;
+        }
+
+        //  v3 Invisible Hide
+        .primary:has(.grecaptcha-badge) {
+            display: none;
+        }
+
+        & {
+            display: block;
+        }
     }
 }

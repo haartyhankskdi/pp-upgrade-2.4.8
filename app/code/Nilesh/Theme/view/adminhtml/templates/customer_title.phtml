@@ -22,10 +22,10 @@ $controllerName = $this->getRequest()->getControllerName();
 $actionName = $this->getRequest()->getActionName();
 $moduleName = $this->getRequest()->getModuleName();
 $urlAction = $moduleName . '_' . $controllerName . '_' . $actionName;
-if ($urlAction == 'customer_index_edit') {
+$customerId = $this->getRequest()->getParam('id');
+if ($urlAction == 'customer_index_edit' && $customerId) {
     $custFlag = 0;
     $helper = $this->helper('Sachin\OrderFlag\Helper\OrderFlag');
-    $customerId = $this->getRequest()->getParam('id');
     $custFlag = $helper->getCustomerFlagForCustomerEdit($customerId);
     if ($custFlag == 1) { ?>
         <div class="notsupply">Do Not Supply</div>

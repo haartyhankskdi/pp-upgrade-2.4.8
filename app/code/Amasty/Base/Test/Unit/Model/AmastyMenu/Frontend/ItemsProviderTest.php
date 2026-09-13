@@ -19,6 +19,7 @@ use Amasty\Base\Model\AmastyMenu\MenuItemsProvider;
 use Amasty\Base\Model\AmastyMenu\ModuleTitlesResolver;
 use Amasty\Base\Model\Feed\ExtensionsProvider;
 use Magento\Framework\Module\Manager;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -93,6 +94,7 @@ class ItemsProviderTest extends TestCase
      * @param array $expected
      * @return void
      */
+    #[DataProvider('getItemsDataProvider')]
     public function testGetItems(array $solutionsData, array $expected)
     {
         $this->moduleTitleResolverMock->expects($this->any())
@@ -112,7 +114,7 @@ class ItemsProviderTest extends TestCase
         $this->assertEquals($expected, $this->itemsProvider->getItems());
     }
 
-    public function getItemsDataProvider(): array
+    public static function getItemsDataProvider(): array
     {
         return [
             'no solutions' => [

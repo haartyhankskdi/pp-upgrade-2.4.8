@@ -13,25 +13,24 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Eav\Model\Validator\Attribute;
 
 use Magento\Eav\Model\AttributeDataFactory;
+use Magento\Eav\Model\Config;
 use Magento\Eav\Model\Validator\Attribute\Data as AttributeData;
+use Magento\Framework\App\ObjectManager;
+use Magento\Framework\ObjectManagerInterface;
 use Mageplaza\Osc\Helper\Data as HelperData;
 use Mageplaza\Osc\Model\Plugin\Eav\Model\Validator\Attribute\Data;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class DataTest
- * @package Mageplaza\Osc\Test\Unit\Model\Plugin\Eav\Model\Validator\Attribute
- */
 class DataTest extends TestCase
 {
     /**
@@ -49,7 +48,7 @@ class DataTest extends TestCase
      */
     private $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->attributeDataFactoryMock = $this->getMockBuilder(AttributeDataFactory::class)
             ->disableOriginalConstructor()
@@ -58,11 +57,21 @@ class DataTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
+        $eavConfigMock = $this->getMockBuilder(Config::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $objectManagerMock = $this->getMockForAbstractClass(ObjectManagerInterface::class);
+        $objectManagerMock->method('get')
+            ->with(Config::class)
+            ->willReturn($eavConfigMock);
+        ObjectManager::setInstance($objectManagerMock);
+
         $this->plugin = new Data(
             $this->attributeDataFactoryMock,
             $this->oscHelperDataMock
         );
     }
+
 
     public function testMethod()
     {
@@ -74,7 +83,7 @@ class DataTest extends TestCase
     /**
      * @return array
      */
-    public function providerAfterIsValid()
+    public static function providerAfterIsValid()
     {
         return [
             [true, true],

@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model;
@@ -33,10 +33,6 @@ use Mageplaza\Osc\Model\GuestCheckoutManagement;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class GuestCheckoutManagementTest
- * @package Mageplaza\Osc\Test\Unit\Model
- */
 class GuestCheckoutManagementTest extends TestCase
 {
     /**
@@ -79,7 +75,7 @@ class GuestCheckoutManagementTest extends TestCase
      */
     private $quoteId = 1;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->quoteIdMaskFactoryMock = $this->getMockBuilder(QuoteIdMaskFactory::class)
             ->disableOriginalConstructor()
@@ -94,10 +90,9 @@ class GuestCheckoutManagementTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $quoteIdMethods = get_class_methods(QuoteIdMask::class);
-        $quoteIdMethods[] = 'getQuoteId';
         $this->quoteIdMaskMock = $this->getMockBuilder(QuoteIdMask::class)
-            ->setMethods($quoteIdMethods)
+            ->onlyMethods(['load'])
+            ->addMethods(['getQuoteId'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -183,7 +178,7 @@ class GuestCheckoutManagementTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestSaveEmailToQuote()
+    public static function providerTestSaveEmailToQuote()
     {
         return [
             [
@@ -205,10 +200,8 @@ class GuestCheckoutManagementTest extends TestCase
      */
     public function testSaveEmailToQuote($result, $isThrow)
     {
-        $quoteMethods = get_class_methods(Quote::class);
-        $quoteMethods[] = 'setCustomerEmail';
         $quoteMock = $this->getMockBuilder(Quote::class)
-            ->setMethods($quoteMethods)
+            ->addMethods(['setCustomerEmail'])
             ->disableOriginalConstructor()
             ->getMock();
         $this->cartRepositoryMock->expects($this->once())->method('getActive')

@@ -16,8 +16,8 @@ class PrescriberNotes extends \Magento\Ui\Component\Listing\Columns\Column {
     public function prepareDataSource(array $dataSource) {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as & $item) {
-                if(strlen($item['note']) > 15){
-                    $item['note'] = substr($item['note'],0,15).' ...';
+                if(strlen((string) $item['note']) > 15){
+                    $item['note'] = substr((string) $item['note'],0,15).' ...';
                 }else{
                     $item['note'] = $item['note'];
                 }

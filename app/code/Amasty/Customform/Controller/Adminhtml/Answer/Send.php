@@ -1,15 +1,17 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Controller\Adminhtml\Answer;
 
 use Amasty\Customform\Model\Answer;
 use Amasty\Customform\Model\Config\Source\Status;
 use Amasty\Customform\Model\Grid\Bookmark;
+use Laminas\Validator\NotEmpty;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Exception\LocalizedException;
 
 class Send extends \Amasty\Customform\Controller\Adminhtml\Answer
@@ -34,6 +36,11 @@ class Send extends \Amasty\Customform\Controller\Adminhtml\Answer
      */
     private $formRepository;
 
+    /**
+     * @var NotEmpty
+     */
+    private $notEmptyValidator;
+
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Amasty\Customform\Model\AnswerRepository $answerRepository,
@@ -44,7 +51,8 @@ class Send extends \Amasty\Customform\Controller\Adminhtml\Answer
         \Amasty\Customform\Helper\Data $helper,
         \Amasty\Customform\Model\FormRepository $formRepository,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        Bookmark $bookmark
+        Bookmark $bookmark,
+        ?NotEmpty $notEmptyValidator = null // TODO move to not optional
     ) {
         parent::__construct(
             $context,
@@ -59,6 +67,7 @@ class Send extends \Amasty\Customform\Controller\Adminhtml\Answer
         $this->helper = $helper;
         $this->storeManager = $storeManager;
         $this->formRepository = $formRepository;
+        $this->notEmptyValidator = $notEmptyValidator ?? ObjectManager::getInstance()->get(NotEmpty::class);
     }
 
     /**
@@ -70,7 +79,7 @@ class Send extends \Amasty\Customform\Controller\Adminhtml\Answer
         $answerId = $this->getRequest()->getParam('answer_id');
         $message = $this->getRequest()->getParam('email_text');
         try {
-            if (!\Zend_Validate::is(trim($message), 'NotEmpty')) {
+            if (!$this->notEmptyValidator->isValid(trim($message))) {
                 $this->messageManager->addErrorMessage(__('Please enter a Email Text.'));
                 $this->_redirect('amasty_customform/answer/edit', ['id' => $answerId]);
                 return;

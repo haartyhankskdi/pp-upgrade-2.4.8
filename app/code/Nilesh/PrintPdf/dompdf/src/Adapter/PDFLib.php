@@ -209,13 +209,13 @@ class PDFLib implements Canvas
     {
         if (is_array($paper)) {
             $size = $paper;
-        } elseif (isset(self::$PAPER_SIZES[mb_strtolower($paper)])) {
-            $size = self::$PAPER_SIZES[mb_strtolower($paper)];
+        } elseif (isset(self::$PAPER_SIZES[mb_strtolower((string)$paper)])) {
+            $size = self::$PAPER_SIZES[mb_strtolower((string)$paper)];
         } else {
             $size = self::$PAPER_SIZES["letter"];
         }
 
-        if (mb_strtolower($orientation) === "landscape") {
+        if (mb_strtolower((string)$orientation) === "landscape") {
             list($size[2], $size[3]) = [$size[3], $size[2]];
         }
 
@@ -400,6 +400,7 @@ class PDFLib implements Canvas
      */
     public function add_object($object, $where = 'all')
     {
+        $where = (string)$where;
 
         if (mb_strpos($where, "next") !== false) {
             $this->_objs[$object]["start_page"]++;
@@ -766,7 +767,7 @@ class PDFLib implements Canvas
     protected function _load_font($font, $encoding = null, $options = "")
     {
         // Fix for PDFLibs case-sensitive font names
-        $baseFont = basename($font);
+        $baseFont = basename((string)$font);
         $isNativeFont = false;
         if (isset(self::$nativeFontsTpPDFLib[$baseFont])) {
             $font = self::$nativeFontsTpPDFLib[$baseFont];
@@ -1208,7 +1209,7 @@ class PDFLib implements Canvas
         $w = (int)$w;
         $h = (int)$h;
 
-        $img_type = Cache::detect_type($img_url, $this->get_dompdf()->getHttpContext());
+        $img_type = (string)Cache::detect_type($img_url, $this->get_dompdf()->getHttpContext());
 
         if (!isset($this->_imgs[$img_url])) {
             if (strtolower($img_type) === "svg") {
@@ -1295,6 +1296,7 @@ class PDFLib implements Canvas
      */
     public function add_link($url, $x, $y, $width, $height)
     {
+        $url = (string)$url;
         $y = $this->y($y) - $height;
         if (strpos($url, '#') === 0) {
             // Local link

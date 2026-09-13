@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Controller\Adminhtml\Field;
@@ -33,10 +33,6 @@ use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Mageplaza\Osc\Helper\Data as OscHelper;
 
-/**
- * Class Save
- * @package Mageplaza\Osc\Controller\Adminhtml\Field
- */
 class Save extends Action
 {
     /**
@@ -57,10 +53,10 @@ class Save extends Action
     /**
      * Save constructor.
      *
-     * @param Context $context
-     * @param Config $resourceConfig
+     * @param Context                   $context
+     * @param Config                    $resourceConfig
      * @param ReinitableConfigInterface $config
-     * @param JsonFactory $resultJsonFactory
+     * @param JsonFactory               $resultJsonFactory
      */
     public function __construct(
         Context $context,
@@ -82,7 +78,9 @@ class Save extends Action
      */
     public function execute()
     {
-        /** @var Json $resultJson */
+        /**
+ * @var Json $resultJson
+*/
         $resultJson = $this->resultJsonFactory->create();
 
         $result = [

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!--
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/-->
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
     <acl>
@@ -25,6 +25,14 @@
                         <resource id="Magento_Config::config">
                             <resource id="Amasty_Customform::config" title="Amasty Custom Forms" sortOrder="032106" />
                         </resource>
+                    </resource>
+                </resource>
+
+                <resource id="Magento_Reports::report">
+                    <resource id="Amasty_Customform::analytics" title="Amasty Custom Form" translate="title"
+                              sortOrder="100">
+                        <resource id="Amasty_Customform::forms_analytics" title="Forms Analytics" translate="title"
+                                  sortOrder="10"/>
                     </resource>
                 </resource>
             </resource>

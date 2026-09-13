@@ -12,73 +12,60 @@ namespace Amasty\Base\Block\Adminhtml\System\Config\Form\Field\Promo;
 
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\Module\Manager;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Asset\Repository as AssetRepository;
 
-class PromoField extends Field
+class PromoField extends Field implements PromoConfigInterface
 {
-    public const PROMO_CONFIGS = [
-        'subscribe' => [
-            'isIconVisible' => true,
-            'iconBgColor' => '#ebe7ff',
-            'iconSrc' => 'Amasty_Base::images/components/promotion-field/lock.svg',
-            'subscribeText' => 'Subscribe to Unlock',
-            'promoLink' => null
-        ],
-        'upgrade' => [
-            'isIconVisible' => true,
-            'iconBgColor' => 'rgba(0, 133, 255, .1)',
-            'iconSrc' => 'Amasty_Base::images/components/promotion-field/lock-upgrade.svg',
-            'subscribeText' => 'Upgrade Your Plan',
-            'promoLink' => null
-        ]
-    ];
-
     /**
      * @var string
      */
-    private $moduleName;
+    private string $moduleName;
 
     /**
-     * @var string[]
+     * @var array{
+     *      'isIconVisible': bool,
+     *      'iconBgColor': string,
+     *      'iconSrc': string,
+     *      'subscribeText': string,
+     *      'promoLink': string|null,
+     *      'comment': string|null
+     *  }
      */
-    private $promoConfig;
+    private array $promoConfig;
 
     /**
      * @var Manager
      */
-    private $moduleManager;
+    private Manager $moduleManager;
 
     /**
-     * @var Escaper
+     * @var ConfigLabelRender
      */
-    private $escaper;
-
-    /**
-     * @var AssetRepository
-     */
-    private $assetRepository;
+    private ConfigLabelRender $configLabelRender;
 
     public function __construct(
         Context $context,
         Manager $moduleManager,
-        Escaper $escaper,
-        AssetRepository $assetRepository,
+        ?Escaper $escaper, // @deprecated since 1.20.0
+        ?AssetRepository $assetRepository, // @deprecated since 1.20.0
         string $moduleName,
         array $promoConfig = [],
         array $data = [],
-        string $currentPromoConfig = 'subscribe'
+        string $currentPromoConfig = self::PLAN_SUBSCRIBE,
+        ?ConfigLabelRender $configLabelRender = null // TODO move to not optional
     ) {
         $this->moduleName = $moduleName;
         $this->moduleManager = $moduleManager;
-        $this->escaper = $escaper;
-        $this->assetRepository = $assetRepository;
         $this->promoConfig = array_merge(
-            static::PROMO_CONFIGS[$currentPromoConfig] ?? static::PROMO_CONFIGS['subscribe'],
+            static::PROMO_CONFIGS[$currentPromoConfig],
             $promoConfig
         );
+        // OM for backward compatibility
+        $this->configLabelRender = $configLabelRender ?? ObjectManager::getInstance()->get(ConfigLabelRender::class);
         parent::__construct($context, $data);
     }
 
@@ -94,8 +81,8 @@ class PromoField extends Field
 
         $element->setDisabled(true);
         $element->setReadonly(true);
-        if (isset($this->promoConfig['comment'])) {
-            $element->setComment($this->promoConfig['comment']);
+        if (isset($this->promoConfig[static::COMMENT_KEY])) {
+            $element->setComment($this->promoConfig[static::COMMENT_KEY]);
         }
 
         $html = $this->renderLabel($element);
@@ -109,56 +96,12 @@ class PromoField extends Field
         return $this->_decorateRowHtml($element, $html);
     }
 
+    /**
+     * @deprecated since 1.20.0
+     * @see ConfigLabelRender::renderLabelHtml
+     */
     public function renderLabel(AbstractElement $element): string
     {
-        return <<<LABEL
-            <td class="label">
-                <div class="ampromo-config-label">
-                    {$this->getIcon()}
-                    <div class="ampromo-config-content-container">
-                        <div>
-                            <label for="{$element->getHtmlId()}">
-                                <span>
-                                    {$element->getLabel()}
-                                </span>
-                            </label>
-                        </div>
-                        <div class="ampromo-config-notification-message">
-                            {$this->escaper->escapeHtml(__($this->promoConfig['subscribeText']))}
-                        </div>
-                    </div>
-                </div>
-            </td>
-        LABEL;
-    }
-
-    protected function getIcon(): string
-    {
-        if ($this->promoConfig['isIconVisible'] === false) {
-            return '';
-        }
-
-        $icon = <<<ICON
-            <span class="ampromo-config-icon"
-                style="
-                    background-color: {$this->promoConfig['iconBgColor']};
-                    background-image: url('{$this->getIconUrl()}');
-                "></span>
-        ICON;
-
-        if (!$this->promoConfig['promoLink']) {
-            return $icon;
-        }
-
-        return <<<LINK
-            <a href="{$this->promoConfig['promoLink']}" target="_blank">
-                {$icon}
-            </a>
-        LINK;
-    }
-
-    protected function getIconUrl(): string
-    {
-        return $this->escaper->escapeUrl($this->assetRepository->getUrl($this->promoConfig['iconSrc']));
+        return $this->configLabelRender->renderLabelHtml($element, $this->promoConfig);
     }
 }

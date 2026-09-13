@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Google Invisible reCaptcha for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Google Invisible reCaptcha for Magento 2
+ */
 
 namespace Amasty\InvisibleCaptcha\Plugin\Framework\App\FrontControllerInterface;
 
@@ -101,12 +102,31 @@ class ValidateCaptcha
             foreach ($this->configProvider->getAllUrls() as $captchaUrl) {
                 if ($request->isPost()
                     && !$this->isInIgnoreList($captchaUrl)
-                    && false !== strpos($this->urlBuilder->getCurrentUrl(), $captchaUrl)
+                    && $this->isUrlMatch($this->urlBuilder->getCurrentUrl(), $captchaUrl)
                 ) {
                     $token = $request->getPost('g-recaptcha-response');
+
+                    if (!$token && $request->getContent()) {
+                        $data = json_decode($request->getContent(), true);
+                        if (!empty($data['g-recaptcha-response'])) {
+                            $token = $data['g-recaptcha-response'];
+                        }
+                    }
+
                     $validation = $this->captchaModel->verify($token);
 
                     if (!$validation['success']) {
+                        // Checkout login popup/email-step submit via AJAX (customer/ajax/login) and expect
+                        // a JSON {errors, message} body, not a session flash message + redirect.
+                        if ($request->isXmlHttpRequest()) {
+                            $response = $this->responseFactory->create();
+                            $response->setHeader('Content-Type', 'application/json', true);
+                            $response->setBody(json_encode(['errors' => true, 'message' => $validation['error']]));
+                            $response->setNoCacheHeaders();
+
+                            return $response;
+                        }
+
                         $this->messageManager->addErrorMessage($validation['error']);
                         $response = $this->responseFactory->create();
                         $response->setRedirect($this->redirect->getRefererUrl());
@@ -130,13 +150,32 @@ class ValidateCaptcha
     private function isInIgnoreList(string $captchaUrl): bool
     {
         if ($this->session->getCustomerGroupId() != Group::NOT_LOGGED_IN_ID) {
+            $captchaPath = trim($captchaUrl, '/');
             foreach ($this->ignoreListForLoggedIn as $ignoredUrl) {
-                if (false !== strpos($captchaUrl, $ignoredUrl)) {
+                if ($captchaPath === trim($ignoredUrl, '/')) {
                     return true;
                 }
             }
         }
 
         return false;
+    }
+
+    private function isUrlMatch(string $currentUrl, string $captchaUrl): bool
+    {
+        $captchaPath = trim($captchaUrl, '/');
+        if ($captchaPath === '') {
+            return false;
+        }
+
+        // phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
+        $currentPath = trim((string) parse_url($currentUrl, PHP_URL_PATH), '/');
+
+        return $this->isPathMatch($currentPath, $captchaPath);
+    }
+
+    private function isPathMatch(string $currentPath, string $captchaPath): bool
+    {
+        return (bool)preg_match('#(^|/)' . preg_quote($captchaPath, '#') . '(/|$)#', $currentPath);
     }
 }

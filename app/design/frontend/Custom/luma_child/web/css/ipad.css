@@ -1567,7 +1567,7 @@
 	.blog-category-view .advice-post-view-sec .post-holder {
 		width: 23% !important;
 		margin: 0 25px 30px 0 !important;
-		height: 420px;
+		height:420px;
 	}
 
 	.blog-category-view .advice-post-top .left-side .slick-track {
@@ -3433,10 +3433,10 @@
 		font-size: 14px;
 	}
 
-	.view-all-treatment button {
+	/*.view-all-treatment button {
 		line-height: 48px!important;
 		border: 0 !important;
-	}
+	}*/
 
 	.catalog-category-view .page-header .custom-menu-ul li.trustpoilet {
 		margin-top: 0 !important;
@@ -4200,7 +4200,7 @@
 	}
 }
 
-@media only screen and (min-width: 768px) {
+/*@media only screen and (min-width: 768px) {
 	.cms-index-index #popupbuilder-popup1.popupbuilder-popup-modal {
 		padding-top: 10px;
 	}
@@ -4237,7 +4237,7 @@
 	.cms-index-index #popupbuilder-popup1.popupbuilder-popup-modal {
 		left: 49.99% !important;
 	}
-}
+}*/
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
 	.block-customer-login.custom-block-customer-login {
@@ -11034,7 +11034,7 @@
 	}
 
 	.account.page-layout-2columns-left .column.main {
-		width: 65.7%;
+		width: 65.7% !important;
 		background-color: #F1F7F9;
 		padding: 45px 125px 45px 55px;
 		margin-bottom: 0;
@@ -11381,5 +11381,329 @@
 
 	.blog-bottom-review-team.wegoy-page-b .reviewved-by.sep-l {
 		margin-right: 0 !important;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+	.custom-col-category, .page-products.page-layout-1column .products-grid .product-item.custom-col-category, .cms-start-consultation-html .custom-col-category {
+		width: calc(50% - 30px);
+	}
+
+	.product-image img {
+		width: 100%;
+	}
+
+	.catalog-category-view .category-view .category-image {
+		margin-top: 0;
+	}
+
+	.catalog-category-view .category-cms {
+		margin-top: 50px;
+	}
+
+	.general-question-fixed, .customer-account-create, .customer-account-login, .catalog-category-view {
+		background-image: none;
+	}
+
+	.general-question-fixed .main-container {
+		width: 100%;
+		padding: 0;
+	}
+
+	.general-question-regpage-div {
+		flex-direction: column;
+		padding-left: 0;
+	}
+
+	.general-question-regpage-text {
+		width: 100%;
+	}
+
+	.general-question-regpage-text p {
+		width: 100%;
+	}
+
+	.general-question-regpage-btn {
+		width: auto;
+		margin-top: 30px;
+		margin-right: auto;
+		padding-left: 110px;
+		text-align: left;
+		justify-content: flex-start;
+	}
+
+	.general-question-fixed .main-container {
+		flex-direction: column;
+	}
+
+	.general-question-fixed .main-container .question-wrapper, .general-question-fixed .main-container .text-wrapper {
+		width: 100%;
+	}
+
+	.general-question-fixed .main-container .text-wrapper > * {
+		max-width: 100%;
+	}
+
+	.general-question-fixed .main-container .text-wrapper {
+		padding-top: 20px;
+	}
+
+	.general-question-fixed .main-container .text-wrapper .img-wrapper {
+		justify-content: center;
+	}
+
+	.general-question-fixed.active {
+		position: relative;
+	}
+
+	.form-create-account .field.captcha .control.captcha {
+		grid-template-columns: 65% auto;
+	}
+
+	.catalog-category-view .products-grid, .catalog-category-view .category-cms {
+		background-image: none;
+		width: 100%;
+		margin-left: auto;
+	}
+
+	.forgot-password-block {
+		width: 80%;
+	}
+
+	.popup-authentication.modal-popup.modal-slide._inner-scroll._show {
+		left: 0;
+		margin: 0 auto;
+		top: 80px;
+	}
+
+	.popup-authentication.modal-popup._inner-scroll .modal-inner-wrap {
+		width: 70%;
+		margin: 0 auto;
+	}
+
+	.popup-authentication.modal-popup._inner-scroll .modal-inner-wrap .modal-content {
+		padding: 15px;
+	}
+
+	.popup-authentication .block[class], .popup-authentication.modal-popup._inner-scroll .modal-inner-wrap .modal-content {
+		padding: 0;
+	}
+
+	.popup-authentication.modal-popup #block-customer-login-heading {
+		margin-top: 0.5rem;
+	}
+
+	.popup-authentication.modal-popup._inner-scroll .action-close {
+		padding: 25px;
+	}
+
+	.cms-register-success {
+		background-image: none;
+	}
+}
+
+@media only screen and (min-width: 1023px) and (max-width: 1100px) {
+	.general-question-fixed {
+		background-size: 300px;
+	}
+
+	.catalog-category-view .products-grid, .catalog-category-view .category-cms {
+		background-image: none;
+		width: 100%;
+		margin-left: auto;
+	}
+
+	.popup-authentication.modal-popup.modal-slide._inner-scroll._show {
+		left: 0;
+		margin: 0 auto;
+		top: 80px;
+	}
+
+	.popup-authentication.modal-popup._inner-scroll .modal-inner-wrap {
+		width: 60%;
+		margin: 0 auto;
+	}
+
+	.popup-authentication.modal-popup._inner-scroll .modal-inner-wrap .modal-content {
+		padding: 15px;
+	}
+}
+
+@media only screen and (min-width: 1025px) {
+	.custom-block-customer-register {
+		width: 70%;
+		margin-top: 80px;
+	}
+
+	.page-with-filter .category-cms {
+		margin-top: 155px;
+	}
+
+	.catalog-category-view .page-title-wrapper {
+		margin-top: 20px;
+	}
+}
+
+@media only screen and (max-width: 1024px) {
+	.home-sections-wrapper {
+		background-image: none;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+	.blog-page.blog-page-list .post-holder .item-post-list {
+		padding-bottom: 0 !important;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 977px) {
+	.catalog-product-view.page-layout-1column .page-main #itoris_dynamicproductoptions tr.fields .error-custom-terms-condition, .catalog-product-view.page-layout-1column .page-main #itoris_dynamicproductoptions tr.fields .error-terms-condition {
+		min-width: 315px !important;
+		font-size: 12px !important;
+		padding: 3px !important;
+		line-height: 16px !important;
+	}
+
+	.catalog-product-view.page-layout-1column #product-options-wrapper .fieldset.fieldset-section-1 {
+		max-height: 360px !important;
+	}
+
+	.error-custom-terms-condition {
+		bottom: -60px;
+	}
+
+	#itoris_dynamicproductoptions tr.fields td {
+		padding-bottom: 8px !important;
+	}
+
+	.catalog-product-view.page-layout-1column #itoris_dynamicproductoptions .form-list.option-fields-cols-1 .field .control input[type=file]:before {
+		padding-right: 16px !important;
+		padding-left: 16px !important;
+	}
+
+	.page-layout-1column.start_consultation .product-options-bottom {
+		width: 60% !important;
+	}
+
+	.page-layout-1column.start_consultation .product-info-main .product-options-bottom .box-tocart {
+		margin-top: 0 !important;
+	}
+
+	.page-layout-1column.start_consultation .product-info-main .price-box {
+		margin-top: 25px;
+	}
+}
+
+@media only screen and (min-width: 978px) and (max-width: 1024px) {
+	.catalog-product-view.page-layout-1column #product-options-wrapper .fieldset.fieldset-section-1 {
+		max-height: 360px !important;
+	}
+
+	.error-custom-terms-condition {
+		bottom: -60px;
+	}
+
+	#itoris_dynamicproductoptions tr.fields td {
+		padding-bottom: 8px !important;
+	}
+
+	.catalog-product-view.page-layout-1column #itoris_dynamicproductoptions .form-list.option-fields-cols-1 .field .control input[type=file]:before {
+		padding-right: 16px !important;
+		padding-left: 16px !important;
+	}
+
+	.page-layout-1column.start_consultation {
+		padding-top: 35px;
+		background: url(https://www.pharmacyplanet.com//static/frontend/Custom/luma_child/en_GB/images/question-page-bg_2.png) right -20px no-repeat !important;
+	}
+
+	.page-layout-1column.start_consultation .product-options-bottom {
+		width: 60% !important;
+	}
+
+	.page-layout-1column.start_consultation .product-info-main .product-options-bottom .box-tocart {
+		margin-top: 0 !important;
+	}
+
+	.page-layout-1column.start_consultation .product-info-main .price-box {
+		margin-top: 25px;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+	.page-layout-1column.start_consultation .product-info-main .p-description.order-message {
+		width: 90% !important;
+	}
+
+	.page-layout-1column.start_consultation button.before-start-consultation.question-text {
+		top: -230px !important;
+	}
+
+	.page-layout-1column.start_consultation #product-options-wrapper .fieldset.fieldset-section-1 {
+		max-height: 100% !important;
+	}
+
+	.page-layout-1column.start_consultation span.consultation-section.question-text.consultation-image.please-make-a-selection {
+		font-size: 25px !important;
+		overflow: hidden;
+	}
+
+	.page-layout-1column.start_consultation .product-info-main .p-description.please-make-a-selection br {
+		display: none;
+	}
+
+	.page-layout-1column.start_consultation #itoris_dynamicproductoptions tr.fields td {
+		padding: 0 !important;
+	}
+
+	.page-layout-1column.start_consultation .page-main #itoris_dynamicproductoptions tr.fields .error-custom-terms-condition, .page-layout-1column.start_consultation .page-main #itoris_dynamicproductoptions tr.fields .error-terms-condition {
+		min-width: 415px !important;
+		bottom: -50px;
+	}
+
+	.page-layout-1column.start_consultation .consultation-section.question-text.consultation-image.prev-btn {
+		top: 50px !important;
+	}
+}
+
+@media only screen and (min-width: 977px) and (max-width: 1024px) {
+	.page-layout-1column.start_consultation .consultation-section.question-text.consultation-image.prev-btn {
+		top: 38px !important;
+	}
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+	.catalog-product-view .modal-popup .modal-inner-wrap {
+		width: 60% !important;
+	}
+
+	.info-btn button {
+		width: 252px;
+	}
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 977px) {
+	.page-layout-1column.start_consultation .consultation-section .consultation_block {
+		width: 29%;
+	}
+
+	.page-layout-1column.start_consultation .consultation-section {
+		overflow-x: hidden;
+	}
+
+	.page-layout-1column.start_consultation .consultation-section .consultation_img {
+		width: 100px !important;
+	}
+
+	.page-layout-1column.start_consultation .consultation-section h4 {
+		width: 100px !important;
+	}
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+	.page-layout-1column.start_consultation button.before-start-consultation.question-text.no_custom_option {
+		top: 30px !important;
 	}
 }

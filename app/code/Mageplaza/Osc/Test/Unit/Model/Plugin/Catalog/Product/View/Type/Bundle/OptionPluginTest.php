@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Catalog\Product\View\Type\Bundle;
@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class OptionPlugin
- * @package Mageplaza\Osc\Model\Plugin\Catalog\Product\View\Type\Bundle
+ *
  */
 class OptionPluginTest extends TestCase
 {
@@ -43,7 +43,7 @@ class OptionPluginTest extends TestCase
      */
     private $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->helperMock = $this->getMockBuilder(Data::class)
             ->disableOriginalConstructor()->getMock();
@@ -56,7 +56,7 @@ class OptionPluginTest extends TestCase
          * @param Option $optionMock
          */
         $optionMock = $this->getMockBuilder(Option::class)
-            ->setMethods(['setTierPriceRenderer'])
+            ->addMethods(['setTierPriceRenderer'])
             ->disableOriginalConstructor()->getMock();
         if (class_exists('Magento\Bundle\Block\DataProviders\OptionPriceRenderer')) {
             $optionPriceRendererMock = $this->getMockBuilder(OptionPriceRenderer::class)

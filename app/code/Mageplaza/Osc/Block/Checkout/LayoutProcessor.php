@@ -13,15 +13,14 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Block\Checkout;
 
-use Amazon\Core\Helper\Data;
 use Magento\Checkout\Block\Checkout\AttributeMerger;
 use Magento\Checkout\Block\Checkout\LayoutProcessorInterface;
 use Magento\Checkout\Model\Session as CheckoutSession;
@@ -32,10 +31,6 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Ui\Component\Form\AttributeMapper;
 use Mageplaza\Osc\Helper\Address as OscHelper;
 
-/**
- * Class LayoutProcessor
- * @package Mageplaza\Osc\Block\Checkout
- */
 class LayoutProcessor implements LayoutProcessorInterface
 {
     /**
@@ -113,12 +108,21 @@ class LayoutProcessor implements LayoutProcessorInterface
         }
 
         $steps = &$jsLayout['components']['checkout']['children']['steps']['children'];
-        unset($steps['billing-step']['children']['payment']['children']
-            ['afterMethods']['children']['billing-address-form']);
+        unset(
+            $steps['billing-step']['children']['payment']['children']
+            ['afterMethods']['children']['billing-address-form']
+        );
 
         $shippingStep = &$steps['shipping-step']['children'];
 
-        /** Shipping address fields */
+        if (isset($shippingStep['shippingAddress']['children']['customer-email'])) {
+            $shippingStep['shippingAddress']['children']['customer-email']['template'] =
+                'Mageplaza_Osc/container/form/element/email';
+        }
+
+        /**
+         * Shipping address fields
+         */
         if (isset($shippingStep['shippingAddress']['children']['shipping-address-fieldset']['children'])) {
             $shipping = &$shippingStep['shippingAddress']['children'];
 
@@ -134,13 +138,17 @@ class LayoutProcessor implements LayoutProcessorInterface
                 $shippingConfig['children']['customer-email']['component'] = 'Mageplaza_Osc/js/view/form/element/email';
             }
 
-            /** Fix the issue of the unsaved vat_id field */
+            /**
+             * Fix the issue of the unsaved vat_id field
+             */
             if (isset($shipping['shipping-address-fieldset']['children']['taxvat'])) {
                 $shipping['shipping-address-fieldset']['children']['taxvat']['dataScope'] = 'shippingAddress.vat_id';
             }
         }
 
-        /** Billing address fields */
+        /**
+         * Billing address fields
+         */
         if (isset($shippingStep['billingAddress']['children']['billing-address-fieldset']['children'])) {
             $billing = &$shippingStep['billingAddress']['children'];
 
@@ -149,12 +157,16 @@ class LayoutProcessor implements LayoutProcessorInterface
                 'billingAddress'
             );
 
-            /** Fix the issue of the unsaved vat_id field */
+            /**
+             * Fix the issue of the unsaved vat_id field
+             */
             if (isset($billing['billing-address-fieldset']['children']['taxvat'])) {
                 $billing['billing-address-fieldset']['children']['taxvat']['dataScope'] = 'billingAddress.vat_id';
             }
 
-            /** Remove billing customer email if quote is not virtual */
+            /**
+             * Remove billing customer email if quote is not virtual
+             */
             if (!$this->checkoutSession->getQuote()->isVirtual()) {
                 unset($billing['customer-email']);
             }
@@ -162,12 +174,17 @@ class LayoutProcessor implements LayoutProcessorInterface
 
         $billingStep = &$steps['billing-step']['children'];
 
-        /** Remove billing address in payment method content */
-        /** @var array $fields */
+        /**
+         * Remove billing address in payment method content
+         */
+        /**
+         * @var array $fields
+         */
         $fields = &$billingStep['payment']['children']['payments-list']['children'];
         foreach ($fields as $code => $field) {
-            if (array_key_exists('component', $field) &&
-                $field['component'] === 'Magento_Checkout/js/view/billing-address') {
+            if (array_key_exists('component', $field)
+                && $field['component'] === 'Magento_Checkout/js/view/billing-address'
+            ) {
                 unset($fields[$code]);
             }
         }
@@ -206,9 +223,8 @@ class LayoutProcessor implements LayoutProcessorInterface
      */
     public function disableOAComponent(&$jsLayout)
     {
-        if (!isset($jsLayout['components']['checkout']['children']['sidebar']['children']
-            ['place-order-information-left']['children']['addition-information']['children']
-            ['mpOrderAttributes']['children'])) {
+        if (!isset($jsLayout['components']['checkout']['children']['sidebar']['children']['place-order-information-left']['children']['addition-information']['children']['mpOrderAttributes']['children'])
+        ) {
             $jsLayout['components']['checkout']['children']['sidebar']['children']
             ['place-order-information-left']['children']['addition-information']['children']
             ['mpOrderAttributes']['config']['componentDisabled'] = true;
@@ -258,7 +274,9 @@ class LayoutProcessor implements LayoutProcessorInterface
         $oscField        = [];
         $allFieldSection = $this->_oscHelper->getSortedField(false);
         foreach ($allFieldSection as $allField) {
-            /** @var Attribute $field */
+            /**
+             * @var Attribute $field
+             */
             foreach ($allField as $field) {
                 $oscField[] = $field->getAttributeCode();
             }
@@ -280,8 +298,10 @@ class LayoutProcessor implements LayoutProcessorInterface
          * Compatible Amazon Pay
          */
         if ($this->_oscHelper->isEnableAmazonPay()) {
-            /** @var Data $amazonHelper */
-            $amazonHelper = $this->_oscHelper->getObject(Data::class);
+            /**
+             * @var \Amazon\Core\Helper\Data $amazonHelper
+             */
+            $amazonHelper = $this->_oscHelper->getObject(\Amazon\Core\Helper\Data::class);
             if ($amazonHelper->isPwaEnabled()) {
                 $fields['inline-form-manipulator'] = [
                     'component' => 'Mageplaza_Osc/js/view/amazon'
@@ -348,9 +368,7 @@ class LayoutProcessor implements LayoutProcessorInterface
                     continue;
                 }
 
-                if ($code !== 'mpOrderAttributes' &&
-                    (in_array($code, $oscField, true) || $this->_oscHelper->isEnableCustomerAttributes())
-                ) {
+                if ($code !== 'mpOrderAttributes' && in_array($code, $oscField, true)) {
                     unset($fields[$code]);
                 }
 
@@ -370,10 +388,13 @@ class LayoutProcessor implements LayoutProcessorInterface
             }
 
             if (((isset($field['config']['elementTmpl'])
-                    && $field['config']['elementTmpl'] === 'ui/form/element/date')
+                    && $field['config']['elementTmpl'] === 'ui/form/element/date'
+                    && !isset($field['options']['mpDateFormat']))
                 || in_array($code, ['dob', 'mposc_field_3'], true))
             ) {
-                if (!isset($field['fieldType']) || (isset($field['fieldType']) && $field['fieldType'] !== 'datetime')) {
+                if (!isset($field['fieldType'])
+                    || (isset($field['fieldType']) && !in_array($field['fieldType'], ['datetime', 'time']))
+                ) {
                     $classes            .= ' date';
                     $field['component'] = 'Mageplaza_Osc/js/view/form/element/date';
                     $field['options']   = [
@@ -453,9 +474,9 @@ class LayoutProcessor implements LayoutProcessorInterface
                 }
 
                 $child['config']['additionalClasses'] = $classes;
-                if ($key === 0 &&
-                    $this->_oscHelper->isGoogleHttps() &&
-                    in_array('street', explode('.', $field['dataScope']), true)
+                if ($key === 0
+                    && $this->_oscHelper->isGoogleHttps()
+                    && in_array('street', explode('.', $field['dataScope']), true)
                 ) {
                     $this->rewriteTemplate($child, $fieldConfig, 'Mageplaza_Osc/container/form/element/street');
                     continue;
@@ -516,7 +537,9 @@ class LayoutProcessor implements LayoutProcessorInterface
                 $formCode
             );
 
-            /** @var Attribute $attribute */
+            /**
+             * @var Attribute $attribute
+             */
             foreach ($attributes->getItems() as $attribute) {
                 $code = $attribute->getAttributeCode();
 

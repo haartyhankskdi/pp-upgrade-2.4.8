@@ -1,0 +1,42 @@
+<?php
+/**
+ * This software is the confidential and proprietary information of Autify Digital Ltd.
+ * Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+ * Copyright (c) 2020-Present Autify Digital Ltd Autify Digital Ltd.
+ * All rights reserved. Distribution and disclosure are permitted only in accordance with
+ * the terms of a valid written agreement with Autify Digital Ltd.
+ */
+?>
+<?php
+use AutifyDigital\LloydscardnetPayment\Helper\Data;
+use Magento\GroupedProduct\Model\Product\Type\Grouped;
+use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
+
+/** @var \AutifyDigital\LloydscardnetPayment\Block\Applepay\Product $block */
+$autifyDigitalHelper = $block->getHelper();
+$product = $block->getProduct();
+
+if ($autifyDigitalHelper->displayProductApplePay() &&
+$autifyDigitalHelper->getApplepayPaymentMethodInteration() == 'onsite') { ?>
+    <?php
+    if ($product->getTypeId() === Configurable::TYPE_CODE) {
+        $applePayPrice = (float) $product->getFinalPrice();
+    } elseif ($product->getTypeId() === Grouped::TYPE_CODE) {
+        $groupedProducts = $product->getTypeInstance()->getAssociatedProducts($product);
+        $applePayPrice = (float) $groupedProducts[0]->getPrice();
+    } else {
+        $applePayPrice = (float) $product->getPriceInfo()->getPrice('final_price')->getAmount()->getValue();
+    }
+
+    ?>
+    <div id="apple-pay-button-container"
+    class="apple-pay-button-container"
+    data-applepay-price="<?= $escaper->escapeHtmlAttr($applePayPrice) ?>"></div>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "AutifyDigital_LloydscardnetPayment/js/view/product-applepay": {}
+            }
+        }
+    </script>
+<?php } ?>

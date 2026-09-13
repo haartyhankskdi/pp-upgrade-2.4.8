@@ -1,0 +1,30 @@
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">helpdesk_activity.helpdesk_activity_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>columns</spinner>
+        <deps>
+            <dep>helpdesk_activity.helpdesk_activity_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="helpdesk_activity_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">identity</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <dataProvider class="Mirasvit\Helpdesk\Ui\DataProvider\Activity" name="helpdesk_activity_data_source">
+            <settings>
+                <requestFieldName>identity</requestFieldName>
+                <primaryFieldName>identity</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <columns name="columns" component="Mirasvit_Helpdesk/js/ticket/listing/activity" template="Mirasvit_Helpdesk/ticket/listing/activity">
+
+    </columns>
+</listing>

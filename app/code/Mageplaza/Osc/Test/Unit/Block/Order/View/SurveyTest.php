@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Block\Order\View;
@@ -31,7 +31,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class Survey
- * @package Mageplaza\Osc\Block\Order\View
+ *
  */
 class SurveyTest extends TestCase
 {
@@ -50,7 +50,7 @@ class SurveyTest extends TestCase
      */
     protected $surveyBlock;
 
-    public function setUp()
+    public function setUp(): void
     {
         /**
          * @var Context|MockObject $contextMock
@@ -76,7 +76,7 @@ class SurveyTest extends TestCase
     public function testGetSurveyQuestion()
     {
         $orderMock = $this->getMockBuilder(Order::class)
-            ->setMethods(['getOscSurveyQuestion'])
+            ->addMethods(['getOscSurveyQuestion'])
             ->disableOriginalConstructor()->getMock();
         $this->coreRegistryMock->expects($this->once())
             ->method('registry')
@@ -100,7 +100,7 @@ class SurveyTest extends TestCase
     public function testGetSurveyAnswers()
     {
         $orderMock = $this->getMockBuilder(Order::class)
-            ->setMethods(['getOscSurveyAnswers'])
+            ->addMethods(['getOscSurveyAnswers'])
             ->disableOriginalConstructor()->getMock();
         $this->coreRegistryMock->expects($this->once())
             ->method('registry')

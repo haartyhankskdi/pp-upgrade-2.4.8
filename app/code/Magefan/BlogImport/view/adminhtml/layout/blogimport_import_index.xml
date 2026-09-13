@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="jquery/fileUploader/css/jquery.fileupload-ui.css"/>
+        <css src="Magefan_BlogImport::css/import.css"/>
+    </head>
+    <update handle="editor"/>
+    <update handle="blog_update_info"/>
+    <body>
+        <referenceContainer name="content">
+            <container name="mfblog.import.items" htmlTag="div" htmlClass="mfblog-imports" >
+                <block name="mfblog.import.wp.extra" template="Magefan_BlogImport::import/item.phtml">
+                    <arguments>
+                        <argument name="import_path" xsi:type="string">blogimport/import/wpextra</argument>
+                        <argument name="label" xsi:type="string">WordPress (New)</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/wordpress.png</argument>
+                    </arguments>
+                </block>
+                <block name="mfblog.import.wordpress" template="Magefan_BlogImport::import/item.phtml">
+                    <arguments>
+                        <argument name="import_type" xsi:type="string">wordpress</argument>
+                        <argument name="label" xsi:type="string">WordPress (using DataBase)</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/wordpress.png</argument>
+                    </arguments>
+                </block>
+                <block name="mfblog.import.mageplaza" template="Magefan_BlogImport::import/item.phtml">
+                    <arguments>
+                        <argument name="import_type" xsi:type="string">mageplaza</argument>
+                        <argument name="label" xsi:type="string">Mageplaza (Magento 2)</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/mageplaza.png</argument>
+                    </arguments>
+                </block>
+                <block name="mfblog.import.mageplaza1" template="Magefan_BlogImport::import/item.phtml">
+                    <arguments>
+                        <argument name="import_type" xsi:type="string">mageplaza1</argument>
+                        <argument name="label" xsi:type="string">Mageplaza (Magento 1)</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/mageplaza.png</argument>
+                    </arguments>
+                </block>
+                <block name="mfblog.import.amasty2" template="Magefan_BlogImport::import/item.phtml" >
+                    <arguments>
+                        <argument name="import_url" xsi:type="string">https://magefan.com/magento2-blog-extension/pricing</argument>
+                        <argument name="import_type" xsi:type="string">amasty2</argument>
+                        <argument name="label" xsi:type="string">Amasty (Magento 2)</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/amasty.png</argument>
+                    </arguments>
+                </block>
+                <block name="mfblog.import.amasty1" template="Magefan_BlogImport::import/item.phtml" >
+                    <arguments>
+                        <argument name="import_url" xsi:type="string">https://magefan.com/magento2-blog-extension/pricing</argument>
+                        <argument name="import_type" xsi:type="string">amasty1</argument>
+                        <argument name="label" xsi:type="string">Amasty (Magento 1)</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/amasty.png</argument>
+                    </arguments>
+                </block>
+                <block name="mfblog.import.aw2" template="Magefan_BlogImport::import/item.phtml">
+                    <arguments>
+                        <argument name="import_type" xsi:type="string">aw2</argument>
+                        <argument name="label" xsi:type="string">AheadWorks (Magento 2)</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/aheadworks.png</argument>
+                    </arguments>
+                </block>
+                <block name="mfblog.import.aw" template="Magefan_BlogImport::import/item.phtml">
+                    <arguments>
+                        <argument name="import_type" xsi:type="string">aw</argument>
+                        <argument name="label" xsi:type="string">AheadWorks (Magento 1)</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/aheadworks.png</argument>
+                    </arguments>
+                </block>
+                <block name="mfblog.import.mirasvit" template="Magefan_BlogImport::import/item.phtml">
+                    <arguments>
+                        <argument name="import_type" xsi:type="string">mirasvit</argument>
+                        <argument name="label" xsi:type="string">Mirasvit (Magento 2)</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/mirasvit.png</argument>
+                    </arguments>
+                </block>
+                <block name="mfblog.import.csvxml" template="Magefan_BlogImport::import/item.phtml">
+                    <arguments>
+                        <argument name="import_url" xsi:type="string">https://magefan.com/magento2-blog-extension/pricing</argument>
+                        <argument name="import_type" xsi:type="string">csvxml</argument>
+                        <argument name="import_path" xsi:type="string">blogimport/import/step1</argument>
+                        <argument name="label" xsi:type="string">CSV/XML File</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/csv.png</argument>
+                    </arguments>
+                </block>
+                <block name="mfblog.import.joomla" template="Magefan_BlogImport::import/item.phtml">
+                    <arguments>
+                        <argument name="import_url" xsi:type="string">https://magefan.com/magento2-blog-extension/pricing</argument>
+                        <argument name="import_type" xsi:type="string">joomla</argument>
+                        <argument name="label" xsi:type="string">Joomla</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/joomla.png</argument>
+                    </arguments>
+                </block>
+                <!--<block name="mfblog.import.em" template="Magefan_BlogImport::import/item.phtml">
+                    <arguments>
+                        <argument name="import_url" xsi:type="string">https://magefan.com/magento2-blog-extension/pricing</argument>
+                        <argument name="import_type" xsi:type="string">em</argument>
+                        <argument name="label" xsi:type="string">EM Themes</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/em_m1.jpg</argument>
+                    </arguments>
+                </block>-->
+                <block name="mfblog.import.hubspot" template="Magefan_BlogImport::import/item.phtml" >
+                    <arguments>
+                        <argument name="import_url" xsi:type="string">https://magefan.com/magento2-blog-extension/pricing</argument>
+                        <argument name="import_type" xsi:type="string">hubspot</argument>
+                        <argument name="import_path" xsi:type="string">blogimport/import/hubspot</argument>
+                        <argument name="label" xsi:type="string">HubSpot</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/HubSpot.png</argument>
+                    </arguments>
+                </block>
+                <block name="mfblog.import.drupal" template="Magefan_BlogImport::import/item.phtml" >
+                    <arguments>
+                        <argument name="import_url" xsi:type="string">https://magefan.com/magento2-blog-extension/pricing</argument>
+                        <argument name="import_type" xsi:type="string">drupal</argument>
+                        <argument name="label" xsi:type="string">Drupal</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/drupal-1.png</argument>
+                    </arguments>
+                </block>
+                <block name="mfblog.import.custom" template="Magefan_BlogImport::import/item.phtml">
+                    <arguments>
+                        <argument name="import_url" xsi:type="string">https://magefan.com/contact</argument>
+                        <argument name="label" xsi:type="string">Contact Magefan Team</argument>
+                        <argument name="image" xsi:type="string">Magefan_BlogImport::images/custom.png</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

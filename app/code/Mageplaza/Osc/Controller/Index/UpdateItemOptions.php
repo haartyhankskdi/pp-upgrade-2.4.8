@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Controller\Index;
@@ -32,15 +32,11 @@ use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Data\Form\FormKey\Validator;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Filter\LocalizedToNormalized;
 use Magento\Framework\Locale\ResolverInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
+use Magento\Framework\Filter\LocalizedToNormalized;
 
-/**
- * Class UpdateItemOptions
- * @package Mageplaza\Osc\Controller\Index
- */
 class UpdateItemOptions extends Cart
 {
     /**
@@ -61,15 +57,15 @@ class UpdateItemOptions extends Cart
     /**
      * UpdateItemOptions constructor.
      *
-     * @param Context $context
-     * @param ScopeConfigInterface $scopeConfig
-     * @param Session $checkoutSession
+     * @param Context               $context
+     * @param ScopeConfigInterface  $scopeConfig
+     * @param Session               $checkoutSession
      * @param StoreManagerInterface $storeManager
-     * @param Validator $formKeyValidator
-     * @param CustomerCart $cart
-     * @param ResolverInterface $resolver
-     * @param JsonFactory $resultJsonFactory
-     * @param LoggerInterface $logger
+     * @param Validator             $formKeyValidator
+     * @param CustomerCart          $cart
+     * @param ResolverInterface     $resolver
+     * @param JsonFactory           $resultJsonFactory
+     * @param LoggerInterface       $logger
      */
     public function __construct(
         Context $context,
@@ -96,7 +92,9 @@ class UpdateItemOptions extends Cart
      */
     public function execute()
     {
-        /** @var Json $resultJson */
+        /**
+ * @var Json $resultJson
+*/
         $resultJson = $this->resultJsonFactory->create();
 
         $id = (int)$this->getRequest()->getParam('id');
@@ -108,9 +106,11 @@ class UpdateItemOptions extends Cart
 
         try {
             if (isset($params['qty'])) {
-                $filter = new LocalizedToNormalized([
+                $filter = new LocalizedToNormalized(
+                    [
                     'locale' => $this->resolver->getLocale()
-                ]);
+                    ]
+                );
                 $params['qty'] = $filter->filter($params['qty']);
             }
 

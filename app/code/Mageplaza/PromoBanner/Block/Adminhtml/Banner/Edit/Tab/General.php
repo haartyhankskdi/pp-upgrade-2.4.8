@@ -86,9 +86,9 @@ class General extends Generic implements TabInterface
         array $data = []
     ) {
         $this->_customerCollection = $customerCollection;
-        $this->systemStore         = $systemStore;
-        $this->statusOptions       = $statusOptions;
-        $this->helperData          = $helperData;
+        $this->systemStore = $systemStore;
+        $this->statusOptions = $statusOptions;
+        $this->helperData = $helperData;
 
         parent::__construct($context, $registry, $formFactory, $data);
     }
@@ -106,25 +106,25 @@ class General extends Generic implements TabInterface
         $form = $this->_formFactory->create();
         $form->setHtmlIdPrefix('mppromobanner_');
         $form->setFieldNameSuffix('mppromobanner');
-        $fieldset = $form->addFieldset('base_fieldset', [
+        $fieldset = $form->addFieldset('general_base_fieldset', [
             'legend' => __('Item Information'),
-            'class'  => 'fieldset-wide'
+            'class' => 'fieldset-wide'
         ]);
         if ($model->getId()) {
             $fieldset->addField('banner_id', 'hidden', ['name' => 'banner_id']);
         }
 
         $fieldset->addField('name', 'text', [
-            'name'     => 'name',
-            'label'    => __('Name'),
-            'title'    => __('Name'),
+            'name' => 'name',
+            'label' => __('Name'),
+            'title' => __('Name'),
             'required' => true
         ]);
 
         $fieldset->addField('status', 'select', [
-            'name'   => 'status',
-            'label'  => __('Status'),
-            'title'  => __('Status'),
+            'name' => 'status',
+            'label' => __('Status'),
+            'title' => __('Status'),
             'values' => $this->statusOptions->toOptionArray()
         ]);
         if (!$model->getId()) {
@@ -133,7 +133,7 @@ class General extends Generic implements TabInterface
 
         if ($this->_storeManager->isSingleStoreMode()) {
             $fieldset->addField('store_ids', 'hidden', [
-                'name'  => 'store_ids',
+                'name' => 'store_ids',
                 'value' => $this->_storeManager->getStore()->getId()
             ]);
             $model->setStoreIds(0);
@@ -141,11 +141,11 @@ class General extends Generic implements TabInterface
             /** @var RendererInterface $rendererBlock */
             $rendererBlock = $this->getLayout()->createBlock(Element::class);
             $fieldset->addField('store_ids', 'multiselect', [
-                'name'     => 'store_ids',
-                'label'    => __('Store Views'),
-                'title'    => __('Store Views'),
+                'name' => 'store_ids',
+                'label' => __('Store Views'),
+                'title' => __('Store Views'),
                 'required' => true,
-                'values'   => $this->systemStore->getStoreValuesForForm(false, true)
+                'values' => $this->systemStore->getStoreValuesForForm(false, true)
             ])->setRenderer($rendererBlock);
             if (!$model->hasData('store_ids')) {
                 $model->setStoreIds(0);
@@ -153,42 +153,42 @@ class General extends Generic implements TabInterface
         }
 
         $fieldset->addField('customer_group_ids', 'multiselect', [
-            'name'     => 'customer_group_ids[]',
-            'label'    => __('Customer Groups'),
-            'title'    => __('Customer Groups'),
+            'name' => 'customer_group_ids[]',
+            'label' => __('Customer Groups'),
+            'title' => __('Customer Groups'),
             'required' => true,
-            'values'   => $this->_customerCollection->toOptionArray(),
-            'note'     => __('Select customer group(s) to display the promo banner to')
+            'values' => $this->_customerCollection->toOptionArray(),
+            'note' => __('Select customer group(s) to display the promo banner to')
         ]);
 
         $fieldset->addField('category', 'select', [
-            'name'   => 'category',
-            'label'  => __('Promotion Category'),
-            'title'  => __('Promotion Category'),
+            'name' => 'category',
+            'label' => __('Promotion Category'),
+            'title' => __('Promotion Category'),
             'values' => $this->helperData->getCategoryList()
         ]);
 
         $fieldset->addField('from_date', 'date', [
-            'name'        => 'from_date',
-            'label'       => __('Start Date'),
-            'title'       => __('Start Date'),
+            'name' => 'from_date',
+            'label' => __('Start Date'),
+            'title' => __('Start Date'),
             'date_format' => 'M/d/yyyy',
-            'timezone'    => false
+            'timezone' => false
         ]);
 
         $fieldset->addField('to_date', 'date', [
-            'name'        => 'to_date',
-            'label'       => __('End Date'),
-            'title'       => __('End Date'),
+            'name' => 'to_date',
+            'label' => __('End Date'),
+            'title' => __('End Date'),
             'date_format' => 'M/d/yyyy',
-            'timezone'    => false
+            'timezone' => false
         ]);
 
         $fieldset->addField('priority', 'text', [
-            'name'  => 'priority',
+            'name' => 'priority',
             'label' => __('Priority'),
             'class' => 'validate-digits',
-            'note'  => __('Default is 0. The promo banner with the lower number will get the higher priority.')
+            'note' => __('Default is 0. The promo banner with the lower number will get the higher priority.')
         ]);
 
         $form->setValues($model->getData());

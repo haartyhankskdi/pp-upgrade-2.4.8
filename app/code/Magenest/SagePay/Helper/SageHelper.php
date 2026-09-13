@@ -314,7 +314,11 @@ class SageHelper extends AbstractHelper
      */
     public function getInstructions()
     {
-        return preg_replace('/\s+|\n+|\r/', ' ', $this->getConfigValue('instructions'));
+        $instructions = $this->getConfigValue('instructions');
+        if ($instructions === null) {
+            return $instructions;
+        }
+        return preg_replace('/\s+|\n+|\r/', ' ', $instructions);
     }
 
     /**
@@ -1123,8 +1127,8 @@ class SageHelper extends AbstractHelper
         $applyCcv = $this->getIsApplyCvcCheck();
         $testDomain = $this->getConfigValue('test_domain');
         $liveDomain = $this->getConfigValue('live_domain');
-        $testDomain = rtrim($testDomain, "/") . '/';
-        $liveDomain = rtrim($liveDomain, "/") . '/';
+        $testDomain = rtrim((string)$testDomain, "/") . '/';
+        $liveDomain = rtrim((string)$liveDomain, "/") . '/';
         if (!$testDomain) {
             $testDomain = $baseUrl;
         }

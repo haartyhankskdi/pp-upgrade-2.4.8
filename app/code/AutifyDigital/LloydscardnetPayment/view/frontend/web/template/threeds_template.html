@@ -1,0 +1,99 @@
+<!--
+/*
+ * This software is the confidential and proprietary information of Autify Digital Ltd.
+ * Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+ * Copyright (c) 2020-Present Autify Digital Ltd.
+ * This work is protected under applicable copyright and intellectual property laws.
+ * All rights reserved. Distribution and disclosure are permitted only in accordance with
+ * the terms of a valid written agreement with Autify Digital Ltd.
+ */
+-->
+<div class="hidden-form" style="visibility:hidden;position:absolute;top:-9999px;">
+    {THREEDS_DATA}
+</div>
+<div id="loader-container"
+     style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;
+            display: flex;align-items: center;justify-content: center;
+            flex-direction: column;z-index: 9999;background:#fff;">
+    <div class="loader"
+         style="border: 4px solid #f3f3f3;border-top: 4px solid #007bff;
+                border-radius: 50%;width: 50px;height: 50px;
+                animation: spin 1s linear infinite;margin: 10px;">
+    </div>
+    <p class="loader-text" style="font-size:16px;color:#333;text-align:center;">
+        {PROCESSING_MESSAGE}
+    </p>
+</div>
+<style>
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+<script>
+    (function() {
+        var url = "{REDIRECT_URL}";
+        var ipgId = "{IPG_ID}";
+        var count = 0;
+        var submitted = false;
+        var maxAttempts = 10;
+
+        function submit3DS(data) {
+            if (submitted || !data || !data.action || !data.fields) return;
+            submitted = true;
+            var f = document.createElement('form');
+            f.method = 'POST';
+            f.action = data.action;
+            Object.keys(data.fields).forEach(function (name) {
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = name;
+                input.value = data.fields[name];
+                f.appendChild(input);
+            });
+            document.body.appendChild(f);
+            f.submit();
+        }
+
+        function threeDsRequest() {
+            if (++count > maxAttempts) {
+                console.log(count + " Performed");
+                window.location.href = url;
+                return;
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url + (url.indexOf('?') > -1 ? '&' : '?') + 'ajax_check=1', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    try {
+                        var r = JSON.parse(xhr.responseText);
+                        if (r.status === 'challenge_required') submit3DS(r.challenge_data);
+                        else if (r.status === 'complete' || r.status === 'failed' || r.status === 'error') {
+                            window.location.href = r.redirect_url;
+                            return;
+                        } else {
+                            scheduleNext();
+                        }
+                    } catch(e) {
+                        scheduleNext();
+                    }
+                } else {
+                    scheduleNext();
+                }
+            };
+            xhr.onerror = function() {
+                scheduleNext();
+            };
+            xhr.send('ipg_id=' + encodeURIComponent(ipgId) + '&attempt=' + count);
+        }
+
+        function scheduleNext() {
+            setTimeout(threeDsRequest, 1000);
+        }
+
+        setTimeout(threeDsRequest, 1000);
+    })();
+</script>

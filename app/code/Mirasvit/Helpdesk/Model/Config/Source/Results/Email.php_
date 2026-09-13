@@ -1,0 +1,23 @@
+<?php
+
+namespace Mirasvit\Helpdesk\Model\Config\Source\Results;
+
+class Email implements \Magento\Framework\Option\ArrayInterface
+{
+    /**
+     * @return array
+     */
+    public function toOptionArray()
+    {
+        $result = [];
+
+        foreach ($this->toArray() as $k => $v) {
+            //@mst bug??? unused??
+            $result[] = ['value' => $k, 'label' => $v];
+        }
+
+        return $result;
+    }
+
+    /************************/
+}

@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\CustomerCustomAttributes\Checkout;
@@ -24,10 +24,6 @@ namespace Mageplaza\Osc\Model\Plugin\CustomerCustomAttributes\Checkout;
 use Magento\CustomerCustomAttributes\Block\Checkout\LayoutProcessor;
 use Mageplaza\Osc\Helper\Address;
 
-/**
- * Class LayoutProcessorPlugin
- * @package Mageplaza\Osc\Model\Plugin\CustomerCustomAttributes\Checkout
- */
 class LayoutProcessorPlugin
 {
     /**
@@ -47,7 +43,7 @@ class LayoutProcessorPlugin
 
     /**
      * @param LayoutProcessor $subject
-     * @param array $jsLayout
+     * @param array           $jsLayout
      *
      * @return array
      */
@@ -87,8 +83,8 @@ class LayoutProcessorPlugin
      */
     private function mergeCustomAttributes(&$jsLayout)
     {
-        if (empty($jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
-        ['children']['shippingAddress']['children']['shipping-address-fieldset']['children'])) {
+        if (empty($jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']            ['children']['shippingAddress']['children']['shipping-address-fieldset']['children'])
+        ) {
             return;
         }
 

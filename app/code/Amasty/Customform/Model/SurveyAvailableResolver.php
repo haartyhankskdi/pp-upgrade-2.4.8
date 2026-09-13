@@ -1,21 +1,26 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
 
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
+
 namespace Amasty\Customform\Model;
 
+use Amasty\Base\Model\GetCustomerIp;
 use Amasty\Customform\Api\Data\AnswerInterface;
+use Magento\Customer\Model\Context;
 use Magento\Customer\Model\SessionFactory;
 use Magento\Framework\Api\FilterFactory;
 use Magento\Framework\Api\Search\FilterGroupFactory;
+use Magento\Framework\Api\SearchCriteria;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Http\Context as HttpContext;
-use Magento\Framework\Api\SearchCriteria;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Message\ManagerInterface;
 
 class SurveyAvailableResolver
 {
@@ -45,7 +50,7 @@ class SurveyAvailableResolver
     private $httpContext;
 
     /**
-     * @var \Magento\Framework\Message\ManagerInterface
+     * @var ManagerInterface
      */
     private $messageManager;
 
@@ -55,9 +60,9 @@ class SurveyAvailableResolver
     private $searchCriteriaBuilder;
 
     /**
-     * @var \Amasty\Customform\Helper\Data
+     * @var GetCustomerIp
      */
-    private $helper;
+    private $customerIp;
 
     public function __construct(
         AnswerRepository $answerRepository,
@@ -65,9 +70,9 @@ class SurveyAvailableResolver
         FilterGroupFactory $filterGroupFactory,
         SessionFactory $customerSessionFactory,
         HttpContext $httpContext,
-        \Magento\Framework\Message\ManagerInterface $messageManager,
-        \Amasty\Customform\Helper\Data $helper,
-        SearchCriteriaBuilder $searchCriteriaBuilder
+        ManagerInterface $messageManager,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        GetCustomerIp $customerIp
     ) {
 
         $this->answerRepository = $answerRepository;
@@ -77,14 +82,14 @@ class SurveyAvailableResolver
         $this->httpContext = $httpContext;
         $this->messageManager = $messageManager;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
-        $this->helper = $helper;
+        $this->customerIp = $customerIp;
     }
 
     public function isSurveyAvailable(int $formId): bool
     {
         try {
             $list = $this->answerRepository->getListFilter($this->prepareSearchCriteria($formId));
-        } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
+        } catch (NoSuchEntityException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
             $list = [];
         }
@@ -99,13 +104,13 @@ class SurveyAvailableResolver
             ->setConditionType('eq');
         $filterGroup1 = $this->filterGroupFactory->create()->setFilters([$filter]);
 
-        if ($this->httpContext->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH)) {
+        if ($this->httpContext->getValue(Context::CONTEXT_AUTH)) {
             $filters[] = $this->filterFactory->create()->setField(AnswerInterface::CUSTOMER_ID)
                 ->setValue($this->customerSessionFactory->create()->getId())
                 ->setConditionType('eq');
         }
         $filters[] = $this->filterFactory->create()->setField(AnswerInterface::IP)
-            ->setValue($this->helper->getCurrentIp())
+            ->setValue($this->customerIp->getCurrentIp())
             ->setConditionType('eq');
         $filterGroup2 = $this->filterGroupFactory->create()->setFilters($filters);
         $this->searchCriteriaBuilder->setFilterGroups([$filterGroup1, $filterGroup2]);

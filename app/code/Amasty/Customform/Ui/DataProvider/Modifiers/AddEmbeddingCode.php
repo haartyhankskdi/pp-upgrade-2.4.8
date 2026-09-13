@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Ui\DataProvider\Modifiers;
 
@@ -27,7 +28,7 @@ class AddEmbeddingCode implements ModifierInterface
         );
 
         $data['template'] = sprintf(
-            '<?= $this->helper("Amasty\Customform\Helper\Data")->renderForm("%s") ?>',
+            '<?= $this->helper("Amasty\Customform\Helper\Data")->renderForm(%s) ?>',
             (int) $data[FormInterface::FORM_ID]
         );
 

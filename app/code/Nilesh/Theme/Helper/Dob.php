@@ -13,9 +13,10 @@ class Dob extends AbstractHelper
      */
     public function getDay($date)
     {
-        if(!empty($date)){
-            $date = str_replace("/","-",$date);
+        if (empty($date)) {
+            return '';
         }
+        $date = str_replace("/","-",$date);
         $date = strtotime($date);
         return $date ? date('d', $date) : '';
     }
@@ -26,10 +27,11 @@ class Dob extends AbstractHelper
      * @return string|bool
      */
     public function getMonth($date)
-    {   
-        if(!empty($date)){
-            $date = str_replace("/","-",$date);
+    {
+        if (empty($date)) {
+            return '';
         }
+        $date = str_replace("/","-",$date);
         $date = strtotime($date);
         return $date ? date('m', $date) : '';
     }
@@ -41,9 +43,10 @@ class Dob extends AbstractHelper
      */
     public function getYear($date)
     {
-        if(!empty($date)){
-            $date = str_replace("/","-",$date);
+        if (empty($date)) {
+            return '';
         }
+        $date = str_replace("/","-",$date);
         $date = strtotime($date);
         return $date ? date('Y', $date) : '';
     }
@@ -55,9 +58,10 @@ class Dob extends AbstractHelper
      */
     public function getFormatedDob($date)
     {
-        if(!empty($date)){
-            $date = str_replace("/","-",$date);
+        if (empty($date)) {
+            return '';
         }
+        $date = str_replace("/","-",$date);
         $date = strtotime($date);
         return $date ? date('d/m/Y', $date) : '';
     }

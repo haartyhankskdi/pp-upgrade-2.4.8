@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\Sales\Order\Address;
@@ -24,10 +24,6 @@ namespace Mageplaza\Osc\Model\Plugin\Sales\Order\Address;
 use Magento\Sales\Model\Order\Address;
 use Mageplaza\Osc\Helper\Data;
 
-/**
- * Class Validator
- * @package Mageplaza\Osc\Model\Plugin\Sales\Order\Address
- */
 class Validator
 {
     /**
@@ -47,7 +43,7 @@ class Validator
 
     /**
      * @param Address\Validator $subject
-     * @param Address $address
+     * @param Address           $address
      *
      * @return array
      */

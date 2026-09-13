@@ -171,7 +171,7 @@ class Style
 
     static function parseColor($color)
     {
-        $color = strtolower(trim($color));
+        $color = strtolower(trim((string)$color));
 
         $parts = preg_split('/[^,]\s+/', $color, 2);
 
@@ -366,7 +366,7 @@ class Style
      * @return float|null
      */
     static function convertSize($size, $referenceSize = 11.0, $dpi = 96.0) {
-        $size = trim(strtolower($size));
+        $size = trim(strtolower((string)$size));
 
         if (is_numeric($size)) {
             return $size;

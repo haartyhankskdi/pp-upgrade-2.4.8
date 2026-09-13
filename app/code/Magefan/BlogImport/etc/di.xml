@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--<virtualType name="Magefan\Blog\Model\Import\Csv" type="Magefan\BlogImport\Model\Csv" />
+    <virtualType name="Magefan\Blog\Model\Import\Em" type="Magefan\BlogImport\Model\Em" />
+    <virtualType name="Magefan\Blog\Model\Import\Joomla" type="Magefan\BlogImport\Model\Joomla" />
+    <virtualType name="Magefan\Blog\Model\Import\Hubspot" type="Magefan\BlogImport\Model\Hubspot" />
+    <virtualType name="Magefan\Blog\Model\Import\Amasty1" type="Magefan\BlogImport\Model\Amasty1" />
+    <virtualType name="Magefan\Blog\Model\Import\Amasty2" type="Magefan\BlogImport\Model\Amasty2" />
+    <virtualType name="Magefan\Blog\Model\Import\EcsArticles" type="Magefan\BlogImport\Model\EcsArticles" />
+    <virtualType name="Magefan\Blog\Model\Import\Drupal" type="Magefan\BlogImport\Model\Drupal" />-->
+    <preference for="Magefan\BlogImport\Api\WpImportManagementInterface" type="Magefan\BlogImport\Model\WordpressV2Import\Import"/>
+</config>

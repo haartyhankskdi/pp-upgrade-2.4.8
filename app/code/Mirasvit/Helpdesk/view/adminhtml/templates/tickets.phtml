@@ -1,0 +1,90 @@
+<?php /** @var \Mirasvit\Helpdesk\Block\Adminhtml\ToolbarTickets $block */
+use Mirasvit\Core\Service\CspService;
+?>
+<?php
+$nonce = CspService::getNonce();
+$newTickets = $block->getNewTickets();
+$userTickets = $block->getUserTickets();
+$class = '';
+$counter = strlen((int)$newTickets);
+$counter += strlen((int)$userTickets);
+if ($counter > 3 && $counter < 5) {
+    $class = 'medium';
+} elseif ($counter > 4) {
+    $class = 'large';
+}
+?>
+<div
+    data-mage-init='{"toolbarTickets": {}}'
+    class="mst-notifications-wrapper admin__action-dropdown-wrap"
+    data-mst-notification-count="<?= $block->escapeHtml($newTickets); ?>/<?= $block->escapeHtml($userTickets); ?>">
+    <?php if ($userTickets > 0 || $newTickets) : ?>
+        <a
+            href="<?= $block->escapeUrl($block->getUrl('helpdesk/ticket/index')); ?>"
+            class="notifications-action admin__action-dropdown helpdesk-tickets <?= $block->escapeHtml($class) ?>"
+            data-mage-init='{"dropdown":{}}'
+            title="<?= $block->escapeHtml(__('Tickets')); ?>"
+            data-toggle="dropdown"
+            aria-label="<?= $block->escapeHtml(__('View tickets notifications')) ?>">
+            <span class="mst-notifications-counter">
+                <?= $block->escapeHtml($newTickets); ?>/<?= $block->escapeHtml($userTickets); ?>
+            </span>
+        </a>
+        <ul
+            class="admin__action-dropdown-menu"
+            role="menu">
+            <li class="notifications-entry notifications-entry-last" role="menuitem">
+                <a
+                    href="<?= $block->escapeUrl($block->getUrl('helpdesk/ticket/index')); ?>"
+                    class="action-tertiary action-more helpdesk-tickets"
+                    aria-label="<?= $block->escapeHtml(__('Navigate to all tickets page')) ?>">
+                    <?= $block->escapeHtml(__('See All Tickets')); ?>
+                </a>
+            </li>
+            <?php foreach ($block->getLatestNewTickets() as $ticket) : ?>
+                <?php /** @var \Mirasvit\Helpdesk\Model\Ticket $ticket */ ?>
+                <li class="notifications-entry"
+                    data-notification-id="<?= $block->escapeHtml($ticket->getId()); ?>"
+                    role="menuitem">
+                    <?php
+                    $ticketDescription = $block->escapeHtml($ticket->getDescription());
+                    $ticketDescriptionLength = $block->getNotificationDescriptionLength();
+                    ?>
+                    <a href="<?= $block->escapeUrl($block->getUrl('helpdesk/ticket/edit', ['id' => $ticket->getId()])); ?>"
+                       aria-label="<?= $block->escapeHtml(__('Edit ticket: %1', $ticket->getSubject())) ?>">
+                        <strong class="notifications-entry-title">
+                            <?php echo $block->escapeHtml($ticket->getSubject()); ?>
+                        </strong>
+                    </a>
+                    <?php if (strlen($ticketDescription) > $ticketDescriptionLength) : ?>
+                        <p class="notifications-entry-description _cutted">
+                        <span class="notifications-entry-description-start">
+                            <?= $block->escapeHtml(substr($ticketDescription, 0, $ticketDescriptionLength)); ?>
+                        </span>
+                            <span class="notifications-entry-description-end">
+                            <?= $block->escapeHtml(substr($ticketDescription, $ticketDescriptionLength)); ?>
+                        </span>
+                        </p>
+                    <?php else : ?>
+                        <p class="notifications-entry-description">
+                            <?= $block->escapeHtml($ticketDescription); ?>
+                        </p>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else : ?>
+        <a
+            class="notifications-action admin__action-dropdown helpdesk-tickets"
+            href="<?= $block->escapeUrl($block->getUrl('helpdesk/ticket/index')); ?>"
+            title="<?= $block->escapeHtml(__('Tickets')); ?>"
+            aria-label="<?= $block->escapeHtml(__('View tickets page')) ?>">
+        </a>
+    <?php endif; ?>
+</div>
+
+<script <?php if ($nonce): ?> nonce="<?= $block->escapeHtml($nonce) ?>"<?php endif; ?>>
+    var notificationInterval = "<?php echo $block->getNotificationInterval()*1000; ?>";
+    var notificationCheckUrl = "<?php echo $block->escapeUrl($block->getCheckNotificationUrl()); ?>";
+    var notificationIcon = "<?php echo $block->escapeUrl($block->getViewFileUrl("Mirasvit_Helpdesk::images/notification_icon.png")); ?>";
+</script>

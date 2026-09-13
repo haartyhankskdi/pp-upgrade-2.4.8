@@ -104,7 +104,7 @@
             'err_no_name' => $block->escapeHtml(__('Please enter new template name')),
         ];
         ?>
-        window.dynamicProductOptionsTemplates = new Itoris.DynamicProductOptionsTemplate(<?php echo Zend_Json::encode($messages) ?>, <?php echo $block->getTemplatesConfigJson() ?>);
+        window.dynamicProductOptionsTemplates = new Itoris.DynamicProductOptionsTemplate(<?php echo json_encode($messages) ?>, <?php echo $block->getTemplatesConfigJson() ?>);
         <?php endif; ?>
 		/* // re-bind form elements onchange
         varienWindowOnload(true);

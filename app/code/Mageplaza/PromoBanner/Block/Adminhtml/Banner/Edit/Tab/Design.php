@@ -109,7 +109,8 @@ class Design extends Generic implements TabInterface
         CmsCollection $cmsCollection,
         PopupResponsive $popupResponsive,
         array $data = []
-    ) {
+    )
+    {
         $this->_wysiwygConfig    = $wysiwygConfig;
         $this->_rendererFieldset = $rendererFieldset;
         $this->_fieldFactory     = $fieldFactory;
@@ -134,7 +135,7 @@ class Design extends Generic implements TabInterface
         $form->setFieldNameSuffix('mppromobanner');
 
         $fieldset = $form->addFieldset(
-            'base_fieldset',
+            'design_base_fieldset',
             [
                 'legend' => __('Design')
             ]
@@ -147,12 +148,32 @@ class Design extends Generic implements TabInterface
             'values' => $this->bannerType->toOptionArray()
         ]);
 
-        $singleImage = $fieldset->addField('banner_image', BannerImage::class, [
-            'name'  => 'banner_image',
-            'label' => __('Select Image'),
-            'title' => __('Select Image'),
-            'path'  => $this->imageHelper->getBaseMediaPath(HelperImage::TEMPLATE_MEDIA_TYPE_BANNER)
-        ]);
+        $singleImage = $fieldset->addField(
+            'banner_image',
+            BannerImage::class,
+            [
+                'name'         => 'banner_image',
+                'label'        => __('Select Image'),
+                'title'        => __('Select Image'),
+                'path'         => $this->imageHelper->getBaseMediaPath(HelperImage::TEMPLATE_MEDIA_TYPE_BANNER),
+                'container_id' => 'row_mppromobanner_banner_image'
+            ]
+        )->setAfterElementHtml('
+            <script>
+                require([
+                     "jquery",
+                ], function($){
+                    $(document).ready(function () {
+                        if($("#mppromobanner_banner_image").attr("value")){
+                            $("#mppromobanner_banner_image").removeClass("required-file");
+                        }else{
+                            $("#mppromobanner_banner_image").addClass("required-file");
+                        }
+                        $( "#mppromobanner_banner_image" ).attr( "accept", "image/x-png,image/gif,image/jpeg,image/jpg,image/png" );
+                    });
+                  });
+           </script>
+        ');
 
         $sliderImages = $fieldset->addField('slider_images', SliderImages::class, [
             'name'  => 'slider_images',
@@ -160,12 +181,31 @@ class Design extends Generic implements TabInterface
             'title' => __('Select Image(s)'),
         ]);
 
-        $popupImage = $fieldset->addField('popup_image', BannerImage::class, [
-            'name'  => 'popup_image',
-            'label' => __('Select Popup Banner'),
-            'title' => __('Select Popup Banner'),
-            'path'  => $this->imageHelper->getBaseMediaPath(HelperImage::TEMPLATE_MEDIA_TYPE_BANNER)
-        ]);
+        $popupImage = $fieldset->addField(
+            'popup_image',
+            BannerImage::class,
+            [
+                'name'         => 'popup_image',
+                'label'        => __('Select Popup Banner'),
+                'title'        => __('Select Popup Banner'),
+                'path'         => $this->imageHelper->getBaseMediaPath(HelperImage::TEMPLATE_MEDIA_TYPE_BANNER),
+                'container_id' => 'row_mppromobanner_popup_image'
+            ])->setAfterElementHtml('
+                <script>
+                    require([
+                         "jquery",
+                    ], function($){
+                        $(document).ready(function () {
+                            if($("#mppromobanner_popup_image").attr("value")){
+                                $("#mppromobanner_popup_image").removeClass("required-file");
+                            }else{
+                                $("#mppromobanner_popup_image").addClass("required-file");
+                            }
+                            $( "#mppromobanner_popup_image" ).attr( "accept", "image/x-png,image/gif,image/jpeg,image/jpg,image/png" );
+                        });
+                      });
+                </script>
+            ');
 
         $popupRes = $fieldset->addField('popup_responsive', 'select', [
             'name'   => 'popup_responsive',
@@ -174,12 +214,31 @@ class Design extends Generic implements TabInterface
             'values' => $this->popupResponsive->toFormOptionArray()
         ]);
 
-        $floatingImage = $fieldset->addField('floating_image', BannerImage::class, [
-            'name'  => 'floating_image',
-            'label' => __('Select Floating Banner'),
-            'title' => __('Select Floating Banner'),
-            'path'  => $this->imageHelper->getBaseMediaPath(HelperImage::TEMPLATE_MEDIA_TYPE_BANNER)
-        ]);
+        $floatingImage = $fieldset->addField(
+            'floating_image',
+            BannerImage::class,
+            [
+                'name'         => 'floating_image',
+                'label'        => __('Select Floating Banner'),
+                'title'        => __('Select Floating Banner'),
+                'path'         => $this->imageHelper->getBaseMediaPath(HelperImage::TEMPLATE_MEDIA_TYPE_BANNER),
+                'container_id' => 'row_mppromobanner_floating_image'
+            ])->setAfterElementHtml('
+                <script>
+                    require([
+                         "jquery",
+                    ], function($){
+                        $(document).ready(function () {
+                            if($("#mppromobanner_floating_image").attr("value")){
+                                $("#mppromobanner_floating_image").removeClass("required-file");
+                            }else{
+                                $("#mppromobanner_floating_image").addClass("required-file");
+                            }
+                            $( "#mppromobanner_floating_image" ).attr( "accept", "image/x-png,image/gif,image/jpeg,image/jpg,image/png" );
+                        });
+                      });
+               </script>
+            ');
 
         $url = $fieldset->addField('url', 'text', [
             'name'  => 'url',
