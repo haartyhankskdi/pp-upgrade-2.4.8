@@ -79,7 +79,7 @@ class Data extends AbstractHelper
         $categories = $this->getCategory($rootCatId);
         // Level one
         $child_cat_list = "";
-        $sub_cat = explode(",", $categories->getChildren()); 
+        $sub_cat = explode(",", (string) $categories->getChildren());
         // exit($categories->getChildren());
         if ($categories->hasChildren()) {
             for ($i = 0; $i < count($sub_cat); $i++) {
@@ -102,7 +102,7 @@ class Data extends AbstractHelper
         $categories = $this->getCategory($catId);
         // Level one
         $child_cat_list = $child.',';
-        $sub_cat = explode(",", $categories->getChildren());
+        $sub_cat = explode(",", (string) $categories->getChildren());
         if ($categories->hasChildren()) {
             for ($i = 0; $i < count($sub_cat); $i++) {
                 $child_cat_list .= $this->getLoopChildCategory($sub_cat[$i], $child_cat_list);

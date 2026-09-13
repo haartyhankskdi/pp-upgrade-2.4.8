@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<!--
+   ~ This software is the confidential and proprietary information of Autify Digital Ltd.
+   ~ Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+   ~ Copyright (c) 2020-Present Autify Digital Ltd.
+   ~ This work is protected under applicable copyright and intellectual property laws.
+   ~ All rights reserved. Distribution and disclosure are permitted only in accordance with
+   ~ the terms of a valid written agreement with Autify Digital Ltd.
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="before.body.end">
+            <block class="AutifyDigital\LloydscardnetPayment\Block\Config" name="js.config" template="AutifyDigital_LloydscardnetPayment::config.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="product.info.addtocart">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="product.info.addtocart.lloyds.wallets"
+                   template="AutifyDigital_LloydscardnetPayment::wallet/buttons.phtml"
+                   before="-">
+                <block name="product.info.addtocart.lloyds.googlepayButton"
+                       class="AutifyDigital\LloydscardnetPayment\Block\Googlepay\Product"
+                       template="AutifyDigital_LloydscardnetPayment::googlepay/product_page.phtml"/>
+                <block name="product.info.addtocart.lloyds.applepayButton"
+                       class="AutifyDigital\LloydscardnetPayment\Block\Applepay\Product"
+                       template="AutifyDigital_LloydscardnetPayment::applepay/product_page.phtml"
+                       after="product.info.addtocart.lloyds.googlepayButton"/>
+            </block>
+        </referenceBlock>
+
+        <referenceBlock name="product.info.addtocart.additional">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="product.info.addtocart.additional.lloyds.wallets"
+                   template="AutifyDigital_LloydscardnetPayment::wallet/buttons.phtml"
+                   before="-">
+                <block name="product.info.addtocart.lloyds.additional.googlepayButton"
+                       class="AutifyDigital\LloydscardnetPayment\Block\Googlepay\Product"
+                       template="AutifyDigital_LloydscardnetPayment::googlepay/product_page.phtml"/>
+                <block name="product.info.addtocart.lloyds.additional.applepayButton"
+                       class="AutifyDigital\LloydscardnetPayment\Block\Applepay\Product"
+                       template="AutifyDigital_LloydscardnetPayment::applepay/product_page.phtml"
+                       after="product.info.addtocart.lloyds.additional.googlepayButton"/>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -102,9 +102,9 @@ class Indexer extends IndexBuilder
         SearchCriteriaBuilder $searchCriteriaBuilder,
         $batchCount = 1000
     ) {
-        $this->connection            = $resource->getConnection();
-        $this->collectionFactory     = $collectionFactory;
-        $this->productRepository     = $productRepository;
+        $this->connection = $resource->getConnection();
+        $this->collectionFactory = $collectionFactory;
+        $this->productRepository = $productRepository;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
 
         parent::__construct(
@@ -214,7 +214,7 @@ class Indexer extends IndexBuilder
      */
     protected function applyMpRule(Banner $banner, $product)
     {
-        $bannerId        = $banner->getId();
+        $bannerId = $banner->getId();
         $productEntityId = $product->getId();
 
         if (!$banner->getActions()->validate($product)) {
@@ -232,7 +232,7 @@ class Indexer extends IndexBuilder
         $rows = [];
         try {
             $rows[] = [
-                'banner_id'  => $bannerId,
+                'banner_id' => $bannerId,
                 'product_id' => $productEntityId,
             ];
 
@@ -310,11 +310,11 @@ class Indexer extends IndexBuilder
         $indexTable = $this->resource->getTableName('mageplaza_promobanner_actions_index');
 
         $bannerId = $banner->getId();
-        $rows     = [];
+        $rows = [];
 
         foreach ($productIds as $productId) {
             $rows[] = [
-                'banner_id'  => $bannerId,
+                'banner_id' => $bannerId,
                 'product_id' => $productId
             ];
 

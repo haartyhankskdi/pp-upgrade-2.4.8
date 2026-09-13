@@ -21,22 +21,27 @@
 
 /** @var \Mageplaza\Osc\Block\Order\View\CustomField $block */
 $data = $block->getAddressData();
-
+$addressOsc ='';
 if (empty($data)) {
     return;
 }
+
 ?>
 
 <?php foreach ($data as $address): ?>
+    <?php if ($address['label']->getText() === "Billing Address"):?>
     <div class="admin__page-section-item order-billing-address">
+    <?php else:?>
+    <div class="admin__page-section-item order-shipping-address">
+    <?php endif;?>
         <div class="admin__page-section-item-title">
-            <span class="title"><?= $block->escapeHtml($address['label']) ?></span>
+            <span class="title"><?= $escaper->escapeHtml($address['label']) ?></span>
         </div>
         <div class="admin__page-section-item-content">
             <?php foreach ((array) $address['value'] as $field): ?>
                 <div class="question">
-                    <strong><?= $block->escapeHtml($field['label']) ?>:&nbsp;</strong>
-                    <span><?= $block->escapeHtml($field['value']) ?></span>
+                    <strong><?= $escaper->escapeHtml($field['label']) ?>:&nbsp;</strong>
+                    <span><?= $escaper->escapeHtml($field['value']) ?></span>
                 </div>
             <?php endforeach; ?>
         </div>

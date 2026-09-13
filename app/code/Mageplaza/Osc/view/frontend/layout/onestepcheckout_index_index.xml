@@ -20,7 +20,7 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 -->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <update handle="checkout_index_index"/>
     <head>
         <css src="Mageplaza_Osc::css/style.css"/>
@@ -28,10 +28,10 @@
         <css src="Mageplaza_Core::css/font-awesome.min.css"/>
     </head>
     <body>
-        <referenceBlock name="content">
+      <referenceBlock name="content">
             <block class="Mageplaza\Osc\Block\Checkout\CompatibleConfig" name="mageplaza.osc.compatible-config" before="checkout.root"/>
-            <block class="Mageplaza\Osc\Block\StaticBlock" name="osc.static-block.top" template="static-block.phtml" before="checkout.root"/>
-            <block class="Mageplaza\Osc\Block\StaticBlock" name="osc.static-block.bottom" template="static-block.phtml" after="checkout.root"/>
+            <block class="Mageplaza\Osc\Block\StaticBlock" name="osc.static-block.top" template="Mageplaza_Osc::static-block.phtml" before="checkout.root"/>
+            <block class="Mageplaza\Osc\Block\StaticBlock" name="osc.static-block.bottom" template="Mageplaza_Osc::static-block.phtml" after="checkout.root"/>
         </referenceBlock>
         <referenceBlock name="checkout.root">
             <arguments>
@@ -281,6 +281,10 @@
                                                                         <item name="componentDisabled" xsi:type="helper" helper="Mageplaza\Osc\Helper\Data::isHideProductImage"/>
                                                                     </item>
                                                                 </item>
+                                                                <item name="message" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/item/details/message</item>
+                                                                    <item name="displayArea" xsi:type="string">item_message</item>
+                                                                </item>
                                                             </item>
                                                         </item>
                                                     </item>
@@ -326,6 +330,14 @@
                                                             <item name="component" xsi:type="string">Magento_SalesRule/js/view/payment/discount-messages</item>
                                                             <item name="displayArea" xsi:type="string">messages</item>
                                                         </item>
+                                                        <item name="checkout_sales_rule" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Magento_ReCaptchaCheckoutSalesRule/js/checkout-sales-rule</item>
+                                                            <item name="displayArea" xsi:type="string">captcha</item>
+                                                            <item name="formId" xsi:type="string">checkout-sales-rule-request</item>
+                                                            <item name="configSource" xsi:type="string">oscConfig</item>
+                                                            <item name="settings" xsi:type="helper" helper="Mageplaza\Osc\Helper\Data::reCaptchaConfig"/>
+                                                            <item name="reCaptchaId" xsi:type="string">recaptcha-checkout-coupon-apply</item>
+                                                        </item>
                                                     </item>
                                                 </item>
                                                 <item name="addition-information" xsi:type="array">
@@ -333,27 +345,28 @@
                                                     <item name="sortOrder" xsi:type="string">20</item>
                                                     <item name="children" xsi:type="array">
                                                         <!-- Add more component here -->
+                                                        <item name="gift-message" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Mageplaza_Osc/js/view/review/addition/gift-message</item>
+                                                            <item name="sortOrder" xsi:type="string">20</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="componentDisabled" xsi:type="helper" helper="Mageplaza\Osc\Helper\Data::isDisabledGiftMessage"/>
+                                                            </item>
+                                                        </item>
                                                         <item name="newsletter" xsi:type="array">
                                                             <item name="component" xsi:type="string">Mageplaza_Osc/js/view/review/addition/newsletter</item>
-                                                            <item name="sortOrder" xsi:type="string">20</item>
+                                                            <item name="sortOrder" xsi:type="string">30</item>
                                                             <item name="config" xsi:type="array">
                                                                 <item name="componentDisabled" xsi:type="helper" helper="Mageplaza\Osc\Helper\Data::isDisabledNewsletter"/>
                                                             </item>
                                                         </item>
                                                         <item name="gift_wrap" xsi:type="array">
                                                             <item name="component" xsi:type="string">Mageplaza_Osc/js/view/review/addition/gift-wrap</item>
-                                                            <item name="sortOrder" xsi:type="string">30</item>
+                                                            <item name="sortOrder" xsi:type="string">40</item>
                                                             <item name="config" xsi:type="array">
                                                                 <item name="componentDisabled" xsi:type="helper" helper="Mageplaza\Osc\Helper\Data::isDisabledGiftWrap"/>
                                                             </item>
                                                         </item>
-                                                        <item name="gift-message" xsi:type="array">
-                                                            <item name="component" xsi:type="string">Mageplaza_Osc/js/view/review/addition/gift-message</item>
-                                                            <item name="sortOrder" xsi:type="string">40</item>
-                                                            <item name="config" xsi:type="array">
-                                                                <item name="componentDisabled" xsi:type="helper" helper="Mageplaza\Osc\Helper\Data::isDisabledGiftMessage"/>
-                                                            </item>
-                                                        </item>
+
                                                     </item>
                                                 </item>
                                             </item>
@@ -362,20 +375,6 @@
                                             <item name="component" xsi:type="string">uiComponent</item>
                                             <item name="displayArea" xsi:type="string">place-order-information-right</item>
                                             <item name="children" xsi:type="array">
-                                                <item name="place-order-button" xsi:type="array">
-                                                    <item name="component" xsi:type="string">Mageplaza_Osc/js/view/review/placeOrder</item>
-                                                    <item name="children" xsi:type="array">
-                                                        <item name="agreements" xsi:type="array">
-                                                            <item name="component" xsi:type="string">Mageplaza_Osc/js/view/review/checkout-agreements</item>
-                                                            <item name="config" xsi:type="array">
-                                                                <item name="componentDisabled" xsi:type="helper" helper="Mageplaza\Osc\Helper\Data::disabledReviewTOC"/>
-                                                            </item>
-                                                            <item name="displayArea" xsi:type="string">checkout-agreements</item>
-                                                            <item name="dataScope" xsi:type="string">checkoutAgreements</item>
-                                                            <item name="provider" xsi:type="string">checkoutProvider</item>
-                                                        </item>
-                                                    </item>
-                                                </item>
                                                 <item name="osc-payment-list" xsi:type="array">
                                                     <item name="component" xsi:type="string">Mageplaza_Osc/js/view/payment/list</item>
                                                     <item name="displayArea" xsi:type="string">payment-methods-list</item>
@@ -398,6 +397,20 @@
                                                         </item>
                                                     </item>
                                                 </item>
+                                                <item name="place-order-button" xsi:type="array">
+                                                    <item name="component" xsi:type="string">Mageplaza_Osc/js/view/review/placeOrder</item>
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="agreements" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Mageplaza_Osc/js/view/review/checkout-agreements</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="componentDisabled" xsi:type="helper" helper="Mageplaza\Osc\Helper\Data::disabledReviewTOC"/>
+                                                            </item>
+                                                            <item name="displayArea" xsi:type="string">checkout-agreements</item>
+                                                            <item name="dataScope" xsi:type="string">checkoutAgreements</item>
+                                                            <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
                                             </item>
                                         </item>
                                     </item>
@@ -410,16 +423,15 @@
         </referenceBlock>
         <attribute name="class" value="checkout-index-index"/>
         <referenceBlock name="head.additional">
-            <block class="Mageplaza\Osc\Block\Design" name="osc.design" as="osc.generator.css" template="design.phtml"/>
+            <block class="Mageplaza\Osc\Block\Design" name="osc.design" as="osc.generator.css" template="Mageplaza_Osc::design.phtml"/>
         </referenceBlock>
         <referenceBlock name="page.main.title">
-            <block class="Mageplaza\Osc\Block\Container" name="page.main.description" template="description.phtml"/>
+            <block class="Mageplaza\Osc\Block\Container" name="page.main.description" template="Mageplaza_Osc::description.phtml"/>
         </referenceBlock>
         <referenceContainer name="columns.top">
             <container name="page.messages.osc" htmlTag="div" htmlClass="page messages">
                 <block class="Magento\Framework\View\Element\Template" name="ajax.message.placeholder.osc" template="Magento_Theme::html/messages.phtml"/>
                 <block class="Magento\Framework\View\Element\Messages" name="messages.osc" as="messages.osc" template="Magento_Theme::messages.phtml"/>
-                <block class="Nilesh\GeneralQuestions\Block\General\Question" name="ghq-pop-up-form" template="Nilesh_GeneralQuestions::general/ghqQuestionModelOSC.phtml" />
             </container>
         </referenceContainer>
     </body>

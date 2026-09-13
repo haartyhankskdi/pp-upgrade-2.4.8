@@ -65,9 +65,9 @@ class Cart
             return $result;
         }
 
-        $ids        = [];
-        $quote      = $this->getQuote()->collectTotals();
-        $address    = $quote->isVirtual() ? $quote->getBillingAddress() : $quote->getShippingAddress();
+        $ids = [];
+        $quote = $this->getQuote()->collectTotals();
+        $address = $quote->isVirtual() ? $quote->getBillingAddress() : $quote->getShippingAddress();
         $collection = $this->helperData->getPromoBannerCollection();
 
         foreach ($collection as $item) {

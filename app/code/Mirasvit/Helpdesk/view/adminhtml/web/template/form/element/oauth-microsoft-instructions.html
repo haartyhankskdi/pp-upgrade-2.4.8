@@ -1,0 +1,21 @@
+<div class="admin__field field-oauth-instructions" data-bind="visible: visible">
+    <div class="admin__field-label"></div>
+    <div class="admin__field-control control">
+        <div class="message message-notice">
+            <p>
+                <strong data-bind="i18n: 'How to obtain Microsoft 365 / Exchange Online OAuth2 credentials'"></strong>
+            </p>
+            <ol>
+                <li>
+                    <span data-bind="i18n: 'Open the Azure portal and go to App registrations, then register a new application (supported account types as your tenant requires).'"></span>
+                    <a href="https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade" target="_blank" rel="noopener noreferrer"
+                       data-bind="i18n: 'Open Azure App registrations'"></a>
+                </li>
+                <li data-bind="i18n: 'Copy the Application (client) ID and the Directory (tenant) ID from the app Overview page into the fields below (leave tenant empty to use common).'"></li>
+                <li data-bind="i18n: 'Under Certificates &amp; secrets create a new client secret and copy its Value into the OAuth2 Client Secret field below.'"></li>
+                <li data-bind="i18n: 'Under Authentication add a Web platform and register the OAuth2 Redirect URI shown below exactly as displayed.'"></li>
+                <li data-bind="i18n: 'Under API permissions add the delegated Microsoft Graph Mail.ReadWrite and offline_access permissions, then grant admin consent.'"></li>
+            </ol>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="admin__field field-oauth-instructions" data-bind="visible: visible">
+    <div class="admin__field-label"></div>
+    <div class="admin__field-control control">
+        <div class="message message-notice">
+            <p>
+                <strong data-bind="i18n: 'How to obtain Gmail OAuth2 credentials'"></strong>
+            </p>
+            <ol>
+                <li data-bind="i18n: 'Open the Google Cloud Console and create (or pick) a project.'"></li>
+                <li>
+                    <span data-bind="i18n: 'Go to APIs &amp; Services then Credentials, click Create Credentials and choose OAuth client ID (application type: Web application).'"></span>
+                    <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener noreferrer"
+                       data-bind="i18n: 'Open Google Cloud Console Credentials'"></a>
+                </li>
+                <li data-bind="i18n: 'Add the OAuth2 Redirect URI shown below to the Authorized redirect URIs list.'"></li>
+                <li>
+                    <span data-bind="i18n: 'On the OAuth consent screen add the gmail.modify and userinfo.email scopes, then copy the generated Client ID and Client Secret into the fields below.'"></span>
+                    <a href="https://console.cloud.google.com/apis/credentials/consent" target="_blank" rel="noopener noreferrer"
+                       data-bind="i18n: 'Open OAuth consent screen'"></a>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>

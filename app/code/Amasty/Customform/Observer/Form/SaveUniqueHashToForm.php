@@ -63,21 +63,15 @@ class SaveUniqueHashToForm implements ObserverInterface
         }
         $this->setUniqueHash($hashKeyJson);
         return $hashKey;
-        // return $this->remoteAddress->getRemoteAddress();
     }
 
     public function execute(Observer $observer)
     {
-        // $hashKeyJson = $this->getUniqueHassSession();
-        // $value = $this->helperData->getUniqueHash();
-        // $this->helperData->unsUniqueHash();
-        // $this->unsUniqueHassSession();
+        
         $hashKey = $this->getHashKey();
         $answer= $observer->getData('amasty_customform_answer');
         $answer->setQuestionnaireUniqueId($hashKey);
-        // echo $hashKey; exit();
-        // file_put_contents("/home/master/applications/bzhyrrvjxm/public_html/textFormGetId.txt", $hashKey);
-
+        
         $answer->save();
     }
 }

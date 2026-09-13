@@ -1,0 +1,26 @@
+body.helpdesk-ticket-index {
+    .mst-quickDataBar {
+        min-height: 107px;
+        height:     auto !important;
+
+        .mst-quickDataBar-container {
+            height: auto !important;
+            align-items: stretch;
+            min-height: 107px;
+
+            > div {
+                height: auto;
+                display: flex;
+                align-items: center;
+
+                &:last-child {
+                    width: 100%;
+                }
+
+                .dataBlockLabel {
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}

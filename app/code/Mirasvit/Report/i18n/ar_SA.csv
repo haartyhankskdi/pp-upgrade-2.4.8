@@ -1,0 +1,226 @@
+"Something went wrong while building the report","حدث خطأ أثناء إنشاء التقرير"
+"Not logged in","غير مسجل الدخول"
+"Email Notifications","إشعارات البريد الإلكتروني"
+"The email report has been deleted.","تم حذف تقرير البريد الإلكتروني."
+"This email report no longer exists.","لم يعد تقرير البريد الإلكتروني هذا موجودًا."
+"This email no longer exists.","لم يعد هذا البريد الإلكتروني موجودًا."
+"Edit Email ""%1""","تعديل البريد الإلكتروني ""%1"""
+"New Email Report","تقرير بريد إلكتروني جديد"
+"You saved the email report.","لقد قمت بحفظ تقرير البريد الإلكتروني."
+"No data to save.","لا توجد بيانات للحفظ."
+"This report no longer exists.","لم يعد هذا التقرير موجودًا."
+"Report columns saved.","تم حفظ أعمدة التقرير."
+"Unsupported format ""%1""","تنسيق غير مدعوم ""%1"""
+"This report does not exist or is not available for sharing.","هذا التقرير غير موجود أو غير متاح للمشاركة"
+"Report identifier is required","معرّف التقرير مطلوب"
+"Report: %1","التقرير: %1"
+"Block identifier ""%1"" does not match any available report or dashboard block. Use GET /V1/reports/reports to discover valid identifiers.","معرّف الكتلة ""%1"" لا يطابق أي تقرير أو كتلة لوحة معلومات متاحة. استخدم GET /V1/reports/reports لاكتشاف المعرّفات الصالحة."
+"Time range ""%1"" is not valid. Valid values: %2","النطاق الزمني ""%1"" غير صالح. القيم الصالحة: %2"
+"Email with ID ""%1"" does not exist.","البريد الإلكتروني بالمعرّف ""%1"" غير موجود."
+Back,رجوع
+Delete,حذف
+"Are you sure you want to do this?","هل أنت متأكد أنك تريد القيام بذلك؟"
+Save,حفظ
+"Save & Continue","حفظ ومتابعة"
+"Save & Send","حفظ وإرسال"
+Edit,تعديل
+"Delete email?","حذف البريد الإلكتروني؟"
+(previous),(السابق)
+"%1 out of %2 selected","تم تحديد %1 من %2"
+"Access URL","رابط الوصول"
+Actions,الإجراءات
+"Active filters:","عوامل التصفية النشطة:"
+"Add Empty Widget","إضافة أداة فارغة"
+"Add filter","إضافة عامل تصفية"
+"Add Filter","إضافة عامل تصفية"
+"Add New Board","إضافة لوحة جديدة"
+"Add New Widget","إضافة أداة جديدة"
+"Add Widget","إضافة أداة"
+"Additional Filters","عوامل تصفية إضافية"
+"Advanced mode","الوضع المتقدم"
+Aggregator,أداة تجميع
+"and more %1 other columns","و%1 أعمدة أخرى"
+applicable,قابل للتطبيق
+Apply,تطبيق
+"Apply date filter","تطبيق عامل تصفية التاريخ"
+"Apply Filters","تطبيق عوامل التصفية"
+"Are you sure you want to reset the access token?","هل أنت متأكد أنك تريد إعادة تعيين رمز الوصول؟"
+Average,المتوسط
+"Base Table","الجدول الأساسي"
+"Block Type","نوع الكتلة"
+Cancel,إلغاء
+"Cancel date filter","إلغاء عامل تصفية التاريخ"
+Chart,مخطط
+"Chart type selector","محدد نوع المخطط"
+"Clear all","مسح الكل"
+Close,إغلاق
+"Close menu","إغلاق القائمة"
+Column,عمود
+"Column for grouping data in the table","عمود لتجميع البيانات في الجدول"
+"Column for grouping the data in the table","عمود لتجميع البيانات في الجدول"
+"Column selector mode switcher. Current mode: %1","مبدّل وضع محدد الأعمدة. الوضع الحالي: %1"
+Columns,الأعمدة
+"Columns to group the rows in the table","أعمدة لتجميع الصفوف في الجدول"
+Comparison,مقارنة
+contains,يحتوي على
+Content,المحتوى
+Copied,تم النسخ
+"Copy importdata code for Google Sheets","نسخ كود importdata لجداول بيانات Google"
+"Copy to clipboard","نسخ إلى الحافظة"
+Count,العدد
+Country,البلد
+"Current mode: %1","الوضع الحالي: %1"
+"Current Page","الصفحة الحالية"
+Custom,مخصص
+Customize,تخصيص
+Date,التاريخ
+"Date filter","عامل تصفية التاريخ"
+Day,يوم
+"Delete report","حذف التقرير"
+Description,الوصف
+Dimension,البُعد
+"Dimension column table","جدول أعمدة الأبعاد"
+Dimensions,الأبعاد
+Disable,تعطيل
+"Disable sharing report","تعطيل مشاركة التقرير"
+"Do not compare","عدم المقارنة"
+"doesn't contain","لا يحتوي على"
+Download,تنزيل
+Duplicate,تكرار
+"Duplicate report","تكرار التقرير"
+Early,مبكرًا
+"Edit Board","تعديل اللوحة"
+"Edit columns","تعديل الأعمدة"
+"Edit report","تعديل التقرير"
+"Empty report data table","جدول بيانات التقرير فارغ"
+Enable,تمكين
+"Enable Remote Access","تمكين الوصول عن بُعد"
+"Enable Remote Access on Storefront","تمكين الوصول عن بُعد على واجهة المتجر"
+"Enable sharing report","تمكين مشاركة التقرير"
+"Enter page number","أدخل رقم الصفحة"
+"Excel XML","Excel XML"
+Export,تصدير
+"Filter value","قيمة عامل التصفية"
+Filters,عوامل التصفية
+"Found: %1 columns","تم العثور على: %1 عمودًا"
+from,من
+"From date","من تاريخ"
+"General Information","معلومات عامة"
+"Go to next page","الانتقال إلى الصفحة التالية"
+"Go to previous page","الانتقال إلى الصفحة السابقة"
+"Group by","تجميع حسب"
+"Hide percentage of total","إخفاء النسبة المئوية من الإجمالي"
+"Image for %1","صورة لـ %1"
+"Import data code","كود استيراد البيانات"
+"Insert the below code into your Google Sheet and it will automatically import the most recent data from the report every hour:","أدرج الكود أدناه في جدول بيانات Google الخاص بك وسيقوم باستيراد أحدث البيانات من التقرير تلقائيًا كل ساعة:"
+"Insert To Google Sheet","إدراج إلى جدول بيانات Google"
+"Insert widget's HTML content here","أدرج محتوى HTML الخاص بالأداة هنا"
+"Internal Filters","عوامل تصفية داخلية"
+"Is Default","افتراضي"
+"is not","ليس"
+"is not one of","ليس واحدًا من"
+"is one of","واحد من"
+Loading...,جارٍ التحميل...
+"Lower number means higher position. Boards with the same sort order will be ordered according to the dashboard general sorting settings.","الرقم الأقل يعني موضعًا أعلى. سيتم ترتيب اللوحات ذات ترتيب الفرز نفسه وفقًا لإعدادات الفرز العامة للوحة المعلومات."
+"Make a copy","إنشاء نسخة"
+"Make sure that the selected columns are","تأكد من أن الأعمدة المحددة"
+Manage,إدارة
+"Manage columns","إدارة الأعمدة"
+"Manage filters","إدارة عوامل التصفية"
+Metric,المقياس
+Month,شهر
+"More filters","المزيد من عوامل التصفية"
+"More Filters","المزيد من عوامل التصفية"
+"No next pages, action disabled","لا توجد صفحات تالية، الإجراء معطل"
+"No previous pages, action disabled","لا توجد صفحات سابقة، الإجراء معطل"
+"not allowed","غير مسموح"
+Number,رقم
+of,من
+"Once you have configured the report, you can use a direct link to open the report on any device without opening the admin and always with fresh live data.","بمجرد تكوين التقرير، يمكنك استخدام رابط مباشر لفتح التقرير على أي جهاز دون فتح لوحة الإدارة ودائمًا ببيانات مباشرة محدّثة."
+"Open link","فتح الرابط"
+"Open menu","فتح القائمة"
+"Override dashboard time","تجاوز وقت لوحة المعلومات"
+"Page Size","حجم الصفحة"
+Percent,النسبة المئوية
+"Please select","يرجى الاختيار"
+"Previous period","الفترة السابقة"
+"Primary Filters","عوامل التصفية الأساسية"
+"Private Board","لوحة خاصة"
+"Private Board will be available only for the current admin user. Shared Board will be available for all admin users.","ستكون اللوحة الخاصة متاحة فقط للمستخدم المسؤول الحالي. ستكون اللوحة المشتركة متاحة لجميع المستخدمين المسؤولين."
+Quarter,ربع سنة
+"Quick Access & Sharing","الوصول السريع والمشاركة"
+"A quick access link to the report is a great alternative to routine daily exporting.","رابط الوصول السريع إلى التقرير بديل رائع للتصدير اليومي الروتيني."
+Range,النطاق
+"records found","السجلات التي تم العثور عليها"
+Refresh,تحديث
+Remove,إزالة
+"Remove filter","إزالة عامل التصفية"
+"Remove from chart","إزالة من المخطط"
+"Removing board...","جارٍ إزالة اللوحة..."
+"Report data table with %1 rows","جدول بيانات التقرير بـ %1 صفوف"
+Reset,إعادة تعيين
+"Reset access token","إعادة تعيين رمز الوصول"
+"Reset Changes","إعادة تعيين التغييرات"
+"Resetting the access token will deactivate the old access link. Anyone who previously had access to the board will lose it and will need the new link to access it.","سيؤدي إعادة تعيين رمز الوصول إلى إلغاء تنشيط رابط الوصول القديم. سيفقد أي شخص كان لديه وصول سابق إلى اللوحة هذا الوصول وسيحتاج إلى الرابط الجديد للوصول إليها."
+"Rows Limit","حد الصفوف"
+"Same period last month","نفس الفترة من الشهر الماضي"
+"Same period last week","نفس الفترة من الأسبوع الماضي"
+"Same period last year","نفس الفترة من العام الماضي"
+"Save Changes","حفظ التغييرات"
+"Saving report...","جارٍ حفظ التقرير..."
+Saving...,جارٍ الحفظ...
+"Search column across ALL tables by identifier.","البحث عن العمود في جميع الجداول حسب المعرّف."
+"Search for column","البحث عن عمود"
+"Select condition","اختر الشرط"
+"Select date range","اختر النطاق الزمني"
+"Select Date Range","اختر النطاق الزمني"
+Share,مشاركة
+"Share Dashboard","مشاركة لوحة المعلومات"
+"Share in %1 format","المشاركة بتنسيق %1"
+"Shared Board","لوحة مشتركة"
+"Sharing link","رابط المشاركة"
+"Show in chart","عرض في المخطط"
+"Show percentage of total","عرض النسبة المئوية من الإجمالي"
+"Single Value","قيمة واحدة"
+"Sort by %1","الفرز حسب %1"
+"Sort Order","ترتيب الفرز"
+Sorting,الفرز
+"Spark line","خط مصغّر"
+String,سلسلة نصية
+Sum,المجموع
+"Switch to %1 chart","التبديل إلى مخطط %1"
+Table,جدول
+"Time Range","النطاق الزمني"
+Title,العنوان
+to,إلى
+"To date","إلى تاريخ"
+"to the current report.","إلى التقرير الحالي."
+Toolbar,شريط الأدوات
+Type,النوع
+"Type to search","اكتب للبحث"
+"Untitled Block","كتلة بدون عنوان"
+"Untitled Board","لوحة بدون عنوان"
+Value,القيمة
+"We couldn't find any records.","لم نتمكن من العثور على أي سجلات."
+Week,أسبوع
+"Widget Library","مكتبة الأدوات"
+"Wrong configuration. Please change report building conditions.","تكوين خاطئ. يرجى تغيير شروط إنشاء التقرير."
+Year,سنة
+"To add your first block, unlock the board (top right corner).","تحتاج إلى إلغاء قفل اللوحة (الزاوية العلوية اليمنى) لإضافة الكتلة الأولى."
+"Loading report data","جارٍ تحميل بيانات التقرير"
+"Report data table for %1","جدول بيانات التقرير لـ %1"
+Block,كتلة
+"Date Interval","الفاصل الزمني"
+Limit,الحد
+"Add Block","إضافة كتلة"
+Active,نشط
+"Attach each block as a separate CSV report","إرفاق كل كتلة كتقرير CSV منفصل"
+Subject,الموضوع
+Recipient,المستلم
+Schedule,الجدولة
+"Should be cron-like expression. <br/>Example: 59 23 * * * <br/>Will be sent report every day at 23:59","يجب أن يكون تعبيرًا شبيهًا بـ cron. <br/>مثال: 59 23 * * * <br/>سيتم إرسال التقرير كل يوم في الساعة 23:59"
+Body,المحتوى
+"Add New Email","إضافة بريد إلكتروني جديد"
+ID,المعرّف
+Status,الحالة
+"Last Sent At","آخر إرسال في"

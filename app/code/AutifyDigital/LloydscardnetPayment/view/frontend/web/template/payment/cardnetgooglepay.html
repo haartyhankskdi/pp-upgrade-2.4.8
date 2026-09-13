@@ -1,0 +1,74 @@
+<!--
+/*
+ * This software is the confidential and proprietary information of Autify Digital Ltd.
+ * Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+ * Copyright (c) 2020-Present Autify Digital Ltd.
+ * This work is protected under applicable copyright and intellectual property laws.
+ * All rights reserved. Distribution and disclosure are permitted only in accordance with
+ * the terms of a valid written agreement with Autify Digital Ltd.
+ */
+-->
+<div class="payment-method cardnet-googlepay-checkout" data-bind="css: {'_active': (getCode() == isChecked())}">
+    <div class="payment-method-title field choice">
+        <input type="radio"
+               name="payment[method]"
+               class="radio"
+               data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()">
+        <label data-bind="attr: {'for': getCode()}" class="label">
+            <span data-bind="text: getTitle()"></span>
+            <!-- ko if: window.checkoutConfig.payment.cardnetgooglepay.payment_logo -->
+            <img data-bind="attr: {src: window.checkoutConfig.payment.cardnetgooglepay.payment_logo}" class="payment-icon" style="margin-right: 0; float: right; max-height: 30px;" alt="Lloyd's Cardnet"/>
+            <!-- /ko -->
+        </label>
+    </div>
+    <div class="payment-method-content">
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <!-- ko if: isBillingAddressRequired() -->
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <!-- /ko -->
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+
+        <!-- ko if: paymentInterationType() == 'onsite' -->
+            <!-- ko if: isBillingAddressFilled() -->
+            <div class="actions-toolbar">
+                <div id="google-pay-button-container"></div>
+            </div>
+            <!--/ko-->
+            <!-- ko ifnot: isBillingAddressFilled() -->
+            <div class="lcnet-wallet-hint" data-bind="i18n: 'Please complete and save the billing address above to continue with Google Pay.'"></div>
+            <!--/ko-->
+        <!-- /ko -->
+
+        <!-- ko if: paymentInterationType() == 'hosted' -->
+        <!-- ko if: window.checkoutConfig.payment.cardnetgooglepay.payment_tooltip -->
+        <p class="payment-tooltip" data-bind="i18n: window.checkoutConfig.payment.cardnetgooglepay.payment_tooltip"></p>
+        <!--/ko-->
+        
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button class="action primary checkout"
+                        type="submit"
+                        data-bind="
+                        click: placeOrder,
+                        attr: {title: $t('Pay by GooglePay')},
+                        css: {disabled: !isPlaceOrderActionAllowed()},
+                        enable: (getCode() == isChecked())
+                        "
+                        disabled>
+                    <span data-bind="i18n: 'Pay by GooglePay'"></span>
+                </button>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>

@@ -13,34 +13,55 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Customer;
 
+use Magento\Checkout\Model\Session;
 use Magento\Customer\Api\Data\AddressInterface;
 use Magento\Customer\Model\Address as CustomerAddress;
+use Magento\Eav\Model\Config;
 use Mageplaza\Osc\Model\Plugin\Customer\Address;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 
-/**
- * Class AddressTest
- * @package Mageplaza\Osc\Test\Unit\Model\Plugin\Customer
- */
 class AddressTest extends TestCase
 {
+    /**
+     * @var Session|MockObject
+     */
+    private $checkoutSessionMock;
+
+    /**
+     * @var Config|MockObject
+     */
+    private $configMock;
+
     /**
      * @var Address
      */
     private $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
-        $this->plugin = new Address();
+        $this->checkoutSessionMock = $this->getMockBuilder(Session::class)
+            ->addMethods(['getOscData'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->configMock = $this->getMockBuilder(Config::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->plugin = new Address(
+            $this->checkoutSessionMock,
+            $this->configMock
+        );
     }
 
     public function testAfterUpdateData()
@@ -49,7 +70,7 @@ class AddressTest extends TestCase
          * @var CustomerAddress $subject
          */
         $subject = $this->getMockBuilder(CustomerAddress::class)
-            ->setMethods(['setShouldIgnoreValidation'])
+            ->addMethods(['setShouldIgnoreValidation'])
             ->disableOriginalConstructor()->getMock();
         $subject->expects($this->once())->method('setShouldIgnoreValidation')->with(true);
 
@@ -59,7 +80,7 @@ class AddressTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestBeforeUpdateData()
+    public static function providerTestBeforeUpdateData()
     {
         return [
             [
@@ -84,13 +105,12 @@ class AddressTest extends TestCase
     }
 
     /**
-     * @param array $customAttribute
+     * @param array  $customAttribute
      * @param string $key
      *
      * @dataProvider providerTestBeforeUpdateData
-     * @throws ReflectionException
+     * @throws       ReflectionException
      */
-
     public function testBeforeUpdateData($customAttribute, $key)
     {
         /**

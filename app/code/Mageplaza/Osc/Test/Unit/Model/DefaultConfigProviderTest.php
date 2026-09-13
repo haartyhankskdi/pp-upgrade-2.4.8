@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model;
@@ -52,10 +52,6 @@ use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionException;
 
-/**
- * Class DefaultConfigProviderTest
- * @package Mageplaza\Osc\Test\Unit\Model
- */
 class DefaultConfigProviderTest extends TestCase
 {
     /**
@@ -133,7 +129,7 @@ class DefaultConfigProviderTest extends TestCase
      */
     private $shippingAddressMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->checkoutSessionMock = $this->getMockBuilder(CheckoutSession::class)
             ->disableOriginalConstructor()
@@ -151,10 +147,9 @@ class DefaultConfigProviderTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
         $this->oscHelperMock = $this->getMockBuilder(OscHelper::class)->disableOriginalConstructor()->getMock();
-        $cmsBlockMethods = get_class_methods(Block::class);
-        $cmsBlockMethods[] = 'setBlockId';
         $this->cmsBlockMock = $this->getMockBuilder(Block::class)
-            ->setMethods($cmsBlockMethods)
+            ->onlyMethods(['toHtml'])
+            ->addMethods(['setBlockId'])
             ->disableOriginalConstructor()->getMock();
         $this->storeManagerMock = $this->getMockForAbstractClass(StoreManagerInterface::class);
         $this->paypalConfigMock = $this->getMockBuilder(PaypalConfig::class)
@@ -178,7 +173,6 @@ class DefaultConfigProviderTest extends TestCase
             $this->stockRegistryMock,
             $this->moduleManagerMock,
             $this->oscHelperMock,
-            $this->cmsBlockMock,
             $this->storeManagerMock,
             $this->paypalConfigMock,
             $this->urlMock
@@ -188,7 +182,7 @@ class DefaultConfigProviderTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestGetConfig()
+    public static function providerTestGetConfig()
     {
         return [
             [
@@ -200,10 +194,10 @@ class DefaultConfigProviderTest extends TestCase
     /**
      * @param string $selectedShippingRate
      *
-     * @throws LocalizedException
-     * @throws NoSuchEntityException
-     * @throws StateException
-     * @throws ReflectionException
+     * @throws       LocalizedException
+     * @throws       NoSuchEntityException
+     * @throws       StateException
+     * @throws       ReflectionException
      * @dataProvider providerTestGetConfig
      */
     public function testGetConfig($selectedShippingRate)
@@ -214,6 +208,7 @@ class DefaultConfigProviderTest extends TestCase
         $this->oscHelperMock->expects($this->once())->method('isOscPage')->willReturn(true);
         $resultShipping = $this->mockGetShippingMethodsWithCountry();
         $this->oscHelperMock->expects($this->atLeastOnce())->method('checkVersion')->willReturn($checkVersion);
+        $this->oscHelperMock->method('versionCompare')->willReturn(false);
         $this->oscHelperMock->expects($this->once())
             ->method('getDefaultPaymentMethod')
             ->willReturn($defaultPaymentMethod);
@@ -235,7 +230,8 @@ class DefaultConfigProviderTest extends TestCase
             'paymentMethods' => $paymentMethod,
             'selectedPaymentMethod' => $defaultPaymentMethod,
             'oscConfig' => $this->getOscConfigMock(),
-            'checkVersion' => $checkVersion
+            'checkVersion' => $checkVersion,
+            'checkVersion242' => false,
         ];
 
         $this->assertEquals($result, $this->model->getConfig());
@@ -270,16 +266,21 @@ class DefaultConfigProviderTest extends TestCase
         $this->oscHelperMock->expects($this->once())->method('getAddressFields')->willReturn($addressFields);
         $this->oscHelperMock->expects($this->once())->method('getAutoDetectedAddress')->willReturn(null);
         $this->oscHelperMock->expects($this->once())->method('getGoogleSpecificCountry')->willReturn(null);
-        $this->oscHelperMock->expects($this->exactly(3))->method('getConfigValue')
-            ->withConsecutive(
-                [AccountManagement::XML_PATH_MINIMUM_PASSWORD_LENGTH],
-                [AccountManagement::XML_PATH_REQUIRED_CHARACTER_CLASSES_NUMBER],
-                ['sociallogin/general/popup_login']
-            )->willReturnOnConsecutiveCalls($dataPasswordMinLength, $dataPasswordMinCharacterSets, 'popup_slide');
+        $configValueMap = [
+            AccountManagement::XML_PATH_MINIMUM_PASSWORD_LENGTH => $dataPasswordMinLength,
+            AccountManagement::XML_PATH_REQUIRED_CHARACTER_CLASSES_NUMBER => $dataPasswordMinCharacterSets,
+            'sociallogin/general/popup_login' => 'popup_slide',
+            'osc/display_configuration/seal_block/seal_image' => null,
+        ];
+        $this->oscHelperMock->method('getConfigValue')
+            ->willReturnCallback(function ($path) use ($configValueMap) {
+                return $configValueMap[$path] ?? null;
+            });
         $this->oscHelperMock->expects($this->once())->method('getAllowGuestCheckout')
             ->with($this->quoteMock)
             ->willReturn(1);
         $this->oscHelperMock->expects($this->once())->method('getShowBillingAddress')->willReturn(true);
+        $this->oscHelperMock->method('checkSameAsShipping')->willReturn(false);
         $this->oscHelperMock->expects($this->once())->method('isSubscribedByDefault')->willReturn(false);
         $this->shippingAddressMock->expects($this->once())->method('getUsedGiftWrap')->willReturn(false);
         $this->giftMessageConfigProviderMock->expects($this->once())
@@ -311,18 +312,29 @@ class DefaultConfigProviderTest extends TestCase
             ->method('isShowItemListToggle')
             ->willReturn(false);
         $updateItemOptions = 'https://test.com/onestepcheckout/index/updateItemOptions/';
-        $this->urlMock->expects($this->once())->method('getUrl')
-            ->with('onestepcheckout/index/updateItemOptions', ['_secure' => true])
-            ->willReturn($updateItemOptions);
+        $multiShippingUrl = 'https://test.com/multishipping/checkout/';
+        $this->urlMock->method('getUrl')
+            ->willReturnCallback(function ($route, $params) use ($updateItemOptions, $multiShippingUrl) {
+                if ($route === 'onestepcheckout/index/updateItemOptions') {
+                    return $updateItemOptions;
+                }
+                if ($route === 'multishipping/checkout') {
+                    return $multiShippingUrl;
+                }
+                return '';
+            });
 
         $this->paypalConfigMock->expects($this->once())->method('setMethod')->with(PaypalConfig::METHOD_EXPRESS);
         $this->oscHelperMock->expects($this->atLeastOnce())->method('isEnabledSealBlock')->willReturn(0);
+        $this->oscHelperMock->method('isShowMultiAddessCheckoutLink')->willReturn(false);
+        $this->oscHelperMock->method('isModuleOutputEnabled')->willReturn(false);
+        $this->oscHelperMock->method('isCaptchaEnabled')->willReturn(false);
 
         return [
             'addressFields' => $addressFields,
             'autocomplete' => [
                 'type' => null,
-                'google_default_country' => null,
+                'google_default_country' => [''],
             ],
             'register' => [
                 'dataPasswordMinLength' => $dataPasswordMinLength,
@@ -330,6 +342,7 @@ class DefaultConfigProviderTest extends TestCase
             ],
             'allowGuestCheckout' => false,
             'showBillingAddress' => true,
+            'same_as_shipping' => false,
             'newsletterDefault' => false,
             'isUsedGiftWrap' => false,
             'giftMessageOptions' => [
@@ -339,8 +352,9 @@ class DefaultConfigProviderTest extends TestCase
                 'baseUrl' => 'https://test.com/',
                 'isEnableOscGiftMessageItems' => false,
             ],
-            'isDisplaySocialLogin' => true,
-            'isPopupSlideSocialLogin' => true,
+            'isDisplaySocialLogin' => false,
+            'isPopupSlideSocialLogin' => false,
+            'isPopupQuickLogin' => false,
             'isUsedMaterialDesign' => false,
             'isAmazonAccountLoggedIn' => false,
             'geoIpOptions' => [
@@ -355,7 +369,14 @@ class DefaultConfigProviderTest extends TestCase
             'sealBlock' => '',
             'isShowItemListToggle' => false,
             'paymentCustomBtn' => [],
-            'updateCartUrl' => $updateItemOptions
+            'updateCartUrl' => $updateItemOptions,
+            'multiAddressOptions' => [
+                'isShowMultiAddressCheckoutLink' => false,
+                'multiAddressCheckoutLink' => $multiShippingUrl,
+            ],
+            'shippingStorePickup' => false,
+            'enableOscPro' => false,
+            'isCaptchaEnabledConfig' => false,
         ];
     }
 
@@ -364,6 +385,10 @@ class DefaultConfigProviderTest extends TestCase
         $this->oscHelperMock->expects($this->once())->method('isEnabledSealBlock')->willReturn(1);
         $blockId = 1;
         $this->oscHelperMock->expects($this->once())->method('getSealStaticBlock')->willReturn($blockId);
+        $this->oscHelperMock->expects($this->once())->method('isEnableBetterStaticBlock')->willReturn(false);
+        $this->oscHelperMock->expects($this->once())->method('getObject')
+            ->with(Block::class)
+            ->willReturn($this->cmsBlockMock);
         $this->cmsBlockMock->expects($this->once())->method('setBlockId')->with($blockId)->willReturnSelf();
         $this->cmsBlockMock->expects($this->once())->method('toHtml')->willReturn('test');
 
@@ -440,21 +465,20 @@ class DefaultConfigProviderTest extends TestCase
     public function mockGetShippingMethodsWithCountry()
     {
         $quoteId = 1;
-        $shippingAddressMethods = get_class_methods(Address::class);
-        $shippingAddressMethods[] = 'getUsedGiftWrap';
         $this->shippingAddressMock = $this->getMockBuilder(Address::class)
-            ->setMethods($shippingAddressMethods)
+            ->onlyMethods(['getCountryId', 'getShippingMethod'])
+            ->addMethods(['getUsedGiftWrap'])
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->quoteMock->expects($this->atLeastOnce())
             ->method('getShippingAddress')->willReturn($this->shippingAddressMock);
-        $this->shippingAddressMock->expects($this->once())->method('getCountryId')->willReturn('US');
+        $this->shippingAddressMock->expects($this->atLeastOnce())->method('getCountryId')->willReturn('US');
         $shippingMethodMock = $this->getMockBuilder(ShippingMethod::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->shippingMethodManagementMock->expects($this->once())
+        $this->shippingMethodManagementMock->expects($this->atLeastOnce())
             ->method('getList')
             ->with($quoteId)
             ->willReturn([$shippingMethodMock]);
@@ -471,7 +495,7 @@ class DefaultConfigProviderTest extends TestCase
             'price_excl_tax' => 5.0,
             'price_incl_tax' => 5.0,
         ];
-        $shippingMethodMock->expects($this->once())
+        $shippingMethodMock->expects($this->atLeastOnce())
             ->method('__toArray')
             ->willReturn($methodToArray);
 
@@ -501,7 +525,7 @@ class DefaultConfigProviderTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestGetItemQtyIncrement()
+    public static function providerTestGetItemQtyIncrement()
     {
         return [
             [
@@ -528,9 +552,9 @@ class DefaultConfigProviderTest extends TestCase
     }
 
     /**
-     * @param array $result
-     * @param boolean $enableQtyIncrements
-     * @param int $qtyIncrements
+     * @param array               $result
+     * @param boolean             $enableQtyIncrements
+     * @param int                 $qtyIncrements
      * @param InvokedCountMatcher $qtyIncrementsExpect
      *
      * @dataProvider providerTestGetItemQtyIncrement
@@ -579,7 +603,7 @@ class DefaultConfigProviderTest extends TestCase
 
     /**
      * @param string $methodName
-     * @param array $parameters
+     * @param array  $parameters
      *
      * @return mixed
      * @throws ReflectionException
@@ -596,7 +620,7 @@ class DefaultConfigProviderTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestGetPaymentCustomBtn()
+    public static function providerTestGetPaymentCustomBtn()
     {
         return [
             [
@@ -613,8 +637,8 @@ class DefaultConfigProviderTest extends TestCase
     }
 
     /**
-     * @param array $result
-     * @param boolean $resultCheckVersion
+     * @param array               $result
+     * @param boolean             $resultCheckVersion
      * @param InvokedCountMatcher $expects
      *
      * @dataProvider providerTestGetPaymentCustomBtn

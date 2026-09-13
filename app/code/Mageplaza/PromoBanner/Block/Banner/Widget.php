@@ -49,7 +49,7 @@ class Widget extends PromoBanner
             return null;
         }
 
-        $bannerId      = $this->getData('banner_id');
+        $bannerId = $this->getData('banner_id');
         $customerGroup = $this->httpContext->getValue(CustomerContext::CONTEXT_GROUP);
         /** @var Collection $collection */
         $collection = $this->bannerCollection->create();

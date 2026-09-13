@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model;
@@ -36,10 +36,6 @@ use Magento\Quote\Model\Quote;
 use Magento\Customer\Api\Data\CustomerExtensionInterface;
 use Mageplaza\Osc\Helper\Data;
 
-/**
- * Class CheckoutRegister
- * @package Mageplaza\Osc\Model
- */
 class CheckoutRegister
 {
     /**
@@ -85,13 +81,13 @@ class CheckoutRegister
     /**
      * CheckoutRegister constructor.
      *
-     * @param Session $checkoutSession
-     * @param Copy $objectCopyService
-     * @param DataObjectHelper $dataObjectHelper
+     * @param Session                    $checkoutSession
+     * @param Copy                       $objectCopyService
+     * @param DataObjectHelper           $dataObjectHelper
      * @param AccountManagementInterface $accountManagement
-     * @param CustomerManagement $customerManagement
-     * @param Data $oscHelper
-     * @param Encryptor $encryptor
+     * @param CustomerManagement         $customerManagement
+     * @param Data                       $oscHelper
+     * @param Encryptor                  $encryptor
      */
     public function __construct(
         Session $checkoutSession,
@@ -124,16 +120,24 @@ class CheckoutRegister
 
         $this->setIsCheckedRegister(true);
 
-        /** @var Quote $quote */
+        /**
+ * @var Quote $quote
+*/
         $quote = $this->checkoutSession->getQuote();
 
-        /** Validate address */
+        /**
+ * Validate address
+*/
         $this->validateAddressBeforeSubmit($quote);
 
-        /** One step check out additional data */
+        /**
+ * One step check out additional data
+*/
         $oscData = $this->checkoutSession->getOscData();
 
-        /** Create account when checkout */
+        /**
+ * Create account when checkout
+*/
         if (!empty($oscData['register']) && !empty($oscData['password'])) {
             $this->checkoutSession->setIsCreatedAccountPaypalExpress(true);
             $quote->setCheckoutMethod(Onepage::METHOD_REGISTER)
@@ -177,13 +181,19 @@ class CheckoutRegister
         $customer->setEmail($quote->getCustomerEmail());
         $quote->setCustomer($customer);
 
-        /** Create customer */
+        /**
+ * Create customer
+*/
         $this->customerManagement->populateCustomerInfo($quote);
 
         $this->_oscHelper->setFlagOscMethodRegister(true);
 
-        /** Init customer address */
-        /** @var Address $customerBillingData */
+        /**
+ * Init customer address
+*/
+        /**
+ * @var Address $customerBillingData
+*/
         $customerBillingData = $billing->exportCustomerAddress();
         $customerBillingData->setIsDefaultBilling(true)
             ->setData('should_ignore_validation', true);
@@ -193,7 +203,9 @@ class CheckoutRegister
                 $shipping->setCustomerAddressData($customerBillingData);
                 $customerBillingData->setIsDefaultShipping(true);
             } else {
-                /** @var Address $customerShippingData */
+                /**
+ * @var Address $customerShippingData
+*/
                 $customerShippingData = $shipping->exportCustomerAddress();
                 $customerShippingData->setIsDefaultShipping(true)
                     ->setData('should_ignore_validation', true);
@@ -224,7 +236,9 @@ class CheckoutRegister
      */
     public function validateAddressBeforeSubmit(Quote $quote)
     {
-        /** Remove address validation */
+        /**
+ * Remove address validation
+*/
         if (!$quote->isVirtual()) {
             $quote->getShippingAddress()->setShouldIgnoreValidation(true);
         }

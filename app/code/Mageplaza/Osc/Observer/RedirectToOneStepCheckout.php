@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Observer;
@@ -26,10 +26,6 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\UrlInterface;
 use Mageplaza\Osc\Helper\Data as OscHelper;
 
-/**
- * Class RedirectToOneStepCheckout
- * @package Mageplaza\Osc\Observer
- */
 class RedirectToOneStepCheckout implements ObserverInterface
 {
     /**
@@ -46,7 +42,7 @@ class RedirectToOneStepCheckout implements ObserverInterface
      * RedirectToOneStepCheckout constructor.
      *
      * @param UrlInterface $url
-     * @param OscHelper $oscHelper
+     * @param OscHelper    $oscHelper
      */
     public function __construct(
         UrlInterface $url,
@@ -59,7 +55,7 @@ class RedirectToOneStepCheckout implements ObserverInterface
     /**
      * @param Observer $observer
      *
-     * @return void
+     * @return                                       void
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function execute(Observer $observer)

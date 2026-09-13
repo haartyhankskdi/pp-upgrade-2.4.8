@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Mirasvit\Core\Ui\QuickDataBar\DataBar" ifconfig="helpdesk/general/show_quick_bar_in_admin">
+                <arguments>
+                    <argument name="isShowDateRange" xsi:type="boolean">false</argument>
+                </arguments>
+
+                <block class="Mirasvit\Helpdesk\Ui\QuickDataBar\MyTicketDataBlock"/>
+                <block class="Mirasvit\Helpdesk\Ui\QuickDataBar\AllTicketDataBlock"/>
+                <block class="Mirasvit\Helpdesk\Ui\QuickDataBar\TicketDistributionDataBlock"/>
+            </block>
+
+            <uiComponent name="helpdesk_ticket_listing"/>
+        </referenceContainer>
+
+        <referenceContainer name="content">
+            <uiComponent name="helpdesk_activity" ifconfig="helpdesk/general/show_activity_bar_in_admin"/>
+        </referenceContainer>
+    </body>
+</page>

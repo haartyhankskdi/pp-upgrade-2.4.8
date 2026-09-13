@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Block\Adminhtml\Field;
@@ -30,22 +30,23 @@ use Mageplaza\OrderAttributes\Model\Attribute;
 use Mageplaza\Osc\Helper\Data;
 
 /**
- * Class AbstractOrderField
- * @package Mageplaza\Osc\Block\Adminhtml\Field
+ * Abstract class for admin order field block in OSC module.
  */
 abstract class AbstractOrderField extends AbstractField
 {
-    const BLOCK_SCOPE = [];
+    public const BLOCK_SCOPE = [];
 
     /**
      * @inheritdoc
-     * @throws LocalizedException
-     * @throws NoSuchEntityException
+     * @throws     LocalizedException
+     * @throws     NoSuchEntityException
      */
     protected function _construct()
     {
         parent::_construct();
-        /** Prepare collection */
+        /**
+ * Prepare collection
+*/
         [$this->sortedFields, $this->availableFields] = $this->getFields();
     }
 
@@ -60,7 +61,9 @@ abstract class AbstractOrderField extends AbstractField
             return [[], []];
         }
 
-        /** @var oaHelper $oaHelper */
+        /**
+ * @var oaHelper $oaHelper
+*/
         $oaHelper = $this->helper->getObject(oaHelper::class);
 
         $availFields = [];
@@ -68,26 +71,33 @@ abstract class AbstractOrderField extends AbstractField
         $sortOrder = 1;
         $isSepAdded = false;
 
-        foreach ($oaHelper->getFilteredAttributes() as $field) {
+        foreach ($oaHelper->getOrderAttributesCollection(null, null, false) as $field) {
             if (in_array((int)$field->getPosition(), static::BLOCK_SCOPE, true)) {
                 $availFields[] = $field;
             }
         }
 
         $sepLabel = $this->getSeparatorLabel();
-        $separator = new DataObject([
+        $separator = new DataObject(
+            [
             'col_style' => 'wide ui-state-disabled',
             'frontend_label' => $sepLabel,
-        ]);
+            ]
+        );
 
         $oaFields = $this->helper->getOAFieldPosition();
 
-        usort($oaFields, function ($a, $b) {
-            return ($a['bottom'] <= $b['bottom']) ? -1 : 1;
-        });
+        usort(
+            $oaFields,
+            function ($a, $b) {
+                return ($a['bottom'] <= $b['bottom']) ? -1 : 1;
+            }
+        );
 
         foreach ($oaFields as $field) {
-            /** @var Attribute $avField */
+            /**
+ * @var Attribute $avField
+*/
             foreach ($availFields as $key => $avField) {
                 if ($field['code'] === $avField->getAttributeCode()) {
                     unset($availFields[$key]);

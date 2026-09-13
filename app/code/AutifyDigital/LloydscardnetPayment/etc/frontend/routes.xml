@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<!--
+   ~ This software is the confidential and proprietary information of Autify Digital Ltd.
+   ~ Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+   ~ Copyright (c) 2020-Present Autify Digital Ltd.
+   ~ This work is protected under applicable copyright and intellectual property laws.
+   ~ All rights reserved. Distribution and disclosure are permitted only in accordance with
+   ~ the terms of a valid written agreement with Autify Digital Ltd.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+	<router id="standard">
+		<route frontName="lcnetpayment" id="lcnetpayment">
+			<module name="AutifyDigital_LloydscardnetPayment"/>
+		</route>
+		<route frontName="lloyds" id="lloyds">
+			<module name="AutifyDigital_LloydscardnetPayment"/>
+		</route>
+        <route frontName="googlepay" id="googlepay">
+            <module name="AutifyDigital_LloydscardnetPayment"/>
+        </route>
+	</router>
+</config>

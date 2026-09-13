@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Block;
@@ -27,10 +27,6 @@ use Mageplaza\Osc\Helper\Data as OscHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class ContainerTest
- * @package Mageplaza\Osc\Test\Unit\Block
- */
 class ContainerTest extends TestCase
 {
     /**
@@ -43,7 +39,7 @@ class ContainerTest extends TestCase
      */
     private $containerBock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         /**
          * @var Context $contextMock

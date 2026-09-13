@@ -21,7 +21,6 @@
 
 namespace Mageplaza\PromoBanner\Model\Config\Source;
 
-use Magento\Framework\Option\ArrayInterface;
 use Mageplaza\PromoBanner\Helper\Data;
 
 /**
@@ -29,7 +28,7 @@ use Mageplaza\PromoBanner\Helper\Data;
  *
  * @package Mageplaza\PromoBanner\Model\Config\Source
  */
-class Category implements ArrayInterface
+class Category extends AbstractSource
 {
     /**
      * @var Data

@@ -25,7 +25,7 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Magento_Backend::stores">
-                    <resource id="Mageplaza_Osc::osc" title="One Step Checkout" sortOrder="45">
+                    <resource id="Mageplaza_Osc::osc" title="Mageplaza One Step Checkout" sortOrder="45">
                         <resource id="Mageplaza_Osc::field_management" title="Manage Fields" sortOrder="10"/>
                     </resource>
                     <resource id="Magento_Backend::stores_settings">

@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Block;
@@ -30,10 +30,6 @@ use Mageplaza\Osc\Helper\Data as OscHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class SurveyTest
- * @package Mageplaza\Osc\Test\Unit\Block
- */
 class SurveyTest extends TestCase
 {
     /**
@@ -51,7 +47,7 @@ class SurveyTest extends TestCase
      */
     private $surveyBlock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         /**
          * @var Context $contextMock
@@ -65,10 +61,8 @@ class SurveyTest extends TestCase
             ->getMock();
 
         $this->checkoutSessionMock = $this->getMockBuilder(CheckoutSession::class)
-            ->setMethods([
-                'getLastRealOrder',
-                'setOscData'
-            ])
+            ->onlyMethods(['getLastRealOrder'])
+            ->addMethods(['setOscData'])
             ->disableOriginalConstructor()
             ->getMock();
 

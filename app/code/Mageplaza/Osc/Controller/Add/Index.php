@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Controller\Add;
@@ -29,10 +29,6 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Osc\Helper\Data;
 
-/**
- * Class Index
- * @package Mageplaza\Osc\Controller\Add
- */
 class Index extends Cart
 {
     /**

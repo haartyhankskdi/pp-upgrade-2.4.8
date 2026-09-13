@@ -1,27 +1,31 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Helper;
 
 use Amasty\Base\Model\Serializer;
+use Amasty\Customform\ViewModel\Answser\Email\SubmittedFieldsRenderer;
 use Magento\Backend\Model\UrlInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Store\Model\ScopeInterface;
+use Symfony\Component\Mime\MimeTypes;
 use Magento\Checkout\Model\Session as Session;
 use Magento\Framework\Math\Random;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
-    public const MEDIA_PATH = 'amasty/amcustomform/';
+    public const VAR_PATH = 'amasty/amcustomform/';
 
     public const FILE_WAS_NOT_UPLOADED_CODE_ERROR = '666';
 
     public const REDIRECT_PREVIOUS_PAGE = '/';
+
+    public const DEFAULT_ALLOWED_EXTENSIONS = 'doc,docx,xls,xlsx,ppt,pptx,gif,bmp,png,jpg,jpeg,pdf,txt';
 
     /**
      * @var \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress
@@ -42,11 +46,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @var \Magento\Framework\Filesystem
      */
     private $filesystem;
-
-    /**
-     * @var \Magento\Framework\Filesystem\Io\File
-     */
-    private $ioFile;
 
     /**
      * @var \Magento\MediaStorage\Model\File\UploaderFactory
@@ -79,6 +78,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     private $answerModeFactory;
 
     /**
+     * @var MimeTypes
+     */
+    private $mimeTypes;
+
+    /**
      * @var Session
      */
     protected $session;
@@ -93,7 +97,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Magento\Customer\Api\CustomerRepositoryInterface $customerRepository,
         \Magento\Customer\Model\SessionFactory $sessionFactory,
         \Magento\Framework\Filesystem $filesystem,
-        \Magento\Framework\Filesystem\Io\File $ioFile,
+        ?\Magento\Framework\Filesystem\Io\File $ioFile, //todo: move to not optional
         \Magento\MediaStorage\Model\File\UploaderFactory $fileUploaderFactory,
         \Magento\Backend\Model\UrlInterface $backendUrl,
         \Magento\Framework\Escaper $escaper,
@@ -101,21 +105,21 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         \Amasty\Customform\ViewModel\Form\FormInit\AnswerModeFactory $answerModeFactory,
         \Amasty\Base\Model\Serializer $serializer,
         Session $session,
-        Random $random
+        Random $random,
+        MimeTypes $mimeTypes
     ) {
         parent::__construct($context);
-
         $this->remoteAddress = $context->getRemoteAddress();
         $this->sessionFactory = $sessionFactory;
         $this->customerRepository = $customerRepository;
         $this->filesystem = $filesystem;
-        $this->ioFile = $ioFile;
         $this->fileUploaderFactory = $fileUploaderFactory;
         $this->backendUrl = $backendUrl;
         $this->escaper = $escaper;
         $this->layout = $layout;
         $this->serializer = $serializer;
         $this->answerModeFactory = $answerModeFactory;
+        $this->mimeTypes = $mimeTypes;
         $this->session = $session;
         $this->random = $random;
     }
@@ -152,6 +156,21 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         } else {
             $data = $allowedTags ? $data : strip_tags((string)$data);
             $result = $this->escaper->escapeHtml($data, $allowedTags);
+        }
+
+        return $result;
+    }
+
+    public function stripTags($data)
+    {
+        if (is_array($data)) {
+            $result = [];
+
+            foreach ($data as $key => $item) {
+                $result[$key] = $this->stripTags($item);
+            }
+        } else {
+            $result = strip_tags((string)$data);
         }
 
         return $result;
@@ -212,7 +231,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getQuestionnaireUniqueId(){
         $hashKeyArray = [];
         $hashKey = $this->random->getUniqueHash();
-        // $this->session->setUniqueSingleHashKey($hashKey);
+        
         if($this->getUniqueHash()){
             // $hashKeyArray = json_decode($this->getUniqueHash());
             array_push($hashKeyArray, $hashKey);
@@ -227,18 +246,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 
     public function getCurrentIp()
     {
-        // $hashKeyArray = [];
-        // $hashKey = $this->random->getUniqueHash();
-        // if($this->getUniqueHash()){
-        //     $hashKeyArray = json_decode($this->getUniqueHash());
-        //     array_push($hashKeyArray, $hashKey);
-        //     $hashKeyJson = json_encode($hashKeyArray);
-        // } else {
-        //     array_push($hashKeyArray, $hashKey);
-        //     $hashKeyJson = json_encode($hashKeyArray);
-        // }
-        // $this->setUniqueHash($hashKeyJson);
-        // return $hashKey;
         return $this->remoteAddress->getRemoteAddress();
     }
 
@@ -266,7 +273,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getCustomerName($customerId, $asLink = false)
     {
-        $customerName = __('Guest');
+        $customerName = __('Guest')->render();
 
         try {
             $customer = $this->customerRepository->getById($customerId);
@@ -315,20 +322,24 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function saveFileField($name, $fileValidation)
     {
         //upload images
-        $path = $this->filesystem->getDirectoryRead(
-            DirectoryList::MEDIA
-        )->getAbsolutePath(
-            self::MEDIA_PATH
-        );
-        $this->ioFile->checkAndCreateFolder($path);
+        $dir = $this->filesystem->getDirectoryWrite(DirectoryList::VAR_DIR);
+        $path = $dir->getAbsolutePath(self::VAR_PATH);
 
         try {
+            $dir->getDriver()->createDirectory($path);
             /** @var $uploader \Magento\MediaStorage\Model\File\Uploader */
             $uploader = $this->fileUploaderFactory->create(['fileId' => $name]);
 
             if (!$uploader->getFileExtension()) {
                 throw new LocalizedException(
                     __('Can\'t save file without extensions name')
+                );
+            }
+
+            $allMimeTypesByExt = $this->mimeTypes->getMimeTypes($uploader->getFileExtension());
+            if (!$uploader->checkMimeType($allMimeTypesByExt)) {
+                throw new LocalizedException(
+                    __('File MIME type does not match file extension')
                 );
             }
 
@@ -458,6 +469,13 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         foreach ($validationFields as $field) {
             if (array_key_exists($field, $element) && $element[$field]) {
                 $validation[$field] = strip_tags($element[$field]);
+            }
+
+            if ($field === 'allowed_extension'
+                && $element['type'] == SubmittedFieldsRenderer::TYPE_FILE
+                && empty($element[$field])
+            ) {
+                $validation[$field] = self::DEFAULT_ALLOWED_EXTENSIONS;
             }
         }
 

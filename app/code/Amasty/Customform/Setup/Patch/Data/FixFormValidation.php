@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Setup\Patch\Data;
 
@@ -105,7 +106,10 @@ class FixFormValidation implements DataPatchInterface
                 try {
                     $unSerializedValidation = $this->serializer->unserialize($fieldValidation);
                     $fixedValidation = $unSerializedValidation['validation'] ?? '';
-                    $fieldConfig['required'] = $unSerializedValidation['required'] ?? '0';
+
+                    if ($unSerializedValidation && isset($unSerializedValidation['required'])) {
+                        $fieldConfig['required'] = $unSerializedValidation['required'];
+                    }
                 } catch (Throwable $e) {
                     $fixedValidation = $fieldValidation;
                 }

@@ -517,7 +517,7 @@ if (!empty($params['bmi_result'])) {
                 case 'validation':
                     if ($item == 'validate-email' && !$this->isHiddenField($field)) {
                         $value = filter_var($value, FILTER_SANITIZE_EMAIL);
-                        if (!\Zend_Validate::is($value, 'EmailAddress')) {
+                        if (filter_var($value, FILTER_VALIDATE_EMAIL) === false) {
                             throw new LocalizedException(__('Please enter a valid email address.'));
                         }
                     }

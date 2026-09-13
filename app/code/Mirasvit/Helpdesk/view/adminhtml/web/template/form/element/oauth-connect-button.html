@@ -1,0 +1,13 @@
+<div class="admin__field field-oauth-connect-button" data-bind="visible: visible">
+    <label class="label admin__field-label">
+        <span data-bind="text: label"></span>
+    </label>
+    <div class="admin__field-control control">
+        <button type="button"
+                class="action-default scalable primary"
+                data-bind="click: connectToGmail">
+            <span data-bind="text: isConnected() ? $t('Reconnect') : $t('Connect Mailbox')"></span>
+        </button>
+        <p class="note" data-bind="i18n: 'Click this button to authorize mailbox access via OAuth2'"></p>
+    </div>
+</div>

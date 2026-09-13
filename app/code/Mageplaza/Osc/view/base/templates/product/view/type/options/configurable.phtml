@@ -30,18 +30,23 @@ $_itemId     = $block->getData('quote_item')->getId();
         <?php foreach ($_attributes as $_attribute): ?>
             <div class="field configurable required">
                 <label class="label"
-                       for="attribute<?= $block->escapeHtml($_itemId . '-' . $_attribute->getAttributeId()) ?>">
-                    <span><?= $block->escapeHtml($_attribute->getProductAttribute()->getStoreLabel()) ?></span>
+                       for="attribute<?= $escaper->escapeHtml($_itemId . '-' . $_attribute->getAttributeId()) ?>">
+                    <span><?= $escaper->escapeHtml($_attribute->getProductAttribute()->getStoreLabel()) ?></span>
                 </label>
                 <div class="control">
-                    <select name="super_attribute[<?= $block->escapeHtml($_attribute->getAttributeId()) ?>]"
-                            data-selector="super_attribute[<?= $block->escapeHtml($_itemId) ?>]
-                        [<?= $block->escapeHtml($_attribute->getAttributeId()) ?>]"
+                    <select name="super_attribute[<?= $escaper->escapeHtml($_attribute->getAttributeId()) ?>]"
+                            data-selector="super_attribute[<?= $escaper->escapeHtml($_itemId) ?>]
+                        [<?= $escaper->escapeHtml($_attribute->getAttributeId()) ?>]"
                             data-validate="{required:true}"
-                            id="attribute<?= $block->escapeHtml($_attribute->getAttributeId()) ?>"
+                            id="attribute<?= $escaper->escapeHtml($_attribute->getAttributeId()) ?>"
                             class="super-attribute-select"
-                            data-attribute-id="<?= $block->escapeHtml($_attribute->getAttributeId()) ?>">
-                        <option value=""><?= $block->escapeHtml(__('Choose an Option...')) ?></option>
+                            data-attribute-id="<?= $escaper->escapeHtml($_attribute->getAttributeId()) ?>">
+                        <option value=""><?= $escaper->escapeHtml(__('Choose an Option...')) ?></option>
+                        <?php foreach ($_attribute->getOptions() as $option): ?>
+                            <option value="<?= $escaper->escapeHtml($option['value_index']) ?>">
+                                <?= $escaper->escapeHtml($option['label']) ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>

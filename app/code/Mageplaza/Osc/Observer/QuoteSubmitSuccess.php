@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Observer;
@@ -53,11 +53,9 @@ use Magento\Quote\Model\Quote;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\CustomerManagement;
 use Magento\Store\Model\ScopeInterface;
+use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Store\Model\StoreManagerInterface;
 
-/**
- * Class QuoteSubmitSuccess
- * @package Mageplaza\Osc\Observer
- */
 class QuoteSubmitSuccess implements ObserverInterface
 {
     /**
@@ -133,6 +131,16 @@ class QuoteSubmitSuccess implements ObserverInterface
     protected $customerGroupManagement;
 
     /**
+     * @var CustomerRepositoryInterface
+     */
+    protected $customerRepository;
+
+    /**
+     * @var StoreManagerInterface
+     */
+    protected $storeManager;
+
+    /**
      * QuoteSubmitSuccess constructor.
      *
      * @param Session $checkoutSession
@@ -140,15 +148,17 @@ class QuoteSubmitSuccess implements ObserverInterface
      * @param Url $customerUrl
      * @param ManagerInterface $messageManager
      * @param CustomerSession $customerSession
-     * @param SubscriberFactory $subscriberFactory
-     * @param CustomerManagement $customerManagement
-     * @param ScopeConfigInterface $scopeConfig
-     * @param PurchasedFactory $purchasedFactory
-     * @param ProductFactory $productFactory
-     * @param ItemFactory $itemFactory
-     * @param CollectionFactory $itemsFactory
-     * @param Copy $objectCopyService
      * @param CustomerGroupManagement $customerGroupManagement
+     * @param Copy $objectCopyService
+     * @param ScopeConfigInterface $scopeConfig
+     * @param CustomerManagement $customerManagement
+     * @param SubscriberFactory|null $subscriberFactory
+     * @param PurchasedFactory|null $purchasedFactory
+     * @param ProductFactory|null $productFactory
+     * @param ItemFactory|null $itemFactory
+     * @param CollectionFactory|null $itemsFactory
+     * @param CustomerRepositoryInterface $customerRepository
+     * @param StoreManagerInterface $storeManager
      */
     public function __construct(
         Session $checkoutSession,
@@ -156,15 +166,17 @@ class QuoteSubmitSuccess implements ObserverInterface
         Url $customerUrl,
         ManagerInterface $messageManager,
         CustomerSession $customerSession,
-        SubscriberFactory $subscriberFactory,
-        CustomerManagement $customerManagement,
-        ScopeConfigInterface $scopeConfig,
-        PurchasedFactory $purchasedFactory,
-        ProductFactory $productFactory,
-        ItemFactory $itemFactory,
-        CollectionFactory $itemsFactory,
+        CustomerGroupManagement $customerGroupManagement,
         Copy $objectCopyService,
-        CustomerGroupManagement $customerGroupManagement
+        ScopeConfigInterface $scopeConfig,
+        CustomerManagement $customerManagement,
+        ?SubscriberFactory $subscriberFactory,
+        ?PurchasedFactory $purchasedFactory,
+        ?ProductFactory $productFactory,
+        ?ItemFactory $itemFactory,
+        ?CollectionFactory $itemsFactory,
+        CustomerRepositoryInterface $customerRepository,
+        StoreManagerInterface $storeManager
     ) {
         $this->checkoutSession = $checkoutSession;
         $this->accountManagement = $accountManagement;
@@ -180,6 +192,8 @@ class QuoteSubmitSuccess implements ObserverInterface
         $this->_itemsFactory = $itemsFactory;
         $this->_objectCopyService = $objectCopyService;
         $this->customerGroupManagement = $customerGroupManagement;
+        $this->customerRepository = $customerRepository;
+        $this->storeManager = $storeManager;
     }
 
     /**
@@ -189,7 +203,9 @@ class QuoteSubmitSuccess implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        /** @var Quote $quote $quote */
+        /**
+         * @var Quote $quote $quote
+        */
         $quote = $observer->getEvent()->getQuote();
         $order = $observer->getEvent()->getOrder();
 
@@ -205,7 +221,13 @@ class QuoteSubmitSuccess implements ObserverInterface
                 $customer = $quote->getCustomer();
                 $this->checkoutSession->unsIsCreatedAccountPaypalExpress();
             } else {
-                $customer = $this->customerManagement->create($order->getId());
+                $email     = $order->getCustomerEmail();
+                $websiteId = $this->storeManager->getStore()->getWebsiteId();
+
+                $customer = $this->customerRepository->get($email, $websiteId);
+                if (!$customer->getId()) {
+                    $customer = $this->customerManagement->create($order->getId());
+                }
             }
 
             /* Set customer Id for address */
@@ -217,8 +239,8 @@ class QuoteSubmitSuccess implements ObserverInterface
             }
 
             if ($customer->getId()
-                && $this->accountManagement->getConfirmationStatus($customer->getId())
-                === AccountManagement::ACCOUNT_CONFIRMATION_REQUIRED) {
+                && $this->accountManagement->getConfirmationStatus($customer->getId())=== AccountManagement::ACCOUNT_CONFIRMATION_REQUIRED
+            ) {
                 $url = $this->_customerUrl->getEmailConfirmationUrl($customer->getEmail());
                 $this->messageManager->addSuccessMessage(
                 // @codingStandardsIgnoreStart
@@ -247,16 +269,16 @@ class QuoteSubmitSuccess implements ObserverInterface
         }
 
         if (isset($oscData['is_subscribed']) && $oscData['is_subscribed']) {
-            if (!$this->_customerSession->isLoggedIn()) {
-                $subscribedEmail = $quote->getBillingAddress()->getEmail();
-            } else {
-                $customer = $this->_customerSession->getCustomer();
-                $subscribedEmail = $customer->getEmail();
-            }
-
             try {
-                $this->subscriberFactory->create()
-                    ->subscribe($subscribedEmail);
+                if (!$this->_customerSession->isLoggedIn()) {
+                    $subscribedEmail = $quote->getBillingAddress()->getEmail();
+                    $this->subscriberFactory->create()
+                        ->subscribe($subscribedEmail);
+                } else {
+                    $customer = $this->_customerSession->getCustomer();
+                    $this->subscriberFactory->create()
+                        ->subscribeCustomerById($customer->getId());
+                }
             } catch (Exception $e) {
                 $this->messageManager->addErrorMessage(__('There is an error while subscribing for newsletter.'));
             }

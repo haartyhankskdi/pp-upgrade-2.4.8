@@ -28,7 +28,6 @@
         <referenceContainer name="content">
             <block class="Mageplaza\Osc\Block\Survey" name="osc.survey" template="Mageplaza_Osc::onepage/success/survey.phtml"/>
             <block class="Mageplaza\Osc\Block\StaticBlock" name="osc.static-block.success" template="static-block.phtml"/>
-             <!-- <block class="Magento\Framework\View\Element\Template" before="page.main.title" name="custom.success.block" template="Mageplaza_Osc::success/notice.phtml" /> -->
         </referenceContainer>
     </body>
 </page>

@@ -1,0 +1,226 @@
+"Something went wrong while building the report","Rapor oluşturulurken bir hata oluştu"
+"Not logged in","Oturum açılmamış"
+"Email Notifications","E-posta Bildirimleri"
+"The email report has been deleted.","E-posta raporu silindi."
+"This email report no longer exists.","Bu e-posta raporu artık mevcut değil."
+"This email no longer exists.","Bu e-posta artık mevcut değil."
+"Edit Email ""%1""","""%1"" E-postasını Düzenle"
+"New Email Report","Yeni E-posta Raporu"
+"You saved the email report.","E-posta raporunu kaydettiniz."
+"No data to save.","Kaydedilecek veri yok."
+"This report no longer exists.","Bu rapor artık mevcut değil."
+"Report columns saved.","Rapor sütunları kaydedildi."
+"Unsupported format ""%1""","Desteklenmeyen biçim ""%1"""
+"This report does not exist or is not available for sharing.","Bu rapor mevcut değil veya paylaşıma açık değil"
+"Report identifier is required","Rapor tanımlayıcısı gereklidir"
+"Report: %1","Rapor: %1"
+"Block identifier ""%1"" does not match any available report or dashboard block. Use GET /V1/reports/reports to discover valid identifiers.","""%1"" blok tanımlayıcısı mevcut hiçbir rapor veya pano bloğuyla eşleşmiyor. Geçerli tanımlayıcıları bulmak için GET /V1/reports/reports kullanın."
+"Time range ""%1"" is not valid. Valid values: %2","""%1"" zaman aralığı geçerli değil. Geçerli değerler: %2"
+"Email with ID ""%1"" does not exist.","""%1"" kimliğine sahip e-posta mevcut değil."
+Back,Geri
+Delete,Sil
+"Are you sure you want to do this?","Bunu yapmak istediğinize emin misiniz?"
+Save,Kaydet
+"Save & Continue","Kaydet ve Devam Et"
+"Save & Send","Kaydet ve Gönder"
+Edit,Düzenle
+"Delete email?","E-posta silinsin mi?"
+(previous),(önceki)
+"%1 out of %2 selected","%2 öğeden %1 seçildi"
+"Access URL","Erişim URL'si"
+Actions,İşlemler
+"Active filters:","Etkin filtreler:"
+"Add Empty Widget","Boş Widget Ekle"
+"Add filter","Filtre ekle"
+"Add Filter","Filtre Ekle"
+"Add New Board","Yeni Pano Ekle"
+"Add New Widget","Yeni Widget Ekle"
+"Add Widget","Widget Ekle"
+"Additional Filters","Ek Filtreler"
+"Advanced mode","Gelişmiş mod"
+Aggregator,Toplayıcı
+"and more %1 other columns","ve %1 sütun daha"
+applicable,geçerli
+Apply,Uygula
+"Apply date filter","Tarih filtresini uygula"
+"Apply Filters","Filtreleri Uygula"
+"Are you sure you want to reset the access token?","Erişim anahtarını sıfırlamak istediğinize emin misiniz?"
+Average,Ortalama
+"Base Table","Temel Tablo"
+"Block Type","Blok Türü"
+Cancel,İptal
+"Cancel date filter","Tarih filtresini iptal et"
+Chart,Grafik
+"Chart type selector","Grafik türü seçici"
+"Clear all","Tümünü temizle"
+Close,Kapat
+"Close menu","Menüyü kapat"
+Column,Sütun
+"Column for grouping data in the table","Tablodaki verileri gruplamak için sütun"
+"Column for grouping the data in the table","Tablodaki verileri gruplamak için sütun"
+"Column selector mode switcher. Current mode: %1","Sütun seçici mod değiştirici. Geçerli mod: %1"
+Columns,Sütunlar
+"Columns to group the rows in the table","Tablodaki satırları gruplamak için sütunlar"
+Comparison,Karşılaştırma
+contains,içerir
+Content,İçerik
+Copied,Kopyalandı
+"Copy importdata code for Google Sheets","Google Sheets için importdata kodunu kopyala"
+"Copy to clipboard","Panoya kopyala"
+Count,Sayı
+Country,Ülke
+"Current mode: %1","Geçerli mod: %1"
+"Current Page","Geçerli Sayfa"
+Custom,Özel
+Customize,Özelleştir
+Date,Tarih
+"Date filter","Tarih filtresi"
+Day,Gün
+"Delete report","Raporu sil"
+Description,Açıklama
+Dimension,Boyut
+"Dimension column table","Boyut sütunu tablosu"
+Dimensions,Boyutlar
+Disable,Devre Dışı Bırak
+"Disable sharing report","Rapor paylaşımını devre dışı bırak"
+"Do not compare","Karşılaştırma"
+"doesn't contain","içermez"
+Download,İndir
+Duplicate,Çoğalt
+"Duplicate report","Raporu çoğalt"
+Early,Erken
+"Edit Board","Panoyu Düzenle"
+"Edit columns","Sütunları düzenle"
+"Edit report","Raporu düzenle"
+"Empty report data table","Boş rapor veri tablosu"
+Enable,Etkinleştir
+"Enable Remote Access","Uzaktan Erişimi Etkinleştir"
+"Enable Remote Access on Storefront","Mağaza Önyüzünde Uzaktan Erişimi Etkinleştir"
+"Enable sharing report","Rapor paylaşımını etkinleştir"
+"Enter page number","Sayfa numarası girin"
+"Excel XML","Excel XML"
+Export,Dışa Aktar
+"Filter value","Filtre değeri"
+Filters,Filtreler
+"Found: %1 columns","Bulunan: %1 sütun"
+from,başlangıç
+"From date","Başlangıç tarihi"
+"General Information","Genel Bilgiler"
+"Go to next page","Sonraki sayfaya git"
+"Go to previous page","Önceki sayfaya git"
+"Group by","Grupla"
+"Hide percentage of total","Toplam yüzdesini gizle"
+"Image for %1","%1 için görsel"
+"Import data code","Veri içe aktarma kodu"
+"Insert the below code into your Google Sheet and it will automatically import the most recent data from the report every hour:","Aşağıdaki kodu Google sayfanıza yapıştırın, raporun en güncel verilerini her saat başı otomatik olarak içe aktaracaktır:"
+"Insert To Google Sheet","Google Sayfasına Ekle"
+"Insert widget's HTML content here","Widget'ın HTML içeriğini buraya girin"
+"Internal Filters","Dahili Filtreler"
+"Is Default","Varsayılan"
+"is not","değil"
+"is not one of","şunlardan biri değil"
+"is one of","şunlardan biri"
+Loading...,Yükleniyor...
+"Lower number means higher position. Boards with the same sort order will be ordered according to the dashboard general sorting settings.","Daha düşük sayı daha yüksek konum anlamına gelir. Aynı sıralama değerine sahip panolar, pano genel sıralama ayarlarına göre sıralanır."
+"Make a copy","Kopyasını oluştur"
+"Make sure that the selected columns are","Seçili sütunların şöyle olduğundan emin olun"
+Manage,Yönet
+"Manage columns","Sütunları yönet"
+"Manage filters","Filtreleri yönet"
+Metric,Metrik
+Month,Ay
+"More filters","Daha fazla filtre"
+"More Filters","Daha Fazla Filtre"
+"No next pages, action disabled","Sonraki sayfa yok, işlem devre dışı"
+"No previous pages, action disabled","Önceki sayfa yok, işlem devre dışı"
+"not allowed","izin verilmiyor"
+Number,Sayı
+of,/
+"Once you have configured the report, you can use a direct link to open the report on any device without opening the admin and always with fresh live data.","Raporu yapılandırdıktan sonra, yönetici paneline girmeden herhangi bir cihazda raporu açmak için doğrudan bir bağlantı kullanabilirsiniz ve her zaman güncel canlı verilere erişirsiniz."
+"Open link","Bağlantıyı aç"
+"Open menu","Menüyü aç"
+"Override dashboard time","Pano zamanını geçersiz kıl"
+"Page Size","Sayfa Boyutu"
+Percent,Yüzde
+"Please select","Lütfen seçin"
+"Previous period","Önceki dönem"
+"Primary Filters","Birincil Filtreler"
+"Private Board","Özel Pano"
+"Private Board will be available only for the current admin user. Shared Board will be available for all admin users.","Özel Pano yalnızca geçerli yönetici kullanıcı için kullanılabilir olacaktır. Paylaşılan Pano tüm yönetici kullanıcılar için kullanılabilir olacaktır."
+Quarter,Çeyrek
+"Quick Access & Sharing","Hızlı Erişim ve Paylaşım"
+"A quick access link to the report is a great alternative to routine daily exporting.","Rapora hızlı erişim bağlantısı, günlük dışa aktarma rutinine harika bir alternatiftir."
+Range,Aralık
+"records found","kayıt bulundu"
+Refresh,Yenile
+Remove,Kaldır
+"Remove filter","Filtreyi kaldır"
+"Remove from chart","Grafikten kaldır"
+"Removing board...","Pano kaldırılıyor..."
+"Report data table with %1 rows","%1 satırlı rapor veri tablosu"
+Reset,Sıfırla
+"Reset access token","Erişim anahtarını sıfırla"
+"Reset Changes","Değişiklikleri Sıfırla"
+"Resetting the access token will deactivate the old access link. Anyone who previously had access to the board will lose it and will need the new link to access it.","Erişim anahtarını sıfırlamak eski erişim bağlantısını devre dışı bırakır. Daha önce panoya erişimi olan herkes erişimini kaybeder ve erişmek için yeni bağlantıya ihtiyaç duyar."
+"Rows Limit","Satır Sınırı"
+"Same period last month","Geçen ayın aynı dönemi"
+"Same period last week","Geçen haftanın aynı dönemi"
+"Same period last year","Geçen yılın aynı dönemi"
+"Save Changes","Değişiklikleri Kaydet"
+"Saving report...","Rapor kaydediliyor..."
+Saving...,Kaydediliyor...
+"Search column across ALL tables by identifier.","TÜM tablolarda tanımlayıcıya göre sütun ara."
+"Search for column","Sütun ara"
+"Select condition","Koşul seçin"
+"Select date range","Tarih aralığı seçin"
+"Select Date Range","Tarih Aralığı Seçin"
+Share,Paylaş
+"Share Dashboard","Panoyu Paylaş"
+"Share in %1 format","%1 biçiminde paylaş"
+"Shared Board","Paylaşılan Pano"
+"Sharing link","Paylaşım bağlantısı"
+"Show in chart","Grafikte göster"
+"Show percentage of total","Toplam yüzdesini göster"
+"Single Value","Tekil Değer"
+"Sort by %1","%1 ölçütüne göre sırala"
+"Sort Order","Sıralama Düzeni"
+Sorting,Sıralama
+"Spark line","Mini grafik"
+String,Metin
+Sum,Toplam
+"Switch to %1 chart","%1 grafiğine geç"
+Table,Tablo
+"Time Range","Zaman Aralığı"
+Title,Başlık
+to,bitiş
+"To date","Bitiş tarihi"
+"to the current report.","geçerli rapora."
+Toolbar,Araç Çubuğu
+Type,Tür
+"Type to search","Aramak için yazın"
+"Untitled Block","Başlıksız Blok"
+"Untitled Board","Başlıksız Pano"
+Value,Değer
+"We couldn't find any records.","Herhangi bir kayıt bulamadık."
+Week,Hafta
+"Widget Library","Widget Kütüphanesi"
+"Wrong configuration. Please change report building conditions.","Yanlış yapılandırma. Lütfen rapor oluşturma koşullarını değiştirin."
+Year,Yıl
+"To add your first block, unlock the board (top right corner).","İlk bloğu eklemek için panonun kilidini açmanız gerekir (sağ üst köşe)."
+"Loading report data","Rapor verileri yükleniyor"
+"Report data table for %1","%1 için rapor veri tablosu"
+Block,Blok
+"Date Interval","Tarih Aralığı"
+Limit,Sınır
+"Add Block","Blok Ekle"
+Active,Etkin
+"Attach each block as a separate CSV report","Her bloğu ayrı bir CSV raporu olarak ekle"
+Subject,Konu
+Recipient,Alıcı
+Schedule,Zamanlama
+"Should be cron-like expression. <br/>Example: 59 23 * * * <br/>Will be sent report every day at 23:59","Cron benzeri bir ifade olmalıdır. <br/>Örnek: 59 23 * * * <br/>Rapor her gün 23:59'da gönderilecektir"
+Body,Gövde
+"Add New Email","Yeni E-posta Ekle"
+ID,Kimlik
+Status,Durum
+"Last Sent At","Son Gönderim Zamanı"

@@ -528,6 +528,7 @@ class Customc extends \Magento\Backend\App\Action
     }
 
     public function remove_http($url) {
+        $url = (string) $url;
         $disallowed = array('http://', 'https://');
         foreach($disallowed as $d) {
             if(strpos($url, $d) === 0) {

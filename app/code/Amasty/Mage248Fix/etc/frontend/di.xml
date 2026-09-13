@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Mage 2.4.8 Fix
+ */ -->
+ 
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\App\PageCache\Kernel">
+        <arguments>
+            <argument name="identifier"
+                      xsi:type="object">Amasty\Mage248Fix\Model\App\PageCache\IdentifierForRead</argument>
+        </arguments>
+    </type>
+    <type name="Magento\PageCache\Model\App\Response\HttpPlugin">
+        <plugin name="Amasty_Mage248Fix::keepNotNullVary" type="Amasty\Mage248Fix\Plugin\PageCache\Model\App\Response\HttpPlugin\KeepNotNullVary"/>
+    </type>
+</config>

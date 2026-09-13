@@ -1,0 +1,226 @@
+"Something went wrong while building the report","Er is iets misgegaan bij het genereren van het rapport"
+"Not logged in","Niet ingelogd"
+"Email Notifications","E-mailmeldingen"
+"The email report has been deleted.","Het e-mailrapport is verwijderd."
+"This email report no longer exists.","Dit e-mailrapport bestaat niet meer."
+"This email no longer exists.","Deze e-mail bestaat niet meer."
+"Edit Email ""%1""","E-mail ""%1"" bewerken"
+"New Email Report","Nieuw e-mailrapport"
+"You saved the email report.","Je hebt het e-mailrapport opgeslagen."
+"No data to save.","Geen gegevens om op te slaan."
+"This report no longer exists.","Dit rapport bestaat niet meer."
+"Report columns saved.","Rapportkolommen opgeslagen."
+"Unsupported format ""%1""","Niet-ondersteund formaat ""%1"""
+"This report does not exist or is not available for sharing.","Dit rapport bestaat niet of is niet beschikbaar om te delen"
+"Report identifier is required","Rapport-ID is vereist"
+"Report: %1","Rapport: %1"
+"Block identifier ""%1"" does not match any available report or dashboard block. Use GET /V1/reports/reports to discover valid identifiers.","Blok-ID ""%1"" komt niet overeen met een beschikbaar rapport of dashboardblok. Gebruik GET /V1/reports/reports om geldige ID's te vinden."
+"Time range ""%1"" is not valid. Valid values: %2","Tijdsbereik ""%1"" is niet geldig. Geldige waarden: %2"
+"Email with ID ""%1"" does not exist.","E-mail met ID ""%1"" bestaat niet."
+Back,Terug
+Delete,Verwijderen
+"Are you sure you want to do this?","Weet je zeker dat je dit wilt doen?"
+Save,Opslaan
+"Save & Continue","Opslaan en doorgaan"
+"Save & Send","Opslaan en verzenden"
+Edit,Bewerken
+"Delete email?","E-mail verwijderen?"
+(previous),(vorige)
+"%1 out of %2 selected","%1 van %2 geselecteerd"
+"Access URL","Toegangs-URL"
+Actions,Acties
+"Active filters:","Actieve filters:"
+"Add Empty Widget","Leeg widget toevoegen"
+"Add filter","Filter toevoegen"
+"Add Filter","Filter toevoegen"
+"Add New Board","Nieuw bord toevoegen"
+"Add New Widget","Nieuw widget toevoegen"
+"Add Widget","Widget toevoegen"
+"Additional Filters","Aanvullende filters"
+"Advanced mode","Geavanceerde modus"
+Aggregator,Aggregator
+"and more %1 other columns","en nog %1 andere kolommen"
+applicable,van toepassing
+Apply,Toepassen
+"Apply date filter","Datumfilter toepassen"
+"Apply Filters","Filters toepassen"
+"Are you sure you want to reset the access token?","Weet je zeker dat je het toegangstoken wilt resetten?"
+Average,Gemiddelde
+"Base Table","Basistabel"
+"Block Type","Bloktype"
+Cancel,Annuleren
+"Cancel date filter","Datumfilter annuleren"
+Chart,Grafiek
+"Chart type selector","Selectie grafiektype"
+"Clear all","Alles wissen"
+Close,Sluiten
+"Close menu","Menu sluiten"
+Column,Kolom
+"Column for grouping data in the table","Kolom om gegevens in de tabel te groeperen"
+"Column for grouping the data in the table","Kolom om gegevens in de tabel te groeperen"
+"Column selector mode switcher. Current mode: %1","Modusschakelaar voor kolomselectie. Huidige modus: %1"
+Columns,Kolommen
+"Columns to group the rows in the table","Kolommen om de rijen in de tabel te groeperen"
+Comparison,Vergelijking
+contains,bevat
+Content,Inhoud
+Copied,Gekopieerd
+"Copy importdata code for Google Sheets","Importdata-code voor Google Sheets kopiëren"
+"Copy to clipboard","Kopiëren naar klembord"
+Count,Aantal
+Country,Land
+"Current mode: %1","Huidige modus: %1"
+"Current Page","Huidige pagina"
+Custom,Aangepast
+Customize,Aanpassen
+Date,Datum
+"Date filter","Datumfilter"
+Day,Dag
+"Delete report","Rapport verwijderen"
+Description,Beschrijving
+Dimension,Dimensie
+"Dimension column table","Dimensiekolomtabel"
+Dimensions,Dimensies
+Disable,Uitschakelen
+"Disable sharing report","Rapport delen uitschakelen"
+"Do not compare","Niet vergelijken"
+"doesn't contain","bevat niet"
+Download,Downloaden
+Duplicate,Dupliceren
+"Duplicate report","Rapport dupliceren"
+Early,Vroeg
+"Edit Board","Bord bewerken"
+"Edit columns","Kolommen bewerken"
+"Edit report","Rapport bewerken"
+"Empty report data table","Lege rapportgegevenstabel"
+Enable,Inschakelen
+"Enable Remote Access","Externe toegang inschakelen"
+"Enable Remote Access on Storefront","Externe toegang op frontend inschakelen"
+"Enable sharing report","Rapport delen inschakelen"
+"Enter page number","Paginanummer invoeren"
+"Excel XML","Excel XML"
+Export,Exporteren
+"Filter value","Filterwaarde"
+Filters,Filters
+"Found: %1 columns","Gevonden: %1 kolommen"
+from,van
+"From date","Van datum"
+"General Information","Algemene informatie"
+"Go to next page","Naar volgende pagina"
+"Go to previous page","Naar vorige pagina"
+"Group by","Groeperen op"
+"Hide percentage of total","Percentage van totaal verbergen"
+"Image for %1","Afbeelding voor %1"
+"Import data code","Code voor gegevensimport"
+"Insert the below code into your Google Sheet and it will automatically import the most recent data from the report every hour:","Plak de onderstaande code in je Google Sheet en de meest recente rapportgegevens worden elk uur automatisch geïmporteerd:"
+"Insert To Google Sheet","Invoegen in Google Sheet"
+"Insert widget's HTML content here","Voeg hier de HTML-inhoud van het widget in"
+"Internal Filters","Interne filters"
+"Is Default","Standaard"
+"is not","is niet"
+"is not one of","is geen van"
+"is one of","is een van"
+Loading...,Laden...
+"Lower number means higher position. Boards with the same sort order will be ordered according to the dashboard general sorting settings.","Een lager nummer betekent een hogere positie. Borden met dezelfde sorteervolgorde worden gerangschikt volgens de algemene sorteerinstellingen van het dashboard."
+"Make a copy","Kopie maken"
+"Make sure that the selected columns are","Zorg ervoor dat de geselecteerde kolommen"
+Manage,Beheren
+"Manage columns","Kolommen beheren"
+"Manage filters","Filters beheren"
+Metric,Metriek
+Month,Maand
+"More filters","Meer filters"
+"More Filters","Meer filters"
+"No next pages, action disabled","Geen volgende pagina's, actie uitgeschakeld"
+"No previous pages, action disabled","Geen vorige pagina's, actie uitgeschakeld"
+"not allowed","niet toegestaan"
+Number,Aantal
+of,van
+"Once you have configured the report, you can use a direct link to open the report on any device without opening the admin and always with fresh live data.","Zodra je het rapport hebt geconfigureerd, kun je een directe link gebruiken om het rapport op elk apparaat te openen zonder de admin te openen en altijd met actuele live gegevens."
+"Open link","Link openen"
+"Open menu","Menu openen"
+"Override dashboard time","Dashboardperiode overschrijven"
+"Page Size","Paginagrootte"
+Percent,Percentage
+"Please select","Selecteer"
+"Previous period","Vorige periode"
+"Primary Filters","Primaire filters"
+"Private Board","Privé-bord"
+"Private Board will be available only for the current admin user. Shared Board will be available for all admin users.","Privé-bord is alleen beschikbaar voor de huidige admin-gebruiker. Gedeeld bord is beschikbaar voor alle admin-gebruikers."
+Quarter,Kwartaal
+"Quick Access & Sharing","Snelle toegang en delen"
+"A quick access link to the report is a great alternative to routine daily exporting.","Een snelle toegangslink naar het rapport is een uitstekend alternatief voor dagelijkse routinematige export."
+Range,Bereik
+"records found","records gevonden"
+Refresh,Vernieuwen
+Remove,Verwijderen
+"Remove filter","Filter verwijderen"
+"Remove from chart","Uit grafiek verwijderen"
+"Removing board...","Bord verwijderen..."
+"Report data table with %1 rows","Rapportgegevenstabel met %1 rijen"
+Reset,Resetten
+"Reset access token","Toegangstoken resetten"
+"Reset Changes","Wijzigingen resetten"
+"Resetting the access token will deactivate the old access link. Anyone who previously had access to the board will lose it and will need the new link to access it.","Het resetten van het toegangstoken deactiveert de oude toegangslink. Iedereen die eerder toegang had tot het bord verliest deze en heeft de nieuwe link nodig om er toegang toe te krijgen."
+"Rows Limit","Rijenlimiet"
+"Same period last month","Zelfde periode vorige maand"
+"Same period last week","Zelfde periode vorige week"
+"Same period last year","Zelfde periode vorig jaar"
+"Save Changes","Wijzigingen opslaan"
+"Saving report...","Rapport opslaan..."
+Saving...,Opslaan...
+"Search column across ALL tables by identifier.","Kolom doorzoeken in ALLE tabellen op ID."
+"Search for column","Kolom zoeken"
+"Select condition","Voorwaarde selecteren"
+"Select date range","Datumbereik selecteren"
+"Select Date Range","Datumbereik selecteren"
+Share,Delen
+"Share Dashboard","Dashboard delen"
+"Share in %1 format","Delen in %1-formaat"
+"Shared Board","Gedeeld bord"
+"Sharing link","Deellink"
+"Show in chart","In grafiek tonen"
+"Show percentage of total","Percentage van totaal tonen"
+"Single Value","Enkele waarde"
+"Sort by %1","Sorteren op %1"
+"Sort Order","Sorteervolgorde"
+Sorting,Sortering
+"Spark line","Sparkline"
+String,Tekenreeks
+Sum,Som
+"Switch to %1 chart","Overschakelen naar %1-grafiek"
+Table,Tabel
+"Time Range","Tijdsbereik"
+Title,Titel
+to,tot
+"To date","Tot datum"
+"to the current report.","aan het huidige rapport."
+Toolbar,Werkbalk
+Type,Type
+"Type to search","Typ om te zoeken"
+"Untitled Block","Blok zonder titel"
+"Untitled Board","Bord zonder titel"
+Value,Waarde
+"We couldn't find any records.","We hebben geen records kunnen vinden."
+Week,Week
+"Widget Library","Widgetbibliotheek"
+"Wrong configuration. Please change report building conditions.","Onjuiste configuratie. Wijzig de voorwaarden voor rapportgeneratie."
+Year,Jaar
+"To add your first block, unlock the board (top right corner).","Je moet het bord ontgrendelen (rechterbovenhoek) om het eerste blok toe te voegen."
+"Loading report data","Rapportgegevens laden"
+"Report data table for %1","Rapportgegevenstabel voor %1"
+Block,Blok
+"Date Interval","Datuminterval"
+Limit,Limiet
+"Add Block","Blok toevoegen"
+Active,Actief
+"Attach each block as a separate CSV report","Elk blok als afzonderlijk CSV-rapport bijvoegen"
+Subject,Onderwerp
+Recipient,Ontvanger
+Schedule,Planning
+"Should be cron-like expression. <br/>Example: 59 23 * * * <br/>Will be sent report every day at 23:59","Moet een cron-achtige expressie zijn. <br/>Voorbeeld: 59 23 * * * <br/>Rapport wordt elke dag om 23:59 verzonden"
+Body,Inhoud
+"Add New Email","Nieuwe e-mail toevoegen"
+ID,ID
+Status,Status
+"Last Sent At","Laatst verzonden op"

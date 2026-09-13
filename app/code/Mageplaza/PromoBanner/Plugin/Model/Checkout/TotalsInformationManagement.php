@@ -62,7 +62,7 @@ class TotalsInformationManagement
         Data $helperData
     ) {
         $this->quoteRepository = $quoteRepository;
-        $this->helperData      = $helperData;
+        $this->helperData = $helperData;
     }
 
     /**
@@ -123,11 +123,11 @@ class TotalsInformationManagement
      */
     public function getPromoBannerValidate()
     {
-        $ids        = [];
+        $ids = [];
         $collection = $this->helperData->getPromoBannerCollection();
         $collection->addFieldToFilter(['page', 'page_type'], [['eq' => 0], ['finset' => Page::CART_PAGE]]);
         if ($this->helperData->isEnabled() && $collection && $collection->getSize()) {
-            $quote   = $this->getQuote()->collectTotals();
+            $quote = $this->getQuote()->collectTotals();
             $address = $quote->isVirtual() ? $quote->getBillingAddress() : $quote->getShippingAddress();
 
             foreach ($collection as $item) {

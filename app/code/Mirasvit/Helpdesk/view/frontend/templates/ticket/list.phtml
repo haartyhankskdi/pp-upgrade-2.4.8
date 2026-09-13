@@ -1,0 +1,47 @@
+<?php
+/** @var \Mirasvit\Helpdesk\Block\Ticket\Listing $block */
+?>
+<?php
+$collection = $block->getTicketCollection()
+    ->joinFields()
+    ->setOrder('last_reply_at', 'desc');
+?>
+
+<?= $block->getChildHtml('helpdesk_mytickets_schedule_status') ?>
+
+<div class="hdmx__tickets">
+    <button title="<?= $block->escapeHtml(__("Create ticket")) ?>" class="action create-button primary"
+            onclick="window.location = '<?= $block->escapeUrl($block->getCreateUrl()) ?>';return false;"
+            aria-label="<?= $block->escapeHtml(__('Navigate to create new ticket page')) ?>">
+        <span><?= $block->escapeHtml(__("Create ticket")) ?></span>
+    </button>
+    <?php if ($collection->count()): ?>
+        <div class="table-wrapper">
+            <table class="data table hdmx__tickets-table">
+                <caption class="table-caption"><?= $block->escapeHtml(__('Tickets')) ?></caption>
+                <thead>
+                <tr>
+                    <?php foreach ($block->getColumns() as $name => $column): ?>
+                        <th scope="col" class="col <?= $block->escapeHtml($name) ?>"><?= $block->escapeHtml($column->getLabel()) ?></th>
+                    <?php endforeach ?>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($collection as $ticket): ?>
+                    <tr>
+                        <?php foreach ($block->getColumns() as $name => $column): ?>
+                            <td data-th="<?= $block->escapeHtml($column->getLabel()) ?>" class="<?= $block->escapeHtml($name) ?>">
+                                <?= $block->getColumnHtml($column, $ticket) ?>
+                            </td>
+                        <?php endforeach ?>
+                    </tr>
+                <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
+    <?php else: ?>
+        <div class="message info empty">
+            <span><?= $block->escapeHtml(__("You don't have open tickets")) ?></span>
+        </div>
+    <?php endif ?>
+</div>

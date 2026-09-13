@@ -8,6 +8,7 @@ More,More
 "Shipping Method","Shipping Method"
 "Payment Method","Payment Method"
 "Address Information","Address Information"
+"Checkout Steps","Checkout Steps"
 "Save Position","Save Position"
 "Please install %1 to add more address fields.","Please install %1 to add more address fields."
 "Add Customer Attributes","Add Customer Attributes"
@@ -42,6 +43,8 @@ Default,Default
 "Filled In","Filled In"
 "In Payment Area","In Payment Area"
 "In Review Area","In Review Area"
+"-- Please select --","-- Please select --"
+"Custom Field %1","Custom Field %1"
 Flat,Flat
 Material,Material
 "Per Order","Per Order"
@@ -51,7 +54,6 @@ Material,Material
 "2 Columns With Floating Column","2 Columns With Floating Column"
 "3 Columns","3 Columns"
 "3 Columns With Colspan","3 Columns With Colspan"
-"-- Please select --","-- Please select --"
 "With Gap","With Gap"
 "Select Static Block","Select Static Block"
 "Use Default Design","Use Default Design"
@@ -68,12 +70,16 @@ Add,Add
 Test,Test
 "The product that was requested doesn't exist. Verify the product and try again.","The product that was requested doesn't exist. Verify the product and try again."
 test,test
+"Disabled Field","Disabled Field"
 "Is Required?","Is Required?"
+"Enabled Field","Enabled Field"
 "Additional Content","Additional Content"
 "Order Comment","Order Comment"
 "Order Survey","Order Survey"
 Question:,Question:
 Answers:,Answers:
+Disable,Disable
+"Not installed","Not installed"
 sample,sample
 "Select all","Select all"
 "Unselect all","Unselect all"
@@ -97,10 +103,12 @@ Password,Password
 "New Address","New Address"
 Edit,Edit
 "Save in address book","Save in address book"
+"* Required Fields","* Required Fields"
 "Already have an account? Click here to login","Already have an account? Click here to login"
 "Email Address","Email Address"
 "Sign In","Sign In"
 "Forgot Your Password?","Forgot Your Password?"
+or,or
 "You already have an account with us.","You already have an account with us."
 "Sign in","Sign in"
 "or continue as guest.","or continue as guest."
@@ -114,6 +122,7 @@ Login,Login
 "Enter discount code","Enter discount code"
 "Apply Discount","Apply Discount"
 "Cancel coupon","Cancel coupon"
+Cancel,Cancel
 "Gift Message","Gift Message"
 From:,From:
 To:,To:
@@ -121,6 +130,7 @@ Message:,Message:
 "Register for newsletter","Register for newsletter"
 Comments,Comments
 "Place Order","Place Order"
+"Check Out with Multiple Addresses","Check Out with Multiple Addresses"
 "Shipping Methods","Shipping Methods"
 "Select Method","Select Method"
 Price,Price
@@ -129,24 +139,33 @@ Price,Price
 "Sorry, no quotes are available for this order at this time","Sorry, no quotes are available for this order at this time"
 "Forgot an item?","Forgot an item?"
 "Edit your cart","Edit your cart"
+" of "," of "
 "Item in Cart","Item in Cart"
 "Items in Cart","Items in Cart"
 "Product Name","Product Name"
 Qty,Qty
 Subtotal,Subtotal
+"View and Edit Cart","View and Edit Cart"
 "View Details","View Details"
 "Options Details","Options Details"
 Update,Update
 Delete,Delete
+"Save for later use.","Save for later use."
+"What is this?","What is this?"
+"We store you payment information securely on Braintree servers via SSL.","We store you payment information securely on Braintree servers via SSL."
+"Acceptance Mark","Acceptance Mark"
+"Please enter only up to the second decimal.","Please enter only up to the second decimal."
 "Provided Zip/Postal Code seems to be invalid.","Provided Zip/Postal Code seems to be invalid."
 " Example: "," Example: "
 "If you believe it is the right one you can ignore this notice.","If you believe it is the right one you can ignore this notice."
+"This is a required field.","This is a required field."
 "Login successfully. Please wait...","Login successfully. Please wait..."
 "Please specify a payment method.","Please specify a payment method."
+"PayPal Checkout could not be initialized. Please contact the store owner.","PayPal Checkout could not be initialized. Please contact the store owner."
+"Address failed validation. Please check and confirm your City, State, and Postal Code","Address failed validation. Please check and confirm your City, State, and Postal Code"
 "Please specify a shipping method.","Please specify a shipping method."
 "Gift message item","Gift message item"
 "Gift Message Item &#40","Gift Message Item &#40"
-Cancel,Cancel
 "General Configuration","General Configuration"
 "Enable One Step Checkout","Enable One Step Checkout"
 "Select <strong>Yes</strong> to enable the module.","Select <strong>Yes</strong> to enable the module."
@@ -168,6 +187,8 @@ Cancel,Cancel
 "Select Yes to enable redirecting to the Checkout Page after a product's added to cart.","Select Yes to enable redirecting to the Checkout Page after a product's added to cart."
 "Show Billing Address","Show Billing Address"
 "Select Yes to allow the <strong>Billing Address</strong> block to appear in the Checkout Page, or No to imply that <strong>Billing Address</strong> and <strong>Shipping Address</strong> are the same.","Select Yes to allow the <strong>Billing Address</strong> block to appear in the Checkout Page, or No to imply that <strong>Billing Address</strong> and <strong>Shipping Address</strong> are the same."
+"Billing Address and Shipping Address are the same” checked by default","Billing Address and Shipping Address are the same” checked by default"
+"If <strong>Yes</strong>, the checkbox will be automatically checked. Customers uncheck to fill in the Billing Address information.","If <strong>Yes</strong>, the checkbox will be automatically checked. Customers uncheck to fill in the Billing Address information."
 "Use Auto Suggestion Technology","Use Auto Suggestion Technology"
 "Select <strong>Google</strong> to use it for automatic address suggestion, or <strong>No</strong> to disable this feature.","Select <strong>Google</strong> to use it for automatic address suggestion, or <strong>No</strong> to disable this feature."
 "Google Api Key","Google Api Key"
@@ -200,6 +221,9 @@ Route,Route
 "Select <strong>No</strong> to hide <strong>Terms and Conditions</strong>, or select an area to display it.","Select <strong>No</strong> to hide <strong>Terms and Conditions</strong>, or select an area to display it."
 "Enable Social Login On Checkout Page","Enable Social Login On Checkout Page"
 "Select <strong>Yes</strong> to allow customers to login via their social network accounts. Supports Mageplaza <a href=""https://www.mageplaza.com/magento-2-social-login-extension"" target=""_blank"">Social Login</a>","Select <strong>Yes</strong> to allow customers to login via their social network accounts. Supports Mageplaza <a href=""https://www.mageplaza.com/magento-2-social-login-extension"" target=""_blank"">Social Login</a>"
+"Social Login on Checkout Page","Social Login on Checkout Page"
+"Show Check Out with Multiple Addresses Link","Show Check Out with Multiple Addresses Link"
+"Select <strong>Yes</strong> to show the link for Multiple Addresses Checkout.","Select <strong>Yes</strong> to show the link for Multiple Addresses Checkout."
 "Review Cart Section","Review Cart Section"
 "Show Order Review Section","Show Order Review Section"
 "Select <strong>No</strong> to remove the Order Review section. The section is displayed by default.","Select <strong>No</strong> to remove the Order Review section. The section is displayed by default."
@@ -250,6 +274,11 @@ Survey,Survey
 "Material Color","Material Color"
 "Change color icon heading, border input text, radio,checkbox buttons.","Change color icon heading, border input text, radio,checkbox buttons."
 "Place Order button color","Place Order button color"
+"Order Summary Background Color","Order Summary Background Color"
+"One Step Checkout Page Background Color","One Step Checkout Page Background Color"
+"One Step Checkout Page Title Color","One Step Checkout Page Title Color"
+"One Step Checkout Description Color","One Step Checkout Description Color"
+"Text Font","Text Font"
 "Custom Fields Configuration","Custom Fields Configuration"
 "Compatible with <a href=""https://www.mageplaza.com/magento-2-customer-attributes/?utm_source=configuration&utm_medium=link&utm_campaign=one-step-checkout"" target=""_blank"">Customer Attributes</a>","Compatible with <a href=""https://www.mageplaza.com/magento-2-customer-attributes/?utm_source=configuration&utm_medium=link&utm_campaign=one-step-checkout"" target=""_blank"">Customer Attributes</a>"
 "Custom Field 1 Label","Custom Field 1 Label"
@@ -257,5 +286,6 @@ Survey,Survey
 "Custom Field 2 Label","Custom Field 2 Label"
 "Custom Field 3 Label","Custom Field 3 Label"
 "Date picker field","Date picker field"
+"Show in Customer Grid","Show in Customer Grid"
 "We'll send your order confirmation here.","We'll send your order confirmation here."
 "For delivery questions.","For delivery questions."

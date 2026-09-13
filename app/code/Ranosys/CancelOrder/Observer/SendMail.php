@@ -69,7 +69,7 @@ class SendMail implements ObserverInterface
         $from = $this->helper->getSender();
         $to = $this->helper->getReceiver();
         $template = $this->helper->getTemplate();
-        $value = trim($to, " ");
+        $value = trim((string) $to, " ");
         //$to = explode(",", $to);
         $this->inlineTranslation->suspend();
         $transport = $this->transportBuilder->setTemplateIdentifier($template)

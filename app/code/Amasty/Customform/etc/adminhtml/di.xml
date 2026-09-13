@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!--
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/-->
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */-->
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
@@ -52,6 +52,14 @@
     <type name="Amasty\Customform\Model\Answer\GetSecuredFileUrl">
         <arguments>
             <argument name="urlBuilder" xsi:type="object">\Magento\Framework\Url</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Customform\Model\Form\Save\Validation\ValidationComposite">
+        <arguments>
+            <argument name="validationProcessors" xsi:type="array">
+                <item name="0" xsi:type="object">Amasty\Customform\Model\Form\Save\Validation\FormJsonValidate</item>
+            </argument>
         </arguments>
     </type>
 </config>

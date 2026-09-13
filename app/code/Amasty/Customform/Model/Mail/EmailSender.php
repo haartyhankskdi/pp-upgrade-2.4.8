@@ -1,39 +1,40 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
 
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
+
 namespace Amasty\Customform\Model\Mail;
 
-use Amasty\Customform\Model\Template\TransportBuilder;
-use Amasty\Customform\Model\Template\TransportBuilderFactory;
+use Amasty\Base\Utils\Email\TransportBuilder;
 use Magento\Framework\App\Area;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\MailException;
+use Magento\Framework\HTTP\Mime;
 use Magento\Store\Model\StoreManagerInterface;
 
 class EmailSender
 {
     /**
-     * @var TransportBuilderFactory
-     */
-    private $transportBuilderFactory;
-
-    /**
      * @var StoreManagerInterface
      */
     private $storeManager;
 
+    /**
+     * @var TransportBuilder
+     */
+    private $transportBuilder;
+
     public function __construct(
-        TransportBuilderFactory $transportBuilderFactory,
-        StoreManagerInterface $storeManager
+        StoreManagerInterface $storeManager,
+        TransportBuilder $transportBuilder
     ) {
-        $this->transportBuilderFactory = $transportBuilderFactory;
         $this->storeManager = $storeManager;
+        $this->transportBuilder = $transportBuilder;
     }
 
     /**
@@ -57,56 +58,40 @@ class EmailSender
         ?int $storeId = null,
         ?string $replyTo = null
     ): void {
-        $transportBuilder = $this->transportBuilderFactory->create();
-        $this->addReceivers($transportBuilder, $receivers);
-        $transportBuilder->setTemplateIdentifier($templateIdentifier);
-        $this->addTemplateOptions($transportBuilder, $storeId);
-        $transportBuilder->setTemplateVars($templateVars);
-        $transportBuilder->setFromByScope($sender, $storeId);
-
+        $this->addReceivers($receivers);
+        $this->transportBuilder->setTemplateIdentifier($templateIdentifier);
+        $this->addTemplateOptions($storeId);
+        $this->transportBuilder->setTemplateVars($templateVars);
+        $this->transportBuilder->setFromByScope($sender, $storeId);
         if ($replyTo) {
-            $transportBuilder->setReplyTo($replyTo);
+            $this->transportBuilder->setReplyTo($replyTo);
         }
-
         foreach ($attachments as $fileName => $content) {
-            $transportBuilder->addAttachment($content, $fileName);
+            $this->transportBuilder->addAttachment($content, $fileName, Mime::TYPE_OCTETSTREAM);
         }
 
-        $transportBuilder->getTransport()->sendMessage();
+        $this->transportBuilder->getTransport()->sendMessage();
     }
 
     private function addTemplateOptions(
-        TransportBuilder $transportBuilder,
-        ?int $storeId = null,
-        ?string $area = Area::AREA_FRONTEND
+        ?int $storeId = null
     ): void {
         if ($storeId === null) {
             $storeId = (int) $this->storeManager->getStore()->getId();
         }
 
-        $transportBuilder->setTemplateOptions(['area' => $area, 'store' => $storeId]);
+        $this->transportBuilder->setTemplateOptions(['area' => Area::AREA_FRONTEND, 'store' => $storeId]);
     }
 
     /**
-     * @param TransportBuilder $transportBuilder
      * @param string|array $receivers
      */
-    private function addReceivers(TransportBuilder $transportBuilder, $receivers): void
+    private function addReceivers($receivers): void
     {
         $receivers = is_string($receivers) && strpos($receivers, ',')
             ? explode(',', $receivers)
             : (array) $receivers;
         $receivers = array_map('trim', $receivers);
-
-        if (count($receivers) > 1) {
-            /*
-             * It's done to bypass the Magento 2.3.3 bug, which makes it impossible to add an array
-             * of mail recipients until you add one recipient
-             */
-            $firstReceiver = array_shift($receivers);
-            $transportBuilder->addTo($firstReceiver);
-        }
-
-        $transportBuilder->addTo($receivers);
+        $this->transportBuilder->addTo($receivers);
     }
 }

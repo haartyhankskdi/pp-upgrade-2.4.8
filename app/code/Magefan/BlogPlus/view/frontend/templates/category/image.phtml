@@ -1,0 +1,30 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog category image template
+ *
+ * @var \Magefan\BlogPlus\Block\Category\Image $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+if (!isset($escaper)) {
+    /* Compatability fix for old Magento versions */
+    $escaper = $block;
+}
+?>
+<?php if ($imageUrl = $block->getImageUrl()) { ?>
+    <div class="blog-top-image blog-category-top-image">
+        <img src="<?= $escaper->escapeUrl($imageUrl)?>"
+             alt="<?= $escaper->escapeHtml($block->getImageAlt())?>"
+             width="<?= $escaper->escapeHtml($block->getImageWidth()) ?>"
+             height="<?= $escaper->escapeHtml($block->getImageHeight()) ?>"
+        />
+    </div>
+<?php } ?>

@@ -12,10 +12,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 define(
@@ -34,17 +34,18 @@ define(
         'Magento_Checkout/js/action/select-billing-address'
     ],
     function (ko,
-              $,
-              _,
-              quote,
-              resourceUrlManager,
-              storage,
-              oscData,
-              paymentService,
-              methodConverter,
-              errorProcessor,
-              fullScreenLoader,
-              selectBillingAddressAction) {
+        $,
+        _,
+        quote,
+        resourceUrlManager,
+        storage,
+        oscData,
+        paymentService,
+        methodConverter,
+        errorProcessor,
+        fullScreenLoader,
+        selectBillingAddressAction
+    ) {
         'use strict';
 
         return {
@@ -77,20 +78,25 @@ define(
 
                 var customAttributes = {};
                 if (_.isObject(quote.billingAddress().customAttributes)) {
-                    _.each(quote.billingAddress().customAttributes, function (attribute, key) {
-                        if (_.isArray(attribute)) {
-                            customAttributes[key] = attribute.join(',')
-                        } else if (_.isString(attribute) || _.isNumber(attribute)) {
-                            customAttributes[key] = attribute
-                        } else if (_.isObject(attribute)) {
-                            customAttributes[attribute.attribute_code] = attribute.value
+                    _.each(
+                        quote.billingAddress().customAttributes, function (attribute, key) {
+                            if (_.isArray(attribute)) {
+                                customAttributes[key] = attribute.join(',')
+                            } else if (_.isString(attribute) || _.isNumber(attribute)) {
+                                customAttributes[key] = attribute
+                            } else if (_.isObject(attribute)) {
+                                customAttributes[attribute.attribute_code] = attribute.value
+                            }
                         }
-                    });
+                    );
                 }
-
+                if (addressInformation.shipping_address) {
+                    var extension_attributes = addressInformation.shipping_address.extension_attributes,
+                        extensionAttributes = addressInformation.shipping_address.extensionAttributes;
+                    addressInformation.shipping_address.extension_attributes = $.extend(extension_attributes, extensionAttributes);
+                }
                 payload = {
                     addressInformation: addressInformation,
-                    customerAttributes: customAttributes,
                     additionInformation: additionInformation
                 };
 
@@ -114,10 +120,11 @@ define(
 
             saveGiftMessage: function () {
                 var giftMessage = {};
-                if (!$("#osc-gift-message").is(":checked")) $('.gift-options-content').find('input:text,textarea').val('');
-                giftMessage.sender = $("#gift-message-whole-from").val();
-                giftMessage.recipient = $("#gift-message-whole-to").val();
-                giftMessage.message = $("#gift-message-whole-message").val();
+                if ($("#osc-gift-message").length === 1) {
+                    giftMessage.sender    = $("#gift-message-whole-from").val();
+                    giftMessage.recipient = $("#gift-message-whole-to").val();
+                    giftMessage.message   = $("#gift-message-whole-message").val();
+                }
                 return JSON.stringify(giftMessage);
             },
 

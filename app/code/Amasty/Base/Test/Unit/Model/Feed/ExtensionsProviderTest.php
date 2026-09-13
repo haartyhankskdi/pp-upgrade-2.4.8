@@ -12,6 +12,7 @@ namespace Amasty\Base\Test\Unit\Model\Feed;
 
 use Amasty\Base\Model\Feed\ExtensionsProvider;
 use Amasty\Base\Model\Feed\FeedTypes\Extensions;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -42,6 +43,7 @@ class ExtensionsProviderTest extends TestCase
      * @param array $expected
      * @return void
      */
+    #[DataProvider('getFeedModuleDataDataProvider')]
     public function testGetFeedModuleData(array $modules, array $expected): void
     {
         $this->extensionsFeedMock->expects($this->any())->method('execute')->willReturn($modules);
@@ -49,7 +51,7 @@ class ExtensionsProviderTest extends TestCase
         $this->assertEquals($expected, $this->extensionsProvider->getFeedModuleData('Amasty_Test1'));
     }
 
-    public function getFeedModuleDataDataProvider(): array
+    public static function getFeedModuleDataDataProvider(): array
     {
         return [
             'no feed data' => [[], []],
@@ -69,6 +71,7 @@ class ExtensionsProviderTest extends TestCase
      * @param array $expected
      * @return void
      */
+    #[DataProvider('getAllSolutionsDataDataProvider')]
     public function testGetAllSolutionsData(array $modules, array $expected): void
     {
         $this->extensionsFeedMock->expects($this->any())->method('execute')->willReturn($modules);
@@ -76,7 +79,7 @@ class ExtensionsProviderTest extends TestCase
         $this->assertEquals($expected, $this->extensionsProvider->getAllSolutionsData());
     }
 
-    public function getAllSolutionsDataDataProvider(): array
+    public static function getAllSolutionsDataDataProvider(): array
     {
         return [
             'no feed data' => [[], []],

@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\Eav\Model\Validator\Attribute;
@@ -24,10 +24,6 @@ namespace Mageplaza\Osc\Model\Plugin\Eav\Model\Validator\Attribute;
 use Magento\Eav\Model\AttributeDataFactory;
 use Mageplaza\Osc\Helper\Data as HelperData;
 
-/**
- * Class Data
- * @package Mageplaza\Osc\Model\Plugin\Eav\Model\Validator\Attribute
- */
 class Data extends \Magento\Eav\Model\Validator\Attribute\Data
 {
     /**
@@ -39,7 +35,7 @@ class Data extends \Magento\Eav\Model\Validator\Attribute\Data
      * Data constructor.
      *
      * @param AttributeDataFactory $attrDataFactory
-     * @param HelperData $oscHelperData
+     * @param HelperData           $oscHelperData
      */
     public function __construct(
         AttributeDataFactory $attrDataFactory,
@@ -52,7 +48,7 @@ class Data extends \Magento\Eav\Model\Validator\Attribute\Data
 
     /**
      * @param \Magento\Eav\Model\Validator\Attribute\Data $subject
-     * @param bool $result
+     * @param bool                                        $result
      *
      * @return bool
      */

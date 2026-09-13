@@ -86,10 +86,10 @@ class ProductConditions extends AbstractElement
         Data $helperData,
         array $data = []
     ) {
-        $this->actions     = $actions;
+        $this->actions = $actions;
         $this->bannerModel = $bannerModel;
-        $this->registry    = $registry;
-        $this->helperData  = $helperData;
+        $this->registry = $registry;
+        $this->helperData = $helperData;
         parent::__construct($factoryElement, $factoryCollection, $escaper, $data);
     }
 
@@ -121,7 +121,7 @@ class ProductConditions extends AbstractElement
      */
     public function getElementHtml()
     {
-        $htmlId      = $this->getHtmlId();
+        $htmlId = $this->getHtmlId();
         $newChildUrl = $this->_escaper->escapeUrl($this->getNewChildUrl());
 
         $html = '<div class="control admin__field-control" id="' . $this->getHtmlId() . '">
@@ -132,12 +132,13 @@ class ProductConditions extends AbstractElement
         </div>
     </div>';
 
+        $windowVariable = 'window.' . $htmlId;
         $html .= '<script>
     require([
         "Magento_Rule/rules",
         "prototype"
     ], function(VarienRulesForm){
-        window.' . $htmlId . ' = new VarienRulesForm("' . $htmlId . '", "' . $newChildUrl . '");
+        ' . $windowVariable . ' = new VarienRulesForm("' . $htmlId . '", "' . $newChildUrl . '");
     });
 </script>';
 

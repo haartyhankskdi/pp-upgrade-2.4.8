@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!--
+   ~ This software is the confidential and proprietary information of Autify Digital Ltd.
+   ~ Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+   ~ Copyright (c) 2020-Present Autify Digital Ltd.
+   ~ This work is protected under applicable copyright and intellectual property laws.
+   ~ All rights reserved. Distribution and disclosure are permitted only in accordance with
+   ~ the terms of a valid written agreement with Autify Digital Ltd.
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+	<group id="default">
+		<job instance="AutifyDigital\LloydscardnetPayment\Cron\CancelInactiveOrders" method="execute" name="autifydigital_lloyds_cancel_inactive_orders">
+            <schedule>*/5 * * * *</schedule>
+        </job>
+        <job instance="AutifyDigital\LloydscardnetPayment\Cron\LicenseCheck" method="execute" name="autifydigital_license_check" >
+            <schedule>0 0 * * *</schedule>
+        </job>
+	</group>
+</config>

@@ -16,10 +16,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\DesignInterface;
 use Magento\Framework\View\Design\Theme\ThemeProviderInterface;
 
-/**
- * Class Tag
- * @package Magefan\BlogGraphQl\Model\Resolver\DataProvider
- */
 class Tag
 {
     /**
@@ -78,14 +74,23 @@ class Tag
     }
 
     /**
-     * @param string $tagId
+     * Get tag data
+     *
+     * @param mixed $tagId
      * @return array
      * @throws NoSuchEntityException
      */
-    public function getData(string $tagId): array
+    public function getData($tagId): array
     {
-        $tag = $this->tagRepository->getFactory()->create();
-        $tag->getResource()->load($tag, $tagId);
+        if (is_object($tagId)) {
+            $tag = $tagId;
+        } else {
+            try {
+                $tag = $this->tagRepository->getById((int)$tagId);
+            } catch (\Exception $e) {
+                throw new NoSuchEntityException();
+            }
+        }
 
         if (!$tag->isActive()) {
             throw new NoSuchEntityException();
@@ -113,8 +118,9 @@ class Tag
 
     /**
      * Prepare all additional data
-     * @param $tag
-     * @param null $fields
+     *
+     * @param mixed $tag
+     * @param null|array $fields
      * @return mixed
      */
     public function getDynamicData($tag, $fields = null)
@@ -129,10 +135,10 @@ class Tag
 
         foreach ($keys as $key) {
             $method = 'get' . str_replace(
-                    '_',
-                    '',
-                    ucwords($key, '_')
-                );
+                '_',
+                '',
+                ucwords($key, '_')
+            );
             $data[$key] = $tag->$method();
             if ($key === 'tag_url') {
                 $data[$key] = str_replace(

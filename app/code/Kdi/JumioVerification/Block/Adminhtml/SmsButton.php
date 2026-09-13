@@ -185,7 +185,7 @@ class SmsButton implements ButtonProviderInterface
             $response = $jumioVerificationData->getData();
 
             # get the workflowId value
-            $workflowId = trim($response['workflow_id']);
+            $workflowId = trim((string) $response['workflow_id']);
 
             $url = "https://retrieval.emea-1.jumio.ai/api/v1/workflow-executions/".$workflowId;
 

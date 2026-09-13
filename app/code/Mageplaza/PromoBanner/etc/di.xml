@@ -38,4 +38,23 @@
     <type name="Magento\Checkout\Model\TotalsInformationManagement">
         <plugin name="mppromobanner_save_ShippingMethodOnCalculate" type="Mageplaza\PromoBanner\Plugin\Model\Checkout\TotalsInformationManagement"/>
     </type>
+
+    <!--    Api-->
+    <preference for="Mageplaza\PromoBanner\Api\PromoBannerRepositoryInterface" type="Mageplaza\PromoBanner\Model\Api\PromoBannerRepository"/>
+    <preference for="Mageplaza\PromoBanner\Api\Data\PromoBannerSearchResultsInterface" type="Mageplaza\PromoBanner\Model\Api\Data\PromoBannerSearchResults"/>
+    <preference for="Mageplaza\PromoBanner\Api\Data\PromoBannerInterface" type="Mageplaza\PromoBanner\Model\Banner"/>
+    <preference for="Mageplaza\PromoBanner\Api\Data\ConfigInterface" type="Mageplaza\PromoBanner\Model\Api\Data\Config"/>
+    <preference for="Mageplaza\PromoBanner\Api\Data\GeneralConfigInterface" type="Mageplaza\PromoBanner\Model\Api\Data\GeneralConfig"/>
+    <preference for="Mageplaza\PromoBanner\Api\Data\SliderConfigInterface" type="Mageplaza\PromoBanner\Model\Api\Data\SliderConfig"/>
+    <preference for="Mageplaza\PromoBanner\Api\Data\PopupConfigInterface" type="Mageplaza\PromoBanner\Model\Api\Data\PopupConfig"/>
+    <preference for="Mageplaza\PromoBanner\Api\Data\FloatingConfigInterface" type="Mageplaza\PromoBanner\Model\Api\Data\FloatingConfig"/>
+    <type name="Magento\Catalog\Model\ProductRepository">
+        <plugin name="mp_add_promo_banner_to_product" type="Mageplaza\PromoBanner\Plugin\Catalog\Model\ProductRepository"/>
+    </type>
+    <type name="Magento\Catalog\Model\CategoryList">
+        <plugin name="mp_add_promo_banner_to_category_list" type="Mageplaza\PromoBanner\Plugin\Catalog\Model\CategoryList"/>
+    </type>
+    <type name="Magento\Catalog\Model\CategoryRepository">
+        <plugin name="mp_add_promo_banner_to_category" type="Mageplaza\PromoBanner\Plugin\Catalog\Model\CategoryRepository"/>
+    </type>
 </config>

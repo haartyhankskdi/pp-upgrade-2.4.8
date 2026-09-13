@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magefan\Blog\Block\Catalog\Product\RelatedPosts">
+        <plugin name="magefan_blog_block_catalog_product_related_posts"
+                type="Magefan\BlogPlus\Plugin\Block\Catalog\Product\RelatedPostsPlugin" sortOrder="10" />
+    </type>
+    <!--<preference for="Magefan\Blog\Controller\Router" type="Magefan\BlogPlus\Controller\Router" />-->
+    <type name="Magefan\Blog\Block\Post\View\Comments">
+        <plugin name="magefan_blogplus_block_post_view" type="Magefan\BlogPlus\Plugin\Block\Post\View\CommentsPlugin" sortOrder="10" disabled="false" />
+    </type>
+    <type name="Magefan\Blog\Block\Widget\Recent">
+        <plugin name="magefan_blogplus_block_widget_recent"
+                type="Magefan\BlogPlus\Plugin\Block\Widget\RecentPlugin"
+                sortOrder="10" disabled="false" />
+    </type>
+    <type name="Magefan\Blog\Block\Widget\Featured">
+        <plugin name="magefan_blogplus_block_widget_featured"
+                type="Magefan\BlogPlus\Plugin\Block\Widget\FeaturedPlugin"
+                sortOrder="10" disabled="false" />
+    </type>
+</config>

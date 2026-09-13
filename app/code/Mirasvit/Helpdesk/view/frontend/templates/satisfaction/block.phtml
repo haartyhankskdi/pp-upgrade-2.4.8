@@ -1,0 +1,30 @@
+<?php
+/** @var \Mirasvit\Helpdesk\Block\Widget\Satisfaction $block */
+$rate = $block->getAggregatedRate();
+$satisfactionListUrl = $block->getData('satisfaction_list_url');
+?>
+
+<?php if ($satisfactionListUrl): ?>
+    <div class="helpdesk_satisfaction-block" onclick="window.location.href='<?= $block->escapeUrl($block->getUrl($satisfactionListUrl)) ?>';">
+<?php else: ?>
+    <div class="helpdesk_satisfaction-block">
+<?php endif; ?>
+    <div class="block-title">
+        <strong>
+            <?php if ($satisfactionListUrl): ?>
+                <a href="<?= $block->escapeUrl($block->getUrl($satisfactionListUrl)) ?>"><?= $block->escapeHtml(__('Satisfactory level of customer service in real time')); ?></a>
+            <?php else: ?>
+                <?= $block->escapeHtml(__('Satisfactory level of customer service in real time')); ?>
+            <?php endif; ?>
+        </strong>
+    </div>
+
+    <div class="helpdesk_satisfaction-rate-great">
+        <img src="<?= $block->escapeUrl($block->getViewFileUrl('Mirasvit_Helpdesk::images/smile/3.png')) ?>">
+        <div class="text">
+            <?= $block->escapeHtml(__('%1% said great!', $rate['great'])) ?>
+        </div>
+    </div>
+
+    <div class="last-update"><?= $block->escapeHtml(__('last updated %1', $block->getLastActivityTime())) ?></div>
+</div>

@@ -1,3 +1,4 @@
+/*phpcs:ignoreFile*/
 /*
 formBuilder - https://formbuilder.online/
 Version: 1.24.2
@@ -46,7 +47,8 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
 
 .kc-toggle
 .kct-on {
-  color: #12a912; }
+  color: #0e880e;
+}
 
 .kct-off {
   color: #666; }
@@ -271,7 +273,15 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
 }
 
 .rendered-form textarea.form-control {
-  height: auto; }
+  height: auto;
+}
+
+.rendered-form .form-control[readonly],
+.rendered-form .amform-time[readonly],
+.rendered-form .readonly-blocked {
+    opacity: .5;
+    cursor: not-allowed;
+}
 
 /*
 .rendered-form .form-control {
@@ -418,9 +428,8 @@ Author: Kevin Chappell <kevin.b.chappell@gmail.com>
 
 .amform-form .fieldset .fields .amform-layout-two,
 .amform-form .fieldset .fields .amform-layout-three {
-    display: inline-block;
     margin-right: 2%;
-    vertical-align: top;
+    display: block;
 }
 
 .amform-layout-two:last-child,

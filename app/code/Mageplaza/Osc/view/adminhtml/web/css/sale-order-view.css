@@ -22,3 +22,7 @@
     float: left;
     width: 50%;
 }
+
+.order-osc-survey .answers span {
+    word-wrap: break-word;
+}

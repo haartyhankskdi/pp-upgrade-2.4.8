@@ -1,9 +1,9 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Controller\Form;
 
@@ -74,7 +74,6 @@ class Submit extends \Magento\Framework\App\Action\Action
                     ['customer' => $this->sessionFactory->create()->getCustomer()]
                 );
                 $type = self::SUCCESS_RESULT;
-                $this->helper->setFormValue(1);
                 $this->session->setData(SessionData::AM_CUSTOM_FORM_SESSION_DATA . $this->getFormId(), []);
             } catch (ValidatorException $e) {
                 $this->processError($e, $this->getValidatorExceptionMessage());
@@ -94,6 +93,7 @@ class Submit extends \Magento\Framework\App\Action\Action
             $resultRedirect = $this->resultRedirectFactory->create();
             if ($url === Data::REDIRECT_PREVIOUS_PAGE) {
                 $resultRedirect->setRefererUrl();
+                return $resultRedirect;
             }
 
             return $this->resultFactory->create(ResultFactory::TYPE_REDIRECT)->setPath($url);

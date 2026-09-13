@@ -1,21 +1,24 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Controller\Adminhtml\Forms;
 
 use Amasty\Customform\Api\Data\FormInterface;
 use Amasty\Customform\Model\Form;
 use Amasty\Customform\Model\Form\Save\Preparation\PreparationInterface;
+use Amasty\Customform\Model\Form\Save\Validation\ValidationComposite;
 use Amasty\Customform\Model\FormFactory;
 use Amasty\Customform\Model\FormRepository;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context as ActionContext;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\View\Model\Layout\Update\ValidatorFactory;
 use Psr\Log\LoggerInterface;
@@ -47,13 +50,19 @@ class Save extends Action
      */
     private $logger;
 
+    /**
+     * @var ValidationComposite
+     */
+    private $formDataValidationProcessor;
+
     public function __construct(
         ActionContext $context,
         ValidatorFactory $validatorFactory,
         FormFactory $formFactory,
         FormRepository $formRepository,
         PreparationInterface $formDataPreparationProcessor,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        ?ValidationComposite $formDataValidationProcessor = null
     ) {
         parent::__construct($context);
 
@@ -62,6 +71,8 @@ class Save extends Action
         $this->formRepository = $formRepository;
         $this->formDataPreparationProcessor = $formDataPreparationProcessor;
         $this->logger = $logger;
+        $this->formDataValidationProcessor = $formDataValidationProcessor
+            ?: ObjectManager::getInstance()->get(ValidationComposite::class);
     }
 
     /**
@@ -108,6 +119,7 @@ class Save extends Action
                     $model = $this->formRepository->get($id);
                 }
 
+                $this->formDataValidationProcessor->validate($data);
                 $data = $this->formDataPreparationProcessor->prepare($data);
                 $model->setData($data);
                 $session = $this->_getSession();

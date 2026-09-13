@@ -93,11 +93,6 @@ class DefaultConfigProvider implements ConfigProviderInterface
     protected $stockRegistry;
 
     /**
-     * @var Block
-     */
-    protected $cmsBlock;
-
-    /**
      * @var StoreManagerInterface
      */
     protected $storeManager;
@@ -123,7 +118,6 @@ class DefaultConfigProvider implements ConfigProviderInterface
      * @param StockRegistryInterface $stockRegistry
      * @param ModuleManager $moduleManager
      * @param OscHelper $oscHelper
-     * @param Block $cmsBlock
      * @param StoreManagerInterface $storeManager
      * @param PaypalConfig $paypalConfig
      * @param UrlInterface $url
@@ -137,7 +131,6 @@ class DefaultConfigProvider implements ConfigProviderInterface
         StockRegistryInterface $stockRegistry,
         ModuleManager $moduleManager,
         OscHelper $oscHelper,
-        Block $cmsBlock,
         StoreManagerInterface $storeManager,
         PaypalConfig $paypalConfig,
         UrlInterface $url
@@ -150,7 +143,6 @@ class DefaultConfigProvider implements ConfigProviderInterface
         $this->stockRegistry             = $stockRegistry;
         $this->moduleManager             = $moduleManager;
         $this->_oscHelper                = $oscHelper;
-        $this->cmsBlock                  = $cmsBlock;
         $this->storeManager              = $storeManager;
         $this->paypalConfig              = $paypalConfig;
         $this->url                       = $url;
@@ -194,7 +186,7 @@ class DefaultConfigProvider implements ConfigProviderInterface
             'addressFields'           => $this->_oscHelper->getAddressFields(),
             'autocomplete'            => [
                 'type'                   => $this->_oscHelper->getAutoDetectedAddress(),
-                'google_default_country' => $this->_oscHelper->getGoogleSpecificCountry(),
+                'google_default_country' => explode(',', (string) $this->_oscHelper->getGoogleSpecificCountry()),
             ],
             'register'                => [
                 'dataPasswordMinLength'        => $this->_oscHelper
@@ -204,6 +196,7 @@ class DefaultConfigProvider implements ConfigProviderInterface
             ],
             'allowGuestCheckout'      => $this->allowGuestCheckout(),
             'showBillingAddress'      => $this->_oscHelper->getShowBillingAddress(),
+            'same_as_shipping'        => $this->_oscHelper->checkSameAsShipping(),
             'newsletterDefault'       => $this->_oscHelper->isSubscribedByDefault(),
             'isUsedGiftWrap'          => (bool) $this->checkoutSession->getQuote()
                 ->getShippingAddress()->getUsedGiftWrap(),
@@ -230,8 +223,38 @@ class DefaultConfigProvider implements ConfigProviderInterface
             'updateCartUrl'           => $this->url->getUrl(
                 'onestepcheckout/index/updateItemOptions',
                 ['_secure' => true]
-            )
+            ),
+            'multiAddressOptions'     => [
+                'isShowMultiAddressCheckoutLink' => (bool) $this->_oscHelper->isShowMultiAddessCheckoutLink(),
+                'multiAddressCheckoutLink'       => $this->url->getUrl(
+                    'multishipping/checkout',
+                    ['_secure' => true]
+                )
+            ],
+            'shippingStorePickup'     => $this->shippingStorePickup(),
+            'enableOscPro'            => $this->_oscHelper->isModuleOutputEnabled('Mageplaza_Osc'),
+            'isCaptchaEnabledConfig'  => $this->_oscHelper->isCaptchaEnabled()
         ];
+    }
+
+    /**
+     * @return bool
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
+     * @throws StateException
+     */
+    public function shippingStorePickup()
+    {
+        $result = false;
+        foreach ($this->getShippingMethods() as $shippingMethod) {
+            $method = $shippingMethod['method_code'] . '_' . $shippingMethod['carrier_code'];
+            if ('pickup_instore' === $method) {
+                $result = true;
+                break;
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -255,17 +278,22 @@ class DefaultConfigProvider implements ConfigProviderInterface
     public function getSealBlock()
     {
         $sealContent = '';
+        $configImage = $this->_oscHelper->getConfigValue('osc/display_configuration/seal_block/seal_image');
 
         if ($this->_oscHelper->isEnabledSealBlock() === 1) {
-            $blockId     = $this->_oscHelper->getSealStaticBlock();
-            $sealContent = $this->cmsBlock->setBlockId($blockId)->toHtml();
+            $blockId = $this->_oscHelper->getSealStaticBlock();
+            if ($this->_oscHelper->isEnableBetterStaticBlock()) {
+                $cmsBlock = $this->_oscHelper->getObject(\Mageplaza\BetterStaticBlock\Block\Block::class);
+            } else {
+                $cmsBlock = $this->_oscHelper->getObject(Block::class);
+            }
+            $sealContent = $cmsBlock->setBlockId($blockId)->toHtml();
         } else {
             if ($this->_oscHelper->isEnabledSealBlock() === 2) {
                 $mediaUrl        = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
-                $sealImage       = $mediaUrl . SealBlockImage::UPLOAD_DIR . $this->_oscHelper->getSealImage();
+                $sealImage       = $mediaUrl . SealBlockImage::UPLOAD_DIR . ($this->_oscHelper->getSealImage() ?: $configImage);
                 $sealDescription = $this->_oscHelper->getSealDescription();
-
-                $sealContent = '<img alt="seal-img" src="' . $sealImage . '"><p>' . $sealDescription . '</p>';
+                $sealContent     = '<img alt="seal-img" src="' . $sealImage . '"><p>' . $sealDescription . '</p>';
             }
         }
 
@@ -371,7 +399,7 @@ class DefaultConfigProvider implements ConfigProviderInterface
     private function isDisplaySocialLogin()
     {
         return $this->moduleManager->isOutputEnabled('Mageplaza_SocialLogin')
-            && !$this->_oscHelper->isDisabledSocialLoginOnCheckout();
+            && $this->_oscHelper->isDisabledSocialLoginOnCheckout();
     }
 
     /**

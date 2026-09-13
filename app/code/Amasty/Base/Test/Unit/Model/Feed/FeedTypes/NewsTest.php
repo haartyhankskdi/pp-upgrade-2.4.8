@@ -12,6 +12,7 @@ use Amasty\Base\Model\Feed\FeedTypes\News;
 use Amasty\Base\Model\ModuleInfoProvider;
 use Amasty\Base\Test\Unit\Traits;
 use Magento\Framework\DataObjectFactory;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class NewsTest extends \PHPUnit\Framework\TestCase
 {
@@ -62,6 +63,7 @@ class NewsTest extends \PHPUnit\Framework\TestCase
      * @covers NewsProcessor::validateByExtension
      * @dataProvider validateByExtensionDataProvider
      */
+    #[DataProvider('validateByExtensionDataProvider')]
     public function testValidateByExtension($extensions, $result)
     {
         $this->assertEquals($result, $this->invokeMethod($this->model, 'validateByExtension', [$extensions, true]));
@@ -71,7 +73,7 @@ class NewsTest extends \PHPUnit\Framework\TestCase
      * Data provider for validateByExtension test
      * @return array
      */
-    public function validateByExtensionDataProvider()
+    public static function validateByExtensionDataProvider()
     {
         return [
             ['', true],
@@ -84,6 +86,7 @@ class NewsTest extends \PHPUnit\Framework\TestCase
      * @covers NewsProcessor::validateByNotInstalled
      * @dataProvider validateByNotInstalledDataProvider
      */
+    #[DataProvider('validateByNotInstalledDataProvider')]
     public function testValidateByNotInstalled($extensions, $result)
     {
         $this->assertEquals($result, $this->invokeMethod($this->model, 'validateByNotInstalled', [$extensions, true]));
@@ -93,7 +96,7 @@ class NewsTest extends \PHPUnit\Framework\TestCase
      * Data provider for validateByNotInstalled test
      * @return array
      */
-    public function validateByNotInstalledDataProvider()
+    public static function validateByNotInstalledDataProvider()
     {
         return [
             ['', true],

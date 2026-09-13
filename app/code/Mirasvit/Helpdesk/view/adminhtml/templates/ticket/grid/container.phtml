@@ -1,0 +1,22 @@
+<?php
+
+$headerHtml = $block->getHeaderHtml();
+$buttonsHtml = $block->getButtonsHtml();
+$gridHtml = $block->getGridHtml();
+?>
+<div class="content-header">
+    <table cellspacing="0" role="presentation">
+        <caption class="admin__table-caption hidden"><?= $block->escapeHtml(__('Ticket Grid Container')) ?></caption>
+        <tr>
+            <td style="<?= $block->escapeHtml($block->getHeaderWidth()) ?>"><?= /* @noEscape */ $headerHtml ?></td>
+            <td>
+            </td>
+            <td class="form-buttons"><?= /* @noEscape */ $buttonsHtml ?></td>
+        </tr>
+    </table>
+</div>
+<div>
+    <?= $block->getChildHtml('store_switcher') ?>
+    <?= $block->getChildHtml('search_form') ?>
+    <?= /* @noEscape */ $gridHtml ?>
+</div>

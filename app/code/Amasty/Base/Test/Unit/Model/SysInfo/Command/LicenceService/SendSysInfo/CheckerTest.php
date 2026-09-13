@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Amasty\Base\Test\Unit\Model\SysInfo\Command\LicenceService\SendSysInfo;
 
 use Amasty\Base\Model\SysInfo\Command\LicenceService\SendSysInfo\Checker;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class CheckerTest extends TestCase
@@ -32,12 +33,13 @@ class CheckerTest extends TestCase
      * @dataProvider isChangedCacheValueEqualDataProvider
      * @return void
      */
+    #[DataProvider('isChangedCacheValueEqualDataProvider')]
     public function testIsChangedCacheValue(?string $cacheValue, string $newValue, bool $expected): void
     {
         $this->assertEquals($expected, $this->model->isChangedCacheValue($cacheValue, $newValue));
     }
 
-    public function isChangedCacheValueEqualDataProvider(): array
+    public static function isChangedCacheValueEqualDataProvider(): array
     {
         return [
             [hash('sha256', 'test'), hash('sha256', 'test'), false],

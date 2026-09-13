@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Save Published Restriction Plugins -->
+    <type name="Magefan\Blog\Model\ResourceModel\Post">
+        <plugin disabled="false" name="magefan_blogplus_save_published" sortOrder="10" type="Magefan\BlogPlus\Plugin\Model\ResourceModel\PostPublishPermissionPlugin"/>
+
+        <!-- Save Post Condition Plugin -->
+        <plugin disabled="false" name="magefan_blogplus_save_condition_serialize" sortOrder="10" type="Magefan\BlogPlus\Plugin\Model\ResourceModel\PostConditionsSerializePlugin"/>
+        <plugin disabled="false" name="magefan_blogplus_save_update_related_products" sortOrder="10" type="Magefan\BlogPlus\Plugin\Model\ResourceModel\PostUpdateRelatedProductsPlugin"/>
+    </type>
+    <type name="Magefan\Blog\Model\ResourceModel\Category">
+        <plugin disabled="false" name="magefan_blogplus_save_published" sortOrder="10" type="Magefan\BlogPlus\Plugin\Model\ResourceModel\CategoryPublishPermissionPlugin"/>
+    </type>
+    <type name="Magefan\Blog\Model\ResourceModel\Tag">
+        <plugin disabled="false" name="magefan_blogplus_save_published" sortOrder="10" type="Magefan\BlogPlus\Plugin\Model\ResourceModel\TagPublishPermissionPlugin"/>
+    </type>
+    <type name="Magefan\Blog\Model\ResourceModel\Comment">
+        <plugin disabled="false" name="magefan_blogplus_save_published" sortOrder="10" type="Magefan\BlogPlus\Plugin\Model\ResourceModel\CommentPublishPermissionPlugin"/>
+    </type>
+
+    <!-- Display Save Button Restriction Plugins -->
+    <type name="Magefan\Blog\Block\Adminhtml\Post\SaveButton">
+        <plugin disabled="false" name="magefan_blogplus_button_save_published" sortOrder="10" type="Magefan\BlogPlus\Plugin\Block\Adminhtml\Post\PublishedSaveButtonPlugin"/>
+    </type>
+    <type name="Magefan\Blog\Block\Adminhtml\Post\SaveAndContinueButton">
+        <plugin disabled="false" name="magefan_blogplus_button_save_published" sortOrder="10" type="Magefan\BlogPlus\Plugin\Block\Adminhtml\Post\PublishedSaveButtonPlugin"/>
+    </type>
+    <type name="Magefan\Blog\Block\Adminhtml\Category\SaveButton">
+        <plugin disabled="false" name="magefan_blogplus_button_save_published" sortOrder="10" type="Magefan\BlogPlus\Plugin\Block\Adminhtml\Category\PublishedSaveButtonPlugin"/>
+    </type>
+    <type name="Magefan\Blog\Block\Adminhtml\Category\SaveAndContinueButton">
+        <plugin disabled="false" name="magefan_blogplus_button_save_published" sortOrder="10" type="Magefan\BlogPlus\Plugin\Block\Adminhtml\Category\PublishedSaveButtonPlugin"/>
+    </type>
+    <type name="Magefan\Blog\Block\Adminhtml\Tag\SaveButton">
+        <plugin disabled="false" name="magefan_blogplus_button_save_published" sortOrder="10" type="Magefan\BlogPlus\Plugin\Block\Adminhtml\Tag\PublishedSaveButtonPlugin"/>
+    </type>
+    <type name="Magefan\Blog\Block\Adminhtml\Tag\SaveAndContinueButton">
+        <plugin disabled="false" name="magefan_blogplus_button_save_published" sortOrder="10" type="Magefan\BlogPlus\Plugin\Block\Adminhtml\Tag\PublishedSaveButtonPlugin"/>
+    </type>
+    <type name="Magefan\Blog\Block\Adminhtml\Comment\SaveButton">
+        <plugin disabled="false" name="magefan_blogplus_button_save_published" sortOrder="10" type="Magefan\BlogPlus\Plugin\Block\Adminhtml\Comment\PublishedSaveButtonPlugin"/>
+    </type>
+    <type name="Magefan\Blog\Block\Adminhtml\Comment\SaveAndContinueButton">
+        <plugin disabled="false" name="magefan_blogplus_button_save_published" sortOrder="10" type="Magefan\BlogPlus\Plugin\Block\Adminhtml\Comment\PublishedSaveButtonPlugin"/>
+    </type>
+
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="blog_related" xsi:type="array">
+                    <item name="class" xsi:type="string">Magefan\BlogPlus\Ui\DataProvider\Product\Form\Modifier\RelatedPosts</item>
+                    <item name="sortOrder" xsi:type="number">115</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magefan\BlogPlus\Ui\DataProvider\Product\Form\Modifier\RelatedPosts">
+        <arguments>
+            <argument name="scopeName" xsi:type="string">product_form.product_form</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Model\ResourceModel\Product">
+        <plugin
+            name="Magefan_BlogPlus_Plugin_Magento_Catalog_Model_ResourceModel_Product"
+            type="Magefan\BlogPlus\Plugin\Magento\Catalog\Model\ResourceModel\ProductPlugin"
+            sortOrder="100"
+            disabled="false"
+        />
+    </type>
+</config>

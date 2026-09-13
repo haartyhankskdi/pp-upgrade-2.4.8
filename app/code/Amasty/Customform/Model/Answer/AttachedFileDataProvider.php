@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Model\Answer;
 
@@ -46,13 +47,13 @@ class AttachedFileDataProvider implements AttachedFileDataProviderInterface
 
     public function getPath(string $fileName): string
     {
-        $mediaDir = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA)->getAbsolutePath();
+        $varDir = $this->filesystem->getDirectoryRead(DirectoryList::VAR_DIR)->getAbsolutePath();
 
         return sprintf(
             '%s%s%s%s%s',
-            rtrim($mediaDir, DIRECTORY_SEPARATOR),
+            rtrim($varDir, DIRECTORY_SEPARATOR),
             DIRECTORY_SEPARATOR,
-            GetDownloadPath::AMASTY_CUSTOMFORM_MEDIA_PATH,
+            GetDownloadPath::AMASTY_CUSTOMFORM_VAR_PATH,
             DIRECTORY_SEPARATOR,
             Uploader::getCorrectFileName($fileName)
         );

@@ -1,0 +1,57 @@
+<?php
+use Mirasvit\Core\Service\CspService;
+/** @var \Mirasvit\Helpdesk\Block\Contact\ContactUsForm $block */
+$config = $block->getConfig();
+$customer = $block->getCustomer();
+if (!$config->getContactFormIsActive()) {
+    return;
+}
+$nonce = CspService::getNonce();
+?>
+<div id="hdmx__contact-button" class="hdmx__contact-button hdmx__contact-button-<?= $block->escapeHtml($config->getPosition()) ?>"
+     style="background-color: <?= $block->escapeHtml($config->getColor()) ?>;"
+     role="button" tabindex="0" aria-label="<?= $block->escapeHtml(__('Open contact form')) ?>">
+    <span><?= $block->escapeHtml($config->getTitle()) ?></span>
+</div>
+
+<?= $this->getChildHtml('hdmx-popup-form') ?>
+
+<div class="hdmx__contact-overlay" id="helpdesk-contact-form-overlay" style="display:none;">&nbsp;</div>
+<script type="text/javascript" <?php if ($nonce): ?> nonce="<?= $block->escapeHtml($nonce) ?>"<?php endif; ?>>
+    //<![CDATA[
+    require([
+        'jquery',
+    ], function ($) {
+        var $popup = $('#hdmx__contact-popup');
+        $('#hdmx__contact-button').bind('click keydown', function (e) {
+            if (e.type === 'click' || (e.type === 'keydown' && (e.which === 13 || e.which === 32))) {
+                if (e.type === 'keydown') {
+                    e.preventDefault();
+                }
+                $popup.show();
+                center($popup);
+                $('#helpdesk-contact-form-overlay').show();
+            }
+        });
+
+        $('#hdmx__contact-popup .close, .hdmx__contact-overlay').bind('click', function () {
+            $popup.hide();
+            $('#helpdesk-contact-form-overlay').hide();
+        });
+
+        const observer = new MutationObserver(center);
+        observer.observe(document.getElementById('hdmx__contact-popup'), { subtree: true, childList: true });
+
+        $(window).bind('resize', function () {
+            center($popup);
+        });
+    });
+
+    function center($el) {
+        var top = (jQuery(window).height() - $el.height()) / 2;
+        $el.css({
+            top: (top > 0 ? top : 0) + 'px'
+        });
+    }
+    //]]>
+</script>

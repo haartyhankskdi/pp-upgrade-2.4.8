@@ -38,10 +38,10 @@ class NewConditionHtml extends Action
     public function execute()
     {
         $conditionId = $this->getRequest()->getParam('id');
-        $formName    = $this->getRequest()->getParam('form_namespace');
-        $typeArr     = explode('|', str_replace('-', '/', $this->getRequest()->getParam('type')));
-        $type        = $typeArr[0];
-        $model       = $this->_objectManager->create($type)
+        $formName = $this->getRequest()->getParam('form_namespace');
+        $typeArr = explode('|', str_replace('-', '/', $this->getRequest()->getParam('type')));
+        $type = $typeArr[0];
+        $model = $this->_objectManager->create($type)
             ->setId($conditionId)
             ->setType($type)
             ->setRule($this->_objectManager->create(Banner::class))

@@ -89,7 +89,7 @@ class Options extends \Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Options
         foreach ($templates as $template) {
             $config['templates'][] = $template->getName();
         }
-        return \Zend_Json::encode($config);
+        return json_encode($config);
     }
 
     public function getStoreId() {

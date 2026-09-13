@@ -34,12 +34,21 @@
 
 <div class="opc-wrapper one-step-checkout-wrapper">
     <div class="opc one-step-checkout-container" id="checkoutSteps">
-        <div class="col-mp mp-4 mp-sm-6 mp-xs-12 hoverable">
+        <div class="col-mp mp-4 mp-sm-6 mp-xs-12">
             <div class="row-mp">
-                <div class="col-mp mp-12" data-bind="scope: 'checkout.steps.shipping-step.shippingAddress'">
+                <!-- render Steps and Attributes in Mageplaza_OrderAttributes -->
+                <div  data-bind="scope: 'checkout.osc-steps-before'">
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                </div>
+                <!-- ko if: window.checkoutConfig.oscConfig.shippingStorePickup -->
+                <div class="col-mp mp-12 hoverable" data-bind="scope: 'checkout.steps.store-pickup'">
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                </div>
+                <!--/ko-->
+                <div class="col-mp mp-12 hoverable" data-bind="scope: 'checkout.steps.shipping-step.shippingAddress'">
                     <!-- ko template: getAddressTemplate() --><!-- /ko -->
                 </div>
-                <div class="col-mp mp-12" data-bind="scope: 'checkout.steps.shipping-step.billingAddress'">
+                <div class="col-mp mp-12 hoverable" data-bind="scope: 'checkout.steps.shipping-step.billingAddress'">
                     <!-- ko template: getAddressTemplate() --><!-- /ko -->
                 </div>
                 <div class="mp-clear"></div>
@@ -48,6 +57,10 @@
         <div class="col-mp mp-4 mp-sm-6 mp-xs-12">
             <div class="row-mp">
                 <div class="col-mp mp-12 hoverable" data-bind="scope: 'checkout.steps.shipping-step'">
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                </div>
+                <!-- render Steps and Attributes in Mageplaza_OrderAttributes -->
+                <div  data-bind="scope: 'checkout.osc-steps-after'">
                     <!-- ko template: getTemplate() --><!-- /ko -->
                 </div>
                 <div class="col-mp mp-12 hoverable" data-bind="scope: 'checkout.steps.billing-step'">

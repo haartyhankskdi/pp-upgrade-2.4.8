@@ -1,0 +1,459 @@
+/*
+* This software is the confidential and proprietary information of Autify Digital Ltd.
+* Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+* Copyright (c) 2020-Present Autify Digital Ltd.
+* This work is protected under applicable copyright and intellectual property laws.
+* All rights reserved. Distribution and disclosure are permitted only in accordance with
+* the terms of a valid written agreement with Autify Digital Ltd.
+*/
+
+@color-ad-primary: #00a9e0;
+@color-ad-invalid: #c01324;
+@color-ad-white: #fff;
+@color-ad-button-primary: #280;
+@color-ad-button-primary-hover: #252;
+@color-gray: #999;
+@color-light-gray: #aaa;
+@color-off-white: #ddd;
+@color-off-white-light: #ccc;
+@color-gray-light: #f8f8f8;
+@color-black: #000;
+@color-dark-gray: #666;
+
+& when (@media-common = true) {
+    .paymentjs-form {
+    
+        .form-controls {
+            border: 1px solid @color-off-white;
+            border-radius: 0;
+            box-sizing: border-box;
+            font-size: 16px;
+            height: 40px;
+            margin: 5px 0 10px;
+            padding: 10px;
+
+            &:focus {
+                border-color: @color-ad-primary;
+                outline: none;
+            }
+        }
+
+        .fields-row {
+            align-items: center;
+            display: flex;
+            gap: 15px;
+            justify-content: space-between;
+
+            .field {
+                flex: 1;
+            }
+        }
+
+        .fields {
+            max-width: 400px;
+        }
+
+        .form {
+            position: relative;
+        }
+
+        .overlay {
+            align-items: center;
+            background: rgba(255, 255, 255, 0.75); /* phpcs:ignore */
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            left: 0;
+            opacity: 1;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: opacity 1s linear;
+            z-index: 2;
+        }
+
+        .status {
+            color: @color-ad-invalid;
+            font-weight: bold;
+            margin-bottom: 20px;
+            opacity: 0;
+            padding: 10px 0;
+            transition: opacity 1s linear;
+
+            &:first-letter {
+                text-transform: capitalize;
+            }
+        }
+
+        /* phpcs:ignore */
+        .status__heading {
+            margin: 0;
+        }
+
+        select.form-controls {
+            appearance: none;
+            background: @color-ad-white;
+            background-image: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'><path fill='%23444' d='M7.406 7.828l4.594 4.594 4.594-4.594 1.406 1.406-6 6-6-6z'></path></svg>");
+            background-position: 100% 50%;
+            background-repeat: no-repeat;
+            border-radius: 0;
+            display: block;
+            width: 100%;
+        }
+
+        #token { /* phpcs:ignore */
+            margin-top: 10px;
+        }
+
+        #submit { /* phpcs:ignore */
+            &:disabled {
+                cursor: not-allowed;
+            }
+        }
+
+        .payment-fields.disabled {
+            cursor: not-allowed;
+        }
+
+        .focus {
+            border-color: @color-ad-primary;
+            outline: none;
+        }
+
+        .invalid {
+            border-color: @color-ad-invalid;
+            color: @color-ad-invalid;
+        }
+
+        .valid {
+            border-color: @color-ad-button-primary;
+        }
+
+        label.focus,
+        label.valid,
+        label.invalid {
+            border: none;
+        }
+
+        .success {
+            color: @color-ad-button-primary;
+
+            .btn--secondary {
+                margin: 30px 0 0;
+                padding: 0;
+            }
+        }
+
+        .success-bkg {
+            background: @color-ad-button-primary;
+
+            .btn__loader { /* phpcs:ignore */
+                &::after {
+                    background: @color-ad-button-primary;
+                }
+            }
+        }
+
+        .btn__loader { /* phpcs:ignore */
+            animation: load3 1.4s infinite linear;
+            background: @color-ad-white;
+            background: linear-gradient(to right, @color-ad-white 10%, rgba(255, 255, 255, 0) 42%);
+            border-radius: 50%;
+            display: inline-block;
+            font-size: 12px;
+            height: 1em;
+            margin-right: 10px;
+            overflow: hidden;
+            position: relative;
+            text-indent: -9999em;
+            transform: translateZ(0);
+            width: 1em;
+
+            &::before {
+                background: @color-ad-white;
+                border-radius: 100% 0 0 0;
+                content: '';
+                height: 50%;
+                left: 0;
+                position: absolute;
+                top: 0;
+                width: 50%;
+            }
+
+            &::after {
+                background: @color-ad-primary;
+                border-radius: 50%;
+                bottom: 0;
+                content: '';
+                height: 75%;
+                left: 0;
+                margin: auto;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 75%;
+            }
+        }
+
+        .checkout-agreements-block {
+            text-align: left;
+            width: 100%;
+
+            .checkout-agreement.field {
+                display: block;
+            }
+        }
+
+        input[type='checkbox'] {
+            height: 15px;
+            margin-right: 5px;
+            margin-top: 0;
+            width: 15px;
+
+            &:active,
+            &:checked,
+            &:disabled,
+            &:focus,
+            &:hover,
+            &:not(:checked),
+            &[disabled] {
+                box-shadow: none;
+                outline: none;
+            }
+        }
+    }
+
+    .firstdata-field {
+        &-focused {
+            border-color: @color-ad-primary;
+            outline: none;
+        }
+
+        &-invalid {
+            border-color: @color-ad-invalid;
+            color: @color-ad-invalid;
+        }
+
+        &-valid {
+            border-color: @color-ad-button-primary;
+        }
+    }
+
+    .saved-card-dropdown {
+        margin-bottom: 10px;
+    }
+
+    .checkout-payment-method {
+        .payment-method {
+            .lcnet {
+                align-items: center;
+                display: flex;
+                justify-content: space-between;
+
+                label.label {
+                    align-items: center;
+                    display: flex;
+                    flex: 1;
+                    justify-content: space-between;
+                }
+
+                .payment-icon {
+                    display: inline-block;
+                    margin-right: 5px;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+
+    @keyframes load3 {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .cardnet-moto-response {
+        border: 1px solid @color-off-white-light;
+        border-radius: 5px;
+        margin: 40px auto;
+        max-width: 600px;
+        padding: 30px;
+        text-align: center;
+    }
+    .cardnet-moto-response .response-container h2 {
+        margin-bottom: 20px;
+    }
+    .cardnet-moto-response .message {
+        background: @color-gray-light;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+    .cardnet-moto-response .instructions {
+        color: @color-dark-gray;
+        font-style: italic;
+    }
+    apple-pay-button,
+    .cardnet-apple-pay-button {
+        --apple-pay-button-width: 240px;
+        --apple-pay-button-height: 40px;
+        --apple-pay-button-border-radius: 5px;
+        --apple-pay-button-padding: 0px;
+        cursor: pointer;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+    }
+    .cardnet-applepay-checkout .cardnet-apple-pay-button,
+    #apple-pay-button-container .cardnet-apple-pay-button,
+    #cardnet-applepay-minicart-btn .cardnet-apple-pay-button {
+        --apple-pay-button-width: 100%;
+        margin-top: 10px;
+    }
+    #apple-pay-button-container,
+    #cardnet-applepay-minicart-btn {
+        text-align: center;
+    }
+    .apple-pay-button-container-minicart {
+        height: 40px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    #google-pay-minicart-button {
+        height: 40px;
+        margin: 0 auto;
+        text-align: center;
+        width: 100%;
+    }
+    #cardnet-applepay-cart-btn {
+        float: none !important;
+        height: 40px;
+        margin-top: 10px;
+        width: 100%;
+    }
+    #minicart-content-wrapper div.google-pay-cart-button,
+    .checkout-cart-index div.google-pay-cart-button {
+        margin-top: 10px;
+    }
+    .checkout-cart-index #apple-pay-button-container,
+    .checkout-cart-index div.google-pay-cart-button {
+        width: 100%;
+    }
+    .lloyds-wallet-buttons {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+        width: 100%;
+    }
+    .lloyds-wallet-buttons > div {
+        flex: 1 1 0;
+        margin-top: 0;
+        min-width: 0;
+    }
+    .lloyds-wallet-buttons #cardnet-applepay-cart-btn {
+        margin-top: 0;
+    }
+    .lloyds-wallet-buttons #apple-pay-button-container .cardnet-apple-pay-button {
+        margin-top: 0;
+    }
+    .gpay-card-info-container.black,
+    .gpay-card-info-animation-container.black,
+    .gpay-card-info-container.white,
+    .gpay-card-info-animation-container.white {
+        width: 100%;
+    }
+    .product-add-form .gpay-card-info-container.black,
+    .product-add-form .gpay-card-info-animation-container.black,
+    .product-add-form .gpay-card-info-container.white,
+    .product-add-form .gpay-card-info-animation-container.white {
+        max-width: 240px;
+    }
+    .lloyds-wallet-buttons .gpay-card-info-container,
+    .lloyds-wallet-buttons .gpay-card-info-animation-container,
+    .lloyds-wallet-buttons button.gpay-button,
+    .lloyds-wallet-buttons .gpay-card-info-container.black,
+    .lloyds-wallet-buttons .gpay-card-info-animation-container.black,
+    .lloyds-wallet-buttons .gpay-card-info-container.white,
+    .lloyds-wallet-buttons .gpay-card-info-animation-container.white {
+        max-width: 100%;
+        width: 100%;
+    }
+    .checkout-index-index .payment-method-content #google-pay-button-container {
+        align-items: end;
+        display: flex;
+        margin-top: 15px;
+    }
+    .cardnet-applepay-checkout img,
+    .cardnet-googlepay-checkout img {
+        max-height: 30px;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    #cardnet-applepay-checkout-btn,
+    #cardnet-applepay-minicart-btn {
+        width: 100%;
+        float: none !important;
+    }
+    apple-pay-button,
+    .cardnet-apple-pay-button {
+        --apple-pay-button-width: 100%;
+    }
+    .apple-pay-button-container {
+        width: 100%;
+    }
+    #google-pay-button-container,
+    .google-pay-cart-button {
+        width: 100%;
+    }
+    .lloyds-wallet-buttons {
+        flex-direction: column;
+    }
+    .lloyds-wallet-buttons > div {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+    .product-add-form .gpay-card-info-container.black,
+    .product-add-form .gpay-card-info-animation-container.black,
+    .product-add-form .gpay-card-info-container.white,
+    .product-add-form .gpay-card-info-animation-container.white {
+        max-width: 100%;
+    }
+    .gpay-card-info-container.black,
+    .gpay-card-info-animation-container.black,
+    .gpay-card-info-container.white,
+    .gpay-card-info-animation-container.white {
+        width: 100%;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+}
+.cardnet-moto-response {
+    border: 1px solid @color-off-white-light;
+    border-radius: 5px;
+    margin: 40px auto;
+    max-width: 600px;
+    padding: 30px;
+    text-align: center;
+}
+.cardnet-moto-response .response-container h2 {
+    margin-bottom: 20px;
+}
+.cardnet-moto-response .message {
+    background: @color-gray-light;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.cardnet-moto-response .instructions {
+    color: @color-dark-gray;
+    font-style: italic;
+}

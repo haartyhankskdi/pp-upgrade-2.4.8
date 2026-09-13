@@ -19,15 +19,13 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 
-// @codingStandardsIgnoreFile
-
 if ($block->getChildHtml()): ?>
     <div class="block block-order-additional-view">
         <div class="block-title">
-            <strong><?= __('Additional Information') ?></strong>
+            <strong><?= /* @noEscape */ __('Additional Information') ?></strong>
         </div>
         <div class="block-content">
-            <?= $block->getChildHtml() ?>
+            <?= /* @noEscape */ $block->getChildHtml() ?>
         </div>
     </div>
 <?php endif; ?>

@@ -107,10 +107,13 @@
     }
 
     //  Start extension override
-    .item-extensions a,
-    .item-marketplace a {
-        color: @color-white !important;
-        font-weight: 600 !important;
+    /* phpcs:ignore Magento2.Less.AvoidId.IdSelectorUsage */
+    #menu-menuamasty-base-menu {
+        .item-extensions a,
+        .item-marketplace a {
+            color: @color-white !important;
+            font-weight: 600 !important;
+        }
     }
     //  End extension override
 

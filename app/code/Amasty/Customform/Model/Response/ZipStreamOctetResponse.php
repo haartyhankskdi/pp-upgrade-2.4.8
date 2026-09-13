@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Model\Response;
 
@@ -47,7 +48,7 @@ class ZipStreamOctetResponse extends Http
         Context $context,
         DateTime $dateTime,
         ZipStreamFactory $zipStreamFactory,
-        ConfigInterface $sessionConfig = null
+        ?ConfigInterface $sessionConfig = null
     ) {
         $this->initHeaders();
         $this->zipStreamFactory = $zipStreamFactory;
@@ -123,5 +124,12 @@ class ZipStreamOctetResponse extends Http
         }
 
         $zipStream->finish();
+    }
+
+    public function _resetState(): void
+    {
+        $this->fileName = null;
+        $this->zipContentSource = [];
+        $this->headersInitialized = false;
     }
 }

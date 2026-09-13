@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Observer;
@@ -33,10 +33,6 @@ use Mageplaza\Osc\Observer\ReindexCustomer;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class ReindexCustomerTest
- * @package Mageplaza\Osc\Test\Unit\Observer
- */
 class ReindexCustomerTest extends TestCase
 {
     /**
@@ -54,7 +50,7 @@ class ReindexCustomerTest extends TestCase
      */
     private $reindexCustomerObserver;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->customerFactoryMock = $this->getMockBuilder(CustomerFactory::class)
             ->disableOriginalConstructor()
@@ -82,7 +78,7 @@ class ReindexCustomerTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
         $eventMock = $this->getMockBuilder(Event::class)
-            ->setMethods(['getOrder'])
+            ->addMethods(['getOrder'])
             ->disableOriginalConstructor()
             ->getMock();
         $observerMock->expects($this->once())->method('getEvent')->willReturn($eventMock);

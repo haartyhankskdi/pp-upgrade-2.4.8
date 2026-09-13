@@ -15,6 +15,7 @@ use Amasty\Base\Model\LicenceService\Schedule\Data\ScheduleConfig;
 use Amasty\Base\Model\LicenceService\Schedule\Data\ScheduleConfigFactory;
 use Amasty\Base\Model\LicenceService\Schedule\ScheduleConfigRepository;
 use Magento\Framework\Stdlib\DateTime\DateTime;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -66,6 +67,7 @@ class DailyTest extends TestCase
      * @dataProvider isNeedToSendDataProvider
      * @return void
      */
+    #[DataProvider('isNeedToSendDataProvider')]
     public function testIsNeedToSend(int $lastSendDate, int $currentTime, bool $result): void
     {
         $flag = 'amasty_base_daily_send_system_info';
@@ -86,16 +88,16 @@ class DailyTest extends TestCase
         $this->assertEquals($result, $this->model->isNeedToSend($flag));
     }
 
-    public function isNeedToSendDataProvider(): array
+    public static function isNeedToSendDataProvider(): array
     {
         return [
             [
-                ScheduleConfig::LAST_SEND_DATE => 1640198000,
+                1640198000,
                 1640198457,
                 false
             ],
             [
-                ScheduleConfig::LAST_SEND_DATE => 1640000000,
+                1640000000,
                 1640198457,
                 true
             ]

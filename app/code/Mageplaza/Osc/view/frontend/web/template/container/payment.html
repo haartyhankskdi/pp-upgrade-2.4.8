@@ -22,18 +22,6 @@
 
 <div id="payment" role="presentation" class="checkout-payment-method">
     <div class="step-title" data-role="title">
-        <i class="fa fa-credit-card"></i>
-        <!-- ko if: window.checkoutConfig.oscConfig.isUsedMaterialDesign -->
-            <span class="fa-stack fa-2x">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <!-- ko if: !!Number(window.checkoutConfig.quoteData.is_virtual) -->
-                    <strong class="fa-stack-1x fa-stack-text fa-inverse">2</strong>
-                <!-- /ko -->
-                <!-- ko ifnot: !!Number(window.checkoutConfig.quoteData.is_virtual) -->
-                    <strong class="fa-stack-1x fa-stack-text fa-inverse">3</strong>
-                <!-- /ko -->
-            </span>
-        <!-- /ko -->
         <span data-bind="i18n: 'Payment Methods'"></span>
     </div>
     <div id="checkout-step-payment"

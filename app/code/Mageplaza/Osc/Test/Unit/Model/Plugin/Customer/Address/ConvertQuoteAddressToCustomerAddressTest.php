@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Plugin\Model\Plugin\Customer\Address;
@@ -26,10 +26,6 @@ use Magento\Quote\Model\Quote\Address;
 use Mageplaza\Osc\Model\Plugin\Customer\Address\ConvertQuoteAddressToCustomerAddress;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class ConvertQuoteAddressToCustomerAddressTest
- * @package Mageplaza\Osc\Test\Plugin\Model\Plugin\Customer\Address
- */
 class ConvertQuoteAddressToCustomerAddressTest extends TestCase
 {
     /**
@@ -37,7 +33,7 @@ class ConvertQuoteAddressToCustomerAddressTest extends TestCase
      */
     private $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->plugin = new ConvertQuoteAddressToCustomerAddress();
     }

@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Observer;
@@ -28,10 +28,6 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Payment\Model\Cart;
 
-/**
- * Class PaypalPrepareItems
- * @package Mageplaza\Osc\Observer
- */
 class PaypalPrepareItems implements ObserverInterface
 {
     /**
@@ -59,7 +55,9 @@ class PaypalPrepareItems implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        /** @var Cart $cart */
+        /**
+ * @var Cart $cart
+*/
         $cart = $observer->getEvent()->getCart();
         $giftWrap = $this->checkoutSession->getQuote()->getShippingAddress()->getBaseOscGiftWrapAmount();
         if ($giftWrap > 0.0001) {

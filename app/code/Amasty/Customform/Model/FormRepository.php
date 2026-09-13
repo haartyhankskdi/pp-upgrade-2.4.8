@@ -1,9 +1,9 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Model;
 
@@ -161,5 +161,10 @@ class FormRepository implements \Amasty\Customform\Api\FormRepositoryInterface
         if (!$form->getCode()) {
             throw new LocalizedException(__('Form code was not found'));
         }
+    }
+
+    public function _resetState(): void
+    {
+        $this->form = [];
     }
 }

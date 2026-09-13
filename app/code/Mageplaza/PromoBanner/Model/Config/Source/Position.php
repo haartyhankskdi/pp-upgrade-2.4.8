@@ -21,26 +21,24 @@
 
 namespace Mageplaza\PromoBanner\Model\Config\Source;
 
-use Magento\Framework\Option\ArrayInterface;
-
 /**
  * Class Position
  *
  * @package Mageplaza\PromoBanner\Model\Config\Source
  */
-class Position implements ArrayInterface
+class Position extends AbstractSource
 {
-    const CONTENT_TOP              = 'content-top';
-    const PAGE_TOP                 = 'page-top';
-    const SIDEBAR_MAIN             = 'sidebar-main';
-    const SIDEBAR_ADDITIONAL       = 'sidebar-additional';
+    const CONTENT_TOP = 'content-top';
+    const PAGE_TOP = 'page-top';
+    const SIDEBAR_MAIN = 'sidebar-main';
+    const SIDEBAR_ADDITIONAL = 'sidebar-additional';
     const UNDER_ADD_TO_CART_BUTTON = 'under-add-to-cart';
-    const BELLOW_TOTAL_ORDER       = 'bellow-total-order';
-    const SNIPPET_CODE             = 'snippet-code';
-    const WIDGET                   = 'widget';
-    const LEFT_FLOATING            = 'left-floating';
-    const RIGHT_FLOATING           = 'right-floating';
-    const POPUP                    = 'popup';
+    const BELLOW_TOTAL_ORDER = 'bellow-total-order';
+    const SNIPPET_CODE = 'snippet-code';
+    const WIDGET = 'widget';
+    const LEFT_FLOATING = 'left-floating';
+    const RIGHT_FLOATING = 'right-floating';
+    const POPUP = 'popup';
 
     /**
      * @return array

@@ -40,7 +40,7 @@ class Category extends AbstractFieldArray
             ['label' => __('Category Name'), 'renderer' => false, 'class' => 'required-entry']
         );
 
-        $this->_addAfter       = false;
+        $this->_addAfter = false;
         $this->_addButtonLabel = __('Add');
     }
 }

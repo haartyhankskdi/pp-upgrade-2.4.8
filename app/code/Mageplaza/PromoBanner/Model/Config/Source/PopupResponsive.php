@@ -21,17 +21,15 @@
 
 namespace Mageplaza\PromoBanner\Model\Config\Source;
 
-use Magento\Framework\Option\ArrayInterface;
-
 /**
  * Class PopupResponsive
  * @package Mageplaza\PromoBanner\Model\Config\Source
  */
-class PopupResponsive implements ArrayInterface
+class PopupResponsive extends AbstractSource
 {
     const FULL_SCREEN = 'full_screen';
-    const CENTER      = 'center';
-    const CONFIG      = 'config';
+    const CENTER = 'center';
+    const CONFIG = 'config';
 
     /**
      * @return array

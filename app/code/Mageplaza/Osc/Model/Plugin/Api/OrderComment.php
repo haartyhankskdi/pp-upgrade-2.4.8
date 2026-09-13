@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\Api;
@@ -28,10 +28,6 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\ResourceModel\Order\Collection;
 use Mageplaza\Osc\Helper\Data;
 
-/**
- * Class OrderComment
- * @package Mageplaza\Osc\Model\Plugin\Api
- */
 class OrderComment
 {
     /**
@@ -48,7 +44,7 @@ class OrderComment
      * OrderComment constructor.
      *
      * @param OrderExtensionFactory $orderExtensionFactory
-     * @param Data $helper
+     * @param Data                  $helper
      */
     public function __construct(
         OrderExtensionFactory $orderExtensionFactory,
@@ -60,7 +56,7 @@ class OrderComment
 
     /**
      * @param OrderRepositoryInterface $subject
-     * @param OrderInterface $resultOrder
+     * @param OrderInterface           $resultOrder
      *
      * @return OrderInterface
      */
@@ -72,13 +68,17 @@ class OrderComment
             return $resultOrder;
         }
 
-        /** @var OrderExtensionInterface $extensionAttributes */
+        /**
+ * @var OrderExtensionInterface $extensionAttributes
+*/
         $extensionAttributes = $resultOrder->getExtensionAttributes() ?: $this->orderExtensionFactory->create();
         if ($extensionAttributes && $extensionAttributes->getOscOrderComment()) {
             return $resultOrder;
         }
 
-        /** get osc comment from order */
+        /**
+ * get osc comment from order
+*/
         $comment = $resultOrder->getOscOrderComment();
 
         $extensionAttributes->setOscOrderComment($comment);
@@ -89,7 +89,7 @@ class OrderComment
 
     /**
      * @param OrderRepositoryInterface $subject
-     * @param Collection $resultOrder
+     * @param Collection               $resultOrder
      *
      * @return Collection
      */
@@ -97,7 +97,9 @@ class OrderComment
         OrderRepositoryInterface $subject,
         Collection $resultOrder
     ) {
-        /** @var OrderInterface $order */
+        /**
+ * @var OrderInterface $order
+*/
         foreach ($resultOrder->getItems() as $order) {
             $this->afterGet($subject, $order);
         }

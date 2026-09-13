@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Sales\Order\Address;
@@ -28,7 +28,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class Validator
- * @package Mageplaza\Osc\Model\Plugin\Sales\Order\Address
+ *
  */
 class ValidatorTest extends TestCase
 {
@@ -42,7 +42,7 @@ class ValidatorTest extends TestCase
      */
     private $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->helperMock = $this->getMockBuilder(Data::class)->disableOriginalConstructor()->getMock();
 
@@ -67,7 +67,7 @@ class ValidatorTest extends TestCase
          * @var Address $addressMock
          */
         $addressMock = $this->getMockBuilder(Address::class)
-            ->setMethods(['setShouldIgnoreValidation'])
+            ->addMethods(['setShouldIgnoreValidation'])
             ->disableOriginalConstructor()->getMock();
         $this->helperMock->expects($this->once())->method('isEnabled')->willReturn(true);
         $addressMock->expects($this->once())->method('setShouldIgnoreValidation')->with(true);

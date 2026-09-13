@@ -13,23 +13,22 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Block\Adminhtml\Field;
 
 use Magento\Backend\Block\Widget\Container;
 use Magento\Backend\Block\Widget\Context;
+use Magento\Framework\Data\Collection\AbstractDb;
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Mageplaza\OrderAttributes\Model\Step;
 use Mageplaza\Osc\Helper\Address;
 use Mageplaza\Osc\Helper\Data;
 
-/**
- * Class Tabs
- * @package Mageplaza\Osc\Block\Adminhtml\Field
- */
 class Tabs extends Container
 {
     /**
@@ -42,7 +41,7 @@ class Tabs extends Container
      *
      * @param Context $context
      * @param Address $helper
-     * @param array $data
+     * @param array   $data
      */
     public function __construct(
         Context $context,
@@ -61,10 +60,13 @@ class Tabs extends Container
     {
         parent::_construct();
 
-        $this->addButton('save', [
+        $this->addButton(
+            'save',
+            [
             'label' => __('Save Position'),
             'class' => 'save primary mposc-save-position',
-        ]);
+            ]
+        );
 
         $caAction = "setLocation('{$this->getUrl('customer/address_attribute/new')}')";
         if (!$this->helper->isEnableCustomerAttributes()) {
@@ -74,11 +76,14 @@ class Tabs extends Container
             $caAction = "confirmSetLocation('{$message}', '{$url}')";
         }
 
-        $this->addButton('add_customer_attr', [
+        $this->addButton(
+            'add_customer_attr',
+            [
             'label' => __('Add Customer Attributes'),
             'class' => 'secondary',
             'onclick' => $caAction,
-        ]);
+            ]
+        );
 
         $oaAction = "setLocation('{$this->getUrl('mporderattributes/attribute/new')}')";
         if (!$this->helper->isEnableOrderAttributes()) {
@@ -88,11 +93,14 @@ class Tabs extends Container
             $oaAction = "confirmSetLocation('{$message}', '{$url}')";
         }
 
-        $this->addButton('add_order_attr', [
+        $this->addButton(
+            'add_order_attr',
+            [
             'label' => __('Add Order Attributes'),
             'class' => 'secondary',
             'onclick' => $oaAction,
-        ]);
+            ]
+        );
     }
 
     /**
@@ -106,10 +114,31 @@ class Tabs extends Container
     }
 
     /**
+     * @return array|AbstractDb|AbstractCollection|null
+     */
+    public function getCheckoutStepsOrderAttributes()
+    {
+        $steps = [];
+        if ($this->helper->isEnableOrderAttributes()) {
+            $steps = $this->helper->getObject(Step::class);
+            $steps = $steps->getCollection()->addFieldToFilter('status', 1);
+        }
+
+        return $steps;
+    }
+
+    /**
      * @return string
      */
     public function getAjaxUrl()
     {
         return $this->getUrl('*/*/save');
+    }
+    /**
+     * @return string
+     */
+    public function getUrlCheckoutSteps()
+    {
+        return $this->getUrl('*/*/checkoutsteps');
     }
 }

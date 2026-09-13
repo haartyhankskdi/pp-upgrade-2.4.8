@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Total\Quote;
@@ -31,10 +31,6 @@ use Magento\Quote\Model\Quote\Address\Total\AbstractTotal;
 use Mageplaza\Osc\Helper\Data as OscHelper;
 use Mageplaza\Osc\Model\System\Config\Source\Giftwrap as SourceGiftwrap;
 
-/**
- * Class GiftWrap
- * @package Mageplaza\Osc\Model\Total\Quote
- */
 class GiftWrap extends AbstractTotal
 {
     /**
@@ -60,8 +56,8 @@ class GiftWrap extends AbstractTotal
     /**
      * GiftWrap constructor.
      *
-     * @param Session $checkoutSession
-     * @param OscHelper $oscHelper
+     * @param Session                $checkoutSession
+     * @param OscHelper              $oscHelper
      * @param PriceCurrencyInterface $priceCurrency
      */
     public function __construct(
@@ -79,9 +75,9 @@ class GiftWrap extends AbstractTotal
     /**
      * Collect gift wrap totals
      *
-     * @param Quote $quote
+     * @param Quote                       $quote
      * @param ShippingAssignmentInterface $shippingAssignment
-     * @param Total $total
+     * @param Total                       $total
      *
      * @return $this
      */
@@ -111,7 +107,7 @@ class GiftWrap extends AbstractTotal
     /**
      * Assign gift wrap amount and label to address object
      *
-     * @param Quote $quote
+     * @param Quote         $quote
      * @param Address\Total $total
      *
      * @return array
@@ -157,10 +153,12 @@ class GiftWrap extends AbstractTotal
                     }
                     $baseItemGiftWrapAmount = $giftWrapBaseAmount * $item->getQty();
                     $item->setBaseOscGiftWrapAmount($baseItemGiftWrapAmount);
-                    $item->setOscGiftWrapAmount($this->priceCurrency->convert(
-                        $baseItemGiftWrapAmount,
-                        $quote->getStore()
-                    ));
+                    $item->setOscGiftWrapAmount(
+                        $this->priceCurrency->convert(
+                            $baseItemGiftWrapAmount,
+                            $quote->getStore()
+                        )
+                    );
 
                     $baseOscGiftWrapAmount += $baseItemGiftWrapAmount;
                 }

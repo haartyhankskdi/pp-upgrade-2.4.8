@@ -1,0 +1,284 @@
+<?php
+/*
+ * This software is the confidential and proprietary information of Autify Digital Ltd.
+ * Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+ * Copyright (c) 2020-Present Autify Digital Ltd.
+ * This work is protected under applicable copyright and intellectual property laws.
+ * All rights reserved. Distribution and disclosure are permitted only in accordance with
+ * the terms of a valid written agreement with Autify Digital Ltd.
+ */
+
+/**
+ * @var $block \AutifyDigital\LloydscardnetPayment\Block\Block\Adminhtml\Order\PaymentJs
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+
+$paymentData = $block->getPaymentData();
+if (!$paymentData) {
+    return;
+}
+?>
+<?php if (isset($paymentData)): ?>
+<div class="lloyd-cardnet-payment-container">
+    <div class="lloyd-cardnet-section">
+        <h3 class="lloyd-cardnet-section-title">
+            <?= $escaper->escapeHtml(__('Payment Information')) ?>
+        </h3>
+        <?php
+            $fetchTransactionUrl = $block->getUrl(
+                'autify_lloydscardnetpayment/transaction/fetch',
+                ['_query' => ['transaction_id' => $paymentData->getData('ipgTransactionId')]]
+            );
+        if ($paymentData->getStatus() == 1) { ?>
+            <a href="<?= /* @noEscape */ $fetchTransactionUrl ?>">
+                <?= $escaper->escapeHtml(__('Fetch Transaction Info')); ?>
+            </a>
+        <?php } ?>
+        <table class="admin__table-secondary lloyd-cardnet-info-table">
+            <tbody>
+                <?php if ($paymentData->getIpgTransactionId()) { ?>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Payment ID')) ?></th>
+                    <td>
+                        <span class="payment_id">
+                            <?= $escaper->escapeHtml($paymentData->getIpgTransactionId()) ?>
+                        </span>
+                    </td>
+                </tr>
+                <?php } ?>
+                
+                <?php if ($paymentData->getStatus()) { ?>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Status')) ?></th>
+                    <td>
+                        <?php
+                        $status = $paymentData->getStatus();
+                        ?>
+                        <span class="<?= $escaper->escapeHtml($block->getStatusClass($status)) ?>">
+                            <?= $escaper->escapeHtml($block->getPaymentStatus($status)) ?>
+                        </span>
+                    </td>
+                </tr>
+                <?php } ?>
+                
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Amount')) ?></th>
+                    <td>
+                        <span class="amount">
+                            <?= $escaper->escapeHtml(
+                                $block->getCurrencySymbol() .
+                                number_format(
+                                    (float)$block->getAmount() ? $block->getAmount() : 0.00,
+                                    2,
+                                    '.',
+                                    ''
+                                )
+                            ) ?>
+                        </span>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Captured')) ?></th>
+                    <td>
+                        <span class="amount">
+                            <?= $escaper->escapeHtml(
+                                $block->getCurrencySymbol() .
+                                number_format(
+                                    (float)$block->getAmount() ? $block->getAmount() : 0.00,
+                                    2,
+                                    '.',
+                                    ''
+                                )
+                            ) ?>
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Refunded')) ?></th>
+                    <td>
+                        <span class="amount">
+                            <?= $escaper->escapeHtml(
+                                $block->getCurrencySymbol() .
+                                number_format(
+                                    (float)$block->getRefundAmount() ? $block->getRefundAmount() : 0.00,
+                                    2,
+                                    '.',
+                                    ''
+                                )
+                            ) ?>
+                        </span>
+                    </td>
+                </tr>                
+                <?php if ($block->getPaymentMethod($paymentData->getData('payment_method'))) { ?>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Payment Method')) ?></th>
+                    <td>
+                        <span class="payment-method-badge">
+                            <?= $escaper->escapeHtml(ucfirst($block->getPaymentMethod($paymentData
+                            ->getData('payment_method')))) ?>
+                        </span>
+                    </td>
+                </tr>
+                <?php } ?>
+                
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Payment Date')) ?></th>
+                    <td><?= $escaper->escapeHtml($paymentData->getCreatedAt()) ?></td>
+                </tr>
+                <?php if (null !== $paymentData->getData('ipgTransactionId')) { ?>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('IPG Transaction Id')) ?></th>
+                    <td><?= $escaper->escapeHtml($paymentData->getData('ipgTransactionId')) ?></td>
+                </tr>
+                <?php } ?>
+                
+                <?php if (null !== $paymentData->getData('remote_reference')) { ?>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Gateway Reference')) ?></th>
+                    <td><?= $escaper->escapeHtml($paymentData->getData('remote_reference')) ?></td>
+                </tr>
+                <?php } ?>
+                
+
+                <?php $message3DS = $block->get3DSSecureMessage($paymentData->getData('response_3ds_code_message')) ?>
+                <?php if (null !== $message3DS) { ?>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Gateway Message')) ?></th>
+                    <td>
+                        <div class="three-ds-message">
+                            <?= $escaper->escapeHtml($message3DS) ?>
+                        </div>
+                    </td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Fraud Details Section -->
+    <div class="lloyd-cardnet-section">
+        <h3 class="lloyd-cardnet-section-title"><?= $escaper->escapeHtml(__('Fraud Details')) ?></h3>
+        <table class="admin__table-secondary lloyd-cardnet-info-table">
+            <tbody>                
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Street Check')) ?></th>
+                    <td>
+                        <?php if (null !== $paymentData->getStreetMatch()) { ?>
+                            <?= /* @noEscape */ $block->getCheckResult($paymentData->getStreetMatch()) ?>
+                        <?php } else { ?>
+                            <span class="check-unchecked">
+                                <?= $escaper->escapeHtml(__('Unchecked')) ?>
+                            </span>
+                        <?php } ?>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Postcode Check')) ?></th>
+                    <td>
+                        <?php if (null !== $paymentData->getPostcodeMatch()) { ?>
+                            <?= /* @noEscape */ $block->getCheckResult($paymentData->getPostcodeMatch()) ?>
+                        <?php } else { ?>
+                            <span class="check-unchecked">
+                                <?= $escaper->escapeHtml(__('Unchecked')) ?>
+                            </span>
+                        <?php } ?>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('CVV Check')) ?></th>
+                    <td>
+                        <?php if (null !== $paymentData->getCvvMatch()) { ?>
+                            <?= /* @noEscape */ $block->getCheckResult($paymentData
+                            ->getCvvMatch()) ?>
+                        <?php } else { ?>
+                            <span class="check-unchecked">
+                                <?= $escaper->escapeHtml(__('Unchecked')) ?>
+                            </span>
+                        <?php } ?>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Card Details Section -->
+    <div class="lloyd-cardnet-section">
+        <h3 class="lloyd-cardnet-section-title">
+            <?= $escaper->escapeHtml(__('Card Details')) ?>
+        </h3>
+        <table class="admin__table-secondary lloyd-cardnet-info-table">
+            <tbody>
+                <?php if (null !== $paymentData->getBrand()) { ?>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Brand')) ?></th>
+                    <td>
+                        <div class="card-brand">
+                            <?php
+                            $brand = strtolower($paymentData->getBrand());
+                            ?>
+                            <span class="card-icon <?= $escaper->escapeHtml($brand) ?>">
+                                <img
+                                src="<?= $escaper->escapeHtml($block->getPaymentMethodIcon($paymentData->getBrand())) ?>"
+                                alt="<?= $escaper->escapeHtml($paymentData->getBrand()) ?>" />
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <?php } ?>
+                
+                <?php if (null !== $paymentData->getData('last4')) { ?>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Last 4')) ?></th>
+                    <td>
+                        <span class="masked-value">
+                            <?= $escaper->escapeHtml($paymentData->getData('last4')) ?>
+                        </span>
+                    </td>
+                </tr>
+                <?php } ?>
+                
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Country')) ?></th>
+                    <td><?= $escaper->escapeHtml($block->getCardCountry()) ?></td>
+                </tr>
+                <?php if ($paymentData->getData('exp_month')) { ?>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Expiration')) ?></th>
+                    <td>
+                        <span class="masked-value">
+                            <?= $escaper->escapeHtml($paymentData->getData('exp_month').'/'.
+                            $paymentData->getData('exp_year')) ?>
+                        </span>
+                    </td>
+                </tr>
+                <?php } ?>
+                <?php if (null !== $paymentData->getData('cardnet_refund_id')) { ?>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Cardnet Refund ID')) ?></th>
+                    <td><?= $escaper->escapeHtml($paymentData->getData('cardnet_refund_id')) ?></td>
+                </tr>
+                <?php } ?>
+                
+                <?php if (null !== $paymentData->getData('remote_status_or_code')) { ?>
+                <tr>
+                    <th><?= $escaper->escapeHtml(__('Gateway Status')) ?></th>
+                    <td>
+                        <?php
+                        $remoteStatus = strtolower($paymentData->getData('remote_status_or_code'));
+                        $remoteStatusClass = $block->getRemoteStatusClass($remoteStatus);
+                        ?>
+                        <span class="<?= $escaper->escapeHtml($remoteStatusClass) ?>">
+                            <?= $escaper->escapeHtml(__($paymentData->getData('remote_status_or_code'))) ?>
+                        </span>
+                    </td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<?php endif; ?>

@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Checkout;
@@ -33,7 +33,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class Data
- * @package Mageplaza\Osc\Model\Plugin\Checkout
+ *
  */
 class DataTest extends TestCase
 {
@@ -52,7 +52,7 @@ class DataTest extends TestCase
      */
     private $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->helperMock = $this->getMockBuilder(OscData::class)
             ->disableOriginalConstructor()
@@ -106,10 +106,10 @@ class DataTest extends TestCase
     }
 
     /**
-     * @param boolean $result
+     * @param boolean              $result
      * @param MockObject | boolean $quote
-     * @param boolean $isEnable
-     * @param InvokedCountMatcher $allowExpect
+     * @param boolean              $isEnable
+     * @param InvokedCountMatcher  $allowExpect
      *
      * @dataProvider providerTestAfterIsAllowedGuestCheckout
      *

@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Block\Adminhtml;
 
@@ -32,12 +33,14 @@ class Tag extends \Magento\Backend\Block\Widget\Grid\Container
     }
 
     /**
+     * Prepares the layout and adds an import button to the toolbar if the user has the necessary permissions.
+     *
      * @return $this
      */
     protected function _prepareLayout()
     {
-        if ($this->_authorization->isAllowed("Magefan_Blog::import")) {
-            $onClick = "setLocation('" . $this->getUrl('*/import') . "')";
+        if ($this->_authorization->isAllowed("Magefan_BlogImport::import")) {
+            $onClick = "setLocation('" . $this->getUrl('blogimport/import') . "')";
 
             $this->getToolbar()->addChild(
                 'options_button',

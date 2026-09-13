@@ -24,6 +24,15 @@ define([
         },
 
         _create: function () {
+            this.loadData();
+
+            $(document).on('amFormFill:fieldUpdate', (e, productId) => {
+                this.options.formParams.productId = productId
+                this.loadData();
+            })
+        },
+
+        loadData: function() {
             var source = this.getDataSource();
 
             source.fail(this.processError.bind(this));

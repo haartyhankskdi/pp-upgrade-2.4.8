@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\Wishlist\Index;
@@ -26,11 +26,6 @@ use Magento\Framework\UrlInterface;
 use Magento\Wishlist\Model\ItemFactory;
 use Mageplaza\Osc\Helper\Data;
 
-/**
- * Class Cart
- *
- * @package Mageplaza\Osc\Model\Plugin\Wishlist\Index
- */
 class Cart
 {
     /**
@@ -74,8 +69,8 @@ class Cart
     }
 
     /**
-     * @param \Magento\Wishlist\Controller\Index\Cart $subject
-     * @param                                         $result
+     * @param  \Magento\Wishlist\Controller\Index\Cart $subject
+     * @param  $result
      * @return mixed
      * @throws \Magento\Framework\Exception\LocalizedException
      */

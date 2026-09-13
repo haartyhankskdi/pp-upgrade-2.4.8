@@ -23,16 +23,21 @@ namespace Mageplaza\PromoBanner\Helper;
 
 use Exception;
 use Magento\Checkout\Model\Session;
+use Magento\Cms\Block\Block;
 use Magento\Cms\Model\Template\FilterProvider;
 use Magento\Customer\Model\Context as CustomerContext;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\App\Http\Context as HttpContext;
+use Magento\Framework\Escaper;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Stdlib\DateTime\DateTime;
+use Magento\Framework\View\Asset\Repository;
 use Magento\Quote\Model\Quote;
 use Magento\Store\Model\StoreManagerInterface;
 use Mageplaza\Core\Helper\AbstractData;
+use Mageplaza\PromoBanner\Model\Banner;
+use Mageplaza\PromoBanner\Model\Config\Source\Type;
 use Mageplaza\PromoBanner\Model\ResourceModel\Banner\Collection;
 use Mageplaza\PromoBanner\Model\ResourceModel\Banner\CollectionFactory;
 
@@ -44,11 +49,6 @@ use Mageplaza\PromoBanner\Model\ResourceModel\Banner\CollectionFactory;
 class Data extends AbstractData
 {
     const CONFIG_MODULE_PATH = 'mppromobanner';
-
-    /**
-     * @var FilterProvider
-     */
-    protected $filterProvider;
 
     /**
      * @var CollectionFactory
@@ -71,6 +71,31 @@ class Data extends AbstractData
     protected $checkoutSession;
 
     /**
+     * @var Repository
+     */
+    private $assetRepo;
+
+    /**
+     * @var Image
+     */
+    private $imageHelper;
+
+    /**
+     * @var Escaper
+     */
+    private $escaper;
+
+    /**
+     * @var Block
+     */
+    private $cmsBlock;
+
+    /**
+     * @var FilterProvider
+     */
+    private $filterProvider;
+
+    /**
      * Data constructor.
      *
      * @param Context $context
@@ -81,6 +106,10 @@ class Data extends AbstractData
      * @param HttpContext $httpContext
      * @param Session $checkoutSession
      * @param CollectionFactory $bannerCollection
+     * @param Repository $assetRepo
+     * @param Image $imageHelper
+     * @param Escaper $escaper
+     * @param Block $cmsBlock
      */
     public function __construct(
         Context $context,
@@ -90,13 +119,21 @@ class Data extends AbstractData
         DateTime $date,
         HttpContext $httpContext,
         Session $checkoutSession,
-        CollectionFactory $bannerCollection
+        CollectionFactory $bannerCollection,
+        Repository $assetRepo,
+        Image $imageHelper,
+        Escaper $escaper,
+        Block $cmsBlock
     ) {
-        $this->filterProvider   = $filterProvider;
-        $this->date             = $date;
-        $this->httpContext      = $httpContext;
-        $this->checkoutSession  = $checkoutSession;
+        $this->filterProvider = $filterProvider;
+        $this->date = $date;
+        $this->httpContext = $httpContext;
+        $this->checkoutSession = $checkoutSession;
         $this->bannerCollection = $bannerCollection;
+        $this->assetRepo = $assetRepo;
+        $this->imageHelper = $imageHelper;
+        $this->escaper = $escaper;
+        $this->cmsBlock = $cmsBlock;
 
         parent::__construct($context, $objectManager, $storeManager);
     }
@@ -245,5 +282,137 @@ class Data extends AbstractData
         $code = ($code !== '') ? '/' . $code : '';
 
         return $this->getConfigValue(static::CONFIG_MODULE_PATH . '/floating_setting' . $code, $storeId);
+    }
+
+    /**
+     * @param Banner $banner
+     *
+     * @return Banner
+     */
+    public function setAutoTime(Banner $banner)
+    {
+        if ($banner->getAutoCloseTime() === 'use_config') {
+            $banner->setAutoCloseTime($this->getAutoCloseTime());
+        }
+        if ($banner->getAutoReopenTime() === 'use_config') {
+            $banner->setAutoReopenTime($this->getAutoOpenTime());
+        }
+
+        return $banner;
+    }
+
+    /**
+     * @return StoreManagerInterface
+     */
+    public function getStoreManager()
+    {
+        return $this->storeManager;
+    }
+
+    /**
+     * @param Banner $banner
+     *
+     * @return mixed|string
+     */
+    public function getBannerHtml(Banner $banner)
+    {
+        $html = '';
+        switch ($banner->getType()) {
+            case Type::SINGLE_IMAGE:
+                $src = $this->escaper->escapeUrl($this->imageHelper->getImageSrc($banner->getBannerImage()));
+                if ($banner->getUrl()) {
+                    $html = '<div class="mppromobanner-container">
+                                <a class="mppromobanner-url" href="' . $this->escaper->escapeUrl($banner->getUrl()) . '"
+                                target="_blank" rel="noopener noreferrer">
+                                    <img class="mppromobanner-image img-responsive"
+                                    src="' . $src . '" alt="' . $banner->getBannerImage() . '">
+                                </a>
+                            </div>';
+                } else {
+                    $html = '<div class="mppromobanner-container">
+                                <img class="mppromobanner-image img-responsive"
+                                src="' . $src . '" alt="' . $banner->getBannerImage() . '">
+                            </div>';
+                }
+                break;
+            case Type::HTML_TEXT:
+                $html = $this->filterContent($banner->getContent());
+                $html = '<div class="mppromobanner-container">' . $html . '</div>';
+                break;
+            case Type::CMS_BLOCK:
+                try {
+                    $html = $this->cmsBlock
+                        ->setBlockId($banner->getCmsBlockId())
+                        ->toHtml();
+                    $html = '<div class="mppromobanner-container">' . $html . '</div>';
+                } catch (Exception $e) {
+                    $html = '';
+                }
+                break;
+        }
+
+        if (empty($html)) {
+            return $html;
+        }
+
+        if ($this->showCloseButton()) {
+            $closeBtn = '<div class="mppromobanner-close">
+                <div class="mppromobanner-close-btn" title="Close"></div>
+            </div>';
+            $html = '<div class="mppromobanner-banner-'
+                . $banner->getId() . ' mppromobanner-banner-style">' . $closeBtn . $html
+                . '</div>';
+        } else {
+            $html = '<div class="mppromobanner-banner-' . $banner->getId() . ' mppromobanner-banner-style">'
+                . $html .
+                '</div>';
+        }
+
+        return $html;
+    }
+
+    /**
+     * @param string $content
+     *
+     * @return mixed|string
+     */
+    public function filterContent($content)
+    {
+        try {
+            $content = $this->filterProvider->getBlockFilter()->filter($content);
+
+            return $content;
+        } catch (Exception $e) {
+            return '';
+        }
+    }
+
+    /**
+     * @param Banner $banner
+     *
+     * @return mixed
+     */
+    public function processBannerData($banner)
+    {
+        if ($banner->getBannerImage()) {
+            $banner->setBannerImage($this->imageHelper->getImageSrc($banner->getBannerImage()));
+        }
+        $sliderImages = $this->unserialize($banner->getSliderImages());
+        if (!empty($sliderImages)) {
+            foreach ($sliderImages as &$sliderImage) {
+                $sliderImage['image'] = $this->imageHelper->getImageSrc($sliderImage['image']);
+            }
+            unset($sliderImage);
+            $banner->setSliderImages($this->serialize($sliderImages));
+        }
+        if ($banner->getPopupImage()) {
+            $banner->setPopupImage($this->imageHelper->getImageSrc($banner->getPopupImage()));
+        }
+        if ($banner->getFloatingImage()) {
+            $banner->setFloatingImage($this->imageHelper->getImageSrc($banner->getFloatingImage()));
+        }
+        $this->setAutoTime($banner);
+
+        return $banner;
     }
 }

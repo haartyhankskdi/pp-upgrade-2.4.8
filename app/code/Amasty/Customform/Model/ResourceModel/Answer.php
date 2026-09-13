@@ -1,9 +1,9 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Model\ResourceModel;
 
@@ -28,6 +28,11 @@ class Answer extends AbstractDb
      * @var BeforeSaveCallbacksPool
      */
     private $beforeSaveCallbacks;
+
+    /**
+     * @var array
+     */
+    protected $_uniqueFields = [];
 
     public function __construct(
         Context $context,

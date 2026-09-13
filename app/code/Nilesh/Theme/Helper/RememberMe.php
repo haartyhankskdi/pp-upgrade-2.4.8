@@ -108,9 +108,17 @@ $this->cookieManager->setPublicCookie(self::COOKIE_NAME, $value, $metadata);
     */
    public function getCookieloginName()
    {
-       $name = json_decode($this->get(self::COOKIE_NAME));
-       if($name)
-       return $name->username ? $name->username : '';
+       $cookie = $this->get(self::COOKIE_NAME);
+       if (!$cookie) {
+           return '';
+       }
+
+       $name = json_decode($cookie);
+       if ($name && !empty($name->username)) {
+           return $name->username;
+       }
+
+       return '';
    }
 
    /**
@@ -128,9 +136,17 @@ $this->cookieManager->setPublicCookie(self::COOKIE_NAME, $value, $metadata);
     */
    public function getCookieloginChk()
    {
-       $chk = json_decode($this->get(self::COOKIE_NAME));
-       if($chk)
-       return $chk->remchkbox ? 1 : '';
+       $cookie = $this->get(self::COOKIE_NAME);
+       if (!$cookie) {
+           return '';
+       }
+
+       $chk = json_decode($cookie);
+       if ($chk && !empty($chk->remchkbox)) {
+           return 1;
+       }
+
+       return '';
    }
 
    /**

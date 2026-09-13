@@ -18,6 +18,7 @@
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\PromoBanner\Test\Unit\Block;
 
 use Magento\Catalog\Model\Category;
@@ -108,24 +109,24 @@ class PromoBannerTest extends TestCase
 
     protected function setUp()
     {
-        $this->context          = $this->getMockBuilder(Context::class)->disableOriginalConstructor()->getMock();
-        $this->helperData       = $this->getMockBuilder(Data::class)->disableOriginalConstructor()->getMock();
-        $this->date             = $this->getMockBuilder(DateTime::class)->disableOriginalConstructor()->getMock();
-        $this->httpContext      = $this->getMockBuilder(HttpContext::class)->disableOriginalConstructor()->getMock();
-        $this->registry         = $this->getMockBuilder(Registry::class)->disableOriginalConstructor()->getMock();
-        $this->helperImage      = $this->getMockBuilder(HelperImage::class)->disableOriginalConstructor()->getMock();
+        $this->context = $this->getMockBuilder(Context::class)->disableOriginalConstructor()->getMock();
+        $this->helperData = $this->getMockBuilder(Data::class)->disableOriginalConstructor()->getMock();
+        $this->date = $this->getMockBuilder(DateTime::class)->disableOriginalConstructor()->getMock();
+        $this->httpContext = $this->getMockBuilder(HttpContext::class)->disableOriginalConstructor()->getMock();
+        $this->registry = $this->getMockBuilder(Registry::class)->disableOriginalConstructor()->getMock();
+        $this->helperImage = $this->getMockBuilder(HelperImage::class)->disableOriginalConstructor()->getMock();
         $this->bannerCollection = $this->getMockBuilder(CollectionFactory::class)
             ->disableOriginalConstructor()
             ->setMethods(['create'])
             ->getMock();
-        $this->selectMock       = $this->getMockBuilder(Select::class)->disableOriginalConstructor()->getMock();
-        $this->_eventManager    = $this->getMockBuilder(ManagerInterface::class)
+        $this->selectMock = $this->getMockBuilder(Select::class)->disableOriginalConstructor()->getMock();
+        $this->_eventManager = $this->getMockBuilder(ManagerInterface::class)
             ->setMethods(['dispatch'])
             ->getMock();
-        $this->request          = $this->getMockBuilder(Http::class)
+        $this->request = $this->getMockBuilder(Http::class)
             ->setMethods(['getParam', 'getPost', 'getFullActionName', 'getPostValue'])
             ->disableOriginalConstructor()->getMock();
-        $this->escape           = $this->getMockBuilder(Escaper::class)->disableOriginalConstructor()->getMock();
+        $this->escape = $this->getMockBuilder(Escaper::class)->disableOriginalConstructor()->getMock();
         $this->context->expects($this->any())->method('getRequest')->will($this->returnValue($this->request));
         $this->context->expects($this->any())->method('getEscaper')->will($this->returnValue($this->escape));
         $this->context->expects($this->any())
@@ -161,12 +162,12 @@ class PromoBannerTest extends TestCase
     public function testGetPromoBannerCollection($actionName, $position)
     {
         $customerGroup = '1';
-        $storeId       = '1';
-        $datetime      = '2019-07-15 03:39:52';
-        $productId     = 6;
-        $categoryId    = 3;
-        $urlImage      = 'http://192.168.1.200/tuvv/ce232/pub/media/mageplaza/promobanner/banner/image/0/2/02_bg_2.png';
-        $content       = '<div class="mppromobanner-banner- mppromobanner-banner-style"><div class="mppromobanner-close">
+        $storeId = '1';
+        $datetime = '2019-07-15 03:39:52';
+        $productId = 6;
+        $categoryId = 3;
+        $urlImage = 'http://192.168.1.200/tuvv/ce232/pub/media/mageplaza/promobanner/banner/image/0/2/02_bg_2.png';
+        $content = '<div class="mppromobanner-banner- mppromobanner-banner-style"><div class="mppromobanner-close">
                 <div class="mppromobanner-close-btn" title="Close"></div>
             </div><div class="mppromobanner-container">
                                 <a class="mppromobanner-url" href="http://192.168.1.200/tuvv/ce232"
@@ -175,19 +176,19 @@ class PromoBannerTest extends TestCase
                                     src="http://192.168.1.200/tuvv/ce232/pub/media/mageplaza/promobanner/banner/image/0/2/02_bg_2.png" alt="0/2/02_bg_2.png">
                                 </a>
                             </div></div>';
-        $bannerData    = [
-            'banner_id'          => '1',
-            'status'             => '1',
-            'store_ids'          => '1',
+        $bannerData = [
+            'banner_id' => '1',
+            'status' => '1',
+            'store_ids' => '1',
             'customer_group_ids' => '0,1,2,3',
-            'from_date'          => '2019-07-11 00:00:00',
-            'url'                => 'http://192.168.1.200/tuvv/ce232',
-            'to_date'            => null,
-            'type'               => 'banner_image',
-            'banner_image'       => '0/2/02_bg_2.png',
-            'category_ids'       => '3,4,5',
-            'auto_close_time'    => '60',
-            'auto_reopen_time'   => 'infinite'
+            'from_date' => '2019-07-11 00:00:00',
+            'url' => 'http://192.168.1.200/tuvv/ce232',
+            'to_date' => null,
+            'type' => 'banner_image',
+            'banner_image' => '0/2/02_bg_2.png',
+            'category_ids' => '3,4,5',
+            'auto_close_time' => '60',
+            'auto_reopen_time' => 'infinite'
         ];
 
         $this->httpContext->method('getValue')->with(CustomerContext::CONTEXT_GROUP)->willReturn($customerGroup);
@@ -201,7 +202,7 @@ class PromoBannerTest extends TestCase
             ->disableOriginalConstructor()
             ->setMethods(['getType', 'getBannerImage', 'getUrl', 'setContent', 'getAutoCloseTime', 'getAutoReopenTime'])
             ->getMock();
-        $collection  = $this->getMockBuilder(Collection::class)
+        $collection = $this->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
         $this->bannerCollection->expects($this->any())->method('create')->willReturn($collection);

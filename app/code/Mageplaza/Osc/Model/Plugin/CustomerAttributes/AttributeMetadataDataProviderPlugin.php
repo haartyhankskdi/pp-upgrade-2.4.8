@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\CustomerAttributes;
@@ -29,11 +29,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Module\Manager;
 use Mageplaza\Osc\Helper\Data;
 
-/**
- * Class AttributeMetadataDataProviderPlugin
- *
- * @package Mageplaza\Osc\Model\Plugin\CustomerAttributes
- */
 class AttributeMetadataDataProviderPlugin
 {
     /**
@@ -54,9 +49,9 @@ class AttributeMetadataDataProviderPlugin
     /**
      * AttributeMetadataDataProviderPlugin constructor.
      *
-     * @param Data          $helper
-     * @param Session       $session
-     * @param Manager       $moduleManage
+     * @param Data    $helper
+     * @param Session $session
+     * @param Manager $moduleManage
      */
     public function __construct(
         Data $helper,
@@ -69,8 +64,8 @@ class AttributeMetadataDataProviderPlugin
     }
 
     /**
-     * @param AttributeMetadataDataProvider $subject
-     * @param AttributesCollection          $result
+     * @param  AttributeMetadataDataProvider $subject
+     * @param  AttributesCollection          $result
      * @return AttributesCollection
      */
     public function afterLoadAttributesCollection(AttributeMetadataDataProvider $subject, $result)
@@ -88,7 +83,7 @@ class AttributeMetadataDataProviderPlugin
         }
 
         $storeId = $quote->getStoreId();
-        if (!$quote->getId() || !$this->helper->isOscPage($storeId)) {
+        if (!$quote->getId()) {
             return $result;
         }
         $customerGroup = $quote->getCustomerGroupId();

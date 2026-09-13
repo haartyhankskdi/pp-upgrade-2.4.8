@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\OrderAttributes;
@@ -26,10 +26,6 @@ use Mageplaza\OrderAttributes\Model\Attribute;
 use Mageplaza\OrderAttributes\Model\Config\Source\Position;
 use Mageplaza\Osc\Helper\Address;
 
-/**
- * Class Helper
- * @package Mageplaza\Osc\Model\Plugin\OrderAttributes
- */
 class Helper
 {
     /**
@@ -48,12 +44,12 @@ class Helper
     }
 
     /**
-     * @param Data $subject
+     * @param Data        $subject
      * @param Attribute[] $result
      *
      * @return Attribute[]
      */
-    public function afterGetFilteredAttributes(Data $subject, $result)
+    public function afterGetOrderAttributesCollection(Data $subject, $result)
     {
         if (!$this->helper->isOscPage()) {
             return $result;
@@ -69,19 +65,17 @@ class Helper
         $attributes = [];
 
         foreach ($result as $attribute) {
-            $pos = (int)$attribute->getPosition();
+            $pos = $attribute->getPosition();
             $code = (string)$attribute->getAttributeCode();
             $oaField = isset($position[$code]) ? $position[$code] : null;
 
             if (!$oaField) {
-                if ($pos === 1) {
-                    $attributes[] = $attribute;
-                }
+                $attributes[] = $attribute;
 
                 continue;
             }
 
-            switch ($pos) {
+            switch ((int)$pos) {
                 case Position::SHIPPING_TOP:
                 case Position::SHIPPING_BOTTOM:
                     $pos = !empty($oaField['bottom']) ? Position::SHIPPING_BOTTOM : Position::SHIPPING_TOP;
@@ -90,6 +84,7 @@ class Helper
                 case Position::PAYMENT_BOTTOM:
                     $pos = !empty($oaField['bottom']) ? Position::PAYMENT_BOTTOM : Position::PAYMENT_TOP;
                     break;
+
             }
             $attribute->setPosition($pos);
             $attribute->setSortOrder($sortOrder++);

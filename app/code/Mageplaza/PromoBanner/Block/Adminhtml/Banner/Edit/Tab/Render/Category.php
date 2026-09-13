@@ -68,7 +68,7 @@ class Category extends AbstractElement
         array $data = []
     ) {
         $this->_collectionFactory = $collectionFactory;
-        $this->categoryOptions    = $categoryOptions;
+        $this->categoryOptions = $categoryOptions;
 
         parent::__construct($factoryElement, $factoryCollection, $escaper, $data);
     }
@@ -80,7 +80,7 @@ class Category extends AbstractElement
     public function getElementHtml()
     {
         $html = '<div class="admin__field-control admin__control-grouped" id="' . $this->getHtmlId() . '">';
-        $html .= '<div id="mppromobanner_select_category" class="admin__field" 
+        $html .= '<div id="mppromobanner_select_category" class="admin__field"
 data-bind="scope:\'mppromobanner_catalog_category\'" data-index="index">';
         $html .= '<!-- ko foreach: elems() -->';
         $html .= '<input type="hidden" name="mppromobanner[category_ids]" data-bind="value: value"/>';
@@ -147,7 +147,7 @@ data-bind="scope:\'mppromobanner_catalog_category\'" data-index="index">';
     public function getValues()
     {
         $collection = $this->_getCategoriesCollection();
-        $values     = $this->getValue();
+        $values = $this->getValue();
         if (!is_array($values)) {
             $values = explode(',', $values);
         }

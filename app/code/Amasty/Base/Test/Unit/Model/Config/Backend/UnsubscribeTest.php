@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * @author Amasty Team
  * @copyright Copyright (c) Amasty (https://www.amasty.com)
@@ -7,80 +10,141 @@
 
 namespace Amasty\Base\Test\Unit\Model\Config\Backend;
 
+use Amasty\Base\Model\AdminNotification\Messages;
 use Amasty\Base\Model\Config\Backend\Unsubscribe;
 use Amasty\Base\Model\Source\NotificationType;
-use Amasty\Base\Test\Unit\Traits;
+use Magento\Framework\App\Cache\TypeListInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Data\Collection\AbstractDb;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Model\ResourceModel\AbstractResource;
+use Magento\Framework\Registry;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
-/**
- * Class UnsubscribeTest
- *
- * @see Unsubscribe
- *
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- * phpcs:ignoreFile
- */
-class UnsubscribeTest extends \PHPUnit\Framework\TestCase
+class UnsubscribeTest extends TestCase
 {
-    use Traits\ObjectManagerTrait;
-    use Traits\ReflectionTrait;
+    /**
+     * @var Context|MockObject
+     */
+    private $contextMock;
 
     /**
-     * @covers Unsubscribe::prepareMessage
+     * @var Registry|MockObject
      */
-    public function testPrepareMessage()
+    private $registryMock;
+
+    /**
+     * @var ScopeConfigInterface|MockObject
+     */
+    private $scopeConfigMock;
+
+    /**
+     * @var TypeListInterface|MockObject
+     */
+    private $typeListMock;
+
+    /**
+     * @var Messages|MockObject
+     */
+    private $messageManagerMock;
+
+    /**
+     * @var NotificationType|MockObject
+     */
+    private $notificationTypeMock;
+
+    /**
+     * @var AbstractResource|MockObject
+     */
+    private $resourceMock;
+
+    /**
+     * @var AbstractDb|MockObject
+     */
+    private $resourceCollectionMock;
+
+    protected function setUp(): void
     {
-        $model = $this->createPartialMock(
-            Unsubscribe::class,
-            ['generateMessage', 'getOldValue']
+        $eventDispatcher = $this->createMock(\Magento\Framework\Event\ManagerInterface::class);
+        $this->contextMock = $this->createMock(Context::class);
+        $this->contextMock->method('getEventDispatcher')->willReturn($eventDispatcher);
+        $this->registryMock = $this->createMock(Registry::class);
+        $this->scopeConfigMock = $this->createMock(ScopeConfigInterface::class);
+        $this->typeListMock = $this->createMock(TypeListInterface::class);
+        $this->messageManagerMock = $this->createMock(Messages::class);
+        $this->notificationTypeMock = $this->createMock(NotificationType::class);
+        $this->notificationTypeMock->method('toOptionArray')->willReturn($this->getTitles());
+        $this->resourceMock = $this->createMock(AbstractResource::class);
+        $this->resourceCollectionMock = $this->createMock(AbstractDb::class);
+    }
+
+    public function testNoChanges(): void
+    {
+        $model = new Unsubscribe(
+            $this->contextMock,
+            $this->registryMock,
+            $this->scopeConfigMock,
+            $this->typeListMock,
+            $this->messageManagerMock,
+            $this->notificationTypeMock,
+            $this->resourceMock,
+            $this->resourceCollectionMock
         );
-        $model->setValue('test_value');
-        $messageManager = $this->createMock(\Amasty\Base\Model\AdminNotification\Messages::class);
-
-        $model->expects($this->any())->method('generateMessage')->willReturn(10);
-        $model->expects($this->any())->method('getOldValue')->willReturnOnConsecutiveCalls('test', '');
-        $messageManager->expects($this->once())->method('addMessage');
-        $messageManager->expects($this->once())->method('clear');
-
-        $this->setProperty($model, 'messageManager', $messageManager, Unsubscribe::class);
-
-        $this->invokeMethod($model, 'prepareMessage');
-        $this->invokeMethod($model, 'prepareMessage');
+        $this->messageManagerMock->expects($this->never())->method('addMessage');
+        $model->afterSave();
     }
 
     /**
-     * @covers Unsubscribe::generateMessage
-     * @dataProvider generateMessageDataProvider
+     * @dataProvider processMessageDataProvider
      */
-    public function testGenerateMessage($data, $result)
+    #[DataProvider('processMessageDataProvider')]
+    public function testProcessMessage(string $value, string $expectedMessage): void
     {
-        $notificationType = $this->getObjectManager()->getObject(NotificationType::class);
-        $model = $this->getObjectManager()->getObject(
-            Unsubscribe::class,
-            [
-                'notificationType' => $notificationType
-            ]
+        $this->scopeConfigMock->method('getValue')
+            ->willReturn(implode(',', [NotificationType::GENERAL, NotificationType::SPECIAL_DEALS]));
+        $model = new Unsubscribe(
+            $this->contextMock,
+            $this->registryMock,
+            $this->scopeConfigMock,
+            $this->typeListMock,
+            $this->messageManagerMock,
+            $this->notificationTypeMock,
+            $this->resourceMock,
+            $this->resourceCollectionMock,
+            ['value' => $value]
         );
-
-        $this->assertEquals($result, $this->invokeMethod($model, 'generateMessage', [$data]));
+        $this->messageManagerMock->expects($this->once())->method('addMessage')->with($expectedMessage);
+        $model->afterSave();
     }
 
-    /**
-     * Data provider for generateMessage test
-     * @return array
-     */
-    public function generateMessageDataProvider()
+    public static function processMessageDataProvider(): array
     {
         return [
-            ['test', ''],
             [
                 NotificationType::UNSUBSCRIBE_ALL,
                 '<img src="https://feed.amasty.net/news/unsubscribe/unsubscribe_all.svg"/>'
                 . '<span>You have successfully unsubscribed from All Notifications.</span>'
             ],
             [
-                NotificationType::GENERAL,
+                NotificationType::SPECIAL_DEALS,
                 '<img src="https://feed.amasty.net/news/unsubscribe/info.svg"/>'
                 . '<span>You have successfully unsubscribed from General Info.</span>'
+            ],
+        ];
+    }
+
+    private function getTitles(): array
+    {
+        return [
+            [
+                'value' => NotificationType::UNSUBSCRIBE_ALL,
+                'label' => __('Unsubscribe from all')
+            ],
+            [
+                'value' => NotificationType::GENERAL,
+                'label' => __('General Info')
             ],
         ];
     }

@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\Checkout;
@@ -26,10 +26,6 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Mageplaza\Osc\Helper\Item;
 
-/**
- * Class DefaultConfigProvider
- * @package Mageplaza\Osc\Model\Plugin\Checkout
- */
 class DefaultConfigProvider
 {
     /**
@@ -46,7 +42,7 @@ class DefaultConfigProvider
      * DefaultConfigProvider constructor.
      *
      * @param CheckoutSession $checkoutSession
-     * @param Item $itemHelper
+     * @param Item            $itemHelper
      */
     public function __construct(
         CheckoutSession $checkoutSession,
@@ -58,7 +54,7 @@ class DefaultConfigProvider
 
     /**
      * @param \Magento\Checkout\Model\DefaultConfigProvider $subject
-     * @param array $config
+     * @param array                                         $config
      *
      * @return array
      * @throws LocalizedException
@@ -71,9 +67,15 @@ class DefaultConfigProvider
         }
 
         $quote = $this->checkoutSession->getQuote();
-
+        $countItem = 0;
+        $maxItemsDisplay = (int)$this->itemHelper->getConfigValue('checkout/options/max_items_display_count');
         foreach ($config['quoteItemData'] as &$item) {
-            $item['mposc'] = $this->itemHelper->getItemOptionsConfig($quote, $item['item_id']);
+            $countItem += 1;
+            if ($countItem < $maxItemsDisplay || $maxItemsDisplay === 0) {
+                $item['mposc'] = $this->itemHelper->getItemOptionsConfig($quote, $item['item_id'], true);
+            } else {
+                $item['mposc'] = $this->itemHelper->getItemOptionsConfig($quote, $item['item_id'], false);
+            }
         }
 
         return $config;

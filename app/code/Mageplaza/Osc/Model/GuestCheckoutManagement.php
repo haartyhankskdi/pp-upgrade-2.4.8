@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model;
@@ -32,10 +32,6 @@ use Magento\Quote\Model\QuoteIdMaskFactory;
 use Mageplaza\Osc\Api\CheckoutManagementInterface;
 use Mageplaza\Osc\Api\GuestCheckoutManagementInterface;
 
-/**
- * Class GuestCheckoutManagement
- * @package Mageplaza\Osc\Model
- */
 class GuestCheckoutManagement implements GuestCheckoutManagementInterface
 {
     /**
@@ -61,10 +57,10 @@ class GuestCheckoutManagement implements GuestCheckoutManagementInterface
     /**
      * GuestCheckoutManagement constructor.
      *
-     * @param QuoteIdMaskFactory $quoteIdMaskFactory
+     * @param QuoteIdMaskFactory          $quoteIdMaskFactory
      * @param CheckoutManagementInterface $checkoutManagement
-     * @param CartRepositoryInterface $cartRepository
-     * @param AccountManagementInterface $accountManagement
+     * @param CartRepositoryInterface     $cartRepository
+     * @param AccountManagementInterface  $accountManagement
      */
     public function __construct(
         QuoteIdMaskFactory $quoteIdMaskFactory,
@@ -83,7 +79,9 @@ class GuestCheckoutManagement implements GuestCheckoutManagementInterface
      */
     public function updateItemQty($cartId, $itemId, $itemQty)
     {
-        /** @var $quoteIdMask QuoteIdMask */
+        /**
+ * @var $quoteIdMask QuoteIdMask
+*/
         $quoteIdMask = $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id');
 
         return $this->checkoutManagement->updateItemQty($quoteIdMask->getQuoteId(), $itemId, $itemQty);
@@ -94,7 +92,9 @@ class GuestCheckoutManagement implements GuestCheckoutManagementInterface
      */
     public function removeItemById($cartId, $itemId)
     {
-        /** @var $quoteIdMask QuoteIdMask */
+        /**
+ * @var $quoteIdMask QuoteIdMask
+*/
         $quoteIdMask = $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id');
 
         return $this->checkoutManagement->removeItemById($quoteIdMask->getQuoteId(), $itemId);
@@ -105,7 +105,9 @@ class GuestCheckoutManagement implements GuestCheckoutManagementInterface
      */
     public function getPaymentTotalInformation($cartId)
     {
-        /** @var $quoteIdMask QuoteIdMask */
+        /**
+ * @var $quoteIdMask QuoteIdMask
+*/
         $quoteIdMask = $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id');
 
         return $this->checkoutManagement->getPaymentTotalInformation($quoteIdMask->getQuoteId());
@@ -116,7 +118,9 @@ class GuestCheckoutManagement implements GuestCheckoutManagementInterface
      */
     public function updateGiftWrap($cartId, $isUseGiftWrap)
     {
-        /** @var $quoteIdMask QuoteIdMask */
+        /**
+ * @var $quoteIdMask QuoteIdMask
+*/
         $quoteIdMask = $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id');
 
         return $this->checkoutManagement->updateGiftWrap($quoteIdMask->getQuoteId(), $isUseGiftWrap);
@@ -131,7 +135,9 @@ class GuestCheckoutManagement implements GuestCheckoutManagementInterface
         $customerAttributes = [],
         $additionInformation = []
     ) {
-        /** @var $quoteIdMask QuoteIdMask */
+        /**
+ * @var $quoteIdMask QuoteIdMask
+*/
         $quoteIdMask = $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id');
 
         return $this->checkoutManagement->saveCheckoutInformation(
@@ -147,9 +153,13 @@ class GuestCheckoutManagement implements GuestCheckoutManagementInterface
      */
     public function saveEmailToQuote($cartId, $email)
     {
-        /** @var $quoteIdMask QuoteIdMask */
+        /**
+ * @var $quoteIdMask QuoteIdMask
+*/
         $quoteIdMask = $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id');
-        /** @var Quote $quote */
+        /**
+ * @var Quote $quote
+*/
         $quote = $this->cartRepository->getActive($quoteIdMask->getQuoteId());
         $quote->setCustomerEmail($email);
 
@@ -179,7 +189,9 @@ class GuestCheckoutManagement implements GuestCheckoutManagementInterface
         $cartId,
         PaymentInterface $paymentMethod
     ) {
-        /** @var $quoteIdMask QuoteIdMask */
+        /**
+ * @var $quoteIdMask QuoteIdMask
+*/
         $quoteIdMask = $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id');
 
         return $this->checkoutManagement->paymentMethodDiscount(

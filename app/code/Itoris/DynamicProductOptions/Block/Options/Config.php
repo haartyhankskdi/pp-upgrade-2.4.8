@@ -173,7 +173,7 @@ class Config extends \Magento\Catalog\Block\Product\View\Options//\Magento\Frame
 
         $config = array_merge($defaultConfig, $config);
 
-        return \Zend_Json::encode($config);
+        return json_encode($config);
     }
 
     public function getQuoteProductOptionsQtys(){
@@ -317,7 +317,7 @@ class Config extends \Magento\Catalog\Block\Product\View\Options//\Magento\Frame
                 }
             }
         }
-        return \Zend_Json::encode($fields);
+        return json_encode($fields);
     }
 
     public function getOptionPrice($option) {

@@ -68,8 +68,8 @@ class Preview extends Widget
         TemplateFactory $templateFactory,
         array $data = []
     ) {
-        $this->blockFactory     = $blockFactory;
-        $this->blockResource    = $blockResource;
+        $this->blockFactory = $blockFactory;
+        $this->blockResource = $blockResource;
         $this->_templateFactory = $templateFactory;
 
         parent::__construct($context, $data);

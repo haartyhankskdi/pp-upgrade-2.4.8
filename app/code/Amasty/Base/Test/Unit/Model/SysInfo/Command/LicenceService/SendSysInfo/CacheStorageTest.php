@@ -14,6 +14,7 @@ use Amasty\Base\Model\InstanceHash\InstanceHash;
 use Amasty\Base\Model\InstanceHash\InstanceHashFactory;
 use Amasty\Base\Model\InstanceHash\Repository;
 use Amasty\Base\Model\SysInfo\Command\LicenceService\SendSysInfo\CacheStorage;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -52,6 +53,7 @@ class CacheStorageTest extends TestCase
      * @dataProvider getDataProvider
      * @return void
      */
+    #[DataProvider('getDataProvider')]
     public function testGet(string $identifier, ?string $expected): void
     {
         $instanceHashMock = $this->createConfiguredMock(InstanceHash::class, ['getValue' => $expected]);
@@ -64,7 +66,7 @@ class CacheStorageTest extends TestCase
         $this->assertEquals($expected, $this->model->get($identifier));
     }
 
-    public function getDataProvider(): array
+    public static function getDataProvider(): array
     {
         return [
             ['identifier1', 'val1'],
@@ -78,6 +80,7 @@ class CacheStorageTest extends TestCase
      * @dataProvider setDataProvider
      * @return void
      */
+    #[DataProvider('setDataProvider')]
     public function testSet(string $identifier, string $value): void
     {
         $instanceHashMock = $this->createPartialMock(InstanceHash::class, []);
@@ -90,7 +93,7 @@ class CacheStorageTest extends TestCase
         $this->assertTrue($this->model->set($identifier, $value));
     }
 
-    public function setDataProvider(): array
+    public static function setDataProvider(): array
     {
         return [
             ['identifier1', 'val1']

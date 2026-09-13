@@ -29,7 +29,7 @@ if ($productId) {
             'images' => $product->getMediaGalleryImages(),
             'title' => $product->getName(),
             'description' => $product->getShortDescription(),
-            'features' => explode("\n", $product->getData('features')), // Assuming 'features' is a multi-line attribute
+            'features' => explode("\n", (string) $product->getData('features')), // Assuming 'features' is a multi-line attribute
             'price' => $product->getFinalPrice(),
             'is_salable' => $product->getIsSalable(),
             'stockItem' => $stockRegistry->getStockItem($product->getId()),
@@ -185,91 +185,6 @@ if ($productId) {
 </div>
 
 
-<!-- product info -->
-<div class="product-info-sec reveal1">
-<?php
-// desktop view
-if ($productId == 9426) {
-    echo $this->getLayout()
-    ->createBlock('Magento\Cms\Block\Block')
-    ->setBlockId('orlistat_product_info')
-    ->toHtml();
-} elseif ($productId == 9434) {
-    echo $this->getLayout()
-    ->createBlock('Magento\Cms\Block\Block')
-    ->setBlockId('saxenda_product_info')
-    ->toHtml();
-} elseif ($productId == 9411) {
-    echo $this->getLayout()
-    ->createBlock('Magento\Cms\Block\Block')
-    ->setBlockId('wegovy_product_info')
-    ->toHtml();
-} elseif ($productId == 9424) {
-    echo $this->getLayout()
-    ->createBlock('Magento\Cms\Block\Block')
-    ->setBlockId('mounjaro_product_info')
-    ->toHtml();
-} elseif ($productId == 9429) {
-    echo $this->getLayout()
-    ->createBlock('Magento\Cms\Block\Block')
-    ->setBlockId('mysimba_product_info')
-    ->toHtml();
-} elseif ($productId == 9436) {
-    echo $this->getLayout()
-    ->createBlock('Magento\Cms\Block\Block')
-    ->setBlockId('zepbound_product_info')
-    ->toHtml();
-} 
-// else {
-//     echo $this->getLayout()
-//     ->createBlock('Magento\Cms\Block\Block')
-//     ->setBlockId('wegovy_product_info')
-//     ->toHtml();
-// }
-
-
-// mobile view
-
-if ($productId == 9426) {
-    echo $this->getLayout()
-    ->createBlock('Magento\Cms\Block\Block')
-    ->setBlockId('orlistat_mob_product_info')
-    ->toHtml();
-} elseif ($productId == 9434) {
-    echo $this->getLayout()
-    ->createBlock('Magento\Cms\Block\Block')
-    ->setBlockId('saxenda_mob_product_view')
-    ->toHtml();
-} elseif ($productId == 9411) {
-    echo $this->getLayout()
-    ->createBlock('Magento\Cms\Block\Block')
-    ->setBlockId('wegovy_mob_product_info')
-    ->toHtml();
-} elseif ($productId == 9424) {
-    echo $this->getLayout()
-    ->createBlock('Magento\Cms\Block\Block')
-    ->setBlockId('mounjaro_mob_product_info')
-    ->toHtml();
-} elseif ($productId == 9429) {
-    echo $this->getLayout()
-    ->createBlock('Magento\Cms\Block\Block')
-    ->setBlockId('mysimba_mob_product_info')
-    ->toHtml();
-} elseif ($productId == 9436) {
-    echo $this->getLayout()
-    ->createBlock('Magento\Cms\Block\Block')
-    ->setBlockId('zepbound_mob_product_info')
-    ->toHtml();
-} 
-// else {
-//     echo $this->getLayout()
-//     ->createBlock('Magento\Cms\Block\Block')
-//     ->setBlockId('wegovy_mob_product_info')
-//     ->toHtml();
-// }
-?>
-
-</div>
 
 
 <div class="out-of-stock-product">
@@ -286,11 +201,6 @@ $inStock = $stockItem->getIsInStock();
 // }
 ?>
 </div>
-
-<!-- What our patients are saying -->
-<?php echo $this->getLayout()->createBlock("Magento\Cms\Block\Widget\Block")->setTemplate("widget/static_block/default.phtml")->setBlockId("151")->toHtml(); ?>
-<?php echo $this->getLayout()->createBlock("Magento\Cms\Block\Widget\Block")->setTemplate("widget/static_block/default.phtml")->setBlockId("150")->toHtml(); ?>
-
 
 <!-- Our results speak for themselves -->
 
@@ -379,73 +289,9 @@ $inStock = $stockItem->getIsInStock();
 </div>
 
 
-<?php
-// Treatment Options 
-$treatoption = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/treatment-option.phtml")->toHtml();
-// echo $treatoption;
-?>
-
-<!-- Meet The Team -->
-<div class="hm-meet-team reveal1">
-<div class="container">
-    <?php echo $this->getLayout()->createBlock("WeltPixel\OwlCarouselSlider\Block\Slider\Custom")->setSliderId("1")->toHtml(); ?>
-</div>
-</div>
-
-<?php
-
-// Faq
-$maounjaro = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/mounjaro_faq.phtml")->toHtml();
-$orlistat = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/orlistat_faq.phtml")->toHtml();
-$wegovy = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/wegovy_faq.phtml")->toHtml();
-$saxenda = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/saxenda_faq.phtml")->toHtml();
-$zepbound = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/zepbound_faq.phtml")->toHtml();
-$mysimba = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/faqs/mysimba_faq.phtml")->toHtml();
 
 
-if ($productId == 9426) {
-    echo $orlistat;
-}
-elseif ($productId == 9434) {
-    echo $saxenda;
-} 
-elseif ($productId == 9411) {
-    echo $wegovy;
-} 
-elseif ($productId == 9424) {
-    echo $maounjaro; 
-} 
-elseif ($productId == 9429) {
-    echo $mysimba;
-} 
-elseif ($productId == 9436) {
-    echo $zepbound;
-} 
-// elseif ($productId == 9386) {
-//     echo $this->getLayout()
-//     ->createBlock('Magento\Cms\Block\Block')
-//     ->setBlockId('retatrutide_product_info')
-//     ->toHtml();
-// } 
-// else {
-//     echo $storiesContent;
-// }
-?>
 
-<div class="mob-consult-btn">
-    <!-- {{block class="Amasty\Customform\Block\Init" template="Amasty_Customform::init.phtml" form_id="54"}}
-    {{block class="Magento\Framework\View\Element\Template" template="Haartyhanks_CategoryQuestWL::category_id_template.phtml"}} -->
-
-    <?= $this->helper("Amasty\Customform\Helper\Data")->renderForm("54") ?>
-    <?= $this->getLayout()->createBlock('Magento\Framework\View\Element\Template')->setTemplate('Haartyhanks_CategoryQuestWL::category_id_template.phtml')->toHtml() ?>
-</div>
-
-
-<?php
-$Blog = $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Catalog::product/blogSlider.phtml")->toHtml();
-echo $Blog;
-
-?>
 
 <style>
 /* Add CSS to style the thumbnails */
@@ -637,29 +483,6 @@ function showSlides() {
 }
 </script>
 
-<script>
-function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-
-// Get the element with id="defaultOpen" and click on it
-
-
-if (document.getElementById("defaultOpen").length) {
-document.getElementById("defaultOpen").click();
-    
-}
-</script>
 
 
 <script type="text/javascript">

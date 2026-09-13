@@ -24,14 +24,14 @@
 if (!empty($surveyQuestion = $block->getSurveyQuestion()) && !empty($surveyAnswers = $block->getSurveyAnswers())): ?>
     <div class="box box-order-survey">
         <strong class="box-title">
-            <span><?= $block->escapeHtml(__('Order Survey')) ?></span>
+            <span><?= $escaper->escapeHtml(__('Order Survey')) ?></span>
         </strong>
         <div class="box-content">
             <div class="question">
-                <strong><?= $block->escapeHtml(__('Question')) ?>: </strong><span><?= $block->escapeHtml($surveyQuestion) ?></span>
+                <strong><?= $escaper->escapeHtml(__('Question')) ?>: </strong><span><?= $escaper->escapeHtml($surveyQuestion) ?></span>
             </div>
             <div class="answers">
-                <strong><?= $block->escapeHtml(__('Answers')) ?>: </strong><span><?= $block->escapeHtml($surveyAnswers) ?></span>
+                <strong><?= $escaper->escapeHtml(__('Answers')) ?>: </strong><span><?= $escaper->escapeHtml($surveyAnswers) ?></span>
             </div>
         </div>
     </div>

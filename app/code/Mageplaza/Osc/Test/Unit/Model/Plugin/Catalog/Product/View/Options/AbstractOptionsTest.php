@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Catalog\Product\View\Options;
@@ -29,13 +29,12 @@ use Mageplaza\Osc\Model\Plugin\Catalog\Product\View\Options\AbstractOptions;
 use PHPUnit\Framework\MockObject\Matcher\InvokedCount as InvokedCountMatcher;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
 use Psr\Log\LoggerInterface;
 use ReflectionException;
 
 /**
  * Class AbstractOptions
- * @package Mageplaza\Osc\Model\Plugin\Catalog\Product\View\Options
+ *
  */
 class AbstractOptionsTest extends TestCase
 {
@@ -49,7 +48,7 @@ class AbstractOptionsTest extends TestCase
      */
     private $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->loggerMock = $this->getMockForAbstractClass(LoggerInterface::class);
         $this->plugin = new AbstractOptions($this->loggerMock);
@@ -65,7 +64,7 @@ class AbstractOptionsTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestBeforeGetOption()
+    public static function providerTestBeforeGetOption()
     {
         return [
             [
@@ -80,7 +79,7 @@ class AbstractOptionsTest extends TestCase
     }
 
     /**
-     * @param boolean $handlesResult
+     * @param boolean             $handlesResult
      * @param InvokedCountMatcher $handleExpect
      *
      * @dataProvider providerTestBeforeGetOption
@@ -104,11 +103,8 @@ class AbstractOptionsTest extends TestCase
             $methods
         );
 
-        /**
-         * @var PHPUnit_Framework_MockObject_MockObject $layoutMock
-         */
         $layoutMock = $this->getMockBuilder(LayoutInterface::class)
-            ->setMethods(['addHandle'])
+            ->addMethods(['addHandle'])
             ->getMockForAbstractClass();
         $updateMock = $this->getMockForAbstractClass(ProcessorInterface::class);
         $abstractOptionMock->expects($this->once())->method('getLayout')->willReturn($layoutMock);
@@ -137,7 +133,7 @@ class AbstractOptionsTest extends TestCase
 
         $exception = new LocalizedException(__('test'));
         $abstractOptionMock->expects($this->once())->method('getLayout')->willThrowException($exception);
-        $this->loggerMock->expects($this->once())->method('critical')->willReturn($exception);
+        $this->loggerMock->expects($this->once())->method('critical')->with($exception);
 
         $this->plugin->beforeGetOption($abstractOptionMock);
     }

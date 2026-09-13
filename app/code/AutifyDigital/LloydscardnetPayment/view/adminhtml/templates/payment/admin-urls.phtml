@@ -1,0 +1,12 @@
+<?php
+/** @var \Magento\Backend\Block\Template $block */
+?>
+<div id="lcnet-admin-urls" style="display:none"
+     data-auth-url="<?= $block->escapeUrl($block->getUrl('autify_lloydscardnetpayment/paymentjs/authJsData')) ?>"
+     data-placeorder-url="<?= $block->escapeUrl($block->getUrl('autify_lloydscardnetpayment/paymentjs/placeorder')) ?>"
+     data-process-url="<?= $block->escapeUrl($block->getUrl('autify_lloydscardnetpayment/paymentjs/processjsdata')) ?>"
+     data-placeorder-redirect-url="<?= $block->escapeUrl($block->getUrl('autify_lloydscardnetpayment/payments/placeorder')) ?>"
+     data-checkout-redirect-url="<?= $block->escapeUrl($block->getUrl('autify_lloydscardnetpayment/checkout/redirect')) ?>"
+     data-redirectpostdata-url="<?= $block->escapeUrl($block->getUrl('autify_lloydscardnetpayment/payments/redirectPostData')) ?>"
+     data-orderview-url="<?= $block->escapeUrl($block->getUrl('sales/order/view')) ?>">
+</div>

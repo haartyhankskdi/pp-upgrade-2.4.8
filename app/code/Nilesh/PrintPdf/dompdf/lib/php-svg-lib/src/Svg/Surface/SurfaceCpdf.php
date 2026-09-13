@@ -384,7 +384,7 @@ class SurfaceCpdf implements SurfaceInterface
             $canvas->setColor(array((float)$fill[0]/255, (float)$fill[1]/255, (float)$fill[2]/255), true);
         }
 
-        if ($fillRule = strtolower($style->fillRule)) {
+        if ($fillRule = strtolower((string)$style->fillRule)) {
             $canvas->setFillRule($fillRule);
         }
 

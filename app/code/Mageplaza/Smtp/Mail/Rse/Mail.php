@@ -22,11 +22,14 @@
 namespace Mageplaza\Smtp\Mail\Rse;
 
 use Mageplaza\Smtp\Helper\Data;
-use Zend\Mail\Message;
-use Zend\Mail\Transport\Smtp;
-use Zend\Mail\Transport\SmtpOptions;
+use Laminas\Mail\Message;
+use Laminas\Mail\Transport\Smtp;
+use Laminas\Mail\Protocol\Smtp as SmtpProtocol;
+use Laminas\Mail\Transport\SmtpOptions;
+use ReflectionMethod;
+use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
+use Symfony\Component\Mime\Parser\MessageParser;
 use Zend_Exception;
-use Zend_Mail_Transport_Smtp;
 
 /**
  * Class Mail
@@ -70,7 +73,7 @@ class Mail
     protected $_returnPath = [];
 
     /**
-     * @var Zend_Mail_Transport_Smtp
+     * @var Smtp
      */
     protected $_transport;
 
@@ -112,6 +115,11 @@ class Mail
             unset($options['force_sent']);
         }
 
+        if (isset($options['authentication']) && !isset($options['auth'])) {
+            $options['auth'] = $options['authentication'];
+        }
+        unset($options['authentication']);
+
         if (count($options)) {
             $this->_smtpOptions[$storeId] = $options;
         }
@@ -122,7 +130,7 @@ class Mail
     /**
      * @param $storeId
      *
-     * @return Zend_Mail_Transport_Smtp | Smtp
+     * @return Smtp
      * @throws Zend_Exception
      */
     public function getTransport($storeId)
@@ -174,14 +182,68 @@ class Mail
 
                 $this->_transport = new Smtp($options);
             } else {
-                $this->_transport = new Zend_Mail_Transport_Smtp(
-                    $this->_smtpOptions[$storeId]['host'],
-                    $this->_smtpOptions[$storeId]
-                );
+                $this->_transport = new Smtp();
             }
         }
 
         return $this->_transport;
+    }
+
+    /**
+     * @return $this
+     */
+    public function resetTransport()
+    {
+        if ($this->_transport instanceof Smtp) {
+            try {
+                $this->retireConnection($this->_transport->getConnection());
+            } catch (\Throwable $e) {
+                // The transport is being discarded; closing it cannot be worth an error.
+            }
+        }
+
+        $this->_transport = null;
+
+        return $this;
+    }
+
+    public function __destruct()
+    {
+        try {
+            if ($this->_transport instanceof Smtp) {
+                $this->retireConnection($this->_transport->getConnection());
+            }
+        } catch (\Throwable $e) {
+            // Shutdown is underway; there is nowhere left to report this.
+        }
+    }
+
+    /**
+     * @param $connection
+     *
+     * @return void
+     */
+    protected function retireConnection($connection)
+    {
+        if (!$connection instanceof SmtpProtocol) {
+            return;
+        }
+
+        if ($connection->hasSession() && method_exists($connection, 'stopSession')) {
+            try {
+                $stopSession = new ReflectionMethod($connection, 'stopSession');
+                $stopSession->setAccessible(true);
+                $stopSession->invoke($connection);
+            } catch (\Throwable $e) {
+                // Leave the flag as it is; disconnect() below still releases the socket.
+            }
+        }
+
+        try {
+            $connection->disconnect();
+        } catch (\Throwable $e) {
+            // The socket is going away regardless of what the server makes of it.
+        }
     }
 
     /**
@@ -259,6 +321,21 @@ class Mail
     }
 
     /**
+     * Get SMTP options for a store (includes temporary test options)
+     *
+     * @param $storeId
+     * @return array|null
+     */
+    public function getSmtpOptions($storeId)
+    {
+        if (isset($this->_smtpOptions[$storeId])) {
+            return $this->_smtpOptions[$storeId];
+        }
+
+        return null;
+    }
+
+    /**
      * @param $storeId
      *
      * @return bool|mixed
@@ -270,5 +347,58 @@ class Mail
         }
 
         return $this->_emailLog[$storeId];
+    }
+
+    /**
+     * @param string $storeId
+     *
+     * @return EsmtpTransport
+     */
+    public function getSymfonyTransport($storeId)
+    {
+        $override = $this->_smtpOptions[$storeId] ?? [];
+        $config   = $this->smtpHelper->getSmtpConfig('', $storeId) ?: [];
+
+        $host     = $override['host'] ?? ($config['host'] ?? 'localhost');
+        $port     = (int) ($override['port'] ?? ($config['port'] ?? 25));
+        $protocol = $override['ssl'] ?? ($config['protocol'] ?? null); // tls | ssl | null
+        $username = $override['username'] ?? ($config['username'] ?? null);
+        $password = array_key_exists('password', $override)
+            ? $override['password']
+            : $this->smtpHelper->getPassword($storeId);
+
+        // CRITICAL: Strip ssl:// or tls:// prefix from host - Symfony adds it automatically
+        $host = preg_replace('#^(ssl|tls)://#i', '', $host);
+
+        // Symfony $tls logic:
+        // - true  → adds ssl:// prefix (implicit SSL, for port 465 only)
+        // - false → plain connection, but EsmtpTransport auto-negotiates STARTTLS if available
+        // - null  → auto-detect based on port (465 → true, others → false)
+
+        $tls = false; // default: plain connection with auto STARTTLS negotiation
+
+        if ($protocol === 'ssl' || $port === 465) {
+            // Implicit SSL: requires ssl:// prefix from start (Symfony adds it when $tls=true)
+            $tls = true;
+            if ($port !== 465) {
+                $port = 465; // Force port 465 for implicit SSL
+            }
+        } elseif ($protocol === 'tls') {
+            // STARTTLS: plain connection first, then upgrade via STARTTLS command
+            // Do NOT use $tls=true here, it would add ssl:// which breaks STARTTLS
+            $tls = false; // Let Symfony negotiate STARTTLS automatically
+            if ($port === 465) {
+                $port = 587; // STARTTLS uses 587, not 465
+            }
+        }
+
+        $transport = new EsmtpTransport($host, $port, $tls);
+
+        if ($username && $password) {
+            $transport->setUsername($username);
+            $transport->setPassword($password);
+        }
+
+        return $transport;
     }
 }

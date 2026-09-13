@@ -2,6 +2,7 @@
   body {
     font-family: 'Ubuntu', sans-serif;
     font-weight: 400;
+    padding: 0;
   }
 
   /*.cms-index-index .page-main {
@@ -1936,7 +1937,7 @@
 
   .block.newsletter input {
     height: 52px;
-    background: transparent;
+    background: transparent !important;
     border: 0;
     font-size: 14px;
     color: #c9c9c9;
@@ -3546,19 +3547,21 @@
     box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.15)
   }
 
+@media screen and (min-width: 1025px) {
   .one-step-checkout-wrapper .col-mp.mp-4 {
-    width: 27.333333%;
+    width: 27.333333% !important;
     margin-right: 18px;
     padding-top: 22px;
   }
 
   .one-step-checkout-wrapper .col-mp.mp-4:nth-last-child(2) {
     background: #fff;
-    padding: 22px 33px 0px 33px;
-    width: 41.333333%;
+    padding: 22px 33px 0px 33px !important;
+    width: 41.333333% !important;
     margin-right: 0px;
     float: right;
   }
+}
 
   .one-step-checkout-wrapper .col-mp.mp-8 #checkout-step-shipping_method {
     background: none;
@@ -3848,6 +3851,7 @@
   .checkout-payment-method .payment-option-content .form-discount .actions-toolbar .primary .action {
     padding: 0 10px !important;
     font-size: 13px !important;
+    height: auto;
   }
 
   .checkout-payment-method .payment-option-content .form-discount .actions-toolbar .primary .action:hover {
@@ -20753,13 +20757,13 @@
     margin: 0 auto;
   }
 
-  .page-layout-1column.start_consultation .product-det {
+  /*.page-layout-1column.start_consultation .product-det {
     width: 92%;
     float: left;
     padding: 30px;
     margin: 25px 0 0 0;
     background: #F1F7F9;
-  }
+  }*/
 
   .page-layout-1column.start_consultation .product-det .product-img {
     width: auto;
@@ -22060,14 +22064,14 @@ flex-direction: column;
 
   .logo-login-signup-mobile a {
         display: block !important;
-        background: url(https://phpstack-732705-2678695.cloudwaysapps.com/pub/static/frontend/Custom/luma_weightloss/en_GB/images/my-account-icon.png) no-repeat;
+        background: url(https://magento-1584919-6629151.cloudwaysapps.com/static/version1789204858/frontend/Custom/luma_child/en_GB/images/logout-icon.png) no-repeat;
         width: 50px;
         height: 50px;
         float: right;
         margin-bottom: 0;
 		position: relative;
         top: 20px;
-        right: 75px;
+        right: 0;
     }
 
     .customMenu {
@@ -22645,7 +22649,9 @@ flex-direction: column;
     border-radius: 5px;
     margin-right: 10px;
 }
-
+.checkout-index-index #co-payment-form{
+  margin-bottom: 15px;
+}
 
 
 @media screen and (max-width: 767px) {
@@ -22658,12 +22664,85 @@ flex-direction: column;
     .treatment-options .home-treatment-block .carousel-item .home_block_1{
       width: auto !important;
     }
+     .one-step-checkout-wrapper .one-step-checkout-container{
+      padding: 0;
+    }
+    .checkout-index-index #maincontent .one-step-checkout-container .col-mp:nth-child(3) #opc-sidebar .order-summary{
+      border-radius: 0 !important;
+    }
+    .one-step-checkout-wrapper #co-shipping-method-form, #co-payment-form{
+      background-color: transparent !important;
+    }
+    .one-step-checkout-wrapper .col-mp.mp-4:nth-last-child(2){
+      background-color: #fff !important;
+    }
+    .onestepcheckout-index-index .field.choice.checkout-agreement input+label{
+      white-space: normal;
+    }
+     
+    .onestepcheckout-index-index .page-title-wrapper{
+      width: auto !important;
+      padding: 0 10px !important;
+    }
+    .checkout-index-index #maincontent .one-step-checkout-container .hoverable{
+      padding: 20px 20px 0px !important;
+    }
+    .checkout-agreements-block #co-place-order-agreement{
+      padding: 0 15px;
+    }
+    .checkout-index-index .order-summary.hoverable{
+      margin-bottom: 10px !important;
+    }
+
 }
  
 @media screen and (min-width: 768px) {
     .modals-wrapper .modal-popup.custom-popup-modal .modal-inner-wrap {
         width: 800px !important; 
     }
+    .treatment-options .home-treatment-block .carousel-prev {
+        left: -40px !important;
+    }
+    .treatment-options .home-treatment-block .carousel-next {
+        right: -40px !important;
+    } 
+    .treatment-options .home-treatment-block .carousel-container{
+        position: initial !important;
+    }
+    .page-main{
+      padding: 0;
+    }
+    .checkout-index-index .page-main{
+      padding: 0 20px;
+    }
+ 
+
 }
+
+
+.qty-wrapper .qty-wrap .input-text.update {
+  background: none !important;
+  border: 0 !important;
+  line-height: 43px;
+  color: #000;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 13px;
+  top: 0 !important; 
+  width: 100% !important;
+}
+
+.osc-payment-after-methods .opc-payment-additional .field .control{
+  width: 65% !important;
+}
+
+.onestepcheckout-index-index .field.choice label.label{
+  padding-left: 0 !important;
+}
+
+.one-step-checkout-wrapper .row-mp{
+    margin: 0 !important;
+}
+
+
 
 </style>

@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Model\Plugin\Customer;
@@ -29,10 +29,6 @@ use Mageplaza\Osc\Model\Plugin\Customer\AccountManagement;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class AccountManagementTest
- * @package Mageplaza\Osc\Test\Unit\Model\Plugin\Customer
- */
 class AccountManagementTest extends TestCase
 {
     /**
@@ -50,10 +46,10 @@ class AccountManagementTest extends TestCase
      */
     private $plugin;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->checkoutSessionMock = $this->getMockBuilder(Session::class)
-            ->setMethods(['getOscData'])
+            ->addMethods(['getOscData'])
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -85,7 +81,7 @@ class AccountManagementTest extends TestCase
          * @var CustomerInterface $customerMock
          */
         $customerMock = $this->getMockBuilder(CustomerInterface::class)
-            ->setMethods(['setData'])
+            ->addMethods(['setData'])
             ->getMockForAbstractClass();
         $oscData = [
             'register' => true,

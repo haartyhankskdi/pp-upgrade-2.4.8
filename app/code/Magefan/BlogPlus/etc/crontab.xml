@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="mf_blogplus_auto_related" instance="Magefan\BlogPlus\Cron\AutoRelated" method="execute">
+            <schedule>10,20,30,40,50 * * * *</schedule>
+        </job>
+        <job name="mf_blogplus_related_products_rule" instance="Magefan\BlogPlus\Cron\RelatedProductsRule" method="execute">
+            <schedule>15 6 * * *</schedule>
+        </job>
+    </group>
+</config>

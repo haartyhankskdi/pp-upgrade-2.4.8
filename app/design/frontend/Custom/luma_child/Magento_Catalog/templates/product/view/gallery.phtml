@@ -37,13 +37,13 @@ $optimizedImageData = str_replace(".jpg", ".webp", $mainImageData);  // This is 
 
 <div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
     <!-- Use srcset for responsive images (optional) -->
-    <img
+    <!-- <img
         alt="<?= /* @noEscape */ $mainImageAlt ?>"
         class="gallery-placeholder__image prod_img"
         data-src="<?= /* @noEscape */ $optimizedImageData ?>"
         srcset="<?= /* @noEscape */ $optimizedImageData ?> 315w, <?= /* @noEscape */ $mainImageData ?> 640w"
-        style="display: block; visibility: hidden;"
-    />
+        style="display: none; visibility: hidden;"
+    /> -->
 </div>
 
 <script type="text/x-magento-init">

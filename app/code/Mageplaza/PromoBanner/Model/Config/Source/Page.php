@@ -22,19 +22,18 @@
 namespace Mageplaza\PromoBanner\Model\Config\Source;
 
 use Magento\Framework\Module\Manager;
-use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class Page
  *
  * @package Mageplaza\PromoBanner\Model\Config\Source
  */
-class Page implements ArrayInterface
+class Page extends AbstractSource
 {
-    const HOME_PAGE     = 'cms_index_index';
-    const CART_PAGE     = 'checkout_cart_index';
+    const HOME_PAGE = 'cms_index_index';
+    const CART_PAGE = 'checkout_cart_index';
     const CHECKOUT_PAGE = 'checkout_index_index';
-    const OSC_PAGE      = 'onestepcheckout_index_index';
+    const OSC_PAGE = 'onestepcheckout_index_index';
 
     /**
      * @var Manager

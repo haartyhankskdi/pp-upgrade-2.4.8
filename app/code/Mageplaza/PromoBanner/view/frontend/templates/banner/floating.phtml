@@ -21,11 +21,11 @@
 
 /** @var \Mageplaza\PromoBanner\Block\Banner\Floating $block */
 $collection = $block->getPromoBannerCollection();
-if ($collection && $collection->getSize()) : ?>
+if ($collection && $collection->getSize()): ?>
 <script id="mppromobanner-template-floating-<?= /* @noEscape */ $block->getPosition() ?>" type="text/x-magento-template">
     <div class="mppromobanner-banner-<%- data.id %> mppromobanner-floating"
          id="mppromobanner-<?= /** @noEscape */ $block->getPosition() ?>">
-        <?php if ($block->showCloseBtn()) : ?>
+        <?php if ($block->showCloseBtn()): ?>
             <div class="mppromobanner-close">
                 <div class="mppromobanner-close-btn" title="<?= /* @noEscape */ __('Close') ?>"></div>
             </div>

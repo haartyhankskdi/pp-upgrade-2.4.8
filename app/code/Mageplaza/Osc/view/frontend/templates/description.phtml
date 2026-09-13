@@ -22,5 +22,5 @@
 /** @var \Mageplaza\Osc\Block\Container $block */
 ?>
 <p class="checkout-description">
-    <?= $block->escapeHtml($block->getCheckoutDescription()) ?>
+    <?= /* @noEscape */ $block->getCheckoutDescription() ?>
 </p>

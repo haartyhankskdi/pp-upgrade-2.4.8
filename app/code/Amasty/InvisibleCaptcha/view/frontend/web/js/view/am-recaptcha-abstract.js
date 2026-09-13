@@ -45,7 +45,7 @@ define([
          * @returns {void}
          */
         appendCaptcha: function () {
-            if (!amReCaptchaModel.isCaptchaAppended) {
+            if (!amReCaptchaModel.isCaptchaAppended && amReCaptchaModel.getRecaptchaConfig().isInvisible) {
                 this.add();
 
                 window.grecaptcha.render(this.reCaptchaId, this.getParameters());
@@ -60,7 +60,8 @@ define([
          */
         add: function () {
             var rendererReCaptcha = $('<div>', {
-                'id': this.reCaptchaId
+                'id': this.reCaptchaId,
+                'class': this.reCaptchaId
             });
 
             $('body').append(rendererReCaptcha);

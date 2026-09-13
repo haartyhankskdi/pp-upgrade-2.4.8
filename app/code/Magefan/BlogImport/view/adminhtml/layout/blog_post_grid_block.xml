@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="blog.post.grid" >
+            <block class="Magento\Backend\Block\Widget\Grid\Export" name="blog.post.grid.export" as="grid.export">
+                <arguments>
+                    <argument name="exportTypes" xsi:type="array">
+                        <item name="csv" xsi:type="array">
+                            <item name="urlPath" xsi:type="string">blogimport/post/exportCsv</item>
+                            <item name="label" xsi:type="string" translate="true">CSV</item>
+                        </item>
+                        <!--
+                        <item name="excel" xsi:type="array">
+                            <item name="urlPath" xsi:type="string">blogimport/post/exportXml</item>
+                            <item name="label" xsi:type="string" translate="true">Excel XML</item>
+                        </item>
+                        -->
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

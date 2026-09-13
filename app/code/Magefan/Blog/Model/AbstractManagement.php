@@ -5,6 +5,7 @@
  *
  * Glory to Ukraine! Glory to the heroes!
  */
+declare(strict_types=1);
 
 namespace Magefan\Blog\Model;
 
@@ -20,11 +21,18 @@ abstract class AbstractManagement implements ManagementInterface
      */
     protected $_itemFactory;
 
+    /**
+     * @var string
+     */
     protected $_imagePath = 'magefan_blog/';
 
+    /**
+     * @var string[]
+     */
     protected $_imagesMap = [
         'featured_img',
         'featured_list_img',
+        'og_img',
         'category_img',
         'tag_img'
     ];
@@ -43,12 +51,13 @@ abstract class AbstractManagement implements ManagementInterface
         $file = $objectManager->get(\Magento\Framework\Filesystem\Driver\File::class);
         $directoryList = $objectManager->get(\Magento\Framework\Filesystem\DirectoryList::class);
 
-        $targetDirectory = $directoryList->getPath(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA) . '/' . $this->_imagePath;
+        $targetDirectory = $directoryList->getPath(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)
+            . '/' . $this->_imagePath;
         $file->createDirectory($targetDirectory);
 
         $finalFileName = $this->getUniqueFileName($targetDirectory, $fileName, $file);
         $finalFilePath = $targetDirectory . $finalFileName;
-
+        // phpcs:ignore Magento2.Functions.DiscouragedFunction
         $file->filePutContents($finalFilePath, base64_decode($fileContent));
 
         return $this->_imagePath . $finalFileName;
@@ -57,15 +66,17 @@ abstract class AbstractManagement implements ManagementInterface
     /**
      * Generates a unique file name if the file already exists.
      *
-     * @param $directory
-     * @param $fileName
-     * @param $fileDriver
+     * @param string $directory
+     * @param string $fileName
+     * @param \Magento\Framework\Filesystem\Driver\File $fileDriver
      * @return string
      */
-    protected function getUniqueFileName($directory, $fileName, $fileDriver)
+    protected function getUniqueFileName(string $directory, $fileName, $fileDriver)
     {
+        // phpcs:disable Magento2.Functions.DiscouragedFunction
         $name = pathinfo($fileName, PATHINFO_FILENAME);
         $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+        // phpcs:enable
         $counter = 1;
 
         $newFileName = $fileName;
@@ -121,7 +132,14 @@ abstract class AbstractManagement implements ManagementInterface
                 $item->setStoreId((int)$data['store_id']);
                 $item->setData('data_to_update', $data);
             } else {
-                $item->setStoreId(0);
+                $storeId = 0;
+
+                if ($storeIdFromRequest = $this->getStoreIdFromRestRequest()) {
+                    $item->setData('data_to_update', $data);
+                    $storeId = $storeIdFromRequest;
+                }
+
+                $item->setStoreId($storeId);
             }
 
             $item->load($id);
@@ -202,6 +220,7 @@ abstract class AbstractManagement implements ManagementInterface
         try {
             $item = $this->_itemFactory->create();
             $item->setStoreId((int)$storeId);
+            // phpcs:ignore
             $item->getResource()->load($item, $id);
 
             if (!$item->isVisibleOnStore($storeId)) {
@@ -215,21 +234,53 @@ abstract class AbstractManagement implements ManagementInterface
     }
 
     /**
-     * @param $item
+     * Get dynamic data for item
+     *
+     * @param mixed $item
      * @return mixed
      */
     abstract protected function getDynamicData($item);
 
     /**
-     * @param $massage
+     * Error response
+     *
+     * @param string $massage
      * @return false|string
      */
     public function getError($massage)
     {
         $data = ['error' => 'true'];
-        
+
         $data['message'] = $massage ?? '';
 
         return json_encode($data);
+    }
+
+    /**
+     * If request url contain store code - get store id
+     *
+     * @return int
+     */
+    private function getStoreIdFromRestRequest(): int
+    {
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $appState = $objectManager->get(\Magento\Framework\App\State::class);
+        $request = $objectManager->get(\Magento\Framework\App\RequestInterface::class);
+        $storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+
+        $storeId = 0;
+
+        if (\Magento\Framework\App\Area::AREA_WEBAPI_REST == $appState->getAreaCode()) {
+            $storeCode = $storeManager->getStore()->getCode();
+
+            // /rest/ua/V1/blog/post/2 or /ua/rest/V1/blog/post/2
+            $path = explode('/', trim($request->getRequestUri(), '/'));
+
+            if ('rest' === $path[0] && $path[1] === $storeCode || 'rest' === $path[1] && $path[0] === $storeCode) {
+                $storeId = (int)$storeManager->getStore()->getId();
+            }
+        }
+
+        return $storeId;
     }
 }

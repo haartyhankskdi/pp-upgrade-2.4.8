@@ -98,7 +98,7 @@ class Option extends \Magento\Framework\Model\AbstractModel
             $dummyId = (int)$connection->fetchOne("select `entity_id` from `{$resource->getTableName('catalog_product_entity')}` where `row_id`={$option->getProductId()}");
         } else $dummyId = $option->getProductId();
         
-        $configuration = \Zend_Json::encode($configuration);
+        $configuration = json_encode($configuration);
         $isUseGlobal = !!$this->getRequest()->getPostValue('idpo_use_global');
         if (!$option->getStoreId()) $option->setStoreId((int) $option->getProduct()->getStoreId());
         if ((int) $option->getStoreId() == 0) $isUseGlobal = false;

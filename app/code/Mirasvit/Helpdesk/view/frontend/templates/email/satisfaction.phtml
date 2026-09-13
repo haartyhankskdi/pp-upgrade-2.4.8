@@ -1,0 +1,39 @@
+<?php /** @var \Mirasvit\Helpdesk\Block\Email\Satisfaction $block */?>
+<?php if ($block->getTicket()) :?>
+    <div class="hdmx-email__satisfaction">
+        <p><strong><?= $block->escapeHtml(__('Please take a second to rate my reply...')) ?></strong></p>
+
+        <div class="hdmx-email__satisfaction-rate great">
+            <a href="<?= $block->escapeUrl($block->getRateUrl(3)) ?>" target="_blank">
+                <img src="<?= $block->escapeUrl($block->getViewFileUrl('Mirasvit_Helpdesk::images/smile/3.png', ['_area' => 'frontend'])) ?>"
+                     width="50" height="50" alt="<?= $block->escapeHtml(__('Great')) ?>" border="0">
+            </a>
+            <h2>
+                <a href="<?= $block->escapeUrl($block->getRateUrl(3)) ?>" target="_blank"><?= $block->escapeHtml(__('Awesome')) ?></a>
+            </h2>
+            <p><?= $block->escapeHtml(__('Fast, friendly, helpful, pleasant. Great job!')) ?></p>
+        </div>
+
+        <div class="hdmx-email__satisfaction-rate ok">
+            <a href="<?= $block->escapeUrl($block->getRateUrl(2)) ?>" target="_blank">
+                <img src="<?= $block->escapeUrl($block->getViewFileUrl('Mirasvit_Helpdesk::images/smile/2.png', ['_area' => 'frontend'])) ?>"
+                     width="50" height="50" alt="<?= $block->escapeHtml(__('OK')) ?>" border="0">
+            </a>
+            <h2>
+                <a href="<?= $block->escapeUrl($block->getRateUrl(2)) ?>" target="_blank"><?= $block->escapeHtml(__('Just Okay')) ?></a>
+            </h2>
+            <p><?= $block->escapeHtml(__('Fine, but definitely could have been better.')) ?></p>
+        </div>
+
+        <div class="hdmx-email__satisfaction-rate bad">
+            <a href="<?= $block->escapeUrl($block->getRateUrl(1)) ?>" target="_blank">
+                <img src="<?= $block->escapeUrl($block->getViewFileUrl('Mirasvit_Helpdesk::images/smile/1.png', ['_area' => 'frontend'])) ?>"
+                     width="50" height="50" alt="<?= $block->escapeHtml(__('Bad')) ?>" border="0">
+            </a>
+            <h2>
+                <a href="<?= $block->escapeUrl($block->getRateUrl(1)) ?>" target="_blank"><?= $block->escapeHtml(__('Not good')) ?></a>
+            </h2>
+            <p><?= $block->escapeHtml(__('Unfortunately, I wasn\'t happy with it at all.')) ?></p>
+        </div>
+    </div>
+<?php endif;?>

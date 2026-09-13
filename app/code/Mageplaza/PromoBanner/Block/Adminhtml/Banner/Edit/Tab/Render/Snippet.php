@@ -40,7 +40,7 @@ class Snippet extends AbstractElement
         $subject = $this->getData('subject');
 
         $currentBanner = $subject->getCurrentBanner();
-        $bannerId      = $currentBanner->getId() ?: '';
+        $bannerId = $currentBanner->getId() ?: '';
 
         $html = '<div id="' . $this->getHtmlId() . '"' . $this->serialize(['class']) . $this->_getUiId() . '>' . "\n";
 
@@ -50,7 +50,7 @@ class Snippet extends AbstractElement
         $html .= '<strong>' . __('CMS Page/Static Block') . '</strong><br />';
         $html .= '<span style="font-size: 10px"><pre style="background-color: #f5f5dc"><code>{{block class="Mageplaza\PromoBanner\Block\Banner\SnippetCode" banner_id="' . $bannerId . '"}}</code></pre></span>';
 
-        $html .= '<strong>' . __('Banner .phtml file') . '</strong><br />';
+        $html .= '<strong>' . __('Template.phtml file') . '</strong><br />';
         $html .= '<span style="font-size: 10px"><pre style="background-color: #f5f5dc"><code>' . $this->_escaper->escapeHtml(
             '<?php echo $block->getLayout()->createBlock("Mageplaza\PromoBanner\Block\Banner\SnippetCode")
         ->setBannerId("' . $bannerId . '")->toHtml();?>'

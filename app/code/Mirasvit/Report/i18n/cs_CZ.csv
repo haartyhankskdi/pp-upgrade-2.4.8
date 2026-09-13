@@ -1,0 +1,226 @@
+"Something went wrong while building the report","Při sestavování reportu došlo k chybě"
+"Not logged in","Nepřihlášen"
+"Email Notifications","E-mailová oznámení"
+"The email report has been deleted.","E-mailový report byl smazán."
+"This email report no longer exists.","Tento e-mailový report již neexistuje."
+"This email no longer exists.","Tento e-mail již neexistuje."
+"Edit Email ""%1""","Upravit e-mail ""%1"""
+"New Email Report","Nový e-mailový report"
+"You saved the email report.","E-mailový report byl uložen."
+"No data to save.","Žádná data k uložení."
+"This report no longer exists.","Tento report již neexistuje."
+"Report columns saved.","Sloupce reportu uloženy."
+"Unsupported format ""%1""","Nepodporovaný formát ""%1"""
+"This report does not exist or is not available for sharing.","Tento report neexistuje nebo není k dispozici pro sdílení"
+"Report identifier is required","Je vyžadován identifikátor reportu"
+"Report: %1","Report: %1"
+"Block identifier ""%1"" does not match any available report or dashboard block. Use GET /V1/reports/reports to discover valid identifiers.","Identifikátor bloku ""%1"" neodpovídá žádnému dostupnému reportu ani bloku dashboardu. Použijte GET /V1/reports/reports pro zjištění platných identifikátorů."
+"Time range ""%1"" is not valid. Valid values: %2","Časový rozsah ""%1"" není platný. Platné hodnoty: %2"
+"Email with ID ""%1"" does not exist.","E-mail s ID ""%1"" neexistuje."
+Back,Zpět
+Delete,Smazat
+"Are you sure you want to do this?","Opravdu to chcete provést?"
+Save,Uložit
+"Save & Continue","Uložit a pokračovat"
+"Save & Send","Uložit a odeslat"
+Edit,Upravit
+"Delete email?","Smazat e-mail?"
+(previous),(předchozí)
+"%1 out of %2 selected","Vybráno %1 z %2"
+"Access URL","URL pro přístup"
+Actions,Akce
+"Active filters:","Aktivní filtry:"
+"Add Empty Widget","Přidat prázdný widget"
+"Add filter","Přidat filtr"
+"Add Filter","Přidat filtr"
+"Add New Board","Přidat novou nástěnku"
+"Add New Widget","Přidat nový widget"
+"Add Widget","Přidat widget"
+"Additional Filters","Další filtry"
+"Advanced mode","Pokročilý režim"
+Aggregator,Agregátor
+"and more %1 other columns","a dalších %1 sloupců"
+applicable,použitelné
+Apply,Použít
+"Apply date filter","Použít filtr data"
+"Apply Filters","Použít filtry"
+"Are you sure you want to reset the access token?","Opravdu chcete resetovat přístupový token?"
+Average,Průměr
+"Base Table","Základní tabulka"
+"Block Type","Typ bloku"
+Cancel,Zrušit
+"Cancel date filter","Zrušit filtr data"
+Chart,Graf
+"Chart type selector","Výběr typu grafu"
+"Clear all","Vymazat vše"
+Close,Zavřít
+"Close menu","Zavřít nabídku"
+Column,Sloupec
+"Column for grouping data in the table","Sloupec pro seskupení dat v tabulce"
+"Column for grouping the data in the table","Sloupec pro seskupení dat v tabulce"
+"Column selector mode switcher. Current mode: %1","Přepínač režimu výběru sloupců. Aktuální režim: %1"
+Columns,Sloupce
+"Columns to group the rows in the table","Sloupce pro seskupení řádků v tabulce"
+Comparison,Srovnání
+contains,obsahuje
+Content,Obsah
+Copied,Zkopírováno
+"Copy importdata code for Google Sheets","Zkopírovat kód importdata pro Google Sheets"
+"Copy to clipboard","Zkopírovat do schránky"
+Count,Počet
+Country,Země
+"Current mode: %1","Aktuální režim: %1"
+"Current Page","Aktuální stránka"
+Custom,Vlastní
+Customize,Přizpůsobit
+Date,Datum
+"Date filter","Filtr data"
+Day,Den
+"Delete report","Smazat report"
+Description,Popis
+Dimension,Dimenze
+"Dimension column table","Tabulka dimenzních sloupců"
+Dimensions,Dimenze
+Disable,Zakázat
+"Disable sharing report","Zakázat sdílení reportu"
+"Do not compare","Neporovnávat"
+"doesn't contain","neobsahuje"
+Download,Stáhnout
+Duplicate,Duplikovat
+"Duplicate report","Duplikovat report"
+Early,Brzy
+"Edit Board","Upravit nástěnku"
+"Edit columns","Upravit sloupce"
+"Edit report","Upravit report"
+"Empty report data table","Prázdná datová tabulka reportu"
+Enable,Povolit
+"Enable Remote Access","Povolit vzdálený přístup"
+"Enable Remote Access on Storefront","Povolit vzdálený přístup v obchodě"
+"Enable sharing report","Povolit sdílení reportu"
+"Enter page number","Zadejte číslo stránky"
+"Excel XML","Excel XML"
+Export,Exportovat
+"Filter value","Hodnota filtru"
+Filters,Filtry
+"Found: %1 columns","Nalezeno: %1 sloupců"
+from,od
+"From date","Datum od"
+"General Information","Obecné informace"
+"Go to next page","Přejít na další stránku"
+"Go to previous page","Přejít na předchozí stránku"
+"Group by","Seskupit podle"
+"Hide percentage of total","Skrýt procento z celku"
+"Image for %1","Obrázek pro %1"
+"Import data code","Kód pro import dat"
+"Insert the below code into your Google Sheet and it will automatically import the most recent data from the report every hour:","Vložte níže uvedený kód do svého Google Sheetu a každou hodinu se automaticky naimportují nejnovější data z reportu:"
+"Insert To Google Sheet","Vložit do Google Sheet"
+"Insert widget's HTML content here","Sem vložte HTML obsah widgetu"
+"Internal Filters","Interní filtry"
+"Is Default","Je výchozí"
+"is not","není"
+"is not one of","není jedním z"
+"is one of","je jedním z"
+Loading...,Načítání...
+"Lower number means higher position. Boards with the same sort order will be ordered according to the dashboard general sorting settings.","Nižší číslo znamená vyšší pozici. Nástěnky se stejným pořadím budou seřazeny podle obecného nastavení řazení dashboardu."
+"Make a copy","Vytvořit kopii"
+"Make sure that the selected columns are","Ujistěte se, že vybrané sloupce jsou"
+Manage,Spravovat
+"Manage columns","Spravovat sloupce"
+"Manage filters","Spravovat filtry"
+Metric,Metrika
+Month,Měsíc
+"More filters","Další filtry"
+"More Filters","Další filtry"
+"No next pages, action disabled","Žádné další stránky, akce zakázána"
+"No previous pages, action disabled","Žádné předchozí stránky, akce zakázána"
+"not allowed","není povoleno"
+Number,Číslo
+of,z
+"Once you have configured the report, you can use a direct link to open the report on any device without opening the admin and always with fresh live data.","Jakmile report nakonfigurujete, můžete pomocí přímého odkazu otevřít report na jakémkoli zařízení bez otevření administrace a vždy s aktuálními daty."
+"Open link","Otevřít odkaz"
+"Open menu","Otevřít nabídku"
+"Override dashboard time","Přepsat čas dashboardu"
+"Page Size","Velikost stránky"
+Percent,Procento
+"Please select","Vyberte prosím"
+"Previous period","Předchozí období"
+"Primary Filters","Primární filtry"
+"Private Board","Soukromá nástěnka"
+"Private Board will be available only for the current admin user. Shared Board will be available for all admin users.","Soukromá nástěnka bude dostupná pouze pro aktuálního administrátora. Sdílená nástěnka bude dostupná všem administrátorům."
+Quarter,Čtvrtletí
+"Quick Access & Sharing","Rychlý přístup a sdílení"
+"A quick access link to the report is a great alternative to routine daily exporting.","Odkaz pro rychlý přístup k reportu je skvělou alternativou k rutinnímu dennímu exportování."
+Range,Rozsah
+"records found","nalezených záznamů"
+Refresh,Obnovit
+Remove,Odebrat
+"Remove filter","Odebrat filtr"
+"Remove from chart","Odebrat z grafu"
+"Removing board...","Odebírání nástěnky..."
+"Report data table with %1 rows","Datová tabulka reportu s %1 řádky"
+Reset,Resetovat
+"Reset access token","Resetovat přístupový token"
+"Reset Changes","Resetovat změny"
+"Resetting the access token will deactivate the old access link. Anyone who previously had access to the board will lose it and will need the new link to access it.","Resetování přístupového tokenu deaktivuje starý přístupový odkaz. Kdokoli, kdo měl dříve přístup k nástěnce, jej ztratí a pro přístup bude potřebovat nový odkaz."
+"Rows Limit","Limit řádků"
+"Same period last month","Stejné období minulého měsíce"
+"Same period last week","Stejné období minulého týdne"
+"Same period last year","Stejné období minulého roku"
+"Save Changes","Uložit změny"
+"Saving report...","Ukládání reportu..."
+Saving...,Ukládání...
+"Search column across ALL tables by identifier.","Hledat sloupec napříč VŠEMI tabulkami podle identifikátoru."
+"Search for column","Hledat sloupec"
+"Select condition","Vyberte podmínku"
+"Select date range","Vyberte rozsah dat"
+"Select Date Range","Vyberte rozsah dat"
+Share,Sdílet
+"Share Dashboard","Sdílet dashboard"
+"Share in %1 format","Sdílet ve formátu %1"
+"Shared Board","Sdílená nástěnka"
+"Sharing link","Odkaz pro sdílení"
+"Show in chart","Zobrazit v grafu"
+"Show percentage of total","Zobrazit procento z celku"
+"Single Value","Jedna hodnota"
+"Sort by %1","Řadit podle %1"
+"Sort Order","Pořadí řazení"
+Sorting,Řazení
+"Spark line","Sparkline"
+String,Řetězec
+Sum,Součet
+"Switch to %1 chart","Přepnout na graf %1"
+Table,Tabulka
+"Time Range","Časový rozsah"
+Title,Název
+to,do
+"To date","Datum do"
+"to the current report.","k aktuálnímu reportu."
+Toolbar,Panel nástrojů
+Type,Typ
+"Type to search","Pište pro vyhledávání"
+"Untitled Block","Nepojmenovaný blok"
+"Untitled Board","Nepojmenovaná nástěnka"
+Value,Hodnota
+"We couldn't find any records.","Nepodařilo se najít žádné záznamy."
+Week,Týden
+"Widget Library","Knihovna widgetů"
+"Wrong configuration. Please change report building conditions.","Chybná konfigurace. Změňte prosím podmínky sestavení reportu."
+Year,Rok
+"To add your first block, unlock the board (top right corner).","Pro přidání prvního bloku musíte odemknout nástěnku (pravý horní roh)."
+"Loading report data","Načítání dat reportu"
+"Report data table for %1","Datová tabulka reportu pro %1"
+Block,Blok
+"Date Interval","Interval dat"
+Limit,Limit
+"Add Block","Přidat blok"
+Active,Aktivní
+"Attach each block as a separate CSV report","Připojit každý blok jako samostatný CSV report"
+Subject,Předmět
+Recipient,Příjemce
+Schedule,Plán
+"Should be cron-like expression. <br/>Example: 59 23 * * * <br/>Will be sent report every day at 23:59","Mělo by být cron výrazem. <br/>Příklad: 59 23 * * * <br/>Report bude odesílán každý den ve 23:59"
+Body,Tělo
+"Add New Email","Přidat nový e-mail"
+ID,ID
+Status,Stav
+"Last Sent At","Naposledy odesláno"

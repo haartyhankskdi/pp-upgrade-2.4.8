@@ -143,7 +143,7 @@ class GD implements Canvas
     {
 
         if (!is_array($size)) {
-            $size = strtolower($size);
+            $size = strtolower((string)$size);
 
             if (isset(CPDF::$PAPER_SIZES[$size])) {
                 $size = CPDF::$PAPER_SIZES[$size];
@@ -152,7 +152,7 @@ class GD implements Canvas
             }
         }
 
-        if (strtolower($orientation) === "landscape") {
+        if (strtolower((string)$orientation) === "landscape") {
             list($size[2], $size[3]) = [$size[3], $size[2]];
         }
 
@@ -886,6 +886,7 @@ class GD implements Canvas
      */
     public function get_ttf_file($font)
     {
+        $font = (string)$font;
         if ( stripos($font, ".ttf") === false ) {
             $font .= ".ttf";
         }

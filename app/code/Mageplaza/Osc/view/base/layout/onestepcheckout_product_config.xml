@@ -24,9 +24,17 @@
     <body>
         <block class="Magento\ConfigurableProduct\Block\Product\View\Type\Configurable" name="mposc.configurable.options" template="Mageplaza_Osc::product/view/type/options/configurable.phtml" cacheable="false"/>
         <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle" name="mposc.bundle.options" template="Mageplaza_Osc::product/view/type/options/bundle.phtml">
-            <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Select" name="product.info.bundle.options.select" as="select"/>
+            <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Select" name="product.info.bundle.options.select" as="select">
+                <arguments>
+                    <argument name="validateQuantityViewModel" xsi:type="object">Mageplaza\Osc\Model\ViewModel\Product\Bundle\ValidateQuantity</argument>
+                </arguments>
+            </block>
             <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Multi" name="product.info.bundle.options.multi" as="multi"/>
-            <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Radio" name="product.info.bundle.options.radio" as="radio"/>
+            <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Radio" name="product.info.bundle.options.radio" as="radio">
+                <arguments>
+                    <argument name="validateQuantityViewModel" xsi:type="object">Mageplaza\Osc\Model\ViewModel\Product\Bundle\ValidateQuantity</argument>
+                </arguments>
+            </block>
             <block class="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option\Checkbox" name="product.info.bundle.options.checkbox" as="checkbox"/>
         </block>
         <block class="Magento\Catalog\Block\Product\View\Options" name="mposc.product.options" as="mposc_product_options" template="Mageplaza_Osc::product/view/options.phtml">

@@ -1,9 +1,9 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Model\ResourceModel\Form\Grid;
 
@@ -11,6 +11,7 @@ use Amasty\Customform\Api\Data\FormInterface;
 use Amasty\Customform\Model\Config\Source\Status;
 use Amasty\Customform\Model\ResourceModel\Answer;
 use Amasty\Customform\Model\ResourceModel\Form\Collection as FormCollection;
+use Magento\Framework\Api\Search\AggregationInterface;
 use Magento\Framework\Api\Search\SearchResultInterface;
 use Magento\Framework\Data\Collection\Db\FetchStrategyInterface;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
@@ -22,6 +23,9 @@ use Zend_Db_Expr;
 
 class Collection extends FormCollection implements SearchResultInterface
 {
+    /**
+     * @var AggregationInterface
+     */
     protected $aggregations;
 
     public function __construct(
@@ -33,8 +37,8 @@ class Collection extends FormCollection implements SearchResultInterface
         $eventPrefix,
         $eventObject,
         $resourceModel,
-        AdapterInterface $connection = null,
-        \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null,
+        ?AdapterInterface $connection = null,
+        ?\Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null,
         $model = Document::class
     ) {
         $this->_eventPrefix = $eventPrefix;
@@ -89,6 +93,8 @@ class Collection extends FormCollection implements SearchResultInterface
     public function setAggregations($aggregations)
     {
         $this->aggregations = $aggregations;
+
+        return $this;
     }
 
     public function getAllIds($limit = null, $offset = null)
@@ -101,7 +107,7 @@ class Collection extends FormCollection implements SearchResultInterface
         return null;
     }
 
-    public function setSearchCriteria(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = null)
+    public function setSearchCriteria(?\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = null)
     {
         return $this;
     }
@@ -126,7 +132,7 @@ class Collection extends FormCollection implements SearchResultInterface
         return parent::addFieldToFilter($field, $condition);
     }
 
-    public function setItems(array $items = null)
+    public function setItems(?array $items = null)
     {
         return $this;
     }

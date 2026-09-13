@@ -89,7 +89,7 @@ class Value extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $customerGroups = null;
         $configuration = $object->getConfiguration();
         if ($configuration) {
-            $configuration = \Zend_Json::decode($configuration);
+            $configuration = json_decode($configuration, true);
             if (isset($configuration['customer_group'])) {
                 $customerGroups = $configuration['customer_group'];
             }

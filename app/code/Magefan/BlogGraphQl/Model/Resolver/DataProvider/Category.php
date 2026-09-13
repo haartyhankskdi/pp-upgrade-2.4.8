@@ -17,10 +17,6 @@ use Magento\Framework\View\Design\Theme\ThemeProviderInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\App\ScopeResolverInterface;
 
-/**
- * Class Category
- * @package Magefan\BlogGraphQl\Model\Resolver\DataProvider
- */
 class Category
 {
     /**
@@ -79,15 +75,24 @@ class Category
     }
 
     /**
-     * @param string $categoryId
-     * @param null $fields
+     * Get category data
+     *
+     * @param mixed $categoryId
+     * @param null|array $fields
      * @return array
      * @throws NoSuchEntityException
      */
-    public function getData(string $categoryId, $fields = null): array
+    public function getData($categoryId, $fields = null): array
     {
-        $category = $this->categoryRepository->getFactory()->create();
-        $category->getResource()->load($category, $categoryId);
+        if (is_object($categoryId)) {
+            $category = $categoryId;
+        } else {
+            try {
+                $category = $this->categoryRepository->getById((int)$categoryId);
+            } catch (\Exception $e) {
+                throw new NoSuchEntityException();
+            }
+        }
 
         if (!$category->isActive()) {
             throw new NoSuchEntityException();
@@ -115,8 +120,9 @@ class Category
 
     /**
      * Prepare all additional data
-     * @param $category
-     * @param null $fields
+     *
+     * @param mixed $category
+     * @param null|array $fields
      * @return mixed
      */
     public function getDynamicData($category, $fields = null)
@@ -131,10 +137,10 @@ class Category
 
         foreach ($keys as $key) {
             $method = 'get' . str_replace(
-                    '_',
-                    '',
-                    ucwords($key, '_')
-                );
+                '_',
+                '',
+                ucwords($key, '_')
+            );
             $data[$key] = $category->$method();
             if ($key === 'category_url') {
                 $data[$key] = str_replace(

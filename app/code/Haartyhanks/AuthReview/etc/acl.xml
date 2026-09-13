@@ -4,6 +4,9 @@
 		<resources>
 			<resource id="Magento_Backend::admin">
 				<resource id="Haartyhanks_AuthReview::Entity" title="Entity" sortOrder="10">
+				<resource id="Haartyhanks_AuthReview::haartyhanks_authreview_entity"
+                              title="List Of All Reviewer"
+                              sortOrder="10"/>
 					<resource id="Haartyhanks_AuthReview::Entity_save" title="Save Entity" sortOrder="10"/>
 					<resource id="Haartyhanks_AuthReview::Entity_delete" title="Delete Entity" sortOrder="20"/>
 					<resource id="Haartyhanks_AuthReview::Entity_update" title="Update Entity" sortOrder="30"/>

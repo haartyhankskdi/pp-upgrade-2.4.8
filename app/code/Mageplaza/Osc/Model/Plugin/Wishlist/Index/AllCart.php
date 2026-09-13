@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\Wishlist\Index;
@@ -27,10 +27,6 @@ use Magento\Framework\Message\MessageInterface;
 use Magento\Framework\UrlInterface;
 use Mageplaza\Osc\Helper\Data;
 
-/**
- * Class AllCart
- * @package Mageplaza\Osc\Model\Plugin\Wishlist\Index
- */
 class AllCart
 {
     /**
@@ -51,8 +47,8 @@ class AllCart
     /**
      * AllCart constructor.
      *
-     * @param Data $helper
-     * @param UrlInterface $url
+     * @param Data             $helper
+     * @param UrlInterface     $url
      * @param ManagerInterface $messageManager
      */
     public function __construct(Data $helper, UrlInterface $url, ManagerInterface $messageManager)

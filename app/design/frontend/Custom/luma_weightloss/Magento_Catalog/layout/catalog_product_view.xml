@@ -231,16 +231,15 @@
          <referenceContainer name="content">
             <block class="Magento\Framework\View\Element\Template" name="custom.product.template" template="Magento_Catalog::product/view/list.phtml" />
         </referenceContainer>
+        <referenceBlock name="breadcrumbs" remove="true" />
+        <referenceBlock name="product.info.description" remove="true"/>
+        <referenceBlock name="product.info.review" remove="true"/>
+        <referenceBlock name="pharmacyvideo.logo" remove="true"/>
+        <referenceBlock name="attr" remove="true"/>
+        <referenceBlock name="attr-new" remove="true"/>
+        <referenceBlock name="navigation.sections" remove="true"/>
+        <!-- <referenceBlock name="product.info.overview" remove="true"/> -->
+        <referenceBlock name="product.info.media" remove="true"/>
+
     </body>
 </page>
-
-
-
-<!-- <?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <body>
-        <referenceContainer name="content">
-            <block class="Magento\Framework\View\Element\Template" name="custom.product.template" template="Magento_Catalog::product/view/list.phtml" />
-        </referenceContainer>
-    </body>
-</page> -->

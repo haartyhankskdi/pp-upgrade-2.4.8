@@ -1,4 +1,4 @@
-<?php
+32<?php
 /**
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
@@ -22,7 +22,7 @@ $_attributes = $block->decorateArray($block->getAllowAttributes());
                         data-validate="{required:true}"
                         id="attribute<?= $block->escapeHtmlAttr($_attribute->getAttributeId()) ?>"
                         class="super-attribute-select">
-                    <option value=""><?= $block->escapeHtml(__('Choose an Option...')) ?></option>
+                    <option value=""><?= $block->escapeHtml(__('TESTING123')) ?></option>
                 </select>
             </div>
         </div>
@@ -30,7 +30,7 @@ $_attributes = $block->decorateArray($block->getAllowAttributes());
     <script type="text/x-magento-init">
         {
             "#product_addtocart_form": {
-                "configurable": {
+                     "Magento_ConfigurableProduct/js/configurable": {
                     "spConfig": <?= /* @noEscape */ $block->getJsonConfig() ?>,
                     "gallerySwitchStrategy": "<?= $block->escapeJs($block->getVar(
                         'gallery_switch_strategy',

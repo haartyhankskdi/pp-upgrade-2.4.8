@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\Quote;
@@ -30,7 +30,7 @@ use Magento\Quote\Model\Quote\Item;
 
 /**
  * Class Address
- * @package Mageplaza\Osc\Model\Plugin\Customer
+ *
  */
 class Processor
 {
@@ -49,10 +49,10 @@ class Processor
 
     /**
      * @param Item\Processor $subject
-     * @param Closure $proceed
-     * @param Item $item
-     * @param DataObject $request
-     * @param Product $candidate
+     * @param Closure        $proceed
+     * @param Item           $item
+     * @param DataObject     $request
+     * @param Product        $candidate
      */
     public function aroundPrepare(
         Item\Processor $subject,

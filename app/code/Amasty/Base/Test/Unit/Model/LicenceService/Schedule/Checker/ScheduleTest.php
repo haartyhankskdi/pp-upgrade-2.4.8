@@ -15,6 +15,7 @@ use Amasty\Base\Model\LicenceService\Schedule\Data\ScheduleConfig;
 use Amasty\Base\Model\LicenceService\Schedule\Data\ScheduleConfigFactory;
 use Amasty\Base\Model\LicenceService\Schedule\ScheduleConfigRepository;
 use Magento\Framework\Stdlib\DateTime\DateTime;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -67,6 +68,7 @@ class ScheduleTest extends TestCase
      * @dataProvider isNeedToSendDataProvider
      * @return void
      */
+    #[DataProvider('isNeedToSendDataProvider')]
     public function testIsNeedToSend(int $lastSendDate, int $currentTime, ?array $timeIntervals, bool $result): void
     {
         $flag = 'amasty_base_instance_registration';
@@ -91,37 +93,37 @@ class ScheduleTest extends TestCase
         $this->assertEquals($result, $this->model->isNeedToSend($flag));
     }
 
-    public function isNeedToSendDataProvider(): array
+    public static function isNeedToSendDataProvider(): array
     {
         return [
             [
-                ScheduleConfig::LAST_SEND_DATE => 1640198000,
+                1640198000,
                 1640198457,
-                ScheduleConfig::TIME_INTERVALS => [300, 900, 3600, 86400],
+                [300, 900, 3600, 86400],
                 true
             ],
             [
-                ScheduleConfig::LAST_SEND_DATE => 1640198457,
+                1640198457,
                 1640198400,
-                ScheduleConfig::TIME_INTERVALS => [300],
+                [300],
                 false
             ],
             [
-                ScheduleConfig::LAST_SEND_DATE => 1640198457,
+                1640198457,
                 1640198000,
-                ScheduleConfig::TIME_INTERVALS => [86400],
+                [86400],
                 false
             ],
             [
-                ScheduleConfig::LAST_SEND_DATE => 1640198457,
+                1640198457,
                 1640198000,
-                ScheduleConfig::TIME_INTERVALS => [],
+                [],
                 false
             ],
             [
-                ScheduleConfig::LAST_SEND_DATE => 1640198457,
+                1640198457,
                 1640198000,
-                ScheduleConfig::TIME_INTERVALS => null,
+                null,
                 true
             ]
         ];

@@ -50,26 +50,21 @@
 
         &:not(.-second) {
             .ambase-menu-item {
-                & {
-                    color: @color-very-light-gray;
-                }
-
-                &:hover {
-                    color: @color-gray65-almost;
-                }
+                &:extend(.admin__menu .submenu a all);
+                &:extend(.admin__menu [class*='level-']:not(.level-0) a all);
             }
 
             .ambase-label.active {
-                color: @color-very-light-gray;
+                color: @submenu-link__color;
             }
 
             .ambase-menu-item .ambase-menu-item {
                 & {
-                    color: @color-gray65-almost;
+                    color: @submenu-section-label__color;
                 }
 
                 &:hover {
-                    color: @color-very-light-gray;
+                    color: @submenu-link__color;
                 }
             }
         }
@@ -117,7 +112,7 @@
             }
 
             &.-solution:hover {
-                color: @color-very-light-gray;
+                color: @submenu-link__color;
             }
 
             .ambase-label.-query {

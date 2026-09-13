@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Model;
 
@@ -20,12 +21,23 @@ class ExternalLibsChecker
      */
     public function checkZipStream(): void
     {
-        if (!class_exists(ZipStream::class) || !class_exists(ZipOptions::class)) {
+        if (!class_exists(ZipStream::class)) {
             throw new ExternalDependencyNotFoundException(__(
                 'To use ZIP functionality, please install the library maennchen/zipstream-php. ' .
                 'To do this, run the command "composer require maennchen/zipstream-php" in the main site folder.'
             ));
+
         }
+    }
+
+    public function getZipStreamMajVersion(): int
+    {
+        $this->checkZipStream();
+        if (class_exists(ZipOptions::class)) {
+            return 2;
+        }
+
+        return 3;
     }
 
     public function checkPdfDom(): void

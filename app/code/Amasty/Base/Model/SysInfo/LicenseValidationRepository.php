@@ -49,11 +49,11 @@ class LicenseValidationRepository
     private $instanceDataFactory;
 
     public function __construct(
+        FlagRepository $flagRepository, //@deprecated
         Serializer $serializer,
         Converter $converter,
-        FlagRepository $flagRepository = null, //@deprecated
-        Repository $instanceDataRepository = null,
-        InstanceDataFactory $instanceDataFactory = null
+        ?Repository $instanceDataRepository = null,
+        ?InstanceDataFactory $instanceDataFactory = null
     ) {
         $this->serializer = $serializer;
         $this->converter = $converter;

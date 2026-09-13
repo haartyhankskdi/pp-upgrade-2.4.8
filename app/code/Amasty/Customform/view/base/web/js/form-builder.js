@@ -148,10 +148,10 @@ define([
             this.generateFormFields(frmbFields, $cbUL);
 
             if (this.options.inputSets.length) {
-                $('<li/>', {'class': 'fb-separator'}).html('<hr>').appendTo($cbUL);
+                $('<li>', {'class': 'fb-separator'}).html('<hr>').appendTo($cbUL);
                 this.options.inputSets.forEach(function (set) {
                     set.name = set.name || this.helpers.makeClassName(set.label);
-                    var $set = $('<li/>', {'class': 'input-set-control', type: set.name});
+                    var $set = $('<li>', {'class': 'input-set-control', type: set.name});
                     $set.html(set.label).appendTo($cbUL);
                 });
             }
@@ -460,29 +460,29 @@ define([
         },
 
         generateWrapperContent: function (formbId, $cbUL) {
-            var $formWrap = $('<div/>', {
+            var $formWrap = $('<div>', {
                 id: formbId + '-form-wrap',
                 'class': 'form-wrap form-builder' + this.helpers.mobileClass()
             });
 
-            this.stageWrap = $('<div/>', {
+            this.stageWrap = $('<div>', {
                 id: formbId + '-stage-wrap',
                 'class': 'stage-wrap ' + this.layout.stage
             });
 
-            var controlbWrap = $('<div/>', {
+            var controlbWrap = $('<div>', {
                 id: formbId + '-cb-wrap',
                 'class': 'cb-wrap ' + this.layout.controls
             });
 
             /*show type controls*/
-            var typesWrap = $('<ul/>', {
+            var typesWrap = $('<ul>', {
                 'class': 'type-wrap amcform-tabs-wrap -second amcustomform-element-tabs'
             });
 
             var fieldsTypes = this.options.fieldsTypes;
             this.utils.forEach(fieldsTypes, function (i) {
-                var $field = $('<li/>', {
+                var $field = $('<li>', {
                     'id': 'amcustomform-type-' + fieldsTypes[i].type,
                     'type': fieldsTypes[i].type,
                     'text': fieldsTypes[i].title,
@@ -526,7 +526,7 @@ define([
 
         generateSortable: function (formbId, $cbUL) {
             // Sortable fields
-            this.sortableFields = $('<ul/>').attr('id', formbId).addClass('frmb');
+            this.sortableFields = $('<ul>').attr('id', formbId).addClass('frmb');
             this.sortableFields.sortable({
                 cursor: 'move',
                 opacity: 0.9,
@@ -560,7 +560,7 @@ define([
         generateFormFields: function (frmbFields, $cbUL) {
             var self = this;
             this.utils.forEach(frmbFields, function (i) {
-                var $field = $('<li/>', {
+                var $field = $('<li>', {
                     'class': 'amelement-container icon-' + frmbFields[i].attrs.className,
                     'type': frmbFields[i].attrs.type,
                     'parentType': frmbFields[i].attrs.parentType,
@@ -568,12 +568,12 @@ define([
                     'label': frmbFields[i].attrs.label
                 });
 
-                var $title = $('<div/>', {
+                var $title = $('<div>', {
                     'class': 'amelement-title',
                     'html': frmbFields[i].label
                 }).appendTo($field);
 
-                var $contentContainer = $('<div/>', {
+                var $contentContainer = $('<div>', {
                     'class': 'amelement-content',
                     'html': frmbFields[i].content
                 }).appendTo($field);
@@ -1028,9 +1028,12 @@ define([
 
             advFields.push(this.hiddenAttribute('parentType', values));
 
-            return advFields.join('');
+            return this.renderFieldsHTML(advFields, values);
         },
 
+        renderFieldsHTML: function(advFields, values) {
+            return advFields.join('');
+        },
 
         processTypeUserAttrs: function (typeUserAttr, values) {
             var advField = [];
@@ -1117,7 +1120,7 @@ define([
             }
 
             var checked = values[name] !== undefined ? 'checked' : '',
-                input = '<input type="checkbox" class="fld-' + name + '" name="' + name + '" value="true" ' + checked + ' id="' + name + '-' + this.lastID + '"/> ',
+                input = '<input type="checkbox" class="fld-' + name + '" name="' + name + '" value="true" ' + checked + ' id="' + name + '-' + this.lastID + '"> ',
                 left = [],
                 right = [input];
 
@@ -1855,10 +1858,14 @@ define([
         },
 
         getParsedFormData: function () {
-            var formData = null;
+            let formData = null;
 
             try {
-                formData = JSON.parse(this.formData);
+                const serializedFormConfig = this.getSerializedFormConfig().flat();
+
+                formData = !!serializedFormConfig.length
+                    ? serializedFormConfig
+                    : JSON.parse(this.formData);
             } catch (e) {
                 formData = this.formData;
             }

@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Model\Utils;
 
@@ -61,5 +62,11 @@ class CustomerInfo
         }
 
         return $this->customerDataModel;
+    }
+
+    public function _resetState(): void
+    {
+        $this->customerDataModel = null;
+        $this->currentCustomer = null;
     }
 }

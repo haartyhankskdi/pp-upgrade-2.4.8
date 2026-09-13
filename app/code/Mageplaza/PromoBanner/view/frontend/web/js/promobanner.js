@@ -25,7 +25,8 @@ define(
         'uiRegistry',
         'mage/template',
         'Magento_Customer/js/customer-data',
-        'mageplaza/core/jquery/popup'
+        'mageplaza/core/jquery/popup',
+        'mageplaza/core/owl.carousel'
     ], function ($, _, registry, mageTemplate, customerData) {
         'use strict';
 
@@ -194,6 +195,24 @@ define(
                             }
                             if (bannerStatus && bannerType === 'slider_images') {
                                 $('.' + storageData[bannerId].banner_id).show();
+
+                                $('#mppromobanner-list-items-'+this.options.sliderId).owlCarousel({
+                                    items:1,
+                                    loop: true,
+                                    margin:10,
+                                    autoHeight:true,
+                                    autoplay:true,
+                                    autoplayHoverPause:true,
+                                    dots: false,
+                                    nav: this.options.showNavs,
+                                    autoplayTimeout: this.options.changeTimeOut
+                                });
+
+                                if(/Android|webOS|iPhone|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                                    var widthMb = parseFloat($('.page-wrapper').width()) - 30;
+                                    $('#mppromobanner-sidebar-additional .owl-stage-outer').attr('style','max-width: '+widthMb+'px');
+                                    $('#mppromobanner-sidebar-main .owl-stage-outer').attr('style','max-width: '+widthMb+'px');
+                                }
                             }
                         }
                     } else {
@@ -294,7 +313,17 @@ define(
                             storageData[bannerId].autoReopenTime - new Date().getTime()
                         );
                     } else {
-                        storageData[bannerId].status = rangeReopenTime === 'infinite';
+                        if(rangeReopenTime === 'infinite' && $('#mppromobanner-popup-checkbox').is(':checked') === true){
+                            storageData[bannerId].status         = false;
+                            storageData[bannerId].autoReopenTime = 31557600;
+                            this.setAutoTime(
+                                bannerId,
+                                'showInterval',
+                                storageData[bannerId].autoReopenTime
+                            );
+                        }else{
+                            storageData[bannerId].status = rangeReopenTime === 'infinite';
+                        }
                     }
                     this.storage.set('mppromobannerData', storageData);
                 },
@@ -337,6 +366,16 @@ define(
                             }
 
                             self.initPromoBanner(cartObj.cart.mppromobanner);
+
+                            if($('.product-options-bottom').length > 0 && $('.block-bundle-summary').length === 0){
+                                $('#mppromobanner-under-add-to-cart').appendTo($('.product-options-bottom'));
+                            }else if($('.block-bundle-summary').length > 0){
+                                $('#mppromobanner-under-add-to-cart').appendTo($('.box-tocart'));
+                            }
+
+                            if(/Android|webOS|iPhone|Mac|Macintosh|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && $('body.catalog-product-view').length === 1) {
+                                $('#mppromobanner-content-top').prependTo('.product.media');
+                            }
                         }
                     });
                 }

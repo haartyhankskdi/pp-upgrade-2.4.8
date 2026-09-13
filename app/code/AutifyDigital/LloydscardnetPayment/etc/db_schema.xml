@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+<!--
+   ~ This software is the confidential and proprietary information of Autify Digital Ltd.
+   ~ Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+   ~ Copyright (c) 2020-Present Autify Digital Ltd.
+   ~ This work is protected under applicable copyright and intellectual property laws.
+   ~ All rights reserved. Distribution and disclosure are permitted only in accordance with
+   ~ the terms of a valid written agreement with Autify Digital Ltd.
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="autify_lloydscardnetpayment_payments" resource="default" engine="innodb" comment="autify_lloydscardnetpayment_payments Table">
+        <column xsi:type="int" name="payments_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="payments_id"/>
+        </constraint>
+        
+        <column name="amount" nullable="true" xsi:type="varchar" comment="Order Amount" length="255"/>
+        <column name="status" nullable="true" xsi:type="varchar" comment="Transaction Status" length="255"/>
+        <column name="order_id" nullable="true" xsi:type="int" comment="Order ID" identity="false"/>
+        <column name="order_increment_id" nullable="true" xsi:type="varchar" comment="Order Increment ID" length="255"/>
+        <column name="remote_reference" nullable="true" xsi:type="text" comment="Remote Reference"/>
+        <column name="remote_message" nullable="true" xsi:type="text" comment="Remote Message"/>
+        <column name="remote_status_or_code" nullable="true" xsi:type="text" comment="Remote Status"/>
+        <column name="cardnet_order_id" nullable="true" xsi:type="text" comment="Cardnet Order ID"/>
+        <column name="cardnet_refund_id" nullable="true" xsi:type="text" comment="Cardnet Refund ID"/>
+        <column name="transaction_update_webhook" nullable="true" xsi:type="smallint" comment="Transaction Webhook" identity="false" default="0"/>
+        <column name="transaction_update_response" nullable="true" xsi:type="smallint" comment="Transaction Response" identity="false" default="0"/>
+        <column name="save_card" nullable="true" xsi:type="smallint" comment="Saved Card" identity="false" default="0"/>
+        <column name="redirect_email_sent" nullable="true" xsi:type="smallint" comment="Redirect Email sent" identity="false" default="0"/>
+        <column name="brand" nullable="true" xsi:type="varchar" comment="Brand" length="255"/>
+        <column name="last4" nullable="true" xsi:type="varchar" comment="Card Last 4 Digits" length="10"/>
+        <column name="approval_code" nullable="true" xsi:type="varchar" comment="Approval Code" length="255"/>
+        <column name="ipgTransactionId" nullable="true" xsi:type="varchar" comment="IPG Transaction ID" length="255"/>
+        <column name="response_3ds_code_message" nullable="true" xsi:type="varchar" comment="Response 3DS Code Message" length="10"/>
+        <column name="street_match" nullable="true" xsi:type="varchar" comment="Street Match" length="10" default="unchecked"/>
+        <column name="postcode_match" nullable="true" xsi:type="varchar" comment="Postcode Match" length="10" default="unchecked"/>
+        <column name="cvv_match" nullable="true" xsi:type="varchar" comment="CVV Match Code" length="10" default="unchecked"/>
+        <column name="payment_method" nullable="true" xsi:type="varchar" comment="Payment Method" length="255"/>
+        <column name="iframe_received" nullable="true" xsi:type="smallint" comment="Iframe Received" identity="false" default="0"/>
+        <column name="threeds_received" nullable="true" xsi:type="smallint" comment="3DS Received" identity="false" default="0"/>
+        <column name="order_processed" nullable="true" xsi:type="smallint" comment="Order Processed Lock" identity="false" default="0"/>
+        <column name="created_at" nullable="false" xsi:type="datetime" default="CURRENT_TIMESTAMP" on_update="false"/>
+        <column name="updated_at" nullable="true" xsi:type="datetime" default="CURRENT_TIMESTAMP" on_update="true"/>
+    </table>
+
+    <table name="autify_lloydscardnetpayment_paymenttoken" resource="default" engine="innodb" comment="autify_lloydscardnetpayment_paymenttoken Table">
+        <column xsi:type="int" name="paymenttoken_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="paymenttoken_id"/>
+        </constraint>
+        <column name="customer_id" nullable="true" xsi:type="int" comment="Customer ID" identity="false"/>
+        <column name="payment_token" nullable="true" xsi:type="text" comment="Payment Token"/>
+        <column name="scheme_transaction_id" nullable="true" xsi:type="text" comment="Scheme Transaction ID"/>
+        <column name="masked" nullable="true" xsi:type="varchar" comment="Masked Number" length="255"/>
+        <column name="brand" nullable="true" xsi:type="varchar" comment="Brand" length="255"/>
+        <column name="last4" nullable="true" xsi:type="varchar" comment="Card 4 Digits" length="10"/>
+        <column name="exp_month" nullable="true" xsi:type="varchar" comment="Exp Month" length="10"/>
+        <column name="exp_year" nullable="true" xsi:type="varchar" comment="Exp Year" length="10"/>
+        <column name="is_fiserv" nullable="true" xsi:type="smallint" comment="Identify payment method" identity="false" default="0"/>
+        <column name="created_at" nullable="false" xsi:type="datetime" default="CURRENT_TIMESTAMP" on_update="false"/>
+    </table>
+    <table name="sales_order" resource="sales" engine="innodb" comment="Sales Order">
+        <column xsi:type="varchar" name="fiserv_checkout_id" nullable="true" length="255" comment="Fiserv Checkout ID"/>
+    </table>
+</schema>

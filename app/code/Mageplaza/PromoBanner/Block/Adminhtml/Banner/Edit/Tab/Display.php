@@ -87,9 +87,9 @@ class Display extends Generic implements TabInterface
         array $data = []
     ) {
         $this->positionConfig = $positionConfig;
-        $this->displayPage    = $displayPage;
-        $this->yesNo          = $yesNo;
-        $this->_fieldFactory  = $fieldFactory;
+        $this->displayPage = $displayPage;
+        $this->yesNo = $yesNo;
+        $this->_fieldFactory = $fieldFactory;
 
         parent::__construct($context, $registry, $formFactory, $data);
     }
@@ -110,28 +110,28 @@ class Display extends Generic implements TabInterface
     {
         /** @var Banner $model */
         $model = $this->getCurrentBanner();
-        $form  = $this->_formFactory->create();
+        $form = $this->_formFactory->create();
         $form->setHtmlIdPrefix('mppromobanner_');
         $form->setFieldNameSuffix('mppromobanner');
 
         $fieldset = $form->addFieldset(
-            'base_fieldset',
+            'display_base_fieldset',
             [
                 'legend' => __('Display')
             ]
         );
 
         $selectPosition = $fieldset->addField('position', 'select', [
-            'name'   => 'position',
-            'label'  => __('Display Position'),
-            'title'  => __('Display Position'),
+            'name' => 'position',
+            'label' => __('Display Position'),
+            'title' => __('Display Position'),
             'values' => $this->positionConfig->toOptionArray()
         ]);
 
         $selectPage = $fieldset->addField('page', 'select', [
-            'name'   => 'page',
-            'label'  => __('Select Page(s)'),
-            'title'  => __('Select Page(s)'),
+            'name' => 'page',
+            'label' => __('Select Page(s)'),
+            'title' => __('Select Page(s)'),
             'values' => [
                 ['value' => 0, 'label' => __('All Pages')],
                 ['value' => 1, 'label' => __('Specific Pages')]
@@ -139,23 +139,23 @@ class Display extends Generic implements TabInterface
         ]);
 
         $pageType = $fieldset->addField('page_type', 'multiselect', [
-            'name'   => 'page_type',
-            'label'  => __('Display on Page(s)'),
-            'title'  => __('Display on Page(s)'),
+            'name' => 'page_type',
+            'label' => __('Display on Page(s)'),
+            'title' => __('Display on Page(s)'),
             'values' => $this->displayPage->toOptionArray(),
-            'note'   => __('Compatible <a href="https://www.mageplaza.com/magento-2-one-step-checkout-extension/" target="_blank" rel="noopener noreferrer">Mageplaza One Step Checkout</a>')
+            'note' => __('Compatible <a href="https://www.mageplaza.com/magento-2-one-step-checkout-extension/" target="_blank" rel="noopener noreferrer">Mageplaza One Step Checkout</a>')
         ]);
 
         $categoryPage = $fieldset->addField('category_ids', Category::class, [
-            'name'  => 'category_ids',
+            'name' => 'category_ids',
             'label' => __('Display On Category Page'),
             'title' => __('Display On Category Page'),
         ]);
 
         $showProductPage = $fieldset->addField('show_product_page', 'select', [
-            'name'   => 'show_product_page',
-            'label'  => __('Display On Product Page'),
-            'title'  => __('Display On Product Page'),
+            'name' => 'show_product_page',
+            'label' => __('Display On Product Page'),
+            'title' => __('Display On Product Page'),
             'values' => $this->yesNo->toOptionArray()
         ]);
 
@@ -165,9 +165,9 @@ class Display extends Generic implements TabInterface
         );
 
         $productCondition = $fieldset->addField('actions', ProductConditions::class, [
-            'name'           => 'actions',
-            'label'          => __('Select'),
-            'title'          => __('Select'),
+            'name' => 'actions',
+            'label' => __('Select'),
+            'title' => __('Select'),
             'data-form-part' => 'mppromobanner_form'
         ])->setNewChildUrl($newChildUrl);
 
@@ -179,9 +179,9 @@ class Display extends Generic implements TabInterface
 
         $refField = $this->_fieldFactory->create(
             [
-                'fieldData'   =>
+                'fieldData' =>
                     [
-                        'value'     => implode(',', [
+                        'value' => implode(',', [
                             Position::PAGE_TOP,
                             Position::CONTENT_TOP,
                             Position::SIDEBAR_ADDITIONAL,
@@ -199,9 +199,9 @@ class Display extends Generic implements TabInterface
 
         $categoryRefField = $this->_fieldFactory->create(
             [
-                'fieldData'   =>
+                'fieldData' =>
                     [
-                        'value'     => implode(',', [
+                        'value' => implode(',', [
                             Position::PAGE_TOP,
                             Position::CONTENT_TOP,
                             Position::SIDEBAR_ADDITIONAL,
@@ -218,9 +218,9 @@ class Display extends Generic implements TabInterface
 
         $productRefField = $this->_fieldFactory->create(
             [
-                'fieldData'   =>
+                'fieldData' =>
                     [
-                        'value'     => implode(',', [
+                        'value' => implode(',', [
                             Position::PAGE_TOP,
                             Position::CONTENT_TOP,
                             Position::UNDER_ADD_TO_CART_BUTTON,
@@ -236,9 +236,9 @@ class Display extends Generic implements TabInterface
 
         $pageRefField = $this->_fieldFactory->create(
             [
-                'fieldData'   =>
+                'fieldData' =>
                     [
-                        'value'     => implode(',', [
+                        'value' => implode(',', [
                             Position::PAGE_TOP,
                             Position::CONTENT_TOP,
                             Position::LEFT_FLOATING,

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!--
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/-->
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */-->
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
@@ -22,5 +22,15 @@
              action="amasty_customform/answer/index"
              resource="Amasty_Customform::data"
         />
+
+        <add id="Amasty_Customform::analytics" title="Amasty Custom Form" module="Amasty_Customform" sortOrder="100"
+             parent="Magento_Reports::report"
+             resource="Amasty_Customform::analytics"
+        />
+      <!--   <add id="Amasty_Customform::forms_analytics" title="Forms Analytics" module="Amasty_Customform" sortOrder="10"
+             parent="Amasty_Customform::analytics"
+             action="amasty_customform/analytics/index"
+             resource="Amasty_Customform::forms_analytics"
+        /> -->
     </menu>
 </config>

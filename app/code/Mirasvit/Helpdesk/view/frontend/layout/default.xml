@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="top.links">
+            <block class="Mirasvit\Helpdesk\Block\Link" name="helpdesk-link" after="my-account-link"
+                   ifconfig="helpdesk/frontend/is_active"/>
+        </referenceBlock>
+
+        <referenceContainer name="before.body.end">
+            <block name="contact-button" ifconfig="helpdesk/contact_form/is_active"
+                   class="Mirasvit\Helpdesk\Block\Contact\PopupForm"
+                   template="contact/button.phtml">
+                <block name="hdmx-popup-form" class="Mirasvit\Helpdesk\Block\Contact\PopupForm" template="contact/form/form.phtml">
+                    <block name="helpdesk_contacts_schedule_status_feedback"
+                           class="Mirasvit\Helpdesk\Block\Contacts\Schedule\Status"
+                           ifconfig="helpdesk/schedule/is_show_status_on_feedbackpopup"
+                           template="contacts/schedule/status.phtml">
+                        <arguments>
+                            <argument name="page" xsi:type="string">feedback-popup</argument>
+                        </arguments>
+                    </block>
+                    <block class="Mirasvit\Helpdesk\Block\MspRecaptcha\Frontend\ReCaptcha\RecaptchaPopup" name="hdmx-msp-recaptcha"
+                           after="-" ifconfig="helpdesk/extended/enable_recaptcha" template="Mirasvit_Helpdesk::contact/form/msp_recaptcha.phtml">
+                        <arguments>
+                            <argument name="jsLayout" xsi:type="array">
+                                <item name="components" xsi:type="array">
+                                    <item name="hdmx-popup-msp-recaptcha" xsi:type="array">
+                                        <item name="component" xsi:type="string">MSP_ReCaptcha/js/reCaptcha</item>
+                                        <item name="zone" xsi:type="string">hdmx-popup</item>
+                                        <item name="reCaptchaId" xsi:type="string">hdmx-popup-msp-recaptcha-id</item>
+                                    </item>
+                                </item>
+                            </argument>
+                        </arguments>
+
+                        <block class="Magento\ReCaptchaUi\Block\ReCaptcha"
+                               name="hdmx-popup-recaptcha"
+                               after="-"
+                               template="Magento_ReCaptchaFrontendUi::recaptcha.phtml"
+                               ifconfig="recaptcha_frontend/type_for/contact">
+                            <arguments>
+                                <argument name="recaptcha_for" xsi:type="string">contact</argument>
+                                <argument name="jsLayout" xsi:type="array">
+                                    <item name="components" xsi:type="array">
+                                        <item name="recaptcha" xsi:type="array">
+                                            <item name="component" xsi:type="string">Magento_ReCaptchaFrontendUi/js/reCaptcha</item>
+                                            <item name="recaptcha_id" xsi:type="string">hdmx-popup-msp-recaptcha-id-m241</item>
+                                        </item>
+                                    </item>
+                                </argument>
+                            </arguments>
+                        </block>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

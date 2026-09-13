@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Controller;
@@ -30,10 +30,6 @@ use Mageplaza\Osc\Helper\Data;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class RouterTest
- * @package Mageplaza\Osc\Test\Unit\Controller
- */
 class RouterTest extends TestCase
 {
     /**
@@ -51,7 +47,7 @@ class RouterTest extends TestCase
      */
     private $routerController;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->actionFactoryMock = $this->getMockBuilder(ActionFactory::class)
             ->disableOriginalConstructor()
@@ -73,7 +69,7 @@ class RouterTest extends TestCase
          * @var RequestInterface $requestMock
          */
         $requestMock = $this->getMockBuilder(RequestInterface::class)
-            ->setMethods(['getPathInfo'])
+            ->addMethods(['getPathInfo'])
             ->getMockForAbstractClass();
         $requestMock->expects($this->once())->method('getPathInfo')->willReturn('test/');
         $this->helperDataMock->expects($this->once())->method('isEnabled')->willReturn(false);
@@ -87,7 +83,7 @@ class RouterTest extends TestCase
          * @var RequestInterface $requestMock
          */
         $requestMock = $this->getMockBuilder(RequestInterface::class)
-            ->setMethods(['getPathInfo'])
+            ->addMethods(['getPathInfo'])
             ->getMockForAbstractClass();
         $requestMock->expects($this->once())->method('getPathInfo')->willReturn('checkout/');
         $this->helperDataMock->expects($this->once())->method('isEnabled')->willReturn(true);
@@ -102,10 +98,9 @@ class RouterTest extends TestCase
          * @var RequestInterface|MockObject $requestMock
          */
         $requestMock = $this->getMockBuilder(RequestInterface::class)
-            ->setMethods(
+            ->addMethods(
                 [
                     'getPathInfo',
-                    'setModuleName',
                     'setControllerName',
                     'setPathInfo',
                     'setAlias'

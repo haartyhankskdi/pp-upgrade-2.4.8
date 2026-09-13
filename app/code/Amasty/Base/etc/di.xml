@@ -18,6 +18,21 @@
     <preference for="Amasty\Base\Api\Data\InstanceHashInterface" type="Amasty\Base\Model\InstanceHash\InstanceHash"/>
     <preference for="Amasty\Base\Api\InstanceHashRepositoryInterface" type="Amasty\Base\Model\InstanceHash\Repository"/>
 
+    <type name="Amasty\Base\Model\SysInfo\Command\LicenceService\ProcessLicenseValidationResponse">
+        <arguments>
+            <argument name="dateTime" xsi:type="object">Magento\Framework\Stdlib\DateTime\DateTime\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="amasty_module_disable" xsi:type="object">Amasty\Base\Console\Command\ModuleDisable</item>
+                <item name="amasty_module_enable" xsi:type="object">Amasty\Base\Console\Command\ModuleEnable</item>
+            </argument>
+        </arguments>
+    </type>
+
     <type name="Amasty\Base\Model\Response\OctetResponseInterfaceFactory">
         <arguments>
             <argument name="responseFactoryAssociationMap" xsi:type="array">
@@ -146,7 +161,11 @@
 
     <type name="Magento\Framework\Config\FileResolverByModule">
         <plugin name="AmBase::FileResolverByModule"
+                sortOrder="10"
                 type="Amasty\Base\Plugin\Framework\Setup\Declaration\Schema\FileSystem\XmlReader\RestrictDropOperationsPlugin"/>
+        <plugin name="AmBase::SchemaUninstallPlugin"
+                sortOrder="50"
+                type="Amasty\Base\Plugin\Framework\Setup\Declaration\Schema\FileSystem\XmlReader\SchemaUninstallPlugin"/>
     </type>
 
     <!-- CLI Configuration Start -->
@@ -156,6 +175,16 @@
                 <item name="AmBase::sendSysInfo" xsi:type="object">Amasty\Base\Console\Command\SendSysInfo</item>
                 <item name="AmBase::registerLicenceKey" xsi:type="object">Amasty\Base\Console\Command\RegisterLicenceKey</item>
             </argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Base\Console\Command\SendSysInfo">
+        <arguments>
+            <argument name="sendSysInfo" xsi:type="object">Amasty\Base\Model\SysInfo\Command\LicenceService\SendSysInfo\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Amasty\Base\Console\Command\RegisterLicenceKey">
+        <arguments>
+            <argument name="registerLicenceKey" xsi:type="object">Amasty\Base\Model\SysInfo\Command\LicenceService\RegisterLicenceKey\Proxy</argument>
         </arguments>
     </type>
     <!-- CLI Configuration End -->
@@ -189,6 +218,26 @@
                 <item name="1.0.4" xsi:type="string">2.4.7</item>
                 <item name="1.0.5" xsi:type="string">2.4.7</item>
             </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Setup\Declaration\Schema\Operations\CreateTable">
+        <arguments>
+            <argument name="triggers" xsi:type="array">
+                <item name="amMigrateDataSetFromTableColumn"
+                      xsi:type="object">Amasty\Base\Setup\Declaration\Schema\Db\MySQL\DDL\Triggers\MigrateDataSetFromTableColumn</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Setup\Patch\PatchApplier">
+        <plugin name="Amasty_Base::DeleteAmastyTables"
+                type="Amasty\Base\Plugin\Framework\Setup\Patch\DeleteAmastyTablesPlugin"/>
+    </type>
+    <type name="Magento\Framework\Setup\Declaration\Schema\SchemaConfig">
+        <arguments>
+            <!-- fix cached tables issue when deleting several modules at once -->
+            <argument name="dbSchemaBuilder" shared="false"
+                      xsi:type="object">Magento\Framework\Setup\Declaration\Schema\Db\SchemaBuilder</argument>
         </arguments>
     </type>
 </config>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/report/emails" method="GET">
+        <service class="Mirasvit\Report\Api\Repository\EmailRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Mirasvit_Report::email"/>
+        </resources>
+    </route>
+    <route url="/V1/report/email/:emailId" method="GET">
+        <service class="Mirasvit\Report\Api\Repository\EmailRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Mirasvit_Report::email"/>
+        </resources>
+    </route>
+    <route url="/V1/report/email" method="POST">
+        <service class="Mirasvit\Report\Api\Repository\EmailRepositoryInterface" method="saveEmail"/>
+        <resources>
+            <resource ref="Mirasvit_Report::email"/>
+        </resources>
+    </route>
+    <route url="/V1/report/email/:emailId" method="PUT">
+        <service class="Mirasvit\Report\Api\Repository\EmailRepositoryInterface" method="saveEmail"/>
+        <resources>
+            <resource ref="Mirasvit_Report::email"/>
+        </resources>
+    </route>
+    <route url="/V1/report/email/:emailId" method="DELETE">
+        <service class="Mirasvit\Report\Api\Repository\EmailRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Mirasvit_Report::email"/>
+        </resources>
+    </route>
+    <route url="/V1/report/email/:emailId/send" method="POST">
+        <service class="Mirasvit\Report\Api\Service\EmailServiceInterface" method="sendById"/>
+        <resources>
+            <resource ref="Mirasvit_Report::email"/>
+        </resources>
+    </route>
+</routes>

@@ -21,21 +21,19 @@
 
 namespace Mageplaza\PromoBanner\Model\Config\Source;
 
-use Magento\Framework\Option\ArrayInterface;
-
 /**
  * Class Frequency
  *
  * @package Mageplaza\PromoBanner\Model\Config\Source
  */
-class Frequency implements ArrayInterface
+class Frequency extends AbstractSource
 {
     /**
      * @return array
      */
     public function toOptionArrayConfig()
     {
-        $option   = $this->toOptionArray();
+        $option = $this->toOptionArray();
         $option[] = ['value' => 'use_config', 'label' => __('Use Config')];
 
         return $option;
@@ -64,5 +62,16 @@ class Frequency implements ArrayInterface
             ['value' => 30 * 24 * 60 * 60, 'label' => __('Every month')],
             ['value' => 'never', 'label' => __('Never')],
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $result = parent::toArray();
+        $result['use_config'] = __('Use Config');
+
+        return $result;
     }
 }

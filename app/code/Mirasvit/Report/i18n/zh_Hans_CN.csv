@@ -1,0 +1,226 @@
+"Something went wrong while building the report","生成报告时出现错误"
+"Not logged in","未登录"
+"Email Notifications","邮件通知"
+"The email report has been deleted.","邮件报告已删除。"
+"This email report no longer exists.","此邮件报告已不存在。"
+"This email no longer exists.","此邮件已不存在。"
+"Edit Email ""%1""","编辑邮件 ""%1"""
+"New Email Report","新建邮件报告"
+"You saved the email report.","您已保存邮件报告。"
+"No data to save.","没有可保存的数据。"
+"This report no longer exists.","此报告已不存在。"
+"Report columns saved.","报告列已保存。"
+"Unsupported format ""%1""","不支持的格式 ""%1"""
+"This report does not exist or is not available for sharing.","此报告不存在或不可共享"
+"Report identifier is required","报告标识符是必需的"
+"Report: %1","报告：%1"
+"Block identifier ""%1"" does not match any available report or dashboard block. Use GET /V1/reports/reports to discover valid identifiers.","区块标识符 ""%1"" 与任何可用的报告或仪表盘区块均不匹配。请使用 GET /V1/reports/reports 查找有效的标识符。"
+"Time range ""%1"" is not valid. Valid values: %2","时间范围 ""%1"" 无效。有效值：%2"
+"Email with ID ""%1"" does not exist.","ID 为 ""%1"" 的邮件不存在。"
+Back,返回
+Delete,删除
+"Are you sure you want to do this?","您确定要执行此操作吗？"
+Save,保存
+"Save & Continue","保存并继续"
+"Save & Send","保存并发送"
+Edit,编辑
+"Delete email?","删除邮件？"
+(previous),(上一个)
+"%1 out of %2 selected","已选择 %2 中的 %1"
+"Access URL","访问 URL"
+Actions,操作
+"Active filters:","活动过滤器："
+"Add Empty Widget","添加空小部件"
+"Add filter","添加过滤器"
+"Add Filter","添加过滤器"
+"Add New Board","添加新看板"
+"Add New Widget","添加新小部件"
+"Add Widget","添加小部件"
+"Additional Filters","附加过滤器"
+"Advanced mode","高级模式"
+Aggregator,聚合器
+"and more %1 other columns","还有 %1 个其他列"
+applicable,适用
+Apply,应用
+"Apply date filter","应用日期过滤器"
+"Apply Filters","应用过滤器"
+"Are you sure you want to reset the access token?","您确定要重置访问令牌吗？"
+Average,平均值
+"Base Table","基础表"
+"Block Type","区块类型"
+Cancel,取消
+"Cancel date filter","取消日期过滤器"
+Chart,图表
+"Chart type selector","图表类型选择器"
+"Clear all","全部清除"
+Close,关闭
+"Close menu","关闭菜单"
+Column,列
+"Column for grouping data in the table","用于对表格中数据进行分组的列"
+"Column for grouping the data in the table","用于对表格中数据进行分组的列"
+"Column selector mode switcher. Current mode: %1","列选择器模式切换器。当前模式：%1"
+Columns,列
+"Columns to group the rows in the table","用于对表格中行进行分组的列"
+Comparison,对比
+contains,包含
+Content,内容
+Copied,已复制
+"Copy importdata code for Google Sheets","复制 Google 表格的 importdata 代码"
+"Copy to clipboard","复制到剪贴板"
+Count,计数
+Country,国家
+"Current mode: %1","当前模式：%1"
+"Current Page","当前页"
+Custom,自定义
+Customize,自定义
+Date,日期
+"Date filter","日期过滤器"
+Day,日
+"Delete report","删除报告"
+Description,描述
+Dimension,维度
+"Dimension column table","维度列表格"
+Dimensions,维度
+Disable,禁用
+"Disable sharing report","禁用报告共享"
+"Do not compare","不对比"
+"doesn't contain","不包含"
+Download,下载
+Duplicate,复制
+"Duplicate report","复制报告"
+Early,早期
+"Edit Board","编辑看板"
+"Edit columns","编辑列"
+"Edit report","编辑报告"
+"Empty report data table","空的报告数据表"
+Enable,启用
+"Enable Remote Access","启用远程访问"
+"Enable Remote Access on Storefront","在店铺前台启用远程访问"
+"Enable sharing report","启用报告共享"
+"Enter page number","输入页码"
+"Excel XML","Excel XML"
+Export,导出
+"Filter value","过滤值"
+Filters,过滤器
+"Found: %1 columns","找到：%1 列"
+from,从
+"From date","起始日期"
+"General Information","基本信息"
+"Go to next page","转到下一页"
+"Go to previous page","转到上一页"
+"Group by","分组方式"
+"Hide percentage of total","隐藏总计百分比"
+"Image for %1","%1 的图片"
+"Import data code","导入数据代码"
+"Insert the below code into your Google Sheet and it will automatically import the most recent data from the report every hour:","将以下代码插入您的 Google 表格中，它会每小时自动从报告导入最新数据："
+"Insert To Google Sheet","插入到 Google 表格"
+"Insert widget's HTML content here","在此处插入小部件的 HTML 内容"
+"Internal Filters","内部过滤器"
+"Is Default","是否默认"
+"is not","不是"
+"is not one of","不是以下之一"
+"is one of","是以下之一"
+Loading...,加载中...
+"Lower number means higher position. Boards with the same sort order will be ordered according to the dashboard general sorting settings.","数字越小，位置越靠前。排序值相同的看板将根据仪表盘的通用排序设置进行排序。"
+"Make a copy","创建副本"
+"Make sure that the selected columns are","请确保所选列为"
+Manage,管理
+"Manage columns","管理列"
+"Manage filters","管理过滤器"
+Metric,指标
+Month,月
+"More filters","更多过滤器"
+"More Filters","更多过滤器"
+"No next pages, action disabled","没有下一页，操作已禁用"
+"No previous pages, action disabled","没有上一页，操作已禁用"
+"not allowed","不允许"
+Number,数字
+of,/
+"Once you have configured the report, you can use a direct link to open the report on any device without opening the admin and always with fresh live data.","配置报告后，您可以使用直接链接在任何设备上打开报告，无需打开管理后台，且始终使用最新的实时数据。"
+"Open link","打开链接"
+"Open menu","打开菜单"
+"Override dashboard time","覆盖仪表盘时间"
+"Page Size","每页条数"
+Percent,百分比
+"Please select","请选择"
+"Previous period","上一周期"
+"Primary Filters","主要过滤器"
+"Private Board","私有看板"
+"Private Board will be available only for the current admin user. Shared Board will be available for all admin users.","私有看板仅对当前管理员用户可用。共享看板对所有管理员用户可用。"
+Quarter,季度
+"Quick Access & Sharing","快速访问和共享"
+"A quick access link to the report is a great alternative to routine daily exporting.","报告的快速访问链接是日常导出的绝佳替代方案。"
+Range,范围
+"records found","条记录"
+Refresh,刷新
+Remove,移除
+"Remove filter","移除过滤器"
+"Remove from chart","从图表中移除"
+"Removing board...","正在移除看板..."
+"Report data table with %1 rows","包含 %1 行的报告数据表"
+Reset,重置
+"Reset access token","重置访问令牌"
+"Reset Changes","重置更改"
+"Resetting the access token will deactivate the old access link. Anyone who previously had access to the board will lose it and will need the new link to access it.","重置访问令牌将使旧的访问链接失效。以前拥有看板访问权限的任何人都将失去权限，需要使用新链接才能访问。"
+"Rows Limit","行数限制"
+"Same period last month","上月同期"
+"Same period last week","上周同期"
+"Same period last year","去年同期"
+"Save Changes","保存更改"
+"Saving report...","正在保存报告..."
+Saving...,正在保存...
+"Search column across ALL tables by identifier.","按标识符在所有表中搜索列。"
+"Search for column","搜索列"
+"Select condition","选择条件"
+"Select date range","选择日期范围"
+"Select Date Range","选择日期范围"
+Share,共享
+"Share Dashboard","共享仪表盘"
+"Share in %1 format","以 %1 格式共享"
+"Shared Board","共享看板"
+"Sharing link","共享链接"
+"Show in chart","在图表中显示"
+"Show percentage of total","显示总计百分比"
+"Single Value","单一值"
+"Sort by %1","按 %1 排序"
+"Sort Order","排序顺序"
+Sorting,排序
+"Spark line","迷你图"
+String,字符串
+Sum,总和
+"Switch to %1 chart","切换到 %1 图表"
+Table,表格
+"Time Range","时间范围"
+Title,标题
+to,至
+"To date","结束日期"
+"to the current report.","到当前报告。"
+Toolbar,工具栏
+Type,类型
+"Type to search","输入以搜索"
+"Untitled Block","未命名区块"
+"Untitled Board","未命名看板"
+Value,值
+"We couldn't find any records.","未找到任何记录。"
+Week,周
+"Widget Library","小部件库"
+"Wrong configuration. Please change report building conditions.","配置错误。请更改报告生成条件。"
+Year,年
+"To add your first block, unlock the board (top right corner).","您需要解锁看板（右上角）才能添加第一个区块。"
+"Loading report data","正在加载报告数据"
+"Report data table for %1","%1 的报告数据表"
+Block,区块
+"Date Interval","日期间隔"
+Limit,限制
+"Add Block","添加区块"
+Active,启用
+"Attach each block as a separate CSV report","将每个区块作为单独的 CSV 报告附加"
+Subject,主题
+Recipient,收件人
+Schedule,计划
+"Should be cron-like expression. <br/>Example: 59 23 * * * <br/>Will be sent report every day at 23:59","应为类 cron 表达式。<br/>示例：59 23 * * * <br/>报告将于每天 23:59 发送"
+Body,正文
+"Add New Email","添加新邮件"
+ID,ID
+Status,状态
+"Last Sent At","上次发送时间"

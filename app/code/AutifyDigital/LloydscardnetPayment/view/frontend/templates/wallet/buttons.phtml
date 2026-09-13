@@ -1,0 +1,21 @@
+<?php
+/*
+ * This software is the confidential and proprietary information of Autify Digital Ltd.
+ * Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+ * Copyright (c) 2020-Present Autify Digital Ltd.
+ * This work is protected under applicable copyright and intellectual property laws.
+ * All rights reserved. Distribution and disclosure are permitted only in accordance with
+ * the terms of a valid written agreement with Autify Digital Ltd.
+ */
+
+/**
+ * Wraps the wallet buttons in a single element so nothing the theme adds to the add to cart
+ * actions - Instant Purchase in particular - can be rendered between them.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+$walletHtml = trim($block->getChildHtml('', true));
+?>
+<?php if ($walletHtml !== ''): ?>
+    <div class="lloyds-wallet-buttons"><?= /* @noEscape */ $walletHtml ?></div>
+<?php endif; ?>

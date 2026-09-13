@@ -1,0 +1,344 @@
+/*
+* This software is the confidential and proprietary information of Autify Digital Ltd.
+* Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+* Copyright (c) 2020-Present Autify Digital Ltd.
+* This work is protected under applicable copyright and intellectual property laws.
+* All rights reserved. Distribution and disclosure are permitted only in accordance with
+* the terms of a valid written agreement with Autify Digital Ltd.
+*/
+
+@color-border: #adadad;
+@color-white: #fff;
+@color-sky-blue: #006bb4;
+@color-red: #ed8380;
+@color-light-green: #79a22e;
+@color-pure-red: #e02b27;
+@color-primary: #007bff;
+@color-success: #28a745;
+@color-success-bg: #d2f2da;
+@color-warning: #ffc107;
+@color-warning-bg: #fbf0cd;
+@color-danger: #dc3545;
+@color-danger-bg: #f3d0d0;
+@color-muted: #6c757d;
+@color-muted-unchecked: #ffbf00;
+@color-muted-bg: #d9d5d5;
+@color-light-bg: #f8f9fa;
+@color-white: #fff;
+@color-text-primary: #333;
+@color-text-secondary: #666;
+@color-border-light: #f0f0f0;
+@color-white-v1: #f8f8f8;
+@color-white-v2: #ddd;
+@color-green-v1: #d4edda;
+@color-green-v2: #155724;
+@color-green-v3: #c3e6cb;
+@color-red-v1: #f8d7da;
+@color-red-v2: #721c24;
+@color-red-v3: #f5c6cb;
+
+& when (@media-common = true) {
+    .menu-wrapper {
+        .admin__menu {
+            /* phpcs:ignore */
+            #menu-autifydigital-lloydscardnetpayment-menu {
+                a {
+                    &:before {
+                        background: url('AutifyDigital_LloydscardnetPayment::images/autify-digital.png') no-repeat;
+                        background-position: center;
+                        background-size: cover;
+                        content: '';
+                        height: 40px;
+                        margin: auto auto 3px;
+                        padding: 0;
+                        width: 45px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* phpcs:ignore */
+#row_payment_autifydigital_lcnet_redirect_dynamic_merchant_name {
+    display: none;
+}
+
+section.admin__page-section.lloyd-cardnet-information {
+    width: 50%;
+}
+
+.sales-order_create-index .admin-payment-method-lcnetpaymentjs .admin__field {
+    padding-bottom: 20px;
+}
+.sales-order_create-index .payment-fields-container {
+    margin: 15px 0;
+}
+
+h3.lloyd-cardnet-section-title {
+    width: 45%;
+    display: inline-block;
+}
+.sales-order_create-index .payment-fields {
+    background-color: @color-white;
+    border: 1px solid @color-border;
+    border-radius: 1px;
+    font-size: 14px;
+    height: 36px;
+    margin-bottom: 8px;
+    position: relative;
+    transition: border-color 0.10s linear;
+}
+
+.sales-order_create-index .payment-fields.focus {
+    border-color: @color-sky-blue;
+}
+
+.sales-order_create-index .payment-fields.invalid {
+    border-color: @color-red;
+}
+
+.sales-order_create-index .payment-fields.valid {
+    border-color: @color-light-green;
+}
+
+.sales-order_create-index .fields-group {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+.sales-order_create-index .fields-group .field {
+    flex: 1;
+}
+
+.sales-order_create-index .label {
+    display: inline-block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.sales-order_create-index .required-field {
+    color: @color-pure-red;
+}
+
+.sales-order_create-index .field-error {
+    color: @color-pure-red;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.sales-order_create-index .admin-fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Card selector styling */
+.sales-order_create-index .admin__field-select-from-token {
+    margin-bottom: 15px;
+}
+
+.sales-order_create-index .admin__field-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.sales-order_create-index .admin__control-select {
+    background-color: @color-white;
+    border: 1px solid @color-border;
+    border-radius: 1px;
+    height: 36px;
+    padding: 4px 8px;
+    width: 100%;
+}
+
+.lloydscardnet-validation-container,
+.live-lloydscardnet-validation-container {
+    background-color: @color-white-v1;
+    border: 1px solid @color-white-v2;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.lloydscardnet-validation-container button,
+.live-lloydscardnet-validation-container button {
+    margin-right: 10px;
+}
+
+#lloydscardnet_validation_result,
+#live_lloydscardnet_validation_result {
+    font-weight: bold;
+}
+
+#lloydscardnet_validation_result.success,
+#live_lloydscardnet_validation_result.success {
+    background-color: @color-green-v1;
+    border: 1px solid @color-green-v3;
+    color: @color-green-v2;
+}
+
+#lloydscardnet_validation_result.error,
+#live_lloydscardnet_validation_result.error {
+    background-color: @color-red-v1;
+    border: 1px solid @color-red-v3;
+    color: @color-red-v2;
+}
+.lloyd-cardnet-payment-container {
+    background: @color-white;
+    margin-bottom: 20px;
+}
+
+.lloyd-cardnet-section {
+    padding-bottom: 35px;
+}
+
+.lloyd-cardnet-section:last-child {
+    padding-bottom: unset !important;
+}
+
+.lloyd-cardnet-section-title {
+    color: @color-text-primary;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+}
+
+.modal-content .lloyd-cardnet-payment-container {
+    margin: auto;
+    width: 70%;
+}
+
+.modal-content .lloyd-cardnet-info-table {
+    width: 100%;
+}
+
+.lloyd-cardnet-info-table {
+    border-collapse: collapse;
+    width: 60%;
+}
+
+.lloyd-cardnet-info-table tr {
+    border-bottom: 1px solid @color-border-light;
+}
+
+.lloyd-cardnet-info-table tr:last-child {
+    border-bottom: none;
+}
+
+.lloyd-cardnet-info-table th {
+    color: @color-text-secondary;
+    font-weight: 500;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    width: 200px;
+}
+
+.lloyd-cardnet-info-table td {
+    color: @color-text-primary;
+    font-weight: 500;
+    padding: 10px;
+    text-align: right;
+}
+
+.status-success {
+    background-color: @color-success-bg;
+    color: @color-success;
+    font-weight: 600;
+    padding: 0 5px;
+}
+
+.status-pending,
+.remote-status-waiting {
+    background-color: @color-warning-bg;
+    color: @color-warning;
+    font-weight: 600;
+    padding: 0 5px;
+}
+
+.status-cancelled {
+    background-color: @color-danger-bg;
+    color: @color-danger;
+    font-weight: 600;
+    padding: 0 5px;
+}
+
+.status-error {
+    background-color: @color-danger-bg;
+    color: @color-danger;
+    font-weight: 600;
+    padding: 0 5px;
+}
+
+.status-refunded {
+    background-color: @color-muted-bg;
+    color: @color-muted;
+    font-weight: 600;
+    padding: 0 5px;
+}
+
+.check-pass {
+    color: @color-success;
+    font-weight: 600;
+}
+
+.check-fail {
+    color: @color-danger;
+    font-weight: 600;
+}
+
+.check-unchecked {
+    color: @color-muted-unchecked;
+    font-weight: 600;
+}
+
+.remote-status-passed {
+    background-color: @color-success-bg;
+    border-radius: 3px;
+    color: @color-success;
+    font-weight: 600;
+    padding: 0 5px;
+}
+
+.remote-status-failed {
+    background-color: @color-danger-bg;
+    border-radius: 3px;
+    color: @color-danger;
+    font-weight: 600;
+    padding: 0 5px;
+}
+
+.remote-status-unknown {
+    background-color: @color-light-bg;
+    border-radius: 3px;
+    color: @color-muted;
+    font-weight: 500;
+    padding: 0 5px;
+}
+
+.card-icon {
+    align-items: center;
+    border-radius: 4px;
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: 600;
+    height: 20px;
+    justify-content: center;
+    width: 32px;
+}
+
+.payment-method-badge {
+    background: @color-primary;
+    border-radius: 20px;
+    color: @color-white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    text-transform: uppercase;
+}
+a.action-view-payment-details {
+    cursor: pointer;
+}

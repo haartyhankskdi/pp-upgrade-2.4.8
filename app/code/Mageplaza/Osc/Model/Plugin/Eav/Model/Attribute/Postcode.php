@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model\Plugin\Eav\Model\Attribute;
@@ -24,10 +24,6 @@ namespace Mageplaza\Osc\Model\Plugin\Eav\Model\Attribute;
 use Magento\Framework\Exception\LocalizedException;
 use Mageplaza\Osc\Helper\Address;
 
-/**
- * Class Postcode
- * @package Mageplaza\Osc\Model\Plugin\Eav\Model\Attribute
- */
 class Postcode
 {
     /**
@@ -47,7 +43,7 @@ class Postcode
 
     /**
      * @param \Magento\Customer\Model\Attribute\Data\Postcode $subject
-     * @param array|bool $result
+     * @param array|bool                                      $result
      *
      * @return array|string
      * @throws LocalizedException

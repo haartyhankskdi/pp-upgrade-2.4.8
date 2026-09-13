@@ -22,18 +22,19 @@
 /** @var \Mageplaza\Osc\Block\Adminhtml\Field\AbstractField $block */
 ?>
 
-<div id="<?= $block->escapeQuote($block->getBlockId()) ?>" class="mposc-field-container">
+<div id="<?= $escaper->escapeQuote($block->getBlockId()) ?>" class="mposc-field-container">
     <?php if ($block->isVisible() && $block->hasFields()): ?>
         <div class="containment row">
             <div class="field-wrapper available-wrapper col-m-4">
+                <span style="padding: 15px;color: #514943;font-weight: 600;font-size:13px"><?= /* @noEscape */ __('Disabled Field') ?></span>
                 <ul class="sortable-list ui-sortable">
                     <?php foreach ($block->getAvailableFields() as $field): ?>
-                        <li class="sortable-item" id="<?= $block->escapeQuote($field->getId()) ?>"
-                            data-code="<?= $block->escapeQuote($field->getAttributeCode()) ?>">
+                        <li class="sortable-item" id="<?= $escaper->escapeQuote($field->getId()) ?>"
+                            data-code="<?= $escaper->escapeQuote($field->getAttributeCode()) ?>">
                             <div class="attribute-label">
-                                <span><?= $block->escapeHtml($field->getFrontendLabel()) ?></span>
+                                <span><?= $escaper->escapeHtml($field->getFrontendLabel()) ?></span>
                                 <div class="attribute-required">
-                                    <input type="checkbox" title="<?= __('Is Required?') ?>"
+                                    <input type="checkbox" title="<?= /* @noEscape */ __('Is Required?') ?>"
                                         <?php if ($field->getIsRequired()) {
                                             echo ' checked';
                                         } ?>>
@@ -44,16 +45,17 @@
                 </ul>
             </div>
             <div class="field-wrapper sorted-wrapper col-m-8">
+                <span style="padding: 15px;color: #514943;font-weight: 600;font-size:13px"><?= /* @noEscape */ __('Enabled Field') ?></span>
                 <ul class="sortable-list ui-sortable">
                     <?php foreach ($block->getSortedFields() as $field): ?>
-                        <li class="sortable-item <?= $block->escapeQuote($field->getColStyle()) ?>"
-                            id="<?= $field->getId() ?>"
-                            data-code="<?= $field->getAttributeCode() ?>">
+                        <li class="sortable-item <?= $escaper->escapeQuote($field->getColStyle()) ?>"
+                            id="<?= /* @noEscape */ $field->getId() ?>"
+                            data-code="<?= /* @noEscape */ $field->getAttributeCode() ?>">
                             <div class="attribute-label">
-                                <span><?= $block->escapeHtml($field->getFrontendLabel()) ?></span>
+                                <span><?= $escaper->escapeHtml($field->getFrontendLabel()) ?></span>
                                 <?php if ($field->getId()): ?>
                                     <div class="attribute-required">
-                                        <input type="checkbox" title="<?= __('Is Required?') ?>"
+                                        <input type="checkbox" title="<?= /* @noEscape */ __('Is Required?') ?>"
                                             <?php if ($field->getIsRequiredMp()) {
                                                 echo ' checked';
                                             } ?>>

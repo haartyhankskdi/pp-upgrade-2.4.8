@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="magefan_blog_recent">
+        <parameters>
+            <parameter name="include_post_rich_snippet" xsi:type="select" visible="true" sort_order="75" >
+                <label translate="true">Include Post Rich Snippet / Structured Data (Blog Plus)</label>
+                <description translate="true">Set to YES to include structured data JSON-LD for each post in this widget.</description>
+                <options>
+                    <option name="0" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="1" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="magefan_blog_featured">
+        <parameters>
+            <parameter name="include_post_rich_snippet" xsi:type="select" visible="true" sort_order="35" >
+                <label translate="true">Include Post Rich Snippet / Structured Data (Blog Plus)</label>
+                <description translate="true">Set to YES to include structured data JSON-LD for each post in this widget.</description>
+                <options>
+                    <option name="0" value="0">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="1" value="1">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

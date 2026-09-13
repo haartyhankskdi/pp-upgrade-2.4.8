@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/-->
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */-->
 
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
@@ -229,13 +229,11 @@
         </field>
 
         <field name="store_id" sortOrder="60" formElement="multiselect">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="default" xsi:type="number">0</item>
-                </item>
-            </argument>
             <settings>
                 <label translate="true">Store View</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
             </settings>
             <formElements>
                 <multiselect>
@@ -338,7 +336,7 @@
             <label translate="true">Notifications</label>
         </settings>
 
-        <fieldset name="email_notification">
+        <fieldset name="email_notification" sortOrder="10">
             <settings>
                 <label translate="true">Email Notifications</label>
                 <dataScope/>
@@ -469,7 +467,7 @@
             </field>
         </fieldset>
 
-        <fieldset name="answer_notification">
+        <fieldset name="answer_notification" sortOrder="20">
             <settings>
                 <label translate="true">Answer the Submitted Form</label>
                 <dataScope/>
@@ -518,7 +516,7 @@
 
         </fieldset>
 
-        <fieldset name="autoresponder">
+        <fieldset name="autoresponder" sortOrder="30">
             <settings>
                 <label translate="true">Autoresponder</label>
                 <dataScope/>
@@ -579,9 +577,7 @@
                 </argument>
                 <settings>
                     <label translate="true">Enable Auto Response</label>
-                    <notice translate="true">Please note. "Email Address Field" should be selected for detecting
-                        recipient email.
-                    </notice>
+                    <notice translate="true">Please note. "Email Address Field" should be selected for detecting recipient email.</notice>
                 </settings>
                 <formElements>
                     <select>
@@ -657,9 +653,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">form</item>
-                    <item name="default" xsi:type="string">Thanks for contacting us. Your request was saved
-                        successfully.
-                    </item>
+                    <item name="default" xsi:type="string">Thanks for contacting us. Your request was saved successfully.</item>
                 </item>
             </argument>
             <settings>
@@ -745,7 +739,6 @@
                 </validation>
             </settings>
         </field>
-
     </fieldset>
 
     <fieldset name="creator" sortOrder="40">
@@ -818,8 +811,7 @@
             </argument>
             <settings>
                 <label translate="true">Template Embedding Code</label>
-                <notice translate="true">Insert this code into *.phtml template directly to display form in any block.
-                </notice>
+                <notice translate="true">Insert this code into *.phtml template directly to display form in any block.</notice>
                 <dataType>text</dataType>
                 <visible>true</visible>
                 <disabled>true</disabled>

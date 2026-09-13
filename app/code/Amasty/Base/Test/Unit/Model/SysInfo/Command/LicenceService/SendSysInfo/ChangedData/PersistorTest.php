@@ -16,6 +16,7 @@ use Amasty\Base\Model\SysInfo\Command\LicenceService\SendSysInfo\Checker;
 use Amasty\Base\Model\SysInfo\Command\LicenceService\SendSysInfo\Encryption;
 use Amasty\Base\Model\SysInfo\Provider\Collector;
 use Amasty\Base\Model\SysInfo\Provider\CollectorPool;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -66,6 +67,7 @@ class PersistorTest extends TestCase
      * @dataProvider getDataProvider
      * @return void
      */
+    #[DataProvider('getDataProvider')]
     public function testGet(bool $isChangedCacheValue): void
     {
         $cacheValue = 'cache_value';
@@ -103,7 +105,7 @@ class PersistorTest extends TestCase
         $this->assertEquals($changedData, $this->model->get());
     }
 
-    public function getDataProvider(): array
+    public static function getDataProvider(): array
     {
         return [
             [true],

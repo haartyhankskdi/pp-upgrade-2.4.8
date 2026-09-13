@@ -8,6 +8,9 @@
 					<resource id="Kdi_Testimonials::Testimonials_delete" title="Delete Testimonials" sortOrder="20"/>
 					<resource id="Kdi_Testimonials::Testimonials_update" title="Update Testimonials" sortOrder="30"/>
 					<resource id="Kdi_Testimonials::Testimonials_view" title="View Testimonials" sortOrder="40"/>
+					<resource id="Kdi_Testimonials::kdi_testimonials_testimonials"
+                              title="Testimonials"
+                              sortOrder="10"/>
 				</resource>
 			</resource>
 		</resources>

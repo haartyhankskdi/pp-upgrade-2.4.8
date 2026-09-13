@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Block\Checkout;
@@ -36,10 +36,6 @@ use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionException;
 
-/**
- * Class LayoutProcessorTest
- * @package Mageplaza\Osc\Test\Unit\Block\Checkout
- */
 class LayoutProcessorTest extends TestCase
 {
     /**
@@ -77,7 +73,7 @@ class LayoutProcessorTest extends TestCase
      */
     private $layoutProcessorBlock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->checkoutSessionMock = $this->getMockBuilder(CheckoutSession::class)
             ->disableOriginalConstructor()
@@ -109,7 +105,7 @@ class LayoutProcessorTest extends TestCase
 
     /**
      * @param string $methodName
-     * @param array $parameters
+     * @param array  $parameters
      *
      * @return mixed
      * @throws ReflectionException
@@ -126,7 +122,7 @@ class LayoutProcessorTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestGetAddressAttributes()
+    public static function providerTestGetAddressAttributes()
     {
         return [
             [
@@ -177,14 +173,14 @@ class LayoutProcessorTest extends TestCase
 
     /**
      * @param $result
-     * @param string $attributeCode
+     * @param string  $attributeCode
      * @param $attributeMapperExpects
      * @param $isUserDefinedExpect
      * @param boolean $isUserDefined
-     * @param array $attributeMap
+     * @param array   $attributeMap
      *
      * @dataProvider providerTestGetAddressAttributes
-     * @throws ReflectionException
+     * @throws       ReflectionException
      */
     public function testGetAddressAttributes(
         $result,
@@ -202,12 +198,20 @@ class LayoutProcessorTest extends TestCase
         $attributeCollectionMock = $this->getMockBuilder(Collection::class)
             ->disableOriginalConstructor()
             ->getMock();
+        $loadCallCount = 0;
         $this->attributeMetadataDataProviderMock->expects($this->exactly(2))
             ->method('loadAttributesCollection')
-            ->withConsecutive(
-                ['customer_address', 'onestepcheckout_index_index'],
-                ['customer_address', 'customer_register_address']
-            )->willReturn($attributeCollectionMock);
+            ->willReturnCallback(function ($entityType, $formCode) use (&$loadCallCount, $attributeCollectionMock) {
+                $loadCallCount++;
+                if ($loadCallCount === 1) {
+                    $this->assertEquals('customer_address', $entityType);
+                    $this->assertEquals('onestepcheckout_index_index', $formCode);
+                } else {
+                    $this->assertEquals('customer_address', $entityType);
+                    $this->assertEquals('customer_register_address', $formCode);
+                }
+                return $attributeCollectionMock;
+            });
         $attributeMock = $this->getMockBuilder(\Magento\Customer\Model\Attribute::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -225,7 +229,7 @@ class LayoutProcessorTest extends TestCase
     /**
      * @return array
      */
-    public function providerTestAddCustomerAttribute()
+    public static function providerTestAddCustomerAttribute()
     {
         $fields = [
             'postcode' => [
@@ -307,10 +311,10 @@ class LayoutProcessorTest extends TestCase
     }
 
     /**
-     * @param array $result
-     * @param array $fields
+     * @param array   $result
+     * @param array   $fields
      * @param boolean $isCustomerAttribute
-     * @param string $type
+     * @param string  $type
      *
      * @dataProvider providerTestAddCustomerAttribute
      *

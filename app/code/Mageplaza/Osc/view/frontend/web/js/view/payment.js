@@ -12,10 +12,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 define(
@@ -35,78 +35,92 @@ define(
         'mage/translate'
     ],
     function (ko,
-              $,
-              Component,
-              quote,
-              stepNavigator,
-              additionalValidators,
-              oscDataResolver,
-              oscPaymentService,
-              paypalExpressCompatible,
-              customerData,
-              discountPaymentMethodAction,
-              resolver) {
+        $,
+        Component,
+        quote,
+        stepNavigator,
+        additionalValidators,
+        oscDataResolver,
+        oscPaymentService,
+        paypalExpressCompatible,
+        customerData,
+        discountPaymentMethodAction,
+        resolver
+    ) {
         'use strict';
-
+        var oscConfig          = window.checkoutConfig.oscConfig.enableOscPro,
+            loadingSpeedConfig = window.loadingSpeedConfig;
         oscDataResolver.resolveDefaultPaymentMethod();
         var isReload = true;
 
-        return Component.extend({
-            defaults: {
-                template: 'Mageplaza_Osc/container/payment'
-            },
-            isLoading: oscPaymentService.isLoading,
-            errorValidationMessage: ko.observable(false),
+        return Component.extend(
+            {
+                defaults: {
+                    template: 'Mageplaza_Osc/container/payment'
+                },
+                isLoading: oscPaymentService.isLoading,
+                errorValidationMessage: ko.observable(false),
 
-            initialize: function () {
-                var self = this;
+                initialize: function () {
+                    var self = this;
 
-                this._super();
+                    this._super();
 
-                stepNavigator.steps.removeAll();
+                    stepNavigator.steps.removeAll();
 
-                additionalValidators.registerValidator(this);
+                    additionalValidators.registerValidator(this);
 
-                quote.paymentMethod.subscribe(function (value) {
-                    paypalExpressCompatible.togglePlaceOrderButton(quote.paymentMethod());
-                    self.errorValidationMessage(false);
-                    if($.type(value) === 'object') {
-                        discountPaymentMethodAction(value);
+                    quote.paymentMethod.subscribe(
+                        function (value) {
+                            paypalExpressCompatible.togglePlaceOrderButton(quote.paymentMethod());
+                            self.errorValidationMessage(false);
+                            if($.type(value) === 'object') {
+
+                                if (!loadingSpeedConfig || loadingSpeedConfig.refresh_page === '1' || !oscConfig) {
+                                    discountPaymentMethodAction(value);
+                                } else if (loadingSpeedConfig && loadingSpeedConfig.payment_method_change.includes('1')) {
+                                    discountPaymentMethodAction(value);
+                                }
+
+                            }
+                        }
+                    );
+
+                    if ($('.page.messages')) {
+                        setTimeout(
+                            function () {
+                                $('.page.messages').remove()
+                            }, 8000
+                        );
                     }
-                });
 
-                if ($('.page.messages')) {
-                    setTimeout(function () {
-                        $('.page.messages').remove()
-                    }, 8000);
-                }
+                    if (isReload) {
+                        customerData.reload(['cart'], false);
+                        isReload = false;
+                    }
+                    this.customer = customerData.get('cart');
 
-                if (isReload) {
-                    customerData.reload(['cart'], false);
-                    isReload = false;
-                }
-                this.customer = customerData.get('cart');
+                    resolver(this.afterResolveDocument.bind(this));
 
-                resolver(this.afterResolveDocument.bind(this));
+                    return this;
+                },
 
-                return this;
-            },
+                validate: function () {
+                    if (!quote.paymentMethod()) {
+                        this.errorValidationMessage($.mage.__('Please specify a payment method.'));
 
-            validate: function () {
-                if (!quote.paymentMethod()) {
-                    this.errorValidationMessage($.mage.__('Please specify a payment method.'));
+                        return false;
+                    }
 
-                    return false;
-                }
+                    return true;
+                },
 
-                return true;
-            },
-
-            afterResolveDocument: function () {
-                if($.type(quote.paymentMethod()) === 'object'){
-                    discountPaymentMethodAction(quote.paymentMethod());
-                }
-            },
-        });
+                afterResolveDocument: function () {
+                    if($.type(quote.paymentMethod()) === 'object') {
+                        discountPaymentMethodAction(quote.paymentMethod());
+                    }
+                },
+            }
+        );
     }
 );

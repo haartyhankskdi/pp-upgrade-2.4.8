@@ -110,13 +110,13 @@ abstract class Banner extends Action
         LoggerInterface $logger
     ) {
         $this->resultForwardFactory = $resultForwardFactory;
-        $this->resultPageFactory    = $resultPageFactory;
-        $this->_coreRegistry        = $coreRegistry;
-        $this->bannerFactory        = $bannerFactory;
-        $this->resourceModel        = $resourceModel;
-        $this->_dateFilter          = $dateFilter;
-        $this->helperData           = $helperData;
-        $this->logger               = $logger;
+        $this->resultPageFactory = $resultPageFactory;
+        $this->_coreRegistry = $coreRegistry;
+        $this->bannerFactory = $bannerFactory;
+        $this->resourceModel = $resourceModel;
+        $this->_dateFilter = $dateFilter;
+        $this->helperData = $helperData;
+        $this->logger = $logger;
         parent::__construct($context);
     }
 

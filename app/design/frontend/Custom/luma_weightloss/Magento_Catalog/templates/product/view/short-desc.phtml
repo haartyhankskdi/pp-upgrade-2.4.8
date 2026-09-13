@@ -19,7 +19,7 @@ $prodSku = $_product->getSku();
 
 <div class="prod-desprection">
     <?php if ($productDesc != "") { ?>
-        <div id="short-desc">
+        <div id="short-desc" style="display:none;">
             <!--SHORT DESCRIPTIONS -->
 
             <?php echo implode(' ', array_slice(explode(' ', $productDesc), 0, 20)) . "\n"; ?>
@@ -31,83 +31,15 @@ $prodSku = $_product->getSku();
         <span id="product-view-full-desc" style="display: none;">
             <?php /* @escapeNotVerified */ echo $productDesc; ?>
         </span>
-
-        <!--READ MORE FUNCTION -->
-        <a onclick="readLessReadMore()" id="product-view-desc-hh">Read more</a>
+ 
 
     <?php }
     if ($prodStock && $_product->getTypeId() == "configurable") { ?>
         <!-- <span class="select-custoption">Please make a selection</span> -->
-        <div class="question-text clinical-consultation">
-
-            <div class="consultation-section question-text">
-                <div class="consultation_block_section question-text">
-                    <div class="consultation_block question-text">
-                        <!-- <span class="question-text ">01</span> -->
-                        <div class="consultation-cont question-text">
-                            <div class="consultation_img question-text"><img class="question-text" src="medicine-icon.svg" alt="" /></div>
-                            <h4 class="question-text">Consult</h4>
-                        </div>
-                    </div>
-                    <div class="consultation_block question-text">
-                        <!-- <span class="question-text step_1">02</span> -->
-                        <div class="consultation-cont question-text">
-                            <div class="consultation_img question-text"><img class="question-text" src="order-review-img.svg" alt="" /></div>
-                            <h4 class="question-text">Select</h4>
-                        </div>
-                    </div>
-                    <div class="consultation_block question-text">
-                        <!-- <span class="question-text step_2">03</span> -->
-                        <div class="consultation-cont question-text">
-                            <div class="consultation_img question-text"><img class="question-text" src="delivery-icon.svg" alt="" /></div>
-                            <h4 class="question-text">Checkout</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- <button type="button" class="before-start-consultation question-text" style="display: block;">< back to product</button> -->
-            <!-- Discretion & Confidentiality -->
-
-            <!-- <div class="discretion-confidentiality-panel new-flow-top">
-            <div class="discretion-section">
-                <div class="discretion_block_section">
-                    <div class="discretion_block">
-                        <span>01</span>
-                        <div class="discretion-cont">
-                            <div class="discretion_img"><img src="/media/medicine-icon.svg" alt="" /></div>
-                            <h4>Select</h4>
-                            <p>the items you wish<br> to order</p>
-                        </div>
-
-                    </div>
-
-                    <div class="discretion_block block_2">
-                        <span>02</span>
-                        <div class="discretion-cont">
-                            <div class="discretion_img"><img src="/media/order-review-img.svg" alt="" /></div>
-                            <h4>Order reviewed</h4>
-                            <p>by our qualified<br> prescriber</p>
-                        </div>
-
-                    </div>
-
-                    <div class="discretion_block block_3">
-                        <span>03</span>
-                        <div class="discretion-cont">
-                            <div class="discretion_img"><img src="/media/delivery-icon.svg" alt="" /></div>
-                            <h4>Delivered</h4>
-                            <p>to your door step</p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-
-            <h2 class="question-text">Your Selection</h2>
-            <p class="p-description question-text">Please use the options provided to make your final selection.</p>
-            <!-- <p  class="p-description question-text order-message" style="background-color: red; color: white;border-radius: 10px; padding: 10px 20px;">If our prescriber is unable to approve your order for any reason, you will receive a full refund</p> -->
+        <div class="question-text">
+    <h2 class="question-text">Your Selection</h2>
+            <p class="p-description">Please use the options provided to make your final selection.</p>
+             
             </p>
         </div>
 
@@ -119,15 +51,15 @@ $prodSku = $_product->getSku();
             <img src="<?= $imageUrl ?>" alt="prodName">
         </div>
         <div class="product-name"><?= $prodName ?></div>
-        <div class="product-price">
+        <!-- <div class="product-price">
             <span class="brnad-selection"></span>
             <span class="size-selection"></span>
             <span class="price"><?php echo "£" . $prodPrice; ?></span>
-        </div>
+        </div> -->
     </div>
-    <div class="total">
+    <!-- <div class="total">
         <span>Total</span>
-    </div>
+    </div> -->
 </div>
 <?php
 if (!($_product->isSaleable()) && $_product->getTypeId() == "configurable") {
@@ -322,3 +254,282 @@ if (!($_product->isSaleable()) && $_product->getTypeId() == "configurable") {
         ]
     }
 </script>
+
+
+<style>
+.catalog-product-view .product-info-main .page-title-wrapper.product{
+    display: none;
+}
+
+.catalog-product-view .product-det {
+    width: 92%;
+    float: left;
+    padding: 30px;
+    margin: 25px 0 0 0;
+    background: #F1F7F9;
+  }
+
+.catalog-product-view .prod-desprection h2.question-text {
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 0 0 5px 0;
+    font-size: 38px;
+    color: #000;
+    font-family: 'Lato', sans-serif;
+    line-height: 48px;
+    font-weight: 300 !important; 
+}
+.catalog-product-view .product-info-main{
+    background-color: #fff !important;
+}
+
+.catalog-product-view .product-info-main .product-add-form{
+    padding: 0 30px;
+    background-color: #F1F7F9;
+    width: auto;
+    margin-bottom: 40px;
+}
+.catalog-product-view .product-options-bottom .box-tocart .actions #product-addtocart-button{
+    width: auto;
+}
+
+.catalog-product-view.page-layout-1column .product-info-main{
+    margin-top: 0;
+}
+@media only screen and (min-width: 768px) {
+     .catalog-product-view .product-info-main{
+        width: 55% !important; 
+        margin: 0 auto !important;
+        float: none !important;
+    }
+    .catalog-product-view .product-options-bottom{
+        width: 50% !important;
+    }
+    .catalog-product-view .product-info-main .product-config-price{
+        width: 50% !important;
+        float: right;
+        bottom: 0;
+        padding-top: 20px;
+    }
+    .catalog-product-view .product-info-main .price-box {
+        width: 200px;
+        float: right;
+    }
+    .catalog-product-view .product-add-form .product-options-wrapper .field .control {
+        width: 100%;
+      }
+}
+.product-info-main .product-add-form #custom-selected-option{
+    padding: 0 !important;
+    border-bottom: 1px solid #e7e9eb;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.catalog-product-view .product-options-bottom {
+    width: 100%;
+    border-top:0;
+    padding-top:0;
+    margin-top: 0;
+  }
+
+
+
+  .catalog-product-view .product-info-main .price-container .price-label {
+    display: none !important;
+  }
+
+  .catalog-product-view .selected-product .other-products {
+    width: 100%;
+    float: left;
+    margin-top: 20px;
+  }
+
+  .catalog-product-view .product-question-right {
+    display: none;
+  }
+
+
+  .catalog-product-view #itoris_dynamicproductoptions .fieldset.fieldset-section-1 {
+    background: transparent !important;
+  }
+
+  .catalog-product-view .product-options-wrapper .fieldset {
+    background: #F1F7F9 !important;
+    padding: 0 30px 30px 30px;
+    margin-bottom: 20px !important;
+  }
+
+  .catalog-product-view .field.configurable {
+    width: auto;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 0;
+  }
+ 
+  .catalog-product-view .field.configurable {
+    width: 200px;
+  }
+
+  .catalog-product-view .field.required.configurable .label:after {
+    margin-left: 0;
+  }
+
+  
+
+  .catalog-product-view .field.configurable label {
+    color: #161616;
+    font-size: 14px;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 22px;
+    font-weight: 600 !important;
+    margin-bottom: 3px !important;
+    float: left;
+  }
+
+  .catalog-product-view .field.configurable select {
+    border: 1px solid #D7E7EC;
+    border-radius: 50px;
+    height: 55px;
+    padding: 0 35px 0 20px;
+  }
+
+  .catalog-product-view .product-det .product-name {
+    padding-top: 15px;
+  }
+ 
+
+  .catalog-product-view .field.configurable select {
+    position: relative;
+    background: url(https://www.pharmacyplanet.com/pub/static/frontend/Custom/luma_weightloss/en_GB/images/select-dropdown-arrow.png) no-repeat right 15px center #fff !important;
+  }
+
+  .catalog-product-view .field.configurable select::after {
+    content: "\25b6";
+    position: absolute;
+    right: 0px;
+    top: 10px;
+    display: block;
+    transition: all 0.4s;
+    color: #000;
+    font-size: 16px;
+    transform: rotate(90deg);
+  }
+
+  .catalog-product-view .product-info-mai .selected-product {
+    width: 100%;
+    float: left;
+    position: relative;
+  }
+
+ .catalog-product-view .product-det .product-desc {
+  display: inline-block; 
+  width: 100%;
+}
+.catalog-product-view .product-det .product-desc .product-img {
+    display: flex;
+    float: left;
+    margin-right: 14px;
+    align-items: center;
+    justify-content: center;
+    height: 135px;
+    background-color: #fff;
+    padding: 8px;
+}
+.catalog-product-view .product-det .product-desc .product-name{
+    display: inline-block; 
+    float: none;
+    vertical-align: bottom; 
+    color: #000000; 
+    font-weight: bold; 
+    font-size: 24px; 
+    margin-bottom: 6px; 
+    line-height: 30px;
+  }
+
+.catalog-product-view .product-options-wrapper .fieldset {    
+  padding:0;
+}
+.catalog-product-view .product-info-main .product-config-price .price-wrapper:before {
+  font-weight: bold; 
+  color: #000000; 
+  margin-bottom: 20px;
+}
+.catalog-product-view .product-info-main .product-config-price .price-container .price {
+  font-size: 45px !important;
+}
+.catalog-product-view .product-add-form {
+  margin-bottom: 0;
+}
+.catalog-product-view .product-info-main { 
+  padding-bottom: 0 !important;
+}
+
+.catalog-product-view .product-info-main .product-config-price .price-wrapper{
+    position: relative;
+}
+.catalog-product-view .product-info-main .product-config-price .price-wrapper:before {
+    content: " Total";
+    color: #2C596D;
+    font-size: 14px;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 16px;
+    font-weight: 400;
+    width: 100%;
+    float: left;
+  }
+
+@media screen and (min-width: 1025px) {
+    .catalog-product-view .product-info-main .product-det .product-desc .product-name{
+        width: 70% !important;
+        margin-top: 25px !important;
+    }
+    .catalog-product-view .product-info-main .product-det .product-img{
+        width: 140px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .catalog-product-view .product-info-main .product-det .product-desc .product-img{
+        background-color: transparent;
+        padding: 0;
+    }
+    .catalog-product-view .product-info-main .product-add-form{
+        width: 100%;
+        padding: 0;
+    }
+    .catalog-product-view.page-product-configurable .product-info-main .product-det{
+        width: 92% !important;
+    }
+    .catalog-product-view .product-options-wrapper .fieldset{
+
+        margin-bottom: 0 !important;
+    }
+    .catalog-product-view .field.configurable{
+        width: 100% !important;
+    }
+    .catalog-product-view .product-add-form .product-options-wrapper .field .control{
+        padding: 0 16px;
+        margin-bottom: 25px;
+    }
+    .catalog-product-view .field.configurable label{
+        padding: 0 16px;
+    }
+    .catalog-product-view .product-info-main .product-add-form .product-config-price{
+        padding: 0 20px;
+    }
+    .catalog-product-view .product-info-main .product-options-bottom .box-tocart{
+        padding: 0 20px;
+    }
+    .catalog-product-view .product-info-main .product-add-form #custom-selected-option{
+        border-bottom: 0 !important;
+    }
+    .catalog-product-view .product-options-bottom{
+        border-top: 1px solid #e7e9eb;
+        margin-top: 15px;
+    }
+}
+
+
+
+</style>

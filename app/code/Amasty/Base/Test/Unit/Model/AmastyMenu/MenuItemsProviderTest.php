@@ -18,6 +18,7 @@ use Magento\Backend\Model\Menu\Config;
 use Magento\Backend\Model\Menu\Filter\Iterator;
 use Magento\Backend\Model\Menu\Filter\IteratorFactory;
 use Magento\Backend\Model\Menu\Item;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -62,7 +63,7 @@ class MenuItemsProviderTest extends TestCase
         $this->defaultMenuMock = $this->createMock(Menu::class);
 
         $iteratorFactoryMock = $this->createMock(IteratorFactory::class);
-        $iteratorFactoryMock->expects($this->any())->method('create')->willReturn($this->iteratorMock);
+        $iteratorFactoryMock->method('create')->willReturn($this->iteratorMock);
 
         $menuConfigMock = $this->createMock(Config::class);
         $menuConfigMock->expects($this->once())->method('getMenu')->willReturn($this->defaultMenuMock);
@@ -83,19 +84,19 @@ class MenuItemsProviderTest extends TestCase
      * @param array $expectedItemsData
      * @return void
      */
-    public function testGet(Item $menuItemMock, array $configData, array $expectedItemsData): void
+    #[DataProvider('getDataProvider')]
+    public function testGet(array $menuItemMockData, array $configData, array $expectedItemsData): void
     {
-        $this->iteratorMock->expects($this->any())->method('valid')->willReturn(true, false);
-        $this->iteratorMock->expects($this->any())->method('current')->willReturn($menuItemMock);
-        $this->configItemsProviderMock->expects($this->any())->method('getConfigItems')->willReturn($configData);
+        $menuItemMock = $this->createConfiguredMock(...$menuItemMockData);
+        $this->iteratorMock->method('valid')->willReturn(true, false);
+        $this->iteratorMock->method('current')->willReturn($menuItemMock);
+        $this->configItemsProviderMock->method('getConfigItems')->willReturn($configData);
 
-        $index = 0;
+        $returnMap = [];
         foreach ($expectedItemsData as $expectedItemData) {
-            $this->menuItemFactoryMock->expects($this->at($index++))->method('create')->with(
-                ['data' => $expectedItemData]
-            );
+            $returnMap[] =  ['data' => $expectedItemData];
         }
-
+        $this->menuItemFactoryMock->method('create')->willReturnMap($returnMap);
         $this->menuItemsProvider->get();
     }
 
@@ -110,21 +111,19 @@ class MenuItemsProviderTest extends TestCase
 
         $reflection = new \ReflectionClass(get_class($this->menuItemsProvider));
         $property = $reflection->getProperty('amastyItems');
-        $property->setAccessible(true);
         $property->setValue($this->menuItemsProvider, $storedData);
 
         $result = $this->menuItemsProvider->get();
         $this->assertEquals($storedData, $result);
     }
 
-    public function getDataProvider(): array
+    public static function getDataProvider(): array
     {
         return [
             'both config and menu from same module' => [
-                $this->createConfiguredMock(
+                [
                     Item::class,
-                    ['getId' => 'Amasty_Test::test', 'getAction' => 'test']
-                ),
+                    ['getId' => 'Amasty_Test::test', 'getAction' => 'test']],
                 [
                     'Amasty_Test' => ['test_data']
                 ],
@@ -140,10 +139,10 @@ class MenuItemsProviderTest extends TestCase
                 ]
             ],
             'config and menu from different modules' => [
-                $this->createConfiguredMock(
+                [
                     Item::class,
                     ['getId' => 'Amasty_Test::test', 'getAction' => 'test']
-                ),
+                ],
                 [
                     'Amasty_Test2' => ['test_data']
                 ],
@@ -161,10 +160,10 @@ class MenuItemsProviderTest extends TestCase
                 ]
             ],
             'only menu data' => [
-                $this->createConfiguredMock(
+                [
                     Item::class,
                     ['getId' => 'Amasty_Test::test', 'getAction' => 'test']
-                ),
+                ],
                 [],
                 [
                     'Amasty_Test' => [

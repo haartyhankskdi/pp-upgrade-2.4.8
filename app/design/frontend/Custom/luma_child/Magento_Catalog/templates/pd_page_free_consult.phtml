@@ -90,7 +90,7 @@ $key = array_search($currentProduct->getId(), $weightLossProductsId);
                     <button type="submit" class=""><?= $block->escapeHtml($buttonTitle) ?></button>
                 
                 <?php elseif($key !== false) : ?>
-                    <a href="/weightloss/wl-login" class="back-to-start-consultation" data-product="<?= $block->escapeHtmlAttr(strtolower(trim($_product->getName()))) ?>">
+                    <a href="/weightloss/wl-login" class="back-to-start-consultation" data-product="<?= $block->escapeHtmlAttr(strtolower(trim((string) $_product->getName()))) ?>">
                         <button type="button"><?php echo __("Start Consultation"); ?></button>
                     </a>
                 <?php else : ?>

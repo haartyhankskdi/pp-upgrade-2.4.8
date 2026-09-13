@@ -1,0 +1,26 @@
+<?php
+/**
+ * This software is the confidential and proprietary information of Autify Digital Ltd.
+ * Unauthorized use, reproduction, or distribution of this software, in whole or in part, is strictly prohibited.
+ * Copyright (c) 2020-Present Autify Digital Ltd.
+ * All rights reserved. Distribution and disclosure are permitted only in accordance with
+ * the terms of a valid written agreement with Autify Digital Ltd.
+ */
+?>
+<?php
+/** @var \AutifyDigital\LloydscardnetPayment\Block\Googlepay\Cart $block */
+$helper = $block->getHelper();
+$orderTotal = $block->getCartGrandTotal();
+
+if ($helper->displayCartGooglePay($orderTotal) &&
+    $helper->getGooglepayPaymentMethodInteration() == 'onsite'
+) { ?>
+    <div id="google-pay-button-container" class="google-pay-cart-button"></div>
+    <script type="text/x-magento-init">
+    {
+        "*": {
+            "AutifyDigital_LloydscardnetPayment/js/view/cart-googlepay": {}
+        }
+    }
+    </script>
+<?php } ?>

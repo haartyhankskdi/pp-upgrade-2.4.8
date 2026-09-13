@@ -135,7 +135,7 @@ class Session extends MagentoAbstractHelper
      */
     public function isJson($string)
     {
-        json_decode($string);
+        json_decode((string) $string);
 
         return (json_last_error() == JSON_ERROR_NONE);
     }

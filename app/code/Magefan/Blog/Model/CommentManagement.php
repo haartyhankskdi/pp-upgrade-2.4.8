@@ -31,22 +31,55 @@ class CommentManagement extends AbstractManagement
         $this->_itemFactory = $commentFactory;
     }
 
-     /**
-      * Retrieve list of tag by page type, term, store, etc
-      *
-      * @param  string $type
-      * @param  string $postId
-      * @param  int $storeId
-      * @param  int $page
-      * @param  int $limit
-      * @return string
-      */
+    /**
+     * Retrieve list of tag by page type, term, store, etc
+     *
+     * @param string $type
+     * @param mixed $term
+     * @param int $storeId
+     * @param int $page
+     * @param int $limit
+     * @return string
+     */
     public function getList($type, $term, $storeId, $page, $limit)
+    {
+        return $this->fetchFilteredComments($type, $term, $storeId, $page, $limit);
+    }
+
+    /**
+     * Retrieve all posts (including inactive) filtered by type, term, store, etc
+     *
+     * @param string $type
+     * @param string $term
+     * @param int $storeId
+     * @param int $page
+     * @param int $limit
+     * @return string
+     */
+    public function getAll($type, $term, $storeId, $page, $limit)
+    {
+        return $this->fetchFilteredComments($type, $term, $storeId, $page, $limit, false);
+    }
+
+    /**
+     *  Build a JSON response with posts filtered by type, term, store, etc
+     *
+     * @param string $type
+     * @param string $term
+     * @param int $storeId
+     * @param int $page
+     * @param int $limit
+     * @param bool $active
+     * @return false|string
+     */
+    public function fetchFilteredComments($type, $term, $storeId, $page, $limit, bool $active = true)
     {
         try {
             $collection = $this->_itemFactory->create()->getCollection();
+            if ($active) {
+                $collection->addActiveFilter();
+            }
             $collection
-                ->addActiveFilter()
                 ->addStoreFilter($storeId)
                 ->setCurPage($page)
                 ->setPageSize($limit);
@@ -77,6 +110,12 @@ class CommentManagement extends AbstractManagement
         }
     }
 
+    /**
+     * Retrieves dynamic data from the given item, including nested replies.
+     *
+     * @param object $item
+     * @return array
+     */
     public function getDynamicData($item)
     {
         $data = $item->getData();

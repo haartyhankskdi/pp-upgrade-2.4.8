@@ -41,59 +41,105 @@ define([
          */
         renderCaptcha: function () {
             $(window).on('amcaptchaReady', this.initFormHandler.bind(this));
+            $(document).on('am-recaptcha:rerender-forms', this.reRenderRecaptchaOnProtectedForms.bind(this));
 
             // eslint-disable-next-line consistent-return
             _.debounce(function () {
                 this._addListeners();
+                this.bindSubmitInterceptor(this.formsToProtect);
+
                 this._eventOrderChange();
-
-                this.formsToProtect.on('submit', function (event) {
-                    var form = $(event.currentTarget);
-
-                    if (amReCaptchaModel.isScriptLoaded) {
-                        form.off('submit:beforeSubmit');
-
-                        return;
-                    }
-
-                    event.preventDefault();
-                    event.stopImmediatePropagation();
-
-                    form.trigger('submit:beforeSubmit');
-                });
+                this._enableSubmitButtons();
             }.bind(this), 200)();
-
-            this._enableSubmitButtons();
         },
 
-        _enableSubmitButtons: function () {
-            this.formsToProtect.find('[am-captcha-protect=true]').removeAttr('disabled');
+        /**
+         * @returns {void}
+         */
+        reRenderRecaptchaOnProtectedForms: function () {
+            const $newForms = $(amReCaptchaModel.getFormsList()).not(this.formsToProtect);
+
+            if (!$newForms.length) {
+                return;
+            }
+
+            this.formsToProtect = this.formsToProtect.add($newForms);
+
+            this._addListeners($newForms);
+            this.bindSubmitInterceptor($newForms);
+            this._eventOrderChange($newForms);
+            this._enableSubmitButtons($newForms);
         },
 
-        _addListeners: function () {
-            this.formsToProtect.on('submit:beforeSubmit', function (event) {
-                if (amReCaptchaModel.isScriptLoaded) {
+        /**
+         * @param {jQuery} $forms
+         * @private
+         * @returns {void}
+         */
+        bindSubmitInterceptor: function ($forms) {
+            $forms.on('submit', function (event) {
+                const form = $(event.currentTarget);
+
+                window.dispatchEvent(new CustomEvent('am-recaptcha-submit-event', {
+                    detail: {
+                        form: form
+                    }
+                }));
+
+                if (amReCaptchaModel.isScriptLoaded && !!event.target.dataset?.amCaptchaObserved) {
+                    form.off('submit:beforeSubmit.amRecaptcha');
+
                     return;
                 }
 
+                event.preventDefault();
+                event.stopImmediatePropagation();
+
+                form.trigger('submit:beforeSubmit');
+            });
+        },
+
+        _enableSubmitButtons: function (forms) {
+            if (typeof forms === 'undefined') {
+                forms = this.formsToProtect;
+            }
+
+            forms.find('[am-captcha-protect=true]').removeAttr('disabled');
+        },
+
+        /**
+         * @param {jQuery} [forms]
+         * @private
+         * @returns {void}
+         */
+        _addListeners: function (forms) {
+            forms = forms || this.formsToProtect;
+
+            forms.on('submit:beforeSubmit.amRecaptcha', function (event) {
                 this.cachedForm = $(event.target);
+                event.target.dataset.amCaptchaObserved = 1;
+
+                if (amReCaptchaModel.isScriptLoaded) {
+                    $(window).trigger('amcaptchaReady');
+                    return;
+                }
+
                 this.loadApi();
             }.bind(this));
         },
 
         /**
+         * @param {jQuery} [forms]
          * @private
          * @returns {void}
          */
-        _eventOrderChange: function () {
-            _.each(this.formsToProtect, function (form) {
+        _eventOrderChange: function (forms) {
+            _.each(forms || this.formsToProtect, function (form) {
                 var $form = $(form);
 
                 $form.data('recaptchaFormId', utils.uniqueid());
 
-                if (+amReCaptchaModel.invisibleCaptchaCustomForm) {
-                    this._swapSubmit($form);
-                }
+                this._swapSubmit($form);
             }.bind(this));
         },
 
@@ -107,7 +153,9 @@ define([
                 listeners;
 
             listeners = $._data($form[0], 'events').submit;
-            listeners.unshift(listeners.pop());
+            if (listeners && listeners.length > 1) {
+                listeners.unshift(listeners.pop());
+            }
         },
 
         /**
@@ -123,7 +171,7 @@ define([
                         $('body').trigger('processStop');
                     }
 
-                    if ($form.valid()) {
+                    if ($form.validation() && $form.validation('isValid')) {
                         $form.submit();
                     }
                 }.bind(this),
@@ -140,13 +188,58 @@ define([
             amReCaptchaModel.isScriptLoaded = true;
             this.appendCaptcha();
             _.each(self.formsToProtect, function (form) {
-                var $form = $(form),
-                    widgetId = self._initCaptchaOnForm(form);
+                if (self.cachedForm && self.cachedForm[0] === form) {
+                    var $form = $(form),
+                        widgetId = self._initCaptchaOnForm(form);
 
-                $form.on('ajaxFormLoaded', function () {
-                    self._formButtonClickEvent(form, widgetId);
-                });
+                    $form.on('ajaxFormLoaded', function () {
+                        self._formButtonClickEvent(form, widgetId);
+                    });
+
+                    $(document).on('am_form:ajax_complete', function (event, form) {
+                        self.renderCaptchaOnForm($(form));
+                    });
+                }
             });
+        },
+
+        /**
+         * Render captcha element on form
+         *
+         * @param {jQuery} $form
+         * @param {jQuery|null} $captchaElement
+         * @returns {Number}
+         */
+        renderCaptchaOnForm: function ($form, $captchaElement = null) {
+            var $formCaptchaElement = $form.find('.' + this.captchaElementClass);
+
+            if ($formCaptchaElement.length) {
+                $formCaptchaElement.remove();
+            }
+
+            if (!$captchaElement) {
+                $captchaElement = this.getCaptchaElement();
+            }
+
+            $form.append($captchaElement);
+
+            var widgetId = window.grecaptcha.render($captchaElement[0], this.getParameters($form[0]));
+
+            $captchaElement.data('id', widgetId);
+            this._formButtonClickEvent($form[0], widgetId);
+
+            this._enableSubmitButtons($form);
+
+            return widgetId;
+        },
+
+        /**
+         * Get captcha element
+         *
+         * @returns {jQuery}
+         */
+        getCaptchaElement: function () {
+            return $('<div class="' + this.captchaElementClass + '"></div>');
         },
 
         /**
@@ -158,15 +251,10 @@ define([
             var $form = $(form),
                 widgetId,
                 $button = $form.find("[type='submit']"),
-                $captchaElement = $('<div class="' + this.captchaElementClass + '"></div>');
+                $captchaElement = this.getCaptchaElement();
 
-            $form.append($captchaElement);
+            widgetId = this.renderCaptchaOnForm($form, $captchaElement);
 
-            widgetId = window.grecaptcha.render($captchaElement[0], this.getParameters($form));
-
-            $captchaElement.data('id', widgetId);
-
-            this._formButtonClickEvent(form, widgetId);
             this._submitCachedForm($form, $button);
 
             amReCaptchaModel.tokenFields.push($captchaElement);
@@ -206,7 +294,7 @@ define([
                 buttonClickListeners = null,
                 buttonListeners = {};
 
-            if($button.length) {
+            if ($button.length) {
                 buttonListeners = $._data($button[0], 'events');
             }
 
@@ -217,9 +305,14 @@ define([
             $button.off('click').on('click', function (e) {
                 e.preventDefault();
 
-                if ($form.valid()) {
+                if ($form.validation() && $form.validation('isValid')) {
+                    $button.prop('disabled', true);
+
                     window.grecaptcha.reset(widgetId);
-                    window.grecaptcha.execute(widgetId);
+
+                    if (amReCaptchaModel.getRecaptchaConfig().isInvisible) {
+                        window.grecaptcha.execute(widgetId);
+                    }
                 }
 
                 if (buttonClickListeners) {
@@ -231,6 +324,8 @@ define([
                     buttonClickListeners = null;
                 }
             });
+
+            this._enableSubmitButtons($form);
         }
     });
 });

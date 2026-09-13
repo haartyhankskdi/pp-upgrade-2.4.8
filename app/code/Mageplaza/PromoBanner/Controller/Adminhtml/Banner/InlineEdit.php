@@ -69,7 +69,7 @@ class InlineEdit extends Action
         ResourceModel $resourceModel,
         Context $context
     ) {
-        $this->jsonFactory   = $jsonFactory;
+        $this->jsonFactory = $jsonFactory;
         $this->bannerFactory = $bannerFactory;
         $this->resourceModel = $resourceModel;
 
@@ -83,15 +83,15 @@ class InlineEdit extends Action
     {
         /** @var Json $resultJson */
         $resultJson = $this->jsonFactory->create();
-        $error      = false;
-        $messages   = [];
-        $postItems  = $this->getRequest()->getParam('items', []);
+        $error = false;
+        $messages = [];
+        $postItems = $this->getRequest()->getParam('items', []);
 
         if (empty($postItems) || !$this->getRequest()->getParam('isAjax')) {
             return $resultJson->setData(
                 [
                     'messages' => [__('Please correct the data sent.')],
-                    'error'    => true,
+                    'error' => true,
                 ]
             );
         }
@@ -101,11 +101,11 @@ class InlineEdit extends Action
                 /** @var BannerModel $banner */
                 $banner = $this->bannerFactory->create();
                 $this->resourceModel->load($banner, $bannerId);
-                if ($bannerId !== $banner->getId()) {
+                if ((float) $bannerId !== (float) $banner->getId()) {
                     return $resultJson->setData(
                         [
                             'messages' => [__('The wrong banner is specified.')],
-                            'error'    => true,
+                            'error' => true,
                         ]
                     );
                 }
@@ -116,14 +116,14 @@ class InlineEdit extends Action
                     $banner,
                     __($e->getMessage())
                 );
-                $error      = true;
+                $error = true;
             }
         }
 
         return $resultJson->setData(
             [
                 'messages' => $messages,
-                'error'    => $error
+                'error' => $error
             ]
         );
     }

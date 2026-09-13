@@ -324,7 +324,7 @@ class Registerverify extends AbstractHelper
             //$age = $results->Age->AgeLower;
         }
         
-        if (strpos($tracesmart_register, 'TR') !== false)
+        if (strpos((string) $tracesmart_register, 'TR') !== false)
           {
             $customer->setCustomAttribute('tracesmart_register', 1);
           
@@ -570,7 +570,7 @@ class Registerverify extends AbstractHelper
             $customer->setCustomAttribute('age_verification', 0);
         }
         
-        if (strpos($tracesmart_register, 'TR') !== false)
+        if (strpos((string) $tracesmart_register, 'TR') !== false)
           {
             $customer->setCustomAttribute('tracesmart_register', 1);
           

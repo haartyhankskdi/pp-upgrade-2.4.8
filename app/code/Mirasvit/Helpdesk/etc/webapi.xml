@@ -1,0 +1,245 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- admin API -->
+    <!-- Create Ticket -->
+    <route url="/V1/helpdesk/ticket" method="POST">
+        <service class="Mirasvit\Helpdesk\Api\Service\TicketApiInterface" method="create"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- Update Ticket -->
+    <route url="/V1/helpdesk/ticket/:code" method="PUT">
+        <service class="Mirasvit\Helpdesk\Api\Service\TicketApiInterface" method="update"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- Add Message to Ticket -->
+    <route url="/V1/helpdesk/ticket/:code/message" method="POST">
+        <service class="Mirasvit\Helpdesk\Api\Service\TicketApiInterface" method="addMessage"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- Delete Ticket -->
+    <route url="/V1/helpdesk/ticket/:code" method="DELETE">
+        <service class="Mirasvit\Helpdesk\Api\Service\TicketApiInterface" method="delete"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- Get Messages for Ticket (paginated) -->
+    <route url="/V1/helpdesk/ticket/:code/message" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Service\TicketApiInterface" method="getMessages"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- Get Ticket with Messages -->
+    <route url="/V1/helpdesk/ticket/:code" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Service\TicketApiInterface" method="get"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- Save Draft Reply -->
+    <route url="/V1/helpdesk/ticket/:code/draft" method="PUT">
+        <service class="Mirasvit\Helpdesk\Api\Service\TicketApiInterface" method="saveDraft"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- Get Draft Reply -->
+    <route url="/V1/helpdesk/ticket/:code/draft" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Service\TicketApiInterface" method="getDraft"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- Delete Draft Reply -->
+    <route url="/V1/helpdesk/ticket/:code/draft" method="DELETE">
+        <service class="Mirasvit\Helpdesk\Api\Service\TicketApiInterface" method="deleteDraft"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- List/Filter Tickets -->
+    <route url="/V1/helpdesk/tickets" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Service\TicketApiInterface" method="getList"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- Save Status -->
+    <route url="/V1/helpdesk/status" method="POST">
+        <service class="Mirasvit\Helpdesk\Api\Repository\StatusRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_status"/>
+        </resources>
+    </route>
+
+    <!-- Get Status -->
+    <route url="/V1/helpdesk/status/:statusId" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\StatusRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_status"/>
+        </resources>
+    </route>
+
+    <!-- List Statuses -->
+    <route url="/V1/helpdesk/statuses" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\StatusRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_status"/>
+        </resources>
+    </route>
+
+    <!-- Save Priority -->
+    <route url="/V1/helpdesk/priority" method="POST">
+        <service class="Mirasvit\Helpdesk\Api\Repository\PriorityRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_priority"/>
+        </resources>
+    </route>
+
+    <!-- Get Priority -->
+    <route url="/V1/helpdesk/priority/:priorityId" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\PriorityRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_priority"/>
+        </resources>
+    </route>
+
+    <!-- List Priorities -->
+    <route url="/V1/helpdesk/priorities" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\PriorityRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_priority"/>
+        </resources>
+    </route>
+
+    <!-- Get Department -->
+    <route url="/V1/helpdesk/department/:departmentId" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\DepartmentRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_department"/>
+        </resources>
+    </route>
+
+    <!-- List Departments -->
+    <route url="/V1/helpdesk/departments" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\DepartmentRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_department"/>
+        </resources>
+    </route>
+
+    <!-- List Tags -->
+    <route url="/V1/helpdesk/tags" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\TagRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- Get Field -->
+    <route url="/V1/helpdesk/field/:fieldId" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\FieldRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_field"/>
+        </resources>
+    </route>
+
+    <!-- List Fields -->
+    <route url="/V1/helpdesk/fields" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\FieldRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_field"/>
+        </resources>
+    </route>
+
+    <!-- Get Satisfaction -->
+    <route url="/V1/helpdesk/satisfaction/:satisfactionId" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\SatisfactionRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- List Satisfactions -->
+    <route url="/V1/helpdesk/satisfactions" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\SatisfactionRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- List Activities -->
+    <route url="/V1/helpdesk/activities" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\ActivityRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- List History -->
+    <route url="/V1/helpdesk/history" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\HistoryRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- List Attachments -->
+    <route url="/V1/helpdesk/attachments" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\AttachmentRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- Get Attachment -->
+    <route url="/V1/helpdesk/attachment/:attachmentId" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\AttachmentRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- Get Attachment Body -->
+    <route url="/V1/helpdesk/attachment/:attachmentId/body" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\AttachmentRepositoryInterface" method="getBody"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- Get Template (Quick Response) -->
+    <route url="/V1/helpdesk/template/:templateId" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\TemplateRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+    <!-- List Templates (Quick Responses) -->
+    <route url="/V1/helpdesk/templates" method="GET">
+        <service class="Mirasvit\Helpdesk\Api\Repository\TemplateRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Mirasvit_Helpdesk::helpdesk_ticket"/>
+        </resources>
+    </route>
+
+</routes>

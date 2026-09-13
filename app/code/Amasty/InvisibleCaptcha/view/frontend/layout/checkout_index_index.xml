@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!--
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Google Invisible reCaptcha for Magento 2
-*/-->
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Google Invisible reCaptcha for Magento 2
+ */-->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
@@ -24,7 +24,7 @@
                                                             <item name="children" xsi:type="array">
                                                                 <item name="before-place-order" xsi:type="array">
                                                                     <item name="children" xsi:type="array">
-                                                                        <item name="place-order-recaptcha" xsi:type="array">
+                                                                        <item name="place-order-amrecaptcha" xsi:type="array">
                                                                             <item name="component" xsi:type="string">Amasty_InvisibleCaptcha/js/view/am-recaptcha-payment</item>
                                                                             <item name="displayArea" xsi:type="string">before-place-order</item>
                                                                             <item name="configSource" xsi:type="string">checkoutConfig</item>

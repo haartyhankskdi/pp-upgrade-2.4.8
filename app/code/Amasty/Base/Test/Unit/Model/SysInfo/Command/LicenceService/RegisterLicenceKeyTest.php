@@ -20,6 +20,7 @@ use Amasty\Base\Model\SysInfo\RegisteredInstanceRepository;
 use Amasty\Base\Model\SysInfo\Command\LicenceService\RegisterLicenceKey\Converter;
 use Amasty\Base\Model\SysInfo\Command\LicenceService\RegisterLicenceKey\Domain\Provider;
 use Magento\Framework\Exception\LocalizedException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -78,6 +79,7 @@ class RegisterLicenceKeyTest extends TestCase
      * @dataProvider executeNotDifferentDataProvider
      * @return void
      */
+    #[DataProvider('executeNotDifferentDataProvider')]
     public function testExecuteNotDifferent(array $currentDomains, array $storedDomains): void
     {
         $this->domainProviderMock
@@ -92,7 +94,7 @@ class RegisterLicenceKeyTest extends TestCase
         $this->model->execute();
     }
 
-    public function executeNotDifferentDataProvider(): array
+    public static function executeNotDifferentDataProvider(): array
     {
         return [
             [['am.com'], []],

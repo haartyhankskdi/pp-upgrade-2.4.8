@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Block\Plugin;
@@ -25,10 +25,6 @@ use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Url;
 use Mageplaza\Osc\Helper\Data as OscHelper;
 
-/**
- * Class Link
- * @package Mageplaza\Osc\Block\Plugin
- */
 class Link
 {
     /**
@@ -47,7 +43,7 @@ class Link
      * Link constructor.
      *
      * @param RequestInterface $httpRequest
-     * @param OscHelper $oscHelper
+     * @param OscHelper        $oscHelper
      */
     public function __construct(
         RequestInterface $httpRequest,
@@ -68,7 +64,8 @@ class Link
     {
         if ($routePath === 'checkout'
             && $this->oscHelper->isEnabled()
-            && $this->_request->getFullActionName() !== 'checkout_index_index') {
+            && $this->_request->getFullActionName() !== 'checkout_index_index'
+        ) {
             return [$this->oscHelper->getOscRoute(), $routeParams];
         }
 

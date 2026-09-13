@@ -21,7 +21,7 @@
 
 /** @var \Mageplaza\PromoBanner\Block\Banner\Popup $block */
 $collection = $block->getPromoBannerCollection();
-if ($collection && $collection->getSize()) : ?>
+if ($collection && $collection->getSize()): ?>
     <script id="mppromobanner_popup_template" type="text/x-magento-template">
         <div class="mppromobanner-banner-<%- data.id %> mppromobanner-white-popup
         mfp-hide mppromobanner-popup-<%- data.responsive %>"
@@ -32,7 +32,7 @@ if ($collection && $collection->getSize()) : ?>
                     <div class="mppromobanner-popup-container">
                         <a class="mppromobanner-url"
                            href="<%- data.url %>"
-                            rel="noopener noreferrer">
+                           target="_blank" rel="noopener noreferrer">
                             <img class="mppromobanner-image img-responsive"
                                  src="<%- data.url_image %>"
                                  alt="<%- data.image %>">
@@ -46,7 +46,7 @@ if ($collection && $collection->getSize()) : ?>
                     </div>
                     <% } %>
                 </div>
-                <?php if ($block->getConfigPopup('show_popup_checkbox')) : ?>
+                <?php if ($block->getConfigPopup('show_popup_checkbox')): ?>
                     <label class="mppromobanner-popup-label">
                         <input type="checkbox" id="mppromobanner-popup-checkbox" value="1">
                         <?= $block->escapeHtml($block->getConfigPopup('checkbox_label')) ?>

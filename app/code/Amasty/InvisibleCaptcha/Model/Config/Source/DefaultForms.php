@@ -1,11 +1,12 @@
 <?php
-/**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Google Invisible reCaptcha for Magento 2
-*/
 
 declare(strict_types=1);
+
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Google Invisible reCaptcha for Magento 2
+ */
 
 namespace Amasty\InvisibleCaptcha\Model\Config\Source;
 
@@ -21,6 +22,7 @@ class DefaultForms implements OptionSourceInterface
     public const PRODUCT_REVIEW = 'review/product/post';
     public const CONTACT_US = 'contact/index/post';
     public const CHECKOUT_PAYMENTS = 'checkout_payment_captcha';
+    public const CUSTOMER_EDIT_ACCOUNT_INFORMATION = 'customer/account/editPost';
 
     /**
      * @return array
@@ -59,6 +61,10 @@ class DefaultForms implements OptionSourceInterface
             [
                 'value' => self::CHECKOUT_PAYMENTS,
                 'label' => __('Checkout Payments')
+            ],
+            [
+                'value' => self::CUSTOMER_EDIT_ACCOUNT_INFORMATION,
+                'label' => __('Customer Edit Account Information')
             ],
         ];
     }

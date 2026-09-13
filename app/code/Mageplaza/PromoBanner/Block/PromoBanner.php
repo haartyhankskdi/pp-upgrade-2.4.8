@@ -21,8 +21,6 @@
 
 namespace Mageplaza\PromoBanner\Block;
 
-use Exception;
-use Magento\Cms\Block\Block;
 use Magento\Cms\Model\Template\FilterProvider;
 use Magento\Customer\Model\Context as CustomerContext;
 use Magento\Framework\App\Http\Context as HttpContext;
@@ -105,12 +103,12 @@ class PromoBanner extends Template
         array $data = []
     ) {
         $this->bannerCollection = $bannerCollection;
-        $this->helperData       = $helperData;
-        $this->date             = $date;
-        $this->httpContext      = $httpContext;
-        $this->registry         = $registry;
-        $this->helperImage      = $helperImage;
-        $this->filterProvider   = $filterProvider;
+        $this->helperData = $helperData;
+        $this->date = $date;
+        $this->httpContext = $httpContext;
+        $this->registry = $registry;
+        $this->helperImage = $helperImage;
+        $this->filterProvider = $filterProvider;
 
         parent::__construct($context, $data);
     }
@@ -157,14 +155,7 @@ class PromoBanner extends Template
      */
     public function setAutoTime(Banner $banner)
     {
-        if ($banner->getAutoCloseTime() === 'use_config') {
-            $banner->setAutoCloseTime($this->helperData->getAutoCloseTime());
-        }
-        if ($banner->getAutoReopenTime() === 'use_config') {
-            $banner->setAutoReopenTime($this->helperData->getAutoOpenTime());
-        }
-
-        return $banner;
+        return $this->helperData->setAutoTime($banner);
     }
 
     /**
@@ -193,55 +184,7 @@ class PromoBanner extends Template
      */
     public function getBannerHtml(Banner $banner)
     {
-        $html = '';
-        switch ($banner->getType()) {
-            case Type::SINGLE_IMAGE:
-                $src = $this->escapeUrl($this->getImageSrc($banner->getBannerImage()));
-                if ($banner->getUrl()) {
-                    $html = '<div class="mppromobanner-container">
-                                <a class="mppromobanner-url" href="' . $this->escapeUrl($banner->getUrl()) . '"
-                                target="_blank" rel="noopener noreferrer">
-                                    <img class="mppromobanner-image img-responsive"
-                                    src="' . $src . '" alt="' . $banner->getBannerImage() . '">
-                                </a>
-                            </div>';
-                } else {
-                    $html = '<div class="mppromobanner-container">
-                                <img class="mppromobanner-image img-responsive"
-                                src="' . $src . '" alt="' . $banner->getBannerImage() . '">
-                            </div>';
-                }
-                break;
-            case Type::HTML_TEXT:
-                $html = $this->filterContent($banner->getContent());
-                $html = '<div class="mppromobanner-container">' . $html . '</div>';
-                break;
-            case Type::CMS_BLOCK:
-                try {
-                    $html = $this->getLayout()->createBlock(Block::class)
-                        ->setBlockId($banner->getCmsBlockId())
-                        ->toHtml();
-                    $html = '<div class="mppromobanner-container">' . $html . '</div>';
-                } catch (Exception $e) {
-                    $html = '';
-                }
-                break;
-        }
-
-        if (empty($html)) {
-            return $html;
-        }
-
-        if ($this->helperData->showCloseButton()) {
-            $closeBtn = '<div class="mppromobanner-close">
-                <div class="mppromobanner-close-btn" title="Close"></div>
-            </div>';
-            $html     = '<div class="mppromobanner-banner-' . $banner->getId() . ' mppromobanner-banner-style">' . $closeBtn . $html . '</div>';
-        } else {
-            $html = '<div class="mppromobanner-banner-' . $banner->getId() . ' mppromobanner-banner-style">' . $html . '</div>';
-        }
-
-        return $html;
+        return $this->helperData->getBannerHtml($banner);
     }
 
     /**
@@ -276,21 +219,5 @@ class PromoBanner extends Template
     public function showCloseBtn()
     {
         return $this->helperData->showCloseButton();
-    }
-
-    /**
-     * @param string $content
-     *
-     * @return mixed|string
-     */
-    public function filterContent($content)
-    {
-        try {
-            $content = $this->filterProvider->getBlockFilter()->filter($content);
-
-            return $content;
-        } catch (Exception $e) {
-            return '';
-        }
     }
 }

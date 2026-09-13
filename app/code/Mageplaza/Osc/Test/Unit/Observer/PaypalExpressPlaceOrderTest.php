@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Observer;
@@ -27,10 +27,6 @@ use Mageplaza\Osc\Observer\PaypalExpressPlaceOrder;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class PaypalExpressPlaceOrderTest
- * @package Mageplaza\Osc\Test\Unit\Observer
- */
 class PaypalExpressPlaceOrderTest extends TestCase
 {
     /**
@@ -43,7 +39,7 @@ class PaypalExpressPlaceOrderTest extends TestCase
      */
     private $observer;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->checkoutRegisterMock = $this->getMockBuilder(CheckoutRegister::class)
             ->disableOriginalConstructor()

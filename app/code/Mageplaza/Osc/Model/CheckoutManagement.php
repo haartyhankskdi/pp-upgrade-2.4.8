@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Model;
@@ -47,10 +47,6 @@ use Mageplaza\Osc\Api\Data\OscDetailsInterface;
 use Mageplaza\Osc\Helper\Item as OscHelper;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class CheckoutManagement
- * @package Mageplaza\Osc\Model
- */
 class CheckoutManagement implements CheckoutManagementInterface
 {
     /**
@@ -145,23 +141,23 @@ class CheckoutManagement implements CheckoutManagementInterface
     /**
      * CheckoutManagement constructor.
      *
-     * @param CartRepositoryInterface $cartRepository
-     * @param OscDetailsFactory $oscDetailsFactory
-     * @param ShippingMethodManagementInterface $shippingMethodManagement
-     * @param PaymentMethodManagementInterface $paymentMethodManagement
-     * @param CartTotalRepositoryInterface $cartTotalsRepository
-     * @param UrlInterface $urlBuilder
-     * @param Session $checkoutSession
+     * @param CartRepositoryInterface                $cartRepository
+     * @param OscDetailsFactory                      $oscDetailsFactory
+     * @param ShippingMethodManagementInterface      $shippingMethodManagement
+     * @param PaymentMethodManagementInterface       $paymentMethodManagement
+     * @param CartTotalRepositoryInterface           $cartTotalsRepository
+     * @param UrlInterface                           $urlBuilder
+     * @param Session                                $checkoutSession
      * @param ShippingInformationManagementInterface $shippingInformationManagement
-     * @param OscHelper $oscHelper
-     * @param Message $giftMessage
-     * @param GiftMessageManager $giftMessageManager
-     * @param CustomerSession $customerSession
-     * @param TotalsCollector $totalsCollector
-     * @param AddressInterface $addressInterface
-     * @param ShippingMethodConverter $shippingMethodConverter
-     * @param QuoteAddressValidator $quoteAddressValidator
-     * @param LoggerInterface $logger
+     * @param OscHelper                              $oscHelper
+     * @param Message                                $giftMessage
+     * @param GiftMessageManager                     $giftMessageManager
+     * @param CustomerSession                        $customerSession
+     * @param TotalsCollector                        $totalsCollector
+     * @param AddressInterface                       $addressInterface
+     * @param ShippingMethodConverter                $shippingMethodConverter
+     * @param QuoteAddressValidator                  $quoteAddressValidator
+     * @param LoggerInterface                        $logger
      */
     public function __construct(
         CartRepositoryInterface $cartRepository,
@@ -210,7 +206,9 @@ class CheckoutManagement implements CheckoutManagementInterface
             return $this->removeItemById($cartId, $itemId);
         }
 
-        /** @var Quote $quote */
+        /**
+ * @var Quote $quote
+*/
         $quote     = $this->cartRepository->getActive($cartId);
         $quoteItem = $quote->getItemById($itemId);
         if (!$quoteItem) {
@@ -233,7 +231,9 @@ class CheckoutManagement implements CheckoutManagementInterface
      */
     public function removeItemById($cartId, $itemId)
     {
-        /** @var Quote $quote */
+        /**
+ * @var Quote $quote
+*/
         $quote     = $this->cartRepository->getActive($cartId);
         $quoteItem = $quote->getItemById($itemId);
         if (!$quoteItem) {
@@ -255,7 +255,9 @@ class CheckoutManagement implements CheckoutManagementInterface
      */
     public function getPaymentTotalInformation($cartId)
     {
-        /** @var Quote $quote */
+        /**
+ * @var Quote $quote
+*/
         $quote = $this->cartRepository->getActive($cartId);
 
         return $this->getResponseData($quote);
@@ -266,7 +268,9 @@ class CheckoutManagement implements CheckoutManagementInterface
      */
     public function updateGiftWrap($cartId, $isUseGiftWrap)
     {
-        /** @var Quote $quote */
+        /**
+ * @var Quote $quote
+*/
         $quote = $this->cartRepository->getActive($cartId);
         $quote->getShippingAddress()->setUsedGiftWrap($isUseGiftWrap);
 
@@ -290,7 +294,9 @@ class CheckoutManagement implements CheckoutManagementInterface
      */
     public function getResponseData(Quote $quote)
     {
-        /** @var OscDetailsInterface $oscDetails */
+        /**
+ * @var OscDetailsInterface $oscDetails
+*/
         $oscDetails = $this->oscDetailsFactory->create();
 
         if (!$quote->hasItems() || $quote->getHasError() || !$quote->validateMinimumAmount()) {
@@ -310,7 +316,7 @@ class CheckoutManagement implements CheckoutManagementInterface
         foreach ($quote->getAllVisibleItems() as $item) {
             $product = $item->getProduct();
 
-            $optionsData[$item->getId()] = $this->oscHelper->getItemOptionsConfig($quote, $item);
+            $optionsData[$item->getId()] = $this->oscHelper->getItemOptionsConfig($quote, $item, true);
             $imageData[$item->getId()]   = $this->oscHelper->getItemImages($item);
             $requestPath[$item->getId()] = $product->getUrlModel()->getUrl($product);
         }
@@ -337,18 +343,21 @@ class CheckoutManagement implements CheckoutManagementInterface
             $this->checkoutSession->setOscData($additionInformation);
             $this->addGiftMessage($cartId, $additionInformation);
 
-            /** @var Quote $quote */
+            /**
+ * @var Quote $quote
+*/
             $quote = $this->cartRepository->getActive($cartId);
 
             if (!$quote->isVirtual()) {
                 if ($addressInformation->getShippingAddress()) {
                     if (!empty($additionInformation['billing-same-shipping'])
-                        && $this->_customerSession->isLoggedIn()) {
+                        && $this->_customerSession->isLoggedIn()
+                    ) {
                         $addressInformation->getShippingAddress()->setSaveInAddressBook(0);
                     }
                     $this->shippingInformationManagement->saveAddressInformation($cartId, $addressInformation);
                 }
-            } else if ($billingAddress = $addressInformation->getBillingAddress()) {
+            } elseif ($billingAddress = $addressInformation->getBillingAddress()) {
                 if (!$billingAddress->getCustomerAddressId()) {
                     $billingAddress->setCustomerAddressId(null);
                 }
@@ -356,7 +365,6 @@ class CheckoutManagement implements CheckoutManagementInterface
                 $quote->setBillingAddress($billingAddress);
                 $this->cartRepository->save($quote);
             }
-
         } catch (Exception $e) {
             $this->logger->critical($e->getMessage());
             throw new InputException(__('Unable to save order information. Please check input data.'));
@@ -400,10 +408,12 @@ class CheckoutManagement implements CheckoutManagementInterface
      */
     public function addGiftMessage($cartId, $additionInformation)
     {
-        /** @var Quote $quote */
+        /**
+ * @var Quote $quote
+*/
         $quote = $this->cartRepository->getActive($cartId);
 
-        if (isset($additionInformation['giftMessage']) && !$this->oscHelper->isDisabledGiftMessage()) {
+        if (isset($additionInformation['giftMessage']) && $this->oscHelper->isDisabledGiftMessage()) {
             $giftMessage = $this->oscHelper->jsonDecodeData($additionInformation['giftMessage']);
             $this->giftMessage->setSender(isset($giftMessage['sender']) ? $giftMessage['sender'] : '');
             $this->giftMessage->setRecipient(isset($giftMessage['recipient']) ? $giftMessage['recipient'] : '');
@@ -413,16 +423,30 @@ class CheckoutManagement implements CheckoutManagementInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
+     * @throws     NoSuchEntityException
+     * @throws     \Magento\Framework\Exception\State\InvalidTransitionException
      */
-    public function paymentMethodDiscount(
-        $cartId,
-        PaymentInterface $paymentMethod
-    ) {
-        /** @var CartRepositoryInterface $quoteRepository */
+    public function paymentMethodDiscount($cartId, PaymentInterface $paymentMethod)
+    {
+        /**
+ * @var CartRepositoryInterface $quoteRepository
+*/
         $quoteRepository = $this->cartRepository;
-        /** @var Quote $quote */
+        /**
+ * @var Quote $quote
+*/
         $quote = $quoteRepository->getActive($cartId);
+
+        //mp_stripe_credit_cards_vault_{id} is not in DB.
+        if (str_contains($paymentMethod->getMethod(), 'mp_stripe_credit_cards_vault')) {
+            $paymentMethod->setMethod('mp_stripe_credit_cards_vault');
+        }
+        // mpmoneris_vault mpmoneris_vault_{id} -> mpmoneris_vault to get Method Instance (same as Checkout Core)
+        if (str_contains($paymentMethod->getMethod(), 'mpmoneris_vault')) {
+            $paymentMethod->setMethod('mpmoneris_vault');
+        }
+
         $this->paymentMethodManagement->set($cartId, $paymentMethod);
         $quote->collectTotals();
 

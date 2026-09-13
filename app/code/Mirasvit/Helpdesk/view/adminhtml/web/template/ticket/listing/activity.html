@@ -1,0 +1,46 @@
+<div class="helpdesk__ticket-activity" data-bind="visible: currentLabel">
+
+    <div class="navigation">
+        <button data-bind="click: goPrev, text: prevLabel"></button>
+        <span data-bind="text: currentLabel"></span>
+        <button data-bind="click: goNext, text: nextLabel"></button>
+    </div>
+
+    <ul class="groups" data-bind="foreach: { data: rows, as: 'group' }">
+        <li class="group">
+            <span class="name" data-bind="text: group.name"></span>
+
+            <div class="hours">
+                <div class="h10-19"></div>
+            </div>
+            <ul class="timeline" data-bind="foreach: { data: group.points, as: 'point' }">
+                <li class="point"
+                    data-bind="style: { left: $parents[1].getOffset(point) }, click: $parents[1].onClick.bind(point), attr:{'data-kind': point.kind}">
+                    <div data-bind="text: point.title"></div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="active-point" data-bind="if: point()">
+        <table>
+            <tr>
+                <th colspan="2">
+                    <a href="#" data-bind="text: point().title, attr: {href: point().url}" target="_blank"></a>
+                </th>
+            </tr>
+            <tr>
+                <th data-bind="i18n: 'Kind'"></th>
+                <td data-bind="text: point().kind"></td>
+            </tr>
+            <tr>
+                <th data-bind="i18n: 'Date'"></th>
+                <td data-bind="text: point().timestamp"></td>
+            </tr>
+            <tr>
+                <th data-bind="i18n: 'Info'"></th>
+                <td data-bind="html: point().description"></td>
+            </tr>
+        </table>
+    </div>
+</div>

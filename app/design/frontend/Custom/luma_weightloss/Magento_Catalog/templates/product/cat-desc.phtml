@@ -60,7 +60,7 @@ if ($productId) {
             'images' => $product->getMediaGalleryImages(),
             'title' => $product->getName(),
             'description' => $product->getShortDescription(),
-            'features' => explode("\n", $product->getData('features')), // Assuming 'features' is a multi-line attribute
+            'features' => explode("\n", (string) $product->getData('features')), // Assuming 'features' is a multi-line attribute
             'price' => $product->getFinalPrice(),
             'is_salable' => $product->getIsSalable(),
             'stockItem' => $stockRegistry->getStockItem($product->getId()),

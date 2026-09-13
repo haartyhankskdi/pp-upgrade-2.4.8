@@ -1,9 +1,9 @@
 <?php
 /**
-* @author Amasty Team
-* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
-* @package Custom Form Base for Magento 2
-*/
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Custom Form Base for Magento 2
+ */
 
 namespace Amasty\Customform\Plugin\Data\Form\FormKey;
 
@@ -32,7 +32,7 @@ class Validator
     public function afterValidate(
         \Magento\Framework\Data\Form\FormKey\Validator $subject,
         $result,
-        \Magento\Framework\App\Request\Http $request = null
+        ?\Magento\Framework\App\Request\Http $request = null
     ) {
         if ($request && $request->getFullActionName() == self::FULL_ACTION_NAME && empty($request->getParams())) {
             $result = true;

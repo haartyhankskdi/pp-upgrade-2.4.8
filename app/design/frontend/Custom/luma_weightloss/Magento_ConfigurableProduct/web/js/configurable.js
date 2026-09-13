@@ -82,7 +82,13 @@ define([
         _initializeOptions: function () {
             var options = this.options,
                 gallery = $(options.mediaGallerySelector),
+                priceBoxOptions;
+
+            try {
                 priceBoxOptions = $(this.options.priceHolderSelector).priceBox('option').priceConfig || null;
+            } catch (e) {
+                priceBoxOptions = null;
+            }
 
             if (priceBoxOptions && priceBoxOptions.optionTemplate) {
                 options.optionTemplate = priceBoxOptions.optionTemplate;
@@ -631,8 +637,14 @@ define([
          * @private
          */
         _calculatePrice: function (config) {
-            var displayPrices = $(this.options.priceHolderSelector).priceBox('option').prices,
+            var displayPrices,
                 newPrices = this.options.spConfig.optionPrices[_.first(config.allowedProducts)] || {};
+
+            try {
+                displayPrices = $(this.options.priceHolderSelector).priceBox('option').prices;
+            } catch (e) {
+                displayPrices = {};
+            }
 
             _.each(displayPrices, function (price, code) {
                 displayPrices[code].amount = newPrices[code] ? newPrices[code].amount - displayPrices[code].amount : 0;
@@ -728,7 +740,15 @@ define([
         _onGalleryLoaded: function (element) {
             var galleryObject = element.data('gallery');
 
-            this.options.mediaGalleryInitial = galleryObject.returnCurrentImages();
+            if (!galleryObject || typeof galleryObject.returnCurrentImages !== 'function') {
+                return;
+            }
+
+            try {
+                this.options.mediaGalleryInitial = galleryObject.returnCurrentImages();
+            } catch (e) {
+                this.options.mediaGalleryInitial = null;
+            }
         },
 
         /**

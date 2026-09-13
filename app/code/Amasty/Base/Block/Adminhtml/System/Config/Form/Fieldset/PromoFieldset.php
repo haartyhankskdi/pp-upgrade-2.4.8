@@ -81,7 +81,7 @@ class PromoFieldset extends Fieldset
         string $moduleName,
         array $promoConfig = [],
         array $data = [],
-        XssStringEscaper $xssEscaper = null // TODO move to not optional
+        ?XssStringEscaper $xssEscaper = null // TODO move to not optional
     ) {
         parent::__construct($context, $authSession, $jsHelper, $data);
 
@@ -102,6 +102,7 @@ class PromoFieldset extends Fieldset
         if ($this->isNeedPromo()) {
             foreach ($element->getElements() as $field) {
                 $field->setData('disabled', true);
+                $field->setData('readonly', true);
             }
         }
 
@@ -144,7 +145,7 @@ class PromoFieldset extends Fieldset
     protected function getInfoMessage(): string
     {
         return <<<TEXT
-                <div class="message message-info">
+                <div class="message message-info ampromo-config-info">
                     {$this->xssEscaper->escapeScriptInHtml($this->promoConfig['infoMessage'])}
                 </div>
             TEXT;

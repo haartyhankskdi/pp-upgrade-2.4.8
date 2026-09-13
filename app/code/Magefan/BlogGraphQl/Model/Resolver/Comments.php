@@ -17,10 +17,6 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magefan\Blog\Api\CommentRepositoryInterface;
 use Magento\Framework\Api\SortOrderBuilder;
 
-/**
- * Class Comments
- * @package Magefan\BlogGraphQl\Model\Resolver
- */
 class Comments implements ResolverInterface
 {
     /**
@@ -148,7 +144,7 @@ class Comments implements ResolverInterface
 
         foreach ($items as $k => $data) {
             $items[$k] = $this->commentDataProvider->getData(
-                $data['comment_id'],
+                $data,
                 isset($fields['items']) ? $fields['items'] : null
             );
         }

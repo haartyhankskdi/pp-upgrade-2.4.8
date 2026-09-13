@@ -12,13 +12,14 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
-define(['jquery', 'ko', 'uiElement', 'underscore', 'mage/translate'],
+define(
+    ['jquery', 'ko', 'uiElement', 'underscore', 'mage/translate'],
     function ($, ko, uiElement, _, $t) {
         'use strict';
 
@@ -71,15 +72,18 @@ define(['jquery', 'ko', 'uiElement', 'underscore', 'mage/translate'],
                 },
                 /**
                  * show message below order summary
+                 *
                  * @param type
                  * @param message
                  */
                 showMessage: function (type, message) {
                     var classElement = 'message ' + type;
                     $('#opc-sidebar .block.items-in-cart').before('<div class=" ' + classElement + '"> <span>' + $t(message) + '</span></div>');
-                    setTimeout(function () {
-                        $('#opc-sidebar .opc-block-summary .message.' + type).remove();
-                    }, 3000);
+                    setTimeout(
+                        function () {
+                            $('#opc-sidebar .opc-block-summary .message.' + type).remove();
+                        }, 3000
+                    );
                 }
             };
             model.initialize();

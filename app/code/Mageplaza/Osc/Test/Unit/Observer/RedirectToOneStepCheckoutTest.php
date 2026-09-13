@@ -13,10 +13,10 @@
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
  *
- * @category    Mageplaza
- * @package     Mageplaza_Osc
- * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
- * @license     https://www.mageplaza.com/LICENSE.txt
+ * @category  Mageplaza
+ * @package   Mageplaza_Osc
+ * @copyright Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license   https://www.mageplaza.com/LICENSE.txt
  */
 
 namespace Mageplaza\Osc\Test\Unit\Observer;
@@ -29,10 +29,6 @@ use Mageplaza\Osc\Observer\RedirectToOneStepCheckout;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class RedirectToOneStepCheckoutTest
- * @package Mageplaza\Osc\Test\Unit\Observer
- */
 class RedirectToOneStepCheckoutTest extends TestCase
 {
     /**
@@ -50,7 +46,7 @@ class RedirectToOneStepCheckoutTest extends TestCase
      */
     private $observer;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->oscHelperMock = $this->getMockBuilder(OscHelper::class)
             ->disableOriginalConstructor()
@@ -72,13 +68,13 @@ class RedirectToOneStepCheckoutTest extends TestCase
          * @var Observer|MockObject $observerMock
          */
         $observerMock = $this->getMockBuilder(Observer::class)
-            ->setMethods(['getRequest'])
+            ->addMethods(['getRequest'])
             ->disableOriginalConstructor()
             ->getMock();
         $this->oscHelperMock->expects($this->once())->method('isEnabled')->willReturn(true);
         $this->oscHelperMock->expects($this->once())->method('isRedirectToOneStepCheckout')->willReturn(true);
         $requestMock = $this->getMockBuilder(RequestInterface::class)
-            ->setMethods(['setParam'])
+            ->addMethods(['setParam'])
             ->getMockForAbstractClass();
         $observerMock->expects($this->once())->method('getRequest')->willReturn($requestMock);
         $this->oscHelperMock->expects($this->once())->method('getOscRoute')->willReturn($oscRoute);

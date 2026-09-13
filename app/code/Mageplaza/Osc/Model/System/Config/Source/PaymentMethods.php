@@ -24,9 +24,10 @@ namespace Mageplaza\Osc\Model\System\Config\Source;
 use Exception;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Option\ArrayInterface;
-use Magento\Payment\Model\Method\Factory;
-use Magento\Store\Model\ScopeInterface;
 use Mageplaza\Osc\Helper\Data as OscHelper;
+use Magento\Payment\Helper\Data as PaymentHelper;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\App\RequestInterface;
 
 /**
  * Class PaymentMethods
@@ -35,14 +36,14 @@ use Mageplaza\Osc\Helper\Data as OscHelper;
 class PaymentMethods implements ArrayInterface
 {
     /**
-     * @var ScopeConfigInterface
-     */
-    protected $_scopeConfig;
-
-    /**
      * @var Factory
      */
     protected $_paymentMethodFactory;
+
+    /**
+     * @var PaymentHelper
+     */
+    protected $_paymentHelper;
 
     /**
      * @var OscHelper
@@ -50,20 +51,38 @@ class PaymentMethods implements ArrayInterface
     protected $_oscHelper;
 
     /**
+     * @var StoreManagerInterface
+     */
+    protected $storeManager;
+
+    /**
+     * @var ScopeConfigInterface
+     */
+    protected $scopeConfig;
+
+    /**
+     * @var RequestInterface
+     */
+    protected $request;
+
+    /**
      * PaymentMethods constructor.
      *
-     * @param ScopeConfigInterface $scopeConfig
-     * @param Factory $paymentMethodFactory
      * @param OscHelper $oscHelper
+     * @param PaymentHelper $paymentHelper
      */
     public function __construct(
+        OscHelper $oscHelper,
+        PaymentHelper $paymentHelper,
+        StoreManagerInterface $storeManager,
         ScopeConfigInterface $scopeConfig,
-        Factory $paymentMethodFactory,
-        OscHelper $oscHelper
+        RequestInterface $request,
     ) {
-        $this->_scopeConfig = $scopeConfig;
-        $this->_paymentMethodFactory = $paymentMethodFactory;
         $this->_oscHelper = $oscHelper;
+        $this->_paymentHelper = $paymentHelper;
+        $this->storeManager = $storeManager;
+        $this->scopeConfig = $scopeConfig;
+        $this->request = $request;
     }
 
     /**
@@ -71,51 +90,44 @@ class PaymentMethods implements ArrayInterface
      */
     public function toOptionArray()
     {
-        $options = [['label' => __('-- Please select --'), 'value' => '']];
+        $options = [['label' => __('No'), 'value' => '']];
 
-        $payments = $this->getActiveMethods();
+        $storeCode = $this->request->getParam('store');
+        $storeId = $storeCode
+            ? $this->storeManager->getStore($storeCode)->getId()
+            : $this->storeManager->getStore()->getId();
+
+        $payments = $this->_paymentHelper->getPaymentMethods();
+
         foreach ($payments as $paymentCode => $paymentModel) {
-            $options[$paymentCode] = [
-                'label' => $paymentModel->getTitle(),
-                'value' => $paymentCode
-            ];
-        }
-
-        return $options;
-    }
-
-    /**
-     * Get all active payment method
-     *
-     * @return array
-     */
-    public function getActiveMethods()
-    {
-        $methods = [];
-        $paymentConfig = $this->_scopeConfig->getValue('payment', ScopeInterface::SCOPE_STORE, null);
-        if ($this->_oscHelper->isEnabledMultiSafepay()) {
-            $paymentConfig = array_merge(
-                $this->_scopeConfig->getValue('payment', ScopeInterface::SCOPE_STORE, null),
-                $this->_scopeConfig->getValue('gateways', ScopeInterface::SCOPE_STORE, null)
+            $isActive = $this->scopeConfig->getValue(
+                'payment/' . $paymentCode . '/active',
+                \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+                $storeId
             );
-        }
 
-        foreach ($paymentConfig as $code => $data) {
-            if (isset($data['active'], $data['model']) && (bool)$data['active']) {
-                try {
-                    $methodModel = $this->_paymentMethodFactory->create($data['model']);
-                    if (is_object($methodModel)) {
-                        $methodModel->setStore(null);
-                        if ($methodModel->getConfigData('active', null)) {
-                            $methods[$code] = $methodModel;
-                        }
-                    }
-                } catch (Exception $e) {
-                    continue;
+            if (strpos($paymentCode, 'payment_services') !== false) {
+                if (isset($paymentModel['can_use_checkout']) && $paymentModel['can_use_checkout'] == 1) {
+                    $options[] = [
+                        'label' => $paymentModel['title'] ?? $paymentCode,
+                        'value' => $paymentCode
+                    ];
                 }
+                continue;
+            }
+
+            if (!$isActive) {
+                continue;
+            }
+
+            if ($paymentCode !== 'free' && isset($paymentModel['title'])) {
+                $options[] = [
+                    'label' => $paymentModel['title'],
+                    'value' => $paymentCode
+                ];
             }
         }
 
-        return $methods;
+        return $options;
     }
 }

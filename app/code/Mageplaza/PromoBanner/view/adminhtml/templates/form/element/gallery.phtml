@@ -30,7 +30,7 @@ $_htmlId ?>">
         <script id="mppromobanner_row_template"
                 type="text/x-magento-template">
             <tr id="<%- _id %>">
-                <?php foreach ($block->getColumns() as $columnName => $column) : ?>
+                <?php foreach ($block->getColumns() as $columnName => $column): ?>
                     <td class="col-<?= /* @noEscape */ $columnName ?> control-table-actions-cell col-items">
                         <?= /* @noEscape */ $block->renderCellTemplate($columnName) ?>
                     </td>
@@ -67,8 +67,8 @@ $_htmlId ?>">
 
             <tbody id="mppromobanner-row-container" data-role="options-container">
 
-            <?php if ($block->getColumns() !== null && $block->getValues() !== null) : ?>
-                <?php foreach ($block->getValues() as $key => $image) : ?>
+            <?php if ($block->getColumns() !== null && $block->getValues() !== null): ?>
+                <?php foreach ($block->getValues() as $key => $image): ?>
                     <tr id="<?= /* @noEscape */
                     $key ?>">
                         <td class="col-image control-table-actions-cell col-items">
