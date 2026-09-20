@@ -8,6 +8,8 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Catalog\Model\ProductFactory as ModelFactory;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Nilesh\GeneralQuestions\Model\GeneralQuestions;
+use Amasty\Customform\Model\Answer;
 
 class Downloadcsv extends Action
 {
@@ -15,19 +17,25 @@ class Downloadcsv extends Action
     protected $collectionFactory;
     protected $productModel;
     protected $timezone;
+    protected $gq;
+    protected $answer;
 
     public function __construct(
         Action\Context $context,
         FileFactory $fileFactory,
         \MY\CustomExport\Model\ResourceModel\CustomExport\CollectionFactory $collectionFactory,
         ModelFactory $productModel,
-        TimezoneInterface $timezone
+        TimezoneInterface $timezone,
+        GeneralQuestions $generalQuestions,
+        Answer $answer
     ) {
         parent::__construct($context);
         $this->fileFactory = $fileFactory;
         $this->collectionFactory = $collectionFactory;
         $this->productModel = $productModel;
         $this->timezone = $timezone;
+        $this->gq = $generalQuestions;
+        $this->answer = $answer;
     }
 
     public function execute()
@@ -93,7 +101,7 @@ class Downloadcsv extends Action
                 'Tax Percent', 'Discount Amount', 'SKU', 'DOB', 'Prescriber Name', 'Gender', 'Customer Group', 'Ethnic Group', 'Sub Ethnicity', 
                 'Billing Address', 'Shipping Address', 'Configurable Product', 'Associated Product', 'Price', 'Brand', 'Medical Strength', 'Size',
                 'Shipping Tracking No', 'Subscribed to Newsletter', 'Transaction ID', 'Vendor Transaction Code', 
-                'Coupon Code', 'Qnair Unique Id'
+                'Coupon Code', 'Qnair Unique Id' ,'register_gp', 'permisssion_gp', 'gp_details'
             ];
             fputcsv($stream, $header);
 
@@ -127,6 +135,7 @@ class Downloadcsv extends Action
                 if ($order->getId()) {
                     foreach ($order->getAllVisibleItems() as $orderItem) {
                         $product_name = $this->getProductNameBySku($orderItem->getSku()) ;
+                        
                          // Safe, human-readable date formatting (store timezone aware)
                          $createdAt = $item->getCreatedAt();
                          $formattedDate = '';
@@ -137,6 +146,9 @@ class Downloadcsv extends Action
                                  $formattedDate = $createdAt; // fallback if parsing fails
                              }
                          }
+
+                        $gp = $this->getGpDetails($customerId);
+                        // $gp = $this->getGpCustomForm($item->getData('questionnaire_unique_id'));
  
                         $csvRow = [
                             $customerId,
@@ -179,6 +191,9 @@ class Downloadcsv extends Action
                             $vendorTxCode,
                             $item->getCouponCode(),
                             $item->getData('questionnaire_unique_id'),
+                            $gp['registred_in_gp'],
+                            $gp['gp_supply_permission'],
+                            $gp['gp_surgery_detail']
                         ];
                         fputcsv($stream, $csvRow);
                     }
@@ -223,4 +238,107 @@ class Downloadcsv extends Action
         }
         return null;
     }
+
+
+    private function getGpDetails(string $customerId): array
+    {
+        $generalQuestions = $this->gq
+            ->load($customerId, 'customer_id');
+
+        $registeredGp = (int) $generalQuestions->getData('registered_gp');
+
+        // Case 1: registered_gp = 0 -> everything 0
+        if ($registeredGp !== 1) {
+            return $this->buildGpDetailsResponse($registeredGp, 0);
+        }
+
+        $gpSupplyPermission = (int) $generalQuestions->getData('registered_gp_permission');
+
+        // Case 2: registered_gp = 1, permission_gp = 0 -> everything 0
+        if ($gpSupplyPermission !== 1) {
+            return $this->buildGpDetailsResponse($registeredGp, 0);
+        }
+
+        // Case 3: registered_gp = 1, permission_gp = 1 -> full value
+        $surgery = json_decode(
+            (string) $generalQuestions->getData('registered_gp_surgery'),
+            true
+        );
+
+        if (!is_array($surgery)) {
+            return $this->buildGpDetailsResponse($registeredGp, $gpSupplyPermission);
+        }
+
+        $gpSurgeryDetail = implode(', ', array_filter([
+            $surgery['practice_code'] ?? '',
+            $surgery['name_of_practice'] ?? '',
+            $surgery['address_line_one'] ?? '',
+            $surgery['address_line_two'] ?? '',
+            $surgery['city'] ?? '',
+            $surgery['county'] ?? '',
+            $surgery['postcode'] ?? '',
+        ]));
+
+        return $this->buildGpDetailsResponse(
+            $registeredGp,
+            $gpSupplyPermission,
+            $gpSurgeryDetail !== '' ? $gpSurgeryDetail : 'N/A'
+        );
+    }
+
+    private function buildGpDetailsResponse(
+        int $registeredGp,
+        int $gpSupplyPermission,
+        $gpSurgeryDetail = 0
+    ): array {
+        return [
+            'registred_in_gp' => $registeredGp,
+            'gp_supply_permission' => $gpSupplyPermission,
+            'gp_surgery_detail' => $gpSurgeryDetail,
+        ];
+    }
+
+
+    private function getGpCustomForm($hash): array
+{
+    $data = $this->answer->load($hash, 'questionnaire_unique_id');
+
+    if (!$data->getId()) {
+        return $this->buildGpDetailsResponse(0, 0);
+    }
+
+    $formData = json_decode((string) $data->getData('response_json'), true);
+
+    if (!is_array($formData)) {
+        return $this->buildGpDetailsResponse(0, 0);
+    }
+
+    $registeredGpValue = $formData['registered_gp']['value'] ?? '';
+    $registeredGp = (strtolower(trim($registeredGpValue)) === 'yes') ? 1 : 0;
+
+    // Case 1: not registered with a GP -> everything 0
+    if ($registeredGp !== 1) {
+        return $this->buildGpDetailsResponse($registeredGp, 0);
+    }
+
+    $surgeryRaw = $formData['registered_gp_surgery']['value'] ?? '';
+
+    if (empty($surgeryRaw)) {
+        return $this->buildGpDetailsResponse($registeredGp, 0);
+    }
+
+    // Convert <br/> HTML line breaks into a single comma-separated line
+    $gpSurgeryDetail = str_replace(["<br />", "<br/>", "<br>"], ', ', $surgeryRaw);
+    $gpSurgeryDetail = str_replace(["\r\n", "\n", "\r"], ' ', $gpSurgeryDetail);
+    $gpSurgeryDetail = trim(preg_replace('/\s*,\s*/', ', ', $gpSurgeryDetail), ', ');
+    $gpSurgeryDetail = strip_tags($gpSurgeryDetail);
+
+    return $this->buildGpDetailsResponse(
+        $registeredGp,
+        1,
+        $gpSurgeryDetail !== '' ? $gpSurgeryDetail : 'N/A'
+    );
+}
+
+
 }

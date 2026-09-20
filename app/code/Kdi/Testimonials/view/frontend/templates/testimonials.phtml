@@ -1,13 +1,8 @@
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-    body {
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      background: #fff;
-      margin: 0;
-      padding: 40px 0;
-      color: #222;
+  /*@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap'); 
+    body { 
+      background: #fff; 
     }
-
     .experience-story h2.section-title {
       text-align: center;
       font-weight: 300;
@@ -17,19 +12,7 @@
 
     .experience-story .slick-slider {
       max-width: 100%; 
-    }
-
-    /*.card {
-      background: #fff;
-      border-radius: 0px;
-      overflow: hidden;
-      box-shadow: none;
-      margin: 0 10px;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }*/
-
+    } 
     .experience-story .image-pair {
       display: flex;
       height: 215px;
@@ -92,8 +75,7 @@
       background: #2ab7d6;
       transform: translateY(-2px);
     }
-
-    /* Slick arrows and dots */
+ 
     .experience-story .slick-prev:before,
     .experience-story .slick-next:before {
       color: #3ecff0;
@@ -255,7 +237,7 @@
     background-position: 0 -100% !important;
     text-decoration: none !important;
     background-color: #53CAF5 !important;
-}
+}*/
 
   </style>
 
@@ -272,6 +254,7 @@ $vm = $block->getViewModel();
 <?php if ($vm->isCurrentProductInList()) : ?>
   
 <div class="experience-story"> 
+  <div class="container">
 <h2 class="section-title">Real Patient, <strong>Real Results</strong></h2>
 <?php if(count($vm->getAllTestimonials())) : ?>
   <div class="slick-slider">
@@ -322,12 +305,14 @@ $vm = $block->getViewModel();
 <a href="/successstory">View All Success Stories</a></div>
         <?php endif; ?>
 </div>
+
+</div>
  
 
 
 
         
-        <style type="text/css">
+        <!-- <style type="text/css">
           .row {
             display: flex;
           }
@@ -335,7 +320,7 @@ $vm = $block->getViewModel();
           .column {
             padding: 0px 30px;
           }
-        </style>
+        </style> -->
         
         
         <script type="text/javascript">
@@ -388,11 +373,7 @@ $vm = $block->getViewModel();
         });
             </script>
         
-            <style>
-                .category-slider {
-                    
-                }
-                
+            <style> 
                 .item img {
                     height: 300px;
                     width: 300px;

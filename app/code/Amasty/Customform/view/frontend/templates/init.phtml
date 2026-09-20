@@ -89,9 +89,11 @@ $usePopup = $viewModel->isPopupUsed();
 <?php if ($usePopup): ?>
         </div>
     </div>
+    <div class="start-const-btn">
         <button data-amform-show="<?= (int)$formId ?>" class="amform-show-popup amcform-button -default">
             <?= $escaper->escapeHtml($viewModel->getPopupButtonTitle()) ?>
         </button>
+</div>
     </div>
 <?php endif; ?>
 
@@ -112,6 +114,12 @@ $usePopup = $viewModel->isPopupUsed();
             $('body').addClass('amform-body');
             $('#amform-form-<?= (int)$formId ?>').validation({
                 ignore: '.amcform-hidden-field, .amcform-hidden-page, :hidden:not(.amform-rating)'
+            });
+            $(".amform-show-popup").click(function() {
+                $("body").addClass("amform-poup-opened");
+            });
+            $(".-cross").click(function() {
+                $("body").removeClass("amform-poup-opened");
             });
 
             renderedFormContainer.formRender(
@@ -150,6 +158,38 @@ $usePopup = $viewModel->isPopupUsed();
             renderForm();
         <?php endif; ?>
 
+        jQuery(document).ready(function($) {
+            var submitBtn = $('.amcform-submit.action.submit.primary');
+
+            function evaluate() {
+                var anyNo = false;
+                var groupNames = $.unique($('input.policy').map(function() { return this.name; }).get());
+
+                $.each(groupNames, function(i, name) {
+                    var checkedVal = $('input.policy[name="' + name + '"]:checked').val();
+                    if (checkedVal === 'no' || checkedVal === 'option-2') {
+                        anyNo = true;
+                        return false; // break the each loop
+                    }
+                });
+
+                if (anyNo) {
+                    submitBtn.prop('disabled', true).css({
+                        'opacity': '0.5',
+                        'pointer-events': 'none'
+                    });
+                } else {
+                    submitBtn.prop('disabled', false).css({
+                        'opacity': '1',
+                        'pointer-events': 'auto'
+                    });
+                }
+            }
+
+            $('input.policy').on('change', evaluate);
+            evaluate(); // initial check on page load, in case a value is pre-selected
+        });
+
          // custom js for disabled button and error message
         jQuery(document).ready(function($){
             var submitBtn = $('.amcform-submit.action.submit.primary');
@@ -162,6 +202,23 @@ $usePopup = $viewModel->isPopupUsed();
                 submitBtn.prop('disabled', false).css({'opacity':'1', 'pointer-events':'auto'});
             }
         });
+            function fixDatePickerInputs() {
+            const inputs = document.querySelectorAll('input.amform-date._has-datepicker');
+            document.querySelectorAll('button.ui-datepicker-trigger').forEach(btn => {
+                btn.style.display = 'none';
+            });
+            inputs.forEach(input => {
+                input.removeAttribute('readonly');
+                input.setAttribute('type', 'date');
+            });
+            
+            return inputs.length; // returns count of modified inputs
+        }
+            fixDatePickerInputs();
+            
+        // run after 5 seconds
+        // setTimeout(insertGpSearchFormAfterLastBefore, 5000);
+        setTimeout(fixDatePickerInputs, 5000);
         });
     });
 </script>
@@ -224,3 +281,109 @@ $usePopup = $viewModel->isPopupUsed();
 
     }
 </style>
+
+
+<script type="text/javascript">
+    require([
+        'jquery'
+    ], function($) {
+        $(document).ready(function() {
+            $(".amcform-icon.-cross").click(function() {
+                location.reload();
+            });
+
+            var gpSearchInserted = false;
+
+            function waitForElement(selector, callback, maxTries, interval) {
+                maxTries = maxTries || 60;   
+                interval = interval || 200;
+                var tries = 0;
+
+                var timer = setInterval(function() {
+                    tries++;
+                    var $el = $(selector);
+
+                    if ($el.length) {
+                        clearInterval(timer);
+                        callback($el);
+                    } else if (tries >= maxTries) {
+                        clearInterval(timer);
+                        console.warn('waitForElement: "' + selector + '" not found after max tries.');
+                    }
+                }, interval);
+            }
+
+
+            function insertGpSearchFormAfterLastBefore() {
+                 if (gpSearchInserted) {   
+                  return;                
+                } 
+               
+
+                var $blocks = $('.amcform-page-wrap .amform-layout-one');
+
+                // get the block that contains gp_search_before
+                var $targetBlock = $('.custom_form_hw').closest('.amform-layout-one');
+
+                // get its index
+                var index = $blocks.index($targetBlock);
+
+                console.log("Index:", index);
+
+                // add class to that block
+                $blocks.eq(index).addClass('DDDDDDDDDD');
+
+                // create new layout
+                var $newLayout = $('<div class="amform-layout-one amform-layout-one--gp-search field fb-text form-group"></div>');
+                var $newGroup = $('<div class="amform-groupv2 gp-search-group"></div>');
+                var $gpForm = $('.bmi-claculator-sec');
+                if ($gpForm.length) {
+                    $newGroup.append($gpForm);
+                    $gpForm.show();
+                } else {
+                    console.warn('#gp_search_form not found.');
+                }
+
+
+                $newLayout.append($newGroup);
+
+                // insert after found index
+                $blocks.eq(index).before($newLayout);
+
+
+
+                console.log("New layout inserted after index:", index);
+
+
+                console.log('-----------------------------------------------------');
+             gpSearchInserted = true;  
+            }
+
+
+            function fixDatePickerInputs() {
+                const inputs = document.querySelectorAll('input.amform-date._has-datepicker');
+                document.querySelectorAll('button.ui-datepicker-trigger').forEach(btn => {
+                    btn.style.display = 'none';
+                });
+                inputs.forEach(input => {
+                    input.removeAttribute('readonly');
+                    input.setAttribute('type', 'date');
+                });
+
+                return inputs.length; // returns count of modified inputs
+            }
+            fixDatePickerInputs();
+
+            // run after 5 seconds
+            waitForElement('.custom_form_hw', function() {
+          insertGpSearchFormAfterLastBefore();
+    });
+
+        waitForElement('input.amform-date._has-datepicker', function() {
+            fixDatePickerInputs();
+        });
+
+
+        });
+    });
+</script>

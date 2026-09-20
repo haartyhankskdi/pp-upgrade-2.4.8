@@ -531,40 +531,10 @@
                     <item name="sortOrder" xsi:type="number">30</item>
                 </item>
             </argument>
-        </column>            
-        <!-- <column name="suffer_diagnosed_yes" class="MY\CustomExport\Ui\Component\Listing\Column\NoConditon">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="sorting" xsi:type="string">asc</item>
-                    <item name="sortable" xsi:type="boolean">false</item>
-                    <item name="label" xsi:type="string" translate="true">Do you suffer from or have you been diagnosed with any other medical condition(s)?</item>
-                    <item name="sortOrder" xsi:type="number">30</item>
-                </item>
-            </argument>
-        </column>        
-        <column name="other_medication_yes" class="MY\CustomExport\Ui\Component\Listing\Column\NoConditon">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="sorting" xsi:type="string">asc</item>
-                    <item name="sortable" xsi:type="boolean">false</item>
-                    <item name="label" xsi:type="string" translate="true">Are you on any other medication (including prescription medicine, over the counter medicines, vitamins or supplements)?</item>
-                    <item name="sortOrder" xsi:type="number">32</item>
-                </item>
-            </argument>
         </column>
-        <column name="have_allergies_yes" class="MY\CustomExport\Ui\Component\Listing\Column\NoConditon">
-            <argument name="data" xsi:type="array">                
-                <item name="config" xsi:type="array">                    
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="sorting" xsi:type="string">asc</item>           
-                    <item name="sortable" xsi:type="boolean">false</item>         
-                    <item name="label" xsi:type="string" translate="true">Do you have any allergies?</item>                    
-                    <item name="sortOrder" xsi:type="number">33</item>
-                </item>
-            </argument>
-        </column> 
+                    
+               
+        
         <column name="registered_gp">
             <argument name="data" xsi:type="array">  
                 <item name="options" xsi:type="object">Magento\Config\Model\Config\Source\Yesno</item>              
@@ -592,17 +562,17 @@
                     <item name="sortOrder" xsi:type="number">36</item>
                 </item>
             </argument>
-        </column>         
-        <column name="upload_documents_prescriber_yes" class="MY\CustomExport\Ui\Component\Listing\Column\NoConditon">
+        </column>
+        <column name="registered_gp_surgery" class="MY\CustomExport\Ui\Component\Listing\Column\RegisteredGP">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
                     <item name="sorting" xsi:type="string">asc</item>
                     <item name="sortable" xsi:type="boolean">false</item>
-                    <item name="label" xsi:type="string" translate="true">Would you like to upload any documents for the prescriber to see (for example, prescription, doctors letter or blood tests)?</item>
-                    <item name="sortOrder" xsi:type="number">38</item>
+                    <item name="label" xsi:type="string" translate="true">If yes, Do you give permission for Pharmacy Planet to inform your GP of this supply?</item>
+                    <item name="sortOrder" xsi:type="number">36</item>
                 </item>
             </argument>
-        </column> -->                 
+        </column>                       
     </columns>
 </listing>

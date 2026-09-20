@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mflazyzoad>
+            <general>
+                <mfmodule>LazyLoad</mfmodule>
+                <mftype>1</mftype>
+                <method>0</method>
+                <blocks_to_lazy_load>1</blocks_to_lazy_load>
+                <lazy_blocks>
+                    {
+                        "_1686830676971_971":{"block_identifier":"footer","first_images_to_skip":"0"},
+                        "_1686830692627_627":{"block_identifier":"category.products.list","first_images_to_skip":"2"},
+                        "_1686830698763_763":{"block_identifier":"search_result_list","first_images_to_skip":"0"},
+                        "_1686830706539_539":{"block_identifier":"catalog.product.related","first_images_to_skip":"0"},
+                        "_1686830709731_731":{"block_identifier":"product.info.upsell","first_images_to_skip":"0"},
+                        "_1686830724821_821":{"block_identifier":"product.info.details","first_images_to_skip":"0"},
+                        "_1686830727491_491":{"block_identifier":"checkout.cart.crosssell","first_images_to_skip":"0"},
+                        "_1686830759755_755":{"block_identifier":"blog.post","first_images_to_skip":"0"},
+                        "_1686830764027_27":{"block_identifier":"blog.posts.list","first_images_to_skip":"0"},
+                        "_1686830775499_499":{"block_identifier":"blog.sidebar","first_images_to_skip":"0"},
+                        "_1686830777092_92":{"block_identifier":"blog.post.relatedproducts","first_images_to_skip":"0"},
+                        "_1686830777637_637":{"block_identifier":"product.info.description","first_images_to_skip":""}
+                    }
+                </lazy_blocks>
+                <noscript>0</noscript>
+            </general>
+        </mflazyzoad>
+    </default>
+</config>

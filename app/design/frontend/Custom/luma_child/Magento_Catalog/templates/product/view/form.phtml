@@ -129,7 +129,7 @@ $key = array_search($currentProduct->getId(), $weightLossProductsId);
 <?php echo $this->getLayout()->createBlock("Kdi\GHQ\Block\Product\View\CustomAttribute")->setTemplate("Kdi_GHQ::custom_attribute.phtml")->toHtml(); ?>
 <?php elseif (empty($questionnaireAttributeId) && $_product->isSaleable()) : ?>
 <!-- <p class="line-163">add</p> -->
-    <?php if ($key == false) :  ?>
+  <?php if ($key === false) :  ?>
         <div class="start-const-btn">
             <a href="?true" class="back-to-start-consultation" style="display:block"><button type="button"><?= $block->escapeHtml($buttonTitle); ?></button></a>
         </div>

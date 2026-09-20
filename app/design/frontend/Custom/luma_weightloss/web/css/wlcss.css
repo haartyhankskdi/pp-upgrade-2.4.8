@@ -23,7 +23,7 @@ body{
  	.page-products.catalog-category-view.amform-body .category-view .category-image{
  		margin-top: 50px !important;
  	}
-	.minicart-wrapper,
+	 
 	.custom-menu-ul li.trustpoilet,
 	.view-all-treatment-menu,
 	.mppromobanner-style{
@@ -445,7 +445,7 @@ body{
 	width: 100%;
 	float: left;
 	padding:65px 0;
-	margin: 0;
+	margin: 66px 0px;
 	background: #E7F2F4;
 	text-align: center;
 }
@@ -864,9 +864,10 @@ footer.page-footer{
 		padding: 15px 40px !important;
 		margin: 7rem auto !important;
 	}
-	/*.checkout-index-index .page-main {
-	    max-width: 1090px !important; 
-	}*/
+	.checkout-index-index .page-wrapper .page-main{ 
+	     max-width: 1090px !important; 
+	    margin-top: 25px;
+	}
 
  }
 
@@ -1788,7 +1789,7 @@ footer.page-footer{
 
 @media screen and (min-width: 768px) {
 	.amcform-popup-block .amform-form{
-		max-width: 475px !important;
+		max-width: 600px !important;
 		float: none !important;
 	}
 	.content .select-product,
@@ -2174,8 +2175,9 @@ footer.page-footer{
 .rendered-form .fieldset .fields .field.form-group label.amform-versiontwo-label{
 	border-radius: 0 !important;
 }
-.rendered-form .fieldset .fields .field.form-group .amform-groupv2 {
-    margin-right: 0 !important; 
+.rendered-form .fieldset .fields .field.form-group.field-checkboxtwo-1720096426155 .amform-groupv2,
+.rendered-form .fieldset .fields .field.form-group.field-checkboxtwo-1720096920041 .amform-groupv2{
+    margin-right: 5px !important; 
 }
 .amform-parent .amcform-popup .rendered-form .fieldset .fields .field.form-group label.amform-versiontwo-label{
 	min-width: 70px !important;
@@ -3888,9 +3890,7 @@ footer.page-footer{
 
 @media screen and (min-width: 1025px) {
 
-	.checkout-index-index .page-wrapper .page-main{
-		max-width: 100% !important;
-	}
+	 
 	.one-step-checkout-wrapper .col-mp.mp-4 {
 		width: 27.333333% !important;
 		margin-right: 18px;
@@ -3906,4 +3906,233 @@ footer.page-footer{
 		width: 65% !important;
 		padding-right: 2% !important;
 	}
+}
+@media screen and (max-width: 767px) {
+    .page-layout-1column.amform-body .weightloss-custom-login .repeat-right-column h2 {
+        font-size: 25px !important;
+        margin-top: 50px !important;
+        line-height: 30px !important;
+    }
+}
+
+
+/*--------admincss-------*/
+
+
+.amform-parent .amcform-popup .rendered-form .fieldset .fields .field.form-group.field-radiotwo-1753336151245 label.amform-versiontwo-label[for=radiotwo-1753336151245-1]{
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+@media (min-width:1025px){
+    .checkout-cart-index .page-main{
+        max-width: 1260px !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .onestepcheckout-index-index .checkout-bottom { 
+        display: inline-block;
+    }
+     
+}
+
+.page-header .offer1{
+    display: none !important;
+}
+@media screen and (min-width: 768px) {
+    .need-help-section .left-column {
+        width: 42%;
+        text-align: left;
+        margin-bottom: 0;
+    }
+}
+
+.slider-wrapper .rating-img{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+@media only screen and (min-width: 768px) {
+    .categoryquestwl-index-index .column.main .content .select-product .custom-col-category h2{ 
+        font-size: 20px !important;
+    }
+    .categoryquestwl-index-index .column.main .content .select-product .custom-col-category ul,
+    .categoryquestwl-index-index .column.main .content .select-product .custom-col-category h2{
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    .categoryquestwl-index-index .column.main .content .select-product .custom-col-category h2 {
+        height: 60px  !important;
+        line-height: 28px !important;
+    }
+ 
+   .treatment-options .home_block_1 .h-product-title{
+    	height: 60px !important;
+    	font-size: 23px;
+    }
+    .home-treatment-block .home_block_1 ul{
+    	height: 100px;
+    	overflow: hidden;
+    }
+ 
+	.treatment-options .carousel-container .carousel .carousel-item .home_block_1{
+		padding-left: 12px !important;
+		padding-right: 12px !important;
+	}
+	.treatment-options .carousel-container .carousel .carousel-item{
+		padding: 0 7px !important;
+	}
+}
+
+.cms-weightloss .how-it-works-section .h-banner-btn{
+    display: none;
+}
+.rendered-form .amform-form-fieldset.fieldset{
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+.default.amform-form .fields .amform-layout-two, .default.amform-form .fields .amform-layout-one{
+    margin-right: 0 !important;
+}
+.amcform-popup-block .amform-form .amcform-toolbar{
+    margin-top: -7px;
+}
+.rendered-form .fieldset .fields .field.form-group.am-customform-depend{
+    background-color: #fff;
+    padding: 0 15px;
+}
+.rendered-form .fieldset .fields .field.fb-radio.form-group.registered_gp_surgery_fieldset{
+    padding-left: 0 !important;
+}
+@media only screen and (max-width: 767px) {
+   .page-main .mob-consult-btn a{
+    width: 80% !important;
+   } 
+ 
+}
+
+.treatment-options .carousel-container .carousel .carousel-item .home_block_1 .h-banner-btn a{
+	width: auto !important;
+}
+.treatment-options .home_block_1 .h-banner-btn .info-tooltip p{
+    font-size: 12px;
+    line-height: 16px;
+    min-height: auto;
+    margin-bottom: 10px;
+}
+.treatment-options .home_block_1 .h-banner-btn .info-tooltip{
+    left: -10px !important;
+    width: 190px !important;
+    top: auto !important;
+    bottom: 0;
+font-size: 12px !important;
+    line-height: 16px !important;
+}
+.treatment-options .home_block_1 .h-banner-btn .info-tooltip p a{
+    background: transparent;
+    line-height: 16px;
+    color: #000;
+    text-transform: none;
+    text-align: left;
+    font-size: 12px;
+    text-decoration: underline !important;
+}
+.treatment-options .home_block_1 .h-banner-btn .info-tooltip::after{
+    top: auto !important;
+    bottom: 10px;
+}
+
+.treatment-options .home_block_1 .h-banner-btn .info-tooltip ul{
+    width: 90%;
+    margin-left: 15px;
+    margin-bottom: 0;
+}
+.treatment-options .home_block_1 .h-banner-btn .info-tooltip ul li{
+    list-style-type: disc;
+    font-size: 12px;
+    line-height: 16px;
+}
+.treatment-options .home_block_1 .h-product-title a{
+    color: #000 !important;
+}
+
+@media only screen and (max-width: 767px) {
+    .treatment-options .home_block_1 .h-banner-btn .info-tooltip p,
+    .custom-col-wrapper-category .select-btn .info-tooltip{
+        font-size: 12px !important;
+        line-height: 16px !important;
+    }
+    .treatment-options .home_block_1 .h-banner-btn .info-tooltip,
+    .custom-col-wrapper-category .select-btn .info-tooltip{
+        max-height: 300px;
+        overflow-y: auto;
+        overflow-x: hidden
+    }
+
+    .modal-popup._inner-scroll .modal-content {
+	    padding-left: 15px !important;
+	    padding-right: 15px !important;
+	}
+	.account.sales-order-history .table-wrapper.orders-history table>tbody>tr>td.actions a.view {
+	    float: left !important;
+	}
+}
+
+.custom-col-wrapper-category .select-btn .info-tooltip{
+    top: auto !important;
+    bottom: 0 !important;
+}
+.custom-col-wrapper-category .select-btn .info-tooltip::after{
+    top: auto !important;
+    bottom: 10px;
+} 
+
+.amform-poup-opened .amcform-popup-block .amform-form .amcform-page-wrap .amform-layout-one.amform-layout-one--gp-search{
+    width: 100%;
+    display: inline-block;
+    background-color: #fff;
+}
+.rendered-form .fieldset .insert-container.fields .field.form-group.fb-h2 h2{
+    margin-bottom: 10px !important;
+text-align: center !important;
+}
+@media screen and (min-width: 1025px) {
+       .page-product-configurable.page-layout-1column.start_consultation .product-info-main .product-options-bottom .box-tocart .fill-wlcat-question{
+            margin-top: 10px !important;
+       }
+     
+.catalog-product-view.page-layout-1column.start_consultation .product-info-main .product-det .product-desc .product-name{
+      width: 70% !important;
+      margin-top: 25px !important;
+    }
+}
+@media screen and (min-width: 1500px) { 
+	.treatment-options .home-treatment-block .carousel-prev {
+        left: -40px !important;
+    }
+    .treatment-options .home-treatment-block .carousel-next {
+        right: -40px !important;
+    }
+    .cms-weightloss .treatment-options .home-treatment-block .carousel-container {
+        position: initial;
+    }
+}
+
+
+.checkout-index-index .osc-cms-block .p-description.question-text.order-message{
+	margin-top: 10px;
+}
+.osc-place-order-wrapper .osc-multi-address-checkout{
+	display: none;
+}
+
+.modal-popup .modal-inner-wrap footer.modal-footer {
+    display: block;
+    flex-direction: row;
+}
+
+.product-faq-section{
+	margin-bottom: 50px;
 }

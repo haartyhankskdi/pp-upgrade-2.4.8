@@ -1,34 +1,34 @@
 <?php 
 $_product = $block->getProduct();
-$faqCount = 10; 
+$faqCount = 16; 
 $hasFaq = false;
 
 for ($i = 1; $i <= $faqCount; $i++) {
-    if (!empty($_product->getData("faq_ques$i"))) {
+    if (!empty($_product->getData("faq_ques$i")) && !empty($_product->getData("faq_ans$i"))) {
         $hasFaq = true;
         break;
     }
 }
 ?>
+
 <?php if ($hasFaq) : ?>
 <div class="product-faq-section">
   <div class="container reveal1">
     <div class="h-title">Frequently Asked Questions</div>
-    
+
     <div class="faq-list-sec">
       <?php for ($i = 1; $i <= $faqCount; $i++) : 
-        $question = $_product->getData("faq_ques$i");
-        $answer = $_product->getData("faq_ans$i");
-        if (!empty($question)) : ?>
+        $question = strip_tags($_product->getData("faq_ques$i") ?? '');
+        $answer   = strip_tags($_product->getData("faq_ans$i") ?? '', '<a><br><strong><em><ul><li>');
+
+        if (!empty($question) && !empty($answer)) : ?>
           <div class="faq-list">
-          <input type="checkbox" id="faq-title<?php echo $i; ?>" />
-          <label for="faq-title<?php echo $i; ?>" class="faq-item"><?php echo $question; ?></label>
-        <?php endif; 
-        if (!empty($answer)) : ?>
-          <div class="panel-p faq-answer">
-            <p><?php echo $answer; ?></p>
+            <input type="checkbox" id="faq-title<?php echo $i; ?>" />
+            <label for="faq-title<?php echo $i; ?>" class="faq-item"><?php echo $block->escapeHtml($question); ?></label>
+            <div class="panel-p faq-answer">
+              <p><?php echo $answer; ?></p>
+            </div>
           </div>
-        </div>
         <?php endif; 
       endfor; ?>
     </div>
@@ -36,6 +36,7 @@ for ($i = 1; $i <= $faqCount; $i++) {
   </div>
 </div>
 <?php endif; ?>
+
 <?php
 $faqSchema = [
     "@context" => "https://schema.org",
@@ -44,8 +45,8 @@ $faqSchema = [
 ];
 
 for ($i = 1; $i <= $faqCount; $i++) {
-    $question = $_product->getData("faq_ques$i");
-    $answer = $_product->getData("faq_ans$i");
+    $question = $_product->getData("faq_ques$i") ?? '';
+    $answer   = $_product->getData("faq_ans$i") ?? '';
 
     if (!empty($question) && !empty($answer)) {
         $faqSchema['mainEntity'][] = [
@@ -59,11 +60,8 @@ for ($i = 1; $i <= $faqCount; $i++) {
     }
 }
 
-// Output the JSON-LD schema
-if (!empty($faqSchema['mainEntity'])):
-?>
+if (!empty($faqSchema['mainEntity'])) : ?>
 <script type="application/ld+json">
 <?php echo json_encode($faqSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT); ?>
 </script>
 <?php endif; ?>
-

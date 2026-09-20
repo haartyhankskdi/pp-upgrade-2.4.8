@@ -368,8 +368,8 @@
 		padding-right: 15px !important;
 	}
 
-	.home-new-block-sec .block-n-1 {
-		width: 24.9% !important;
+	.page-wrapper .home-new-block-sec .block-n-1 {
+		width: 32.9% !important;
 	}
 
 	.home-new-block-sec .block-n-1 p {
@@ -382,7 +382,7 @@
 	}
 
 	.hm-meet-team .custom-slider .owl-carousel .owl-item .banner-item .banner-image, .hm-meet-team .owl-carousel .owl-item .banner-item {
-		height: 235px !important;
+		height: 180px !important;
 	}
 
 	.medication-ordering-title {
@@ -572,7 +572,7 @@
 	}
 
 	.customMenu .view-treatment-content ul.menu-1 label a {
-		line-height: 46px !important;
+		/*line-height: 46px !important;*/
 		width: 78% !important;
 	}
 
@@ -607,7 +607,7 @@
 	}
 
 	.customMenu .view-all-treatment-menu .view-treatment-content ul.submenu {
-		width: 75% !important;
+		width: 80% !important;
 	}
 
 	.customMenu .view-all-treatment-menu .view-treatment-content ul.menu-1 ul.submenu li {
@@ -947,8 +947,6 @@
 		z-index: 9999 !important;
 	}
 
-	.view-all-treatment-menu .view-treatment-1 {
-	}
 }
 
 @media screen and (min-width: 768px) {
@@ -1658,7 +1656,7 @@
 
 @media screen and (min-width: 1025px) {
 	.cms-meet-our-team .meet-the-team.meet-our-team-sec .row > .column.meet-our-team-list {
-		width: 235px;
+		width: 235px !important;
 	}
 
 	.cms-meet-our-team .meet-the-team.meet-our-team-sec .row > .column.meet-our-team-list:nth-child(4n) {
@@ -1675,20 +1673,7 @@
 		height: 100% !important;
 	}
 }
-
-@media screen and (min-width: 1025px) {
-	.cms-meet-our-team .meet-the-team.meet-our-team-sec .row > .column.meet-our-team-list {
-		width: 235px;
-	}
-
-	.cms-meet-our-team .meet-the-team.meet-our-team-sec .row > .column.meet-our-team-list:nth-child(4n) {
-		margin-right: 0 !important;
-	}
-
-	.cms-meet-our-team .meet-the-team.meet-our-team-sec .row > .column.meet-our-team-list.last {
-		margin-right: 40px !important;
-	}
-}
+ 
 
 @media screen and (min-width: 768px) {
 	.cms-weight-loss .page-main {
@@ -2318,7 +2303,11 @@
 	}
 
 	.page-layout-1column.start_consultation .product-det {
-		width: 92% !important;
+		width: 100% !important;
+	}
+	.page-layout-1column.start_consultation .product-det .product-desc{
+		padding-left: 30px !important;
+		padding-right: 30px !important;
 	}
 
 	.catalog-product-view .product-info-main .config-price {
@@ -3490,9 +3479,7 @@
 		text-align: left;
 	}
 
-	.catalog-category-view .how-it-works-section {
-		padding: 40px 0 50px 0 !important;
-	}
+	
 }
 
 @media only screen and (min-width:768px) and (max-width:1024px) {
@@ -3843,7 +3830,7 @@
 
 @media screen and (min-width: 768px) {
 	.catalog-category-view.page-products .product-item-info.custom-col-wrapper-category .product-item-name-wrapper {
-		height: 80px !important;
+		height: 120px !important;
 	}
 
 	.catalog-category-view .products-grid .product-items.custom-row-category .price-box, .catalog-category-view.page-products .custom-col-wrapper-category .start-from.out-of-stock-p, .catalog-category-view.page-products .custom-col-wrapper-category .simple-prod.start-from.out-of-stock-p {
@@ -4422,13 +4409,13 @@
 	}
 
 	.footer-right {
-		width: 64%;
+		/*width: 64%;*/
 		float: left;
 		padding: 45px 0 20px 10px;
 	}
 
 	.footer-left {
-		width: 34%;
+		width: 40%;
 	}
 
 	.footer-link ul li {
@@ -4456,9 +4443,9 @@
 		font-weight: 600;
 	}
 
-	body.cms-index-index .minicart-wrapper .action.showcart:before {
+	/*body.cms-index-index .minicart-wrapper .action.showcart:before {
 		background-color: #e9f3f6;
-	}
+	}*/
 
 	.cms-index-index .discretion-confidentiality-panel {
 		margin-top: 50px !important;
@@ -8561,11 +8548,7 @@
 		float: left;
 		padding: 45px 0 20px 10px;
 	}
-
-	.footer-left {
-		width: 34%;
-	}
-
+ 
 	.contact-details ul li a {
 		margin-right: 0 !important;
 	}
@@ -8587,9 +8570,9 @@
 		font-weight: 600;
 	}
 
-	body.cms-index-index .minicart-wrapper .action.showcart:before {
+	/*body.cms-index-index .minicart-wrapper .action.showcart:before {
 		background-color: #e9f3f6;
-	}
+	}*/
 
 	.cms-index-index .discretion-confidentiality-panel {
 		margin-top: 50px !important;
@@ -11220,9 +11203,9 @@
 		margin-right: 0 !important;
 	}
 
-	.cms-index-index .home-new-block-sec .block-n-1 {
+	/*.cms-index-index .home-new-block-sec .block-n-1 {
 		width: 414px !important;
-	}
+	}*/
 
 	.popular-condition-sec-slide-container, .popular-condition-sec-slide-container.mobile {
 		display: none !important;
@@ -11269,7 +11252,7 @@
 	}
 
 	body {
-		overflow: hidden;
+		overflow-x: hidden;
 	}
 
 	.toggle-icon {
@@ -11705,5 +11688,29 @@
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
 	.page-layout-1column.start_consultation button.before-start-consultation.question-text.no_custom_option {
 		top: 30px !important;
+	}
+	.reveal-r,
+	.reveal-l{
+		transform: translateX(0) !important;
+        opacity: 1 !important;
+	}
+	.brand-logo-sec-panel.pp-media .b-logo-sec{
+		width: 100% !important;
+		margin-top: 20px;
+	}
+	.brand-logo-sec-panel.pp-media .brand-logo-img{
+		width: 22% !important;
+		margin-right: 10px !important;
+		margin-left: 10px !important;
+	}
+
+	.pharmacy-vid-cont{
+		width: 90% !important;
+	}
+	.payment-icon{
+		gap: 10px;
+	}
+	.view-all-treatment-menu .view-treatment-1{
+		margin-left: 0 !important;
 	}
 }

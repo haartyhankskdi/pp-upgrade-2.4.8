@@ -5,38 +5,86 @@
  */
 
 /** @var \Magento\Customer\Block\Widget\Gender $block */
-
-// for="$block->escapeHtmlAttr($block->getFieldId('gender'))"
 ?>
 <div class="field gender<?= $block->isRequired() ? ' required' : ''?>">
     <label class="label"><span><?= $block->escapeHtml($block->getStoreLabel('gender')) ?></span></label>
-    <div class="control">
-            <?php $options = $block->getGenderOptions(); ?>
-            <?php $value = $block->getGender(); ?>
+    <div class="control gender-control">
+        <?php $options = $block->getGenderOptions(); ?>
+        <?php $value = $block->getGender(); ?>
 
-            <div class="field">
+        <div class="field">
             <input type="radio" <?= /* @noEscape */ ("1" == $value) ? ' checked="checked"' : '' ?> name="<?= $block->escapeHtmlAttr($block->getFieldName('gender')) ?>" value="1" id="gender_male" class="<?php if ($block->isRequired()) : ?>required-entry validate-one-required-by-name <?php endif; ?>">
-            <label class="gender gender_male" for="gender_male"><span><?= $block->escapeHtml(__("Male")) ?></span></label>
+            <label class="gender gender_male<?= ("1" == $value) ? ' active' : '' ?>" for="gender_male"><span><?= $block->escapeHtml(__("Male")) ?></span></label>
         </div>
 
         <div class="field">
             <input type="radio" <?= /* @noEscape */ ("2" == $value) ? ' checked="checked"' : '' ?> name="<?= $block->escapeHtmlAttr($block->getFieldName('gender')) ?>" value="2" id="gender_female" class="<?php if ($block->isRequired()) : ?> required-entry validate-one-required-by-name <?php endif; ?>">
-            <label class="gender gender_female" for="gender_female"><span><?= $block->escapeHtml(__("Female")) ?></span></label>
+            <label class="gender gender_female<?= ("2" == $value) ? ' active' : '' ?>" for="gender_female"><span><?= $block->escapeHtml(__("Female")) ?></span></label>
         </div>
-            <div for="gender" generated="true" class="mage-error" style="display:none" id="gender-error">This is a required field.</div>
     </div>
 </div>
 
+<style>
+    .gender-control {
+        position: relative;
+        padding-bottom: 22px;
+        display: flow-root;
+    }
+    .gender-control .field {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 10px;
+    }
+    .gender-control #gender-error,
+    .gender-control .mage-error {
+        position: absolute !important;
+        left: 0;
+        bottom: 0;
+        top: auto;
+        margin: 0 !important;
+        white-space: nowrap;
+    }
+</style>
+
 <script>
-    require(['jquery'], function($){
-        $('.gender').click(function () { 
-            if ($("#gender_male").is(":checked")) {
-                $(".gender_male").addClass('active');
-                $(".gender_female").removeClass('active');
-            }else{
-                $(".gender_male").removeClass('active');
-                $(".gender_female").addClass('active');
+    require(['jquery'], function ($) {
+        var control = document.querySelector('.gender-control');
+        if (!control) return;
+
+        var isRelocating = false;
+
+        var relocateError = function () {
+            var error = control.querySelector('#gender-error');
+            if (error && control.lastElementChild !== error) {
+                isRelocating = true;
+                control.appendChild(error);
+                isRelocating = false;
+            }
+        };
+
+        $('input[name="<?= $block->escapeJs($block->getFieldName('gender')) ?>"]').on('change', function () {
+            if ($('#gender_male').is(':checked')) {
+                $('.gender_male').addClass('active');
+                $('.gender_female').removeClass('active');
+            } else {
+                $('.gender_male').removeClass('active');
+                $('.gender_female').addClass('active');
             }
         });
+
+        if (window.MutationObserver) {
+            var observer = new MutationObserver(function () {
+                if (isRelocating) return;
+                relocateError();
+            });
+
+            observer.observe(control, { childList: true });
+
+            var fields = control.querySelectorAll('.field');
+            fields.forEach(function (f) {
+                observer.observe(f, { childList: true });
+            });
+        }
+        relocateError();
     });
 </script>
