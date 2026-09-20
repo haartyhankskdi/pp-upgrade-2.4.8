@@ -1,0 +1,189 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * @var $block \Magefan\LazyLoad\Block\Lazy
+ * @var $mfSecureRenderer \Magefan\Community\Api\SecureHtmlRendererInterface
+ */
+?>
+<?php if ($block->isNoScriptEnabled()) { ?>
+    <style>
+        .mflazyzoad-no-js [data-original],
+        .mflazyzoad-no-js [data-originalset] {
+            display: none!important;
+        }
+    </style>
+<?php } ?>
+<?php if ($block->getIsJavascriptLazyLoadMethod()) { ?>
+    <?php
+    $script = "
+    var mfLazyLoadTriggered = false;
+
+    function observeLazyTarget() {
+        var element = document.querySelector(
+            'main img[src\$=\"pixel.jpg\"], main .mflazy-background-image, div[data-original]'
+        );
+        if (!element) return;
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    loadLazyLoad();
+                    observer.disconnect();
+                }
+            });
+        }, { rootMargin: '100px' });
+        observer.observe(element);
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        " . ($block->isNoScriptEnabled() ? "
+            document.body.className = document.body.className.replace('mflazyzoad-no-js', '');
+        " : "") . "
+        observeLazyTarget();
+        document.addEventListener('scroll', loadLazyLoad, { once: true, passive: true });
+        document.addEventListener('click', loadLazyLoad, { once: true });
+    });
+
+    function loadLazyLoad() {
+        if (mfLazyLoadTriggered) return;
+        mfLazyLoadTriggered = true;
+        var jsSrc = '{$block->getViewFileUrl('Magefan_LazyLoad::js/lazyload.min.js')}';
+        function loadScript(e,t){var a,n,r;n=!1,(a=document.createElement('script')).type='text/javascript',a.src=e,a.onload=a.onreadystatechange=function(){n||this.readyState&&\"complete\"!=this.readyState||(n=!0,t())},(r=document.getElementsByTagName('script')[0]).parentNode.insertBefore(a,r)}
+
+        loadScript(jsSrc, function(){
+            var rawConfig = {$block->getLazyLoadConfig()};
+
+            /* Mapping Magefan attributes to LazyLoad v19 configuration */
+            var lazyLoadConfig = Object.assign({}, rawConfig, {
+                data_src: 'original',
+                data_bg: 'original',
+                class_loading: 'mf-loading',
+                class_loaded: 'mf-loaded',
+                class_error: 'mf-error',
+                use_native: false
+            });
+
+            var myLazyLoad = false;
+
+            function initLazy() {
+                myLazyLoad = new LazyLoad(lazyLoadConfig);
+                /* Backup call for dynamic elements */
+                setTimeout(function(){ myLazyLoad.update(); }, 2000);
+            }
+
+            if (document.readyState !== 'loading') {
+                initLazy();
+            } else {
+                document.addEventListener('DOMContentLoaded', initLazy);
+            }
+
+            document.body.addEventListener('contentUpdated', function(){
+                if (myLazyLoad) {
+                    myLazyLoad.update();
+                }
+            });
+            return true;
+        });
+    }
+";
+    ?>
+    <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', ['data-rocketjavascript' => 'false'], $script, false) ?>
+    <?php
+
+    $script = "
+    document.addEventListener('DOMContentLoaded', function() {
+        function replacePixelImage(img) {
+            if (!img.classList.contains('mf-loaded')) {
+                var src = img.getAttribute('data-original');
+                if (src) {
+                    img.setAttribute('src', src);
+                    img.classList.add('mf-loaded')
+                }
+                var srcset = img.getAttribute('data-originalset');
+                if (srcset) {
+                    img.setAttribute('srcset', srcset);
+                    img.classList.add('mf-loaded')
+                }
+            }
+        }
+
+        /* Fix for product tabs */
+        var l = 'mf-loaded';
+        var productInfoDetailedImg = document.querySelector('.product.info.detailed .data.item.title a');
+        if(productInfoDetailedImg){
+            productInfoDetailedImg.addEventListener('click', function () {
+                document.querySelectorAll('.product.info.detailed img[data-original^=\"h\"],.product.info.detailed source[data-originalset^=\"h\"]').forEach(function(el){
+                    replacePixelImage(el);
+                });
+            });
+        }
+
+        document.querySelectorAll('.nav-sections, .navigation-bar').forEach(function(el){
+            el.addEventListener('click', handlerMouseEvent, false);
+            el.addEventListener('mouseenter', handlerMouseEvent, false);
+        });
+
+        function handlerMouseEvent(e) {
+            e.target.querySelectorAll('img[data-original^=\"h\"],source[data-originalset^=\"h\"]').forEach(function (el) {
+                replacePixelImage(el);
+            });
+        }
+
+
+        /* Fix for sliders */
+        var intr = setInterval(function(){
+            var sliders = document.querySelectorAll('.slick-track, .swiper-wrapper, .owl-carousel, .carousel-inner');
+            if (!sliders.length) clearInterval(intr);
+            sliders.forEach(function(el) {
+                var imgs = el.querySelectorAll('img,source');
+                var c = 0;
+                imgs.forEach(function(el){
+                    if ((el.getAttribute('src') && el.getAttribute('src').indexOf('pixel.jpg') != -1)
+                        || (el.getAttribute('srcset') && el.getAttribute('srcset').indexOf('pixel.jpg') != -1)
+                    ) {
+                        c++;
+                    }
+                });
+                if (c && imgs.length != c) {
+                    imgs.forEach(function(el){
+                        var src = el.getAttribute('data-original');
+                        if (src) {
+                            el.setAttribute('src', src);
+                        }
+
+                        var srcset = el.getAttribute('data-originalset');
+                        if (srcset) {
+                            el.setAttribute('srcset', srcset);
+                            el.classList.add(l)
+                        }
+                    });
+                }
+
+                /* Fix for page builder bg in the slider */
+                var mflazyBI = el.querySelectorAll('div.mflazy-background-image');
+                var BI = el.querySelectorAll('div.background-image');
+
+                if (mflazyBI.length && BI.length) {
+                    mflazyBI.forEach(function(el) {
+                        el.className = el.className.replace(/mflazy-background-image/g, 'background-image');
+                    });
+                }
+
+            });
+        }, 2000);
+    });
+";
+    ?>
+    <?= /* @noEscape */ $mfSecureRenderer->renderTag('script', [], $script, false) ?>
+<?php } ?>
+
+<style>
+    .slick-slide:not(.slick-active) .background-image {display: none;}
+</style>

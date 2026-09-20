@@ -54,10 +54,9 @@ $logoHeight = $logoSizeResolver !== null && $logoSizeResolver->getHeight()
         <?php endif; ?>
     </div>
 
-
 <a
     class="logo"
-    href="https://www.pharmacyplanet.com/general-health/weight-loss.html"
+    href="<?php echo $this->getBaseUrl();?>"
     title="<?= $block->escapeHtmlAttr($storeName) ?>"
     aria-label="store logo">
     <img src="<?= $block->escapeUrl($block->getLogoSrc()) ?>"

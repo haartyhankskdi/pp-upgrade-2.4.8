@@ -38,7 +38,13 @@ if (in_array($productType, $allowedTypes)) {
                                 selected_options[attribute_id] = option_selected;
                             });
 
-                            var product_id_index = $('[data-role=swatch-options]').data('mageSwatchRenderer').options.jsonConfig.index;
+                            var swatchRenderer = $('[data-role=swatch-options]').data('mageSwatchRenderer');
+
+                            if (!swatchRenderer) {
+                                return;
+                            }
+
+                            var product_id_index = swatchRenderer.options.jsonConfig.index;
                             var found_ids = [];
                             $.each(product_id_index, function(product_id,attributes){
                                 var productIsSelected = function(attributes, selected_options){

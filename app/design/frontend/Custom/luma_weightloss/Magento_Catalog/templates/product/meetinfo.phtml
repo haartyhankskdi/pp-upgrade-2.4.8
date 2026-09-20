@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Meet the Team</title>
     <style>
         /* Basic styles for the modal */
@@ -15,8 +11,6 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.65); 
             padding:35px 0;
-            
-            
         }
 
         .meet-the-team-popup .model-content-sec{
@@ -33,8 +27,6 @@
             z-index: 1000;
             width: 400px;
             margin: 0 auto;
-             
-            
         }
 
         .meet-the-team-popup .modal-header {
@@ -93,16 +85,9 @@
                     opacity:1
                     }
                 }
-
-
     </style>
 </head>
 <body>
-    <!-- Buttons to trigger modals -->
-    <!-- <button class="plus-button" data-section="team1">Team Member 1</button>
-    <button class="plus-button" data-section="team2">Team Member 2</button>
-    <button class="plus-button" data-section="team3">Team Member 3</button> -->
-
     <!-- Modal element -->
     <div class="meet-the-team-popup">
     <div id="modal" class="modal">
@@ -116,74 +101,78 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const plusButtons = document.querySelectorAll('.plus-button');
             const modal = document.getElementById('modal');
             const modalClose = document.getElementById('modal-close');
             const modalHeader = document.getElementById('modal-header');
             const modalContent = document.getElementById('modal-content');
 
-            plusButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const section = this.getAttribute('data-section');
+            const teamData = {
+                'bhupinder-dhaliwal': {
+                    title: 'BHUPINDER (BOO) DHALIWAL',
+                    content: '<span>GPhC 2050963</span><p>Boo graduated from university with a degree in Pharmacy. After achieving registration as a pharmacist, he went on to purchase a community pharmacy and began a lifelong journey of delivering pharmaceutical care to communities across England. Today, Boo is an integral member of the Pharmacy Planet team. In between rounds of golf and a commitment to NHS pharmacy services, Boo enjoys seeing a new generation of pharmacy emerging in a digital era.</p>'
+                },
+                'james-batson': {
+                    title: 'JAMES BATSON',
+                    content: '<p>James began his career in pharmacy as a teenager working in a small pharmacy in regional Australia. Since then, he has accrued decades of experience working in retail, hospital, and community pharmacy settings. Today, he oversees Pharmacy Planet’s extensive operations and coordinates all aspects of Pharmacy Planet.</p>'
+                },
+                'jenomi-thuduwage': {
+                    title: 'JENOMI THUDUWAGE',
+                    content: '<p>Jenomi has been with Pharmacy Planet since its very earliest days. Starting as one of our first operational assistants, Jenomi began by preparing medicines to be shipped to patients and packaging their orders for dispatch. Since then, she has risen through the ranks to lead our customer service team and play a crucial role in the operations of our weight loss clinic.</p>'
+                },
+                'harminder-kaur': {
+                    title: 'HARMINDER HARMY KAUR',
+                    content: '<span>GPhC 2061107</span><p>Harmy is an experienced community pharmacist and clinical services pharmacist. Her particular interest in weight loss medicine has seen her career spent working with patients across a wide array of healthcare settings. This has equipped her as an expert in developing and implementing innovative new clinical and patient care services. She brings these skills to Pharmacy Planet’s weight loss clinic where she provides her clinical services and advice.</p>'
+                },
+                'ayesha-patel': {
+                    title: 'Ayesha Patel',
+                    content: '<p>Ayesha Patel is a highly skilled and dedicated pharmacist with extensive experience in community pharmacy management. Registered with the General Pharmaceutical Council (GPhC), she has demonstrated her commitment to patient care and clinical excellence throughout her career. Ayesha holds a Master of Pharmacy (MPharm) degree from Portsmouth University, where she developed a strong foundation in pharmaceutical science, clinical therapeutics, and patient care. </p>'
+                },
+                'saranya-vijayakumar': {
+                    title: 'SARANYA VIJAYAKUMAR',
+                    content: '<p>Saranya is the most recent addition to the Pharmacy Planet team and has come on board with the experience she has gained in the food safety, nutrition, and marketing fields. Her valuable insight is already proving to be an asset for our weight loss clinic and the wider pharmacy.</p>'
+                },
+                'tamana-panesar': {
+                    title: 'TAMANA PANESAR',
+                    content: '<p>Tamana joined the Pharmacy Planet customer service team in 2023 and has gone on to develop strong relationships with our patients and facilitate healthcare solutions for thousands of patients. Her cheery disposition and willingness to go above and beyond have made her a highly valued member of the Pharmacy Planet team.</p>'
+                }
+            };
 
-                    // Simulated data retrieval based on section
-                    let sectionData;
-                    switch (section) {
-                        case 'bhupinder-dhaliwal':
-                            sectionData = {
-                                title: 'BHUPINDER (BOO) DHALIWAL',
-                                content: '<span>GPhC 2050963</span><p>Boo graduated from university with a degree in Pharmacy. After achieving registration as a pharmacist, he went on to purchase a community pharmacy and began a lifelong journey of delivering pharmaceutical care to communities across England. Today, Boo is an integral member of the Pharmacy Planet team. In between rounds of golf and a commitment to NHS pharmacy services, Boo enjoys seeing a new generation of pharmacy emerging in a digital era.</p>'
-                            };
-                            break;
-                        case 'james-batson':
-                            sectionData = {
-                                title: 'JAMES BATSON',
-                                content: '<p>James began his career in pharmacy as a teenager working in a small pharmacy in regional Australia. Since then, he has accrued decades of experience working in retail, hospital, and community pharmacy settings. Today, he oversees Pharmacy Planet’s extensive operations and coordinates all aspects of Pharmacy Planet.</p>'
-                            };
-                            break;
-                        case 'jenomi-thuduwage':
-                            sectionData = {
-                                title: 'JENOMI THUDUWAGE',
-                                content: '<p>Jenomi has been with Pharmacy Planet since its very earliest days. Starting as one of our first operational assistants, Jenomi began by preparing medicines to be shipped to patients and packaging their orders for dispatch. Since then, she has risen through the ranks to lead our customer service team and play a crucial role in the operations of our weight loss clinic.</p>'
-                            };
-                            break;
-                        case 'harminder-kaur':
-                            sectionData = {
-                                title: 'HARMINDER HARMY KAUR',
-                                content: '<span>GPhC 2061107</span><p>Harmy is an experienced community pharmacist and clinical services pharmacist. Her particular interest in weight loss medicine has seen her career spent working with patients across a wide array of healthcare settings. This has equipped her as an expert in developing and implementing innovative new clinical and patient care services. She brings these skills to Pharmacy Planet’s weight loss clinic where she provides her clinical services and advice.</p>'
-                            };
-                            break;
-                        case 'saranya-vijayakumar':
-                            sectionData = {
-                                title: 'SARANYA VIJAYAKUMAR',
-                                content: '<p>JSaranya is the most recent addition to the Pharmacy Planet team and has come on board with the experience she has gained in the food safety, nutrition, and marketing fields. Her valuable insight is already proving to be an asset for our weight loss clinic and the wider pharmacy.</p>'
-                            };
-                            break;
-                        case 'tamana-panesar':
-                            sectionData = {
-                                title: 'TAMANA PANESAR',
-                                content: '<p>Tamana joined the Pharmacy Planet customer service team in 2023 and has gone on to develop strong relationships with our patients and facilitate healthcare solutions for thousands of patients. Her cheery disposition and willingness to go above and beyond have made her a highly valued member of the Pharmacy Planet team.</p>'
-                            };
-                            break;
-                        default:
-                            sectionData = {
-                                title: 'Unknown',
-                                content: '<p>No details available.</p>'
-                            };
-                            break;
-                    }
+            function normalizeKey(value) {
+                if (!value) return '';
+                return value
+                    .toLowerCase()
+                    .trim()
+                    .replace(/[\s_]+/g, '-')
+                    .replace(/[^a-z0-9-]/g, '')
+                    .replace(/-+/g, '-')
+                    .replace(/^-|-$/g, '');
+            }
 
-                    modalHeader.innerText = sectionData.title;
-                    modalContent.innerHTML = sectionData.content;
-                    modal.style.display = 'block';
-                });
+            document.addEventListener('click', function(event) {
+                const button = event.target.closest('.plus-button');
+                if (!button) return;
+
+                const rawSection = button.getAttribute('data-section');
+                const key = normalizeKey(rawSection);
+                const sectionData = teamData[key] || {
+                    title: 'Unknown',
+                    content: '<p>No details available.</p>'
+                };
+
+                if (!teamData[key]) {
+                  
+                    console.warn('No match found for data-section:', rawSection, '(normalized:', key + ')');
+                }
+
+                modalHeader.innerText = sectionData.title;
+                modalContent.innerHTML = sectionData.content;
+                modal.style.display = 'block';
             });
 
             modalClose.addEventListener('click', function() {
                 modal.style.display = 'none';
             });
 
-            // Close the modal if user clicks outside of it
             window.addEventListener('click', function(event) {
                 if (event.target === modal) {
                     modal.style.display = 'none';
@@ -191,5 +180,3 @@
             });
         });
     </script>
-</body>
-</html>

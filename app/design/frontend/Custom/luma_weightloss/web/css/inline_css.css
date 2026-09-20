@@ -1,6 +1,7 @@
 body {
     font-family: 'Ubuntu', sans-serif;
     font-weight: 400;
+    padding: 0;
   }
 
   .cms-index-index .page-main {
@@ -863,12 +864,12 @@ body {
 
   @media only screen and (min-width: 1025px) {
     .block-customer-login.custom-block-customer-login {
-      width: 40%;
+      width: 40% !important;
     }
 
-    .custom-block-customer-register {
-      width: 60%;
-    }
+    /*.custom-block-customer-register {
+      width: 60% !important;
+    }*/
   }
 
 
@@ -1733,8 +1734,8 @@ body {
   }
 
   .footer.content {
-    max-width: 100%;
-    padding: 0;
+    max-width: 100% !important;
+    padding: 0 !important;
   }
 
   .footer-consultation {
@@ -1807,7 +1808,7 @@ body {
 
 
   .page-footer {
-    background: #000;
+    background: #000 !important;
     width: 100%;
     float: left;
     padding-bottom: 30px !important;
@@ -1904,7 +1905,7 @@ body {
 
   .block.newsletter input {
     height: 52px;
-    background: transparent;
+    background: transparent !important;
     border: 0;
     font-size: 14px;
     color: #c9c9c9;
@@ -2741,14 +2742,7 @@ body {
     line-height: 46px;
   }
 
-  /*.product.attribute.description h3:after{
-  content: ' ';
-  width: 100%;
-  float: left;
-  border-top: 2px solid #8EA8B3;
-  margin-top: 10px;
-  margin-bottom: 22px;
-}*/
+  
   .info-details {
     width: auto;
     max-width: 100%;
@@ -2840,7 +2834,7 @@ body {
   .info-details .info-left ul li:before {
     content: '';
     font-family: 'luma-icons';
-    background: url(<?php echo $this->getViewFileUrl('images/sprites.png'); ?>) no-repeat;
+    background: url('../images/sprites.png') no-repeat; 
     height: 22px;
     width: 20px;
     float: left;
@@ -3369,11 +3363,7 @@ body {
     height: 85px;
   }
 
-  /*#itoris_dynamicproductoptions tr.fields td div.field{
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}*/
-
+ 
 
   .page-layout-1column.start_consultation .box-tocart .action.tocart {
     background: #ED3237;
@@ -3481,26 +3471,28 @@ body {
 
 
 
-  .one-step-checkout-wrapper {
+  .checkout-index-index .one-step-checkout-wrapper {
     background: #F1F7F9;
-    padding-left: 30px !important;
+    padding-left: 15px !important;
     padding-top: 0px !important;
     box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.15)
   }
 
+@media screen and (min-width: 1025px) {
   .one-step-checkout-wrapper .col-mp.mp-4 {
-    width: 27.333333%;
+    width: 27.333333% !important;
     margin-right: 18px;
     padding-top: 22px;
   }
 
   .one-step-checkout-wrapper .col-mp.mp-4:nth-last-child(2) {
     background: #fff;
-    padding: 22px 33px 0px 33px;
-    width: 41.333333%;
+    padding: 22px 33px 0px 33px !important;
+    width: 41.333333% !important;
     margin-right: 0px;
     float: right;
   }
+}
 
   .one-step-checkout-wrapper .col-mp.mp-8 #checkout-step-shipping_method {
     background: none;
@@ -3563,11 +3555,11 @@ body {
     line-height: 46px;
     content: " " !important;
     font-family: FontAwesome;
-    background: url(<?php echo $this->getViewFileUrl('images/tick.png'); ?>) center no-repeat #8CC4A2;
+    background: url('../images/tick.png') center no-repeat #8CC4A2;
   }
 
   .opc-wrapper .action-show-popup {
-    border-radius: 50px;
+    border-radius: 50px !important;
     background: #53CAF5 !important;
     font-size: 14px;
     color: #fff;
@@ -3579,7 +3571,7 @@ body {
   }
 
   .checkout-container button:not(.primary):not(.action-show):not(.action-close):not(.edit-address-link):not(.ui-datepicker-trigger) {
-    border-radius: 50px;
+    border-radius: 50px !important;
     background: #53CAF5 !important;
     font-size: 14px;
     color: #fff;
@@ -3644,6 +3636,7 @@ body {
 
   .methods-shipping .osc-place-order-block textarea {
     height: 88px;
+    margin-top: 5px;
   }
 
   #checkout-step-billing .field.field-select-billing {
@@ -3790,6 +3783,7 @@ body {
   .checkout-payment-method .payment-option-content .form-discount .actions-toolbar .primary .action {
     padding: 0 10px !important;
     font-size: 13px !important;
+     height: auto;
   }
 
   .checkout-payment-method .payment-option-content .form-discount .actions-toolbar .primary .action:hover {
@@ -3836,7 +3830,7 @@ body {
   }
 
   .one-step-checkout-wrapper .mp-4 #checkout-review-table tbody tr td.product {
-    width: 268px !important;
+    width: 230px !important;
     float: left;
   }
 
@@ -3864,6 +3858,7 @@ body {
 
   .opc-block-summary .minicart-items-wrapper {
     overflow: visible;
+    max-height: 90% !important;
   }
 
   /*.opc-block-summary .items-in-cart > .title{
@@ -4060,7 +4055,7 @@ body {
     color: #fff;
     text-transform: uppercase;
     background: #ED3237 !important;
-    border-radius: 0;
+    border-radius: 0 !important;
     margin-top: 10px;
     -webkit-transition: all 0.1s;
     -moz-transition: all 0.1s;
@@ -4116,7 +4111,7 @@ body {
 
   .remove-wrapper .button-action.remove .fa-times:before {
     content: " " !important;
-    background: url(<?php echo $this->getViewFileUrl('images/remove-icon.svg'); ?>) center no-repeat;
+    background: url('../images/remove-icon.svg') center no-repeat;
     width: 20px;
     height: 30px;
     float: left;
@@ -4336,7 +4331,7 @@ body {
     content: '';
     font-family: 'luma-icons';
     color: #00B67A;
-    background: url(<?php echo $this->getViewFileUrl('images/sprites.png'); ?>) no-repeat;
+    background: url('../images/sprites.png') no-repeat;
     height: 22px;
     width: 20px;
     float: left;
@@ -4431,16 +4426,7 @@ body {
     margin-left: 25px;
   }
 
-  /*.account-delete h3{
-  width: 100%;
-  float: left;
-  text-align: center;
-  color: #ED3237;
-  font-size: 15px;
-  text-decoration: underline;
-  font-weight: 400;
-  margin-top: 28px;
-}*/
+ 
   .mp-gdpr-delete-account legend,
   .mp-gdpr-delete-account .gdpr-delete-message {
     display: none;
@@ -4587,17 +4573,7 @@ body {
     top: 7px;
   }
 
-  /*.myaccount-dashbord{
-  width: 100%;
-  float: left;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-}
-.myaccount-dashbord-1{
-  float: none;
-  display: inline-block;
-}*/
+  
   .myaccount-bottom {
     width: 100%;
     float: left;
@@ -4781,10 +4757,7 @@ body {
     line-height: 26px;
     font-family: 'Ubuntu', sans-serif;
     color: #2C596D;
-    font-weight: 400;
-    /*background: url(<?php //echo $this->getViewFileUrl('images/title-bg-1.jpg'); 
-                      ?>) no-repeat left bottom !important;*/
-    text-transform: capitalize;
+    font-weight: 400; 
     position: relative;
   }
 
@@ -4897,98 +4870,58 @@ body {
   .account-nav ul li a.customer-delete {
     color: #E60808;
   }
-
-  /*.customer-general-question .account-nav ul li strong{
-   background: url(<?php //echo $this->getViewFileUrl('images/manage-account-details-icon-hover.svg'); 
-                    ?>) left center no-repeat;
-   padding: 3px 0 3px 37px;
-   color: #E60808;
-   font-weight: 400;
-}*/
-
+ 
   .account-nav ul li a.manage-account-details {
-    background: url(<?php echo $this->getViewFileUrl('images/manage-account-details-icon.svg'); ?>) left center no-repeat;
+    background: url('../images/manage-account-details-icon.svg') left center no-repeat;
   }
 
   .account-nav ul li a.manage-address-details {
-    background: url(<?php echo $this->getViewFileUrl('images/manage-address-details.svg'); ?>) left center no-repeat;
+    background: url('../images/manage-address-details.svg') left center no-repeat;
   }
-
-  /*.account-nav ul li:nth-child(4){
-  background: url(<?php echo $this->getViewFileUrl('images/myaccount-safe.svg'); ?>) left center no-repeat;
-}*/
+ 
   .account-nav ul li a.general-question {
-    background: url(<?php echo $this->getViewFileUrl('images/myaccount-genearl-health-question.svg'); ?>) left center no-repeat;
+    background: url('../images/myaccount-genearl-health-question.svg') left center no-repeat;
   }
 
   .account-nav ul li a.my-orders {
-    background: url(<?php echo $this->getViewFileUrl('images/myorder.svg'); ?>) left center no-repeat;
+    background: url('../images/myorder.svg') left center no-repeat;
   }
-
-  /*.account-nav ul li:nth-child(7){
-  background: url(<?php echo $this->getViewFileUrl('images/need-help.svg'); ?>) left center no-repeat;
-}*/
+ 
   .account-nav ul li a.newsletter-subscriptions {
-    background: url(<?php echo $this->getViewFileUrl('images/myaccount-newsletter.svg'); ?>) left center no-repeat;
+    background: url('../images/myaccount-newsletter.svg') left center no-repeat;
   }
 
   .account-nav ul li a.customer-delete {
-    background: url(<?php echo $this->getViewFileUrl('images/delete-account.svg'); ?>) left center no-repeat;
+    background: url('../images/delete-account.svg') left center no-repeat;
   }
 
   .account-nav ul li:nth-child(9) {
-    background: url(<?php echo $this->getViewFileUrl('images/delete-account.svg'); ?>) left center no-repeat;
+    background: url('../images/delete-account.svg') left center no-repeat;
   }
-
-  /*.account.page-layout-2columns-left .page-main{
-  background: url(<?php echo $this->getViewFileUrl('images/my-account-bg.jpg'); ?>) right top;
-}*/
-
-
-  /*.account-nav ul li.current{
-  background: url(<?php //echo $this->getViewFileUrl('images/manage-account-details-icon-hover.svg'); 
-                  ?>) left center no-repeat;
-}
-.account-nav ul li.current{
-  background: url(<?php //echo $this->getViewFileUrl('images/manage-address-details-hover.svg'); 
-                  ?>) left center no-repeat;
-}
-.account-nav ul li.current{
-  background: url(<?php //echo $this->getViewFileUrl('images/myaccount-genearl-health-question-hover.svg'); 
-                  ?>) left center no-repeat;
-}
-.account-nav ul li.current{
-  background: url(<?php //echo $this->getViewFileUrl('images/myorder-hover.svg'); 
-                  ?>) left center no-repeat;
-}
-.account-nav ul li.current{
-  background: url(<?php //echo $this->getViewFileUrl('images/myaccount-newsletter-hover.svg'); 
-                  ?>) left center no-repeat;
-}*/
-
+ 
 
   .account-nav ul li:nth-child(1).current {
-    background: url(<?php echo $this->getViewFileUrl('images/manage-account-details-icon-hover.svg'); ?>) left center no-repeat;
+    background: url('../images/manage-account-details-icon-hover.svg') left center no-repeat;
   }
 
   .account-nav ul li:nth-child(2).current {
-    background: url(<?php echo $this->getViewFileUrl('images/manage-address-details-hover.svg'); ?>) left center no-repeat;
+    background: url('../images/manage-address-details-hover.svg') left center no-repeat;
   }
 
   .account-nav ul li:nth-child(3).current {
-    background: url(<?php echo $this->getViewFileUrl('images/myaccount-genearl-health-question-hover.svg'); ?>) left center no-repeat;
+    background: url('../images/myaccount-genearl-health-question-hover.svg') left center no-repeat;
   }
 
   .account-nav ul li:nth-child(4).current {
-    background: url(<?php echo $this->getViewFileUrl('images/myorder-hover.svg'); ?>) left center no-repeat;
+    background: url('../images/myorder-hover.svg') left center no-repeat;
   }
 
   .account-nav ul li:nth-child(5).current {
-    background: url(<?php echo $this->getViewFileUrl('images/myaccount-newsletter-hover.svg'); ?>) left center no-repeat;
+    background: url('../images/myaccount-newsletter-hover.svg') left center no-repeat;
   }
 
   .account-nav ul li:nth-child(6).current {
-    background: url(<?php echo $this->getViewFileUrl('images/delete-account-hover.svg'); ?>) left center no-repeat;
+    background: url('../images/delete-account-hover.svg') left center no-repeat;
   }
 
   .account-nav ul li:nth-child(6).current strong {
@@ -5318,7 +5251,7 @@ body {
 
   .minicart-wrapper .action.showcart:before {
     content: " " !important;
-    background: url(<?php echo $this->getViewFileUrl('images/cart-icon.svg'); ?>) center no-repeat;
+    background: url('../images/cart-icon.svg') center no-repeat;
   }
 
   .view-treatment-content:before {
@@ -5508,21 +5441,21 @@ body {
   }
 
   .myaccount-general-question .gender_male span {
-    background: url(<?php echo $this->getViewFileUrl('images/reg-male.png'); ?>) 40px center no-repeat #fff !important;
+    background: url('../images/reg-male.png') 40px center no-repeat #fff !important;
     padding-left: 20px !important;
   }
 
   .myaccount-general-question .gender_female span {
-    background: url(<?php echo $this->getViewFileUrl('images/reg-female.png'); ?>) 33px center no-repeat #fff !important;
+    background: url('../images/reg-female.png') 33px center no-repeat #fff !important;
     padding-left: 20px !important;
   }
 
   .myaccount-general-question .field-1 input.Male_input[type="radio"]:checked+label span {
-    background: url(<?php echo $this->getViewFileUrl('images/reg-male-w.png'); ?>) 40px center no-repeat #75c4f0 !important;
+    background: url('../images/reg-male-w.png') 40px center no-repeat #75c4f0 !important;
   }
 
   .myaccount-general-question .field-1 input.Female_input[type="radio"]:checked+label span {
-    background: url(<?php echo $this->getViewFileUrl('images/reg-male-w.png'); ?>) 33px center no-repeat #75c4f0 !important;
+    background: url('../images/reg-male-w.png') 33px center no-repeat #75c4f0 !important;
   }
 
   .contact-index-index .enquiry-panel h3 {
@@ -6488,6 +6421,13 @@ body {
     text-align: center;
     margin-top: 50px;
   }
+  .checkout-onepage-success .page-main .columns .column.main{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .checkout-onepage-success .page-main .checkout-success{
+    margin-top: 20px;
+  }
 
   .checkout-onepage-success .page-main .page-title-wrapper .page-title {
     font-family: 'Ubuntu', sans-serif;
@@ -6988,7 +6928,7 @@ body {
   .out-of-stock {
     position: absolute;
     top: 0;
-    background: url(<?php echo $this->getViewFileUrl('images/outof-stock.png'); ?>) left top no-repeat;
+    background: url('../images/outof-stock.png') left top no-repeat;
     width: 112px;
     height: 101px;
   }
@@ -7632,7 +7572,7 @@ body {
     height: 50px;
     border-radius: 30px;
     margin-bottom: 10px;
-    background: #F1F7F9 url(<?php echo $this->getViewFileUrl('images/select-bg.svg'); ?>) no-repeat 98% 45%;
+    background: #F1F7F9 url('../images/select-bg.svg') no-repeat 98% 45%;
   }
 
 
@@ -7799,7 +7739,7 @@ body {
     border-radius: 50px;
     width: auto;
     text-transform: uppercase;
-    margin-top: 30px;
+    margin-top: 5px;
     -webkit-transition: all 0.1s;
     -moz-transition: all 0.1s;
     -o-transition: all 0.1s;
@@ -8038,7 +7978,7 @@ body {
     float: left;
     text-align: center;
     font-size: 0;
-    background: url(<?php echo $this->getViewFileUrl('images/error-page.jpg'); ?>) center 0 no-repeat;
+    background: url('../images/error-page.jpg') center 0 no-repeat;
     height: 270px;
   }
 
@@ -8072,7 +8012,7 @@ body {
     float: left;
     padding: 0;
     margin: 0 0 25px 0;
-    background: url(<?php echo $this->getViewFileUrl('images/my-account-icon.png'); ?>) no-repeat;
+    background: url('../images/my-account-icon.png') no-repeat;
   }
 
   .checkout-index-index .mposc-product-modal .fieldset>.field>.fieldset>.legend span {
@@ -8698,7 +8638,7 @@ body {
   .account .table-wrapper.orders-history table>tbody>tr>td.actions a.reorder span {
     color: #fff !important;
     font-size: 0px;
-    background: url(<?php echo $this->getViewFileUrl('images/refresh-button.svg'); ?>) center no-repeat #53CAF5;
+    background: url('../images/refresh-button.svg') center no-repeat #53CAF5;
     border-radius: 50px;
     line-height: 37px;
     padding: 0px 19px;
@@ -8941,13 +8881,13 @@ body {
 
     .account.page-layout-2columns-left .sidebar-main,
     .account.page-layout-2columns-left .sidebar-additional {
-      width: 20.3%;
+      width: 20.3% !important;
       padding-right: 0;
       margin-left: 9.5%;
     }
 
     .account.page-layout-2columns-left .column.main {
-      width: 65.7%;
+      width: 65.7% !important;
       background-color: #F1F7F9;
       padding: 45px 125px 45px 55px;
       margin-bottom: 0;
@@ -9011,7 +8951,7 @@ body {
 
 
 
-  @media screen and (min-width: 1400px) {
+  /*@media screen and (min-width: 1400px) {
     .page-layout-1column.start_consultation .page-main {
       max-width: 100%;
       padding: 0 7%;
@@ -9028,7 +8968,7 @@ body {
 
     .page-layout-1column.start_consultation {
       padding-top: 40px !important;
-      background: url(<?php echo $this->getViewFileUrl('images/question-page-bg_2_1.png'); ?>) no-repeat right -17px top !important;
+      background: url('../images/question-page-bg_2_1.png') no-repeat right -17px top !important;
     }
 
     .customer-account-create.page-layout-1column .general-question-fixed .main-container {
@@ -9049,7 +8989,7 @@ body {
     }
   }
 
-
+*/
 
 
   @-moz-document url-prefix() {
@@ -9228,8 +9168,9 @@ body {
     }
 
     .account .table-wrapper.orders-history .data.table .col.actions {
-      width: auto !important;
+      width: 100% !important;
       margin-top: 10px;
+      display: inline-block
     }
 
     .account .table-wrapper.orders-history table>tbody>tr>td.processing:before,
@@ -10061,43 +10002,7 @@ body {
   .account.page-layout-2columns-left .page-bottom {
     padding: 0px 0 !important;
   }
-
-  /*.accordion-tab label::after {
-  content: "\25b6";
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  display: block;
-  transition: all 0.4s;
-  display: none;
-}
-.accordion-tab input[type=checkbox]:checked + label::after,
-.accordion-tab input[type=radio]:checked + label::after {
-  transform: rotate(90deg);
-}
-
  
-.tab-content {
-  overflow: hidden;
-   transition: max-height 0.4s;  
-}
-.tab-content p {
-  margin: 15px 0;
-}
-.accordion-tab input:checked ~ .tab-content {
-   
-  max-height: 100vh;
-  margin-bottom:20px;
-}*/
-
-  /*.footer-consultation h3:before{
-  content: ' ';
-  background: url("../images/sprites.png") no-repeat; 
-  height: 62px;
-  width: 62px;
-  float: left;
-  background-position: -4px -87px;
-}*/
 
   /* Search suggestions styling */
 
@@ -10812,7 +10717,7 @@ body {
       font-size: 20px;
       width: 9px;
       height: 15px;
-      background: url(<?php echo $this->getViewFileUrl('images/myaccount-arrow.png'); ?>) right center no-repeat;
+      background: url('../images/myaccount-arrow.png') right center no-repeat;
     }
 
     .myaccount-menu input[type=checkbox]:checked+label::after,
@@ -10978,7 +10883,7 @@ body {
 
     .btn-login-signup-mobile a {
       display: block !important;
-      background: url(<?php echo $this->getViewFileUrl('images/my-account-icon.png'); ?>) no-repeat;
+      background: url('../images/my-account-icon.png') no-repeat;
       width: 50px;
       height: 50px;
       float: right;
@@ -10987,7 +10892,7 @@ body {
 
     .btn-login-signup-mobile a.btn-logout-myaccount {
       display: block !important;
-      background: url(<?php echo $this->getViewFileUrl('images/logout-icon.png'); ?>) no-repeat;
+      background: url('../images/logout-icon.png') no-repeat;
       width: 50px;
       height: 50px;
       float: right;
@@ -11186,7 +11091,7 @@ body {
 
     .new-additional-info h2::after {
       content: " " !important;
-      background: url(<?php echo $this->getViewFileUrl('images/footer-arrow2.png'); ?>) no-repeat;
+      background: url('../images/footer-arrow2.png') no-repeat;
       width: 13px;
       height: 9px;
       transform: rotate(0deg);
@@ -11208,7 +11113,7 @@ body {
     }
 
     .minicart-wrapper .block-minicart #top-cart-btn-checkout {
-      width: 100%;
+      width: 100%; 
     }
 
     .block-minicart .block-content>.actions>.secondary .action.viewcart {
@@ -11489,10 +11394,7 @@ body {
     .cms-index-index .home-bg-video {
       display: none;
     }
-
-    /*body.cms-index-index.page-layout-1column {
-    background: url(../../frontend/Custom/luma_child/en_GB/images/body-bg.jpg) no-repeat top 100px right -100px !important;
-  }*/
+ 
     .cms-index-index .page-header {
       position: relative;
       margin-bottom: 20px;
@@ -11737,9 +11639,9 @@ body {
       max-width: 100%;
     }
 
-    body.cms-index-index {
+    /*body.cms-index-index {
       background: #F1F7F9 !important;
-    }
+    }*/
 
     .container {
       width: 100%;
@@ -11866,7 +11768,7 @@ body {
       display: block;
       color: #fff;
       font-size: 12px;
-      background: url(<?php echo $this->getViewFileUrl('images/footer-arrow.png'); ?>) no-repeat;
+      background: url('../images/footer-arrow.png') no-repeat;
       width: 8px;
       height: 14px;
     }
@@ -12776,7 +12678,7 @@ body {
 
     .page-layout-1column.start_consultation {
       padding-top: 25px;
-      background: url(<?php echo $this->getViewFileUrl('images/question-page-bg_2-ipad.png'); ?>) right -20px top no-repeat !important;
+      background: url('../images/question-page-bg_2-ipad.png') right -20px top no-repeat !important;
     }
 
     .consultation-section {
@@ -13514,7 +13416,7 @@ body {
     }
 
     .page-layout-1column.start_consultation {
-      background: url(<?php echo $block->getUrl("media") ?>frontend/Custom/luma_child/en_GB/images/question-page-bg_2.png) right -70px top no-repeat !important;
+      background: url(https://www.pharmacyplanet.com/static/frontend/Custom/luma_child/en_GB/images/question-page-bg_2.png) right -70px top no-repeat !important;
     }
 
     .cms-index-index .header.searchbar {
@@ -14440,7 +14342,7 @@ body {
   }
 
   .cms-meet-our-team {
-    background: url(<?php echo $this->getViewFileUrl('images/meet-the-team-bg.png'); ?>) right 0px no-repeat;
+    background: url('../images/meet-the-team-bg.png') right 0px no-repeat;
   }
 
   .page-layout-1columnhome {
@@ -14809,7 +14711,7 @@ body {
     margin-top: 20px;
     margin-bottom: 45px;
     font-weight: 300;
-    background: url(<?php echo $this->getViewFileUrl('images/sprites.png'); ?>) no-repeat;
+    background: url('../images/sprites.png') no-repeat;
     background-position: 0px -185px;
     display: inline-block;
   }
@@ -14870,7 +14772,7 @@ body {
     float: left;
     display: inline-block;
     position: relative;
-    background: url(<?php echo $this->getViewFileUrl('images/next-arrow-2.png'); ?>) right center no-repeat;
+    background: url('../images/next-arrow-2.png') right center no-repeat;
     min-height: 145px;
     margin-right: 0px;
   }
@@ -14923,7 +14825,7 @@ body {
 
   .page-layout-1column.start_consultation {
     padding-top: 35px;
-    background: url(<?php echo $this->getViewFileUrl('images/question-page-bg_2.png'); ?>) right -20px no-repeat;
+    background: url('../images/question-page-bg_2.png') right -20px no-repeat;
   }
 
   .page-layout-1column.start_consultation .product-question-right {
@@ -15023,7 +14925,7 @@ body {
 
   .info_list ul li {
     list-style-type: none;
-    background: url(<?php echo $this->getViewFileUrl('images/list-icon.png'); ?>) 0 6px no-repeat;
+    background: url('../images/list-icon.png') 0 6px no-repeat;
     padding-left: 18px;
     margin-bottom: 7px;
   }
@@ -15031,7 +14933,7 @@ body {
 
   .info_list h2.info_title_1:before {
     content: '';
-    background: url(<?php echo $this->getViewFileUrl('images/confidentiality-authenticity.svg'); ?>) no-repeat;
+    background: url('../images/confidentiality-authenticity.svg') no-repeat;
     height: 41px;
     width: 36px;
     float: left;
@@ -15040,7 +14942,7 @@ body {
 
   .info_list h2.info_title_2:before {
     content: '';
-    background: url(<?php echo $this->getViewFileUrl('images/need_help.svg'); ?>) 0 -10px no-repeat;
+    background: url('../images/need_help.svg') 0 -10px no-repeat;
     height: 41px;
     width: 23px;
     float: left;
@@ -15430,7 +15332,7 @@ body {
 
 
   .customer-general-register {
-    background-image: url(<?php echo $this->getViewFileUrl('images/general-question-bg-left.png'); ?>), url(<?php echo $this->getViewFileUrl('images/general-question-bg-right.png'); ?>);
+    background-image: url('../images/general-question-bg-left.png'), url('../images/general-question-bg-right.png');
     background-position: left top, right 30px;
     background-repeat: no-repeat, no-repeat;
   }
@@ -15707,7 +15609,7 @@ body {
 
     #checkout-payment-method-load .payment-methods input[type="radio"] {
       float: left;
-      margin: 4px 5px 0 0 !important;
+      margin: 4px 5px 15px 0 !important;
     }
 
     .onestepcheckout-index-index .field.choice.col-mp input:after {
@@ -16160,9 +16062,10 @@ body {
 
 
   .one-step-checkout-wrapper .opc-block-summary .items-in-cart .product .item-options {
-    height: 145px;
+    height: auto;
     overflow-y: scroll;
     padding-right: 15px;
+    max-height: 140px;
   }
 
   .one-step-checkout-wrapper .opc-block-summary .items-in-cart .product .item-options::-webkit-scrollbar {
@@ -16198,7 +16101,7 @@ body {
   }
 
   .one-step-checkout-wrapper .opc-block-summary .minicart-items .product-item {
-    padding-bottom: 30px;
+    padding-bottom: 15px;
   }
 
   .modal-popup._inner-scroll .modal-content .field-tooltip .field-tooltip-action {
@@ -17858,7 +17761,7 @@ body {
   }
 
   .account-nav ul li a.customer-support-ticket {
-    background: url(<?php echo $this->getViewFileUrl('images/customer-support-icon.png'); ?>) left center no-repeat;
+    background: url('../images/customer-support-icon.png') left center no-repeat;
     padding-top: 4px;
     padding-bottom: 4px;
   }
@@ -17869,18 +17772,13 @@ body {
   }
 
   .account-nav ul li:nth-child(7).current a strong {
-    background: url(<?php echo $this->getViewFileUrl('images/customer-support-icon-hover.png'); ?>) left center no-repeat;
+    background: url('../images/customer-support-icon-hover.png') left center no-repeat;
     padding-top: 4px;
     padding-bottom: 5px;
   }
-
-  /*.account-nav ul li:nth-child(7).current a{
-  background: url(<?php //echo $this->getViewFileUrl('images/customer-support-icon-hover.svg'); 
-                  ?>) left center no-repeat;
-  padding-left: 0;
-}*/
+ 
   .account-nav ul li a.customer-delete {
-    background: url(<?php echo $this->getViewFileUrl('images/delete-account.svg'); ?>) left center no-repeat;
+    background: url('../images/delete-account.svg') left center no-repeat;
   }
 
   .hdmx__ticket-new .actions-toolbar .action.primary {
@@ -18940,7 +18838,7 @@ body {
   }
 
   .catalog-product-view .block-margin.block.row .owl-theme .owl-controls .owl-nav [class*=owl-].owl-prev {
-    background: url(<?php echo $this->getViewFileUrl('images/left-arrow-slider.png'); ?>) left center no-repeat;
+    background: url('../images/left-arrow-slider.png') left center no-repeat;
     width: 33px;
     height: 73px;
     display: inline-block;
@@ -18948,7 +18846,7 @@ body {
   }
 
   .catalog-product-view .block-margin.block.row .owl-theme .owl-controls .owl-nav [class*=owl-].owl-next {
-    background: url(<?php echo $this->getViewFileUrl('images/right-arrow-slider.png'); ?>) right center no-repeat;
+    background: url('../images/right-arrow-slider.png') right center no-repeat;
     width: 33px;
     height: 73px;
     display: inline-block;
@@ -19026,13 +18924,13 @@ body {
     .catalog-product-view .block-margin.block.row .owl-theme .owl-controls .owl-nav [class*=owl-].owl-prev {
       display: inline-block !important;
       top: 46% !important;
-      background: url(<?php echo $this->getViewFileUrl('images/left-arrow-slider.png'); ?>) left center no-repeat !important;
+      background: url('../images/left-arrow-slider.png') left center no-repeat !important;
     }
 
     .catalog-product-view .block-margin.block.row .owl-theme .owl-controls .owl-nav [class*=owl-].owl-next {
       display: inline-block !important;
       top: 46% !important;
-      background: url(<?php echo $this->getViewFileUrl('images/right-arrow-slider.png'); ?>) right center no-repeat !important;
+      background: url('../images/right-arrow-slider.png') right center no-repeat !important;
     }
 
   }
@@ -19096,13 +18994,13 @@ body {
     .catalog-product-view .block-margin.block.row .owl-theme .owl-controls .owl-nav [class*=owl-].owl-prev {
       display: inline-block !important;
       top: 46% !important;
-      background: url(<?php echo $this->getViewFileUrl('images/left-arrow-slider.png'); ?>) left center no-repeat !important;
+      background: url('../images/left-arrow-slider.png') left center no-repeat !important;
     }
 
     .catalog-product-view .block-margin.block.row .owl-theme .owl-controls .owl-nav [class*=owl-].owl-next {
       display: inline-block !important;
       top: 46% !important;
-      background: url(<?php echo $this->getViewFileUrl('images/right-arrow-slider.png'); ?>) right center no-repeat !important;
+      background: url('../images/right-arrow-slider.png') right center no-repeat !important;
     }
 
   }
@@ -19232,7 +19130,7 @@ body {
 
 
   .checkout-cart-index .block.crosssell .owl-theme .owl-controls .owl-nav [class*=owl-].owl-prev {
-    background: url(<?php echo $this->getViewFileUrl('images/left-arrow-slider.png'); ?>) left center no-repeat;
+    background: url('../images/left-arrow-slider.png') left center no-repeat;
     width: 33px;
     height: 73px;
     display: inline-block;
@@ -19240,7 +19138,7 @@ body {
   }
 
   .checkout-cart-index .block.crosssell .owl-theme .owl-controls .owl-nav [class*=owl-].owl-next {
-    background: url(<?php echo $this->getViewFileUrl('images/right-arrow-slider.png'); ?>) right center no-repeat;
+    background: url('../images/right-arrow-slider.png') right center no-repeat;
     width: 33px;
     height: 73px;
     display: inline-block;
@@ -19673,7 +19571,7 @@ body {
     }
 
     .home-google-review-section .swipe-left {
-      background: url(<?php echo $this->getViewFileUrl('images/left-arrow-img.png'); ?>) left center no-repeat;
+      background: url('../images/left-arrow-img.png') left center no-repeat;
       width: auto;
       float: right;
       padding-left: 35px;
@@ -19731,20 +19629,7 @@ body {
       float: left;
     }
   }
-
-
-
-  @media screen and (min-width: 1800px) {
-    /*.home-google-review-banner-desktop{
-    background: url(<?php echo $this->getViewFileUrl('images/google-review-banner2.png'); ?>) top center no-repeat;
-    height: 371px;
-  }
-   .home-google-review-banner-desktop img{
-    display: none;
-   }*/
-  }
-
-
+ 
   @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
 
   .cms-index-index.page-layout-1column .page-bottom {
@@ -20242,11 +20127,11 @@ body {
   /*-----------------question new css------------*/
 
   .amcform-popup-block .amcform-popup {
-    background: url(<?php echo $this->getViewFileUrl('images/question-page-bg_2_1.png'); ?>) no-repeat right -17px top #fff !important;
+    background: url('../images/question-page-bg_2_1.png') no-repeat right -17px top #fff !important;
   }
 
   .amcform-popup-block .amcform-button.-close-popup .amcform-icon.-cross:before {
-    background: url(<?php echo $this->getViewFileUrl('images/arrow-img1.png'); ?>) no-repeat left center !important;
+    background: url('../images/arrow-img1.png') no-repeat left center !important;
     padding-left: 25px;
   }
 
@@ -20476,9 +20361,9 @@ body {
     font-family: 'Ubuntu', sans-serif;
   }
 
-  .rendered-form .fieldset .fields .field.form-group .amform-groupv2 {
+  /*.rendered-form .fieldset .fields .field.form-group .amform-groupv2 {
     margin-right: 10px;
-  }
+  }*/
 
   .rendered-form .fieldset .fields .field.form-group input[type="radio"]:checked+label {
     background: #53CAF5;
@@ -20547,7 +20432,7 @@ body {
     font-family: 'Ubuntu', sans-serif;
     line-height: 18px;
     font-weight: 400;
-    background: url(<?php echo $this->getViewFileUrl('images/arrow-img1.png'); ?>) no-repeat left center !important;
+    background: url('../images/arrow-img1.png') no-repeat left center !important;
     padding-left: 25px;
     margin-top: 15px;
   }
@@ -20828,7 +20713,7 @@ body {
   .catalog-product-view.page-layout-1column .product-info-main .select-option .brand-label select,
   .catalog-product-view.page-layout-1column .product-info-main .select-option .medistren-label select {
     position: relative;
-    background: url(<?php echo $this->getViewFileUrl('images/select-dropdown-arrow.png'); ?>) no-repeat right 15px center #fff !important;
+    background: url('../images/select-dropdown-arrow.png') no-repeat right 15px center #fff !important;
   }
 
   .catalog-product-view.page-layout-1column .product-info-main .select-option-data {
@@ -20890,7 +20775,7 @@ body {
 
   .categoryquest-index-index,
   .catalog-product-view.page-layout-1column.start_consultation {
-    background: url(<?php echo $this->getViewFileUrl('images/select-treatment-bg.png'); ?>) no-repeat right 225px #fff !important;
+    background: url('../images/select-treatment-bg.png') no-repeat right 225px #fff !important;
   }
 
 
@@ -21348,7 +21233,7 @@ flex-direction: column;
 
   .catalog-product-view.page-layout-1column.start_consultation .field.configurable select {
     position: relative;
-    background: url(<?php echo $this->getViewFileUrl('images/select-dropdown-arrow.png'); ?>) no-repeat right 15px center #fff !important;
+    background: url('../images/select-dropdown-arrow.png') no-repeat right 15px center #fff !important;
   }
 
   .catalog-product-view.page-layout-1column.start_consultation .field.configurable select::after {
@@ -21820,7 +21705,7 @@ flex-direction: column;
   }
 
   .rendered-form .fieldset .fields .field.form-group input[type="checkbox"]:checked+label {
-    background: #53CAF5;
+    background: #53CAF5 !important;
     color: #fff;
   }
 
@@ -21891,16 +21776,9 @@ flex-direction: column;
     }
 
 
-  }
-    /*.amcform-popup-block .amcform-popup{ 
-     background: url(<?php //echo $this->getViewFileUrl('images/question-bg-test.jpg'); ?>)  no-repeat right -17px top #fff !important;
-}*/
+  } 
 
-
-
-
-
-    /*----------04-01-2023--------*/
+/*----------04-01-2023--------*/
 
     .select-product .treatment {
       background-color: #fff;
@@ -21910,20 +21788,7 @@ flex-direction: column;
       height: 60px !important;
       position: relative;
     }
-
-
-/*.account .table-wrapper.orders-history table>tbody>tr>td.actions a.disable-cancelled span,
-.account .table-wrapper.orders-history table>tbody>tr>td.actions a.cancelled span{
-  display: none !important;
-}
-
-
-@media screen and (min-width: 1025px) {
-  .account .table-wrapper.orders-history .data.table .col.actions{
-    width: 98px !important;
-  }
-}*/
-
+ 
 @media screen and (min-width: 1025px) {
   .home_health_block .home_treatment_block{
     width: 882px !important;
@@ -21934,14 +21799,7 @@ flex-direction: column;
 .footer-right .payment-icon{
   display: none !important;
 }
-
-
-
-
-
-
-
-
+ 
 .account.page-layout-2columns-left .page-bottom .myaccount-bottom{
   display: none !important;
 }
@@ -22588,7 +22446,9 @@ flex-direction: column;
     margin-right: 10px;
 }
 
-
+.checkout-index-index #co-payment-form{
+  margin-bottom: 15px;
+}
 
 @media screen and (max-width: 767px) {
     .weight-loss-journey .timeframe-subheading ul {
@@ -22600,10 +22460,362 @@ flex-direction: column;
     .treatment-options .home-treatment-block .carousel-item .home_block_1{
       width: auto !important;
     }
+     .one-step-checkout-wrapper .one-step-checkout-container{
+      padding: 0;
+    }
+    .checkout-index-index #maincontent .one-step-checkout-container .col-mp:nth-child(3) #opc-sidebar .order-summary{
+      border-radius: 0 !important;
+    }
+    .one-step-checkout-wrapper #co-shipping-method-form, #co-payment-form{
+      background-color: transparent !important;
+    }
+    .one-step-checkout-wrapper .col-mp.mp-4:nth-last-child(2){
+      background-color: #fff !important;
+    }
+    .onestepcheckout-index-index .field.choice.checkout-agreement input+label{
+      white-space: normal;
+    }
+     
+    .onestepcheckout-index-index .page-title-wrapper{
+      width: auto !important;
+      padding: 0 0px !important;
+    }
+    .checkout-index-index #maincontent .one-step-checkout-container .hoverable{
+      padding: 20px 20px 0px !important;
+    }
+    .checkout-agreements-block #co-place-order-agreement{
+      padding: 0 15px;
+    }
+    .checkout-index-index .order-summary.hoverable{
+      margin-bottom: 10px !important;
+    }
+
 }
  
 @media screen and (min-width: 768px) {
     .modals-wrapper .modal-popup.custom-popup-modal .modal-inner-wrap {
         width: 800px !important; 
     }
+    .treatment-options .home-treatment-block .carousel-prev {
+        left: -40px !important;
+    }
+    .treatment-options .home-treatment-block .carousel-next {
+        right: -40px !important;
+    } 
+    .treatment-options .home-treatment-block .carousel-container{
+        position: initial !important;
+    }
+    .page-main{
+      padding: 0;
+    }
+    .checkout-index-index .page-wrapper .page-main{ 
+       max-width: 1090px !important; 
+      margin-top: 25px;
+  }
+ 
+
+}
+
+
+.qty-wrapper .qty-wrap .input-text.update {
+  background: none !important;
+  border: 0 !important;
+  line-height: 43px;
+  color: #000;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 13px;
+  top: 0 !important; 
+  width: 100% !important;
+}
+
+.osc-payment-after-methods .opc-payment-additional .field .control{
+  width: 65% !important;
+}
+
+.onestepcheckout-index-index .field.choice label.label{
+  padding-left: 0 !important;
+}
+
+.one-step-checkout-wrapper .row-mp{
+    margin: 0 !important;
+}
+ 
+.weightloss-custom-login .repeat-left-column #login-form div:nth-child(2) {position: relative;}
+.weightloss-custom-login .repeat-left-column #login-form div:nth-child(2) #toggle-password {right: 29px; 
+    top: 23px; position: absolute; box-shadow: none; border: 0; background: transparent; padding: 0;}
+ 
+
+
+
+/*--------admincss-------*/
+
+
+.amform-parent .amcform-popup .rendered-form .fieldset .fields .field.form-group.field-radiotwo-1753336151245 label.amform-versiontwo-label[for=radiotwo-1753336151245-1]{
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+@media (min-width:1025px){
+    .checkout-cart-index .page-main{
+        max-width: 1260px !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .onestepcheckout-index-index .checkout-bottom { 
+        display: inline-block;
+    }
+    
+}
+
+.page-header .offer1{
+    display: none !important;
+}
+@media screen and (min-width: 768px) {
+    .need-help-section .left-column {
+        width: 42%;
+        text-align: left;
+        margin-bottom: 0;
+    }
+}
+
+.slider-wrapper .rating-img{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+@media only screen and (min-width: 768px) {
+    .categoryquestwl-index-index .column.main .content .select-product .custom-col-category h2{ 
+        font-size: 20px !important;
+    }
+    .categoryquestwl-index-index .column.main .content .select-product .custom-col-category ul,
+    .categoryquestwl-index-index .column.main .content .select-product .custom-col-category h2{
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    .categoryquestwl-index-index .column.main .content .select-product .custom-col-category h2 {
+        height: 60px  !important;
+        line-height: 28px !important;
+    }
+ 
+   .treatment-options .home_block_1 .h-product-title{
+      height: 60px !important;
+      font-size: 23px;
+    }
+    .home-treatment-block .home_block_1 ul{
+      height: 100px;
+      overflow: hidden;
+    }
+ 
+  .treatment-options .carousel-container .carousel .carousel-item .home_block_1{
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  .treatment-options .carousel-container .carousel .carousel-item{
+    padding: 0 7px !important;
+  }
+  .header.content .customMenu{
+      width: auto !important;
+    }
+}
+
+.cms-weightloss .how-it-works-section .h-banner-btn{
+    display: none;
+}
+.rendered-form .amform-form-fieldset.fieldset{
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+.default.amform-form .fields .amform-layout-two, .default.amform-form .fields .amform-layout-one{
+    margin-right: 0 !important;
+}
+.amcform-popup-block .amform-form .amcform-toolbar{
+    margin-top: -7px;
+}
+.rendered-form .fieldset .fields .field.form-group.am-customform-depend{
+    background-color: #fff;
+    padding: 0 15px;
+}
+.rendered-form .fieldset .fields .field.fb-radio.form-group.registered_gp_surgery_fieldset{
+    padding-left: 0 !important;
+}
+@media only screen and (max-width: 767px) {
+   .page-main .mob-consult-btn a{
+    width: 80% !important;
+   } 
+ 
+}
+
+.treatment-options .carousel-container .carousel .carousel-item .home_block_1 .h-banner-btn a{
+  width: auto !important;
+}
+.treatment-options .home_block_1 .h-banner-btn .info-tooltip p{
+    font-size: 12px;
+    line-height: 16px;
+    min-height: auto;
+    margin-bottom: 10px;
+}
+.treatment-options .home_block_1 .h-banner-btn .info-tooltip{
+    left: -10px !important;
+    width: 190px !important;
+    top: auto !important;
+    bottom: 0;
+font-size: 12px !important;
+    line-height: 16px !important;
+}
+.treatment-options .home_block_1 .h-banner-btn .info-tooltip p a{
+    background: transparent;
+    line-height: 16px;
+    color: #000;
+    text-transform: none;
+    text-align: left;
+    font-size: 12px;
+    text-decoration: underline !important;
+}
+.treatment-options .home_block_1 .h-banner-btn .info-tooltip::after{
+    top: auto !important;
+    bottom: 10px;
+}
+
+.treatment-options .home_block_1 .h-banner-btn .info-tooltip ul{
+    width: 90%;
+    margin-left: 15px;
+    margin-bottom: 0;
+}
+.treatment-options .home_block_1 .h-banner-btn .info-tooltip ul li{
+    list-style-type: disc;
+    font-size: 12px;
+    line-height: 16px;
+}
+.treatment-options .home_block_1 .h-product-title a{
+    color: #000 !important;
+}
+
+@media only screen and (max-width: 767px) {
+    .treatment-options .home_block_1 .h-banner-btn .info-tooltip p,
+    .custom-col-wrapper-category .select-btn .info-tooltip{
+        font-size: 12px !important;
+        line-height: 16px !important;
+    }
+    .treatment-options .home_block_1 .h-banner-btn .info-tooltip,
+    .custom-col-wrapper-category .select-btn .info-tooltip{
+        max-height: 300px;
+        overflow-y: auto;
+        overflow-x: hidden
+    }
+    .modal-popup._inner-scroll .modal-content {
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+  }
+  .account.sales-order-history .table-wrapper.orders-history table>tbody>tr>td.actions a.view {
+      float: left !important;
+  }
+  .rendered-form .fieldset .insert-container.fields .field.form-group.fb-h2 h2{
+    font-size: 25px !important;
+  }
+  .billing-address-form .fieldset.address .col-mp{
+      width: 50%;
+    }
+    #checkout-review-table tbody {
+      margin-bottom: 15px !important;
+  }
+  .product-faq-section .h-title{
+    font-weight: 300 !important;
+  }
+  .checkout-index-index .one-step-checkout-wrapper{
+    padding-left: 0 !important;
+  }
+}
+
+.custom-col-wrapper-category .select-btn .info-tooltip{
+    top: auto !important;
+    bottom: 0 !important;
+}
+.custom-col-wrapper-category .select-btn .info-tooltip::after{
+    top: auto !important;
+    bottom: 10px;
+} 
+
+.amform-poup-opened .amcform-popup-block .amform-form .amcform-page-wrap .amform-layout-one.amform-layout-one--gp-search{
+    width: 100%;
+    display: inline-block;
+    background-color: #fff;
+}
+.rendered-form .fieldset .insert-container.fields .field.form-group.fb-h2 h2{
+    margin-bottom: 10px !important;
+    text-align: center !important;
+    width: 100%;
+}
+
+@media screen and (min-width: 1025px) {
+       .page-product-configurable.page-layout-1column.start_consultation .product-info-main .product-options-bottom .box-tocart .fill-wlcat-question{
+            margin-top: 10px !important;
+       }
+     
+.catalog-product-view.page-layout-1column.start_consultation .product-info-main .product-det .product-desc .product-name{
+      width: 70% !important;
+      margin-top: 25px !important;
+    }
+}
+@media screen and (min-width: 1500px) { 
+  .treatment-options .home-treatment-block .carousel-prev {
+        left: -40px !important;
+    }
+    .treatment-options .home-treatment-block .carousel-next {
+        right: -40px !important;
+    }
+    .cms-weightloss .treatment-options .home-treatment-block .carousel-container {
+        position: initial;
+    }
+}
+
+.checkout-index-index .osc-cms-block .p-description.question-text.order-message{
+  margin-top: 10px;
+}
+
+.modal-popup .modal-inner-wrap header.modal-header{
+  border-radius: 50px 50px 0 0;
+}
+
+.modal-popup .modal-inner-wrap footer.modal-footer {
+    display: block;
+    flex-direction: row;
+}
+.one-step-checkout-wrapper .opc-block-summary .grand.totals .price{
+  color: #000 !important;
+}
+
+.rendered-form .fieldset .fields .field.form-group.am-customform-depend .amform-text.error-msg{
+  padding: 5px 20px !important;
+}
+
+.page-layout-1column.amform-poup-opened .rendered-form .fieldset .fields .field.fb-radio.form-group.field-radiotwo-1789555291261 label span.required,
+.page-layout-1column.amform-poup-opened .rendered-form .fieldset .fields .field.fb-radio.form-group.field-radiotwo-1789555227386 label span.required,
+.page-layout-1column.amform-poup-opened .rendered-form .fieldset .fields .field.fb-radio.form-group.field-radiotwo-17192487760465 label span.required{
+  display: none;
+}
+
+@media only screen and (min-width:1025px) and (max-width:1280px) {
+  .treatment-options .container{
+        max-width: 1120px !important;
+    }
+    .weight-loss-journey .timeframe-subheading{
+        width: 380px !important;
+    }
+    .weight-loss-journey .timeframe-subheading ul{
+      width: 75%;
+    }
+}
+
+.product-faq-section{
+  margin-bottom: 50px;
+}
+
+.osc-place-order-wrapper .osc-trust-seal{
+  margin: 0 !important;
+}
+
+.minicart-wrapper .block-minicart #top-cart-btn-checkout{
+  display: none;
 }

@@ -100,6 +100,30 @@ define(['jquery', 'underscore', 'mage/template'], function ($, _, mageTemplate) 
                 });
 
                 return displayPrices;
+            },
+
+            /**
+             * Set correct indexes for image set.
+             *
+             * Guarded against a null/undefined entry in images (e.g. a missing
+             * gallery image), same failure category as the guards above - unguarded,
+             * "Cannot set properties of null (setting 'i')" aborts
+             * _changeProductImage() and leaves the gallery stuck on its loader.
+             *
+             * @param {Array} images
+             * @private
+             */
+            _setImageIndex: function (images) {
+                var length = images.length,
+                    i;
+
+                for (i = 0; length > i; i++) {
+                    if (images[i]) {
+                        images[i].i = i + 1;
+                    }
+                }
+
+                return images;
             }
         });
     };

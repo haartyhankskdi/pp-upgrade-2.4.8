@@ -289,5 +289,6 @@
                  <block class="Magento\Catalog\Block\Product\View" name="product_faq_schema" template="Magento_Catalog::product/view/faq_schema.phtml"/>
             </container>
         </referenceContainer>
+        <referenceBlock name="catalog.product.related" remove="true" />
     </body>
 </page>

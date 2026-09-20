@@ -7,10 +7,12 @@ $categoryFactory = $objectManager->get('Magento\Catalog\Model\ResourceModel\Prod
 /** @var \Magento\Store\Model\StoreManagerInterface $storeManager */
 $storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
 $currentStore = $storeManager->getStore();
-$baseUrl = $currentStore->getBaseUrl();
+//$baseUrl = $currentStore->getBaseUrl();
+$defaultStoreId = $storeManager->getDefaultStoreView()->getId();
+$baseUrl = $storeManager->getStore($defaultStoreId)->getBaseUrl();
 
 $stockRegistry = $objectManager->get('Magento\CatalogInventory\Api\StockRegistryInterface');
-$baseUrl = 'https://www.pharmacyplanet.com/';
+//$baseUrl = 'https://www.pharmacyplanet.com/';
 $logUrls = [
     '9411' => $baseUrl . 'wegovy.html',
     '9424' => $baseUrl . 'mounjaro.html',

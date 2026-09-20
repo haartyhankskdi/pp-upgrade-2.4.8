@@ -381,6 +381,11 @@ define([
         /**
          * Set correct indexes for image set.
          *
+         * Guarded against a null/undefined entry in images (e.g. a missing gallery
+         * image), same failure category as the _onGalleryLoaded guard above -
+         * unguarded, "Cannot set properties of null (setting 'i')" aborts
+         * _changeProductImage() and leaves the gallery stuck on its loader.
+         *
          * @param {Array} images
          * @private
          */
@@ -389,7 +394,9 @@ define([
                 i;
 
             for (i = 0; length > i; i++) {
-                images[i].i = i + 1;
+                if (images[i]) {
+                    images[i].i = i + 1;
+                }
             }
 
             return images;

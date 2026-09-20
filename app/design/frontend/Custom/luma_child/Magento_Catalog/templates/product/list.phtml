@@ -178,7 +178,7 @@ $_helper = $block->getData('outputHelper');
             <?php endforeach; ?>
         </ol>
     </div>
-    <?php //echo $block->getChildBlock('toolbar')->setIsBottom(true)->toHtml(); ?>
+    <?php echo $block->getChildBlock('toolbar')->setIsBottom(true)->toHtml(); ?>
     <?php if (!$block->isRedirectToCartEnabled()) :?>
         <script type="text/x-magento-init">
         {

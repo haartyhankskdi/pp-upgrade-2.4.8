@@ -23,7 +23,7 @@ if (!isset($escaper)) {
 <?php if ($block->getPostCollection()->count()) { ?>
 <div class="widget block block-<?= $escaper->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?>" >
     <div class="block-title">
-        <strong><?= $escaper->escapeHtml(__($block->getBlockTitle() ?: 'Recent Posts')) ?></strong>
+        <strong><?= $escaper->escapeHtml(__($block->getBlockTitle() ?: 'Recent Postsfghfghfg')) ?></strong>
     </div>
     <div class="block-content">
         <?= $block->setData('template_type', 'sidebar-article-list')

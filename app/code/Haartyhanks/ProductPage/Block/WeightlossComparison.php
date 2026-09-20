@@ -38,7 +38,20 @@ class WeightlossComparison extends Template
     {
         $allowedProductIds = [
             9221,
-            // Add more product IDs here
+            9305,
+            9746,
+            9693,
+            9691,
+            9690,
+            9567,
+            9443,
+            9441,
+            9439,
+            9395,
+            9338,
+            8294,
+            2303,
+
         ];
 
         if ($this->getRequest()->getFullActionName() === 'categoryquestwl_index_index') {

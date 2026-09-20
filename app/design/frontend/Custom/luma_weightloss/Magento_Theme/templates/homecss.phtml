@@ -1,21 +1,4 @@
-	<style>
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
-
-html {
-  scroll-behavior: smooth;
-}
-
-body{
-	font-family: 'Lato', sans-serif !important;
-	background-color: transparent !important;
-	max-width: 100% !important;
-}
-
-body.cms-index-index{
-	background-color: transparent !important;
-}
-
-
+<style>
 
 
 /* ----------------new css--------------- */
@@ -35,22 +18,18 @@ span.wl-offer {
 .active:after {
 	display:none;
 }
-
-
-.widget.block.block-static-block.mf-initial {/*display: none*/}
-
-
+ 
 .video-section{
 	margin-bottom: 78px;
 }
-.content-heading .title{
+/*.content-heading .title{
 	font: normal normal normal 32px/36px Lato;
 	letter-spacing: 0px;
 	color: #101010;
 	text-align:center;
 	line-height:36px;
 	font-weight: 300;
-}
+}*/
 
 /* silder css */
 .owl-carousel .owl-item .banner-item{
@@ -135,18 +114,13 @@ span.wl-offer {
 	.minicart-wrapper.active{
 		position: relative !important;
     	top: 28px !important;
-    	right: -34px !important;
+    	right: -55px !important;
 		margin-top: 0px;
 	}
 	.timeframe-subheading ul{
 		width: 100% !important;
 	}
-
-	/*.timeframe-subheading ul{
-		display:none;
-	}*/
-
-	.block-static-block.widget{
+    .block-static-block.widget{
 		margin-bottom: 0px;
 	}
 
@@ -244,53 +218,14 @@ span.wl-offer {
 
 
 /* ------------------end new css ----------------*/
-
-
-
-
-
-
-
+ 
 
  @media screen and (min-width: 768px) {
-
-	/*.minicart-wrapper,
-	.custom-menu-ul li.trustpoilet,
-	.view-all-treatment-menu,
-	.mppromobanner-style{
-		display: none !important;
-	}*/
-
+ 
 	.header.content{
 		text-align: center;
 	}
-	/* .logo{
-		float: none;
-		display: inline-block;
-		width: 30%;
-		max-width: 100%;
-    	text-align: center;
-    	margin-bottom: 25px;
-		margin-top: 20px;
-		margin-left: 200px;
-	}
-
-	.logo img{
-		margin: 0 auto;
-		width: 232px !important;
-    	height: 97px !important;
-	} */
-
-	/* .header.content .customMenu {
-	    width: 450px;
-	    display: inline-block;
-	    float: right;
-	    margin-top: -9%;
-	    z-index: 999999;
-	    position: relative;
-	} */
-
-
+	 
 	.cms-index-index .page-header{
 		position: relative !important;
 	}
@@ -957,7 +892,7 @@ button.plus-button {
 	width: 100%;
 	float: left;
 	padding:65px 0;
-	margin: 66px 0px 0px 0px;
+	margin: 66px 0px;
 	background: #E7F2F4;
 	text-align: center;
 }
@@ -2486,45 +2421,7 @@ a:hover{
 	width: 100%;
 }
 
-
-/*
-.banner-left-c .start-const-btn button{
-  position: relative;
-  transition: all .35s;
-}
-
-.banner-left-c .start-const-btn button:before,
-.banner-left-c .start-const-btn button:after{
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: seagreen;
-  z-index: -1;
-  transition: all .35s;
-}
-
-.banner-left-c .start-const-btn button:before{
-  opacity: .5;
-}
-
-.banner-left-c .start-const-btn button:after{
-  transition-delay: .2s;
-}
-
-.banner-left-c .start-const-btn button:hover{
-  color: #fff;
-}
-
-.banner-left-c .start-const-btn button:hover:before,
-.banner-left-c .start-const-btn button:hover:after{
-  top: 0;
-}*/
-
-
-
+ 
 .reveal1{
   position: relative;
   transform: translateY(150px);
@@ -2560,28 +2457,7 @@ a:hover{
 	transition: all .35s !important;
 	text-decoration: none !important;
 }
-
-/*.banner-left-c .start-const-btn button{
-	position: relative;
-	z-index: 2; 
-}
-.banner-left-c .start-const-btn button:after { 
-  content: "";
-  height: 100%; 
-  left: 0; 
-  top: 0; 
-  width: 0px;  
-  position: absolute; 
-  transition: all 0.3s ease 0s; 
-  -webkit-transition: all 0.3s ease 0s; 
-  z-index: -1;
-  border-radius: 30px;
-}
-
-.banner-left-c .start-const-btn button:hover:after{ width: 100%; }
-.banner-left-c .start-const-btn button:after{ background: #53CAF5; }*/
-
-
+ 
 .faq-section .accordion {
       font: var(--unnamed-font-style-normal) normal normal 18px/21px Roboto;
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -2596,15 +2472,10 @@ a:hover{
     }
 
     .faq-section .accordion:after {
-      content: '\002B'; / Unicode character for plus sign /
-       padding-left: 80px 
+      content: '\002B'; 
+       padding-left: 80px ;
       float: right;
-    }
-
-    /* .faq-section .active:after {
-      content: "\2212"; / Unicode character for minus sign /
-    } */
-
+    } 
   .faq-section .panel {
     padding: 10px 0;
     display: none;
@@ -2766,19 +2637,19 @@ a:hover{
 		width: auto;
 		height: 42px;
 
-}
+	}
 }
 
 @media only screen and (min-width:992px) and (max-width:1024px){
 
-.team-2{
-	width: 310px !important;
-}
-.offer.mf-initial {
-		width: auto;
-		height: 42px;
+	.team-2{
+		width: 310px !important;
+	}
+	.offer.mf-initial {
+			width: auto;
+			height: 42px;
 
-}
+	}
 }
 
 
@@ -2898,12 +2769,7 @@ a:hover{
 	}
 	.stories-section {
 	    padding: 40px 0 10px 0 !important;
-	}
-
-/*	.cms-index-index .weight-loss-journey .h-title{
-		display:none;
-	}*/
-
+	} 
 	.cms-index-index .weight-loss-journey .h-title, 
 	.cms-index-index .home-testimonilas .h-title, 
 	.cms-index-index .google-review-section .h-title, 
@@ -2921,11 +2787,17 @@ a:hover{
 	    width: auto !important;
 	    font-weight: 300;
 	    margin: 0 0 25px 0;
-		font: normal normal normal 32px/36px Lato;
+		font-family: 'Lato', sans-serif !important;
+		font-size: 32px;
+		line-height: 40px;
 		letter-spacing: 0px;
 		color: #101010;
 	}
-
+	.weight-loss-journey .container{
+		padding-right: 15px;
+		padding-left: 15px;
+		width: auto;
+	}
 	.work-c{
 		top: 51px !important;
 	}
@@ -2939,10 +2811,13 @@ a:hover{
 	}
 
 	.timeframe-subheading h4{
-		text-align: left;
-		font: normal normal normal 16px/20px Lato;
-		letter-spacing: 0px;
-		font-weight: 500;
+		margin: 0 0 7px 0;
+	    font-size: 20px;
+	    color: #000;
+	    font-family: 'Lato', sans-serif;
+	    line-height: 40px;
+	    font-weight: 700;
+	    text-align: left;
 	}
 	
 	.blog-c h4, .blogs-section .post-holder .post-title a{
@@ -3271,26 +3146,10 @@ a:hover{
 		margin-top: 50px !important;
 	}
 }
-
-/*.page-header .offer1{
-	display: none !important;
-}*/
-
-
-/* .home-testimonilas.inner,
-.slider-wrapper.desk-review-slider{
-	display: none;
-} */
-
-
-
-
-
+  
 
 /*-----------03-06-2024--------------*/
-
-
-
+ 
 @media only screen and (min-width:768px) and (max-width:991px){
 
 	.header .rating-header{
@@ -3513,24 +3372,7 @@ a:hover{
 	}
 }
 
- 
-
-/*.owl-carousel .owl-item .banner-item:before {
-     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.5)); 
-    content: " " !important;
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-    opacity: 0.5;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 99999;
-    background-color: rgba(0, 0, 0, 0.5);
-}*/
-
-
-
+  
 
 @media screen and (max-width: 767px) {
 
@@ -3578,71 +3420,7 @@ a:hover{
 .cms-index-index .faq-section{
 	margin-top: 50px;
 }
-
-
-/*.homepage-banner-new{
-  position: relative;
-  min-height: 100vh;
-  width: 100vw;
-  box-sizing: border-box;
-	transform-style: inherit;
-}
- .homepage-banner-new:before {
-  background-image: url("https://picsum.photos/960/520");
-  background-repeat: no-repeat;
-  transform: translateZ(-1px) scale(2);
-}
-.homepage-banner-new:before{
-	 
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  box-shadow: 0 0 8px 1px rgba(0, 0, 0, .7);
-} */
-
-
-/*.homepage-banner-new{
-
-	-webkit-animation: slidein 50s;
-        animation: slidein 50s;
-
-        -webkit-animation-fill-mode: forwards;
-        animation-fill-mode: forwards;
-
-        -webkit-animation-iteration-count: infinite;
-        animation-iteration-count: infinite;
-
-        -webkit-animation-direction: alternate;
-        animation-direction: alternate;
-}
- @-webkit-keyframes slidein {
-from {background-position: top; background-size:110%; }
-to {background-position: -100px 0px;background-size:100%;}
-}
-
-@keyframes slidein {
-from {background-position: top;background-size:110%; }
-to {background-position: -100px 0px;background-size:100%;}
-
-}*/
-
-/*.homepage-banner-new{
-	 animation: animatedBackground 30s linear alternate infinite;
-	background-size: 110% !important; 
- 
-}
- @keyframes animatedBackground {
-    0% { background-position: 0 0; }
-    50% { background-position: 0 -20%; }
-    100% { background-position: 0 20%; }
-}*/
-
-
-
- 
+  
 
 .cms-index-index .widget.block.block-static-block.mf-initial{
 	margin-bottom: 10px;
@@ -3667,11 +3445,9 @@ to {background-position: -100px 0px;background-size:100%;}
 	}
 }
 
+.product-faq-section{
+	margin-bottom: 50px;
+}
 
-
-
-
-
-
-
+ 
 </style>

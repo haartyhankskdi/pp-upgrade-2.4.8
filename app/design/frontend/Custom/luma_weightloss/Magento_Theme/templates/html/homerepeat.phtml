@@ -159,20 +159,6 @@ $baseUrl = $currentStore->getBaseUrl();
 
 <script>
 
-document.addEventListener('DOMContentLoaded', function() {
-    var repeatCheckbox = document.getElementById('repeat-check');
-    var signInButton = document.getElementById('sign-in-button');
-    
-    if (repeatCheckbox && signInButton) {
-        repeatCheckbox.addEventListener('change', function() {
-            console.log('Checkbox state changed:', this.checked);
-            signInButton.disabled = !this.checked;
-            console.log('Sign In button disabled state:', signInButton.disabled);
-        });
-    } else {
-        console.error('Elements not found');
-    }
-});
 document.getElementById('toggle-password').addEventListener('click', function () {
     var passwordField = document.getElementById('password');
     var icon = this.querySelector('i');
